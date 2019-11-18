@@ -1,21 +1,36 @@
 ---
-title: "Pre-reg, scale perception meritocracy"
-author:
-- Luis Maldonado
-- Juan Carlos Castillo
-- Julio Iturra
-- Jorge Atria
-- Francisco Meneses
-date: "13-11-2019"
+title: "Meritorcacy Scale: Preferences and Perceptions"
+csl: apa6.csl
+bibliography: zlibrary.bib
+css: style.css
 output:
+  pdf_document:
+    keep_tex: false
+    template: null
+    number_sections: true
+    toc: true
+    toc_depth: 2
   html_document:
     theme: flatly
-    highlight: tango
+    number_sections: true
     toc: true
     toc_float: true
-    toc_depth: 2
-    number_sections: false
+geometry: margin=0.78in
+header-includes:
+  # - \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+  - \usepackage{caption}
+  - \captionsetup[figure]{labelfont={bf},labelformat={default},labelsep=period}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+linestretch: '1.5'
+link-citations: yes
+linkcolor: blue
 ---
+
+```{r eval=FALSE, echo=FALSE}
+# Para obtener doble output (html/pdf) correr directamente en consola/terminal:
+rmarkdown::render('pre-reg_merir-scale.rmd', output_format = 'all')
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -133,7 +148,7 @@ The values that will be used as evaluation criteria for the goodness of the adju
 *Root of the average squared residual approximation <0.08.
 
 ### Data Exclusion
-All cases will be used as long as they do not show missing valuesin any of the items on the scale. No imputation criteria will be used.
+All cases will be used as long as they do not show missing values in any of the items on the scale. No imputation criteria will be used.
 
 ### Ethics. JI
 The experiment and survey instruments are approved by the IRB of the University of Chile.
