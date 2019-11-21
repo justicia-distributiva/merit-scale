@@ -1,5 +1,5 @@
 ---
-title: "Meritorcacy Scale: Preferences and Perceptions"
+title: "Meritocracy Scale: Preferences and Perceptions"
 csl: apa6.csl
 bibliography: zlibrary.bib
 css: style.css
@@ -9,7 +9,6 @@ output:
     template: null
     number_sections: true
     toc: true
-    toc_depth: 2
   html_document:
     theme: flatly
     number_sections: true
@@ -19,9 +18,19 @@ geometry: margin=0.78in
 header-includes:
   # - \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
   - \usepackage{caption}
-  - \captionsetup[figure]{labelfont={bf},labelformat={default},labelsep=period}
+  - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
   - \usepackage{graphicx}
   - \usepackage{float}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
 linestretch: '1.5'
 link-citations: yes
 linkcolor: blue
@@ -29,37 +38,62 @@ linkcolor: blue
 
 ```{r eval=FALSE, echo=FALSE}
 # Para obtener doble output (html/pdf) correr directamente en consola/terminal:
-rmarkdown::render('pre-reg_merir-scale.rmd', output_format = 'all')
+rmarkdown::render('index.rmd', output_format = 'all')
 ```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r include=FALSE}
+#Determine the output format of the document
+outputFormat   = knitr::opts_knit$get("rmarkdown.pandoc.to")
+
+#Figure and Table Caption Numbering, for HTML do it manually
+capTabNo = 1; capFigNo = 1;
+
+#Function to add the Table Number
+capTab = function(x){
+  if(outputFormat == 'html'){
+    x = paste0("Table ",capTabNo,". ",x)
+    capTabNo <<- capTabNo + 1
+  }; x
+}
+
+#Function to add the Figure Number
+capFig = function(x){
+  if(outputFormat == 'html'){
+    x = paste0("**","Figura ",capFigNo,": ","**",x)
+    capFigNo <<- capFigNo + 1
+  }; x
+}
+```
+
+
+
 # Research questions
 
-* How valid is a measurement model for the perception of 4-factor meritocracy, which is grouped into: a first-order   factor related to meritocracy and a second-order factor referred to inequalities of opportunity?
+* How valid is a measurement model for the perception of 4-factor meritocracy, which is grouped into: a first-order factor related to meritocracy and a second-order factor referred to inequalities of opportunity?
 
 
 # General description and hypothesis
 
-To measure the ideals of meritocracy, it is essential to differentiate preferences (i.e. what is considered desirable) and perceptions (i.e. how reality is believed to be) (duru-bellat, 2012). This work focuses on the perceptions of meritocracy.
+To measure the ideals of meritocracy, it is essential to differentiate preferences (i.e. what is considered desirable) and perceptions (i.e. how reality is believed to be) [@Duru-bellat2012]. This work focuses on the perceptions of meritocracy.
 
-Although a group of authors has measured the perception of meritocracy as if the perception of inequality of opportunities were the  side opposite of the continuum (Kunovich, 2007; Newman, 2015), others have shown that both concepts are rather different dimensions(Reynolds , 2014). Following this evidence, we chose to model both constructs as distinct latent variables. Different types of inequalities such as origin, contact or discrimination, cannot be considered in a single factor, since they refer to different realities and perceptions, therefore, it is consistent that they are independent latent variables. We also consider the existence of a latent second order variable, referring to the belief of inequality of opportunities in general.
+Although a group of authors has measured the perception of meritocracy as if the perception of inequality of opportunities were the  side opposite of the continuum [@Kunovich2007; @Newman2015], others have shown that both concepts are rather different dimensions [@Reynolds2014]. Following this evidence, we chose to model both constructs as distinct latent variables. Different types of inequalities such as origin, contact or discrimination, cannot be considered in a single factor, since they refer to different realities and perceptions, therefore, it is consistent that they are independent latent variables. We also consider the existence of a latent second order variable, referring to the belief of inequality of opportunities in general.
 
 Consistently, we consider that questions regarding meritocratic preferences will be grouped into two factors, meritocratic preferences and non-meritocratic preferences.
 
-Additionally, it is important to mention that we will exploratoryly test the relationship between the “get a head” questions and questions that refer to whether “In Chile, people are rewarded or manage to succeed according to different qualities (i.e., hardworking, talented, with contacts)”.
+Additionally, it is important to mention that we will exploratory analysis the relationship between the “get a head” questions and questions that refer to whether “In Chile, people are rewarded or manage to succeed according to different qualities (i.e., hardworking, talented, with contacts)”.
 
-
-* H1. The perception of meritocracy is a factor in the drift of the importance attributed to talent and the effort to get ahead in life.
-* H2. The factors of family origin, contacts and discrimination are grouped into a second order factor that relates to non-meritocratic perceptions.
-* H3. Preferences are also grouped into meritocratic and non-meritocratic preferences.
-* H4 (exploratory) the way in which the perception of inequality of opportunities is asked influences the perception declared by the interviewees.
+* H1. The perception of meritocracy is a latent variable in the drift of the importance attributed to talent and the effort to get ahead in life.
+* H2. Non-meritocratic perception is a latent variable that derives from two elements related to the agreement with the statement that people with contacts and rich parents, manage to get ahead
+* H3. Meritocratic preferences behave as a latent variable.
+* H4. Non-meritocratic preferences behave as a latent variable.
 
 # Type of study
 
-The present study is of an observational type focused on the measurement of the meritocracy preception variable. This study is part of an experimental study, applied online, which will be longitudinal panel type, that is, the same subjects will be surveyed 3 different occasions. The subjects will be randomly selected to be assigned to a placebo or to either of the two experimental procedures (change of poverty in Chile or international comparison of inequality)
+The present study is of an observational type focused on the measurement of the meritocracy perception variable. This study is part of an experimental study, applied online, which will be longitudinal panel type, that is, the same subjects will be surveyed 3 different occasions. The subjects will be randomly selected to be assigned to a placebo or to either of the two experimental procedures (change of poverty in Chile or international comparison of inequality)
 To access the cases we turn to the Netquest survey company, which has coverage in several Latin American countries.
 
 
@@ -68,7 +102,7 @@ To access the cases we turn to the Netquest survey company, which has coverage i
 ## Detailed data and explanations of its use.
 
 The Sample that will be necessary for this study has not yet been produced, nor has it begun its field work. However, in order to test the online questionnaire and the functionality of the quota offered by the Qualtrics platform, two previous studies have been carried out. The subjects participated in these two opportunities are excluded to the central sample, which corresponds to the 3-wave panel study.
-These data from the two pilot studies were used for methodological decisions, descriptive stadistics, correlations and confirmation tests.
+These data from the two pilot studies were used for methodological decisions, descriptive statistics, correlations and confirmation tests.
 Due to the above, although the definitive sample has not yet been produced and therefore has not been explored, it is responsible to say, in addition to the review of previous research and international databases, it has some notions of the relationship among the variables product of the analysis of the previous samples
 
 
@@ -85,41 +119,45 @@ To access this target population, a company has been hired dedicated to the onli
 The rule of detention is to reach the number of respondents indicated, adjusted to the corresponding quotas. However, there may be modifications depending on the contingencies of the field work, depending on the response rates.
 
 # Variables to use:
-The variables used for the perception factor of meritocracy are:
 
-* Para surgir en la vida, ¿cuán importante cree
-usted que es?
-    + Tener ambición
-    + El trabajo duro
+All the variables used in the scale use the following question and answer options
 
-On the other hand, the questions related to inequality of opportunities are:
+* To what extent do you agree or in
+disagree with each of the following
+affirmations?
+    + Strongly disagree
+    + Disagree
+    + Neither agree nor disagree
+    + Agree
+    + Totally agree
 
-* Para surgir en la vida, ¿cuán importante cree
-usted que es?
-    + provenir de una familia rica o con muchos recursos
-    + Tener padres con altos niveles de educación
-    + Conocer a las personas adecuadas
-    + Tener contactos políticos
-    + La raza u origen étnico de las personas
-    + El sexo de las personas, ser hombre o mujer
 
-The items of preferences are:
+```{r include=FALSE}
+# Get output document type and use as the format argument in kable function
+library(knitr)
+library(kableExtra)
 
-* ¿En qué medida se encuentra usted de acuerdo o en desacuerdo con cada una de las siguientes afirmaciones?
-    + Quienes más se esfuerzan deberían obtener mayores recompensas que quienes se esfuerzan menos
-    + Quienes poseen más talento deberían obtener mayores recompensas que quienes tienen menos talento
-    + Está bien que quienes tienen padres ricos salgan adelante
-    + Está bien que quienes tienen buenos contactos salgan adelante
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+```
 
-The questions that will be used for the exploratory analysis indicated are:
+```{r echo=FALSE}
 
-* ¿En qué medida se encuentra usted de acuerdo o en
-desacuerdo con cada una de las siguientes
-afirmaciones? En Chile,
-    + Quienes más se esfuerzan logran obtener mayores recompensas.
-    + Quienes tienen más talento logran obtener mayores recompensas.
-    + Las personas con padres ricos logran salir adelante.
-    + Los que tienen buenos contactos logran salir adelante.
+tab01 <- read.csv(file = "materials/table01.csv",header = 1,sep = ";")
+
+cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
+
+caption01 <- capTab("Meritocracy perception and preference")
+kable(tab01,format = table_format,booktabs = T, linesep = "",col.names = cnames, caption = caption01) %>%
+  kable_styling(full_width = T,latex_options = c("hold_position","scale_down"),position = "center",font_size = 9) %>%
+  column_spec(column = 1,width = "1.5cm",) %>%
+  column_spec(column = 2,width = "2 cm") %>%
+  collapse_rows(columns = 1:2,valign = "middle")
+
+```
 
 ### Variable manipulation
 
@@ -137,31 +175,28 @@ No special blinding is used for this study.
 To avoid the existence of biases in the order of the questions, they have been randomized within a thematic block of questions, so, randomly, people answer questions in different orders regarding their perception of meritocracy.
 
 # Analysis plan
-To evaluate these hypotheses, confirmatory factor analysis will be used, since we have strong theory regarding the ordering of the factors. In addition, exploratory factor analysis will be used to evaluate the exploratory hypothesis indicated. The Lavaan R package will be used.
 
-### Inference criteria,
-The values that will be used as evaluation criteria for the goodness of the adjustment of the model were taken from the proposal of Ruiz, Partdo and San Martin (2010) and are the following:
-*Chi-square:> 0.05
-*Chi-square ratio:> 3
-*Comparative adjustment goodness index (CFI):> 0.95
-*Tucker-Lewis Index (TLI):> 0.95
-*Root of the average squared residual approximation <0.08.
+To evaluate these hypotheses, confirmatory factor analysis (CFA) will be used, since we have strong theory regarding the ordering of the factors. In addition, exploratory factor analysis will be used to evaluate the exploratory hypothesis indicated. The lavaan [@Rosseel2012] R package will be used.
+
+### Inference criteria
+
+The values that will be used as evaluation criteria for the goodness of the adjustment of the model were taken from the proposal of @Brown2008 and are the following:
+
+* Chi-square:> 0.05
+* Chi-square ratio:> 3
+* Comparative adjustment goodness index (CFI):> 0.95
+* Tucker-Lewis Index (TLI):> 0.95
+* Root of the average squared residual approximation <0.08.
+
+### Secondary analysis
+
+To evaluate the metric stability of the measurement model [@Davidovetal2014] proposed above we will conduct a longitudinal invariance test using the first and third wave of our study. Following @liuTestingMeasurementInvariance2017, we will test a series of four hierarchical models: Configural, Weak, Strong and Strict invariance models for ordered-categorical indicators based on the assumtion that a five category likert scale cannot be treated as a continous variable because can lead to biased parameter estimates.
 
 ### Data Exclusion
 All cases will be used as long as they do not show missing values in any of the items on the scale. No imputation criteria will be used.
 
-### Ethics. JI
+### Ethics.
 The experiment and survey instruments are approved by the IRB of the University of Chile.
 
-# bibliography
 
-Ruiz, M., Pardo, A. & San Martín, R. (2010). Modelos de Ecuaciones Estructurales. -Papeles del psicólogo, 31-(1), pp. 34-45.
-
-Duru-Bellat, M., & Tenret, E. (2012). Who’s for Meritocracy? Individual and Contextual Variations in the Faith. Chicago Journal, 56(2), 223-247.
-
-Kunovich, S., & Slomczynski, K. M. (2007). Systems of Distribution and a Sense of Equity: A Multilevel Analysis of Meritocratic Attitudes in
-Post-industrial Societies. European Sociological Review, 23(5), 649–663. doi:10.1093/esr/jcm026
-
-Newman, B. J., Johnston, C. D., & Lown, P. L. (2014). False Consciousness or Class Awareness? Local Income Inequality, Personal Economic Position, and Belief in American Meritocracy. American Journal of Political Science, 59(2), 326-340. doi:10.1111/ajps.12153
-
-Reynolds, J., & Xian, H. (2014). Perceptions of meritocracy in the land of opportunity. Research in Social Stratification and Mobility, 36, 121–137. doi:10.1016/j.rssm.2014.03.001
+# Bibliography

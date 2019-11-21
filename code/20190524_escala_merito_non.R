@@ -89,6 +89,8 @@ no_pref =~ pref_famrica  + pref_contact
 no_perc~~no_pref
 '
 
+
+library(lavaan)
 fit1 <- cfa(model = model1,data = data, ordered = c("per_esfuerzo","per_talento",
                                                     "pref_esfuerzo","pref_talento",
                                                     "per_famrica","per_contact" ,
@@ -107,7 +109,7 @@ modelp1 <- semPlot::semPaths(fit1,
                              intercepts = FALSE,
                              thresholds = FALSE)
 
-
+modelp1
 
 
 
