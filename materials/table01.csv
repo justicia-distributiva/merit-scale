@@ -1,9 +1,9 @@
 dimension;factor;items_eng;items_spa
-Perception;Meritocratic;In Chile, those who work harder achieve greater rewards.;En Chile, quienes más se esfuerzan logran obtener mayores recompensas.
-Perception;Meritocratic;In Chile, those who have more  talent achieve greater rewards.;En Chile,  quienes tienen más talento logran obtener mayores recompensas.                                       
-Perception;Non meritocratic;In Chile, people with rich  parents succeed.;En Chile, las  personas con padres ricos logran salir adelante.
-Perception;Non meritocratic;In Chile, those who have good  contacts succeed.;En Chile, los que tienen buenos contactos logran salir adelante.
-Preference;Meritocratic;Those who try harder should get  greater rewards than those who work less.;Quienes más se  esfuerzan deberían obtener mayores recompensas que quienes se esfuerzan menos.
-Preference;Meritocratic;Those with more talent should  get greater rewards than those with less talent.;Quienes poseen  más talento deberían obtener mayores recompensas que quienes tienen menos talento.
-Preference;Non meritocratic;It's fine that those who have  rich parents get ahead.;Está bien que quienes tienen padres ricos salgan adelante.
-Preference;Non meritocratic;It's fine that those who have  good contacts get ahead.;Está  bien que quienes tienen buenos contactos salgan adelante.
+Perception;Meritocratic;Those who try harder get greater rewards than those who work less.;Quienes más se esfuerzan logran obtener mayores recompensas que quienes se esfuerzan menos.
+Perception;Meritocratic;Those who have more talent achieve greater rewards than those who have less talent.;Quienes poseen más talento logran obtener mayores recompensas que quienes poseen menos talento.                   
+Perception;Non meritocratic;Those who have rich parents succeed.;Quienes tienen padres ricos logran salir adelante.
+Perception;Non meritocratic;Those who have good contacts succeed.;Quienes tienen buenos contactos logran salir adelante.
+Preference;Meritocratic;Those who try harder should get greater rewards than those who work less.;Quienes más se esfuerzan deberían obtener mayores recompensas que quienes se esfuerzan menos.
+Preference;Meritocratic;Those who have more talent should get greater rewards than those who have less talent.;Quienes poseen más talento deberían obtener mayores recompensas que quienes poseen menos talento.
+Preference;Non meritocratic;It's fine that those with rich parents get ahead.;Está bien que quienes tienen padres ricos salgan adelante.
+Preference;Non meritocratic;It's fine that those who have good contacts get ahead.;Está bien que quienes tienen buenos contactos salgan adelante.

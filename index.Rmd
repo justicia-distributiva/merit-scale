@@ -1,5 +1,5 @@
 ---
-title: "Meritocracy Scale: Preferences and Perceptions"
+title: "Perceptions and Preferences for Meritocracy Scale (PPM-S)"
 csl: apa6.csl
 bibliography: zlibrary.bib
 css: style.css
@@ -69,62 +69,61 @@ capFig = function(x){
 }
 ```
 
-
-
 # Research questions
 
-* How valid is a measurement model for the perception of 4-factor meritocracy, which is grouped into: a first-order factor related to meritocracy and a second-order factor referred to inequalities of opportunity?
+Is it possible to identify and measure perceptions and preferences for meritocracy as two distinct but related factors?
 
 
-# General description and hypothesis
+# General description and hypotheses
 
-To measure the ideals of meritocracy, it is essential to differentiate preferences (i.e. what is considered desirable) and perceptions (i.e. how reality is believed to be) [@Duru-bellat2012]. This work focuses on the perceptions of meritocracy.
+This research builds upon previous studies attempting to develop a comprehensive approach to measuring meritocratic beliefs [@Duru-bellat2012, @Kunovich2007, @Newman2015, @Reynolds2014]. The proposed measurement model is based on two axis of analysis, as depicted in Table 1. The first one distinguishes between different types of "beliefs", using instead the terms perceptions and preferences for meritocracy. Perceptions refers to the extent to which people see meritocracy working in their society, which in terms of measurement relates to the "reasons to get ahead" battery, whereas preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The second axis consider the distinction between meritocratic and non-meritocratic dimensions. This aspect has been usually treated as different ends of a same continuum in part of the previous research, an assumption that requieres empirical scrutiny. These non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
 
-Although a group of authors has measured the perception of meritocracy as if the perception of inequality of opportunities were the  side opposite of the continuum [@Kunovich2007; @Newman2015], others have shown that both concepts are rather different dimensions [@Reynolds2014]. Following this evidence, we chose to model both constructs as distinct latent variables. Different types of inequalities such as origin, contact or discrimination, cannot be considered in a single factor, since they refer to different realities and perceptions, therefore, it is consistent that they are independent latent variables. We also consider the existence of a latent second order variable, referring to the belief of inequality of opportunities in general.
+Table 1: Model of perceptions and preferences for meritocracy and non-meritocracy
 
-Consistently, we consider that questions regarding meritocratic preferences will be grouped into two factors, meritocratic preferences and non-meritocratic preferences.
+|                  	  | Perceptions 	| Preferences 	|
+|:-----------------	  |-------------	|-------------	|
+| _Meritocracy_     	|             	|             	|
+| _Non-meritocracy_ 	|             	|             	|
 
-Additionally, it is important to mention that we will exploratory analysis the relationship between the “get a head” questions and questions that refer to whether “In Chile, people are rewarded or manage to succeed according to different qualities (i.e., hardworking, talented, with contacts)”.
 
-* H1. The perception of meritocracy is a latent variable in the drift of the importance attributed to talent and the effort to get ahead in life.
-* H2. Non-meritocratic perception is a latent variable that derives from two elements related to the agreement with the statement that people with contacts and rich parents, manage to get ahead
-* H3. Meritocratic preferences behave as a latent variable.
-* H4. Non-meritocratic preferences behave as a latent variable.
+**Hypotheses**
+
+* H1. The perception of meritocracy is a latent variable based on indicators of the importance attributed to talent and the effort to get ahead in life.
+* H2. The non-meritocratic perception is a latent variable that derives from two indicators related to the agreement with the statement that people with contacts and rich parents manage to get ahead.
+* H3. Meritocratic preferences behave as the latent variable based on a normative value of effort and talent.
+* H4. Non-meritocratic preferences behave as a latent variable based on the normative value of the use of personal contacts and having rich parents.
 
 # Type of study
 
-The present study is of an observational type focused on the measurement of the meritocracy perception variable. This study is part of an experimental study, applied online, which will be longitudinal panel type, that is, the same subjects will be surveyed 3 different occasions. The subjects will be randomly selected to be assigned to a placebo or to either of the two experimental procedures (change of poverty in Chile or international comparison of inequality)
-To access the cases we turn to the Netquest survey company, which has coverage in several Latin American countries.
-
+The scale will be included in an online three-wave panel survey study. This study covers among other things an experiment of the effect of information about poverty and inequality on opportunity beliefs. The scale will be presented in wave 1 and wave 3.
 
 # Sample
 
 ## Detailed data and explanations of its use.
 
-The Sample that will be necessary for this study has not yet been produced, nor has it begun its field work. However, in order to test the online questionnaire and the functionality of the quota offered by the Qualtrics platform, two previous studies have been carried out. The subjects participated in these two opportunities are excluded to the central sample, which corresponds to the 3-wave panel study.
-These data from the two pilot studies were used for methodological decisions, descriptive statistics, correlations and confirmation tests.
-Due to the above, although the definitive sample has not yet been produced and therefore has not been explored, it is responsible to say, in addition to the review of previous research and international databases, it has some notions of the relationship among the variables product of the analysis of the previous samples
-
+The data will come from a representative sample of the large cities of Chile (Gran Santiago, Valparaíso-Viña del Mar, Concepción and Antofagasta). In order to ensure representativeness, quotas for sex, education and age will be provided to the agency in charge of the online fieldwork.
 
 
 ## Magnitude of the sample and explanation of the magnitude.
 
-A representative sample of the large cities of Chile (Gran Santiago, Valparaíso-Viña del Mar, Concepción and Antofagasta) is expected, which will have an initial number for the first wave of 2100 cases, which are expected to be at least 1800 in the second wave. From the second to the third wave it has been considered as “free fall” that is, we are not sure of the retention rate of the interviewees.
-The sample size was calculated from power analysis that used information from the pilot study that was applied in June 2019. This pilot study consisted of an online experiment applied to 949 subjects, randomly separating participants to two stimuli and a placebo, leaving a third of the sample in each condition. From these data, the low power of a two-tailed test was calculated, considering an average treatment effect of 0.26, with a standard deviation of the result of the treatment group of 1.23 and a significance level of 0.05. Based on multiple comparison correlations (Bonferroni), we adjusted alpha for six tests (three results * two comparisons between conditions and placebo). The results indicated that the number of subjects exposed to each stimulus should be 580, so we will work with three samples of 600 cases, which gives us a total of 1800 cases for the second wave in which the experiment will be applied. To guarantee the above and in consideration of a high non-response rate, we will start with a sample of 2100 subjects.
+The sample will have an initial number for the first wave of 2100 cases, which are expected to be at least 1800 in the second wave. From the second to the third wave it has been considered as “free fall”, from which we expect to retain about 1500 cases.
+
+The sample size was calculated from power analysis that used information from a pilot study that was applied in June 2019. This pilot study consisted of an online experiment applied to 949 subjects, randomly separating participants to two stimuli and a placebo, leaving a third of the sample in each condition. From these data, the low power of a two-tailed test was calculated, considering an average treatment effect of 0.26, with a standard deviation of the result of the treatment group of 1.23 and a significance level of 0.05. Based on multiple comparison correlations (Bonferroni), we adjusted alpha for six tests (three results * two comparisons between conditions and placebo). The results indicated that the number of subjects exposed to each stimulus should be 580, so we will work with three samples of 600 cases, which gives us a total of 1800 cases for the second wave in which the experiment will be applied. To guarantee the above and in consideration of a high non-response rate, we will start with a sample of 2100 subjects.
 
 ### Data collection procedure:
-To access this target population, a company has been hired dedicated to the online surveys that will be in charge of getting the respondents. These will be invited to participate in the survey under the incentive provided by the external company. Respondents have 4 business days to answer the survey, with a maximum of 20 minutes per survey. In order to achieve greater representativeness of the sample, the quota method will be used, that is, the program will only allow respondents to respond while more people with their demographic characteristics are required. The quotas used were age, sex and education. It should be noted that the time between wave and wave is between 7 and 9 days.
+
+Respondents will be invited to participate in the online survey under the incentive provided by the external company. Respondents have 4 business days to answer the survey, with a maximum of 20 minutes per survey. In order to achieve greater representativeness of the sample, the quota method will be used, that is, the program will only allow respondents with the required demographic characteristics. The quotas used were age, sex and education. It should be noted that the time between wave and wave is around 7 and 9 days.
 
 ### Stop Rule:
-The rule of detention is to reach the number of respondents indicated, adjusted to the corresponding quotas. However, there may be modifications depending on the contingencies of the field work, depending on the response rates.
+
+The rule of detention is to reach the number of respondents indicated in the quotas. However, there may be modifications depending on the contingencies of the field work and the response rates.
 
 # Variables to use:
 
-All the variables used in the scale use the following question and answer options
+All the variables used in the scale use the following question and answer options:
 
-* To what extent do you agree or in
-disagree with each of the following
-affirmations?
+* To what extent do you agree or disagree with each of the following affirmations?
+  - Response scale:
     + Strongly disagree
     + Disagree
     + Neither agree nor disagree
@@ -161,22 +160,27 @@ kable(tab01,format = table_format,booktabs = T, linesep = "",col.names = cnames,
 
 ### Variable manipulation
 
-The variables will be worked on the same scale in which they were asked, without resorting to manipulations of the variables to assess the validity of the measurement model.
+There will not be variable manipulation.
 
 ### Indexes
 
-The investigation of the validity of this scale does not resort to indices intended to represent the perception of meritocracy in an observed way, but rather confirmatory factor analysis will be used to estimate the value of the latent variables underlying the indicators.
+The investigation of the validity of this scale does not rely on indices but rather confirmatory factor analysis will be used to estimate the value of the latent variables underlying the indicators.
 
 ### Blinding of information
 
 No special blinding is used for this study.
 
 ### Randomization
-To avoid the existence of biases in the order of the questions, they have been randomized within a thematic block of questions, so, randomly, people answer questions in different orders regarding their perception of meritocracy.
+
+To test the items' order effects we present the items in three different order conditions which will be assigned randomly. The conditions are the following:
+
+- Order 1: the order in which items are presented in Table 1
+- Order 2: the items are ordered based on topics (work harder, talent, rich parents, connections), and for each of them they have to respond first about perceptions and then about preferences. For instance: a) those who work harder get greater rewards, b) those who work arder should get greater rewards ...
+- Order 3: the order is randomized within this condition
 
 # Analysis plan
 
-To evaluate these hypotheses, confirmatory factor analysis (CFA) will be used, since we have strong theory regarding the ordering of the factors. In addition, exploratory factor analysis will be used to evaluate the exploratory hypothesis indicated. The lavaan [@Rosseel2012] R package will be used.
+To evaluate the hypotheses, confirmatory factor analysis (CFA) will be used as we rely on a theory regarding the underlying four factors. The method of estimation will be Weighted Least Squares Mean Variance Approximation (WLMSV) for categorical ordered indicators. For the analysis we will use the R package Lavaan [@Rosseel2012].
 
 ### Inference criteria
 
@@ -190,12 +194,14 @@ The values that will be used as evaluation criteria for the goodness of the adju
 
 ### Secondary analysis
 
-To evaluate the metric stability of the measurement model [@Davidovetal2014] proposed above we will conduct a longitudinal invariance test using the first and third wave of our study. Following @liuTestingMeasurementInvariance2017, we will test a series of four hierarchical models: Configural, Weak, Strong and Strict invariance models for ordered-categorical indicators based on the assumtion that a five category likert scale cannot be treated as a continous variable because can lead to biased parameter estimates.
+To evaluate the metric stability of the measurement model [@Davidovetal2014] we will conduct a longitudinal invariance test using the first and third wave of our study. Following @liuTestingMeasurementInvariance2017, we will test a series of four hierarchical models: Configural, Weak, Strong and Strict invariance models for ordered-categorical indicators based on the assumption that a five category likert scale cannot be treated as a continous variable because can lead to biased parameter estimates.
 
 ### Data Exclusion
+
 All cases will be used as long as they do not show missing values in any of the items on the scale. No imputation criteria will be used.
 
 ### Ethics.
+
 The experiment and survey instruments are approved by the IRB of the University of Chile.
 
 

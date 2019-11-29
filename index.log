@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.16)  21 NOV 2019 09:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (MiKTeX 2.9.6630 64-bit) (preloaded format=pdflatex 2018.5.16)  29 NOV 2019 14:55
 entering extended mode
 **./index.tex
 (index.tex
@@ -834,24 +834,76 @@ Package: geometry 2010/09/12 v5.6 Page Geometry
 \Gm@layoutvoffset=\dimen124
 \Gm@dimlist=\toks24
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\geometry\geometry.cfg
-")) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.s
+")) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\longtable.s
 ty"
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip48
+\LTright=\skip49
+\LTpre=\skip50
+\LTpost=\skip51
+\LTchunksize=\count115
+\LTcapwidth=\dimen125
+\LT@head=\box28
+\LT@firsthead=\box29
+\LT@foot=\box30
+\LT@lastfoot=\box31
+\LT@cols=\count116
+\LT@rows=\count117
+\c@LT@tables=\count118
+\c@LT@chunks=\count119
+\LT@p@ftn=\toks25
+) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\booktabs\booktabs.s
+ty"
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen126
+\lightrulewidth=\dimen127
+\cmidrulewidth=\dimen128
+\belowrulesep=\dimen129
+\belowbottomsep=\dimen130
+\aboverulesep=\dimen131
+\abovetopsep=\dimen132
+\cmidrulesep=\dimen133
+\cmidrulekern=\dimen134
+\defaultaddspace=\dimen135
+\@cmidla=\count120
+\@cmidlb=\count121
+\@aboverulesep=\dimen136
+\@belowrulesep=\dimen137
+\@thisruleclass=\count122
+\@lastruleclass=\count123
+\@thisrulewidth=\dimen138
+) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\etoolbox\etoolbox.s
+ty"
+Package: etoolbox 2018/02/11 v2.5e e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count124
+)
+("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\footnotehyper\footnot
+ehyper.sty"
+Package: footnotehyper 2018/01/23 v1.1 hyperref aware footnote.sty (JFB)
+\FNH@notes=\box32
+\FNH@width=\dimen139
+) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption.sty
+"
 Package: caption 2018/05/01 v3.3-147 Customizing captions (AR)
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\caption3.sty"
 Package: caption3 2018/05/27 v1.8a caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 64.
-\captionmargin=\dimen125
-\captionmargin@=\dimen126
-\captionwidth=\dimen127
-\caption@tempdima=\dimen128
-\caption@indent=\dimen129
-\caption@parindent=\dimen130
-\caption@hangindent=\dimen131
+\captionmargin=\dimen140
+\captionmargin@=\dimen141
+\captionwidth=\dimen142
+\caption@tempdima=\dimen143
+\caption@indent=\dimen144
+\caption@parindent=\dimen145
+\caption@hangindent=\dimen146
 )
-\c@ContinuedFloat=\count115
+\c@ContinuedFloat=\count125
 Package caption Info: hyperref package is loaded.
-) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.s
-ty"
+Package caption Info: longtable package is loaded.
+("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\ltcaption.sty
+"
+Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
+)) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphicx.
+sty"
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphics.sty
 "
@@ -865,57 +917,19 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
 )
-\Gin@req@height=\dimen132
-\Gin@req@width=\dimen133
+\Gin@req@height=\dimen147
+\Gin@req@width=\dimen148
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\float\float.sty"
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count116
-\float@exts=\toks25
-\float@box=\box28
-\@float@everytoks=\toks26
-\@floatcapt=\box29
-) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\booktabs\booktabs.s
-ty"
-Package: booktabs 2005/04/14 v1.61803 publication quality tables
-\heavyrulewidth=\dimen134
-\lightrulewidth=\dimen135
-\cmidrulewidth=\dimen136
-\belowrulesep=\dimen137
-\belowbottomsep=\dimen138
-\aboverulesep=\dimen139
-\abovetopsep=\dimen140
-\cmidrulesep=\dimen141
-\cmidrulekern=\dimen142
-\defaultaddspace=\dimen143
-\@cmidla=\count117
-\@cmidlb=\count118
-\@aboverulesep=\dimen144
-\@belowrulesep=\dimen145
-\@thisruleclass=\count119
-\@lastruleclass=\count120
-\@thisrulewidth=\dimen146
-) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\longtable.sty
-"
-Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
-\LTleft=\skip48
-\LTright=\skip49
-\LTpre=\skip50
-\LTpost=\skip51
-\LTchunksize=\count121
-\LTcapwidth=\dimen147
-\LT@head=\box30
-\LT@firsthead=\box31
-\LT@foot=\box32
-\LT@lastfoot=\box33
-\LT@cols=\count122
-\LT@rows=\count123
-\c@LT@tables=\count124
-\c@LT@chunks=\count125
-\LT@p@ftn=\toks27
+\c@float@type=\count126
+\float@exts=\toks26
+\float@box=\box33
+\@float@everytoks=\toks27
+\@floatcapt=\box34
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\tools\array.sty"
 Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
-\col@sep=\dimen148
-\extrarowheight=\dimen149
+\col@sep=\dimen149
+\extrarowheight=\dimen150
 \NC@list=\toks28
 \extratabsurround=\skip52
 \backup@length=\skip53
@@ -923,15 +937,15 @@ Package: array 2016/10/06 v2.4d Tabular extension package (FMi)
 ty"
 Package: multirow 2016/11/25 v2.2 Span multiple rows of a table
 \multirow@colwidth=\skip54
-\multirow@cntb=\count126
+\multirow@cntb=\count127
 \multirow@dima=\skip55
-\bigstrutjot=\dimen150
+\bigstrutjot=\dimen151
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\wrapfig\wrapfig.sty
 "
-\wrapoverhang=\dimen151
-\WF@size=\dimen152
-\c@WF@wrappedlines=\count127
-\WF@box=\box34
+\wrapoverhang=\dimen152
+\WF@size=\dimen153
+\c@WF@wrappedlines=\count128
+\WF@box=\box35
 \WF@everypar=\toks29
 Package: wrapfig 2003/01/31  v 3.6
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\colortbl\colortbl.s
@@ -951,68 +965,68 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 Package: tabu 2011/02/26 v2.8 - flexible LaTeX tabulars (FC)
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"
 Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
-\@vwid@box=\box35
-\sift@deathcycles=\count128
-\@vwid@loff=\dimen153
-\@vwid@roff=\dimen154
+\@vwid@box=\box36
+\sift@deathcycles=\count129
+\@vwid@loff=\dimen154
+\@vwid@roff=\dimen155
 )
-\c@taburow=\count129
-\tabu@nbcols=\count130
-\tabu@cnt=\count131
-\tabu@Xcol=\count132
-\tabu@alloc=\count133
-\tabu@nested=\count134
-\tabu@target=\dimen155
-\tabu@spreadtarget=\dimen156
-\tabu@naturalX=\dimen157
-\tabucolX=\dimen158
-\tabu@Xsum=\dimen159
-\extrarowdepth=\dimen160
-\abovetabulinesep=\dimen161
-\belowtabulinesep=\dimen162
-\tabustrutrule=\dimen163
+\c@taburow=\count130
+\tabu@nbcols=\count131
+\tabu@cnt=\count132
+\tabu@Xcol=\count133
+\tabu@alloc=\count134
+\tabu@nested=\count135
+\tabu@target=\dimen156
+\tabu@spreadtarget=\dimen157
+\tabu@naturalX=\dimen158
+\tabucolX=\dimen159
+\tabu@Xsum=\dimen160
+\extrarowdepth=\dimen161
+\abovetabulinesep=\dimen162
+\belowtabulinesep=\dimen163
+\tabustrutrule=\dimen164
 \tabu@thebody=\toks31
 \tabu@footnotes=\toks32
-\tabu@box=\box36
-\tabu@arstrutbox=\box37
-\tabu@hleads=\box38
-\tabu@vleads=\box39
+\tabu@box=\box37
+\tabu@arstrutbox=\box38
+\tabu@hleads=\box39
+\tabu@vleads=\box40
 \tabu@cellskip=\skip57
 )
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\threeparttable\threep
 arttable.sty"
 Package: threeparttable 2003/06/13  v 3.0
-\@tempboxb=\box40
+\@tempboxb=\box41
 ) (index.aux)
 \openout1 = `index.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 72.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 72.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 81.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 81.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\ts1cmr.fd"
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 72.
-LaTeX Font Info:    ... okay on input line 72.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 72.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 81.
+LaTeX Font Info:    ... okay on input line 81.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 81.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \microtypecontext on input line 72.
+LaTeX Info: Redefining \microtypecontext on input line 81.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1028,16 +1042,16 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf.mki
 i"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count135
-\scratchdimen=\dimen164
-\scratchbox=\box41
-\nofMPsegments=\count136
-\nofMParguments=\count137
+\scratchcounter=\count136
+\scratchdimen=\dimen165
+\scratchbox=\box42
+\nofMPsegments=\count137
+\nofMParguments=\count138
 \everyMPshowfont=\toks33
-\MPscratchCnt=\count138
-\MPscratchDim=\dimen165
-\MPnumerator=\count139
-\makeMPintoPDFobject=\count140
+\MPscratchCnt=\count139
+\MPscratchDim=\dimen166
+\MPnumerator=\count140
+\makeMPintoPDFobject=\count141
 \everyMPtoPDFconversion=\toks34
 )
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-bas
@@ -1053,8 +1067,8 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 )
-\AtBeginShipoutBox=\box42
-Package hyperref Info: Link coloring ON on input line 72.
+\AtBeginShipoutBox=\box43
+Package hyperref Info: Link coloring ON on input line 81.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 
@@ -1062,11 +1076,11 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 ring.sty"
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count141
+\c@section@level=\count142
 )
-LaTeX Info: Redefining \ref on input line 72.
-LaTeX Info: Redefining \pageref on input line 72.
-LaTeX Info: Redefining \nameref on input line 72.
+LaTeX Info: Redefining \ref on input line 81.
+LaTeX Info: Redefining \pageref on input line 81.
+LaTeX Info: Redefining \nameref on input line 81.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -1103,46 +1117,41 @@ LaTeX Info: Redefining \nameref on input line 72.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
-Package caption Info: longtable package is loaded.
-("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\caption\ltcaption.sty
-"
-Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
-)
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 74.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 83.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 74.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 83.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 74.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 83.
 
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 74.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 83.
 
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 74.
+(Font)              <12> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 74.
+(Font)              <8> on input line 83.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 74.
-LaTeX Font Info:    Try loading font information for U+msa on input line 74.
+(Font)              <6> on input line 83.
+LaTeX Font Info:    Try loading font information for U+msa on input line 83.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-msa.cf
 g"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 74.
+LaTeX Font Info:    Try loading font information for U+msb on input line 83.
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-msb.cf
@@ -1163,15 +1172,20 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 \tf@toc=\write3
 \openout3 = `index.toc'.
 
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 87.
+[1
+
+{C:/Users/JC/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 137.
+
 ("C:\Users\JC\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ts1lmr.fd"
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [1
-
-{C:/Users/JC/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+) [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 280.
-[4] [5]
+(Font)              <9> on input line 278.
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[3] [4] [5]
 
 Package caption Warning: Unused \captionsetup[figure] on input line \caption@op
 t@figure@lineno .
@@ -1182,22 +1196,22 @@ Package caption Warning: Unused \captionsetup[ table] on input line \caption@op
 t@ table@lineno .
 See the caption package documentation for explanation.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 415.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 424.
 [6]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 415.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 424.
 (index.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 415.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 415.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 415.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 424.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 424.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 424.
  ) 
 Here is how much of TeX's memory you used:
- 15395 strings out of 493305
- 229724 string characters out of 3131107
- 358907 words of memory out of 3000000
- 18556 multiletter control sequences out of 15000+200000
- 64921 words of font info for 102 fonts, out of 3000000 for 9000
+ 15758 strings out of 493305
+ 234402 string characters out of 3131107
+ 371404 words of memory out of 3000000
+ 18917 multiletter control sequences out of 15000+200000
+ 64607 words of font info for 98 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,18n,39p,749b,551s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,18n,39p,901b,552s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{
 C:/Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}<C:
 /Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C
@@ -1206,9 +1220,9 @@ C:/Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr10.pfb><
 C:/Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr17.pfb><
 C:/Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr9.pfb><C
 :/Users/JC/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb>
-Output written on index.pdf (6 pages, 202762 bytes).
+Output written on index.pdf (6 pages, 202798 bytes).
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
- 56 named destinations out of 1000 (max. 500000)
+ 171 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
  16457 words of extra memory for PDF output out of 17280 (max. 10000000)
 
