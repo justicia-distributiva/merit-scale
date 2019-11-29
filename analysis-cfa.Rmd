@@ -9,6 +9,8 @@ output:
     toc_float: true
 ---
 
+# Análisis PPM-S
+
 ```{r eval=FALSE, include=FALSE}
 rmarkdown::render(input = "analysis-cfa.Rmd",output_format = "html_document")
 ```
@@ -26,7 +28,7 @@ dat03 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv03_p")) %>% n
 
 ```
 
-# Version 01:
+## Version 01:
 
 1. Percepcion esfuerzo
 2. Percepcion talento
@@ -44,15 +46,17 @@ model01 <- 'perc_merit=~meritv01_perc_effort+meritv01_perc_talent
             pref_merit=~meritv01_pref_effort+meritv01_pref_talent 
             pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw'
 
-fit1 <- cfa(model = model01,data = dat01)
+fit1 <- cfa(model = model01,data = dat01,ordered = c("meritv01_perc_effort","meritv01_perc_talent",
+                                                     "meritv01_perc_wpart","meritv01_perc_netw",
+                                                     "meritv01_pref_effort","meritv01_pref_talent",
+                                                     "meritv01_pref_wpart","meritv01_pref_netw"))
 
 summary(fit1,standardized=TRUE, fit.measures=TRUE)
-
-semPlot::semPaths(object = fit1,what = "std")
+semPlot::semPaths(object = fit1,what = "std",thresholds = FALSE, intercepts = FALSE)
 ```
 
 
-# Version 02: 
+## Version 02: 
 
 1. Percepcion esfuerzo
 2. Preferencia esfuerzo
@@ -69,16 +73,17 @@ model02 <- 'perc_merit=~meritv02_perc_effort+meritv02_perc_talent
             pref_merit=~meritv02_pref_effort+meritv02_pref_talent 
             pref_nmerit=~meritv02_pref_wpart+meritv02_pref_netw'
 
-fit2 <- cfa(model = model02,data = dat02)
+fit2 <- cfa(model = model02,data = dat02,ordered = c("meritv02_perc_effort","meritv02_perc_talent",
+                                                     "meritv02_perc_wpart","meritv02_perc_netw",
+                                                     "meritv02_pref_effort","meritv02_pref_talent",
+                                                     "meritv02_pref_wpart","meritv02_pref_netw"))
 
 summary(fit2,standardized=TRUE, fit.measures=TRUE)
-
 semPlot::semPaths(object = fit2,what = "std")
 ```
 
 
-
-# Version 03: batería orden aleatorio
+## Version 03: orden aleatorio
 
 ```{r,results='hold'}
 model03 <- 'perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
@@ -86,14 +91,16 @@ model03 <- 'perc_merit=~meritv03_perc_effort+meritv03_perc_talent
             pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
             pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
 
-fit3 <- cfa(model = model03,data = dat03)
+fit3 <- cfa(model = model03,data = dat03,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
+                                                     "meritv03_perc_wpart","meritv03_perc_netw",
+                                                     "meritv03_pref_effort","meritv03_pref_talent",
+                                                     "meritv03_pref_wpart","meritv03_pref_netw"))
 
 summary(fit3,standardized=TRUE, fit.measures=TRUE)
-
-semPlot::semPaths(object = fit3,what = "std")
+semPlot::semPaths(object = fit3,what = "std",thresholds = FALSE, intercepts = FALSE)
 ```
 
-# Version 04:  Modelo muestra completa
+## Version 04: muestra completa
 
 
 ```{r,results='hold'}
@@ -115,9 +122,7 @@ model04 <- 'perc_merit=~perc_effort+perc_talent
             pref_nmerit=~pref_wpart+pref_netw'
 
 fit4 <- cfa(model = model04,data = dat04)
-
 summary(fit4,standardized=TRUE, fit.measures=TRUE)
-
-semPlot::semPaths(object = fit4,what = "std")
+semPlot::semPaths(object = fit4,what = "std",thresholds = FALSE, intercepts = FALSE)
 ```
 
