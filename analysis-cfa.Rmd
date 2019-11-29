@@ -1,6 +1,6 @@
 ---
 title: "Analysis"
-date: "29-11-2019"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
   html_document:
     theme: flatly
