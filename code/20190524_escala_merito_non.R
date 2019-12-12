@@ -108,8 +108,3 @@ modelp1 <- semPlot::semPaths(fit1,
                              thresholds = FALSE)
 
 
-
-
-
-
-
