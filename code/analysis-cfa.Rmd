@@ -1,0 +1,123 @@
+---
+title: "Analysis"
+date: "29-11-2019"
+output: 
+  html_document:
+    theme: flatly
+    number_sections: true
+    toc: true
+    toc_float: true
+---
+
+```{r eval=FALSE, include=FALSE}
+rmarkdown::render(input = "code/analysis-cfa.Rmd",output_format = "html_document",output_file = "code/")
+```
+
+```{r}
+library(sjPlot)
+library(dplyr)
+library(lavaan)
+
+data01 <- sjlabelled::read_spss(path = "data/dat1.sav",verbose = FALSE)
+
+dat01 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv01")) %>% na.omit()
+dat02 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv02")) %>% na.omit()
+dat03 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv03_p")) %>% na.omit()
+
+```
+
+# Version 01:
+
+1. Percepcion esfuerzo
+2. Percepcion talento
+3. Percepcion familia rica
+4. Percepcion redes
+5. Preferencia esfuerzo
+6. Preferencia talento
+7. Preferencia familia rica
+8. Preferencia redes
+
+
+```{r,results='hold'}
+model01 <- 'perc_merit=~meritv01_perc_effort+meritv01_perc_talent 
+            perc_nmerit=~meritv01_perc_wpart+meritv01_perc_netw  
+            pref_merit=~meritv01_pref_effort+meritv01_pref_talent 
+            pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw'
+
+fit1 <- cfa(model = model01,data = dat01)
+
+summary(fit1,standardized=TRUE, fit.measures=TRUE)
+
+semPlot::semPaths(object = fit1,what = "std")
+```
+
+
+# Version 02: 
+
+1. Percepcion esfuerzo
+2. Preferencia esfuerzo
+3. Percepcion talento
+4. Preferencia talento
+5. Percepcion familia rica
+6. Preferencia familia rica
+7. Percepcion redes
+8. Preferencia redes
+
+```{r,results='hold'}
+model02 <- 'perc_merit=~meritv02_perc_effort+meritv02_perc_talent 
+            perc_nmerit=~meritv02_perc_wpart+meritv02_perc_netw  
+            pref_merit=~meritv02_pref_effort+meritv02_pref_talent 
+            pref_nmerit=~meritv02_pref_wpart+meritv02_pref_netw'
+
+fit2 <- cfa(model = model02,data = dat02)
+
+summary(fit2,standardized=TRUE, fit.measures=TRUE)
+
+semPlot::semPaths(object = fit2,what = "std")
+```
+
+
+
+# Version 03: batería orden aleatorio
+
+```{r,results='hold'}
+model03 <- 'perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
+            perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
+            pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+            pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
+
+fit3 <- cfa(model = model03,data = dat03)
+
+summary(fit3,standardized=TRUE, fit.measures=TRUE)
+
+semPlot::semPaths(object = fit3,what = "std")
+```
+
+# Version 04:  Modelo muestra completa
+
+
+```{r,results='hold'}
+dat04 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv01"),starts_with("meritv02"),starts_with("meritv03_p"))
+
+dat04$perc_effort <- rowSums(dat04[,c(matches(match = "perc_effort",vars = names(dat04)))],na.rm = TRUE)
+dat04$perc_talent <- rowSums(dat04[,c(matches(match = "perc_talent",vars = names(dat04)))],na.rm = TRUE)
+dat04$perc_wpart  <- rowSums(dat04[,c(matches(match = "perc_wpart" ,vars = names(dat04)))],na.rm = TRUE)
+dat04$perc_netw   <- rowSums(dat04[,c(matches(match = "perc_netw"  ,vars = names(dat04)))],na.rm = TRUE)
+
+dat04$pref_effort <- rowSums(dat04[,c(matches(match = "pref_effort",vars = names(dat04)))],na.rm = TRUE)
+dat04$pref_talent <- rowSums(dat04[,c(matches(match = "pref_talent",vars = names(dat04)))],na.rm = TRUE)
+dat04$pref_wpart  <- rowSums(dat04[,c(matches(match = "pref_wpart" ,vars = names(dat04)))],na.rm = TRUE)
+dat04$pref_netw   <- rowSums(dat04[,c(matches(match = "pref_netw"  ,vars = names(dat04)))],na.rm = TRUE)
+
+model04 <- 'perc_merit=~perc_effort+perc_talent 
+            perc_nmerit=~perc_wpart+perc_netw  
+            pref_merit=~pref_effort+pref_talent 
+            pref_nmerit=~pref_wpart+pref_netw'
+
+fit4 <- cfa(model = model04,data = dat04)
+
+summary(fit4,standardized=TRUE, fit.measures=TRUE)
+
+semPlot::semPaths(object = fit4,what = "std")
+```
+
