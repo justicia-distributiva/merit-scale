@@ -20,7 +20,7 @@ library(sjPlot)
 library(dplyr)
 library(lavaan)
 
-data01 <- sjlabelled::read_spss(path = "data/dat1.sav",verbose = FALSE)
+data01 <- sjlabelled::read_spss(path = "data/Estudio_3_ola1_January_9_2020.sav",verbose = FALSE)
 
 dat01 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv01")) %>% na.omit()
 dat02 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv02")) %>% na.omit()
