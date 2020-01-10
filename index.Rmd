@@ -38,7 +38,7 @@ linkcolor: blue
 
 ```{r eval=FALSE, echo=FALSE}
 # Para obtener doble output (html/pdf) correr directamente en consola/terminal:
-rmarkdown::render('index.rmd', output_format = 'all')
+rmarkdown::render('production/index.rmd', output_format = 'all',output_dir = ".")
 ```
 
 ```{r setup, include=FALSE}
