@@ -28,7 +28,7 @@ dat03 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv03_p")) %>% n
 
 ```
 
-## Version 01:
+## Version 01: Fixed order by perception / preferences (N=  )
 
 1. Percepcion esfuerzo
 2. Percepcion talento
@@ -55,8 +55,9 @@ summary(fit1,standardized=TRUE, fit.measures=TRUE)
 semPlot::semPaths(object = fit1,what = "std",thresholds = FALSE, intercepts = FALSE)
 ```
 
+*summary*: good fit, heywood case item 8.
 
-## Version 02: 
+## Version 02: Fixed order, by topic (N=  )
 
 1. Percepcion esfuerzo
 2. Preferencia esfuerzo
@@ -81,9 +82,9 @@ fit2 <- cfa(model = model02,data = dat02,ordered = c("meritv02_perc_effort","mer
 summary(fit2,standardized=TRUE, fit.measures=TRUE)
 semPlot::semPaths(object = fit2,what = "std")
 ```
+*summary*: bad fit, heywood 
 
-
-## Version 03: orden aleatorio
+## Version 03: Random order
 
 ```{r,results='hold'}
 model03 <- 'perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
@@ -100,7 +101,9 @@ summary(fit3,standardized=TRUE, fit.measures=TRUE)
 semPlot::semPaths(object = fit3,what = "std",thresholds = FALSE, intercepts = FALSE)
 ```
 
-## Version 04: muestra completa
+*summary*: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence
+
+## Version 04: muestra completa (N=  )
 
 
 ```{r,results='hold'}
