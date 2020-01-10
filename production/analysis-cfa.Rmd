@@ -1,0 +1,180 @@
+---
+title: "Analysis"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+  html_document:
+    theme: flatly
+    number_sections: true
+    toc: true
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+
+# Análisis PPM-S
+
+```{r eval=FALSE, include=FALSE}
+rmarkdown::render(input = "production/analysis-cfa.Rmd",output_format = "html_document",output_dir = ".")
+```
+
+```{r}
+library(sjPlot)
+library(dplyr)
+library(lavaan)
+
+data01 <- sjlabelled::read_spss(path = "../input/data/original/Estudio_3_ola1_January_9_2020.sav",verbose = FALSE)
+
+dat01 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv01")) %>% na.omit()
+dat02 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv02")) %>% na.omit()
+dat03 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv03_p")) %>% na.omit()
+
+# - Nos quedamos solamente con los casos que ACEPTARON participar y terminaron el cuestionario.
+# - Para dejar una base que contenga solamente los casos que tienen información completa en los ítems usamos na.omit()
+
+dat04 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv01"),starts_with("meritv02"),starts_with("meritv03_p")) 
+
+dat04$perc_effort <- rowSums(dat04[,c(matches(match = "perc_effort",vars = names(dat04)))],na.rm = TRUE)
+dat04$perc_talent <- rowSums(dat04[,c(matches(match = "perc_talent",vars = names(dat04)))],na.rm = TRUE)
+dat04$perc_wpart  <- rowSums(dat04[,c(matches(match = "perc_wpart" ,vars = names(dat04)))],na.rm = TRUE)
+dat04$perc_netw   <- rowSums(dat04[,c(matches(match = "perc_netw"  ,vars = names(dat04)))],na.rm = TRUE)
+
+dat04$pref_effort <- rowSums(dat04[,c(matches(match = "pref_effort",vars = names(dat04)))],na.rm = TRUE)
+dat04$pref_talent <- rowSums(dat04[,c(matches(match = "pref_talent",vars = names(dat04)))],na.rm = TRUE)
+dat04$pref_wpart  <- rowSums(dat04[,c(matches(match = "pref_wpart" ,vars = names(dat04)))],na.rm = TRUE)
+dat04$pref_netw   <- rowSums(dat04[,c(matches(match = "pref_netw"  ,vars = names(dat04)))],na.rm = TRUE)
+
+```
+
+## Version 01: Fixed order by perception / preferences (N=`r dim(dat01)[1]`)
+
+1. Percepcion esfuerzo
+2. Percepcion talento
+3. Percepcion familia rica
+4. Percepcion redes
+5. Preferencia esfuerzo
+6. Preferencia talento
+7. Preferencia familia rica
+8. Preferencia redes
+
+
+```{r,results='hold'}
+model01 <- 'perc_merit=~meritv01_perc_effort+meritv01_perc_talent 
+            perc_nmerit=~meritv01_perc_wpart+meritv01_perc_netw  
+            pref_merit=~meritv01_pref_effort+meritv01_pref_talent 
+            pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw'
+
+fit1 <- cfa(model = model01,data = dat01,
+            ordered = c("meritv01_perc_effort","meritv01_perc_talent",
+                        "meritv01_perc_wpart","meritv01_perc_netw",
+                        "meritv01_pref_effort","meritv01_pref_talent",
+                        "meritv01_pref_wpart","meritv01_pref_netw"))
+
+summary(fit1,standardized=TRUE, fit.measures=TRUE)
+semPlot::semPaths(object = fit1,what = "std",thresholds = FALSE, intercepts = FALSE)
+```
+
+*summary*: good fit, heywood case item 8.
+
+## Version 02: Fixed order, by topic (N=`r dim(dat02)[1]`)
+
+1. Percepcion esfuerzo
+2. Preferencia esfuerzo
+3. Percepcion talento
+4. Preferencia talento
+5. Percepcion familia rica
+6. Preferencia familia rica
+7. Percepcion redes
+8. Preferencia redes
+
+```{r,results='hold'}
+model02 <- 'perc_merit=~meritv02_perc_effort+meritv02_perc_talent 
+            perc_nmerit=~meritv02_perc_wpart+meritv02_perc_netw  
+            pref_merit=~meritv02_pref_effort+meritv02_pref_talent 
+            pref_nmerit=~meritv02_pref_wpart+meritv02_pref_netw'
+
+fit2 <- cfa(model = model02,data = dat02,ordered = c("meritv02_perc_effort","meritv02_perc_talent",
+                                                     "meritv02_perc_wpart","meritv02_perc_netw",
+                                                     "meritv02_pref_effort","meritv02_pref_talent",
+                                                     "meritv02_pref_wpart","meritv02_pref_netw"))
+
+summary(fit2,standardized=TRUE, fit.measures=TRUE)
+semPlot::semPaths(object = fit2,what = "std",thresholds = FALSE, intercepts = FALSE)
+```
+*summary*: bad fit, heywood 
+
+## Version 03: Random order (N=`r dim(dat03)[1]`)
+
+```{r,results='hold'}
+model03 <- 'perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
+            perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
+            pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+            pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
+
+fit3 <- cfa(model = model03,data = dat03,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
+                                                     "meritv03_perc_wpart","meritv03_perc_netw",
+                                                     "meritv03_pref_effort","meritv03_pref_talent",
+                                                     "meritv03_pref_wpart","meritv03_pref_netw"))
+
+summary(fit3,standardized=TRUE, fit.measures=TRUE)
+semPlot::semPaths(object = fit3,what = "std",thresholds = FALSE, intercepts = FALSE)
+```
+
+*summary*: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence
+
+## Version 04: muestra completa (N=`r dim(dat04)[1]`)
+
+### Asumiendo items continuos
+
+```{r,results='hold'}
+model04 <- 'perc_merit=~ perc_effort+perc_talent 
+            perc_nmerit=~perc_wpart +perc_netw  
+            pref_merit=~ pref_effort+pref_talent 
+            pref_nmerit=~pref_wpart +pref_netw'
+
+fit4 <- cfa(model = model04,
+            data = dat04, estimator="MLR")
+
+summary(fit4,standardized=TRUE, fit.measures=TRUE)
+fitmeasures(fit4)[c("cfi","rmsea.robust")]
+semPlot::semPaths(object = fit4,what = "std",thresholds = FALSE, intercepts = FALSE)
+```
+
+### Asumiendo items ordenados
+
+```{r}
+model04or <- 'perc_merit=~ perc_effort+perc_talent 
+              perc_nmerit=~perc_wpart +perc_netw  
+              pref_merit=~ pref_effort+pref_talent 
+              pref_nmerit=~pref_wpart +pref_netw'
+
+fit4or <- cfa(model = model04or,
+            data = dat04,
+            ordered = c("perc_effort","perc_talent","perc_wpart","perc_netw",
+                        "pref_effort","pref_talent","pref_wpart","pref_netw"))
+
+summary(fit4or,standardized=TRUE, fit.measures=TRUE)
+fitmeasures(fit4or)[c("cfi","rmsea.robust","rmsea.scaled")]
+semPlot::semPaths(object = fit4or,what = "std",thresholds = FALSE, intercepts = FALSE)
+```
+
+### Test V04 Tau equivalente (ordered) 
+
+```{r,results='hold'}
+model04.tau01 <- 'perc_merit=~ r1*perc_effort+r1*perc_talent 
+                  perc_nmerit=~perc_wpart +perc_netw  
+                  pref_merit=~ pref_effort+pref_talent 
+                  pref_nmerit=~pref_wpart +pref_netw'
+
+fit4.t01 <- cfa(model = model04.tau01,
+                data = dat04,
+                ordered = c("perc_effort","perc_talent","perc_wpart","perc_netw",
+                            "pref_effort","pref_talent","pref_wpart","pref_netw"))
+summary(fit4.t01,standardized=TRUE, fit.measures=TRUE)
+semPlot::semPaths(object = fit4.t01,what = "std",thresholds = FALSE, intercepts = FALSE)
+fitmeasures(fit4.t01)[c("cfi","rmsea.robust","rmsea.scaled")]
+```
+
+```{r}
+anova(fit4or,fit4.t01)
+```
+

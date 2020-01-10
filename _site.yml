@@ -4,7 +4,7 @@ navbar:
   title: "Measuring meritocratic perceptions and beliefs"
   right:
     - text: "Analysis"
-      href: analysis-cfa.html
+      href: "production/analysis-cfa.html"
     - text: "PDF"
       icon: fa-file-pdf
       href: index.pdf

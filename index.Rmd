@@ -1,8 +1,8 @@
 ---
 title: "Perceptions and Preferences for Meritocracy Scale (PPM-S)"
-csl: apa6.csl
-bibliography: zlibrary.bib
-css: style.css
+csl: "input/bib/apa6.csl"
+bibliography: "input/bib/zlibrary.bib"
+css: tyle.css
 output:
   pdf_document:
     keep_tex: false
@@ -145,7 +145,7 @@ table_format = if(is_html_output()) {
 
 ```{r echo=FALSE}
 
-tab01 <- read.csv(file = "materials/table01.csv",header = 1,sep = ";")
+tab01 <- read.csv(file = "input/data/original/materials/table01.csv",header = 1,sep = ";")
 
 cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
 
