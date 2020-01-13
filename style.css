@@ -50,3 +50,14 @@ pre {
     border: 1px solid #cccccc;
     border-radius: 4px;
 }
+
+table, td, th {
+  border: none;
+  padding-left: 1em;
+  padding-right: 1em;
+  min-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}

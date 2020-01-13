@@ -1,6 +1,7 @@
 ---
 title: "Analysis"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
+css: ../style.css
 output: 
   html_document:
     theme: flatly
@@ -9,8 +10,8 @@ output:
     toc_float: true
 editor_options: 
   chunk_output_type: console
+ 
 ---
-
 # Análisis PPM-S
 
 ```{r eval=FALSE, include=FALSE}
@@ -21,6 +22,7 @@ rmarkdown::render(input = "production/analysis-cfa.Rmd",output_format = "html_do
 library(sjPlot)
 library(dplyr)
 library(lavaan)
+library(stargazer)
 
 data01 <- sjlabelled::read_spss(path = "../input/data/original/Estudio_3_ola1_January_9_2020.sav",verbose = FALSE)
 
@@ -31,8 +33,10 @@ dat03 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv0
 # - Nos quedamos solamente con los casos que ACEPTARON participar y terminaron el cuestionario.
 # - Para dejar una base que contenga solamente los casos que tienen información completa en los ítems usamos na.omit()
 
-dat04 <- data01 %>% filter(Intro==1) %>% select(starts_with("meritv01"),starts_with("meritv02"),starts_with("meritv03_p")) 
-
+dat04 <- data01 %>% filter(Intro==1) %>%
+  select(starts_with("meritv01"),
+         starts_with("meritv02"),
+         starts_with("meritv03_p")) 
 dat04$perc_effort <- rowSums(dat04[,c(matches(match = "perc_effort",vars = names(dat04)))],na.rm = TRUE)
 dat04$perc_talent <- rowSums(dat04[,c(matches(match = "perc_talent",vars = names(dat04)))],na.rm = TRUE)
 dat04$perc_wpart  <- rowSums(dat04[,c(matches(match = "perc_wpart" ,vars = names(dat04)))],na.rm = TRUE)
@@ -55,6 +59,10 @@ dat04$pref_netw   <- rowSums(dat04[,c(matches(match = "pref_netw"  ,vars = names
 6. Preferencia talento
 7. Preferencia familia rica
 8. Preferencia redes
+
+```{r echo=FALSE,results='asis'}
+stargazer(dat01,type = "html")
+```
 
 
 ```{r,results='hold'}
@@ -86,6 +94,10 @@ semPlot::semPaths(object = fit1,what = "std",thresholds = FALSE, intercepts = FA
 7. Percepcion redes
 8. Preferencia redes
 
+```{r echo=FALSE,results='asis'}
+stargazer(dat02,type = "html")
+```
+
 ```{r,results='hold'}
 model02 <- 'perc_merit=~meritv02_perc_effort+meritv02_perc_talent 
             perc_nmerit=~meritv02_perc_wpart+meritv02_perc_netw  
@@ -103,6 +115,11 @@ semPlot::semPaths(object = fit2,what = "std",thresholds = FALSE, intercepts = FA
 *summary*: bad fit, heywood 
 
 ## Version 03: Random order (N=`r dim(dat03)[1]`)
+
+
+```{r echo=FALSE,results='asis'}
+stargazer(dat03,type = "html")
+```
 
 ```{r,results='hold'}
 model03 <- 'perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
@@ -122,6 +139,10 @@ semPlot::semPaths(object = fit3,what = "std",thresholds = FALSE, intercepts = FA
 *summary*: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence
 
 ## Version 04: muestra completa (N=`r dim(dat04)[1]`)
+
+```{r echo=FALSE,results='asis'}
+stargazer(dat04,type = "html")
+```
 
 ### Asumiendo items continuos
 
@@ -159,7 +180,7 @@ semPlot::semPaths(object = fit4or,what = "std",thresholds = FALSE, intercepts = 
 
 ### Test V04 Tau equivalente (ordered) 
 
-```{r,results='hold'}
+```{r, results='hold'}
 model04.tau01 <- 'perc_merit=~ r1*perc_effort+r1*perc_talent 
                   perc_nmerit=~perc_wpart +perc_netw  
                   pref_merit=~ pref_effort+pref_talent 
