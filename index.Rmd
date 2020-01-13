@@ -2,7 +2,7 @@
 title: "Perceptions and Preferences for Meritocracy Scale (PPM-S)"
 csl: "input/bib/apa6.csl"
 bibliography: "input/bib/zlibrary.bib"
-css: tyle.css
+css: style.css
 output:
   pdf_document:
     keep_tex: false
