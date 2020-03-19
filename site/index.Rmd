@@ -1,0 +1,12 @@
+---
+title: "Perceptions and Preferences for Meritocracy Scale (PPM-S)"
+author: " "
+output:
+    html_document:
+        smart: false
+---
+
+(repo merit-scale)
+
+[Website for the PPM-S](https://juancarloscastillo.github.io/merit-scale/)
+
