@@ -1,7 +1,7 @@
 ---
 title: "Analysis"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
-css: ../style.css
+css: "../input/bib/style.css"
 output: 
   html_document:
     number_sections: true
@@ -22,7 +22,7 @@ rmarkdown::render(input = "production/analysis-cfa.Rmd",output_format = "html_do
 ```
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE)
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE)
 knitr::opts_knit$set(root.dir = "../")
 options(scipen=999)
 rm(list=ls())
@@ -930,11 +930,6 @@ https://groups.google.com/forum/#!topic/lavaan/nfdatPgLLhc
 
 * Colapsing categories:
 https://www.tandfonline.com/doi/abs/10.1080/10705511.2018.1547640?journalCode=hsem20
-
-
-
-
-
 
 
 

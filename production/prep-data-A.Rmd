@@ -20,7 +20,7 @@ rmarkdown::render(input = "production/prep-data-A.Rmd",output_format = "html_doc
 ```
 
 ```{r include=FALSE}
-knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE,results = "hold")
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,results = "hold")
 knitr::opts_knit$set(root.dir = "../")
 options(scipen=999)
 rm(list=ls())
