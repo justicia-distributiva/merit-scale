@@ -1,20 +1,25 @@
 
 # Render site ------------------------------------------------------------
 
-site<- list.files(path = "site")
-file.copy(file.path("site",site), "docs", overwrite = TRUE) # copy main text of the site
+# INSTRUCTIONS-------------------------:
+# 1. set your root dir at "merit-scale"
+# 2. Run this code.
 
-production<- list.files(path = "production",pattern = ".Rmd") # copy data proc and analysis code
-file.copy(file.path("production",production), "docs",overwrite = TRUE)
+production<- list.files(path = "production",pattern = "prod_")        # a list with the names of the files to copy
+file.copy(file.path("production",production), "docs",overwrite = TRUE)# copy data proc and analysis files 
 
 rmarkdown::render_site("docs") # Render site
 
-unlink(paste0("docs/",dir(path = "docs",pattern = "_files")), recursive = TRUE) # add folder name to be deleted
-unlink(paste0("docs/",dir(path = "docs",pattern = "_cache")), recursive = TRUE) # add folder name to be deleted
+# before you run this line, check if your R Markdown files have a .rmd or .Rmd extension
+# on this case we use both
+ext <- c(grep("^prod_.*\\.rmd$",x = dir(path = "docs"),value = T), # for .rmd 
+         grep("^prod_.*\\.Rmd$",x = dir(path = "docs"),value = T), # for .Rmd
+         ".tex",".log")                                            # for .tex and .log 
 
-ext <- c(".rmd",".Rmd",".yml",".tex",".log") #add file extension to be deleted
 for (i in 1:length(ext)) {
-  file.remove(paste0("docs/",dir(path="docs", pattern=ext[i])))
+  file.remove(paste0("docs/",dir(path="docs", pattern=ext[i]))) # delete files 
 }
 
-
+# Keep only the original .rmd files (site), configuration (_site.yml and _config.yml) 
+# and prod_ folders (cache and files)
+ 
