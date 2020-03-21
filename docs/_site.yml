@@ -8,9 +8,9 @@ navbar:
     - text: "Paper"
       href: "paper.html"
     - text: "Data"
-      href: "prep-data-A.html" 
+      href: "prod_prep-data-A.html" 
     - text: "Analysis"
-      href: "analysis-cfa.html" 
+      href: "prod_analysis-cfa.html" 
     - text: "PDF"
       icon: fa-file-pdf
       href: preanalisis.pdf

@@ -42,6 +42,11 @@ rmarkdown::render('production/index.rmd', output_format = 'all',output_dir = "."
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE)
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
 ```
 
 ```{r include=FALSE}
@@ -144,7 +149,7 @@ table_format = if(is_html_output()) {
 
 ```{r echo=FALSE}
 
-tab01 <- read.csv(file = "../input/data/original/materials/table01.csv",header = 1,sep = ";")
+tab01 <- read.csv(file = "input/data/original/materials/table01.csv",header = 1,sep = ";")
 
 cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
 

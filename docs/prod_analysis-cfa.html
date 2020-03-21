@@ -366,10 +366,10 @@ div.tocify {
   <a href="paper.html">Paper</a>
 </li>
 <li>
-  <a href="prep-data-A.html">Data</a>
+  <a href="prod_prep-data-A.html">Data</a>
 </li>
 <li>
-  <a href="analysis-cfa.html">Analysis</a>
+  <a href="prod_analysis-cfa.html">Analysis</a>
 </li>
 <li>
   <a href="preanalisis.pdf">
@@ -728,21 +728,21 @@ fit1_o &lt;- cfa(model = model01,data = dat01,
 
 #---------------------------------------------------#
 # #summary(fit1_c,standardized=TRUE, fit.measures=TRUE)}
-fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  42.93480226  14.00000000   0.97948028   0.97736086   0.98021257   0.05812794 
-## rmsea.scaled rmsea.robust 
-##   0.05445401   0.05695600</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit1_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
+fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit1_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code># #summary(fit1_o,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  46.11414265  14.00000000   0.99763575   0.99207488           NA   0.03794574 
-## rmsea.scaled rmsea.robust 
-##   0.05740894           NA</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit1_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
+fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit1_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  42.93480226  14.00000000   0.97948028   0.97736086   0.98021257   0.05812794   0.05445401 
+## rmsea.robust 
+##   0.05695600 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  46.11414265  14.00000000   0.99763575   0.99207488           NA   0.03794574   0.05740894 
+## rmsea.robust 
+##           NA</code></pre>
 <blockquote>
 <p><em>#summary</em>: good fit, heywood case item 8.</p>
 </blockquote>
@@ -1032,14 +1032,14 @@ semPlot::semPaths(object = fit2_c,what = &quot;std&quot;,thresholds = FALSE, int
 fitmeasures(fit2_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
 semPlot::semPaths(object = fit2_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 100.06185323  14.00000000   0.92567916   0.91208862   0.92577394   0.09562704 
-## rmsea.scaled rmsea.robust 
-##   0.09331232   0.09530656 
-## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 101.48249122  14.00000000   0.98421904   0.96229187           NA   0.07128592 
-## rmsea.scaled rmsea.robust 
-##   0.09414603           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 100.06185323  14.00000000   0.92567916   0.91208862   0.92577394   0.09562704   0.09331232 
+## rmsea.robust 
+##   0.09530656 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 101.48249122  14.00000000   0.98421904   0.96229187           NA   0.07128592   0.09414603 
+## rmsea.robust 
+##           NA</code></pre>
 <blockquote>
 <p><strong>NOTA</strong>: bad fit, heywood en estimación DWLS</p>
 </blockquote>
@@ -1318,14 +1318,14 @@ semPlot::semPaths(object = fit3_c,what = &quot;std&quot;,thresholds = FALSE, int
 fitmeasures(fit3_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
 semPlot::semPaths(object = fit3_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##   57.0584003   14.0000000    0.9519967    0.9424676    0.9523832    0.0686923 
-## rmsea.scaled rmsea.robust 
-##    0.0664276    0.0681436 
-## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  60.02456981  14.00000000   0.99183602   0.98040527           NA   0.05074320 
-## rmsea.scaled rmsea.robust 
-##   0.06872682           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##   57.0584003   14.0000000    0.9519967    0.9424676    0.9523832    0.0686923    0.0664276 
+## rmsea.robust 
+##    0.0681436 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  60.02456981  14.00000000   0.99183602   0.98040527           NA   0.05074320   0.06872682 
+## rmsea.robust 
+##           NA</code></pre>
 <blockquote>
 <p><strong>NOTA</strong>: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence</p>
 </blockquote>
@@ -1350,24 +1350,21 @@ semPlot::semPaths(object = fit3_c.tau,what = &quot;std&quot;,thresholds = FALSE,
 fitmeasures(fit3_o.tau)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
 semPlot::semPaths(object = fit3_o.tau,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve = 1.5)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  54.64691498  18.00000000   0.95176935   0.95103426   0.95471247   0.06072423 
-## rmsea.scaled rmsea.robust 
-##   0.05404631   0.05860871 
-## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  59.09776813  18.00000000   0.99254921   0.98250283           NA   0.04275195 
-## rmsea.scaled rmsea.robust 
-##   0.05727542           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  54.64691498  18.00000000   0.95176935   0.95103426   0.95471247   0.06072423   0.05404631 
+## rmsea.robust 
+##   0.05860871 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  59.09776813  18.00000000   0.99254921   0.98250283           NA   0.04275195   0.05727542 
+## rmsea.robust 
+##           NA</code></pre>
 <pre class="r"><code>rbind(fitmeasures(fit3_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-      fitmeasures(fit3_o.tau)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)])</code></pre>
-<pre><code>##      chisq.scaled df       cfi cfi.scaled cfi.robust      rmsea rmsea.scaled
-## [1,]     60.02457 14 0.9918360  0.9804053         NA 0.05074320   0.06872682
-## [2,]     59.09777 18 0.9925492  0.9825028         NA 0.04275195   0.05727542
-##      rmsea.robust
-## [1,]           NA
-## [2,]           NA</code></pre>
-<pre class="r"><code>anova(fit3_o,fit3_o.tau)</code></pre>
-<pre><code>## Scaled Chi-Squared Difference Test (method = &quot;satorra.2000&quot;)
+      fitmeasures(fit3_o.tau)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)])
+anova(fit3_o,fit3_o.tau)</code></pre>
+<pre><code>##      chisq.scaled df       cfi cfi.scaled cfi.robust      rmsea rmsea.scaled rmsea.robust
+## [1,]     60.02457 14 0.9918360  0.9804053         NA 0.05074320   0.06872682           NA
+## [2,]     59.09777 18 0.9925492  0.9825028         NA 0.04275195   0.05727542           NA
+## Scaled Chi-Squared Difference Test (method = &quot;satorra.2000&quot;)
 ## 
 ## lavaan NOTE:
 ##     The &quot;Chisq&quot; column contains standard test statistics, not the
@@ -1655,14 +1652,14 @@ semPlot::semPaths(object = fit3_c,what = &quot;std&quot;,thresholds = FALSE, int
 fitmeasures(fit4_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
 semPlot::semPaths(object = fit3_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE,curve = 2)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 181.10487966  14.00000000   0.95270053   0.94250163   0.95276313   0.07634040 
-## rmsea.scaled rmsea.robust 
-##   0.07466588   0.07621226 
-## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 200.77235322  14.00000000   0.99018169   0.97680332           NA   0.05987601 
-## rmsea.scaled rmsea.robust 
-##   0.07895605           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 181.10487966  14.00000000   0.95270053   0.94250163   0.95276313   0.07634040   0.07466588 
+## rmsea.robust 
+##   0.07621226 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 200.77235322  14.00000000   0.99018169   0.97680332           NA   0.05987601   0.07895605 
+## rmsea.robust 
+##           NA</code></pre>
 <div id="resumen-ajuste-ola-01" class="section level3" number="2.4.1">
 <h3 number="2.4.1"><span class="header-section-number">2.4.1</span> Resumen ajuste ola 01</h3>
 <pre class="r"><code>sum_fit&lt;- bind_rows(fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
@@ -2000,17 +1997,17 @@ fit4_o_mg &lt;- cfa(model = model04,data = dat04,ordered = c(&quot;perc_effort&q
                                                        &quot;pref_wpart&quot;,&quot;pref_netw&quot;),std.lv=FALSE, group = &quot;grupo&quot;)
 #---------------------------------------------------#
 #summary(fit4_c_mg,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fit4_c_mg)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
-##   0.95494030   0.94697921   0.95532301   0.07575741   0.07314653   0.07522301</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit4_c_mg,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE, curve=2)</code></pre>
+fitmeasures(fit4_c_mg)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit4_c_mg,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE, curve=2)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-1.png" width="672" /><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-2.png" width="672" /><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-3.png" width="672" /></p>
 <pre class="r"><code>#summary(fit4_o_mg,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fit4_o_mg)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
-##   0.99236975   0.98072106           NA   0.05571542   0.07542086           NA</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit4_o_mg,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve=2)</code></pre>
+fitmeasures(fit4_o_mg)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit4_o_mg,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve=2)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-4.png" width="672" /><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-5.png" width="672" /><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-6.png" width="672" /></p>
+<pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
+##   0.95494030   0.94697921   0.95532301   0.07575741   0.07314653   0.07522301 
+##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
+##   0.99236975   0.98072106           NA   0.05571542   0.07542086           NA</code></pre>
 <p>Cosas por probar:</p>
 <ul>
 <li>V01+V02: cargas y fit</li>
@@ -2038,17 +2035,17 @@ fit4b_c &lt;- cfa(model = model04b1or,data = dat04,ordered = c(&quot;perc_effort
 
 #---------------------------------------------------#
 #summary(fit4a_c,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fit4a_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
-##   0.94736842   0.93880041   0.94760970   0.07779789   0.07441956   0.07754042</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit4a_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE,curve=2)</code></pre>
+fitmeasures(fit4a_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit4a_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE,curve=2)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>#summary(fit4b_c,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fit4b_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
-##   0.98259229   0.97082290           NA   0.07702357   0.08554841           NA</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit4b_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE,curve=2)</code></pre>
+fitmeasures(fit4b_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit4b_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE,curve=2)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
+##   0.94736842   0.93880041   0.94760970   0.07779789   0.07441956   0.07754042 
+##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
+##   0.98259229   0.97082290           NA   0.07702357   0.08554841           NA</code></pre>
 <blockquote>
 <p><strong>NOTA:</strong> Cargas factoriales de segundo orden son bajas. El ajuste del modelo no es bueno.</p>
 </blockquote>
@@ -2074,11 +2071,11 @@ fit4b_o &lt;- cfa(model = model04b2or,data = dat04,
 # semPlot::semPaths(object = fit4b_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE, curve=2)
 
 #summary(fit4b_o,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fit4b_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
+fitmeasures(fit4b_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fit4b_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE, curve=2)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
 ##   0.97583700   0.95699375           NA   0.09074615   0.10386199           NA</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fit4b_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, fade=FALSE, curve=2)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <blockquote>
 <p><strong>NOTA:</strong> El modelo estimado con MLR con factores de segundo orden “meritocracia/ no meritocracia” no converge. EL modelo estimado a través de DWLS converge, posee cargas muy bajas y una muy alta (merit~pref_merit). Fit es malo (RMSEA &gt;.10)</p>
 </blockquote>
@@ -3000,11 +2997,11 @@ mod2_merit_o &lt;- cfa(model = modw2,data = dat01,ordered = c(&quot;meritv03_per
 # semPlot::semPaths(object = mod2_merit_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE)
 
 #summary(mod2_merit_o,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(mod2_merit_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
+fitmeasures(mod2_merit_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = mod2_merit_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve=2, rotation=2)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <pre><code>##          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled rmsea.robust 
 ##   0.96479952   0.94371851           NA   0.07682146   0.08601914           NA</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = mod2_merit_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,fade=FALSE, curve=2, rotation=2)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <blockquote>
 <ul>
 <li>Factor de segundo orden usando MLR no converge.</li>
@@ -3570,14 +3567,14 @@ semPlot::semPaths(object = fitw02b_c,what = &quot;std&quot;,thresholds = FALSE, 
 fitmeasures(fitw02b_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
 semPlot::semPaths(object = fitw02b_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE, curve=2)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  21.89512187  14.00000000   0.98686103   0.98728536   0.98891906   0.03601966 
-## rmsea.scaled rmsea.robust 
-##   0.03102177   0.03291156 
-## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  32.82736205  14.00000000   0.99739823   0.98732355           NA   0.02531526 
-## rmsea.scaled rmsea.robust 
-##   0.04794604           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  21.89512187  14.00000000   0.98686103   0.98728536   0.98891906   0.03601966   0.03102177 
+## rmsea.robust 
+##   0.03291156 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  32.82736205  14.00000000   0.99739823   0.98732355           NA   0.02531526   0.04794604 
+## rmsea.robust 
+##           NA</code></pre>
 </div>
 <div id="cfa-muestra-desigualdad" class="section level2" number="4.5">
 <h2 number="4.5"><span class="header-section-number">4.5</span> CFA Muestra Desigualdad</h2>
@@ -3854,14 +3851,14 @@ semPlot::semPaths(object = fitw02c_c,what = &quot;std&quot;,thresholds = FALSE, 
 fitmeasures(fitw02c_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
 semPlot::semPaths(object = fitw02c_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  46.32268992  14.00000000   0.93940521   0.92687174   0.93936161   0.06371050 
-## rmsea.scaled rmsea.robust 
-##   0.06250230   0.06334778 
-## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  69.67269301  14.00000000   0.97297449   0.94366656           NA   0.06420276 
-## rmsea.scaled rmsea.robust 
-##   0.08209772           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  46.32268992  14.00000000   0.93940521   0.92687174   0.93936161   0.06371050   0.06250230 
+## rmsea.robust 
+##   0.06334778 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  69.67269301  14.00000000   0.97297449   0.94366656           NA   0.06420276   0.08209772 
+## rmsea.robust 
+##           NA</code></pre>
 </div>
 </div>
 <div id="resumen-ajuste-ola-2" class="section level1" number="5">
@@ -4338,17 +4335,18 @@ fitw03c_o &lt;- cfa(model = model03,data = dat01,ordered = c(&quot;meritv03_perc
                                                           &quot;meritv03_pref_wpart&quot;,&quot;meritv03_pref_netw&quot;))
 #---------------------------------------------------#
 #summary(fitw03c_c,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fitw03c_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-##  62.42098851  14.00000000   0.97001271   0.96743840   0.97104967   0.05354429 
-## rmsea.scaled rmsea.robust 
-##   0.04868836   0.05249427</code></pre>
-<pre class="r"><code>#summary(fitw03c_o,standardized=TRUE, fit.measures=TRUE)
+fitmeasures(fitw03c_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+
+#summary(fitw03c_o,standardized=TRUE, fit.measures=TRUE)
 fitmeasures(fitw03c_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 106.11132208  14.00000000   0.98842335   0.97425449           NA   0.05216642 
-## rmsea.scaled rmsea.robust 
-##   0.06717594           NA</code></pre>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+##  62.42098851  14.00000000   0.97001271   0.96743840   0.97104967   0.05354429   0.04868836 
+## rmsea.robust 
+##   0.05249427 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 106.11132208  14.00000000   0.98842335   0.97425449           NA   0.05216642   0.06717594 
+## rmsea.robust 
+##           NA</code></pre>
 <p><strong>summary</strong> &gt; * Ajuste usando estimador MLR es bueno (CFI = 0.971, RMSEA = 0.052). El chi2 (robusto) es 62.421<br />
 &gt; * Ajuste usando estimador DWLS es bueno (CFI = 0.974, RMSEA = 0.067). El chi2 (robusto) es 106.111</p>
 </div>
@@ -7539,21 +7537,21 @@ fitlong_o &lt;- cfa(model = model_long,data = wide02,ordered = indicadores)
 
 #---------------------------------------------------#
 #summary(fitlong_c,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fitlong_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 665.88017314 186.00000000   0.93012912   0.92988159   0.93302455   0.04637638 
-## rmsea.scaled rmsea.robust 
-##   0.04221100   0.04525147</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fitlong_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE)</code></pre>
+fitmeasures(fitlong_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fitlong_c,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <pre class="r"><code>#summary(fitlong_o,standardized=TRUE, fit.measures=TRUE)
-fitmeasures(fitlong_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea 
-## 747.48098303 186.00000000   0.98273020   0.94727999           NA   0.03597639 
-## rmsea.scaled rmsea.robust 
-##   0.04567481           NA</code></pre>
-<pre class="r"><code>semPlot::semPaths(object = fitlong_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,style = &quot;mx&quot;)</code></pre>
+fitmeasures(fitlong_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+semPlot::semPaths(object = fitlong_o,what = &quot;std&quot;,thresholds = FALSE, intercepts = FALSE,style = &quot;mx&quot;)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-55-2.png" width="672" /></p>
+<pre><code>## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 665.88017314 186.00000000   0.93012912   0.92988159   0.93302455   0.04637638   0.04221100 
+## rmsea.robust 
+##   0.04525147 
+## chisq.scaled           df          cfi   cfi.scaled   cfi.robust        rmsea rmsea.scaled 
+## 747.48098303 186.00000000   0.98273020   0.94727999           NA   0.03597639   0.04567481 
+## rmsea.robust 
+##           NA</code></pre>
 <pre class="r"><code>cormat&lt;- as.matrix(inspect(fitlong_o, &quot;cor.lv&quot;))
 corrplot(cormat, method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, tl.srt = 45,addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <div class="figure">
@@ -7576,9 +7574,8 @@ Correlación entre variables latentes w01, w02 y w03
 <pre class="r"><code>library(semTools)</code></pre>
 <pre class="r"><code>load(file = &quot;input/data/proc/datalong.RData&quot;)     # Datos formato long
 load(file = &quot;input/data/proc/datawide_123.RData&quot;) # Datos formato long</code></pre>
-<pre class="r"><code>dim(dat04)</code></pre>
-<pre><code>## [1] 2236   36</code></pre>
-<pre class="r"><code>m_inv_modalidad &lt;- &#39;perc_merit=~ perc_effort+perc_talent 
+<pre class="r"><code>dim(dat04)
+m_inv_modalidad &lt;- &#39;perc_merit=~ perc_effort+perc_talent 
                     perc_nmerit=~perc_wpart +perc_netw  
                     pref_merit=~ pref_effort+pref_talent 
                     pref_nmerit=~pref_wpart +pref_netw&#39;
@@ -7592,28 +7589,21 @@ fit.fuer=cfa(m_inv_modalidad,data=dat04,group=&quot;grupo&quot;,group.equal=c(&q
 fit.str =cfa(m_inv_modalidad,data=dat04,group=&quot;grupo&quot;,group.equal=c(&quot;loadings&quot;,&quot;intercepts&quot;,&quot;residuals&quot;))
 
 
-fitmeasures(fit.conf)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt; 
-##          NA 42.00000000  0.95494030          NA          NA  0.07575741          NA 
-##        &lt;NA&gt; 
-##          NA</code></pre>
-<pre class="r"><code>fitmeasures(fit.deb )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt; 
-##          NA 50.00000000  0.94850216          NA          NA  0.07422755          NA 
-##        &lt;NA&gt; 
-##          NA</code></pre>
-<pre class="r"><code>fitmeasures(fit.fuer)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt; 
-##          NA 58.00000000  0.94733603          NA          NA  0.06969449          NA 
-##        &lt;NA&gt; 
-##          NA</code></pre>
-<pre class="r"><code>fitmeasures(fit.str )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]</code></pre>
-<pre><code>##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt; 
-##          NA 74.00000000  0.91887795          NA          NA  0.07657891          NA 
-##        &lt;NA&gt; 
-##          NA</code></pre>
-<pre class="r"><code>anova(fit.conf, fit.deb, fit.fuer, fit.str)</code></pre>
-<pre><code>## Chi-Squared Difference Test
+fitmeasures(fit.conf)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+fitmeasures(fit.deb )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+fitmeasures(fit.fuer)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+fitmeasures(fit.str )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]
+anova(fit.conf, fit.deb, fit.fuer, fit.str)</code></pre>
+<pre><code>## [1] 2236   36
+##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt;        &lt;NA&gt; 
+##          NA 42.00000000  0.95494030          NA          NA  0.07575741          NA          NA 
+##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt;        &lt;NA&gt; 
+##          NA 50.00000000  0.94850216          NA          NA  0.07422755          NA          NA 
+##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt;        &lt;NA&gt; 
+##          NA 58.00000000  0.94733603          NA          NA  0.06969449          NA          NA 
+##        &lt;NA&gt;          df         cfi        &lt;NA&gt;        &lt;NA&gt;       rmsea        &lt;NA&gt;        &lt;NA&gt; 
+##          NA 74.00000000  0.91887795          NA          NA  0.07657891          NA          NA 
+## Chi-Squared Difference Test
 ## 
 ##          Df   AIC   BIC  Chisq Chisq diff Df diff            Pr(&gt;Chisq)    
 ## fit.conf 42 52068 52578 214.03                                             
