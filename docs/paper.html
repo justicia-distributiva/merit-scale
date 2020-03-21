@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
 
 <meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -13,7 +14,6 @@
 
 <title>Perceptions and Preferences for Meritocracy Scale (PPM-S)</title>
 
-<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -74,7 +74,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="..\input\bib\style.css" type="text/css" />
+<link rel="stylesheet" href="../input/bib/style.css" type="text/css" />
 
 
 
@@ -90,6 +90,7 @@ code {
 }
 img {
   max-width:100%;
+  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -238,7 +239,6 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
-  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -267,12 +267,6 @@ $(document).ready(function () {
 }
 }
 
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
 
 .toc-content {
   padding-left: 30px;
@@ -355,23 +349,16 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="preanalisis.html">Preanalisis</a>
+  <a href="preanalisis.html">Pre-analisis plan</a>
+</li>
+<li>
+  <a href="prod_prep-data-A.html">Data preparation</a>
+</li>
+<li>
+  <a href="prod_analysis-cfa.html">Analysis</a>
 </li>
 <li>
   <a href="paper.html">Paper</a>
-</li>
-<li>
-  <a href="prep-data-A.html">Data</a>
-</li>
-<li>
-  <a href="analysis-cfa.html">Analysis</a>
-</li>
-<li>
-  <a href="preanalisis.pdf">
-    <span class="fa fa-file-pdf"></span>
-     
-    PDF
-  </a>
 </li>
 <li>
   <a href="https://github.com/juancarloscastillo/merit-scale">
@@ -394,19 +381,19 @@ div.tocify {
 </div>
 
 
-<div id="introducción" class="section level2" number="0.1">
-<h2 number="0.1"><span class="header-section-number">0.1</span> Introducción</h2>
+<div id="introduccion" class="section level2">
+<h2><span class="header-section-number">0.1</span> Introducción</h2>
 <p>Tanto las organizaciones internacionales, como parte del mundo académico, presentan una creciente preocupación por el aumento de la desigualdad social y los efectos negativos que esta posee en torno a la legitimidad de nuestras sociedades <span class="citation">(ONU,2016; Schlozman, Verba, and Brady <a href="#ref-schlozmanUnheavenlyChorusUnequal2012" role="doc-biblioref">2012</a>; Castillo et al. <a href="#ref-CastilloMeritocraciadesigualdadeconomica2019" role="doc-biblioref">2019</a>)</span>. Más relevante aún se vuelve la legitimidad de la desigualdad en un contexto mundial de crecientes protestas sociales en contra de la misma. En el caso Chileno, estas movilizaciones han alcanzado una gran envergadura, relevando la importancia de evaluar los niveles de legitimidad de la desigualdad existente, a la luz de distintas ideologías que podrían justificarla. Dentro de estas ideologías que legitiman la desigualdad, la literatura sobre la meritocracia, presenta un notorio crecimiento <span class="citation">(Madeira et al. <a href="#ref-MadeiraPrimesConsequencesSystematic2019" role="doc-biblioref">2019</a>)</span>. Tradicionalmente la meritocracia es entendida como una forma de distribución social de recursos donde el mérito individual (i.e. el esfuerzo y el talento) determinan la distribucion de los privilegios <span class="citation">(Breen and Goldthorpe <a href="#ref-breenClassInequalityMeritocracy1999" role="doc-biblioref">1999</a>; Young <a href="#ref-youngRiseMeritocracy1994" role="doc-biblioref">1994</a>; Ohsfeldt, Kluegel, and Smith <a href="#ref-OhsfeldtBeliefsInequalityAmericans1987" role="doc-biblioref">1987</a>; Jost and Banaji <a href="#ref-Jostrolestereotypingsystemjustification1994" role="doc-biblioref">1994</a>)</span>, sin la interferencia de factores estructurales como la herencia o los contactos <span class="citation">(Breen and Goldthorpe <a href="#ref-breenClassInequalityMeritocracy1999" role="doc-biblioref">1999</a>; Saunders <a href="#ref-saundersMightBritainBe1995" role="doc-biblioref">1995</a>; Yair <a href="#ref-yairMeritocracy2007" role="doc-biblioref">2007</a>; Land <a href="#ref-landWeSatTable2006" role="doc-biblioref">2006</a>; Young <a href="#ref-youngRiseMeritocracy1994" role="doc-biblioref">1994</a>)</span>.</p>
 <p>Los estudios relativos a la meritocracia se pueden clasificar entre estudios de caracter objetivo y estudios decaracter subjetivo. Los estudios de caracter objetivo, suelen dedicarse a la observar de la movilidad social, evaluando críticamente hasta qué punto las sociedades son efectivamente meritocráticas y su distribución no está influida por contactos o ventajas externas <span class="citation">(Alon and Tienda <a href="#ref-alonDiversityOpportunityShifting2007" role="doc-biblioref">2007</a>; Dubet <a href="#ref-dubetRepensarJusticiaSocial2017" role="doc-biblioref">2017</a>; Erikson, Goldthorpe, and Portocarero <a href="#ref-eriksonIntergenerationalClassMobility2010" role="doc-biblioref">2010</a>; Rosanvallon <a href="#ref-rosanvallonSocieteEgaux2011" role="doc-biblioref">2011</a>; Barozet <a href="#ref-barozetValorHistoricoPituto2006" role="doc-biblioref">2006</a>; McNamee and Miller <a href="#ref-mcnameeMeritocracyMyth2004" role="doc-biblioref">2004</a>; Goldthorpe <a href="#ref-goldthorpeMythEducationbasedMeritocracy2003" role="doc-biblioref">2003</a>)</span> Los segundos de caracter subjetivo, ponen el enfacis no en la observacion de la distribucion material de los recursos sino en las ideas y discursos en torno a la distribucion social, mirando la meritocracia desde el enfoque de la economia moral. Desde esta perspectiva de la economía moral, estudian las creencias meritocráticas y su relación con distintos factores, como el ingreso, el contexto social o los prejuicios a grupos vulnerables <span class="citation">(Kunovich and Slomczynski <a href="#ref-KunovichSystemsDistributionSense2007" role="doc-biblioref">2007</a>; Newman, Johnston, and Lown <a href="#ref-NewmanFalseConsciousnessClass2015" role="doc-biblioref">2015</a>; Reynolds and Xian <a href="#ref-ReynoldsPerceptionsmeritocracyland2014" role="doc-biblioref">2014</a>; Duru-Bellat and Tenret <a href="#ref-Duru-BellatWhoMeritocracyIndividual2012" role="doc-biblioref">2012</a>)</span>. Pese a que el concepto de creencias meritocráticas es fundamental para esta segunda línea de trabajo, las distintas escalas utilizadas en esta literatura no poseen suficientes evidencias de validez a su favor, lo que releva la importancia de aportar con propuestas para medir este constructo.</p>
 <p>Para estudiar las creencias meritocráticas se han utilizado múltiples escalas que suponen una estructura unifactorial de las creencias meritocráticas, sin distinguir entre elementos individuales y estructurales, ni diferenciar las preferencias de las percepciones <span class="citation">(Kunovich and Slomczynski <a href="#ref-KunovichSystemsDistributionSense2007" role="doc-biblioref">2007</a>; Newman, Johnston, and Lown <a href="#ref-NewmanFalseConsciousnessClass2015" role="doc-biblioref">2015</a>; Reynolds and Xian <a href="#ref-ReynoldsPerceptionsmeritocracyland2014" role="doc-biblioref">2014</a>)</span>. Más aún, se ha optado por índices unidimensionales incluso cuando se ha tenido evidencia en contra de ellos <span class="citation">(Kunovich and Slomczynski <a href="#ref-KunovichSystemsDistributionSense2007" role="doc-biblioref">2007</a>; Reynolds and Xian <a href="#ref-ReynoldsPerceptionsmeritocracyland2014" role="doc-biblioref">2014</a>)</span>. La mala especificación de las dimensiones del constructo puede llevar a conclusiones erradas sobre las creencias meritocráticas y su rol en la legitimidad de las desigualdades, por lo que es necesario hacer evaluaciones tanto sobre la dimensionalidad del constructo como de los ítems que permiten aproximarse adecuadamente al mismo.</p>
 <p>El objetivo de este proyecto fue desarrollar una escala de creencias en la meritocracia, que presentará una adecuada estructura de medición, que además buscamos que fuese estable en el tiempo. Por ello, nuestras preguntas de investigación refieren a la estructura del constructo y a la mantención de su validez a nivel temporal.</p>
 </div>
-<div id="antecedentes-generales-la-economía-moral-y-la-meritocracia" class="section level2" number="0.2">
-<h2 number="0.2"><span class="header-section-number">0.2</span> Antecedentes generales, la economía moral y la meritocracia</h2>
+<div id="antecedentes-generales-la-economia-moral-y-la-meritocracia" class="section level2">
+<h2><span class="header-section-number">0.2</span> Antecedentes generales, la economía moral y la meritocracia</h2>
 <p>Las ciencias sociales, desde la perspectiva de la economía moral, han enriquecido la comprensión de las relaciones económicas, aportando a la lógica racional imperante en las teorias economicas, aspectos subjetivos como las normas, los procesos históricos y culturales que estructuran las prácticas tanto las económicas <span class="citation">(Mau <a href="#ref-mauMoralEconomyWelfare2004" role="doc-biblioref">2004</a>; Sachweh <a href="#ref-sachwehMoralEconomyInequality2012" role="doc-biblioref">2012</a>; Polanyi, Alvarez-Uria, and VARELA <a href="#ref-polanyiGranTransformacionCritica1997" role="doc-biblioref">1997</a>; Zelizer <a href="#ref-zelizerEconomicLivesHow2010" role="doc-biblioref">2010</a> ; Fourcade and Healy <a href="#ref-fourcadeMoralViewsMarket2007" role="doc-biblioref">2007</a>)</span> como la produccion y reproduccion de la desigualdad <span class="citation">(Lamont, Beljean, and Clair <a href="#ref-lamontWhatMissingCultural2014" role="doc-biblioref">2014</a>)</span>.En este marco teorico, se ha planteado que las creencias meritocráticas pueden legitimar la desigualdad existente <span class="citation">(Hadjar <a href="#ref-hadjarMeritokratieAlsLegitimationsprinzip2008" role="doc-biblioref">2008</a>)</span>. En la misma linea, se ha planteado que la creencia en la meritocracia, que adjudica causas individuales a la pobreza, se relaciona con la atribucion de prejuicios hacia grupos de bajo estatus <span class="citation">(Madeira et al. <a href="#ref-MadeiraPrimesConsequencesSystematic2019" role="doc-biblioref">2019</a>)</span> y con ideas conservadoras de autoritarismo social <span class="citation">(Azevedo et al. <a href="#ref-AzevedoNeoliberalIdeologyJustification2019" role="doc-biblioref">2019</a>)</span>.</p>
 </div>
-<div id="evidencia-de-la-dimensionalidad-de-las-creencias-meritocráticas." class="section level2" number="0.3">
-<h2 number="0.3"><span class="header-section-number">0.3</span> Evidencia de la dimensionalidad de las creencias meritocráticas.</h2>
+<div id="evidencia-de-la-dimensionalidad-de-las-creencias-meritocraticas." class="section level2">
+<h2><span class="header-section-number">0.3</span> Evidencia de la dimensionalidad de las creencias meritocráticas.</h2>
 <p>La mayoría de las investigaciones que han trabajado con las creencias meritocráticas, la han abordado como un concepto unidimensional. No obstante, algunos autores han destacado la diferencia existente entre las preferencias y las percepciones meritocráticas <span class="citation">(Duru-Bellat and Tenret <a href="#ref-Duru-BellatWhoMeritocracyIndividual2012" role="doc-biblioref">2012</a>; Castillo et al. <a href="#ref-CastilloMeritocraciadesigualdadeconomica2019" role="doc-biblioref">2019</a>)</span>. Por percepciones meritocráticas refiere al modo en que el entrevistado describe la realidad. Las preferencias refieren a un aspecto normativo, es decir, que tan de acuerdo se está con que la meritocracia es un buen sistema de distribucion. Esta distinción es fundamental, puesto que ambas variables poseen bastante relación entre sí, por lo cual es de suponer que trabajar con estas variables sin controlarlas entre sí nos puede llevar a tener ideas causales erróneas por espuriedad. Así, por ejemplo, puede ser que las conclusiones que indican una mayor percepción de meritocracia en base a los ingresos, posean coeficientes sobreestimados y errores no normales, por la falta de variables relevantes.</p>
 <p>Además, de la distinción entre percepciones y preferencias, es necesario hacer la distinción entre elementos meritocráticos y elementos no meritocráticos. Al respecto algunos autores, que trabajan solamente con las percepciones meritocráticas, suponen que creer en el peso de factores externos (e.g. la ventaja de tener padres ricos) es contrario a creer en el rol del esfuerzo. De este modo, las creencias no meritocraticas son cosnideradas es el extremo negativo del continuo, mientras creer que la trayectoria personal depende del esfuerzo y el talento del individuo, corresponde al lado positivo del continuo. Dicho planteamiento deriva teoría que señala que una sociedad meritocrática ideal se define por la distribución de riquezas en base a esfuerzo y no a fuerzas estructurales <span class="citation">(Yair <a href="#ref-yairMeritocracy2007" role="doc-biblioref">2007</a>; Land <a href="#ref-landWeSatTable2006" role="doc-biblioref">2006</a>)</span>. Aunque dicho planteamiento es correcto para evaluar que tan meritocratica es una sociedad, no necesariamente este pensamiento se refleja en el modo en como se escructuran los discursos en los imaginarios de la poblacion. De hecho, otros investigadores han evaluado la dimensionalidad de las creencias meritocráticas, generando evidencia sobre la multidimensionalidad de este constructo, dando cuenta de que aspectos meritocraticos y no meritocraticos no forman parte de la misma dimension dentro de la subjetividad de los encuestados. Entre de las investigaciones que han evaluado dicha dimensionalidad se encuentran los trabajos de <span class="citation">Kunovich and Slomczynski (<a href="#ref-KunovichSystemsDistributionSense2007" role="doc-biblioref">2007</a>)</span> y <span class="citation">Reynolds and Xian (<a href="#ref-ReynoldsPerceptionsmeritocracyland2014" role="doc-biblioref">2014</a>)</span>.</p>
 <p>La investigación multinivel internacional de <span class="citation">Kunovich and Slomczynski (<a href="#ref-KunovichSystemsDistributionSense2007" role="doc-biblioref">2007</a>)</span>, que busca explicar las preferencias meritocráticas en el pago utilizando la encuesta ISSP, realizó análisis factoriales para probar la unidimensionalidad sin encontrar resultados satisfactorios, llegando a la conclusión de que las creencias en la meritocracia son más bien un conjunto diverso de ideas agregadas respecto al esfuerzo y la recompensa, razón por la cual decide utilizar un índice sumatorio pese a tener correlaciones insatisfactorias, las cuales estaban más cargadas a los ítems relacionados con aspectos no meritocráticos. En vista de la valioza evidencia producida por esta investigacion, podemos decir que, pese a que se ha trabajado como tal, las creencias meritocraticas parecen no ajustar a un modelo unidimensional.</p>
@@ -435,18 +422,18 @@ div.tocify {
 </tbody>
 </table>
 </div>
-<div id="sección-de-indicadores" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Sección de indicadores</h1>
+<div id="seccion-de-indicadores" class="section level1">
+<h1><span class="header-section-number">1</span> Sección de indicadores</h1>
 <p>Si bien no existe un consenso respecto a cuáles son los indicadores más adecuados para medir creencias en la meritocracia, los indicadores más comunes son preguntas del tipo, “qué tan importante es … para salir adelante”, las cuales incluyen características como tener padres ricos, trabajar duro, ser talentoso, el sexo, la raza, entre otras. El problema con este indicador presente en la International Social Survey Program, es que habla de un criterio de importancia y no de suficiencia. Así, por ejemplo, alguien puede creer que el esfuerzo es fundamental para salir adelante, y creer al mismo tiempo que no todas las personas que se esfuerzan más logran obtener más recursos que quienes se esfuerzan menos. Al respecto, hemos encontrado evidencia sistemática de que si bien una gran mayoría de las personas de chile consideran que el esfuerzo es fundamental para salir adelante, no creen que las personas no son recompensadas por su esfuerzo en su país.</p>
 <p>Otro indicador de esa misma encuesta, pregunta respecto a si cree que es importante a considerar en el pago de una persona distintas características, incluyendo características relativas al mérito, como educación o responsabilidad, y algunas relativas a las necesidades, como el tener hijos. No obstante, este modo de evaluar las creencias respecto a la meritocracia, si bien posee un aspecto no meritocrático, este no refiere a las desigualdades heredables que son lo propiamente contrario al ideal meritocrático (Yair, 2007; Land, 2006; newman; Reynolds and Xian, 2014). Además, este indicador no incluye aspectos de percepción, lo cual, como dijimos, puede generar problemas de espuriedad.</p>
 <p>En vista de la inexistencia de un consenso respecto a la manera correcta de medir las creencias meritocráticas proponemos nuevos indicadores que buscan ser más enfáticos en el fraseo respecto a la diferencia de preferencias y percepciones. Así, las preguntas que utilizamos son las presentes en la tabla 2. Estos indicadores, para referirse a las percepciones sitúan al entrevistado en la realidad de su país.</p>
 <p><img src="input/images/tabla2.png" /></p>
 </div>
-<div id="muestra-del-estudio" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Muestra del Estudio</h1>
+<div id="muestra-del-estudio" class="section level1">
+<h1><span class="header-section-number">2</span> Muestra del Estudio</h1>
 </div>
-<div id="resultados-estructura-factorial-efecto-framing-e-invarianza-longitudinal" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Resultados: Estructura factorial, efecto framing e invarianza longitudinal</h1>
+<div id="resultados-estructura-factorial-efecto-framing-e-invarianza-longitudinal" class="section level1">
+<h1><span class="header-section-number">3</span> Resultados: Estructura factorial, efecto framing e invarianza longitudinal</h1>
 <p>Este estudio cuenta con una encuesta panel de 3 olas. En la primera de los olas, se incorporo la escala en distintos ordenes. El primer orden, pregunta primero por todas las percepciones y despues por todas las preferencias, el segundo orden, pregunta seguidamente por percepciones y preferencias en torno a un mismo tema y, el tercer orden incorpora los items de manera aleatoria. En la segunda y tercera ola, se utilizo el orden</p>
 <p>Para poder evaluar la estructura factorial de la escala propuesta, se realizará un análisis factorial confirmatorio, evaluando el ajuste del modelo propuesto a partir de los estadísticos CFA, TLI, RMSEA y χ2 ratio. Los criterios de ajuste utilizados fueron anteriormente reportados en un preregistro de la investigación en el sitio Open Science FrameWork. Basado en los criterios de Kline (2016) y de Brown (2008) esperamos tanto para la prueba CFA como TLI, valores por sobre .95, mientras que para la prueba RMSEA, se consideran aceptables valores bajo .08 e idóneos bajo .05. Por su parte, respecto al χ2, se esperan valores p no significativos como parámetro ideal y se considera aceptable un χ2 ratio menor a 3.</p>
 <p>En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.</p>
@@ -565,10 +552,10 @@ div.tocify {
 <li>agregar cuales fueron las cargas sujeridas.</li>
 </ul>
 </div>
-<div id="validez-del-constructo" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Validez del constructo</h1>
-<div id="validez-convergente" class="section level2" number="4.1">
-<h2 number="4.1"><span class="header-section-number">4.1</span> Validez convergente</h2>
+<div id="validez-del-constructo" class="section level1">
+<h1><span class="header-section-number">4</span> Validez del constructo</h1>
+<div id="validez-convergente" class="section level2">
+<h2><span class="header-section-number">4.1</span> Validez convergente</h2>
 <p>indicar la construcción de los índices – hacer un anexo.</p>
 <p>Esta escala cuenta con validez de constructo, ya que los distintos índices formados según factor, correlacionan coherentemente la escala “Get a head”, utilizada por el programa internacional de encuestas sociales (ISSP), y con la escala de valores igualitarios utilizada por la encuesta internacional de valores. <strong>(indicar validez del constructo y bibliografía que lo use).</strong></p>
 <table>
@@ -608,24 +595,24 @@ div.tocify {
 <p>**contradicción a considerar: la validez por criterio, en la cual se evalúa la relación con una variable validada, depende de la calidad de la medida. nosotros lo relacionamos con lo que dice que esta mal.get-</p>
 </div>
 </div>
-<div id="invarianza-longitudinal" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Invarianza longitudinal</h1>
+<div id="invarianza-longitudinal" class="section level1">
+<h1><span class="header-section-number">5</span> Invarianza longitudinal</h1>
 </div>
-<div id="discusión" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> Discusión</h1>
+<div id="discusion" class="section level1">
+<h1><span class="header-section-number">6</span> Discusión</h1>
 <ul>
 <li><p>el texto incorpora una discusión que parte de las cargas cruzadas, dándoles sentido (que es un hallazgo propio del texto) y dando cuenta de cómo esta estructura es equivalente en varias encuestas, posteriormente justifica la existencia de cierto desajuste en base a una hipótesis plausible (diferencia entre autoaplicado y por teléfono)</p></li>
 <li><p>habla de la validez predictiva, habla de bajas correlaciones y plantea una posibilidad de un nuevo estudio con un cambio</p></li>
 <li><p>plantea una limitación, su estudio no es experimental y podría estar influido por más por el tipo de encuesta que se contestó.</p></li>
 </ul>
 </div>
-<div id="conclusión" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> Conclusión</h1>
+<div id="conclusion" class="section level1">
+<h1><span class="header-section-number">7</span> Conclusión</h1>
 <p>En un contexto de crecientes movilizaciones sociales y creciente deslegitimidad de los gobiernos, es necesario contar con instrumentos válidos para la medición de las creencias meritocráticas, las cuales, suelen funcionar como legitimadoras de la desigualdad. Por ello, es necesario contar con instrumentos breves y validados, para incorporar la medición de esta variable en otros estudios relacionados con temas de legitimidad. Utilizando los datos recolectados en una encuesta panel representativa de Chile, este artículo expone la elaboración y la validación de una escala de creencias meritocráticas de 4 factores: percepciones meritocráticas, percepciones no-meritocráticas, preferencias meritocráticas y preferencias no meritocráticas. La escala de percepciones y preferencias meritocráticas es un instrumento breve, el cual permite medir de manera relativamente sencilla las creencias meritocráticas, las cuales son fundamentales para abordar temas de legitimación de la desigualdad, preferencias redistributivas o prejuicios hacia grupos vulnerables.</p>
 </div>
-<div id="bibliografía" class="section level1 unnumbered" number="">
-<h1 class="unnumbered" number="">Bibliografía</h1>
-<div id="refs" class="references hanging-indent">
+<div id="bibliografia" class="section level1 unnumbered">
+<h1>Bibliografía</h1>
+<div id="refs" class="references">
 <div id="ref-alonDiversityOpportunityShifting2007">
 <p>Alon, Sigal, and Marta Tienda. 2007. “Diversity, Opportunity, and the Shifting Meritocracy in Higher Education.” <em>American Sociological Review</em> 72 (4): 487–511. <a href="https://doi.org/10.1177/000312240707200401">https://doi.org/10.1177/000312240707200401</a>.</p>
 </div>
