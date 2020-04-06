@@ -395,7 +395,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Longitudinal data</h1>
-<h4 class="date">01 abril, 2020</h4>
+<h4 class="date">05 abril, 2020</h4>
 
 </div>
 
@@ -414,57 +414,51 @@ library(kableExtra)</code></pre>
 <pre class="r"><code>w01 &lt;- sjlabelled::read_spss(&quot;input/data/original/Estudio_3_ola1.sav&quot;,verbose = F)
 w02 &lt;- sjlabelled::read_spss(&quot;input/data/original/Estudio_3_ola2.sav&quot;,verbose = F)
 w03 &lt;- sjlabelled::read_spss(&quot;input/data/original/Estudio_3_ola3.sav&quot;,verbose = F)</code></pre>
-<pre class="r"><code>table(w01$Intro,exclude=NULL) # (2) 221 no aceptan, (1) 2236 aceptan
-
-w01a &lt;- filter(w01,Intro==1) # Elimina los que no aceptan
-table(w01a$Intro,exclude=NULL) # 2236 
-
-# Variables para ver si finalizo encuesta
-table(w01a$Finished,exclude=NULL) # (1) 2100 finalizan, (0) 136 no terminan
-
-w01b &lt;- filter(w01a,Finished==1) # Elimina los que no aceptan
-table(w01b$Intro,exclude=NULL) # 2100</code></pre>
+<pre class="r"><code>table(w01$Intro,exclude=NULL) # (2) 221 no aceptan, (1) 2236 aceptan</code></pre>
 <pre><code>## 
 ##    1    2 
-## 2236  221 
-## 
+## 2236  221</code></pre>
+<pre class="r"><code>w01a &lt;- filter(w01,Intro==1) # Elimina los que no aceptan
+table(w01a$Intro,exclude=NULL) # 2236 </code></pre>
+<pre><code>## 
 ##    1 
-## 2236 
-## 
+## 2236</code></pre>
+<pre class="r"><code># Variables para ver si finalizo encuesta
+table(w01a$Finished,exclude=NULL) # (1) 2100 finalizan, (0) 136 no terminan</code></pre>
+<pre><code>## 
 ##    0    1 
-##  136 2100 
-## 
+##  136 2100</code></pre>
+<pre class="r"><code>w01b &lt;- filter(w01a,Finished==1) # Elimina los que no aceptan
+table(w01b$Intro,exclude=NULL) # 2100</code></pre>
+<pre><code>## 
 ##    1 
 ## 2100</code></pre>
-<pre class="r"><code>table(w02$Intro,exclude=NULL) # (2)  no aceptan, (1)  aceptan
-
-w02a &lt;- filter(w02,Intro==1) # Elimina los que no aceptan
-table(w02a$Intro,exclude=NULL) # 
-
-# Variables para ver si finalizo encuesta
-table(w02a$Finished,exclude=NULL) # (1)  finalizan, (0)  no terminan
-
-w02b &lt;- filter(w02a,Finished==1) # Elimina los que no aceptan
-table(w02b$Intro,exclude=NULL) # </code></pre>
+<pre class="r"><code>table(w02$Intro,exclude=NULL) # (2)  no aceptan, (1)  aceptan</code></pre>
 <pre><code>## 
 ##    1    2 &lt;NA&gt; 
-## 1809   56   17 
-## 
+## 1809   56   17</code></pre>
+<pre class="r"><code>w02a &lt;- filter(w02,Intro==1) # Elimina los que no aceptan
+table(w02a$Intro,exclude=NULL) # </code></pre>
+<pre><code>## 
 ##    1 
-## 1809 
-## 
+## 1809</code></pre>
+<pre class="r"><code># Variables para ver si finalizo encuesta
+table(w02a$Finished,exclude=NULL) # (1)  finalizan, (0)  no terminan</code></pre>
+<pre><code>## 
 ##    0    1 
-##   40 1769 
-## 
+##   40 1769</code></pre>
+<pre class="r"><code>w02b &lt;- filter(w02a,Finished==1) # Elimina los que no aceptan
+table(w02b$Intro,exclude=NULL) # </code></pre>
+<pre><code>## 
 ##    1 
 ## 1769</code></pre>
-<pre class="r"><code>table(w03$Finished==1)
-w03b &lt;- filter(w03,Finished==1) # Elimina los que no aceptan
-dim(w03b)</code></pre>
+<pre class="r"><code>table(w03$Finished==1)</code></pre>
 <pre><code>## 
 ## FALSE  TRUE 
-##    67  1422 
-## [1] 1422   77</code></pre>
+##    67  1422</code></pre>
+<pre class="r"><code>w03b &lt;- filter(w03,Finished==1) # Elimina los que no aceptan
+dim(w03b)</code></pre>
+<pre><code>## [1] 1422   77</code></pre>
 <pre class="r"><code>w01b$ID&lt;- stringr::str_split_fixed(w01b$ticket,&quot;_&quot;, 4)[,1] # En la variable ticket el primer código es el ID, todo lo demás se borra
 w02b$ID &lt;- stringr::str_split_fixed(w02b$ticket, &quot;_&quot;, 4)[,1] 
 
