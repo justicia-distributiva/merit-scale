@@ -29,5 +29,7 @@ for (i in 1:length(ext)) {
   file.remove(paste0("docs/",dir(path="docs", pattern=ext[i]))) # delete files
 }
 
+browseURL(url = "docs/index.html")
+
 # Keep only the original .rmd files (site), configuration (_site.yml and _config.yml)
 # and prod_ folders (cache and files)
