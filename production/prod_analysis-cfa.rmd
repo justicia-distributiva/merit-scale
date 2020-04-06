@@ -1,5 +1,5 @@
 ---
-title: "Analysis"
+title: "Analysis PPM-S"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 css: "../input/bib/style.css"
 output: 
@@ -13,12 +13,15 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Analysis PPM-S
-
 This section, documents all the procedures related to the data analysis and measurement models.
+(description)
+
+
 
 
 # Wave 01 {.tabset .tabset-fade .tabset-pills}
+
+Design: this wave ....
 
 ```{r eval=FALSE, include=FALSE}
 rmarkdown::render(input = "production/prod_analysis-cfa.Rmd",output_format = "html_document")
@@ -88,7 +91,7 @@ Each group correspond to the application modality of the scale.
 
 3.  **Version 03:** Random order (N=`r dim(dat03)[1]`)
 
-4. **Version 04:** Complete sample (N=`r dim(dat04)[1]`)
+4. **Complete Sample:** Complete sample (N=`r dim(dat04)[1]`)
 
 ## Version 01 (N=`r dim(dat01)[1]`){.tabset}
 
@@ -284,7 +287,7 @@ kable(anova(fit3_o,fit3_o.tau),
 
 > **NOTE:** The model with equal factor loadings (in Meritocracy Perception) does not significantly deteriorate the model fit.
 
-## Version 04 (N=`r dim(dat04)[1]`)
+## Complete sample (N=`r dim(dat04)[1]`)
 
 | Spanish (original)                           | English (translated)                 |
 |----------------------------------------------|--------------------------------------|
