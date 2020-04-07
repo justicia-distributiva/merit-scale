@@ -1,5 +1,10 @@
+<<<<<<< Updated upstream
 ---
 title: "Data preparation"
+=======
+
+title: ---"Data preparation"
+>>>>>>> Stashed changes
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 css: "../input/bib/style.css"
 output: 
@@ -42,7 +47,11 @@ library(sjlabelled)
 library(Hmisc)
 ```
 
+<<<<<<< Updated upstream
 # Data preparation
+=======
+# Data preparation according order of the items  
+>>>>>>> Stashed changes
 
 ```{r}
 w01 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola1.sav",verbose = F)
@@ -75,6 +84,7 @@ dat04[dat04==0] <- NA
 ```
 
 ## Translation of variable labels and value labels.  
+<<<<<<< Updated upstream
 ```{r}
 label(dat04$grupo) <- "This variable classifies the interviewees according to the order in which the indicators are shown within the scale. There are three orders  of items on the scale. In the first order (group 1), questions of the same factor are then presented to them, in the second order (group 2) they were separated and in the third order (group 3) at random."
 
@@ -163,6 +173,96 @@ print(dfSummary(dat04, valid.col = FALSE, graph.magnif = 0.75),
 ### Preparation of group 1: order according to the factors.
 
 ```{r}
+=======
+```{r}
+label(dat04$grupo) <- "This variable classifies the interviewees according to the order in which the indicators are shown within the scale. There are three orders  of items on the scale. In the first order (group 1), questions of the same factor are then presented to them, in the second order (group 2) they were separated and in the third order (group 3) at random."
+
+
+dat04$perc_effort <- set_labels(dat04$perc_effort,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$perc_effort) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Who
+the more they try they manage to get bigger
+rewards that those who strive
+less."
+
+dat04$perc_talent <- set_labels(dat04$perc_talent,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$perc_talent) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Who
+possess more talent they manage to obtain
+greater rewards than those who possess
+less talent."
+
+dat04$perc_wpart <- set_labels(dat04$perc_wpart,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$perc_wpart) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Who
+they have rich parents manage to get out
+ahead."
+
+dat04$perc_netw <- set_labels(dat04$perc_netw,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$perc_netw) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Who
+they have good contacts they manage to get out
+ahead."
+
+dat04$pref_effort <- set_labels(dat04$pref_effort,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$pref_effort) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Who
+the more they try they should get
+greater rewards than those who
+they try less."
+
+dat04$pref_talent <- set_labels(dat04$pref_talent,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$pref_talent) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Who
+possess more talent they should get
+greater rewards than those who possess
+less talent."
+
+dat04$pref_wpart <- set_labels(dat04$pref_wpart,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+label(dat04$pref_wpart) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Is
+well that those who have good
+contacts get ahead."
+
+dat04$pref_netw <- set_labels(dat04$pref_netw,  labels = c("strongly disagree", "disagreement", "Neither agree nor disagree","Agree", "totally agree"))
+label(dat04$pref_netw) <- "Thinking of Chilean society,
+what measure do you find of
+agree or disagree with each of
+the following statements? - Is
+well that those who have good
+contacts get ahead."
+```
+
+
+```{r}
+dat04 <-  dat04 %>% select(grupo, perc_effort, perc_talent, perc_wpart, perc_netw, pref_effort, pref_talent, pref_wpart , pref_netw) %>% as.data.frame()
+```
+
+```{r} 
+print(dfSummary(dat04, valid.col = FALSE, graph.magnif = 0.75), 
+      max.tbl.height = 300, method = "render")
+```
+
+
+
+### Preparation of group 1: order according to the factors.
+
+```{r}
+>>>>>>> Stashed changes
 dat01 <- dat04 %>% filter(grupo==1) %>%  na.omit()
 ```
 
@@ -177,6 +277,7 @@ print(dfSummary(dat01, valid.col = FALSE, graph.magnif = 0.75),
 ```{r}
 dat02 <- dat04 %>% filter(grupo==2) %>% select(perc_effort, pref_effort, perc_talent,pref_talent, perc_wpart,pref_wpart,  perc_netw, pref_netw) %>% na.omit()
 ```
+<<<<<<< Updated upstream
 
 ```{r} 
 print(dfSummary(dat02, valid.col = FALSE, graph.magnif = 0.75), 
@@ -189,6 +290,20 @@ print(dfSummary(dat02, valid.col = FALSE, graph.magnif = 0.75),
 dat03 <- dat04 %>% filter(grupo==3) %>%  na.omit()
 ```
 
+=======
+
+```{r} 
+print(dfSummary(dat02, valid.col = FALSE, graph.magnif = 0.75), 
+      max.tbl.height = 300, method = "render")
+```
+
+### Preparation of group 3: randomized order.
+
+```{r}
+dat03 <- dat04 %>% filter(grupo==3) %>%  na.omit()
+```
+
+>>>>>>> Stashed changes
 ```{r} 
 print(dfSummary(dat03, valid.col = FALSE, graph.magnif = 0.75), 
       max.tbl.height = 300, method = "render")
@@ -199,6 +314,7 @@ save(dat01,file = "input/data/proc/dat01.RData")
 save(dat02,file = "input/data/proc/dat02.RData")
 save(dat03,file = "input/data/proc/dat03.RData")
 save(dat04,file = "input/data/proc/dat04.RData")
+<<<<<<< Updated upstream
 ```
 
 
@@ -229,6 +345,38 @@ sjPlot::view_df(w01_Intro, show.type = T,show.frq = T, show.string.values = T, v
 
 Delete those who do not accept and Delete those who do not accept
 ```{r}
+=======
+```
+
+
+# Longitudinal data
+
+```{r}
+w01 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola1.sav",verbose = F)
+w02 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola2.sav",verbose = F)
+w03 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola3.sav",verbose = F)
+```
+
+## Preparation wave 1 
+
+Add tags wave 1
+```{r }
+label(w01$Intro) <- "If you wish to participate, select the alternative I ACCEPT take part in this investigation. If you do not want to participate in this study, press the alternative I NOT ACCEPT take part in this investigation."
+
+w01$Intro <- set_labels(w01$Intro,  labels = c("I ACCEPT take part in this investigation","I NOT ACCEPT take part in this investigation."))
+
+```
+
+
+Frequency of respondents who Accept and Finish wave 1.
+```{r fig.width= 10}
+w01_Intro <- w01 %>% select(Intro,Finished) %>% as.data.frame() 
+sjPlot::view_df(w01_Intro, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+Delete those who do not accept and Delete those who do not accept
+```{r}
+>>>>>>> Stashed changes
 w01b <- w01 %>% filter(Intro==1, Finished==1) %>% as.data.frame() 
 w01b$ID<- stringr::str_split_fixed(w01b$ticket,"_", 4)[,1] # En la variable ticket el primer código es el ID, todo lo demás se borra
 ```
@@ -275,6 +423,7 @@ label(w02$Intro) <- "If you wish to participate, select the alternative I ACCEPT
 
 w02$Intro <- set_labels(w02$Intro,  labels = c("I ACCEPT take part in this investigation","I NOT ACCEPT take part in this investigation."))
 
+<<<<<<< Updated upstream
 ```
 
 
@@ -298,6 +447,31 @@ w02_Introb <- w02b %>% select(Intro,Finished) %>% as.data.frame()
 sjPlot::view_df(w02_Introb, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
 ```
 
+=======
+```
+
+
+Frequency of respondents who Accept and Finish wave 1.
+```{r}
+w02_Intro <- w02 %>% select(Intro,Finished) %>% as.data.frame() 
+sjPlot::view_df(w02_Intro, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+Delete those who do not accept and Delete those who do not accept
+```{r}
+w02b <- w02 %>% filter(Intro==1, Finished==1) %>% as.data.frame() 
+w02b$ID <- stringr::str_split_fixed(w02b$ticket, "_", 4)[,1] 
+
+```
+
+Frequency of respondents who Accept and Finish wave 1.
+```{r }
+w02b$Intro <- set_labels(w02b$Intro,  labels = c("I ACCEPT take part in this investigation", "I NOT ACCEPT take part in this investigation."))
+w02_Introb <- w02b %>% select(Intro,Finished) %>% as.data.frame() 
+sjPlot::view_df(w02_Introb, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+>>>>>>> Stashed changes
 ## 
 ```{r}
 w02c <- w02b
@@ -401,6 +575,7 @@ long01<- melt(wide,variable.name = "wave",
 ```{r}
 save(long01,file = "input/data/proc/datalong.RData")
 ```
+
 
 
 
