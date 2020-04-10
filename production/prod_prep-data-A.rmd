@@ -155,7 +155,7 @@ print(dfSummary(dat04, valid.col = FALSE, graph.magnif = 0.75),
 ## Preparation of group 1: order according to the factors.
 
 ```{r}
-dat01 <- dat04 %>% filter(grupo==1) %>% select(-grupo) %>%  na.omit() 
+dat01 <- dat04 %>% filter(grupo==1) %>% select(-grupo) %>%  na.omit()
 ```
 
 ```{r}
