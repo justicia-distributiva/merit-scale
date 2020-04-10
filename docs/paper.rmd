@@ -3,9 +3,13 @@ title: "Perceptions and Preferences for Meritocracy Scale (PPM-S)"
 linestretch: '1.5'
 link-citations: yes
 output:
-  html_document: default
+    html_document:
+        number_sections: true
+        toc: true
+        toc_float: true
+        smart: false
 linkcolor: blue
-bibliography: input/bib/EconomiaMoral.bib
+bibliography: ../input/bib/EconomiaMoral.bib
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 <div style="text-align: justify">
 
-## Introducción 
+# Introducción 
 
 Tanto las organizaciones internacionales, como parte del mundo académico, presentan una creciente preocupación por el aumento de la desigualdad social y los efectos negativos que esta posee en torno a la legitimidad de nuestras sociedades [ONU,2016; @schlozmanUnheavenlyChorusUnequal2012; @CastilloMeritocraciadesigualdadeconomica2019]. Más relevante aún se vuelve la legitimidad de la desigualdad en un contexto mundial de crecientes protestas sociales en contra de la misma. En el caso Chileno, estas movilizaciones han alcanzado una gran envergadura, relevando la importancia de evaluar los niveles de legitimidad de la desigualdad existente, a la luz de distintas ideologías que según la teoría podrían justificar. Dentro de estas ideologías que legitiman la desigualdad, la literatura sobre la meritocracia, presenta un notorio crecimiento [@MadeiraPrimesConsequencesSystematic2019]. Tradicionalmente la meritocracia es entendida como una forma de distribución social de recursos donde el mérito individual (i.e. el esfuerzo y el talento) determinan la distribución de los privilegios [@breenClassInequalityMeritocracy1999;@youngRiseMeritocracy1994; @OhsfeldtBeliefsInequalityAmericans1987; @Jostrolestereotypingsystemjustification1994], sin la interferencia de factores estructurales como la herencia o los contactos [@breenClassInequalityMeritocracy1999; @saundersMightBritainBe1995; @yairMeritocracy2007; @landWeSatTable2006;@youngRiseMeritocracy1994].
 

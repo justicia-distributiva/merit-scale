@@ -10,3 +10,11 @@ kableExtra
 semTools
 tidyr
 data.table
+semPlot
+summarytools
+sjlabelled
+lattice
+survival
+Formula
+ggplot2
+Hmisc

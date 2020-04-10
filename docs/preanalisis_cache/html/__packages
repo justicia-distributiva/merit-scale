@@ -8,3 +8,13 @@ psych
 knitr
 kableExtra
 semTools
+semPlot
+tidyr
+summarytools
+sjlabelled
+lattice
+survival
+Formula
+ggplot2
+Hmisc
+data.table

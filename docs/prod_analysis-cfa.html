@@ -319,6 +319,12 @@ div.tocify {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -396,65 +402,43 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">07 abril, 2020</h4>
+<h4 class="date">viernes 10 abril 2020 17:12:33</h4>
 
 </div>
 
 
-<p>This section, documents all the procedures related to the data analysis and measurement models. (description)</p>
 <div id="wave-01" class="section level1 tabset tabset-fade tabset-pills" number="1">
 <h1 class="tabset tabset-fade tabset-pills" number="1"><span class="header-section-number">1</span> Wave 01</h1>
-<p>Design: this wave ….</p>
+<p>On the first wave of the study we conducted the application of the Perceptions and Preferences Meritocracy Scale (PPM-S), in which we decided to test three different modalities for the application of the scale. The design of the study considered a sample of 2200 cases in Chile, using quotas for sex, age and educational level. The most important feature of this study consists in that we randomly assigned the participants to three different groups, in which the subjects complete one of the three combination of the questions. The key feature of these combinations relies on the display order of the questions regarding to each indicator of the scale. On this respect, we have three subsamples that correspond to each application modality that can be analysed separately, but also all together as a full sample.</p>
+<p>The scale has eight indicators, divided in four questions for perception and four for preferences, which are also divided in meritocratic and non-meritocratic. The meritocratic indicators refers to topics such as effort and talent, and the non-meritocratic refers to family wealth and networks. The three combinations relies in how these indicators are displayed to the respondent. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. the second combination corresponds to the group in which the questions are displayed following the a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions.</p>
+<p>The rationale of the design relies on the possibility to test how different display modalities could affect the hypothesized factor structure of the scale. On this regard, we conducted the analysis on two stages. On the first stage we tested the hypothesized factor structure on the three groups corresponding to each application modality and the full sample using a Confirmatory Factor Analysis (CFA). On the second stage, we conducted a Multi-group confirmatory factor analysis (MGCFA) using the groups created by the randomization. Furthermore, we explore the possibility of a second order factor structure, in which we tested two models. The first alternative corresponds to a second-order Confirmatory Factor Analysis assuming the Perception/Preference dimension as a second order factor. On the other hand, we tested a model in which we assume that the second order factor structure follows the Meritocratic/Non-meritocratic constructs.</p>
+<hr />
 <p><strong>Libraries</strong></p>
 <pre class="r"><code>library(sjPlot)
 library(dplyr)
 library(lavaan)
+library(semPlot)
 library(stargazer)
 library(corrplot)
 library(psych)
 library(knitr)
 library(kableExtra)</code></pre>
 <p><strong>Load data</strong></p>
-<pre class="r"><code>data01 &lt;- sjlabelled::read_spss(path = &quot;input/data/original/Estudio_3_ola1.sav&quot;,verbose = FALSE)
-
-dat01 &lt;- data01 %&gt;% filter(Intro==1,Finished==1) %&gt;% select(starts_with(&quot;meritv01&quot;))   %&gt;% na.omit()
-dat02 &lt;- data01 %&gt;% filter(Intro==1,Finished==1) %&gt;% select(starts_with(&quot;meritv02&quot;))   %&gt;% na.omit()
-dat03 &lt;- data01 %&gt;% filter(Intro==1,Finished==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) %&gt;% na.omit()
-
-# - Nos quedamos solamente con los casos que ACEPTARON participar y terminaron el cuestionario.
-# - Para dejar una base que contenga solamente los casos que tienen información completa en los ítems usamos na.omit()
-
-dat04 &lt;- data01 %&gt;% filter(Intro==1) %&gt;%
-  select(starts_with(&quot;meritv01&quot;),
-         starts_with(&quot;meritv02&quot;),
-         starts_with(&quot;meritv03_p&quot;),
-         starts_with(&quot;FL_21_DO&quot;)) 
-dat04$grupo &lt;- NA
-dat04$grupo[dat04$FL_21_DO_merit_perc_pref_julio19v01==1] &lt;- 1
-dat04$grupo[dat04$FL_21_DO_merit_perc_pref_julio19v02==1] &lt;- 2
-dat04$grupo[dat04$FL_21_DO_merit_perc_pref_julio19v03==1] &lt;- 3
-dat04$perc_effort &lt;- rowSums(dat04[,c(matches(match = &quot;perc_effort&quot;,vars = names(dat04)))],na.rm = TRUE)
-dat04$perc_talent &lt;- rowSums(dat04[,c(matches(match = &quot;perc_talent&quot;,vars = names(dat04)))],na.rm = TRUE)
-dat04$perc_wpart  &lt;- rowSums(dat04[,c(matches(match = &quot;perc_wpart&quot; ,vars = names(dat04)))],na.rm = TRUE)
-dat04$perc_netw   &lt;- rowSums(dat04[,c(matches(match = &quot;perc_netw&quot;  ,vars = names(dat04)))],na.rm = TRUE)
-
-dat04$pref_effort &lt;- rowSums(dat04[,c(matches(match = &quot;pref_effort&quot;,vars = names(dat04)))],na.rm = TRUE)
-dat04$pref_talent &lt;- rowSums(dat04[,c(matches(match = &quot;pref_talent&quot;,vars = names(dat04)))],na.rm = TRUE)
-dat04$pref_wpart  &lt;- rowSums(dat04[,c(matches(match = &quot;pref_wpart&quot; ,vars = names(dat04)))],na.rm = TRUE)
-dat04$pref_netw   &lt;- rowSums(dat04[,c(matches(match = &quot;pref_netw&quot;  ,vars = names(dat04)))],na.rm = TRUE)
-dat04[dat04==0] &lt;- NA
-dat04 &lt;- dat04 %&gt;% select(starts_with(match = &quot;perc_&quot;),starts_with(match = &quot;pref_&quot;),grupo) %&gt;% na.omit()</code></pre>
+<pre class="r"><code>load(file = &quot;input/data/proc/dat01.RData&quot;)
+load(file = &quot;input/data/proc/dat02.RData&quot;)
+load(file = &quot;input/data/proc/dat03.RData&quot;)
+load(file = &quot;input/data/proc/dat04.RData&quot;)</code></pre>
 <hr />
 <p><strong>Modality</strong></p>
 <p>Each group correspond to the application modality of the scale.</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Version 01:</strong> Fixed order by perception / preferences (N=697)</p></li>
-<li><p><strong>Version 02:</strong> Fixed order, by topic (N=706)</p></li>
-<li><p><strong>Version 03:</strong> Random order (N=697)</p></li>
+<li><p><strong>Version 01:</strong> Fixed order by perception / preferences (N=712)</p></li>
+<li><p><strong>Version 02:</strong> Fixed order, by topic (N=717)</p></li>
+<li><p><strong>Version 03:</strong> Random order (N=712)</p></li>
 <li><p><strong>Complete Sample:</strong> Complete sample (N=2141)</p></li>
 </ol>
-<div id="version-01-n697" class="section level2 tabset" number="1.1">
-<h2 class="tabset" number="1.1"><span class="header-section-number">1.1</span> Version 01 (N=697)</h2>
+<div id="version-01-n712" class="section level2 tabset" number="1.1">
+<h2 class="tabset" number="1.1"><span class="header-section-number">1.1</span> Version 01 (N=712)</h2>
 <table>
 <caption>Mode 01: Fixed order by perception</caption>
 <thead>
@@ -544,7 +528,7 @@ Max
 A. pc.effort
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.16
@@ -573,7 +557,7 @@ A. pc.effort
 B. pc.talent
 </td>
 <td>
-697
+712
 </td>
 <td>
 2.98
@@ -602,13 +586,13 @@ B. pc.talent
 C. pc.wpart
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.60
 </td>
 <td>
-1.35
+1.36
 </td>
 <td>
 1
@@ -631,13 +615,13 @@ C. pc.wpart
 D. pc.netw
 </td>
 <td>
-697
+712
 </td>
 <td>
-3.74
+3.73
 </td>
 <td>
-1.25
+1.27
 </td>
 <td>
 1
@@ -660,7 +644,7 @@ D. pc.netw
 E. pf.effort
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.91
@@ -689,7 +673,7 @@ E. pf.effort
 F. pf.talent
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.27
@@ -718,10 +702,10 @@ F. pf.talent
 G. pf.wpart
 </td>
 <td>
-697
+712
 </td>
 <td>
-2.56
+2.55
 </td>
 <td>
 1.12
@@ -747,10 +731,10 @@ G. pf.wpart
 H. pf.netw
 </td>
 <td>
-697
+712
 </td>
 <td>
-2.34
+2.33
 </td>
 <td>
 1.06
@@ -781,18 +765,18 @@ rownames(cor01$rho) &lt;- c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&
 colnames(cor01$rho) &lt;- c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/correlacion%20v01-1.png" width="672" /></p>
-<pre class="r"><code>model01 &lt;- &#39;perc_merit=~meritv01_perc_effort+meritv01_perc_talent
-            perc_nmerit=~meritv01_perc_wpart+meritv01_perc_netw
-            pref_merit=~meritv01_pref_effort+meritv01_pref_talent
-            pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw&#39;
+<pre class="r"><code>model01 &lt;- &#39;perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw&#39;
 
 fit1_c &lt;- cfa(model = model01,data = dat01,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
 
 fit1_o &lt;- cfa(model = model01,data = dat01,
-            ordered = c(&quot;meritv01_perc_effort&quot;,&quot;meritv01_perc_talent&quot;,
-                        &quot;meritv01_perc_wpart&quot;,&quot;meritv01_perc_netw&quot;,
-                        &quot;meritv01_pref_effort&quot;,&quot;meritv01_pref_talent&quot;,
-                        &quot;meritv01_pref_wpart&quot;,&quot;meritv01_pref_netw&quot;))
+            ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                        &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                        &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                        &quot;pref_wpart&quot;,&quot;pref_netw&quot;))
 
 #---------------------------------------------------#
 cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
@@ -810,51 +794,51 @@ kable(left_join(x = standardizedsolution(fit1_c) %&gt;% filter(op==&quot;=~&quot
 <tbody>
 <tr class="odd">
 <td align="left">perc_merit</td>
-<td align="left">meritv01_perc_effort</td>
+<td align="left">perc_effort</td>
 <td align="right">0.70</td>
 <td align="right">0.69</td>
 </tr>
 <tr class="even">
 <td align="left">perc_merit</td>
-<td align="left">meritv01_perc_talent</td>
-<td align="right">0.73</td>
-<td align="right">0.82</td>
+<td align="left">perc_talent</td>
+<td align="right">0.72</td>
+<td align="right">0.81</td>
 </tr>
 <tr class="odd">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv01_perc_wpart</td>
+<td align="left">perc_wpart</td>
 <td align="right">0.80</td>
 <td align="right">0.85</td>
 </tr>
 <tr class="even">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv01_perc_netw</td>
+<td align="left">perc_netw</td>
 <td align="right">0.92</td>
 <td align="right">0.94</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_merit</td>
-<td align="left">meritv01_pref_effort</td>
+<td align="left">pref_effort</td>
 <td align="right">0.82</td>
 <td align="right">0.85</td>
 </tr>
 <tr class="even">
 <td align="left">pref_merit</td>
-<td align="left">meritv01_pref_talent</td>
+<td align="left">pref_talent</td>
 <td align="right">0.58</td>
 <td align="right">0.64</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv01_pref_wpart</td>
-<td align="right">0.41</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.46</td>
 <td align="right">0.55</td>
 </tr>
 <tr class="even">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv01_pref_netw</td>
-<td align="right">1.51</td>
-<td align="right">1.24</td>
+<td align="left">pref_netw</td>
+<td align="right">1.37</td>
+<td align="right">1.26</td>
 </tr>
 </tbody>
 </table>
@@ -862,8 +846,8 @@ kable(left_join(x = standardizedsolution(fit1_c) %&gt;% filter(op==&quot;=~&quot
 <p><strong>NOTE</strong>: good fit, heywood case item 8.</p>
 </blockquote>
 </div>
-<div id="version-02-n706" class="section level2" number="1.2">
-<h2 number="1.2"><span class="header-section-number">1.2</span> Version 02 (N=706)</h2>
+<div id="version-02-n717" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Version 02 (N=717)</h2>
 <table>
 <caption>Mode 02: Fixed order, by topic.</caption>
 <thead>
@@ -953,7 +937,7 @@ Max
 A. pc.effort
 </td>
 <td>
-706
+717
 </td>
 <td>
 3.10
@@ -982,13 +966,13 @@ A. pc.effort
 E. pf.effort
 </td>
 <td>
-706
+717
 </td>
 <td>
-3.74
+3.73
 </td>
 <td>
-1.34
+1.35
 </td>
 <td>
 1
@@ -1011,10 +995,10 @@ E. pf.effort
 B. pc.talent
 </td>
 <td>
-706
+717
 </td>
 <td>
-3.04
+3.03
 </td>
 <td>
 1.11
@@ -1040,13 +1024,13 @@ B. pc.talent
 F. pf.talent
 </td>
 <td>
-706
+717
 </td>
 <td>
-3.15
+3.13
 </td>
 <td>
-1.15
+1.16
 </td>
 <td>
 1
@@ -1069,13 +1053,13 @@ F. pf.talent
 C. pc.wpart
 </td>
 <td>
-706
+717
 </td>
 <td>
 3.66
 </td>
 <td>
-1.36
+1.37
 </td>
 <td>
 1
@@ -1098,13 +1082,13 @@ C. pc.wpart
 G. pf.wpart
 </td>
 <td>
-706
+717
 </td>
 <td>
-2.74
+2.75
 </td>
 <td>
-1.21
+1.20
 </td>
 <td>
 1
@@ -1127,7 +1111,7 @@ G. pf.wpart
 D. pc.netw
 </td>
 <td>
-706
+717
 </td>
 <td>
 3.73
@@ -1156,7 +1140,7 @@ D. pc.netw
 H. pc.netw
 </td>
 <td>
-706
+717
 </td>
 <td>
 2.39
@@ -1189,18 +1173,18 @@ H. pc.netw
 rownames(cor02$rho) &lt;-c(&quot;A. pc.effort&quot;,&quot;E. pf.effort&quot;,&quot;B. pc.talent&quot;,&quot;F. pf.talent&quot;,&quot;C. pc.wpart&quot;,&quot;G. pf.wpart&quot;,&quot;D. pc.netw&quot;,&quot;H. pc.netw&quot;)
 colnames(cor02$rho) &lt;-c(&quot;(A)&quot;, &quot;(E)&quot;,&quot;(B)&quot;,&quot;(F)&quot;,&quot;(C)&quot;,&quot;(G)&quot;,&quot;(D)&quot;, &quot;(H)&quot;)
 corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<pre class="r"><code>model02 &lt;- &#39;perc_merit=~meritv02_perc_effort+meritv02_perc_talent
-            perc_nmerit=~meritv02_perc_wpart+meritv02_perc_netw
-            pref_merit=~meritv02_pref_effort+meritv02_pref_talent
-            pref_nmerit=~meritv02_pref_wpart+meritv02_pref_netw&#39;
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>model02 &lt;- &#39;perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw&#39;
 
 fit2_c &lt;- cfa(model = model02,data = dat02,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
 
-fit2_o &lt;- cfa(model = model02,data = dat02,ordered = c(&quot;meritv02_perc_effort&quot;,&quot;meritv02_perc_talent&quot;,
-                                                       &quot;meritv02_perc_wpart&quot;  ,&quot;meritv02_perc_netw&quot;,
-                                                       &quot;meritv02_pref_effort&quot; ,&quot;meritv02_pref_talent&quot;,
-                                                       &quot;meritv02_pref_wpart&quot;  ,&quot;meritv02_pref_netw&quot;))
+fit2_o &lt;- cfa(model = model02,data = dat02,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                       &quot;perc_wpart&quot;  ,&quot;perc_netw&quot;,
+                                                       &quot;pref_effort&quot; ,&quot;pref_talent&quot;,
+                                                       &quot;pref_wpart&quot;  ,&quot;pref_netw&quot;))
 
 #---------------------------------------------------#
 cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
@@ -1218,51 +1202,51 @@ kable(left_join(x = standardizedsolution(fit2_c) %&gt;% filter(op==&quot;=~&quot
 <tbody>
 <tr class="odd">
 <td align="left">perc_merit</td>
-<td align="left">meritv02_perc_effort</td>
-<td align="right">0.81</td>
+<td align="left">perc_effort</td>
+<td align="right">0.82</td>
 <td align="right">0.76</td>
 </tr>
 <tr class="even">
 <td align="left">perc_merit</td>
-<td align="left">meritv02_perc_talent</td>
+<td align="left">perc_talent</td>
 <td align="right">0.59</td>
-<td align="right">0.71</td>
+<td align="right">0.72</td>
 </tr>
 <tr class="odd">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv02_perc_wpart</td>
-<td align="right">0.73</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.74</td>
+<td align="right">0.84</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.80</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.83</td>
 <td align="right">0.82</td>
 </tr>
 <tr class="even">
-<td align="left">perc_nmerit</td>
-<td align="left">meritv02_perc_netw</td>
-<td align="right">0.81</td>
-<td align="right">0.83</td>
-</tr>
-<tr class="odd">
 <td align="left">pref_merit</td>
-<td align="left">meritv02_pref_effort</td>
-<td align="right">0.83</td>
-<td align="right">0.81</td>
-</tr>
-<tr class="even">
-<td align="left">pref_merit</td>
-<td align="left">meritv02_pref_talent</td>
+<td align="left">pref_talent</td>
 <td align="right">0.54</td>
 <td align="right">0.65</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv02_pref_wpart</td>
-<td align="right">0.86</td>
-<td align="right">1.02</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.88</td>
+<td align="right">1.04</td>
 </tr>
 <tr class="even">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv02_pref_netw</td>
-<td align="right">0.57</td>
-<td align="right">0.53</td>
+<td align="left">pref_netw</td>
+<td align="right">0.55</td>
+<td align="right">0.52</td>
 </tr>
 </tbody>
 </table>
@@ -1270,8 +1254,8 @@ kable(left_join(x = standardizedsolution(fit2_c) %&gt;% filter(op==&quot;=~&quot
 <p><strong>NOTE</strong>: bad fit, heywood case using DWLS</p>
 </blockquote>
 </div>
-<div id="version-03-n697" class="section level2" number="1.3">
-<h2 number="1.3"><span class="header-section-number">1.3</span> Version 03 (N=697)</h2>
+<div id="version-03-n712" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Version 03 (N=712)</h2>
 <table>
 <caption>Mode 03: Randomized order.</caption>
 <thead>
@@ -1333,7 +1317,7 @@ Max
 A. pc.effort
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.33
@@ -1362,13 +1346,13 @@ A. pc.effort
 B. pc.talent
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.07
 </td>
 <td>
-1.24
+1.25
 </td>
 <td>
 1
@@ -1391,7 +1375,7 @@ B. pc.talent
 C. pc.wpart
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.72
@@ -1420,13 +1404,13 @@ C. pc.wpart
 D. pc.netw
 </td>
 <td>
-697
+712
 </td>
 <td>
 3.90
 </td>
 <td>
-1.23
+1.24
 </td>
 <td>
 1
@@ -1449,10 +1433,10 @@ D. pc.netw
 E. pf.effort
 </td>
 <td>
-697
+712
 </td>
 <td>
-4.05
+4.04
 </td>
 <td>
 1.16
@@ -1478,10 +1462,10 @@ E. pf.effort
 F. pf.talent
 </td>
 <td>
-697
+712
 </td>
 <td>
-3.34
+3.33
 </td>
 <td>
 1.23
@@ -1507,7 +1491,7 @@ F. pf.talent
 G. pf.wpart
 </td>
 <td>
-697
+712
 </td>
 <td>
 2.77
@@ -1536,10 +1520,10 @@ G. pf.wpart
 H. pf.netw
 </td>
 <td>
-697
+712
 </td>
 <td>
-2.51
+2.50
 </td>
 <td>
 1.14
@@ -1569,19 +1553,19 @@ H. pf.netw
 rownames(cor03$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
 colnames(cor03$rho) &lt;-c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw&#39;
+perc_merit=~perc_effort+perc_talent
+perc_nmerit=~perc_wpart+perc_netw
+pref_merit=~pref_effort+pref_talent
+pref_nmerit=~pref_wpart+pref_netw&#39;
 
 fit3_c &lt;- cfa(model = model03,data = dat03,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
 
-fit3_o &lt;- cfa(model = model03,data = dat03,ordered = c(&quot;meritv03_perc_effort&quot;,&quot;meritv03_perc_talent&quot;,
-                                                       &quot;meritv03_perc_wpart&quot;,&quot;meritv03_perc_netw&quot;,
-                                                       &quot;meritv03_pref_effort&quot;,&quot;meritv03_pref_talent&quot;,
-                                                       &quot;meritv03_pref_wpart&quot;,&quot;meritv03_pref_netw&quot;),std.lv=FALSE)
+fit3_o &lt;- cfa(model = model03,data = dat03,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                       &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                       &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                                                       &quot;pref_wpart&quot;,&quot;pref_netw&quot;),std.lv=FALSE)
 #---------------------------------------------------#
 cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
 kable(left_join(x = standardizedsolution(fit3_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit3_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
@@ -1598,51 +1582,51 @@ kable(left_join(x = standardizedsolution(fit3_c) %&gt;% filter(op==&quot;=~&quot
 <tbody>
 <tr class="odd">
 <td align="left">perc_merit</td>
-<td align="left">meritv03_perc_effort</td>
-<td align="right">0.75</td>
+<td align="left">perc_effort</td>
 <td align="right">0.73</td>
+<td align="right">0.70</td>
 </tr>
 <tr class="even">
 <td align="left">perc_merit</td>
-<td align="left">meritv03_perc_talent</td>
+<td align="left">perc_talent</td>
 <td align="right">0.56</td>
 <td align="right">0.65</td>
 </tr>
 <tr class="odd">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv03_perc_wpart</td>
+<td align="left">perc_wpart</td>
 <td align="right">0.76</td>
 <td align="right">0.81</td>
 </tr>
 <tr class="even">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv03_perc_netw</td>
-<td align="right">0.82</td>
-<td align="right">0.90</td>
+<td align="left">perc_netw</td>
+<td align="right">0.80</td>
+<td align="right">0.89</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_merit</td>
-<td align="left">meritv03_pref_effort</td>
+<td align="left">pref_effort</td>
 <td align="right">0.57</td>
 <td align="right">0.66</td>
 </tr>
 <tr class="even">
 <td align="left">pref_merit</td>
-<td align="left">meritv03_pref_talent</td>
+<td align="left">pref_talent</td>
 <td align="right">0.54</td>
 <td align="right">0.59</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv03_pref_wpart</td>
-<td align="right">0.75</td>
-<td align="right">0.77</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.76</td>
+<td align="right">0.78</td>
 </tr>
 <tr class="even">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv03_pref_netw</td>
-<td align="right">0.72</td>
-<td align="right">0.79</td>
+<td align="left">pref_netw</td>
+<td align="right">0.71</td>
+<td align="right">0.77</td>
 </tr>
 </tbody>
 </table>
@@ -1652,17 +1636,17 @@ kable(left_join(x = standardizedsolution(fit3_c) %&gt;% filter(op==&quot;=~&quot
 <div id="tau-equivalence" class="section level3" number="1.3.1">
 <h3 number="1.3.1"><span class="header-section-number">1.3.1</span> Tau-equivalence</h3>
 <pre class="r"><code>model03.tau &lt;- &#39;
-perc_merit=~ r1*meritv03_perc_effort+r1*meritv03_perc_talent 
-perc_nmerit=~r2*meritv03_perc_wpart+ r2*meritv03_perc_netw  
-pref_merit=~ r3*meritv03_pref_effort+r3*meritv03_pref_talent 
-pref_nmerit=~r4*meritv03_pref_wpart+ r4*meritv03_pref_netw&#39;
+perc_merit=~ r1*perc_effort+r1*perc_talent
+perc_nmerit=~r2*perc_wpart+ r2*perc_netw
+pref_merit=~ r3*pref_effort+r3*pref_talent
+pref_nmerit=~r4*pref_wpart+ r4*pref_netw&#39;
 
 fit3_c.tau &lt;- cfa(model = model03.tau,data = dat03,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
 
-fit3_o.tau &lt;- cfa(model = model03.tau,data = dat03,ordered = c(&quot;meritv03_perc_effort&quot;,&quot;meritv03_perc_talent&quot;,
-                                                               &quot;meritv03_perc_wpart&quot;,&quot;meritv03_perc_netw&quot;,
-                                                               &quot;meritv03_pref_effort&quot;,&quot;meritv03_pref_talent&quot;,
-                                                               &quot;meritv03_pref_wpart&quot;,&quot;meritv03_pref_netw&quot;), std.lv=FALSE)
+fit3_o.tau &lt;- cfa(model = model03.tau,data = dat03,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                               &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                               &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                                                               &quot;pref_wpart&quot;,&quot;pref_netw&quot;), std.lv=FALSE)
 #---------------------------------------------------#
 cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
 kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit3_o.tau) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
@@ -1679,49 +1663,49 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 <tbody>
 <tr class="odd">
 <td align="left">perc_merit</td>
-<td align="left">meritv03_perc_effort</td>
-<td align="right">0.62</td>
-<td align="right">0.69</td>
+<td align="left">perc_effort</td>
+<td align="right">0.61</td>
+<td align="right">0.68</td>
 </tr>
 <tr class="even">
 <td align="left">perc_merit</td>
-<td align="left">meritv03_perc_talent</td>
-<td align="right">0.67</td>
-<td align="right">0.69</td>
+<td align="left">perc_talent</td>
+<td align="right">0.66</td>
+<td align="right">0.68</td>
 </tr>
 <tr class="odd">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv03_perc_wpart</td>
+<td align="left">perc_wpart</td>
 <td align="right">0.75</td>
 <td align="right">0.85</td>
 </tr>
 <tr class="even">
 <td align="left">perc_nmerit</td>
-<td align="left">meritv03_perc_netw</td>
-<td align="right">0.83</td>
+<td align="left">perc_netw</td>
+<td align="right">0.82</td>
 <td align="right">0.85</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_merit</td>
-<td align="left">meritv03_pref_effort</td>
+<td align="left">pref_effort</td>
 <td align="right">0.57</td>
-<td align="right">0.63</td>
+<td align="right">0.62</td>
 </tr>
 <tr class="even">
 <td align="left">pref_merit</td>
-<td align="left">meritv03_pref_talent</td>
+<td align="left">pref_talent</td>
 <td align="right">0.54</td>
-<td align="right">0.63</td>
+<td align="right">0.62</td>
 </tr>
 <tr class="odd">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv03_pref_wpart</td>
+<td align="left">pref_wpart</td>
 <td align="right">0.72</td>
 <td align="right">0.78</td>
 </tr>
 <tr class="even">
 <td align="left">pref_nmerit</td>
-<td align="left">meritv03_pref_netw</td>
+<td align="left">pref_netw</td>
 <td align="right">0.75</td>
 <td align="right">0.78</td>
 </tr>
@@ -1730,7 +1714,10 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 <pre class="r"><code>kable(rbind(Ordinal    =fitmeasures(fit3_o    )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal.tau=fitmeasures(fit3_o.tau)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
       format = &quot;markdown&quot;,
-      digits = 3, caption = &quot;Fit tau-equivalence&quot;)</code></pre>
+      digits = 3, caption = &quot;Fit tau-equivalence&quot;)
+kable(anova(fit3_o,fit3_o.tau),
+      format = &quot;markdown&quot;,
+      digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1748,31 +1735,28 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 <tbody>
 <tr class="odd">
 <td align="left">Ordinal</td>
-<td align="right">60.025</td>
+<td align="right">63.336</td>
 <td align="right">14</td>
-<td align="right">0.992</td>
-<td align="right">0.980</td>
+<td align="right">0.991</td>
+<td align="right">0.979</td>
 <td align="right"></td>
-<td align="right">0.051</td>
-<td align="right">0.069</td>
+<td align="right">0.053</td>
+<td align="right">0.070</td>
 <td align="right"></td>
 </tr>
 <tr class="even">
 <td align="left">Ordinal.tau</td>
-<td align="right">59.098</td>
+<td align="right">61.430</td>
 <td align="right">18</td>
-<td align="right">0.993</td>
-<td align="right">0.983</td>
+<td align="right">0.992</td>
+<td align="right">0.981</td>
 <td align="right"></td>
-<td align="right">0.043</td>
-<td align="right">0.057</td>
+<td align="right">0.044</td>
+<td align="right">0.058</td>
 <td align="right"></td>
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>kable(anova(fit3_o,fit3_o.tau),
-      format = &quot;markdown&quot;,
-      digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -1792,7 +1776,7 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 <td align="right">14</td>
 <td align="left"></td>
 <td align="left"></td>
-<td align="right">39.090</td>
+<td align="right">41.633</td>
 <td align="right"></td>
 <td align="right"></td>
 <td align="right"></td>
@@ -1802,10 +1786,10 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 <td align="right">18</td>
 <td align="left"></td>
 <td align="left"></td>
-<td align="right">40.898</td>
-<td align="right">2.339</td>
+<td align="right">43.152</td>
+<td align="right">1.945</td>
 <td align="right">4</td>
-<td align="right">0.674</td>
+<td align="right">0.746</td>
 </tr>
 </tbody>
 </table>
@@ -2126,11 +2110,11 @@ H. pf.netw
 rownames(cor04$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
 colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <pre class="r"><code>model04 &lt;- &#39;
-perc_merit =~ perc_effort+perc_talent 
-perc_nmerit=~perc_wpart +perc_netw  
-pref_merit =~ pref_effort+pref_talent 
+perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
 pref_nmerit=~pref_wpart +pref_netw&#39;
 
 fit4_c &lt;- cfa(model = model04,data = dat04,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
@@ -2207,17 +2191,31 @@ kable(left_join(x = standardizedsolution(fit4_c ) %&gt;% filter(op==&quot;=~&quo
 </div>
 <div id="summary" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Summary</h1>
-<pre class="r"><code>model01 &lt;- &#39;perc_merit=~meritv01_perc_effort+meritv01_perc_talent
-            perc_nmerit=~meritv01_perc_wpart+meritv01_perc_netw
-            pref_merit=~meritv01_pref_effort+meritv01_pref_talent
-            pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw&#39;
+<div id="correlations" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Correlations</h2>
+<pre class="r"><code>corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+<div class="figure">
+<img src="prod_analysis-cfa_files/figure-html/compare%20corr-1.png" alt="Mode 01, 02 and 03" width="33%" /><img src="prod_analysis-cfa_files/figure-html/compare%20corr-2.png" alt="Mode 01, 02 and 03" width="33%" /><img src="prod_analysis-cfa_files/figure-html/compare%20corr-3.png" alt="Mode 01, 02 and 03" width="33%" />
+<p class="caption">
+Mode 01, 02 and 03
+</p>
+</div>
+</div>
+<div id="measurement-model" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Measurement model</h2>
+<pre class="r"><code>model01 &lt;- &#39;perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw&#39;
 
 plot01 &lt;- cfa(model = model01,data = dat01,estimator=&quot;MLR&quot;,std.lv=TRUE)
 
-library(semPlot)
 nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception networks&quot;,
               &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference networks&quot;,
               &quot;Percepction meritocratic&quot;,&quot;Percepction non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
+
 semPaths(plot01,
          style = &quot;lisrel&quot;,
          fade=FALSE,
@@ -2225,22 +2223,29 @@ semPaths(plot01,
          nCharNodes = 0,
          curvePivot = FALSE,
          curve = 2,
-         rotation = 2,
+         rotation = 4,
          layout = &quot;tree3&quot;,
          cardinal = &quot;lat cov&quot;,
-         legend.cex = 0.6, 
+         legend.cex = 0.6,
+         label.cex =1,
          reorder = FALSE,
-         nodeLabels = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,
-                        &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;),
-         nodeNames = nodeNames)</code></pre>
+         nodeNames = nodeNames,
+         nodeLabels = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;),
+         label.font = 6,
+         edge.label.font= 1,
+         asize = 3, #arrow size
+         edge.width =1,
+         sizeMan=5,
+         sizeLat = 10)</code></pre>
 <div class="figure">
-<img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-18-1.png" alt="Measurement model" width="1152" />
+<img src="prod_analysis-cfa_files/figure-html/semPlot-1.png" alt="Measurement model PPM-S" width="1152" />
 <p class="caption">
-Measurement model
+Measurement model PPM-S
 </p>
 </div>
-<div id="fit-indices-wave-01" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Fit indices wave 01</h2>
+</div>
+<div id="fit-indices-wave-01" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Fit indices wave 01</h2>
 <pre class="r"><code>sum_fit&lt;- bind_rows(fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                     fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                     fitmeasures(fit2_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
@@ -2250,15 +2255,22 @@ Measurement model
                     fitmeasures(fit4_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                     fitmeasures(fit4_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)])
 sum_fit$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;,&quot;Model 4&quot;)
-sum_fit$est &lt;- c(&quot;Continous&quot;,&quot;Ordinal&quot;,&quot;Continous&quot;,&quot;Ordinal&quot;,&quot;Continous&quot;,&quot;Ordinal&quot;,&quot;Continous&quot;,&quot;Ordinal&quot;)
+sum_fit$est &lt;- c(&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;)
 sum_fit &lt;- select(sum_fit,mod,est,everything())
+colnames &lt;- c(&quot;Model&quot;,&quot;Estimator&quot;,&quot;$\\chi^2$&quot;,&quot;df&quot;,&quot;CFI&quot;,&quot;CFI.sca&quot;,&quot;CFI.rob&quot;,&quot;RMSEA&quot;,&quot;RMSEA.sca&quot;,&quot;RMSEA.rob&quot;)
 
-sumtable01&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices wave 01&quot;) %&gt;%     kable_styling(full_width = F)  %&gt;% 
-      collapse_rows(columns = 1,valign = &quot;middle&quot;)  %&gt;%  
-      footnote(number = c(&quot;Model 1: fixed order by percepction/preference&quot;, 
-                          &quot;Model 2: fixed order by topic (i.e: effort)&quot;, 
+
+sumtable01&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices wave 01&quot;,col.names = colnames,escape = FALSE) %&gt;%
+  kable_styling(full_width = F)  %&gt;%
+      collapse_rows(columns = 1,valign = &quot;middle&quot;)  %&gt;%
+      footnote(number = c(&quot;Model 1: fixed order by percepction/preference&quot;,
+                          &quot;Model 2: fixed order by topic (i.e: effort)&quot;,
                           &quot;Model 3: Randomized order&quot;,
-                          &quot;Model 4: Complete sample&quot;));sumtable01 </code></pre>
+                          &quot;Model 4: Complete sample&quot;));sumtable01
+
+# Save sumamry table wave 01------------------------------#
+# as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
+save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 Summary fit indices wave 01
@@ -2266,34 +2278,34 @@ Summary fit indices wave 01
 <thead>
 <tr>
 <th style="text-align:left;">
-mod
+Model
 </th>
 <th style="text-align:left;">
-est
+Estimator
 </th>
 <th style="text-align:right;">
-chisq.scaled
+<span class="math inline">\(\chi^2\)</span>
 </th>
 <th style="text-align:right;">
 df
 </th>
 <th style="text-align:right;">
-cfi
+CFI
 </th>
 <th style="text-align:right;">
-cfi.scaled
+CFI.sca
 </th>
 <th style="text-align:right;">
-cfi.robust
+CFI.rob
 </th>
 <th style="text-align:right;">
-rmsea
+RMSEA
 </th>
 <th style="text-align:right;">
-rmsea.scaled
+RMSEA.sca
 </th>
 <th style="text-align:right;">
-rmsea.robust
+RMSEA.rob
 </th>
 </tr>
 </thead>
@@ -2303,39 +2315,39 @@ rmsea.robust
 Model 1
 </td>
 <td style="text-align:left;">
-Continous
+MLR
 </td>
 <td style="text-align:right;">
-42.935
+39.029
 </td>
 <td style="text-align:right;">
 14
 </td>
 <td style="text-align:right;">
-0.979
+0.982
 </td>
 <td style="text-align:right;">
-0.977
+0.981
 </td>
 <td style="text-align:right;">
-0.980
-</td>
-<td style="text-align:right;">
-0.058
+0.983
 </td>
 <td style="text-align:right;">
 0.054
 </td>
 <td style="text-align:right;">
-0.057
+0.050
+</td>
+<td style="text-align:right;">
+0.052
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
 </td>
 <td style="text-align:right;">
-46.114
+42.276
 </td>
 <td style="text-align:right;">
 14
@@ -2344,15 +2356,15 @@ Ordinal
 0.998
 </td>
 <td style="text-align:right;">
-0.992
+0.993
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.038
+0.034
 </td>
 <td style="text-align:right;">
-0.057
+0.053
 </td>
 <td style="text-align:right;">
 </td>
@@ -2362,39 +2374,39 @@ Ordinal
 Model 2
 </td>
 <td style="text-align:left;">
-Continous
+MLR
 </td>
 <td style="text-align:right;">
-100.062
+107.824
 </td>
 <td style="text-align:right;">
 14
 </td>
 <td style="text-align:right;">
-0.926
+0.923
 </td>
 <td style="text-align:right;">
-0.912
+0.907
 </td>
 <td style="text-align:right;">
-0.926
+0.922
 </td>
 <td style="text-align:right;">
-0.096
+0.098
 </td>
 <td style="text-align:right;">
-0.093
+0.097
 </td>
 <td style="text-align:right;">
-0.095
+0.098
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
 </td>
 <td style="text-align:right;">
-101.482
+107.573
 </td>
 <td style="text-align:right;">
 14
@@ -2403,15 +2415,15 @@ Ordinal
 0.984
 </td>
 <td style="text-align:right;">
-0.962
+0.961
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.071
+0.073
 </td>
 <td style="text-align:right;">
-0.094
+0.097
 </td>
 <td style="text-align:right;">
 </td>
@@ -2421,25 +2433,25 @@ Ordinal
 Model 3
 </td>
 <td style="text-align:left;">
-Continous
+MLR
 </td>
 <td style="text-align:right;">
-57.058
+57.590
 </td>
 <td style="text-align:right;">
 14
 </td>
 <td style="text-align:right;">
-0.952
+0.951
 </td>
 <td style="text-align:right;">
-0.942
+0.941
 </td>
 <td style="text-align:right;">
-0.952
+0.951
 </td>
 <td style="text-align:right;">
-0.069
+0.068
 </td>
 <td style="text-align:right;">
 0.066
@@ -2450,27 +2462,27 @@ Continous
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
 </td>
 <td style="text-align:right;">
-60.025
+63.336
 </td>
 <td style="text-align:right;">
 14
 </td>
 <td style="text-align:right;">
-0.992
+0.991
 </td>
 <td style="text-align:right;">
-0.980
+0.979
 </td>
 <td style="text-align:right;">
 </td>
 <td style="text-align:right;">
-0.051
+0.053
 </td>
 <td style="text-align:right;">
-0.069
+0.070
 </td>
 <td style="text-align:right;">
 </td>
@@ -2480,7 +2492,7 @@ Ordinal
 Model 4
 </td>
 <td style="text-align:left;">
-Continous
+MLR
 </td>
 <td style="text-align:right;">
 181.105
@@ -2509,7 +2521,7 @@ Continous
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
 </td>
 <td style="text-align:right;">
 200.772
@@ -2558,21 +2570,18 @@ Ordinal
 </tr>
 </tfoot>
 </table>
-<pre class="r"><code># Save sumamry table wave 01------------------------------#
-# as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
-save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
 </div>
-<div id="other-analyses" class="section level2" number="2.2">
-<h2 number="2.2"><span class="header-section-number">2.2</span> Other analyses</h2>
-<div id="multigroup-cfa" class="section level3" number="2.2.1">
-<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Multigroup CFA</h3>
+<div id="other-analyses" class="section level2" number="2.4">
+<h2 number="2.4"><span class="header-section-number">2.4</span> Other analyses</h2>
+<div id="multigroup-cfa" class="section level3" number="2.4.1">
+<h3 number="2.4.1"><span class="header-section-number">2.4.1</span> Multigroup CFA</h3>
 <ul>
 <li>The group specification correspond to the application modality of the scale.</li>
 </ul>
 <pre class="r"><code>model04 &lt;- &#39;
-perc_merit =~ perc_effort+perc_talent 
-perc_nmerit=~perc_wpart +perc_netw  
-pref_merit =~ pref_effort+pref_talent 
+perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
 pref_nmerit=~pref_wpart +pref_netw&#39;
 
 fit4_c_mg &lt;- cfa(model = model04,data = dat04,estimator=&quot;MLR&quot;,std.lv=FALSE,group = &quot;grupo&quot;) # Continuous/ estimator ML Robust
@@ -2583,7 +2592,13 @@ fit4_o_mg &lt;- cfa(model = model04,data = dat04,ordered = c(&quot;perc_effort&q
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fit4_c_mg)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal=  fitmeasures(fit4_o_mg)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3,caption = &quot;Fit indices&quot;)</code></pre>
+      format = &quot;markdown&quot;,digits = 3,caption = &quot;Fit indices&quot;)
+
+cnames &lt;- c(&quot;Grupo&quot;,&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
+                y = standardizedsolution(fit4_o_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
+                c(&quot;group&quot;,&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings by group&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -2623,11 +2638,6 @@ kable(rbind(Continuous=fitmeasures(fit4_c_mg)[c(&quot;chisq.scaled&quot;,&quot;d
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cnames &lt;- c(&quot;Grupo&quot;,&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
-                y = standardizedsolution(fit4_o_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
-                c(&quot;group&quot;,&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings by group&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -2810,14 +2820,14 @@ kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&q
 </tbody>
 </table>
 </div>
-<div id="second-order-cfa" class="section level3" number="2.2.2">
-<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> Second order CFA</h3>
-<div id="so-cfa-perception-and-preference" class="section level4" number="2.2.2.1">
-<h4 number="2.2.2.1"><span class="header-section-number">2.2.2.1</span> SO-CFA Perception and Preference</h4>
+<div id="second-order-cfa" class="section level3" number="2.4.2">
+<h3 number="2.4.2"><span class="header-section-number">2.4.2</span> Second order CFA</h3>
+<div id="so-cfa-perception-and-preference" class="section level4" number="2.4.2.1">
+<h4 number="2.4.2.1"><span class="header-section-number">2.4.2.1</span> SO-CFA Perception and Preference</h4>
 <pre class="r"><code>model04b1or &lt;- &#39;
-perc_merit=~ perc_effort+perc_talent 
-perc_nmerit=~perc_wpart +perc_netw  
-pref_merit=~ pref_effort+pref_talent 
+perc_merit=~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit=~ pref_effort+pref_talent
 pref_nmerit=~pref_wpart +pref_netw
 percep=~ perc_merit + perc_nmerit
 prefer=~ pref_merit + pref_nmerit&#39;
@@ -2830,7 +2840,13 @@ fit4b_c &lt;- cfa(model = model04b1or,data = dat04,ordered = c(&quot;perc_effort
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fit4a_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal= fitmeasures(fit4b_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)
+
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                y = standardizedsolution(fit4b_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -2870,11 +2886,6 @@ kable(rbind(Continuous=fitmeasures(fit4a_c)[c(&quot;chisq.scaled&quot;,&quot;df&
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                y = standardizedsolution(fit4b_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                c(&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -2964,8 +2975,8 @@ kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quo
 <p><strong>NOTE:</strong> Second order factor loads are low. The fit of the model is not good.</p>
 </blockquote>
 </div>
-<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4" number="2.2.2.2">
-<h4 number="2.2.2.2"><span class="header-section-number">2.2.2.2</span> SO-CFA Meritocratic y Non-meritocratic</h4>
+<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4" number="2.4.2.2">
+<h4 number="2.4.2.2"><span class="header-section-number">2.4.2.2</span> SO-CFA Meritocratic y Non-meritocratic</h4>
 <pre class="r"><code>model04b2or &lt;-&#39;perc_merit=~ perc_effort+perc_talent
                perc_nmerit=~perc_wpart +perc_netw
                pref_merit=~ pref_effort+pref_talent
@@ -2975,13 +2986,17 @@ kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quo
 
 # fit4b_c &lt;- cfa(model = model04b2or,data = dat04,estimator=&quot;MLR&quot;) # No converge
 
-fit4b_o &lt;- cfa(model = model04b2or,data = dat04, 
+fit4b_o &lt;- cfa(model = model04b2or,data = dat04,
                ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,&quot;perc_wpart&quot;,&quot;perc_netw&quot;,
                            &quot;pref_effort&quot;,&quot;pref_talent&quot;,&quot;pref_wpart&quot;,&quot;pref_netw&quot;))
 
 #---------------------------------------------------#
 kable(rbind(Ordinal=fitmeasures(fit4b_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)
+
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
+kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -3010,9 +3025,6 @@ kable(rbind(Ordinal=fitmeasures(fit4b_o)[c(&quot;chisq.scaled&quot;,&quot;df&quo
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
-kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -3103,7 +3115,7 @@ kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% sel
 </ol>
 <pre class="r"><code>data02 &lt;- sjlabelled::read_spss(path = &quot;input/data/original/Estudio_3_ola2.sav&quot;,verbose = FALSE)
 load(file = &quot;input/data/proc/datawide.RData&quot;)
-dat01 &lt;- data02 %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
+dat01 &lt;- data02 %&gt;% select(starts_with(&quot;meritv03_p&quot;))</code></pre>
 <p><strong>ATE on observed indicators</strong></p>
 <pre class="r"><code>m01&lt;- lm(perc_effort_w2~treat,data = wide01)
 m02&lt;- lm(perc_talent_w2~treat,data = wide01)
@@ -3705,7 +3717,14 @@ F Statistic (df = 2; 1774)
 </blockquote>
 <div id="control-group" class="section level2" number="3.1">
 <h2 number="3.1"><span class="header-section-number">3.1</span> Control group</h2>
-<pre class="r"><code>w02con &lt;- data02 %&gt;% filter(FL_6_DO_Control==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
+<pre class="r"><code>w02con &lt;- data02 %&gt;% filter(FL_6_DO_Control==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;))</code></pre>
+<pre class="r"><code>stargazer(w02con,type = &quot;html&quot;,
+          title = &quot;Descriptive statistics&quot;,
+          font.size = &quot;small&quot;,
+          median = TRUE,
+          header=FALSE,
+          digit.separator = &quot;&quot;,
+          digits = 2)</code></pre>
 <table style="text-align:center">
 <caption>
 <strong>Descriptive statistics</strong>
@@ -3990,9 +4009,9 @@ colnames(corw02_1$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&
 corrplot(corw02_1$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw&#39;
 
 fitw02a_c &lt;- cfa(model = model03,data = w02con,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
@@ -4113,7 +4132,14 @@ kable(left_join(x = standardizedsolution(fitw02a_c) %&gt;% filter(op==&quot;=~&q
 </div>
 <div id="poverty-condition" class="section level2" number="3.2">
 <h2 number="3.2"><span class="header-section-number">3.2</span> Poverty condition</h2>
-<pre class="r"><code>w02pob &lt;- data02 %&gt;% filter(FL_6_DO_Tratamiento==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
+<pre class="r"><code>w02pob &lt;- data02 %&gt;% filter(FL_6_DO_Tratamiento==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;))</code></pre>
+<pre class="r"><code>stargazer(w02pob,type = &quot;html&quot;,
+          title = &quot;Descriptive statistics&quot;,
+          font.size = &quot;small&quot;,
+          median = TRUE,
+          header=FALSE,
+          digit.separator = &quot;&quot;,
+          digits = 2)</code></pre>
 <table style="text-align:center">
 <caption>
 <strong>Descriptive statistics</strong>
@@ -4398,9 +4424,9 @@ colnames(corw02_2$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&
 corrplot(corw02_2$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw&#39;
 
 fitw02b_c &lt;- cfa(model = model03,data = w02pob,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
@@ -4522,7 +4548,14 @@ kable(left_join(x = standardizedsolution(fitw02b_c) %&gt;% filter(op==&quot;=~&q
 </div>
 <div id="inequality-condition" class="section level2" number="3.3">
 <h2 number="3.3"><span class="header-section-number">3.3</span> Inequality condition</h2>
-<pre class="r"><code>w02des &lt;- data02 %&gt;% filter(FL_6_DO_Tratamiento_desigualdad==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
+<pre class="r"><code>w02des &lt;- data02 %&gt;% filter(FL_6_DO_Tratamiento_desigualdad==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;))</code></pre>
+<pre class="r"><code>stargazer(w02des,type = &quot;html&quot;,
+          title = &quot;Descriptive statistics&quot;,
+          font.size = &quot;small&quot;,
+          median = TRUE,
+          header=FALSE,
+          digit.separator = &quot;&quot;,
+          digits = 2)</code></pre>
 <table style="text-align:center">
 <caption>
 <strong>Descriptive statistics</strong>
@@ -4808,8 +4841,8 @@ corrplot(corw02_3$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.c
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw&#39;
 
 fitw02c_c &lt;- cfa(model = model03,data = w02des,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
@@ -5225,9 +5258,9 @@ colnames(cor01$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quo
 corrplot(cor01$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw&#39;
 
 fitw02_c &lt;- cfa(model = model03,data = dat01,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
@@ -5351,11 +5384,11 @@ kable(left_join(x = standardizedsolution(fitw02_c) %&gt;% filter(op==&quot;=~&qu
 <div id="second-order-cfa-1" class="section level3" number="3.4.1">
 <h3 number="3.4.1"><span class="header-section-number">3.4.1</span> Second order CFA</h3>
 <pre class="r"><code>modw2 &lt;- &#39;
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw 
-merit =~perc_merit+pref_merit  
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
+pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw
+merit =~perc_merit+pref_merit
 nmerit=~perc_nmerit+pref_nmerit&#39;
 
 # mod2_merit_c &lt;- cfa(model = modw2,data = dat01) # Continuous/ estimator ML Robust
@@ -5367,7 +5400,11 @@ mod2_merit_o &lt;- cfa(model = modw2,data = dat01,ordered = c(&quot;meritv03_per
 
 #---------------------------------------------------#
 kable(rbind(Ordinal=fitmeasures(mod2_merit_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)
+
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
+kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5396,9 +5433,6 @@ kable(rbind(Ordinal=fitmeasures(mod2_merit_o)[c(&quot;chisq.scaled&quot;,&quot;d
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
-kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5483,23 +5517,25 @@ kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;
 </div>
 <div id="summary-fit-indices-wave-02" class="section level1" number="4">
 <h1 number="4"><span class="header-section-number">4</span> Summary fit indices wave 02</h1>
-<pre class="r"><code>sum_fitw02&lt;- bind_rows(fitmeasures(fitw02a_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02a_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02b_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02b_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02c_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02c_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02_c)[ c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-                       fitmeasures(fitw02_o)[ c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],)
+<pre class="r"><code>sum_fitw02&lt;- bind_rows(fitmeasures(fitw02a_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02a_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02b_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02b_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02c_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02c_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02_c)[ c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                       fitmeasures(fitw02_o)[ c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],)
 
 sum_fitw02$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;,&quot;Model 4&quot;)
-sum_fitw02$est &lt;- c(&quot;Continuous&quot;,&quot;Ordinal&quot;,&quot;Continuous&quot;,&quot;Ordinal&quot;,&quot;Continuous&quot;,&quot;Ordinal&quot;,&quot;Continuous&quot;,&quot;Ordinal&quot;)
+sum_fitw02$est &lt;- c(&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;)
 sum_fitw02 &lt;- select(sum_fitw02,mod,est,everything())
+colnames &lt;- c(&quot;Model&quot;,&quot;Estimator&quot;,&quot;$\\chi^2$&quot;,&quot;df&quot;,&quot;CFI&quot;,&quot;CFI.sca&quot;,&quot;CFI.rob&quot;,&quot;RMSEA&quot;,&quot;RMSEA.sca&quot;,&quot;RMSEA.rob&quot;)
 
-kable(sum_fitw02,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices wave 02&quot;) %&gt;% 
-  kable_styling(full_width = F) %&gt;% 
-  collapse_rows(columns = 1,valign = &quot;middle&quot;) %&gt;% 
-  footnote(number = c(&quot;Model 1: Control group sample&quot;, 
+
+kable(sum_fitw02,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices wave 02&quot;, col.names = colnames, escape = F) %&gt;%
+  kable_styling(full_width = F) %&gt;%
+  collapse_rows(columns = 1,valign = &quot;middle&quot;) %&gt;%
+  footnote(number = c(&quot;Model 1: Control group sample&quot;,
                       &quot;Model 2: Poverty treatment condition sample&quot;,
                       &quot;Model 3: Inequality treatment condition sample&quot;,
                       &quot;Model 4: Complete sample&quot;))</code></pre>
@@ -5510,28 +5546,34 @@ Summary fit indices wave 02
 <thead>
 <tr>
 <th style="text-align:left;">
-mod
+Model
 </th>
 <th style="text-align:left;">
-est
+Estimator
 </th>
 <th style="text-align:right;">
-cfi
+<span class="math inline">\(\chi^2\)</span>
 </th>
 <th style="text-align:right;">
-cfi.scaled
+df
 </th>
 <th style="text-align:right;">
-cfi.robust
+CFI
 </th>
 <th style="text-align:right;">
-rmsea
+CFI.sca
 </th>
 <th style="text-align:right;">
-rmsea.scaled
+CFI.rob
 </th>
 <th style="text-align:right;">
-rmsea.robust
+RMSEA
+</th>
+<th style="text-align:right;">
+RMSEA.sca
+</th>
+<th style="text-align:right;">
+RMSEA.rob
 </th>
 </tr>
 </thead>
@@ -5541,7 +5583,13 @@ rmsea.robust
 Model 1
 </td>
 <td style="text-align:left;">
-Continuous
+MLR
+</td>
+<td style="text-align:right;">
+34.740
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.953
@@ -5564,7 +5612,13 @@ Continuous
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
+</td>
+<td style="text-align:right;">
+40.947
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.988
@@ -5588,7 +5642,13 @@ Ordinal
 Model 2
 </td>
 <td style="text-align:left;">
-Continuous
+MLR
+</td>
+<td style="text-align:right;">
+21.895
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.987
@@ -5611,7 +5671,13 @@ Continuous
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
+</td>
+<td style="text-align:right;">
+32.827
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.997
@@ -5635,7 +5701,13 @@ Ordinal
 Model 3
 </td>
 <td style="text-align:left;">
-Continuous
+MLR
+</td>
+<td style="text-align:right;">
+46.323
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.939
@@ -5658,7 +5730,13 @@ Continuous
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
+</td>
+<td style="text-align:right;">
+46.323
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.939
@@ -5684,7 +5762,13 @@ Ordinal
 Model 4
 </td>
 <td style="text-align:left;">
-Continuous
+MLR
+</td>
+<td style="text-align:right;">
+66.256
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.967
@@ -5707,7 +5791,13 @@ Continuous
 </tr>
 <tr>
 <td style="text-align:left;">
-Ordinal
+DWLS
+</td>
+<td style="text-align:right;">
+101.973
+</td>
+<td style="text-align:right;">
+14
 </td>
 <td style="text-align:right;">
 0.988
@@ -5754,7 +5844,7 @@ Ordinal
 <div id="wave-03" class="section level1" number="5">
 <h1 number="5"><span class="header-section-number">5</span> Wave 03</h1>
 <pre class="r"><code>data03 &lt;- sjlabelled::read_spss(path = &quot;input/data/original/Estudio_3_ola3.sav&quot;,verbose = FALSE)
-dat01 &lt;- data03 %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
+dat01 &lt;- data03 %&gt;% select(starts_with(&quot;meritv03_p&quot;))</code></pre>
 <pre class="r"><code>stargazer(dat01,type = &quot;html&quot;,
           title = &quot;Descriptive statistics&quot;,
           font.size = &quot;small&quot;,
@@ -6041,9 +6131,9 @@ meritv03_pref_netw
 </tr>
 </table>
 <pre class="r"><code>model03 &lt;- &#39;
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw&#39;
 
 fitw03c_c &lt;- cfa(model = model03,data = dat01,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
@@ -6055,7 +6145,13 @@ fitw03c_o &lt;- cfa(model = model03,data = dat01,ordered = c(&quot;meritv03_perc
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fitw03c_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal= fitmeasures(fitw03c_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)
+
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fitw03c_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                y = standardizedsolution(fitw03c_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -6095,11 +6191,6 @@ kable(rbind(Continuous=fitmeasures(fitw03c_c)[c(&quot;chisq.scaled&quot;,&quot;d
 </tr>
 </tbody>
 </table>
-<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fitw03c_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw03c_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                c(&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -6179,9 +6270,9 @@ sum_fitw03$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 1&quot;)
 sum_fitw03$est &lt;- c(&quot;Continuous&quot;,&quot;Ordinal&quot;)
 sum_fitw03 &lt;- select(sum_fitw03,mod,est,everything())
 
-kable(sum_fitw03,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T,caption = &quot;Summary fit indices wave 03&quot;) %&gt;% 
-  kable_styling(full_width = F) %&gt;% 
-  collapse_rows(columns = 1,valign = &quot;middle&quot;) %&gt;% 
+kable(sum_fitw03,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T,caption = &quot;Summary fit indices wave 03&quot;) %&gt;%
+  kable_styling(full_width = F) %&gt;%
+  collapse_rows(columns = 1,valign = &quot;middle&quot;) %&gt;%
   footnote(number = c(&quot;Model 1: Complete sample&quot;))</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -6334,7 +6425,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify

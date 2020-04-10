@@ -3,19 +3,18 @@ title: "Data preparation"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 css: "../input/bib/style.css"
 output:
-  html_document:
-    number_sections: true
-    toc: true
-    toc_float: false
-    toc_depth: 2
+    html_document:
+        number_sections: true
+        toc: true
+        smart: false
+        toc_depth: 2
     code_folding: "hide"
 editor_options:
   chunk_output_type: console
 ---
 
-
 ```{r eval=FALSE, include=FALSE}
-rmarkdown::render(input = "production/prod_prep-data-A.Rmd",output_format = "html_document",output_dir = ".")
+rmarkdown::render(input = "production/prod_prep-data-A.Rmd",output_format = "html_document",output_dir = "production/");browseURL(url = "production/prod_prep-data-A.html")
 ```
 
 ```{r include=FALSE}

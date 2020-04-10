@@ -136,18 +136,6 @@ colnames(cor01$rho) <- c("(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
-
-
-```{r}
-source(file = "production/prod_polychoric.R")
-corr.test(cor01$rho)
-sjt.corr(data = cor01$rho,triangle = "lower",digits = 2)
-sjt.corr(data = dat01,triangle = "lower",digits = 2,var.labels = " ")
-
-corr <- psych::polychoric(data,  na.rm = TRUE)
-
-```
-
 ```{r}
 model01 <- 'perc_merit=~perc_effort+perc_talent
             perc_nmerit=~perc_wpart+perc_netw
@@ -355,6 +343,16 @@ kable(left_join(x = standardizedsolution(fit4_c ) %>% filter(op=="=~") %>% selec
 
 # Summary
 
+## Correlations 
+
+```{r compare corr, echo=TRUE, out.width=c('33%', '33%', '33%'),fig.cap="Mode 01, 02 and 03",fig.show='hold'}
+corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+corrplot(cor02$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+corrplot(cor03$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```
+
+## Measurement model 
+
 ```{r semPlot, fig.cap="Measurement model PPM-S", fig.height=8, fig.width=12}
 model01 <- 'perc_merit=~perc_effort+perc_talent
             perc_nmerit=~perc_wpart+perc_netw
@@ -389,7 +387,6 @@ semPaths(plot01,
          sizeMan=5,
          sizeLat = 10)
 ```
-
 
 ## Fit indices wave 01
 ```{r}
