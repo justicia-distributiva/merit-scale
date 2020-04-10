@@ -11,7 +11,7 @@
 
 
 
-<title>Analysis</title>
+<title>Analysis PPM-S</title>
 
 <script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -395,18 +395,16 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Analysis</h1>
-<h4 class="date">06 abril, 2020</h4>
+<h1 class="title toc-ignore">Analysis PPM-S</h1>
+<h4 class="date">07 abril, 2020</h4>
 
 </div>
 
 
-<div id="analysis-ppm-s" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Analysis PPM-S</h1>
-<p>This section, documents all the procedures related to the data analysis and measurement models.</p>
-</div>
-<div id="wave-01" class="section level1 tabset tabset-fade tabset-pills" number="2">
-<h1 class="tabset tabset-fade tabset-pills" number="2"><span class="header-section-number">2</span> Wave 01</h1>
+<p>This section, documents all the procedures related to the data analysis and measurement models. (description)</p>
+<div id="wave-01" class="section level1 tabset tabset-fade tabset-pills" number="1">
+<h1 class="tabset tabset-fade tabset-pills" number="1"><span class="header-section-number">1</span> Wave 01</h1>
+<p>Design: this wave ….</p>
 <p><strong>Libraries</strong></p>
 <pre class="r"><code>library(sjPlot)
 library(dplyr)
@@ -444,7 +442,8 @@ dat04$pref_effort &lt;- rowSums(dat04[,c(matches(match = &quot;pref_effort&quot;
 dat04$pref_talent &lt;- rowSums(dat04[,c(matches(match = &quot;pref_talent&quot;,vars = names(dat04)))],na.rm = TRUE)
 dat04$pref_wpart  &lt;- rowSums(dat04[,c(matches(match = &quot;pref_wpart&quot; ,vars = names(dat04)))],na.rm = TRUE)
 dat04$pref_netw   &lt;- rowSums(dat04[,c(matches(match = &quot;pref_netw&quot;  ,vars = names(dat04)))],na.rm = TRUE)
-dat04[dat04==0] &lt;- NA</code></pre>
+dat04[dat04==0] &lt;- NA
+dat04 &lt;- dat04 %&gt;% select(starts_with(match = &quot;perc_&quot;),starts_with(match = &quot;pref_&quot;),grupo) %&gt;% na.omit()</code></pre>
 <hr />
 <p><strong>Modality</strong></p>
 <p>Each group correspond to the application modality of the scale.</p>
@@ -452,10 +451,10 @@ dat04[dat04==0] &lt;- NA</code></pre>
 <li><p><strong>Version 01:</strong> Fixed order by perception / preferences (N=697)</p></li>
 <li><p><strong>Version 02:</strong> Fixed order, by topic (N=706)</p></li>
 <li><p><strong>Version 03:</strong> Random order (N=697)</p></li>
-<li><p><strong>Version 04:</strong> Complete sample (N=2236)</p></li>
+<li><p><strong>Complete Sample:</strong> Complete sample (N=2141)</p></li>
 </ol>
-<div id="version-01-n697" class="section level2 tabset" number="2.1">
-<h2 class="tabset" number="2.1"><span class="header-section-number">2.1</span> Version 01 (N=697)</h2>
+<div id="version-01-n697" class="section level2 tabset" number="1.1">
+<h2 class="tabset" number="1.1"><span class="header-section-number">1.1</span> Version 01 (N=697)</h2>
 <table>
 <caption>Mode 01: Fixed order by perception</caption>
 <thead>
@@ -466,35 +465,35 @@ dat04[dat04==0] &lt;- NA</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1. Percepción esfuerzo</td>
+<td>A. Percepción esfuerzo</td>
 <td>Perception effort</td>
 </tr>
 <tr class="even">
-<td>2. Percepción talento</td>
+<td>B. Percepción talento</td>
 <td>Perception talent</td>
 </tr>
 <tr class="odd">
-<td>3. Percepción familia rica</td>
+<td>C. Percepción familia rica</td>
 <td>Perception rich family</td>
 </tr>
 <tr class="even">
-<td>4. Percepción redes</td>
+<td>D. Percepción redes</td>
 <td>Perception networks</td>
 </tr>
 <tr class="odd">
-<td>5. Preferencia esfuerzo</td>
+<td>E. Preferencia esfuerzo</td>
 <td>Preference effort</td>
 </tr>
 <tr class="even">
-<td>6. Preferencia talento</td>
+<td>F. Preferencia talento</td>
 <td>Preference talent</td>
 </tr>
 <tr class="odd">
-<td>7. Preferencia familia rica</td>
+<td>G. Preferencia familia rica</td>
 <td>Preference rich family</td>
 </tr>
 <tr class="even">
-<td>8. Preferencia redes</td>
+<td>H. Preferencia redes</td>
 <td>Preference networks</td>
 </tr>
 </tbody>
@@ -542,8 +541,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol style="list-style-type: decimal">
-<li>pc.effort
+A. pc.effort
 </td>
 <td>
 697
@@ -572,8 +570,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="2" style="list-style-type: decimal">
-<li>pc.talent
+B. pc.talent
 </td>
 <td>
 697
@@ -602,8 +599,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="3" style="list-style-type: decimal">
-<li>pc.wpart
+C. pc.wpart
 </td>
 <td>
 697
@@ -632,8 +628,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="4" style="list-style-type: decimal">
-<li>pc.netw
+D. pc.netw
 </td>
 <td>
 697
@@ -662,8 +657,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="5" style="list-style-type: decimal">
-<li>pf.effort
+E. pf.effort
 </td>
 <td>
 697
@@ -692,8 +686,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="6" style="list-style-type: decimal">
-<li>pf.talent
+F. pf.talent
 </td>
 <td>
 697
@@ -722,8 +715,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="7" style="list-style-type: decimal">
-<li>pf.wpart
+G. pf.wpart
 </td>
 <td>
 697
@@ -752,8 +744,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="8" style="list-style-type: decimal">
-<li>pf.netw
+H. pf.netw
 </td>
 <td>
 697
@@ -784,18 +775,10 @@ Max
 <td colspan="9" style="border-bottom: 1px solid black">
 </td>
 </tr>
-</table></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol>
+</table>
 <pre class="r"><code>cor01&lt;-polychoric(dat01)
-rownames(cor01$rho) &lt;- c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
-colnames(cor01$rho) &lt;- c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
+rownames(cor01$rho) &lt;- c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
+colnames(cor01$rho) &lt;- c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/correlacion%20v01-1.png" width="672" /></p>
 <pre class="r"><code>model01 &lt;- &#39;perc_merit=~meritv01_perc_effort+meritv01_perc_talent
@@ -879,8 +862,8 @@ kable(left_join(x = standardizedsolution(fit1_c) %&gt;% filter(op==&quot;=~&quot
 <p><strong>NOTE</strong>: good fit, heywood case item 8.</p>
 </blockquote>
 </div>
-<div id="version-02-n706" class="section level2" number="2.2">
-<h2 number="2.2"><span class="header-section-number">2.2</span> Version 02 (N=706)</h2>
+<div id="version-02-n706" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Version 02 (N=706)</h2>
 <table>
 <caption>Mode 02: Fixed order, by topic.</caption>
 <thead>
@@ -891,35 +874,35 @@ kable(left_join(x = standardizedsolution(fit1_c) %&gt;% filter(op==&quot;=~&quot
 </thead>
 <tbody>
 <tr class="odd">
-<td>1. Percepción esfuerzo</td>
+<td>A. Percepción esfuerzo</td>
 <td>Perception effort</td>
 </tr>
 <tr class="even">
-<td>2. Preferencia esfuerzo</td>
+<td>E. Preferencia esfuerzo</td>
 <td>Preference effort</td>
 </tr>
 <tr class="odd">
-<td>3. Percepción talento</td>
+<td>B. Percepción talento</td>
 <td>Perception talent</td>
 </tr>
 <tr class="even">
-<td>4. Preferencia talento</td>
+<td>F. Preferencia talento</td>
 <td>Preference talent</td>
 </tr>
 <tr class="odd">
-<td>5. Percepción familia rica</td>
+<td>C. Percepción familia rica</td>
 <td>Perception rich family</td>
 </tr>
 <tr class="even">
-<td>6. Preferencia familia rica</td>
+<td>G. Preferencia familia rica</td>
 <td>Preference rich family</td>
 </tr>
 <tr class="odd">
-<td>7. Percepción redes</td>
+<td>D. Percepción redes</td>
 <td>Perception networks</td>
 </tr>
 <tr class="even">
-<td>8. Preferencia redes</td>
+<td>H. Preferencia redes</td>
 <td>Preference networks</td>
 </tr>
 </tbody>
@@ -967,8 +950,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol style="list-style-type: decimal">
-<li>pc.effort
+A. pc.effort
 </td>
 <td>
 706
@@ -997,8 +979,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="2" style="list-style-type: decimal">
-<li>pf.effort
+E. pf.effort
 </td>
 <td>
 706
@@ -1027,8 +1008,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="3" style="list-style-type: decimal">
-<li>pc.talent
+B. pc.talent
 </td>
 <td>
 706
@@ -1057,8 +1037,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="4" style="list-style-type: decimal">
-<li>pf.talent
+F. pf.talent
 </td>
 <td>
 706
@@ -1087,8 +1066,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="5" style="list-style-type: decimal">
-<li>pc.wpart
+C. pc.wpart
 </td>
 <td>
 706
@@ -1117,8 +1095,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="6" style="list-style-type: decimal">
-<li>pf.wpart
+G. pf.wpart
 </td>
 <td>
 706
@@ -1147,8 +1124,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="7" style="list-style-type: decimal">
-<li>pc.netw
+D. pc.netw
 </td>
 <td>
 706
@@ -1177,7 +1153,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-8 pc.netw
+H. pc.netw
 </td>
 <td>
 706
@@ -1208,17 +1184,10 @@ Max
 <td colspan="9" style="border-bottom: 1px solid black">
 </td>
 </tr>
-</table></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol>
+</table>
 <pre class="r"><code>cor02&lt;-polychoric(dat02)
-rownames(cor02$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
-colnames(cor02$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
+rownames(cor02$rho) &lt;-c(&quot;A. pc.effort&quot;,&quot;E. pf.effort&quot;,&quot;B. pc.talent&quot;,&quot;F. pf.talent&quot;,&quot;C. pc.wpart&quot;,&quot;G. pf.wpart&quot;,&quot;D. pc.netw&quot;,&quot;H. pc.netw&quot;)
+colnames(cor02$rho) &lt;-c(&quot;(A)&quot;, &quot;(E)&quot;,&quot;(B)&quot;,&quot;(F)&quot;,&quot;(C)&quot;,&quot;(G)&quot;,&quot;(D)&quot;, &quot;(H)&quot;)
 corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>model02 &lt;- &#39;perc_merit=~meritv02_perc_effort+meritv02_perc_talent
@@ -1301,8 +1270,8 @@ kable(left_join(x = standardizedsolution(fit2_c) %&gt;% filter(op==&quot;=~&quot
 <p><strong>NOTE</strong>: bad fit, heywood case using DWLS</p>
 </blockquote>
 </div>
-<div id="version-03-n697" class="section level2" number="2.3">
-<h2 number="2.3"><span class="header-section-number">2.3</span> Version 03 (N=697)</h2>
+<div id="version-03-n697" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Version 03 (N=697)</h2>
 <table>
 <caption>Mode 03: Randomized order.</caption>
 <thead>
@@ -1361,8 +1330,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol style="list-style-type: decimal">
-<li>pc.effort
+A. pc.effort
 </td>
 <td>
 697
@@ -1391,8 +1359,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="2" style="list-style-type: decimal">
-<li>pc.talent
+B. pc.talent
 </td>
 <td>
 697
@@ -1421,8 +1388,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="3" style="list-style-type: decimal">
-<li>pc.wpart
+C. pc.wpart
 </td>
 <td>
 697
@@ -1451,8 +1417,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="4" style="list-style-type: decimal">
-<li>pc.netw
+D. pc.netw
 </td>
 <td>
 697
@@ -1481,8 +1446,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="5" style="list-style-type: decimal">
-<li>pf.effort
+E. pf.effort
 </td>
 <td>
 697
@@ -1511,8 +1475,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="6" style="list-style-type: decimal">
-<li>pf.talent
+F. pf.talent
 </td>
 <td>
 697
@@ -1541,8 +1504,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="7" style="list-style-type: decimal">
-<li>pf.wpart
+G. pf.wpart
 </td>
 <td>
 697
@@ -1571,8 +1533,7 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="8" style="list-style-type: decimal">
-<li>pf.netw
+H. pf.netw
 </td>
 <td>
 697
@@ -1603,18 +1564,10 @@ Max
 <td colspan="9" style="border-bottom: 1px solid black">
 </td>
 </tr>
-</table></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol>
+</table>
 <pre class="r"><code>cor03&lt;-polychoric(dat03)
-rownames(cor03$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
-colnames(cor03$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
+rownames(cor03$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
+colnames(cor03$rho) &lt;-c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
@@ -1696,8 +1649,8 @@ kable(left_join(x = standardizedsolution(fit3_c) %&gt;% filter(op==&quot;=~&quot
 <blockquote>
 <p><strong>NOTE</strong>: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence</p>
 </blockquote>
-<div id="tau-equivalence" class="section level3" number="2.3.1">
-<h3 number="2.3.1"><span class="header-section-number">2.3.1</span> Tau-equivalence</h3>
+<div id="tau-equivalence" class="section level3" number="1.3.1">
+<h3 number="1.3.1"><span class="header-section-number">1.3.1</span> Tau-equivalence</h3>
 <pre class="r"><code>model03.tau &lt;- &#39;
 perc_merit=~ r1*meritv03_perc_effort+r1*meritv03_perc_talent 
 perc_nmerit=~r2*meritv03_perc_wpart+ r2*meritv03_perc_netw  
@@ -1862,8 +1815,8 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 </blockquote>
 </div>
 </div>
-<div id="version-04-n2236" class="section level2" number="2.4">
-<h2 number="2.4"><span class="header-section-number">2.4</span> Version 04 (N=2236)</h2>
+<div id="complete-sample-n2141" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> Complete sample (N=2141)</h2>
 <table>
 <caption>Mode 04: Complete sample</caption>
 <colgroup>
@@ -1934,11 +1887,10 @@ Max
 </tr>
 <tr>
 <td style="text-align:left">
-<ol style="list-style-type: decimal">
-<li>pc.effort
+A. pc.effort
 </td>
 <td>
-2142
+2141
 </td>
 <td>
 3.20
@@ -1947,25 +1899,24 @@ Max
 1.38
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-2.00
+2
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="2" style="list-style-type: decimal">
-<li>pc.talent
+B. pc.talent
 </td>
 <td>
 2141
@@ -1977,25 +1928,24 @@ Max
 1.16
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-2.00
+2
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="3" style="list-style-type: decimal">
-<li>pc.wpart
+C. pc.wpart
 </td>
 <td>
 2141
@@ -2007,25 +1957,24 @@ Max
 1.36
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="4" style="list-style-type: decimal">
-<li>pc.netw
+D. pc.netw
 </td>
 <td>
 2141
@@ -2037,25 +1986,24 @@ Max
 1.24
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="5" style="list-style-type: decimal">
-<li>pf.effort
+E. pf.effort
 </td>
 <td>
 2141
@@ -2067,25 +2015,24 @@ Max
 1.25
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="6" style="list-style-type: decimal">
-<li>pf.talent
+F. pf.talent
 </td>
 <td>
 2141
@@ -2097,25 +2044,24 @@ Max
 1.19
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-2.00
+2
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="7" style="list-style-type: decimal">
-<li>pf.wpart
+G. pf.wpart
 </td>
 <td>
 2141
@@ -2127,25 +2073,24 @@ Max
 1.18
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-2.00
+2
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-4.00
+4
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td style="text-align:left">
-<ol start="8" style="list-style-type: decimal">
-<li>pf.netw
+H. pf.netw
 </td>
 <td>
 2141
@@ -2157,37 +2102,29 @@ Max
 1.11
 </td>
 <td>
-1.00
+1
 </td>
 <td>
-2.00
+2
 </td>
 <td>
-2.00
+2
 </td>
 <td>
-3.00
+3
 </td>
 <td>
-5.00
+5
 </td>
 </tr>
 <tr>
 <td colspan="9" style="border-bottom: 1px solid black">
 </td>
 </tr>
-</table></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol>
+</table>
 <pre class="r"><code>cor04&lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
-colnames(cor04$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
+rownames(cor04$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
+colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <pre class="r"><code>model04 &lt;- &#39;
@@ -2268,8 +2205,42 @@ kable(left_join(x = standardizedsolution(fit4_c ) %&gt;% filter(op==&quot;=~&quo
 </table>
 </div>
 </div>
-<div id="summary-fit-indices-wave-01" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Summary fit indices wave 01</h1>
+<div id="summary" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Summary</h1>
+<pre class="r"><code>model01 &lt;- &#39;perc_merit=~meritv01_perc_effort+meritv01_perc_talent
+            perc_nmerit=~meritv01_perc_wpart+meritv01_perc_netw
+            pref_merit=~meritv01_pref_effort+meritv01_pref_talent
+            pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw&#39;
+
+plot01 &lt;- cfa(model = model01,data = dat01,estimator=&quot;MLR&quot;,std.lv=TRUE)
+
+library(semPlot)
+nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception networks&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference networks&quot;,
+              &quot;Percepction meritocratic&quot;,&quot;Percepction non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
+semPaths(plot01,
+         style = &quot;lisrel&quot;,
+         fade=FALSE,
+         edge.color = &quot;black&quot;,
+         nCharNodes = 0,
+         curvePivot = FALSE,
+         curve = 2,
+         rotation = 2,
+         layout = &quot;tree3&quot;,
+         cardinal = &quot;lat cov&quot;,
+         legend.cex = 0.6, 
+         reorder = FALSE,
+         nodeLabels = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,
+                        &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;),
+         nodeNames = nodeNames)</code></pre>
+<div class="figure">
+<img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-18-1.png" alt="Measurement model" width="1152" />
+<p class="caption">
+Measurement model
+</p>
+</div>
+<div id="fit-indices-wave-01" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Fit indices wave 01</h2>
 <pre class="r"><code>sum_fit&lt;- bind_rows(fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                     fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                     fitmeasures(fit2_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
@@ -2590,10 +2561,11 @@ Ordinal
 <pre class="r"><code># Save sumamry table wave 01------------------------------#
 # as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
 save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
-<div id="other-analyses" class="section level2" number="3.1">
-<h2 number="3.1"><span class="header-section-number">3.1</span> Other analyses</h2>
-<div id="multigroup-cfa" class="section level3" number="3.1.1">
-<h3 number="3.1.1"><span class="header-section-number">3.1.1</span> Multigroup CFA</h3>
+</div>
+<div id="other-analyses" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Other analyses</h2>
+<div id="multigroup-cfa" class="section level3" number="2.2.1">
+<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Multigroup CFA</h3>
 <ul>
 <li>The group specification correspond to the application modality of the scale.</li>
 </ul>
@@ -2838,10 +2810,10 @@ kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&q
 </tbody>
 </table>
 </div>
-<div id="second-order-cfa" class="section level3" number="3.1.2">
-<h3 number="3.1.2"><span class="header-section-number">3.1.2</span> Second order CFA</h3>
-<div id="so-cfa-perception-and-preference" class="section level4" number="3.1.2.1">
-<h4 number="3.1.2.1"><span class="header-section-number">3.1.2.1</span> SO-CFA Perception and Preference</h4>
+<div id="second-order-cfa" class="section level3" number="2.2.2">
+<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> Second order CFA</h3>
+<div id="so-cfa-perception-and-preference" class="section level4" number="2.2.2.1">
+<h4 number="2.2.2.1"><span class="header-section-number">2.2.2.1</span> SO-CFA Perception and Preference</h4>
 <pre class="r"><code>model04b1or &lt;- &#39;
 perc_merit=~ perc_effort+perc_talent 
 perc_nmerit=~perc_wpart +perc_netw  
@@ -2992,8 +2964,8 @@ kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quo
 <p><strong>NOTE:</strong> Second order factor loads are low. The fit of the model is not good.</p>
 </blockquote>
 </div>
-<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4" number="3.1.2.2">
-<h4 number="3.1.2.2"><span class="header-section-number">3.1.2.2</span> SO-CFA Meritocratic y Non-meritocratic</h4>
+<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4" number="2.2.2.2">
+<h4 number="2.2.2.2"><span class="header-section-number">2.2.2.2</span> SO-CFA Meritocratic y Non-meritocratic</h4>
 <pre class="r"><code>model04b2or &lt;-&#39;perc_merit=~ perc_effort+perc_talent
                perc_nmerit=~perc_wpart +perc_netw
                pref_merit=~ pref_effort+pref_talent
@@ -3120,8 +3092,8 @@ kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% sel
 </div>
 </div>
 </div>
-<div id="wave-02" class="section level1 tabset tabset-fade tabset-pills" number="4">
-<h1 class="tabset tabset-fade tabset-pills" number="4"><span class="header-section-number">4</span> Wave 02</h1>
+<div id="wave-02" class="section level1 tabset tabset-fade tabset-pills" number="3">
+<h1 class="tabset tabset-fade tabset-pills" number="3"><span class="header-section-number">3</span> Wave 02</h1>
 <p>Each sample correspond to one of the three conditions generated by the randomized assignment.</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Control group:</strong> the group that has been assigned to the control group (placebo condition)</p></li>
@@ -3731,8 +3703,8 @@ F Statistic (df = 2; 1774)
 <blockquote>
 <p><strong>NOTE</strong>: There are no statistically significant effects of the treatment conditions on the observed indicators of the meritocracy scale.</p>
 </blockquote>
-<div id="control-group" class="section level2" number="4.1">
-<h2 number="4.1"><span class="header-section-number">4.1</span> Control group</h2>
+<div id="control-group" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Control group</h2>
 <pre class="r"><code>w02con &lt;- data02 %&gt;% filter(FL_6_DO_Control==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
 <table style="text-align:center">
 <caption>
@@ -4016,7 +3988,7 @@ meritv03_pref_netw
 rownames(corw02_1$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
 colnames(corw02_1$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
 corrplot(corw02_1$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
 perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
@@ -4139,8 +4111,8 @@ kable(left_join(x = standardizedsolution(fitw02a_c) %&gt;% filter(op==&quot;=~&q
 </tbody>
 </table>
 </div>
-<div id="poverty-condition" class="section level2" number="4.2">
-<h2 number="4.2"><span class="header-section-number">4.2</span> Poverty condition</h2>
+<div id="poverty-condition" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Poverty condition</h2>
 <pre class="r"><code>w02pob &lt;- data02 %&gt;% filter(FL_6_DO_Tratamiento==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
 <table style="text-align:center">
 <caption>
@@ -4424,7 +4396,7 @@ meritv03_pref_netw
 rownames(corw02_2$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
 colnames(corw02_2$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
 corrplot(corw02_2$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
 perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
@@ -4548,8 +4520,8 @@ kable(left_join(x = standardizedsolution(fitw02b_c) %&gt;% filter(op==&quot;=~&q
 </tbody>
 </table>
 </div>
-<div id="inequality-condition" class="section level2" number="4.3">
-<h2 number="4.3"><span class="header-section-number">4.3</span> Inequality condition</h2>
+<div id="inequality-condition" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Inequality condition</h2>
 <pre class="r"><code>w02des &lt;- data02 %&gt;% filter(FL_6_DO_Tratamiento_desigualdad==1) %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
 <table style="text-align:center">
 <caption>
@@ -4833,7 +4805,7 @@ meritv03_pref_netw
 rownames(corw02_3$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
 colnames(corw02_3$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
 corrplot(corw02_3$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent
 perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
@@ -4956,8 +4928,8 @@ kable(left_join(x = standardizedsolution(fitw02c_c) %&gt;% filter(op==&quot;=~&q
 </tbody>
 </table>
 </div>
-<div id="complete-sample" class="section level2" number="4.4">
-<h2 number="4.4"><span class="header-section-number">4.4</span> Complete sample</h2>
+<div id="complete-sample" class="section level2" number="3.4">
+<h2 number="3.4"><span class="header-section-number">3.4</span> Complete sample</h2>
 <pre class="r"><code>stargazer(dat01,type = &quot;html&quot;,
           title = &quot;Descriptive statistics&quot;,
           font.size = &quot;small&quot;,
@@ -5251,7 +5223,7 @@ cor01&lt;-polychoric(dat01cor)
 rownames(cor01$rho) &lt;-c(&quot;1. pc_effort&quot;, &quot;2. pc_talent&quot;,&quot;3. pc_wpart&quot;,&quot;4. pc_netw&quot;,&quot;5. pf_effort&quot;,&quot;6. pf_talent&quot;,&quot;7. pf_wpart&quot;, &quot;8. pf_netw&quot;)
 colnames(cor01$rho) &lt;-c(&quot;(1)&quot;, &quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(5)&quot;,&quot;(6)&quot;,&quot;(7)&quot;, &quot;(8)&quot;)
 corrplot(cor01$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
 perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
@@ -5376,8 +5348,8 @@ kable(left_join(x = standardizedsolution(fitw02_c) %&gt;% filter(op==&quot;=~&qu
 <blockquote>
 <p><strong>NOTE</strong>: El ajuste de muestra completa en wave 02 con estimator MLR (robusto) es bastante bueno (CFI, RMSEA). El ajuste con DWLS es bastante bueno, CFI mejora, RMSEA aumenta un poco (0.59).</p>
 </blockquote>
-<div id="second-order-cfa-1" class="section level3" number="4.4.1">
-<h3 number="4.4.1"><span class="header-section-number">4.4.1</span> Second order CFA</h3>
+<div id="second-order-cfa-1" class="section level3" number="3.4.1">
+<h3 number="3.4.1"><span class="header-section-number">3.4.1</span> Second order CFA</h3>
 <pre class="r"><code>modw2 &lt;- &#39;
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
 perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
@@ -5509,8 +5481,8 @@ kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;
 </div>
 </div>
 </div>
-<div id="summary-fit-indices-wave-02" class="section level1" number="5">
-<h1 number="5"><span class="header-section-number">5</span> Summary fit indices wave 02</h1>
+<div id="summary-fit-indices-wave-02" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Summary fit indices wave 02</h1>
 <pre class="r"><code>sum_fitw02&lt;- bind_rows(fitmeasures(fitw02a_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                        fitmeasures(fitw02a_o)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                        fitmeasures(fitw02b_c)[c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
@@ -5779,8 +5751,8 @@ Ordinal
 </tfoot>
 </table>
 </div>
-<div id="wave-03" class="section level1" number="6">
-<h1 number="6"><span class="header-section-number">6</span> Wave 03</h1>
+<div id="wave-03" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Wave 03</h1>
 <pre class="r"><code>data03 &lt;- sjlabelled::read_spss(path = &quot;input/data/original/Estudio_3_ola3.sav&quot;,verbose = FALSE)
 dat01 &lt;- data03 %&gt;% select(starts_with(&quot;meritv03_p&quot;)) </code></pre>
 <pre class="r"><code>stargazer(dat01,type = &quot;html&quot;,
@@ -6198,8 +6170,8 @@ kable(left_join(x = standardizedsolution(fitw03c_c) %&gt;% filter(op==&quot;=~&q
 </ul>
 </blockquote>
 </div>
-<div id="summary-fit-indices-wave-03" class="section level1" number="7">
-<h1 number="7"><span class="header-section-number">7</span> Summary fit indices wave 03</h1>
+<div id="summary-fit-indices-wave-03" class="section level1" number="6">
+<h1 number="6"><span class="header-section-number">6</span> Summary fit indices wave 03</h1>
 <pre class="r"><code>sum_fitw03&lt;- bind_rows(fitmeasures(fitw03c_c)[ c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                        fitmeasures(fitw03c_o)[ c(&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)])
 
