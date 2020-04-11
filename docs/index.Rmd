@@ -6,8 +6,9 @@ author: " "
 output:
     html_document:
         smart: false
+        includes:
+          in_header: head_github-activity.html
 ---
-
 
 
 
@@ -37,5 +38,17 @@ Based on a previous paper that proposed a distinction between perceptions and pr
   - _Analysis_: CFA (Confirmatory Factor Analysis) and measurement invariance
   - _Paper_: final output
 
+### Reproducibility and documentation
+
+The repository of the project in Github is structured according to the [IPO reproducibility protocol](https://juancarloscastillo.github.io/ipo/).
+
+
+<br>
+
+## [Github activity feed](https://github.com/juancarloscastillo/github-activity)
+
+<div id="feed"></div>
+
+<br>
 
 ## References

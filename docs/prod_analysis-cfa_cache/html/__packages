@@ -4,11 +4,9 @@ kableExtra
 sjPlot
 dplyr
 lavaan
-semPlot
 stargazer
 corrplot
 psych
-semTools
 tidyr
 summarytools
 sjlabelled
@@ -18,3 +16,4 @@ Formula
 ggplot2
 Hmisc
 data.table
+semPlot
