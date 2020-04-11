@@ -1,30 +1,31 @@
 ---
 title: "Analysis PPM-S"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
 css: "../input/bib/style.css"
-output: 
+output:
   html_document:
     number_sections: true
     toc: true
-    toc_float: true
+    toc_float:
+        collapsed: false
     toc_depth: 2
     code_folding: "hide"
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
-This section, documents all the procedures related to the data analysis and measurement models.
-(description)
-
-
-
-
 # Wave 01 {.tabset .tabset-fade .tabset-pills}
 
-Design: this wave ....
+On the first wave of the study we conducted the application of the Perceptions and Preferences Meritocracy Scale (PPM-S), in which we decided to test three different modalities for the application of the scale. The design of the study considered a sample of 2200 cases in Chile, using quotas for sex, age and educational level. The most important feature of this study consists in that we randomly assigned the participants to three different groups, in which the subjects complete one of the three combination of the questions. The key feature of these combinations relies on the display order of the questions regarding to each indicator of the scale. On this respect, we have three subsamples that correspond to each application modality that can be analysed separately, but also all together as a full sample.
+
+The scale has eight indicators, divided in four questions for perception and four for preferences, which are also divided in meritocratic and non-meritocratic. The meritocratic indicators refers to topics such as effort and talent, and the non-meritocratic refers to family wealth and networks. The three combinations relies in how these indicators are displayed to the respondent. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. the second combination corresponds to the group in which the questions are displayed following the a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions.                
+
+The rationale of the design relies on the possibility to test how different display modalities could affect the hypothesized factor structure of the scale. On this regard, we conducted the analysis on two stages. On the first stage we tested the hypothesized factor structure on the three groups corresponding to each application modality and the full sample using a Confirmatory Factor Analysis (CFA). On the second stage, we conducted a Multi-group confirmatory factor analysis (MGCFA) using the groups created by the randomization. Furthermore, we explore the possibility of a second order factor structure, in which we tested two models. The first alternative corresponds to a second-order Confirmatory Factor Analysis assuming the Perception/Preference dimension as a second order factor. On the other hand, we tested a model in which we assume that the second order factor structure follows the Meritocratic/Non-meritocratic constructs.        
+
+---
 
 ```{r eval=FALSE, include=FALSE}
-rmarkdown::render(input = "production/prod_analysis-cfa.Rmd",output_format = "html_document")
+rmarkdown::render(input = "production/prod_analysis-cfa.Rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-cfa.html")
 ```
 
 ```{r include=FALSE}
@@ -40,6 +41,7 @@ options(knitr.kable.NA = '')
 library(sjPlot)
 library(dplyr)
 library(lavaan)
+library(semPlot)
 library(stargazer)
 library(corrplot)
 library(psych)
@@ -48,9 +50,17 @@ library(kableExtra)
 ```
 
 **Load data**
-```{r}
-data01 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola1.sav",verbose = FALSE)
 
+```{r}
+load(file = "input/data/proc/dat01.RData")
+load(file = "input/data/proc/dat02.RData")
+load(file = "input/data/proc/dat03.RData")
+load(file = "input/data/proc/dat04.RData")
+```
+
+
+```{r eval=FALSE, include=FALSE}
+data01 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola1.sav",verbose = FALSE)
 dat01 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv01"))   %>% na.omit()
 dat02 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv02"))   %>% na.omit()
 dat03 <- data01 %>% filter(Intro==1,Finished==1) %>% select(starts_with("meritv03_p")) %>% na.omit()
@@ -62,7 +72,7 @@ dat04 <- data01 %>% filter(Intro==1) %>%
   select(starts_with("meritv01"),
          starts_with("meritv02"),
          starts_with("meritv03_p"),
-         starts_with("FL_21_DO")) 
+         starts_with("FL_21_DO"))
 dat04$grupo <- NA
 dat04$grupo[dat04$FL_21_DO_merit_perc_pref_julio19v01==1] <- 1
 dat04$grupo[dat04$FL_21_DO_merit_perc_pref_julio19v02==1] <- 2
@@ -77,19 +87,20 @@ dat04$pref_talent <- rowSums(dat04[,c(matches(match = "pref_talent",vars = names
 dat04$pref_wpart  <- rowSums(dat04[,c(matches(match = "pref_wpart" ,vars = names(dat04)))],na.rm = TRUE)
 dat04$pref_netw   <- rowSums(dat04[,c(matches(match = "pref_netw"  ,vars = names(dat04)))],na.rm = TRUE)
 dat04[dat04==0] <- NA
+dat04 <- dat04 %>% select(starts_with(match = "perc_"),starts_with(match = "pref_"),grupo) %>% na.omit()
 ```
 
 ---
 
 **Modality**
 
-Each group correspond to the application modality of the scale. 
+Each group correspond to the application modality of the scale.
 
 1. **Version 01:** Fixed order by perception / preferences (N=`r dim(dat01)[1]`)
 
 2. **Version 02:** Fixed order, by topic (N=`r dim(dat02)[1]`)
 
-3.  **Version 03:** Random order (N=`r dim(dat03)[1]`)
+3. **Version 03:** Random order (N=`r dim(dat03)[1]`)
 
 4. **Complete Sample:** Complete sample (N=`r dim(dat04)[1]`)
 
@@ -97,15 +108,15 @@ Each group correspond to the application modality of the scale.
 
 | Spanish (original)          | English (translated)   |
 |-----------------------------|------------------------|
-| 1. Percepción esfuerzo      | Perception effort      |
-| 2. Percepción talento       | Perception talent      |
-| 3. Percepción familia rica  | Perception rich family |
-| 4. Percepción redes         | Perception networks    |
-| 5. Preferencia esfuerzo     | Preference effort      |
-| 6. Preferencia talento      | Preference talent      |
-| 7. Preferencia familia rica | Preference rich family |
-| 8. Preferencia redes        | Preference networks    |
-Table: Mode 01: Fixed order by perception  
+| A. Percepción esfuerzo      | Perception effort      |
+| B. Percepción talento       | Perception talent      |
+| C. Percepción familia rica  | Perception rich family |
+| D. Percepción redes         | Perception networks    |
+| E. Preferencia esfuerzo     | Preference effort      |
+| F. Preferencia talento      | Preference talent      |
+| G. Preferencia familia rica | Preference rich family |
+| H. Preferencia redes        | Preference networks    |
+Table: Mode 01: Fixed order by perception
 
 ```{r echo=FALSE,results='asis'}
 stargazer(dat01,type = "html",
@@ -115,33 +126,29 @@ stargazer(dat01,type = "html",
           header=FALSE,
           digit.separator = "",
           digits = 2,
-          covariate.labels = c("1. pc.effort", "2. pc.talent","3. pc.wpart","4. pc.netw","5. pf.effort","6. pf.talent","7. pf.wpart", "8. pf.netw"))
-
-
-
-
+          covariate.labels = c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw"))
 ```
 
 ```{r correlacion v01}
 cor01<-polychoric(dat01)
-rownames(cor01$rho) <- c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(cor01$rho) <- c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
+rownames(cor01$rho) <- c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw")
+colnames(cor01$rho) <- c("(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
 ```{r}
-model01 <- 'perc_merit=~meritv01_perc_effort+meritv01_perc_talent
-            perc_nmerit=~meritv01_perc_wpart+meritv01_perc_netw
-            pref_merit=~meritv01_pref_effort+meritv01_pref_talent
-            pref_nmerit=~meritv01_pref_wpart+meritv01_pref_netw'
+model01 <- 'perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw'
 
 fit1_c <- cfa(model = model01,data = dat01,estimator="MLR") # Continuous/ estimator ML Robust
 
 fit1_o <- cfa(model = model01,data = dat01,
-            ordered = c("meritv01_perc_effort","meritv01_perc_talent",
-                        "meritv01_perc_wpart","meritv01_perc_netw",
-                        "meritv01_pref_effort","meritv01_pref_talent",
-                        "meritv01_pref_wpart","meritv01_pref_netw"))
+            ordered = c("perc_effort","perc_talent",
+                        "perc_wpart","perc_netw",
+                        "pref_effort","pref_talent",
+                        "pref_wpart","pref_netw"))
 
 #---------------------------------------------------#
 cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
@@ -155,14 +162,14 @@ kable(left_join(x = standardizedsolution(fit1_c) %>% filter(op=="=~") %>% select
 
 | Spanish (original)          | English (translated)   |
 |-----------------------------|------------------------|
-| 1. Percepción esfuerzo      | Perception effort      |
-| 2. Preferencia esfuerzo     | Preference effort      |
-| 3. Percepción talento       | Perception talent      |
-| 4. Preferencia talento      | Preference talent      |
-| 5. Percepción familia rica  | Perception rich family |
-| 6. Preferencia familia rica | Preference rich family |
-| 7. Percepción redes         | Perception networks    |
-| 8. Preferencia redes        | Preference networks    |
+| A. Percepción esfuerzo      | Perception effort      |
+| E. Preferencia esfuerzo     | Preference effort      |
+| B. Percepción talento       | Perception talent      |
+| F. Preferencia talento      | Preference talent      |
+| C. Percepción familia rica  | Perception rich family |
+| G. Preferencia familia rica | Preference rich family |
+| D. Percepción redes         | Perception networks    |
+| H. Preferencia redes        | Preference networks    |
 Table: Mode 02: Fixed order, by topic.
 
 ```{r echo=FALSE,results='asis'}
@@ -173,29 +180,29 @@ stargazer(dat02,type = "html",
           header=FALSE,
           digit.separator = "",
           digits = 2,
-          covariate.labels = c("1. pc.effort","2. pf.effort","3. pc.talent","4. pf.talent","5. pc.wpart","6. pf.wpart","7. pc.netw","8 pc.netw"))
+          covariate.labels = c("A. pc.effort","E. pf.effort","B. pc.talent","F. pf.talent","C. pc.wpart","G. pf.wpart","D. pc.netw","H. pc.netw"))
 ```
 
 ```{r}
 cor02<-polychoric(dat02)
-rownames(cor02$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(cor02$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
+rownames(cor02$rho) <-c("A. pc.effort","E. pf.effort","B. pc.talent","F. pf.talent","C. pc.wpart","G. pf.wpart","D. pc.netw","H. pc.netw")
+colnames(cor02$rho) <-c("(A)", "(E)","(B)","(F)","(C)","(G)","(D)", "(H)")
 corrplot(cor02$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
 
 ```{r,results='hold'}
-model02 <- 'perc_merit=~meritv02_perc_effort+meritv02_perc_talent
-            perc_nmerit=~meritv02_perc_wpart+meritv02_perc_netw
-            pref_merit=~meritv02_pref_effort+meritv02_pref_talent
-            pref_nmerit=~meritv02_pref_wpart+meritv02_pref_netw'
+model02 <- 'perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw'
 
 fit2_c <- cfa(model = model02,data = dat02,estimator="MLR") # Continuous/ estimator ML Robust
 
-fit2_o <- cfa(model = model02,data = dat02,ordered = c("meritv02_perc_effort","meritv02_perc_talent",
-                                                       "meritv02_perc_wpart"  ,"meritv02_perc_netw",
-                                                       "meritv02_pref_effort" ,"meritv02_pref_talent",
-                                                       "meritv02_pref_wpart"  ,"meritv02_pref_netw"))
+fit2_o <- cfa(model = model02,data = dat02,ordered = c("perc_effort","perc_talent",
+                                                       "perc_wpart"  ,"perc_netw",
+                                                       "pref_effort" ,"pref_talent",
+                                                       "pref_wpart"  ,"pref_netw"))
 
 #---------------------------------------------------#
 cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
@@ -221,29 +228,29 @@ stargazer(dat03,type = "html",
           header=FALSE,
           digit.separator = "",
           digits = 2,
-          covariate.labels = c("1. pc.effort", "2. pc.talent","3. pc.wpart","4. pc.netw","5. pf.effort","6. pf.talent","7. pf.wpart", "8. pf.netw"))
+          covariate.labels = c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw"))
 ```
 
 ```{r}
 cor03<-polychoric(dat03)
-rownames(cor03$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(cor03$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
+rownames(cor03$rho) <-c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw")
+colnames(cor03$rho) <-c("(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 corrplot(cor03$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
 ```{r,results='hold'}
 model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
+perc_merit=~perc_effort+perc_talent
+perc_nmerit=~perc_wpart+perc_netw
+pref_merit=~pref_effort+pref_talent
+pref_nmerit=~pref_wpart+pref_netw'
 
 fit3_c <- cfa(model = model03,data = dat03,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
 
-fit3_o <- cfa(model = model03,data = dat03,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                       "meritv03_perc_wpart","meritv03_perc_netw",
-                                                       "meritv03_pref_effort","meritv03_pref_talent",
-                                                       "meritv03_pref_wpart","meritv03_pref_netw"),std.lv=FALSE)
+fit3_o <- cfa(model = model03,data = dat03,ordered = c("perc_effort","perc_talent",
+                                                       "perc_wpart","perc_netw",
+                                                       "pref_effort","pref_talent",
+                                                       "pref_wpart","pref_netw"),std.lv=FALSE)
 #---------------------------------------------------#
 cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
 kable(left_join(x = standardizedsolution(fit3_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),y = standardizedsolution(fit3_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),c("lhs","rhs")),
@@ -256,17 +263,17 @@ kable(left_join(x = standardizedsolution(fit3_c) %>% filter(op=="=~") %>% select
 
 ```{r,results='hold'}
 model03.tau <- '
-perc_merit=~ r1*meritv03_perc_effort+r1*meritv03_perc_talent 
-perc_nmerit=~r2*meritv03_perc_wpart+ r2*meritv03_perc_netw  
-pref_merit=~ r3*meritv03_pref_effort+r3*meritv03_pref_talent 
-pref_nmerit=~r4*meritv03_pref_wpart+ r4*meritv03_pref_netw'
+perc_merit=~ r1*perc_effort+r1*perc_talent
+perc_nmerit=~r2*perc_wpart+ r2*perc_netw
+pref_merit=~ r3*pref_effort+r3*pref_talent
+pref_nmerit=~r4*pref_wpart+ r4*pref_netw'
 
 fit3_c.tau <- cfa(model = model03.tau,data = dat03,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
 
-fit3_o.tau <- cfa(model = model03.tau,data = dat03,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                               "meritv03_perc_wpart","meritv03_perc_netw",
-                                                               "meritv03_pref_effort","meritv03_pref_talent",
-                                                               "meritv03_pref_wpart","meritv03_pref_netw"), std.lv=FALSE)
+fit3_o.tau <- cfa(model = model03.tau,data = dat03,ordered = c("perc_effort","perc_talent",
+                                                               "perc_wpart","perc_netw",
+                                                               "pref_effort","pref_talent",
+                                                               "pref_wpart","pref_netw"), std.lv=FALSE)
 #---------------------------------------------------#
 cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
 kable(left_join(x = standardizedsolution(fit3_c.tau ) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),y = standardizedsolution(fit3_o.tau) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),c("lhs","rhs")),
@@ -305,21 +312,21 @@ stargazer(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,
           header=FALSE,
           digit.separator = "",
           digits = 2,
-          covariate.labels = c("1. pc.effort", "2. pc.talent","3. pc.wpart","4. pc.netw","5. pf.effort","6. pf.talent","7. pf.wpart", "8. pf.netw"))
+          covariate.labels = c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw"))
 ```
 
 ```{r}
 cor04<-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(cor04$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
+rownames(cor04$rho) <-c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw")
+colnames(cor04$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
 ```{r,results='hold'}
 model04 <- '
-perc_merit =~ perc_effort+perc_talent 
-perc_nmerit=~perc_wpart +perc_netw  
-pref_merit =~ pref_effort+pref_talent 
+perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
 pref_nmerit=~pref_wpart +pref_netw'
 
 fit4_c <- cfa(model = model04,data = dat04,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
@@ -334,8 +341,54 @@ kable(left_join(x = standardizedsolution(fit4_c ) %>% filter(op=="=~") %>% selec
       format = "markdown",digits = 2,col.names = cnames, caption = "Factor loadings")
 ```
 
-# Summary fit indices wave 01
+# Summary
 
+## Correlations 
+
+```{r compare corr, echo=TRUE, out.width=c('33%', '33%', '33%'),fig.cap="Mode 01, 02 and 03",fig.show='hold'}
+corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+corrplot(cor02$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+corrplot(cor03$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```
+
+## Measurement model 
+
+```{r semPlot, fig.cap="Measurement model PPM-S", fig.height=8, fig.width=12}
+model01 <- 'perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw'
+
+plot01 <- cfa(model = model01,data = dat01,estimator="MLR",std.lv=TRUE)
+
+nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception networks",
+              "Preference effort","Preference talent","Preference rich family","Preference networks",
+              "Percepction meritocratic","Percepction non meritocratic","Preference meritocratic","Preference non meritocratic")
+
+semPaths(plot01,
+         style = "lisrel",
+         fade=FALSE,
+         edge.color = "black",
+         nCharNodes = 0,
+         curvePivot = FALSE,
+         curve = 2,
+         rotation = 4,
+         layout = "tree3",
+         cardinal = "lat cov",
+         legend.cex = 0.6,
+         label.cex =1,
+         reorder = FALSE,
+         nodeNames = nodeNames,
+         nodeLabels = c("A","B","C","D","E","F","G","H","1","2","3","4"),
+         label.font = 6,
+         edge.label.font= 1,
+         asize = 3, #arrow size
+         edge.width =1,
+         sizeMan=5,
+         sizeLat = 10)
+```
+
+## Fit indices wave 01
 ```{r}
 sum_fit<- bind_rows(fitmeasures(fit1_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
                     fitmeasures(fit1_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
@@ -346,15 +399,18 @@ sum_fit<- bind_rows(fitmeasures(fit1_c)[c("chisq.scaled","df","cfi","cfi.scaled"
                     fitmeasures(fit4_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
                     fitmeasures(fit4_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")])
 sum_fit$mod <- c("Model 1","Model 1","Model 2","Model 2","Model 3","Model 3","Model 4","Model 4")
-sum_fit$est <- c("Continous","Ordinal","Continous","Ordinal","Continous","Ordinal","Continous","Ordinal")
+sum_fit$est <- c("MLR","DWLS","MLR","DWLS","MLR","DWLS","MLR","DWLS")
 sum_fit <- select(sum_fit,mod,est,everything())
+colnames <- c("Model","Estimator","$\\chi^2$","df","CFI","CFI.sca","CFI.rob","RMSEA","RMSEA.sca","RMSEA.rob")
 
-sumtable01<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 01") %>%     kable_styling(full_width = F)  %>% 
-      collapse_rows(columns = 1,valign = "middle")  %>%  
-      footnote(number = c("Model 1: fixed order by percepction/preference", 
-                          "Model 2: fixed order by topic (i.e: effort)", 
+
+sumtable01<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 01",col.names = colnames,escape = FALSE) %>%
+  kable_styling(full_width = F)  %>%
+      collapse_rows(columns = 1,valign = "middle")  %>%
+      footnote(number = c("Model 1: fixed order by percepction/preference",
+                          "Model 2: fixed order by topic (i.e: effort)",
                           "Model 3: Randomized order",
-                          "Model 4: Complete sample"));sumtable01 
+                          "Model 4: Complete sample"));sumtable01
 
 # Save sumamry table wave 01------------------------------#
 # as_image(sumtable01,file = "output/sumtablew01.png")
@@ -369,9 +425,9 @@ save_kable(sumtable01,file = "output/tables/sumtablew01.html",self_contained = F
 
 ```{r}
 model04 <- '
-perc_merit =~ perc_effort+perc_talent 
-perc_nmerit=~perc_wpart +perc_netw  
-pref_merit =~ pref_effort+pref_talent 
+perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
 pref_nmerit=~pref_wpart +pref_netw'
 
 fit4_c_mg <- cfa(model = model04,data = dat04,estimator="MLR",std.lv=FALSE,group = "grupo") # Continuous/ estimator ML Robust
@@ -397,9 +453,9 @@ kable(left_join(x = standardizedsolution(fit4_c_mg) %>% filter(op=="=~") %>% sel
 
 ```{r}
 model04b1or <- '
-perc_merit=~ perc_effort+perc_talent 
-perc_nmerit=~perc_wpart +perc_netw  
-pref_merit=~ pref_effort+pref_talent 
+perc_merit=~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit=~ pref_effort+pref_talent
 pref_nmerit=~pref_wpart +pref_netw
 percep=~ perc_merit + perc_nmerit
 prefer=~ pref_merit + pref_nmerit'
@@ -437,7 +493,7 @@ model04b2or <-'perc_merit=~ perc_effort+perc_talent
 
 # fit4b_c <- cfa(model = model04b2or,data = dat04,estimator="MLR") # No converge
 
-fit4b_o <- cfa(model = model04b2or,data = dat04, 
+fit4b_o <- cfa(model = model04b2or,data = dat04,
                ordered = c("perc_effort","perc_talent","perc_wpart","perc_netw",
                            "pref_effort","pref_talent","pref_wpart","pref_netw"))
 
@@ -458,11 +514,11 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
 # Wave 02 {.tabset .tabset-fade .tabset-pills}
 
 
-Each sample correspond to one of the three conditions generated by the randomized assignment. 
+Each sample correspond to one of the three conditions generated by the randomized assignment.
 
 1. **Control group:** the group that has been assigned to the control group (placebo condition)
 
-2. **Poverty condition sample** the group that has been assigned to the Poverty treatment condition. 
+2. **Poverty condition sample** the group that has been assigned to the Poverty treatment condition.
 
 3. **Inequality condition sample:** the group that has been assigned to the Inequality treatment condition.
 
@@ -472,7 +528,7 @@ Each sample correspond to one of the three conditions generated by the randomize
 ```{r}
 data02 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola2.sav",verbose = FALSE)
 load(file = "input/data/proc/datawide.RData")
-dat01 <- data02 %>% select(starts_with("meritv03_p")) 
+dat01 <- data02 %>% select(starts_with("meritv03_p"))
 ```
 
 **ATE on observed indicators**
@@ -494,17 +550,17 @@ stargazer::stargazer(m05,m06,m07,m08,type = "html")
 
 <!-- > **NOTE**: Los tratamientos de información no se asocian de manera estadísticamente significativa con ninguno de los Indicatores de la escala de meritocracia.   -->
 
-> **NOTE**: There are no statistically significant effects of the treatment conditions on the observed indicators of the meritocracy scale. 
+> **NOTE**: There are no statistically significant effects of the treatment conditions on the observed indicators of the meritocracy scale.
 
 
 ## Control group
 
 ```{r}
-w02con <- data02 %>% filter(FL_6_DO_Control==1) %>% select(starts_with("meritv03_p")) 
+w02con <- data02 %>% filter(FL_6_DO_Control==1) %>% select(starts_with("meritv03_p"))
 ```
 
-```{r echo=FALSE,results='asis'}
-stargazer(w02con,type = "html",          
+```{r results='asis'}
+stargazer(w02con,type = "html",
           title = "Descriptive statistics",
           font.size = "small",
           median = TRUE,
@@ -523,9 +579,9 @@ corrplot(corw02_1$rho,method = "color", type = "upper", tl.col = "black", addCoe
 
 ```{r,results='hold'}
 model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
 
 fitw02a_c <- cfa(model = model03,data = w02con,estimator="MLR") # Continuous/ estimator ML Robust
@@ -549,10 +605,10 @@ kable(left_join(x = standardizedsolution(fitw02a_c) %>% filter(op=="=~") %>% sel
 ## Poverty condition
 
 ```{r}
-w02pob <- data02 %>% filter(FL_6_DO_Tratamiento==1) %>% select(starts_with("meritv03_p")) 
+w02pob <- data02 %>% filter(FL_6_DO_Tratamiento==1) %>% select(starts_with("meritv03_p"))
 ```
 
-```{r echo=FALSE,results='asis'}
+```{r results='asis'}
 stargazer(w02pob,type = "html",
           title = "Descriptive statistics",
           font.size = "small",
@@ -571,9 +627,9 @@ corrplot(corw02_2$rho,method = "color", type = "upper", tl.col = "black", addCoe
 
 ```{r,results='hold'}
 model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
 
 fitw02b_c <- cfa(model = model03,data = w02pob,estimator="MLR") # Continuous/ estimator ML Robust
@@ -595,13 +651,13 @@ kable(left_join(x = standardizedsolution(fitw02b_c) %>% filter(op=="=~") %>% sel
       format = "markdown",digits = 2,col.names = cnames)
 ```
 
-## Inequality condition 
+## Inequality condition
 
 ```{r}
-w02des <- data02 %>% filter(FL_6_DO_Tratamiento_desigualdad==1) %>% select(starts_with("meritv03_p")) 
+w02des <- data02 %>% filter(FL_6_DO_Tratamiento_desigualdad==1) %>% select(starts_with("meritv03_p"))
 ```
 
-```{r echo=FALSE,results='asis'}
+```{r results='asis'}
 stargazer(w02des,type = "html",
           title = "Descriptive statistics",
           font.size = "small",
@@ -621,8 +677,8 @@ corrplot(corw02_3$rho,method = "color", type = "upper", tl.col = "black", addCoe
 ```{r,results='hold'}
 model03 <- '
 perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
 
 fitw02c_c <- cfa(model = model03,data = w02des,estimator="MLR") # Continuous/ estimator ML Robust
@@ -645,7 +701,7 @@ kable(left_join(x = standardizedsolution(fitw02c_c) %>% filter(op=="=~") %>% sel
 
 ## Complete sample
 
-```{r echo=TRUE,results='asis'}
+```{r results='asis'}
 stargazer(dat01,type = "html",
           title = "Descriptive statistics",
           font.size = "small",
@@ -668,9 +724,9 @@ corrplot(cor01$rho,method = "color", type = "upper", tl.col = "black", addCoef.c
 
 ```{r,results='hold'}
 model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
 
 fitw02_c <- cfa(model = model03,data = dat01,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
@@ -691,17 +747,17 @@ kable(left_join(x = standardizedsolution(fitw02_c) %>% filter(op=="=~") %>% sele
       format = "markdown",digits = 2,col.names = cnames)
 ```
 
-> **NOTE**: El ajuste de muestra completa en wave 02 con estimator MLR (robusto) es bastante bueno (CFI, RMSEA). El ajuste con DWLS es bastante bueno, CFI mejora, RMSEA aumenta un poco (0.59). 
+> **NOTE**: El ajuste de muestra completa en wave 02 con estimator MLR (robusto) es bastante bueno (CFI, RMSEA). El ajuste con DWLS es bastante bueno, CFI mejora, RMSEA aumenta un poco (0.59).
 
 ### Second order CFA
 
 ```{r}
 modw2 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw 
-merit =~perc_merit+pref_merit  
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
+pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw
+merit =~perc_merit+pref_merit
 nmerit=~perc_nmerit+pref_nmerit'
 
 # mod2_merit_c <- cfa(model = modw2,data = dat01) # Continuous/ estimator ML Robust
@@ -729,23 +785,25 @@ kable(standardizedsolution(mod2_merit_o) %>% filter(op=="=~") %>% select(lhs,rhs
 # Summary fit indices wave 02
 
 ```{r}
-sum_fitw02<- bind_rows(fitmeasures(fitw02a_c)[c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02a_o)[c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02b_c)[c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02b_o)[c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02c_c)[c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02c_c)[c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02_c)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02_o)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],)
+sum_fitw02<- bind_rows(fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02_c)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+                       fitmeasures(fitw02_o)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],)
 
 sum_fitw02$mod <- c("Model 1","Model 1","Model 2","Model 2","Model 3","Model 3","Model 4","Model 4")
-sum_fitw02$est <- c("Continuous","Ordinal","Continuous","Ordinal","Continuous","Ordinal","Continuous","Ordinal")
+sum_fitw02$est <- c("MLR","DWLS","MLR","DWLS","MLR","DWLS","MLR","DWLS")
 sum_fitw02 <- select(sum_fitw02,mod,est,everything())
+colnames <- c("Model","Estimator","$\\chi^2$","df","CFI","CFI.sca","CFI.rob","RMSEA","RMSEA.sca","RMSEA.rob")
 
-kable(sum_fitw02,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 02") %>% 
-  kable_styling(full_width = F) %>% 
-  collapse_rows(columns = 1,valign = "middle") %>% 
-  footnote(number = c("Model 1: Control group sample", 
+
+kable(sum_fitw02,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 02", col.names = colnames, escape = F) %>%
+  kable_styling(full_width = F) %>%
+  collapse_rows(columns = 1,valign = "middle") %>%
+  footnote(number = c("Model 1: Control group sample",
                       "Model 2: Poverty treatment condition sample",
                       "Model 3: Inequality treatment condition sample",
                       "Model 4: Complete sample"))
@@ -755,7 +813,7 @@ kable(sum_fitw02,digits = 3,format = "html",row.names = F,booktabs=T, caption = 
 
 ```{r}
 data03 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola3.sav",verbose = FALSE)
-dat01 <- data03 %>% select(starts_with("meritv03_p")) 
+dat01 <- data03 %>% select(starts_with("meritv03_p"))
 ```
 
 ```{r echo=TRUE,results='asis'}
@@ -771,9 +829,9 @@ stargazer(dat01,type = "html",
 
 ```{r}
 model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent 
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw  
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent 
+perc_merit=~meritv03_perc_effort+meritv03_perc_talent
+perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
+pref_merit=~meritv03_pref_effort+meritv03_pref_talent
 pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
 
 fitw03c_c <- cfa(model = model03,data = dat01,estimator="MLR") # Continuous/ estimator ML Robust
@@ -801,7 +859,7 @@ kable(left_join(x = standardizedsolution(fitw03c_c) %>% filter(op=="=~") %>% sel
 > * Adjustment using MLR estimator is good (CFI = 0.971, RMSEA = 0.052). The chi2 (robust) is 62,421
 > * Fit using DWLS estimator is good (CFI = 0.974, RMSEA = 0.067). The chi2 (robust) is 106,111
 
-# Summary fit indices wave 03 
+# Summary fit indices wave 03
 
 ```{r}
 sum_fitw03<- bind_rows(fitmeasures(fitw03c_c)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
@@ -811,9 +869,8 @@ sum_fitw03$mod <- c("Model 1","Model 1")
 sum_fitw03$est <- c("Continuous","Ordinal")
 sum_fitw03 <- select(sum_fitw03,mod,est,everything())
 
-kable(sum_fitw03,digits = 3,format = "html",row.names = F,booktabs=T,caption = "Summary fit indices wave 03") %>% 
-  kable_styling(full_width = F) %>% 
-  collapse_rows(columns = 1,valign = "middle") %>% 
+kable(sum_fitw03,digits = 3,format = "html",row.names = F,booktabs=T,caption = "Summary fit indices wave 03") %>%
+  kable_styling(full_width = F) %>%
+  collapse_rows(columns = 1,valign = "middle") %>%
   footnote(number = c("Model 1: Complete sample"))
 ```
-

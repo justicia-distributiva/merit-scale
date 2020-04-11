@@ -12,6 +12,11 @@ output:
 editor_options: 
   chunk_output_type: console
 ---
+
+```{r eval=FALSE, include=FALSE}
+rmarkdown::render(input = "production/prod_analysis-long_invariance.Rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-long_invariance.html")
+```
+
 # Longitudinal analysis
 
 ```{r}

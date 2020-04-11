@@ -3,19 +3,18 @@ title: "Data preparation"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 css: "../input/bib/style.css"
 output:
-  html_document:
-    number_sections: true
-    toc: true
-    toc_float: false
-    toc_depth: 2
+    html_document:
+        number_sections: true
+        toc: true
+        smart: false
+        toc_depth: 2
     code_folding: "hide"
 editor_options:
   chunk_output_type: console
 ---
 
-
 ```{r eval=FALSE, include=FALSE}
-rmarkdown::render(input = "production/prep-data-A.Rmd",output_format = "html_document",output_dir = ".")
+rmarkdown::render(input = "production/prod_prep-data-A.Rmd",output_format = "html_document",output_dir = "production/");browseURL(url = "production/prod_prep-data-A.html")
 ```
 
 ```{r include=FALSE}
@@ -67,19 +66,17 @@ dat04$perc_effort <- rowSums(dat04[,c(matches(match = "perc_effort",vars = names
 dat04$perc_talent <- rowSums(dat04[,c(matches(match = "perc_talent",vars = names(dat04)))],na.rm = TRUE)
 dat04$perc_wpart  <- rowSums(dat04[,c(matches(match = "perc_wpart" ,vars = names(dat04)))],na.rm = TRUE)
 dat04$perc_netw   <- rowSums(dat04[,c(matches(match = "perc_netw"  ,vars = names(dat04)))],na.rm = TRUE)
-
 dat04$pref_effort <- rowSums(dat04[,c(matches(match = "pref_effort",vars = names(dat04)))],na.rm = TRUE)
 dat04$pref_talent <- rowSums(dat04[,c(matches(match = "pref_talent",vars = names(dat04)))],na.rm = TRUE)
 dat04$pref_wpart  <- rowSums(dat04[,c(matches(match = "pref_wpart" ,vars = names(dat04)))],na.rm = TRUE)
 dat04$pref_netw   <- rowSums(dat04[,c(matches(match = "pref_netw"  ,vars = names(dat04)))],na.rm = TRUE)
 dat04[dat04==0] <- NA
+dat04 <- dat04 %>% select(starts_with(match = "perc_"),starts_with(match = "pref_"),grupo) %>% na.omit()
 ```
 
 ## Translation of variable labels and value labels.
 ```{r}
 label(dat04$grupo) <- "This variable classifies the interviewees according to the order in which the indicators are shown within the scale. There are three orders  of items on the scale. In the first order (group 1), questions of the same factor are then presented to them, in the second order (group 2) they were separated and in the third order (group 3) at random."
-
-
 dat04$perc_effort <- set_labels(dat04$perc_effort,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$perc_effort) <- "Thinking of Chilean society,
 what measure do you find of
@@ -88,7 +85,6 @@ the following statements? - Who
 the more they try they manage to get bigger
 rewards that those who strive
 less."
-
 dat04$perc_talent <- set_labels(dat04$perc_talent,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$perc_talent) <- "Thinking of Chilean society,
 what measure do you find of
@@ -97,7 +93,6 @@ the following statements? - Who
 possess more talent they manage to obtain
 greater rewards than those who possess
 less talent."
-
 dat04$perc_wpart <- set_labels(dat04$perc_wpart,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$perc_wpart) <- "Thinking of Chilean society,
 what measure do you find of
@@ -105,7 +100,6 @@ agree or disagree with each of
 the following statements? - Who
 they have rich parents manage to get out
 ahead."
-
 dat04$perc_netw <- set_labels(dat04$perc_netw,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$perc_netw) <- "Thinking of Chilean society,
 what measure do you find of
@@ -113,7 +107,6 @@ agree or disagree with each of
 the following statements? - Who
 they have good contacts they manage to get out
 ahead."
-
 dat04$pref_effort <- set_labels(dat04$pref_effort,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$pref_effort) <- "Thinking of Chilean society,
 what measure do you find of
@@ -122,7 +115,6 @@ the following statements? - Who
 the more they try they should get
 greater rewards than those who
 they try less."
-
 dat04$pref_talent <- set_labels(dat04$pref_talent,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$pref_talent) <- "Thinking of Chilean society,
 what measure do you find of
@@ -131,7 +123,6 @@ the following statements? - Who
 possess more talent they should get
 greater rewards than those who possess
 less talent."
-
 dat04$pref_wpart <- set_labels(dat04$pref_wpart,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
 label(dat04$pref_wpart) <- "Thinking of Chilean society,
 what measure do you find of
@@ -139,7 +130,6 @@ agree or disagree with each of
 the following statements? - Is
 well that those who have good
 contacts get ahead."
-
 dat04$pref_netw <- set_labels(dat04$pref_netw,  labels = c("strongly disagree", "disagreement", "Neither agree nor disagree","Agree", "totally agree"))
 label(dat04$pref_netw) <- "Thinking of Chilean society,
 what measure do you find of
@@ -164,7 +154,7 @@ print(dfSummary(dat04, valid.col = FALSE, graph.magnif = 0.75),
 ## Preparation of group 1: order according to the factors.
 
 ```{r}
-dat01 <- dat04 %>% filter(grupo==1) %>%  na.omit()
+dat01 <- dat04 %>% filter(grupo==1) %>% select(-grupo) %>%  na.omit()
 ```
 
 ```{r}
@@ -175,7 +165,7 @@ print(dfSummary(dat01, valid.col = FALSE, graph.magnif = 0.75),
 ## Preparation of group 2: order according to topics (i.e Effort).
 
 ```{r}
-dat02 <- dat04 %>% filter(grupo==2) %>% select(perc_effort, pref_effort, perc_talent,pref_talent, perc_wpart,pref_wpart,  perc_netw, pref_netw) %>% na.omit()
+dat02 <- dat04 %>% filter(grupo==2) %>% select(perc_effort, pref_effort, perc_talent,pref_talent, perc_wpart,pref_wpart, perc_netw, pref_netw) %>% na.omit()
 ```
 
 ```{r}
@@ -186,7 +176,7 @@ print(dfSummary(dat02, valid.col = FALSE, graph.magnif = 0.75),
 ## Preparation of group 3: randomized order.
 
 ```{r}
-dat03 <- dat04 %>% filter(grupo==3) %>%  na.omit()
+dat03 <- dat04 %>% filter(grupo==3) %>% select(-grupo) %>%  na.omit()
 ```
 
 ```{r}
@@ -217,7 +207,6 @@ w03 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola3.sav",verbose = 
 Add tags wave 1
 ```{r }
 label(w01$Intro) <- "If you wish to participate, select the alternative I ACCEPT take part in this investigation. If you do not want to participate in this study, press the alternative I NOT ACCEPT take part in this investigation."
-
 w01$Intro <- set_labels(w01$Intro,  labels = c("I ACCEPT take part in this investigation","I NOT ACCEPT take part in this investigation."))
 ```
 
@@ -252,7 +241,6 @@ w01c$perc_effort_w1 <- rowSums(w01c[,c(matches(match = "perc_effort",vars = name
 w01c$perc_talent_w1 <- rowSums(w01c[,c(matches(match = "perc_talent",vars = names(w01c)))],na.rm = TRUE)
 w01c$perc_wpart_w1  <- rowSums(w01c[,c(matches(match = "perc_wpart" ,vars = names(w01c)))],na.rm = TRUE)
 w01c$perc_netw_w1   <- rowSums(w01c[,c(matches(match = "perc_netw"  ,vars = names(w01c)))],na.rm = TRUE)
-
 w01c$pref_effort_w1 <- rowSums(w01c[,c(matches(match = "pref_effort",vars = names(w01c)))],na.rm = TRUE)
 w01c$pref_talent_w1 <- rowSums(w01c[,c(matches(match = "pref_talent",vars = names(w01c)))],na.rm = TRUE)
 w01c$pref_wpart_w1  <- rowSums(w01c[,c(matches(match = "pref_wpart" ,vars = names(w01c)))],na.rm = TRUE)
@@ -273,7 +261,6 @@ print(dfSummary(w01c, valid.col = FALSE, graph.magnif = 0.75),
 Add tags wave 2
 ```{r }
 label(w02$Intro) <- "If you wish to participate, select the alternative I ACCEPT take part in this investigation. If you do not want to participate in this study, press the alternative I NOT ACCEPT take part in this investigation."
-
 w02$Intro <- set_labels(w02$Intro,  labels = c("I ACCEPT take part in this investigation","I NOT ACCEPT take part in this investigation."))
 ```
 
@@ -288,7 +275,6 @@ Delete those who do not accept and Delete those who do not accept
 ```{r}
 w02b <- w02 %>% filter(Intro==1, Finished==1) %>% as.data.frame()
 w02b$ID <- stringr::str_split_fixed(w02b$ticket, "_", 4)[,1]
-
 ```
 
 Frequency of respondents who Accept and Finish wave 2.
@@ -300,14 +286,11 @@ sjPlot::view_df(w02_Introb, show.type = T,show.frq = T, show.string.values = T, 
 
 ```{r}
 w02c <- w02b
-
 w02c$treat <- NA
 w02c$treat[w02c$FL_6_DO_Control==1] <- 1
 w02c$treat[w02c$FL_6_DO_Tratamiento==1] <- 2
 w02c$treat[w02c$FL_6_DO_Tratamiento_desigualdad==1] <- 3
-
 w02c$treat <- factor(w02c$treat,levels = c(1,2,3),labels = c("control","pobreza","desiguald"))
-
 w02c <- w02c %>% rename(perc_effort_w2=meritv03_perc_effort,
                         perc_talent_w2=meritv03_perc_talent,
                         perc_wpart_w2 =meritv03_perc_wpart,
@@ -316,7 +299,6 @@ w02c <- w02c %>% rename(perc_effort_w2=meritv03_perc_effort,
                         pref_talent_w2=meritv03_pref_talent,
                         pref_wpart_w2 =meritv03_pref_wpart,
                         pref_netw_w2  =meritv03_pref_netw)
-
 w02c <- w02c %>% select(perc_effort_w2,perc_talent_w2,perc_wpart_w2,perc_netw_w2,
                         pref_effort_w2,pref_talent_w2,pref_wpart_w2,pref_netw_w2,
                         sexo_w2=sexo,edad_w2=edad,edcep_w2=edcep, treat, ID)
@@ -339,7 +321,6 @@ w03b$ID <- stringr::str_split_fixed(w03b$ticket, "_", 4)[,1]
 
 ```{r}
 w03c <- w03b
-
 w03c <- w03c %>% rename(perc_effort_w3=meritv03_perc_effort,
                         perc_talent_w3=meritv03_perc_talent,
                         perc_wpart_w3 =meritv03_perc_wpart,
@@ -351,7 +332,6 @@ w03c <- w03c %>% rename(perc_effort_w3=meritv03_perc_effort,
 w03c <- w03c %>% select(perc_effort_w3,perc_talent_w3,perc_wpart_w3,perc_netw_w3,
                         pref_effort_w3,pref_talent_w3,pref_wpart_w3,pref_netw_w3,
                         sexo_w3=sexo,edad_w3=edad,edcep_w3=edcep, ID)
-
 #-----------------------------------------------------------------------#
 print(dfSummary(w03c, valid.col = FALSE, graph.magnif = 0.75),
       max.tbl.height = 300, method = "render")
@@ -384,9 +364,7 @@ save(wide02,file = "input/data/proc/datawide_123.RData")
 ```{r}
 library(datasets)
 library(data.table)
-
 wide <- setDT(wide02)
-
 long01<- melt(wide,variable.name = "wave",
               measure = patterns("^perc_effort_","^perc_talent_","^perc_wpart_","^perc_netw_",
                                        "^pref_effort_","^pref_talent_","^pref_wpart_","^pref_netw_",
@@ -394,7 +372,6 @@ long01<- melt(wide,variable.name = "wave",
               value.name = c("perc_effort","perc_talent","perc_wpart","perc_netw",
                              "pref_effort","pref_talent","pref_wpart","pref_netw",
                              "sexo","edad","edcep"))
-
 ```
 
 ```{r}
