@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1586629340525.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2374824153",
+    "id" : "933475AF",
+    "lastKnownWriteTime" : 1586630749,
+    "last_content_update" : 1586630749225,
+    "path" : "~/Dropbox/proyectos y papers compartidos/Meritocracy and preferences/merit-scale/docs/prod_prep-data-A.rmd",
+    "project_path" : "prod_prep-data-A.rmd",
+    "properties" : {
+        "chunk_output_type" : "console",
+        "cursorPosition" : "379,0",
+        "scrollLine" : "362"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
