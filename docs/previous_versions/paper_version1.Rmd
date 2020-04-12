@@ -1,0 +1,168 @@
+---
+title: "Perceptions and Preferences for Meritocracy"
+linestretch: '1.5'
+link-citations: yes
+output:
+    html_document:
+        number_sections: true
+        toc: true
+        toc_float: true
+        smart: false
+linkcolor: blue
+bibliography:
+  - ../input/bib/EconomiaMoral.bib
+  - ../input/bib/meritocracy.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+<div style="text-align: justify">
+
+# Introducción
+
+La desigualdad económica se ha vuelto un tema que genera creciente preocupación y malestar alrededor del mundo. Esto se ha expresado en una serie de protestas como la emblemática "occupy wall street" el año 2011, así como también en una serie de análisis críticos respecto del desarrollo del capitalismo y sus consecuencias [@piketty_Capital_2014]. En este contexto, el estudio de las visiones, preferencias y percepciones respecto de la desigualdad han adquirido relevancia en las ciencias sociales, en temas como las preferencias redistributivas [@alesina_preferences_2011; @Dimick2018ModelsOtherRegardingPreferences] la legitimación de la desigualdad económica [@schroder_is_2017] y el funcionamiento de la meritocracia [@duru-bellat_whos_2012; @mijs_unfulfillable_2016; @reynolds_perceptions_2014].
+
+En general, la meritocracia se define como un sistema de distribución de recursos y recompensas basados en el mérito individual, que en su concepción original es una suma de talento y esfuerzo [@young_rise_1962]. Una serie de estudios han realizado críticas a la realización de este estándar moral de distribución, planteando que es una promesa incumplida dada la influencia preponderante de otros elementos más allá del mérito en el estatus individual [@arrow_meritocracy_2000; @goldthorpe_myth_2003; @markovits_Meritocracy_2019]. Por otro lado, desde la psicología social y la sociología se han estudiado las características y consecuencias de las creencias en la meritocracia, en general basados en la hipótesis que mayor creencia en la meritocracia lleva a una mayor legitimación de las desigualdades [@hadjar_meritokratie_2008; @MadeiraPrimesConsequencesSystematic2019].
+
+estas ideologías que legitiman la desigualdad, la literatura sobre la meritocracia, presenta un notorio crecimiento [@MadeiraPrimesConsequencesSystematic2019]. Tradicionalmente la meritocracia es entendida como una forma de distribución social de recursos donde el mérito individual (i.e. el esfuerzo y el talento) determinan la distribución de los privilegios [@breenClassInequalityMeritocracy1999;@youngRiseMeritocracy1994; @OhsfeldtBeliefsInequalityAmericans1987; @Jostrolestereotypingsystemjustification1994], sin la interferencia de factores estructurales como la herencia o los contactos [@breenClassInequalityMeritocracy1999; @saundersMightBritainBe1995; @yairMeritocracy2007; @landWeSatTable2006;@youngRiseMeritocracy1994].
+
+Los estudios relativos a la meritocracia se pueden clasificar entre estudios de carácter objetivo y estudios de carácter subjetivo. Los estudios de carácter objetivo, suelen dedicarse a la observar de la movilidad social, evaluando críticamente hasta qué punto las sociedades son efectivamente meritocráticas y su distribución no está influida por contactos o ventajas externas [@alonDiversityOpportunityShifting2007; @dubetRepensarJusticiaSocial2017; @eriksonIntergenerationalClassMobility2010; @rosanvallonSocieteEgaux2011; @barozetValorHistoricoPituto2006; @mcnameeMeritocracyMyth2004; @goldthorpeMythEducationbasedMeritocracy2003] Los segundos de carácter subjetivo, ponen el énfasis no en la observación de la distribución material de los recursos sino en las ideas y discursos en torno a la distribución social, mirando la meritocracia desde el enfoque de la economía moral. Desde esta perspectiva de la economía moral, estudian las creencias meritocráticas y su relación con distintos factores, como el ingreso, el contexto social o los prejuicios a grupos vulnerables [@KunovichSystemsDistributionSense2007;@NewmanFalseConsciousnessClass2015; @ReynoldsPerceptionsmeritocracyland2014; @Duru-BellatWhoMeritocracyIndividual2012]. Pese a que el concepto de creencias meritocráticas es fundamental para esta segunda línea de trabajo, las distintas escalas utilizadas en esta literatura no poseen suficientes evidencias de validez a su favor, lo que releva la importancia de aportar con propuestas para medir este constructo.
+
+Para estudiar las creencias meritocráticas se han utilizado múltiples escalas que suponen una estructura unifactorial de las creencias meritocráticas, sin distinguir entre elementos individuales y estructurales, ni diferenciar las preferencias de las percepciones [@KunovichSystemsDistributionSense2007;@NewmanFalseConsciousnessClass2015; @ReynoldsPerceptionsmeritocracyland2014]. Más aún, se ha optado por índices unidimensionales incluso cuando se ha tenido evidencia en contra de ellos [@KunovichSystemsDistributionSense2007;@ReynoldsPerceptionsmeritocracyland2014]. La mala especificación de las dimensiones del constructo puede llevar a conclusiones erradas sobre las creencias meritocráticas y su rol en la legitimidad de las desigualdades, por lo que es necesario hacer evaluaciones tanto sobre la dimensionalidad del constructo como de los ítems que permiten aproximarse adecuadamente al mismo.
+
+El objetivo de este proyecto fue desarrollar una escala de creencias en la meritocracia, que presentará una adecuada estructura de medición, que además buscamos que fuese estable en el tiempo. Por ello, nuestras preguntas de investigación refieren a la estructura del constructo y a la mantención de su validez a nivel temporal.
+
+## Antecedentes generales, la economía moral y la meritocracia
+Las ciencias sociales, desde la perspectiva de la economía moral, han enriquecido la comprensión de las relaciones económicas, aportando a la lógica racional imperante en las teorías económicas, aspectos subjetivos como las normas, los procesos históricos y culturales que estructuran las prácticas tanto las económicas [@mauMoralEconomyWelfare2004; @sachwehMoralEconomyInequality2012; @polanyiGranTransformacionCritica1997; @zelizerEconomicLivesHow2010 ;@fourcadeMoralViewsMarket2007] como la produccion y reproduccion de la desigualdad [@lamontWhatMissingCultural2014].En este marco teórico, se ha  planteado que las creencias meritocráticas pueden legitimar la desigualdad existente [@hadjarMeritokratieAlsLegitimationsprinzip2008]. En la misma línea, se ha planteado que la creencia en la meritocracia, que adjudica causas individuales a la pobreza, se relaciona con la atribución de prejuicios hacia grupos de bajo estatus [@MadeiraPrimesConsequencesSystematic2019] y con ideas conservadoras de autoritarismo social [@AzevedoNeoliberalIdeologyJustification2019].
+
+## Evidencia de la dimensionalidad de las creencias meritocráticas.
+La mayoría de las investigaciones que han trabajado con las creencias meritocráticas, la han abordado como un concepto unidimensional. No obstante, algunos autores han destacado la diferencia existente entre las preferencias y las percepciones meritocráticas [@Duru-BellatWhoMeritocracyIndividual2012; @CastilloMeritocraciadesigualdadeconomica2019]. Por percepciones meritocráticas refiere al modo en que el entrevistado describe la realidad. Las preferencias refieren a un aspecto normativo, es decir, que tan de acuerdo se está con que la meritocracia es un buen sistema de distribución. Esta distinción es fundamental, puesto que ambas variables poseen bastante relación entre sí, por lo cual es de suponer que trabajar con estas variables sin controlarlas entre sí nos puede llevar a tener ideas causales erróneas por espuriedad. Así, por ejemplo, puede ser que las conclusiones que indican una mayor percepción de meritocracia en base a los ingresos, posean coeficientes sobreestimados y errores no normales, por la falta de variables relevantes.
+
+Además, de la distinción entre percepciones y preferencias, es necesario hacer la distinción entre elementos meritocráticos y elementos no meritocráticos. Al respecto algunos autores, que trabajan solamente con las percepciones meritocráticas, suponen que creer en el peso de factores externos (e.g. la ventaja de tener padres ricos) es contrario a creer en el rol del esfuerzo. De este modo, las creencias no meritocráticas son consideradas es el extremo negativo del continuo, mientras creer que la trayectoria personal depende del esfuerzo y el talento del individuo, corresponde al lado positivo del continuo. Dicho planteamiento deriva teoría que señala que una sociedad meritocrática ideal se define por la distribución de riquezas en base a esfuerzo y no a fuerzas estructurales [@yairMeritocracy2007; @landWeSatTable2006]. Aunque dicho planteamiento es correcto para evaluar qué tan meritocrática es una sociedad, no necesariamente este pensamiento se refleja en el modo en cómo se estructuran los discursos en los imaginarios de la población. De hecho, otros investigadores han evaluado la dimensionalidad de las creencias meritocráticas, generando evidencia sobre la multidimensionalidad de este constructo, dando cuenta de que aspectos meritocráticos y no meritocráticos no forman parte de la misma dimensión dentro de la subjetividad de los encuestados. Entre de las investigaciones que han evaluado dicha dimensionalidad se encuentran los trabajos de @KunovichSystemsDistributionSense2007 y @ReynoldsPerceptionsmeritocracyland2014.
+
+La investigación multinivel internacional de @KunovichSystemsDistributionSense2007, que busca explicar las preferencias meritocráticas en el pago utilizando la encuesta ISSP, realizó análisis factoriales para probar la unidimensionalidad sin encontrar resultados satisfactorios, llegando a la conclusión de que las creencias en la meritocracia son más bien un conjunto diverso de ideas agregadas respecto al esfuerzo y la recompensa, razón por la cual decide utilizar un índice sumatorio pese a tener correlaciones insatisfactorias, las cuales estaban más cargadas a los ítems relacionados con aspectos no meritocráticos. En vista de la valioza evidencia producida por esta investigacion, podemos decir que, pese a que se ha trabajado como tal, las creencias meritocraticas parecen no ajustar a un modelo unidimensional.
+
+Por su parte, el artículo de @ReynoldsPerceptionsmeritocracyland2014, utilizando la batería del “get ahead” de la ISSP, plantea que las creencias meritocráticas poseen 3 dimensiones, las cuales refieren a la “percepción de meritocracia” (i.e. importancia atribuida al éxito y al talento para seguir adelante) a la “percepción de la importancia de las redes para salir adelante (i.e tener padres ricos, tener contactos) y la percepción de la discriminación como obstáculo para salir adelante (i.e la importancia del sexo y de la raza de la persona). Pese a esta evidencia, el autor decide hacer un índice unidimensional, donde se incorpora la primera dimensión como el lado positivo del continuo y un agregado de las segundas como el lado negativo del continuo, posteriormente el autor divide este continuo en 4 grupos.
+
+En suma, considerando la evidencia de estos autores, se deduce la multidimensionalidad del constructo, destacándose la diferencia entre los factores de percepciones meritocráticas y las percepciones no meritocráticas.
+
+En consideración de lo discutido, se hipotetiza que las creencias en la meritocracia poseen una estructura multidimensional de 4 factores, los cuales son el resultado del cruce entre las diferencias de percepciones o preferencias y aspectos meritocráticos o no meritocráticos, como se indica en la tabla 1. Así, probaremos un modelo en que las dimensiones sean percepciones meritocráticas, percepciones no meritocráticas, preferencias meritocráticas y preferencias no meritocráticas. Este modelo de medida posee dos ventajas, en primer lugar, no parte del supuesto de la dicotomía entre las creencias meritocráticas y no meritocráticas permitiendo que los sujetos puntúan alto o bajo en las dos variables. Igualmente, es positivo que exista la distinción entre preferencias y percepciones puesto que esto nos permitirá predicciones más robustas y más precisas respecto a las creencias de la meritocracia.
+
+|                  	  | Perceptions 	| Preferences 	|
+|:-----------------	  |-------------	|-------------	|
+| _Meritocracy_     	|             	|             	|
+| _Non-meritocracy_ 	|             	|             	|
+
+
+
+# Sección de indicadores
+Si bien no existe un consenso respecto a cuáles son los indicadores más adecuados para medir creencias en la meritocracia, los indicadores más comunes son preguntas del tipo, “qué tan importante es … para salir adelante”, las cuales incluyen características como tener padres ricos, trabajar duro, ser talentoso, el sexo, la raza, entre otras. El problema con este indicador presente en la International Social Survey Program, es que habla de un criterio de importancia y no de suficiencia. Así, por ejemplo, alguien puede creer que el esfuerzo es fundamental para salir adelante, y creer al mismo tiempo que no todas las personas que se esfuerzan más logran obtener más recursos que quienes se esfuerzan menos. Al respecto, hemos encontrado evidencia sistemática de que si bien una gran mayoría de las personas de chile consideran que el esfuerzo es fundamental para salir adelante, no creen que las personas no son recompensadas por su esfuerzo en su país.
+
+Otro indicador de esa misma encuesta, pregunta respecto a si cree que es importante a considerar en el pago de una persona distintas características, incluyendo características relativas al mérito, como educación o responsabilidad, y algunas relativas a las necesidades, como el tener hijos. No obstante, este modo de evaluar las creencias respecto a la meritocracia, si bien posee un aspecto no meritocrático, este no refiere a las desigualdades heredables que son lo propiamente contrario al ideal meritocrático (Yair, 2007; Land, 2006; newman; Reynolds and Xian, 2014).  Además, este indicador no incluye aspectos de percepción, lo cual, como dijimos, puede generar problemas de espuriedad.
+
+En vista de la inexistencia de un consenso respecto a la manera correcta de medir las creencias meritocráticas proponemos nuevos indicadores que buscan ser más enfáticos en el fraseo respecto a la diferencia de preferencias y percepciones.  Así, las preguntas que utilizamos son las presentes en la tabla 2. Estos indicadores, para referirse a las percepciones sitúan al entrevistado en la realidad de su país.
+
+![](input/images/tabla2.png)
+
+# Muestra del Estudio
+
+
+# Resultados: Estructura factorial, efecto framing e invarianza longitudinal
+Este estudio cuenta con una encuesta panel de 3 olas. En la primera de los olas, se incorporó la escala en distintos órdenes. El primer orden, pregunta primero por todas las percepciones y después por todas las preferencias, el segundo orden, pregunta seguidamente por percepciones y preferencias en torno a un mismo tema y, el tercer orden incorpora los ítems de manera aleatoria. En la segunda y tercera ola, se utilizó el orden
+
+Para poder evaluar la estructura factorial de la escala propuesta, se realizará un análisis factorial confirmatorio, evaluando el ajuste del modelo propuesto a partir de los estadísticos CFA, TLI, RMSEA y χ2 ratio. Los criterios de ajuste utilizados fueron anteriormente reportados en un preregistro de la investigación en el sitio Open Science FrameWork. Basado en los criterios de Kline (2016)  y de Brown (2008)  esperamos tanto para la prueba CFA como TLI, valores por sobre .95, mientras que para la prueba RMSEA, se consideran aceptables valores bajo .08 e idóneos bajo .05. Por su parte, respecto al χ2, se esperan valores p no significativos como parámetro ideal y se considera aceptable un χ2 ratio menor a 3.
+
+En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.
+
+Table 3: **Fit indicators**
+
+|           | Model order 1 | Model order 2 | Model order 3 |
+|:---------:|:-------------:|:-------------:|:-------------:|
+| **n**     |      697      |      702      |      697      |
+| **CFI**   |     0.997     |     0.984     |     0.991     |
+| **TLI**   |     0.992     |     0.968     |     0.984     |
+| **RMSEA** |     0.037     |     0.071     |     0.051     |
+| **χ2**    |     28.03     |     64.156    |     39.090    |
+| **p**     |      .000     |      .000     |      .000     |
+| **χ2/gl** | 2,00          | 4,58          | 2,78          |
+
+
+Todos los modelos independiente de los órdenes obtuvieron un ajuste moderado con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que mejor ajuste obtuvo (CFI=0.998, TLI= 0.995,RMSEA=0.037, χ2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, χ2(df=14)=39.09, p < 0.001).  Por su parte la escala ordenada por temáticas genera un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, lo cual afecta el ajuste, siendo este deficitario, con un χ2 ratio mayor a tres y un RMSEA que se puede encontrar por sobre .8 según el intervalo de confianza correspondiente(CFI=0.984, TLI=0.968,RMSEA=.071, χ2(df=14)=64.156, p < 0.001).
+
+A partir de los análisis de invarianza se puede decir que los distintos órdenes no son invariantes en términos configuracionales [@vandenbergReviewSynthesisMeasurement2000]. El modelo que incorpora la diferenciación de los grupos en la estimación del modelo, este presenta un ajuste moderado similar al de los modelos por separados, aunque posee un ratio de chi-square deficiente por lo que se descarta la invarianza. Esta varianza configuracional se debe a la sobre estimación que se genera en el orden uno de las correlaciones entre los indicadores de un mismo factor los cuales aparecen juntos para el encuestado, mientras que en el modelo 2 se presentan separados, disminuyendo la correlación entre los ítem de un mismo factor.Podríamos decir que las correlaciones entre los ítems son sub o sobre-estimadas según el orden en el que aparezcan. Coherentemente el modelo aleatorio tiene un ajuste intermedio entre ambos. Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha desidido seguir utilizando el orden 3.
+
+
+
+
+|           | Contrast Model 1 Factor | theoretical model 4 Factors | Model with M.I. |
+|:---------:|:-----------------------:|:---------------------------:|:---------------:|
+| **n**     |           1769          |             1769            |       1769      |
+| **CFI**   |          0.595          |            0.988            |      0.994      |
+| **TLI**   |          0.433          |            0.976            |      0.985      |
+| **RMSEA** |          0.226          |            0.047            |      0.036      |
+| **χ2**    |         1830.839        |            68.661           |      40.250     |
+| **p**     |           .000          |             .000            |       .000      |
+| **χ2/gl** |          65.38          |             4.90            |       3.32      |
+
+EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba χ2(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un X2 ratio menor a 3 y obtuvo cargas factoriales muy bajas ʎ < 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
+
+* agregar cuáles fueron las cargas sugeridas.
+
+# Validez del constructo
+
+## Validez convergente
+indicar la construcción de los índices -- hacer un anexo.
+
+Esta escala cuenta con validez de constructo, ya que los distintos índices formados según factor correlacionan coherentemente con la escala "Get a head", utilizada por el programa internacional de encuestas sociales (ISSP), y con la escala de valores igualitarios utilizada por la encuesta internacional de valores.
+
+
+|                                  | Igualitarismo | Get a head |
+|----------------------------------|:-------------:|:----------:|
+| Percepción <br>Meritocrática     |   -0.143***   | 0.228***   |
+| Percepción <br>No Meritocrática  |    0.130***   | -0.210***  |
+| Preferencia <br>Meritocrática    |   -0.055**    | 0.001      |
+| Preferencia <br>No Meritocratica |   -0.191***   | 0.083***   |
+
+
+Existe coherencia entre el índice "Get a Head" y el índice de preferencias y percepciones meritocráticas. Como era esperable, la relación es positiva entre este índice y la percepción de meritocracia de la escala propuesta (*r*=0.228). En la misma línea, el índice Get a head, correlaciona de manera negativa con la percepción de no meritocracia (c=-0.210;p=0.000). Además, las relaciones con las preferencias son considerablemente menores, e incluso no es significativa respecto a las preferencias meritocráticas. En suma, el "Get a head" que es comúnmente utilizado para medir percepciones, posee relación solo con las variables de percepción y no así con las de preferencias.
+
+Por su parte, el índice de Igualitarismo que refleja cuán problemática consideran la desigualdad los entrevistados, posee también relaciones coherentes. En primer lugar, es necesario destacar que solo posee una relación muy pequeña con la variable de preferencias meritocráticas, lo cual es positivo pues dicha dimensión de la escala no busca reflejar igualitarismo sino de preferencias meritocráticas. En segundo lugar, el índice se relaciona de manera negativa con la preferencia no meritocrática, lo cual es coherente en tanto alguien que valore la igualdad debería tender a no estar de acuerdo con la desigualdad de oportunidades. En tercer lugar, considerar la desigualdad como un problema, desde el índice de igualitarismo, posee como requisito creer que existe desigualdad, al respecto, es coherente que quienes consideran que la desigualdad existente es problemática, perciban igualmente que el éxito no depende sólo del esfuerzo y el talento (c=-0.143;p=0.000) sino que está influido por aspectos no meritocráticos (c=0.130;p=).
+
+# Discusión
+
+
+# Conclusión
+
+
+
+## Fiabilidad
+
+### Correlación entre los mismos items segun distintas olas.
+
+| **Pensando en la sociedad chilena, <br>¿En qué medida se encuentra usted de acuerdo o en desacuerdo<br>con cada una de las siguientes afirmaciones?** |  <br>Ola 1 - Ola 2  |  <br>Ola 2 - Ola 3 | <br>Ola 1 - Ola 3 |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------:|:------------------:|:-----------------:|
+| Quienes más se esfuerzan logran obtener mayores <br>recompensas que quienes se esfuerzan menos.                                                       |         0.33        |        0.38        |        0.30       |
+| Quienes poseen más talento logran obtener mayores<br>recompensas que quienes poseen menos talento.                                                    |         0.30        |        0.28        |        0.27       |
+| Quienes tienen padres ricos logran salir adelante.                                                                                                    |         0.33        |        0.36        |        0.38       |
+| Quienes tienen buenos contactos logran salir adelante.                                                                                                |         0.30        |        0.30        |        0.31       |
+| Quienes más se esfuerzan deberían obtener mayores<br>recompensas que quienes se esfuerzan menos.                                                      |         0.27        |        0.32        |        0.22       |
+| Quienes poseen más talento deberían obtener mayores<br>recompensas que quienes poseen menos talento.                                                  |         0.31        |        0.39        |        0.31       |
+| Está bien que quienes tienen padres ricos salganadelante.                                                                                             |         0.40        |        0.41        |        0.39       |
+| Está bien que quienes tienen buenos contactos salgan adelante.                                                                                        |         0.39        |        0.41        |        0.42       |
+
+
+ Pese a que existen bajas correlaciones, hay evidencia para apoyar la hipótesis de estabilidad de la escala a lo largo de las mediciones. Las correlaciones entre los mismos ítems en las distintas olas son de un tamaño pequeño a moderado según los parámetros de [@cohenStatisticalPowerAnalysis2013]. Estas bajas  correlaciones indican inestabilidad en las respuestas de los encuestados, no obstante existe evidencia para señalar una invarianza fuerte de las escalas en las distintas mediciones. En primer lugar, podemos decir que no existe diferencia entre el ajuste de los tres  nos indica que no existe una diferencia significativa entre los ajustes al modelo de las tres olas, lo cual nos señala la existencia de invarianza configuracional.
+
+
+         Df   AIC   BIC  Chisq Chisq diff Df diff Pr(>Chisq)
+fit.conf 42 35745 36222 110.91
+fit.deb  50 35738 36172 119.39      8.485       8     0.3876
+fit.fuer 58 35732 36124 129.94     10.546       8     0.2288
+fit.str  74 35772 36079 202.02     72.081      16  4.298e-09 ***
+
+El análisis de invarianza longitudinal muestra resultados moderadamente buenos. hay equivalencia configuracional,  métrica, pero no escalar escalar
+
+<div/>
+
+# Bibliografía

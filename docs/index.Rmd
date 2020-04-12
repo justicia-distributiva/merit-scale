@@ -10,11 +10,9 @@ output:
           in_header: head_github-activity.html
 ---
 
-
-
 ## This is the project website for the development and testing of the Perceptions and Preferences for Meritocracy Scale.
 
-last website update: `r format(Sys.time(), "%A %d %B %Y %X")`
+Last update: `r format(Sys.time(), "%A %d %B %Y %X")`
 
 ### Authors:
 
