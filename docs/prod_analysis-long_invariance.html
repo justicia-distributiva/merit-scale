@@ -1594,7 +1594,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Longitudinal analysis</h1>
-<h4 class="date">10 abril, 2020</h4>
+<h4 class="date">12 abril, 2020</h4>
 
 </div>
 
@@ -1608,8 +1608,8 @@ library(stargazer)
 library(corrplot)
 library(psych)
 library(knitr)
-library(kableExtra)
-load(file = &quot;input/data/proc/datawide_123.RData&quot;)</code></pre>
+library(kableExtra)</code></pre>
+<pre class="r"><code>load(file = &quot;input/data/proc/datawide_123.RData&quot;)</code></pre>
 <pre class="r"><code>g01&lt;- wide02 %&gt;% filter(grupo==1) %&gt;% select(starts_with(&quot;perc_&quot;),starts_with(&quot;pref_&quot;)) # Fixed by perception/preference
 g02&lt;- wide02 %&gt;% filter(grupo==2) %&gt;% select(starts_with(&quot;perc_&quot;),starts_with(&quot;pref_&quot;)) # Fixed by topic (i.e: effort)
 g03&lt;- wide02 %&gt;% filter(grupo==3) %&gt;% select(starts_with(&quot;perc_&quot;),starts_with(&quot;pref_&quot;)) # Randomized</code></pre>
@@ -4697,13 +4697,7 @@ fitlong_o &lt;- cfa(model = model_long,data = wide02,ordered = Indicatores)
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fitlong_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             ordinal= fitmeasures(fitlong_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)
-
-cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fitlong_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitlong_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                c(&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -4743,6 +4737,11 @@ kable(left_join(x = standardizedsolution(fitlong_c) %&gt;% filter(op==&quot;=~&q
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fitlong_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                y = standardizedsolution(fitlong_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -4917,6 +4916,7 @@ Correlación entre variables latentes w01, w02 y w03
 <pre class="r"><code>library(semTools)</code></pre>
 <pre class="r"><code>load(file = &quot;input/data/proc/datalong.RData&quot;)     # Datos formato long
 load(file = &quot;input/data/proc/datawide_123.RData&quot;) # Datos formato wide 3 olas
+load(file = &quot;input/data/proc/dat04.RData&quot;)
 
 wide_m1 &lt;- subset(wide02,grupo==1) # subset for mode 01
 wide_m2 &lt;- subset(wide02,grupo==2) # subset for mode 02
@@ -4936,9 +4936,7 @@ fit.str =cfa(m_inv_modalidad,data=dat04,group=&quot;grupo&quot;,group.equal=c(&q
 <pre class="r"><code>kable(rbind(fit.conf=fitmeasures(fit.conf)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             fit.deb =fitmeasures(fit.deb )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             fit.fuer=fitmeasures(fit.fuer)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-            fit.str =fitmeasures(fit.str )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)
-
-kable(anova(fit.conf, fit.deb, fit.fuer, fit.str),format = &quot;markdown&quot;,digits = 3)</code></pre>
+            fit.str =fitmeasures(fit.str )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5000,6 +4998,7 @@ kable(anova(fit.conf, fit.deb, fit.fuer, fit.str),format = &quot;markdown&quot;,
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>kable(anova(fit.conf, fit.deb, fit.fuer, fit.str),format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5305,9 +5304,7 @@ metrA = lavaan(model = metricSyntax1, data = wide02, estimator = &quot;MLR&quot;
 # lavTestLRT(metr_m3A, conf_m3,scaled.shifted = TRUE, method = &quot;satorra.bentler.2001&quot;) # invariantes
 
 kable(rbind(fit.conf=fitmeasures(conf)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-            fit.metrA =fitmeasures(metrA)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)
-
-kable(lavTestLRT(metrA,conf,scaled.shifted = TRUE, method = &quot;satorra.bentler.2001&quot;),digits = 3,format = &quot;markdown&quot;) # no es invariante, ver modind</code></pre>
+            fit.metrA =fitmeasures(metrA)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5347,6 +5344,7 @@ kable(lavTestLRT(metrA,conf,scaled.shifted = TRUE, method = &quot;satorra.bentle
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>kable(lavTestLRT(metrA,conf,scaled.shifted = TRUE, method = &quot;satorra.bentler.2001&quot;),digits = 3,format = &quot;markdown&quot;) # no es invariante, ver modind</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5496,11 +5494,7 @@ metrA2 = lavaan(model = metricSyntax2, data = wide02, estimator = &quot;MLR&quot
 
 kable(rbind(fit.conf=fitmeasures(conf)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             fit.metrA =fitmeasures(metrA)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-            fit.metrA2 =fitmeasures(metrA2)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)
-
-#fit.metrA  = all factor loading restricted
-#fit.metrA2 = one free estimated factor loading
-kable(lavTestLRT(metrA2,conf,scaled.shifted = TRUE,method = &quot;satorra.bentler.2001&quot;),format = &quot;markdown&quot;,digits = 3) #non invariant, see modind metric2 below</code></pre>
+            fit.metrA2 =fitmeasures(metrA2)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5551,6 +5545,9 @@ kable(lavTestLRT(metrA2,conf,scaled.shifted = TRUE,method = &quot;satorra.bentle
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>#fit.metrA  = all factor loading restricted
+#fit.metrA2 = one free estimated factor loading
+kable(lavTestLRT(metrA2,conf,scaled.shifted = TRUE,method = &quot;satorra.bentler.2001&quot;),format = &quot;markdown&quot;,digits = 3) #non invariant, see modind metric2 below</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5706,9 +5703,7 @@ metrA3 = lavaan(model = metricSyntax3, data = wide02, estimator = &quot;MLR&quot
 kable(rbind(fit.conf   =fitmeasures(conf)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             fit.metrA  =fitmeasures(metrA)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             fit.metrA2 =fitmeasures(metrA2)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
-            fit.metrA3 =fitmeasures(metrA3)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)
-
-kable(lavTestLRT(metrA3,conf,scaled.shifted = TRUE,method = &quot;satorra.bentler.2001&quot;),format = &quot;markdown&quot;,digits = 3)</code></pre>
+            fit.metrA3 =fitmeasures(metrA3)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),digits = 3,format = &quot;markdown&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -5770,6 +5765,7 @@ kable(lavTestLRT(metrA3,conf,scaled.shifted = TRUE,method = &quot;satorra.bentle
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>kable(lavTestLRT(metrA3,conf,scaled.shifted = TRUE,method = &quot;satorra.bentler.2001&quot;),format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">

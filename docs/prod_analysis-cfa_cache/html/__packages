@@ -4,16 +4,7 @@ kableExtra
 sjPlot
 dplyr
 lavaan
+semPlot
 stargazer
 corrplot
 psych
-tidyr
-summarytools
-sjlabelled
-lattice
-survival
-Formula
-ggplot2
-Hmisc
-data.table
-semPlot
