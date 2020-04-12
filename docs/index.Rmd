@@ -6,14 +6,13 @@ author: " "
 output:
     html_document:
         smart: false
+        includes:
+          in_header: head_github-activity.html
 ---
-
-
-
 
 ## This is the project website for the development and testing of the Perceptions and Preferences for Meritocracy Scale.
 
-last website update: `r format(Sys.time(), "%A %d %B %Y %X")`
+Last update: `r format(Sys.time(), "%A %d %B %Y %X")`
 
 ### Authors:
 
@@ -37,5 +36,17 @@ Based on a previous paper that proposed a distinction between perceptions and pr
   - _Analysis_: CFA (Confirmatory Factor Analysis) and measurement invariance
   - _Paper_: final output
 
+### Reproducibility and documentation
+
+The repository of the project in Github is structured according to the [IPO reproducibility protocol](https://juancarloscastillo.github.io/ipo/).
+
+
+<br>
+
+## [Github activity feed](https://github.com/juancarloscastillo/github-activity)
+
+<div id="feed"></div>
+
+<br>
 
 ## References

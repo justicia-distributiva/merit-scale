@@ -1,10 +1,10 @@
 base
-knitr
-kableExtra
 sjPlot
 dplyr
 lavaan
 stargazer
 corrplot
 psych
+knitr
+kableExtra
 semTools
