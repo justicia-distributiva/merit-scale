@@ -1609,7 +1609,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">viernes 10 abril 2020 17:12:10</h4>
+<h4 class="date">domingo 12 abril 2020 12:08:27</h4>
 
 </div>
 
@@ -2979,10 +2979,7 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 <pre class="r"><code>kable(rbind(Ordinal    =fitmeasures(fit3_o    )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal.tau=fitmeasures(fit3_o.tau)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
       format = &quot;markdown&quot;,
-      digits = 3, caption = &quot;Fit tau-equivalence&quot;)
-kable(anova(fit3_o,fit3_o.tau),
-      format = &quot;markdown&quot;,
-      digits = 3)</code></pre>
+      digits = 3, caption = &quot;Fit tau-equivalence&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -3022,6 +3019,9 @@ kable(anova(fit3_o,fit3_o.tau),
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>kable(anova(fit3_o,fit3_o.tau),
+      format = &quot;markdown&quot;,
+      digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -3531,11 +3531,7 @@ sumtable01&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F
       footnote(number = c(&quot;Model 1: fixed order by percepction/preference&quot;,
                           &quot;Model 2: fixed order by topic (i.e: effort)&quot;,
                           &quot;Model 3: Randomized order&quot;,
-                          &quot;Model 4: Complete sample&quot;));sumtable01
-
-# Save sumamry table wave 01------------------------------#
-# as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
-save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
+                          &quot;Model 4: Complete sample&quot;));sumtable01</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
 Summary fit indices wave 01
@@ -3835,6 +3831,9 @@ DWLS
 </tr>
 </tfoot>
 </table>
+<pre class="r"><code># Save sumamry table wave 01------------------------------#
+# as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
+save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
 </div>
 <div id="other-analyses" class="section level2" number="2.4">
 <h2 number="2.4"><span class="header-section-number">2.4</span> Other analyses</h2>
@@ -3857,13 +3856,7 @@ fit4_o_mg &lt;- cfa(model = model04,data = dat04,ordered = c(&quot;perc_effort&q
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fit4_c_mg)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal=  fitmeasures(fit4_o_mg)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3,caption = &quot;Fit indices&quot;)
-
-cnames &lt;- c(&quot;Grupo&quot;,&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
-                y = standardizedsolution(fit4_o_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
-                c(&quot;group&quot;,&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings by group&quot;)</code></pre>
+      format = &quot;markdown&quot;,digits = 3,caption = &quot;Fit indices&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -3903,6 +3896,11 @@ kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&q
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>cnames &lt;- c(&quot;Grupo&quot;,&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
+                y = standardizedsolution(fit4_o_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std),
+                c(&quot;group&quot;,&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings by group&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -4105,13 +4103,7 @@ fit4b_c &lt;- cfa(model = model04b1or,data = dat04,ordered = c(&quot;perc_effort
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fit4a_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal= fitmeasures(fit4b_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)
-
-cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                y = standardizedsolution(fit4b_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                c(&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -4151,6 +4143,11 @@ kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quo
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                y = standardizedsolution(fit4b_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -4257,11 +4254,7 @@ fit4b_o &lt;- cfa(model = model04b2or,data = dat04,
 
 #---------------------------------------------------#
 kable(rbind(Ordinal=fitmeasures(fit4b_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)
-
-cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
-kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -4290,6 +4283,9 @@ kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% sel
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
+kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -6665,11 +6661,7 @@ mod2_merit_o &lt;- cfa(model = modw2,data = dat01,ordered = c(&quot;meritv03_per
 
 #---------------------------------------------------#
 kable(rbind(Ordinal=fitmeasures(mod2_merit_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)
-
-cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
-kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -6698,6 +6690,9 @@ kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
+kable(standardizedsolution(mod2_merit_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -7410,13 +7405,7 @@ fitw03c_o &lt;- cfa(model = model03,data = dat01,ordered = c(&quot;meritv03_perc
 #---------------------------------------------------#
 kable(rbind(Continuous=fitmeasures(fitw03c_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
             Ordinal= fitmeasures(fitw03c_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
-      format = &quot;markdown&quot;,digits = 3)
-
-cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
-kable(left_join(x = standardizedsolution(fitw03c_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw03c_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
-                c(&quot;lhs&quot;,&quot;rhs&quot;)),
-      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -7456,6 +7445,11 @@ kable(left_join(x = standardizedsolution(fitw03c_c) %&gt;% filter(op==&quot;=~&q
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fitw03c_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                y = standardizedsolution(fitw03c_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
 <table>
 <thead>
 <tr class="header">

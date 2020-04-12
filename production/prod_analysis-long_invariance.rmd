@@ -17,6 +17,15 @@ editor_options:
 rmarkdown::render(input = "production/prod_analysis-long_invariance.Rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-long_invariance.html")
 ```
 
+```{r include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE)
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+```
+
+
 # Longitudinal analysis
 
 ```{r}
@@ -28,8 +37,12 @@ library(corrplot)
 library(psych)
 library(knitr)
 library(kableExtra)
+```
+
+```{r}
 load(file = "input/data/proc/datawide_123.RData")
 ```
+
 
 ```{r}
 g01<- wide02 %>% filter(grupo==1) %>% select(starts_with("perc_"),starts_with("pref_")) # Fixed by perception/preference
@@ -173,6 +186,7 @@ library(semTools)
 ```{r}
 load(file = "input/data/proc/datalong.RData")     # Datos formato long
 load(file = "input/data/proc/datawide_123.RData") # Datos formato wide 3 olas
+load(file = "input/data/proc/dat04.RData")
 
 wide_m1 <- subset(wide02,grupo==1) # subset for mode 01
 wide_m2 <- subset(wide02,grupo==2) # subset for mode 02
