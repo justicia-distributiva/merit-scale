@@ -33,3 +33,5 @@ browseURL(url = "docs/index.html")
 
 # Keep only the original .rmd files (site), configuration (_site.yml and _config.yml)
 # and prod_ folders (cache and files)
+# rmarkdown::clean_site("docs")
+
