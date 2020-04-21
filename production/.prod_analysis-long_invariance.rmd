@@ -184,6 +184,7 @@ library(semTools)
 ```{r}
 load(file = "input/data/proc/datalong.RData")     # Datos formato long
 load(file = "input/data/proc/datawide_123.RData") # Datos formato wide 3 olas
+load(file = "input/data/proc/dat04.RData") # Datos formato wide 3 olas
 
 wide_m1 <- subset(wide02,grupo==1) # subset for mode 01
 wide_m2 <- subset(wide02,grupo==2) # subset for mode 02

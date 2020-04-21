@@ -1,5 +1,6 @@
 ---
 title: "Perceptions and Preferences for Meritocracy"
+css: "../input/bib/style.css"
 linestretch: '1.5'
 link-citations: yes
 output:
@@ -12,11 +13,24 @@ linkcolor: blue
 bibliography:
   - ../input/bib/EconomiaMoral.bib
   - ../input/bib/meritocracy.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE)
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
 ```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library(knitr)
+library(kableExtra)
+library(dplyr)
+```
+
 <div style="text-align: justify">
 
 # Introducción
@@ -86,19 +100,41 @@ Regarding the selection of indicators, most of them some adaptations of previous
 
 # Methodology
 
+The study design consist in two main stages. The first stage was the questionnaire design, in which we collect a serie of background variables, including sex, age and educational level. On this regard, one of the main aspects of our design is that we tested three different application modalities, in order to observe how the display order of the indicators could affect the model fit. We decide to randomize the assignment of the subject to each application modality, and as a result we obtain three groups within the full sample. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. The second combination corresponds to the group in which the questions are displayed following a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions. The figure below describes the complete survey flow.        
+
+![Figure: Study design](../input/images/app_mod.png)
+
+To contact the subjects, we followed an online programmed survey approach using _Qualtrics_, and the field work was conducted by _Netquest_, which is a company with wide experience applying online survey, and for the case of Chile, they have a consolidated pool of individuals that systematically respond online surveys. On this regard, the company have their own incentive system, in which the subjects accumulates specific currencies that they can exchange for a wide range of goods.
+
 ## Data
 
+The field work was conducted during November and December of 2019 in Chile, obtaining a final sample of 2200 individuals, but considering that we use cases with complete information, the final analytical sample has 2141 observations.
 
 ## Variables
 
+<!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
+
+```{r echo=FALSE}
+load(file = "output/tables/sumdat04.RData");sumdat04
+```
 
 
 ## Methods
 
+CFA
 
+MGCFA
+
+@rprogram2019
+@Rosseel2012
 
 # Results
 
+![](../output/images/meas01.png)
+
+```{r echo=FALSE}
+load(file = "output/tables/tb.fm01.RData");tb.fm01
+```
 
 
 
@@ -126,8 +162,6 @@ Table 3: **Fit indicators**
 Todos los modelos independiente de los órdenes obtuvieron un ajuste moderado con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que mejor ajuste obtuvo (CFI=0.998, TLI= 0.995,RMSEA=0.037, χ2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, χ2(df=14)=39.09, p < 0.001).  Por su parte la escala ordenada por temáticas genera un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, lo cual afecta el ajuste, siendo este deficitario, con un χ2 ratio mayor a tres y un RMSEA que se puede encontrar por sobre .8 según el intervalo de confianza correspondiente(CFI=0.984, TLI=0.968,RMSEA=.071, χ2(df=14)=64.156, p < 0.001).
 
 A partir de los análisis de invarianza se puede decir que los distintos órdenes no son invariantes en términos configuracionales [@vandenbergReviewSynthesisMeasurement2000]. El modelo que incorpora la diferenciación de los grupos en la estimación del modelo, este presenta un ajuste moderado similar al de los modelos por separados, aunque posee un ratio de chi-square deficiente por lo que se descarta la invarianza. Esta varianza configuracional se debe a la sobre estimación que se genera en el orden uno de las correlaciones entre los indicadores de un mismo factor los cuales aparecen juntos para el encuestado, mientras que en el modelo 2 se presentan separados, disminuyendo la correlación entre los ítem de un mismo factor.Podríamos decir que las correlaciones entre los ítems son sub o sobre-estimadas según el orden en el que aparezcan. Coherentemente el modelo aleatorio tiene un ajuste intermedio entre ambos. Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha desidido seguir utilizando el orden 3.
-
-
 
 
 |           | Contrast Model 1 Factor | theoretical model 4 Factors | Model with M.I. |

@@ -1,13 +1,14 @@
 ---
 title: "Data preparation"
-date: "`r format(Sys.time(), '%d %B, %Y')`"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
 css: "../input/bib/style.css"
 output:
-    html_document:
-        number_sections: true
-        toc: true
-        smart: false
-        toc_depth: 2
+  html_document:
+    number_sections: true
+    toc: true
+    toc_float:
+        collapsed: false
+    toc_depth: 2
     code_folding: "hide"
 editor_options:
   chunk_output_type: console
@@ -127,9 +128,7 @@ dat04$pref_wpart <- set_labels(dat04$pref_wpart,  labels = c("strongly disagree"
 label(dat04$pref_wpart) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
-the following statements? - Is
-well that those who have good
-contacts get ahead."
+the following statements? - It's fine that those who have rich parents get ahead" 
 dat04$pref_netw <- set_labels(dat04$pref_netw,  labels = c("strongly disagree", "disagreement", "Neither agree nor disagree","Agree", "totally agree"))
 label(dat04$pref_netw) <- "Thinking of Chilean society,
 what measure do you find of
