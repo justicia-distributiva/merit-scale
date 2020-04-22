@@ -1,7 +1,7 @@
 ---
 title: "Analysis PPM-S"
 date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
-css: "../input/bib/style.css"
+css: "../input/css/style.css"
 output:
   html_document:
     number_sections: true
@@ -25,7 +25,7 @@ The rationale of the design relies on the possibility to test how different disp
 ---
 
 ```{r eval=FALSE, include=FALSE}
-rmarkdown::render(input = "production/prod_analysis-cfa.Rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-cfa.html")
+rmarkdown::render(input = "production/prod_analysis-cfa.rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-cfa.html")
 ```
 
 ```{r include=FALSE}
@@ -47,6 +47,8 @@ library(corrplot)
 library(psych)
 library(knitr)
 library(kableExtra)
+library(rvest)
+source('production/prod_polychoric.R')
 ```
 
 **Load data**
@@ -136,6 +138,7 @@ colnames(cor01$rho) <- c("(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
+
 ```{r}
 model01 <- 'perc_merit=~perc_effort+perc_talent
             perc_nmerit=~perc_wpart+perc_netw
@@ -157,6 +160,45 @@ kable(left_join(x = standardizedsolution(fit1_c) %>% filter(op=="=~") %>% select
 ```
 
 > **NOTE**: good fit, heywood case item 8.
+
+```{r}
+labs<- c("A. Who the more they try they manage to get bigger rewards that those who striveless.",
+         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.",
+         "C. Who they have rich parents manage to get out ahead.",
+         "D. Who they have good contacts they manage to get out ahead.",
+         "E. Who the more they try they should get greater rewards than those who they try less." ,
+         "F. Who possess more talent they should get greater rewards than those who possess less talent." ,
+         "G. It's fine that those who have rich parents get ahead",
+         "H. Is well that those who have good contacts get ahead." )
+cnametab<- c("","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)","(1)","(2)","(3)","(4)","(1)","(2)","(3)","(4)")
+```
+
+
+```{r tabla01, eval=TRUE, include=TRUE}
+polyw01<- poly(sjlabelled::remove_all_labels(dat01),
+               digits = 2,
+               triangle = "l",
+               fade.ns = F,
+               remove.spaces = T,
+               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
+matpolyw01 <- as.data.frame(read_html(x = polyw01[["page.content"]]) %>% html_table(fill=FALSE)) 
+matpolyw01 <- matpolyw01[-c(9),]
+colnames(matpolyw01) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)","(H)")
+
+load01<- data.frame(round(cbind(inspect(fit1_c,what="std")$lambda,inspect(fit1_o,what="std")$lambda),digits = 2))
+load01[load01==c(0.00)] <- NA; names(load01) <- c(1:4,1:4)
+
+table01<- bind_cols(x = matpolyw01,y = load01)
+# %>% mutate(vars=labs)
+
+kable(table01,escape = TRUE,align = "l",col.names = cnametab,format = "html") %>% 
+  footnote(general = paste0(paste0("$N$= ",nobs(fit1_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
+  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>%
+  add_header_above(c(" " = 9,"Factor loadings"=8)) %>%
+  column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  kable_styling(full_width = FALSE)
+```
 
 ## Version 02  (N=`r dim(dat02)[1]`)
 
@@ -180,7 +222,7 @@ stargazer(dat02,type = "html",
           header=FALSE,
           digit.separator = "",
           digits = 2,
-          covariate.labels = c("A. pc.effort","E. pf.effort","B. pc.talent","F. pf.talent","C. pc.wpart","G. pf.wpart","D. pc.netw","H. pc.netw"))
+          covariate.labels = c("A. pc.effort","E. pf.effort","B. pc.talent","F. pf.talent","C. pc.wpart","G. pf.wpart","D. pc.netw","H. pc.netw")) 
 ```
 
 ```{r}
@@ -188,7 +230,7 @@ cor02<-polychoric(dat02)
 rownames(cor02$rho) <-c("A. pc.effort","E. pf.effort","B. pc.talent","F. pf.talent","C. pc.wpart","G. pf.wpart","D. pc.netw","H. pc.netw")
 colnames(cor02$rho) <-c("(A)", "(E)","(B)","(F)","(C)","(G)","(D)", "(H)")
 corrplot(cor02$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
-```
+``` 
 
 
 ```{r,results='hold'}
@@ -210,6 +252,33 @@ kable(left_join(x = standardizedsolution(fit2_c) %>% filter(op=="=~") %>% select
       format = "markdown",digits = 2,col.names = cnames, caption = "Factor loadings")
 ```
 > **NOTE**: bad fit, heywood case using DWLS
+
+```{r tabla02, echo=FALSE, include=TRUE}
+polyw02<- poly(sjlabelled::remove_all_labels(dat02),
+               digits = 2,
+               triangle = "l",
+               fade.ns = F,
+               remove.spaces = T,
+               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
+matpolyw02 <- as.data.frame(read_html(x = polyw02[["page.content"]]) %>% html_table(fill=FALSE)) 
+matpolyw02 <- matpolyw02[-c(9),] 
+colnames(matpolyw02) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
+
+load02<- data.frame(round(cbind(inspect(fit2_c,what="std")$lambda,inspect(fit2_o,what="std")$lambda),digits = 2))
+load02[load02==c(0.00)] <- NA; names(load02) <- c(1:4,1:4)
+
+table02<- bind_cols(x = matpolyw02,y = load02)
+# %>% mutate(vars=labs)
+
+kable(table02,escape = FALSE,align = "l",col.names = cnametab)  %>% 
+  footnote(general = paste0(paste0("$N$= ",nobs(fit2_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
+  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
+  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
+  column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  kable_styling(full_width = FALSE) %>% 
+  kable_styling(full_width = F)
+```
 
 ## Version 03 (N=`r dim(dat03)[1]`)
 
@@ -259,6 +328,34 @@ kable(left_join(x = standardizedsolution(fit3_c) %>% filter(op=="=~") %>% select
 
 > **NOTE**: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence
 
+```{r}
+polyw03<- poly(sjlabelled::remove_all_labels(dat03),
+               digits = 2,
+               triangle = "l",
+               fade.ns = F,
+               remove.spaces = T,
+               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
+matpolyw03 <- as.data.frame(read_html(x = polyw03[["page.content"]]) %>% html_table(fill=FALSE)) 
+matpolyw03 <- matpolyw03[-c(9),] 
+
+colnames(matpolyw03) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
+
+load03<- data.frame(round(cbind(inspect(fit3_c,what="std")$lambda,inspect(fit3_o,what="std")$lambda),digits = 2))
+load03[load03==c(0.00)] <- NA; names(load03) <- c(1:4,1:4)
+
+table03<- bind_cols(x = matpolyw03,y = load03)
+# %>% mutate(vars=labs)
+
+kable(table03,escape = FALSE,align = "l",col.names = cnametab) %>% 
+  footnote(general = paste0(paste0("$N$= ",nobs(fit3_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
+  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
+  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
+  column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  kable_styling(full_width = F)
+```
+
+
 ### Tau-equivalence
 
 ```{r,results='hold'}
@@ -293,6 +390,33 @@ kable(anova(fit3_o,fit3_o.tau),
 <!-- > **NOTE:** El modelo con igualdad de cargas factoriales (en Percepción meritocracia) no deteriora significativamente el ajuste del modelo. -->
 
 > **NOTE:** The model with equal factor loadings (in Meritocracy Perception) does not significantly deteriorate the model fit.
+
+```{r tabla03, include=FALSE}
+polyw03tau<- poly(sjlabelled::remove_all_labels(dat03),
+               digits = 2,
+               triangle = "l",
+               fade.ns = F,
+               remove.spaces = T,
+               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
+matpolyw03tau <- as.data.frame(read_html(x = polyw03tau[["page.content"]]) %>% html_table(fill=FALSE)) 
+matpolyw03tau <- matpolyw03tau[-c(9),] 
+
+colnames(matpolyw03tau) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
+load03tau<- data.frame(round(cbind(inspect(fit3_c.tau,what="std")$lambda,inspect(fit3_o.tau,what="std")$lambda),digits = 2))
+load03tau[load03tau==c(0.00)] <- NA; names(load03tau) <- c(1:4,1:4)
+
+table03tau<- bind_cols(x = matpolyw03tau,y = load03tau) 
+# %>% mutate(vars=labs)
+
+kable(table03tau,escape = FALSE,align = "l",col.names = cnametab) %>% 
+  footnote(general = paste0(paste0("$N$= ",nobs(fit3_c.tau)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
+  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
+  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
+  column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  kable_styling(full_width = F)
+```
+
 
 ## Complete sample (N=`r dim(dat04)[1]`)
 
@@ -341,9 +465,113 @@ kable(left_join(x = standardizedsolution(fit4_c ) %>% filter(op=="=~") %>% selec
       format = "markdown",digits = 2,col.names = cnames, caption = "Factor loadings")
 ```
 
+```{r tabla04, include=FALSE}
+polyw04<- poly(sjlabelled::remove_all_labels(dat04[,-c(1)]),
+               digits = 2,
+               triangle = "l",
+               fade.ns = F,
+               remove.spaces = T,
+               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
+matpolyw04 <- as.data.frame(read_html(x = polyw04[["page.content"]]) %>% html_table(fill=FALSE)) 
+matpolyw04 <- matpolyw04[-c(9),] 
+
+colnames(matpolyw04) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
+load04<- data.frame(round(cbind(inspect(fit4_c,what="std")$lambda,inspect(fit4_o,what="std")$lambda),digits = 2))
+load04[load04==c(0.00)] <- NA; names(load04) <- c(1:4,1:4)
+
+table04<- bind_cols(x = matpolyw04,y = load04) 
+# %>% mutate(vars=labs)
+
+kable(table04,escape = FALSE,align = "l",col.names = cnametab) %>% 
+  footnote(general = paste0(paste0("$N$= ",nobs(fit4_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
+  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
+  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
+  column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  kable_styling(full_width = F)
+```
+
+# Tables 
+
+```{r tb_desc-corr}
+load04<- data.frame(round(inspect(fit4_o,what="std")$lambda,digits = 2))
+load04[load04==c(0.00)] <- NA; names(load04) <- c(1:4)
+
+colnames(matpolyw04) <- c("Variable","A","B","C","D","E","F","G", "H") 
+
+sum04b  <- psych::describe(dat04[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
+table04b<- bind_cols(x = sum04b,y = matpolyw04) %>% select(Variable, everything()) %>% mutate(Variable=labs) %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
+
+cap01 <- "Descriptive statistic"
+sumdat04<- kable(table04b, escape = FALSE,align = "l",linesep = "", caption = cap01) %>% 
+           column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
+           footnote(general = paste0(paste0("$N$= ","2141"),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>% 
+           add_header_above(header = c(" "=5,"Polychoric correlations"= 8)) %>% 
+           kable_styling(full_width = TRUE,font_size = 8,position = "center");sumdat04
+save(sumdat04,file = "output/tables/sumdat04.RData")
+```
+
+```{r tb_loads-fitm}
+tb.load<- data.frame(round(cbind(inspect(fit1_o,what="std")$lambda,
+                                 inspect(fit2_o,what="std")$lambda,
+                                 inspect(fit3_o,what="std")$lambda),
+                           digits = 2))
+tb.load[tb.load==c(0.00)] <- NA; names(tb.load) <- c(paste0("M1.",1:4),paste0("M2.",1:4),paste0("M3.",1:4))
+
+for (i in names(tb.load)) {
+  # tb.load[,i] <- sjlabelled::as_character(tb.load[,i])
+  tb.load[,i] <- sprintf(tb.load[,i], fmt = '%#.2f')
+}
+tb.load[tb.load=="NA"] <- ""
+
+#-------#
+fm01<- data.frame(t(data.frame(fitmeasures(fit1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm01) ="M1.1"
+fm02<- data.frame(t(data.frame(fitmeasures(fit2_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm02) ="M2.1"
+fm03<- data.frame(t(data.frame(fitmeasures(fit3_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm03) ="M3.1"
+
+#------chi2, df------#
+fm04<- round(rbind(fm01,fm02,fm03),3)
+fm04.1 <- fm04 %>% select(chisq.scaled,df) 
+fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 2)
+fm04.1$df <- round(x = fm04.1$df,digits = 0)
+fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
+fm04.1 <- select(fm04.1,"chi2df")
+for (i in names(fm04.1)) {
+  fm04.1[,i] <- as.character(fm04.1[,i])
+}
+
+#------CFI, RMSEA------#
+fm04.2 <- fm04 %>% select(cfi.scaled,rmsea.scaled) 
+for (i in names(fm04.2)) {
+  fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
+}
+
+fm.df      <- bind_cols(fm04.1,fm04.2)
+fm.df$nobs <- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o)) 
+fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("M1.1","M2.1","M3.1")
+#------ merge ------#
+tb.fm<- bind_rows(tb.load,fm.df)
+tb.fm<- tb.fm %>% mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>% select(vars,everything())
+#--table---#
+tb.col  <- c("Variables",1:4,1:4,1:4)
+tb.foot <- paste0("; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
+tb.caption <- "Factor loadings and fit measures" 
+
+tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
+          kable_styling(full_width = F,font_size = 9) %>% 
+          column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
+          column_spec(column = 2:13,width = "1cm",width_min = "1.3cm",include_thead = TRUE) %>% 
+          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
+          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12)) %>% 
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01
+save(tb.fm01,file = "output/tables/tb.fm01.RData")
+```
+
 # Summary
 
-## Correlations 
+## Correlations plots
 
 ```{r compare corr, echo=TRUE, out.width=c('33%', '33%', '33%'),fig.cap="Mode 01, 02 and 03",fig.show='hold'}
 corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
@@ -351,7 +579,7 @@ corrplot(cor02$rho,method = "color", type = "upper", tl.col = "black", addCoef.c
 corrplot(cor03$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
-## Measurement model 
+## Measurement model
 
 ```{r semPlot, fig.cap="Measurement model PPM-S", fig.height=8, fig.width=12}
 model01 <- 'perc_merit=~perc_effort+perc_talent
@@ -363,7 +591,7 @@ plot01 <- cfa(model = model01,data = dat01,estimator="MLR",std.lv=TRUE)
 
 nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception networks",
               "Preference effort","Preference talent","Preference rich family","Preference networks",
-              "Percepction meritocratic","Percepction non meritocratic","Preference meritocratic","Preference non meritocratic")
+              "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
 
 semPaths(plot01,
          style = "lisrel",
@@ -385,8 +613,15 @@ semPaths(plot01,
          asize = 3, #arrow size
          edge.width =1,
          sizeMan=5,
-         sizeLat = 10)
+         sizeLat = 10,
+         filetype ="png",
+         width = 12,
+         height= 10,
+         filename = "output/images/meas01")
 ```
+
+
+![](../output/images/meas01.png)
 
 ## Fit indices wave 01
 ```{r}
@@ -414,7 +649,7 @@ sumtable01<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, 
 
 # Save sumamry table wave 01------------------------------#
 # as_image(sumtable01,file = "output/sumtablew01.png")
-save_kable(sumtable01,file = "output/tables/sumtablew01.html",self_contained = FALSE)
+# save_kable(sumtable01,file = "output/tables/sumtablew01.html",self_contained = FALSE)
 ```
 
 ## Other analyses
@@ -425,10 +660,10 @@ save_kable(sumtable01,file = "output/tables/sumtablew01.html",self_contained = F
 
 ```{r}
 model04 <- '
-perc_merit =~ perc_effort+perc_talent
-perc_nmerit=~perc_wpart +perc_netw
-pref_merit =~ pref_effort+pref_talent
-pref_nmerit=~pref_wpart +pref_netw'
+perc_merit =~ perc_effort + perc_talent
+perc_nmerit=~ perc_wpart  + perc_netw
+pref_merit =~ pref_effort + pref_talent
+pref_nmerit=~ pref_wpart  + pref_netw'
 
 fit4_c_mg <- cfa(model = model04,data = dat04,estimator="MLR",std.lv=FALSE,group = "grupo") # Continuous/ estimator ML Robust
 fit4_o_mg <- cfa(model = model04,data = dat04,ordered = c("perc_effort","perc_talent",
@@ -439,10 +674,14 @@ fit4_o_mg <- cfa(model = model04,data = dat04,ordered = c("perc_effort","perc_ta
 kable(rbind(Continuous=fitmeasures(fit4_c_mg)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
             Ordinal=  fitmeasures(fit4_o_mg)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
       format = "markdown",digits = 3,caption = "Fit indices")
+gr01=standardizedsolution(fit4_c_mg) %>% filter(op=="=~") %>% select(group,lhs,rhs,est.std)
+gr02=standardizedsolution(fit4_o_mg) %>% filter(op=="=~") %>% select(group,lhs,rhs,est.std)
+gr01$group=dplyr::recode(gr01$group, `1` = "mod03", `2` = "mod02", `3` = "mod01")
+gr02$group=dplyr::recode(gr02$group, `1` = "mod03", `2` = "mod02", `3` = "mod01")
 
 cnames <- c("Grupo","Factor","Indicator","Loading (MLR)","Loading (DWLS)")
-kable(left_join(x = standardizedsolution(fit4_c_mg) %>% filter(op=="=~") %>% select(group,lhs,rhs,est.std),
-                y = standardizedsolution(fit4_o_mg) %>% filter(op=="=~") %>% select(group,lhs,rhs,est.std),
+kable(left_join(x =gr01 ,
+                y =gr02 ,
                 c("group","lhs","rhs")),
       format = "markdown",digits = 2,col.names = cnames,caption = "Factor loadings by group")
 ```
@@ -477,8 +716,6 @@ kable(left_join(x = standardizedsolution(fit4a_c) %>% filter(op=="=~") %>% selec
       format = "markdown",digits = 2,col.names = cnames,caption = "Factor loadings")
 ```
 
-<!-- > **NOTE:** Cargas factoriales de segundo orden son bajas. El ajuste del modelo no es bueno. -->
-
 > **NOTE:** Second order factor loads are low. The fit of the model is not good.
 
 #### SO-CFA Meritocratic y Non-meritocratic
@@ -506,371 +743,361 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
       format = "markdown",digits = 2,col.names = cnames,caption = "Factor loadings")
 ```
 
-<!-- > **NOTE:** El modelo estimado con MLR con factores de segundo orden "meritocracia/ no meritocracia" no converge. EL modelo estimado a través de DWLS converge, posee cargas muy bajas y una muy alta (merit~pref_merit). Fit es malo (RMSEA >.10) -->
-
 > **NOTE:**  The model estimated with MLR with second order factors "meritocracy / non meritocracy" does not converge. The model estimated through DWLS converges, has very low loads and a very high one (merit ~ pref_merit). Fit is bad (RMSEA> .10)
 
 
-# Wave 02 {.tabset .tabset-fade .tabset-pills}
-
-
-Each sample correspond to one of the three conditions generated by the randomized assignment.
-
-1. **Control group:** the group that has been assigned to the control group (placebo condition)
-
-2. **Poverty condition sample** the group that has been assigned to the Poverty treatment condition.
-
-3. **Inequality condition sample:** the group that has been assigned to the Inequality treatment condition.
-
-4. **Complete sample:** Control, Poverty and Inequality treatment.
-
-
-```{r}
-data02 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola2.sav",verbose = FALSE)
-load(file = "input/data/proc/datawide.RData")
-dat01 <- data02 %>% select(starts_with("meritv03_p"))
-```
-
-**ATE on observed indicators**
-
-```{r, out.width="75%",results='asis'}
-m01<- lm(perc_effort_w2~treat,data = wide01)
-m02<- lm(perc_talent_w2~treat,data = wide01)
-m03<- lm(perc_wpart_w2~treat, data = wide01)
-m04<- lm(perc_netw_w2~treat,  data = wide01)
-#--------------------------------------------#
-m05<- lm(pref_effort_w2~treat,data = wide01)
-m06<- lm(pref_talent_w2~treat,data = wide01)
-m07<- lm(pref_wpart_w2 ~treat, data = wide01)
-m08<- lm(pref_netw_w2  ~treat,  data = wide01)
-#--------------------------------------------#
-stargazer::stargazer(m01,m02,m03,m04,type = "html")
-stargazer::stargazer(m05,m06,m07,m08,type = "html")
-```
-
-<!-- > **NOTE**: Los tratamientos de información no se asocian de manera estadísticamente significativa con ninguno de los Indicatores de la escala de meritocracia.   -->
-
-> **NOTE**: There are no statistically significant effects of the treatment conditions on the observed indicators of the meritocracy scale.
-
-
-## Control group
-
-```{r}
-w02con <- data02 %>% filter(FL_6_DO_Control==1) %>% select(starts_with("meritv03_p"))
-```
-
-```{r results='asis'}
-stargazer(w02con,type = "html",
-          title = "Descriptive statistics",
-          font.size = "small",
-          median = TRUE,
-          header=FALSE,
-          digit.separator = "",
-          digits = 2)
-```
-
-```{r}
-corw02_1<-polychoric(w02con)
-rownames(corw02_1$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(corw02_1$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
-corrplot(corw02_1$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
-```
-
-
-```{r,results='hold'}
-model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
-
-fitw02a_c <- cfa(model = model03,data = w02con,estimator="MLR") # Continuous/ estimator ML Robust
-
-fitw02a_o <- cfa(model = model03,data = w02con,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                           "meritv03_perc_wpart","meritv03_perc_netw",
-                                                           "meritv03_pref_effort","meritv03_pref_talent",
-                                                           "meritv03_pref_wpart","meritv03_pref_netw"))
-#---------------------------------------------------#
-kable(rbind(Continuous=fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-            Ordinal= fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
-      format = "markdown",digits = 3)
-
-cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
-kable(left_join(x = standardizedsolution(fitw02a_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw02a_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                c("lhs","rhs")),
-      format = "markdown",digits = 2,col.names = cnames)
-```
-
-## Poverty condition
-
-```{r}
-w02pob <- data02 %>% filter(FL_6_DO_Tratamiento==1) %>% select(starts_with("meritv03_p"))
-```
-
-```{r results='asis'}
-stargazer(w02pob,type = "html",
-          title = "Descriptive statistics",
-          font.size = "small",
-          median = TRUE,
-          header=FALSE,
-          digit.separator = "",
-          digits = 2)
-```
-
-```{r}
-corw02_2<-polychoric(w02pob)
-rownames(corw02_2$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(corw02_2$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
-corrplot(corw02_2$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
-```
-
-```{r,results='hold'}
-model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
-
-fitw02b_c <- cfa(model = model03,data = w02pob,estimator="MLR") # Continuous/ estimator ML Robust
-
-fitw02b_o <- cfa(model = model03,data = w02pob,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                           "meritv03_perc_wpart","meritv03_perc_netw",
-                                                           "meritv03_pref_effort","meritv03_pref_talent",
-                                                           "meritv03_pref_wpart","meritv03_pref_netw"))
-
-#---------------------------------------------------#
-kable(rbind(Continuous=fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-            Ordinal= fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
-      format = "markdown",digits = 3)
-
-cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
-kable(left_join(x = standardizedsolution(fitw02b_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw02b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                c("lhs","rhs")),
-      format = "markdown",digits = 2,col.names = cnames)
-```
-
-## Inequality condition
-
-```{r}
-w02des <- data02 %>% filter(FL_6_DO_Tratamiento_desigualdad==1) %>% select(starts_with("meritv03_p"))
-```
-
-```{r results='asis'}
-stargazer(w02des,type = "html",
-          title = "Descriptive statistics",
-          font.size = "small",
-          median = TRUE,
-          header=FALSE,
-          digit.separator = "",
-          digits = 2)
-```
-
-```{r}
-corw02_3<-polychoric(w02des)
-rownames(corw02_3$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(corw02_3$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
-corrplot(corw02_3$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
-```
-
-```{r,results='hold'}
-model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
-
-fitw02c_c <- cfa(model = model03,data = w02des,estimator="MLR") # Continuous/ estimator ML Robust
-
-fitw02c_o <- cfa(model = model03,data = w02des,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                           "meritv03_perc_wpart","meritv03_perc_netw",
-                                                           "meritv03_pref_effort","meritv03_pref_talent",
-                                                           "meritv03_pref_wpart","meritv03_pref_netw"))
-#---------------------------------------------------#
-kable(rbind(Continuous=fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-            Ordinal= fitmeasures(fitw02c_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
-      format = "markdown",digits = 3)
-
-cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
-kable(left_join(x = standardizedsolution(fitw02c_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw02c_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                c("lhs","rhs")),
-      format = "markdown",digits = 2,col.names = cnames)
-```
-
-## Complete sample
-
-```{r results='asis'}
-stargazer(dat01,type = "html",
-          title = "Descriptive statistics",
-          font.size = "small",
-          median = TRUE,
-          header=FALSE,
-          digit.separator = "",
-          digits = 2)
-```
-
-```{r}
-dat01cor<- select(dat01,meritv03_perc_effort,meritv03_perc_talent,
-                        meritv03_perc_wpart,meritv03_perc_netw,
-                        meritv03_pref_effort,meritv03_pref_talent,
-                        meritv03_pref_wpart,meritv03_pref_netw)
-cor01<-polychoric(dat01cor)
-rownames(cor01$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw")
-colnames(cor01$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)")
-corrplot(cor01$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
-```
-
-```{r,results='hold'}
-model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
-
-fitw02_c <- cfa(model = model03,data = dat01,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
-
-fitw02_o <- cfa(model = model03,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                         "meritv03_perc_wpart","meritv03_perc_netw",
-                                                         "meritv03_pref_effort","meritv03_pref_talent",
-                                                         "meritv03_pref_wpart","meritv03_pref_netw"))
-#---------------------------------------------------#
-kable(rbind(Continuous=fitmeasures(fitw02_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-            Ordinal= fitmeasures(fitw02_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
-      format = "markdown",digits = 3)
-
-cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
-kable(left_join(x = standardizedsolution(fitw02_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw02_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                c("lhs","rhs")),
-      format = "markdown",digits = 2,col.names = cnames)
-```
-
-> **NOTE**: El ajuste de muestra completa en wave 02 con estimator MLR (robusto) es bastante bueno (CFI, RMSEA). El ajuste con DWLS es bastante bueno, CFI mejora, RMSEA aumenta un poco (0.59).
-
-### Second order CFA
-
-```{r}
-modw2 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw
-merit =~perc_merit+pref_merit
-nmerit=~perc_nmerit+pref_nmerit'
-
-# mod2_merit_c <- cfa(model = modw2,data = dat01) # Continuous/ estimator ML Robust
-
-mod2_merit_o <- cfa(model = modw2,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                           "meritv03_perc_wpart","meritv03_perc_netw",
-                                                           "meritv03_pref_effort","meritv03_pref_talent",
-                                                           "meritv03_pref_wpart","meritv03_pref_netw"))
-
-#---------------------------------------------------#
-kable(rbind(Ordinal=fitmeasures(mod2_merit_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
-      format = "markdown",digits = 3)
-
-cnames <- c("Factor","Indicator","Loading (DWLS)")
-kable(standardizedsolution(mod2_merit_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-      format = "markdown",digits = 2,col.names = cnames)
-```
-
-<!-- > * Factor de segundo orden usando MLR no converge. -->
-<!-- > * Factor de segundo orden usando DWLS converge, pero las cargas no son buenas y el ajuste tampoco. -->
-
-> * Second order factor using MLR does not converge.
-> * Second order factor using DWLS converges, but loads are not good and the fit is not.
-
-# Summary fit indices wave 02
-
-```{r}
-sum_fitw02<- bind_rows(fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02_c)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw02_o)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],)
-
-sum_fitw02$mod <- c("Model 1","Model 1","Model 2","Model 2","Model 3","Model 3","Model 4","Model 4")
-sum_fitw02$est <- c("MLR","DWLS","MLR","DWLS","MLR","DWLS","MLR","DWLS")
-sum_fitw02 <- select(sum_fitw02,mod,est,everything())
-colnames <- c("Model","Estimator","$\\chi^2$","df","CFI","CFI.sca","CFI.rob","RMSEA","RMSEA.sca","RMSEA.rob")
-
-
-kable(sum_fitw02,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 02", col.names = colnames, escape = F) %>%
-  kable_styling(full_width = F) %>%
-  collapse_rows(columns = 1,valign = "middle") %>%
-  footnote(number = c("Model 1: Control group sample",
-                      "Model 2: Poverty treatment condition sample",
-                      "Model 3: Inequality treatment condition sample",
-                      "Model 4: Complete sample"))
-```
-
-# Wave 03
-
-```{r}
-data03 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola3.sav",verbose = FALSE)
-dat01 <- data03 %>% select(starts_with("meritv03_p"))
-```
-
-```{r echo=TRUE,results='asis'}
-stargazer(dat01,type = "html",
-          title = "Descriptive statistics",
-          font.size = "small",
-          median = TRUE,
-          header=FALSE,
-          digit.separator = "",
-          digits = 2)
-```
-
-
-```{r}
-model03 <- '
-perc_merit=~meritv03_perc_effort+meritv03_perc_talent
-perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw
-pref_merit=~meritv03_pref_effort+meritv03_pref_talent
-pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw'
-
-fitw03c_c <- cfa(model = model03,data = dat01,estimator="MLR") # Continuous/ estimator ML Robust
-
-fitw03c_o <- cfa(model = model03,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent",
-                                                          "meritv03_perc_wpart","meritv03_perc_netw",
-                                                          "meritv03_pref_effort","meritv03_pref_talent",
-                                                          "meritv03_pref_wpart","meritv03_pref_netw"))
-#---------------------------------------------------#
-kable(rbind(Continuous=fitmeasures(fitw03c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-            Ordinal= fitmeasures(fitw03c_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
-      format = "markdown",digits = 3)
-
-cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
-kable(left_join(x = standardizedsolution(fitw03c_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                y = standardizedsolution(fitw03c_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
-                c("lhs","rhs")),
-      format = "markdown",digits = 2,col.names = cnames)
-```
-**summary**
-
-<!-- > * Ajuste usando estimator MLR  es bueno (CFI = 0.971, RMSEA = 0.052). El chi2 (robusto) es 62.421   -->
-<!-- > * Ajuste usando estimator DWLS es bueno (CFI = 0.974, RMSEA = 0.067). El chi2 (robusto) es 106.111 -->
-
-> * Adjustment using MLR estimator is good (CFI = 0.971, RMSEA = 0.052). The chi2 (robust) is 62,421
-> * Fit using DWLS estimator is good (CFI = 0.974, RMSEA = 0.067). The chi2 (robust) is 106,111
-
-# Summary fit indices wave 03
-
-```{r}
-sum_fitw03<- bind_rows(fitmeasures(fitw03c_c)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
-                       fitmeasures(fitw03c_o)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")])
-
-sum_fitw03$mod <- c("Model 1","Model 1")
-sum_fitw03$est <- c("Continuous","Ordinal")
-sum_fitw03 <- select(sum_fitw03,mod,est,everything())
-
-kable(sum_fitw03,digits = 3,format = "html",row.names = F,booktabs=T,caption = "Summary fit indices wave 03") %>%
-  kable_styling(full_width = F) %>%
-  collapse_rows(columns = 1,valign = "middle") %>%
-  footnote(number = c("Model 1: Complete sample"))
-```
+<!-- # Wave 02 {.tabset .tabset-fade .tabset-pills} -->
+
+
+<!-- Each sample correspond to one of the three conditions generated by the randomized assignment. -->
+
+<!-- 1. **Control group:** the group that has been assigned to the control group (placebo condition) -->
+
+<!-- 2. **Poverty condition sample** the group that has been assigned to the Poverty treatment condition. -->
+
+<!-- 3. **Inequality condition sample:** the group that has been assigned to the Inequality treatment condition. -->
+
+<!-- 4. **Complete sample:** Control, Poverty and Inequality treatment. -->
+
+
+<!-- ```{r} -->
+<!-- data02 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola2.sav",verbose = FALSE) -->
+<!-- load(file = "input/data/proc/datawide.RData") -->
+<!-- dat01 <- data02 %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+
+<!-- **ATE on observed indicators** -->
+
+<!-- ```{r, out.width="75%",results='asis'} -->
+<!-- m01<- lm(perc_effort_w2~treat,data = wide01) -->
+<!-- m02<- lm(perc_talent_w2~treat,data = wide01) -->
+<!-- m03<- lm(perc_wpart_w2~treat, data = wide01) -->
+<!-- m04<- lm(perc_netw_w2~treat,  data = wide01) -->
+<!-- #--------------------------------------------# -->
+<!-- m05<- lm(pref_effort_w2~treat,data = wide01) -->
+<!-- m06<- lm(pref_talent_w2~treat,data = wide01) -->
+<!-- m07<- lm(pref_wpart_w2 ~treat, data = wide01) -->
+<!-- m08<- lm(pref_netw_w2  ~treat,  data = wide01) -->
+<!-- #--------------------------------------------# -->
+<!-- stargazer::stargazer(m01,m02,m03,m04,type = "html") -->
+<!-- stargazer::stargazer(m05,m06,m07,m08,type = "html") -->
+<!-- ``` -->
+
+<!-- > **NOTE**: There are no statistically significant effects of the treatment conditions on the observed indicators of the meritocracy scale. -->
+
+
+<!-- ## Control group -->
+
+<!-- ```{r} -->
+<!-- w02con <- data02 %>% filter(FL_6_DO_Control==1) %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+
+<!-- ```{r results='asis'} -->
+<!-- stargazer(w02con,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- corw02_1<-polychoric(w02con) -->
+<!-- rownames(corw02_1$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(corw02_1$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(corw02_1$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+
+
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+
+<!-- fitw02a_c <- cfa(model = model03,data = w02con,estimator="MLR") # Continuous/ estimator ML Robust -->
+
+<!-- fitw02a_o <- cfa(model = model03,data = w02con,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02a_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02a_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+
+<!-- ## Poverty condition -->
+
+<!-- ```{r} -->
+<!-- w02pob <- data02 %>% filter(FL_6_DO_Tratamiento==1) %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+
+<!-- ```{r results='asis'} -->
+<!-- stargazer(w02pob,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- corw02_2<-polychoric(w02pob) -->
+<!-- rownames(corw02_2$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(corw02_2$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(corw02_2$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+
+<!-- fitw02b_c <- cfa(model = model03,data = w02pob,estimator="MLR") # Continuous/ estimator ML Robust -->
+
+<!-- fitw02b_o <- cfa(model = model03,data = w02pob,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02b_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+
+<!-- ## Inequality condition -->
+
+<!-- ```{r} -->
+<!-- w02des <- data02 %>% filter(FL_6_DO_Tratamiento_desigualdad==1) %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+
+<!-- ```{r results='asis'} -->
+<!-- stargazer(w02des,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- corw02_3<-polychoric(w02des) -->
+<!-- rownames(corw02_3$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(corw02_3$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(corw02_3$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+
+<!-- fitw02c_c <- cfa(model = model03,data = w02des,estimator="MLR") # Continuous/ estimator ML Robust -->
+
+<!-- fitw02c_o <- cfa(model = model03,data = w02des,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02c_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02c_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02c_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+
+<!-- ## Complete sample -->
+
+<!-- ```{r results='asis'} -->
+<!-- stargazer(dat01,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- dat01cor<- select(dat01,meritv03_perc_effort,meritv03_perc_talent, -->
+<!--                         meritv03_perc_wpart,meritv03_perc_netw, -->
+<!--                         meritv03_pref_effort,meritv03_pref_talent, -->
+<!--                         meritv03_pref_wpart,meritv03_pref_netw) -->
+<!-- cor01<-polychoric(dat01cor) -->
+<!-- rownames(cor01$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(cor01$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(cor01$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+
+<!-- fitw02_c <- cfa(model = model03,data = dat01,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust -->
+
+<!-- fitw02_o <- cfa(model = model03,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                          "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                          "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                          "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+
+<!-- > **NOTE**: El ajuste de muestra completa en wave 02 con estimator MLR (robusto) es bastante bueno (CFI, RMSEA). El ajuste con DWLS es bastante bueno, CFI mejora, RMSEA aumenta un poco (0.59). -->
+
+<!-- ### Second order CFA -->
+
+<!-- ```{r} -->
+<!-- modw2 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw -->
+<!-- merit =~perc_merit+pref_merit -->
+<!-- nmerit=~perc_nmerit+pref_nmerit' -->
+
+<!-- # mod2_merit_c <- cfa(model = modw2,data = dat01) # Continuous/ estimator ML Robust -->
+
+<!-- mod2_merit_o <- cfa(model = modw2,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Ordinal=fitmeasures(mod2_merit_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+
+<!-- cnames <- c("Factor","Indicator","Loading (DWLS)") -->
+<!-- kable(standardizedsolution(mod2_merit_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+
+<!-- > * Second order factor using MLR does not converge. -->
+<!-- > * Second order factor using DWLS converges, but loads are not good and the fit is not. -->
+
+<!-- # Summary fit indices wave 02 -->
+
+<!-- ```{r} -->
+<!-- sum_fitw02<- bind_rows(fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02_c)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02_o)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],) -->
+
+<!-- sum_fitw02$mod <- c("Model 1","Model 1","Model 2","Model 2","Model 3","Model 3","Model 4","Model 4") -->
+<!-- sum_fitw02$est <- c("MLR","DWLS","MLR","DWLS","MLR","DWLS","MLR","DWLS") -->
+<!-- sum_fitw02 <- select(sum_fitw02,mod,est,everything()) -->
+<!-- colnames <- c("Model","Estimator","$\\chi^2$","df","CFI","CFI.sca","CFI.rob","RMSEA","RMSEA.sca","RMSEA.rob") -->
+
+
+<!-- kable(sum_fitw02,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 02", col.names = colnames, escape = F) %>% -->
+<!--   kable_styling(full_width = F) %>% -->
+<!--   collapse_rows(columns = 1,valign = "middle") %>% -->
+<!--   footnote(number = c("Model 1: Control group sample", -->
+<!--                       "Model 2: Poverty treatment condition sample", -->
+<!--                       "Model 3: Inequality treatment condition sample", -->
+<!--                       "Model 4: Complete sample")) -->
+<!-- ``` -->
+
+<!-- # Wave 03 -->
+
+<!-- ```{r} -->
+<!-- data03 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola3.sav",verbose = FALSE) -->
+<!-- dat01 <- data03 %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+
+<!-- ```{r echo=TRUE,results='asis'} -->
+<!-- stargazer(dat01,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+
+
+<!-- ```{r} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+
+<!-- fitw03c_c <- cfa(model = model03,data = dat01,estimator="MLR") # Continuous/ estimator ML Robust -->
+
+<!-- fitw03c_o <- cfa(model = model03,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                           "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                           "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                           "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw03c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw03c_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw03c_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw03c_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- **summary** -->
+
+<!-- > * Adjustment using MLR estimator is good (CFI = 0.971, RMSEA = 0.052). The chi2 (robust) is 62,421 -->
+<!-- > * Fit using DWLS estimator is good (CFI = 0.974, RMSEA = 0.067). The chi2 (robust) is 106,111 -->
+
+<!-- # Summary fit indices wave 03 -->
+
+<!-- ```{r} -->
+<!-- sum_fitw03<- bind_rows(fitmeasures(fitw03c_c)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw03c_o)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]) -->
+
+<!-- sum_fitw03$mod <- c("Model 1","Model 1") -->
+<!-- sum_fitw03$est <- c("Continuous","Ordinal") -->
+<!-- sum_fitw03 <- select(sum_fitw03,mod,est,everything()) -->
+
+<!-- kable(sum_fitw03,digits = 3,format = "html",row.names = F,booktabs=T,caption = "Summary fit indices wave 03") %>% -->
+<!--   kable_styling(full_width = F) %>% -->
+<!--   collapse_rows(columns = 1,valign = "middle") %>% -->
+<!--   footnote(number = c("Model 1: Complete sample")) -->
+<!-- ``` -->

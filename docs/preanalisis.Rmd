@@ -4,11 +4,11 @@ csl: "../input/bib/apa6.csl"
 bibliography: "../input/bib/zlibrary.bib"
 # css: "../input/bib/style.css"
 output:
-  pdf_document:
-    keep_tex: false
-    template: null
-    number_sections: true
-    toc: true
+  # pdf_document:
+  #   keep_tex: false
+  #   template: null
+  #   number_sections: true
+  #   toc: true
   html_document:
     number_sections: true
     toc: true
