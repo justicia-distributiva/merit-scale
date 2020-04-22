@@ -68,9 +68,7 @@ The first axis distinguishes between different types of "beliefs", using instead
 
 Regarding the selection of indicators, most of them some adaptations of previous items that where streamlined in order to a better fit with the specific dimensions. For meritocratic indicators we use effort and talent as the main components of the traditional concept of merit as defined by @young_rise_1962, whereas for non-meritocratic dimensions we use having rich parents and good contacts.
 
-
 ![](../input/images/tabla2.png)
-
 
 
 **Hypotheses**
@@ -87,15 +85,56 @@ Regarding the selection of indicators, most of them some adaptations of previous
 # Methodology
 
 ## Data
+The Netquest company ([website](www.netquest.cl)) applied the online survey during December and January. The online survey distributed by the company was scheduled on the platform Qualtrics ([website](www.Qualtrics.com)). The sample was selected from a non-probabilistic design in three large cities in Chile. The quota method based on age, sex and educational level was used. Quotas were generated based on the survey of the Public Studies Center (CEP, 2019), which has a high prestige in the country. A total sample of 2141 people was collected, excluding those who did not answer the questions on the scale and those who did not accept informed consent. The representativeness of the sample is not satisfactory because, although the proportion by age and sex is consistent with the estimates of the CEP survey, a bias towards high educational levels is evident (as detailed in Annex __X__). This limitation must be considered when making inferences about the population.
 
+
+> Anexo x
+
+|                     | Sample  |   CEP  |
+|---------------------|:-------:|:------:|
+| __gender__          |         |        |
+| Men                 | 49,82%  | 50,52% |
+| Women               | 50.18%  | 49,47% |
+| __Age__             |         |        |
+| 18 - 24             | 18,55%  | 18,17% |
+| 25 - 34             | 18,86%  | 17,48% |
+| 35 - 44             | 19.09%  | 19,98% |
+| 45 - 54             | 17,96%  | 19,23% |
+| 55 - or more        | 25,54%  | 25.11% |
+| __Education__       |         |        |
+| Primary  or less    | 2,93%   | 15,88% |
+| Hig school          | 43,23%  | 37,04% |
+| Non university      | 32,63%  | 28,93% |
+| university or more  | 21,21%  | 18,13% |
+
+
+Based on the recommendations of Wilson, Strite and Loiacono (2017) it has been considered pertinent transparency that the order the items of the meritocracy scale in the survey was random for a third of the sample. With the objective of evaluating the effect of the order of the indicators, the respondents were randomly divided into three groups as explained in __Diagram 1__. The scale was presented to the first group in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). The third group was presented with the scale with the randomized items to assess the possible bias produced by the order in which the questions are presented ((Budd, 1987) [https://psycnet.apa.org/record/1988-31448-001]; Davis and Venkatesh 1996; Goodhue and Loiacono, 2002; Schriesheim et al., 1989).
+
+>Diagrama de flujo de la encuesta, orden de la escala. 
 
 ## Variables
+
+The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into the 4 dimensions indicated. The questions are adaptations of the "get ahead" scale. the terms of of this scale were used (i.e talent, effort, contacts and wealthy parents) which are included in different investigations on meritocracy [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. Unlike this scale, this proposal adds the difference between perceptions and preferences. In addition, a comparative component is incorporated into the question that refers to differences between people with little or fed up with some attribute (e.g. effort, contacts).The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from "I completely agree" (5) to "I completely disagree"(1). According to the recommendations of Xia and Yang ([2018](https://link.springer.com/article/10.3758/s13428-018-1055-2)) for categorical data, we present below a table with the descriptive table and another with correlations between the items on the scale.
+
+
+```{r echo=FALSE,results='asis', warning=FALSE, message=FALSE}
+load(file = "../input/data/proc/dat04.RData")
+library(stargazer)
+stargazer(dat04,type = "html",
+          title = "Descriptive statistics",
+          font.size = "small",
+          median = TRUE,
+          header=FALSE,
+          digit.separator = "",
+          digits = 2,
+          covariate.labels = c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw"))
+```
 
 
 
 ## Methods
 
-
+We tested theoretical model of the scale of perceptions and preferences about meritocracy using confirmatory factor analysis (CFA) with for latent factor. CFA was conducted using the lavaan package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3). 
 
 # Results
 
