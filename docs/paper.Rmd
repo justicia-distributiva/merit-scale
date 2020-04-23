@@ -1,6 +1,6 @@
 ---
 title: "Perceptions and Preferences for Meritocracy"
-css: "../input/bib/style.css"
+css: "../input/css/custom.css"
 linestretch: '1.5'
 link-citations: yes
 output:
@@ -13,7 +13,7 @@ linkcolor: blue
 bibliography:
   - ../input/bib/EconomiaMoral.bib
   - ../input/bib/meritocracy.bib
-editor_options: 
+editor_options:
   chunk_output_type: console
 ---
 
@@ -55,6 +55,7 @@ a. Dimensionality: the item used by Mijs is part of an battery present in severa
 most meritocratic part of Michael Young’s equation, ‘Merit = Intelligence + Effort’, for the simple fact that intelligence itself is conditioned by a nonmeritocratic factor: who your parents happen to be" (p.5). This is a very strong assumption: effort would not depend on parents influence, and talent is not meritocratic. A similar approach only considering effort as the main element of meritocracy is taken by @solt_economic_2016. We suggest here is that questions such as whether talent is not meritocratic (or less meritocratic than effort) should be open to empirical scrutiny and not disregarded upfront based on scholars' assumptions. Besides, the use of single indicators for measurement a construct is based on the assumption of a measurement without error.
 
 b. Beliefs: the "get ahead" battery refers to "how important you think it is", considered by Mijs as a belief in meritocracy. Nevertheless, another version of this same battery asks about "how important you think it _should_ be". Which one of both is the "belief"? If we consider belief as related to a normative content, actually the more close version is the "should be", being the other one more close to the perception of the situation. Such distinction was already made by @duru-bellat_whos_2012, who used the item "how important should the number of years spent in education and training be in deciding how much money people ought to earn?" for "desired" meritocracy, whereas for "perceived" meritocracy they use two items: “Would you say that in your country, people are rewarded for their efforts?” and “... people are rewarded for their skills?”. Is the belief in meritocracy a perception or a preference? A comprehensive measurement should be in line with what @duru-bellat_whos_2012 did, in order to open up possibilities of analyzing whether perceptions and preferences are actually the same (i.e. correlation close to 1) or they are different aspects of the same phenomenon. As @son_hing_merit_2011-1 have pointed out, "People can believe that outcomes ought to be distributed on the basis of merit and yet vary in their perceptions of whether this is how society currently operates" (p. 435). Accordingly, we suggest that the use of the term belief is confusing, being more accurate to speak about meritocratic perceptions and preferences.
+Uso conjunto de percepción y preferencias.
 
 c. Non-meritocratic aspects: @mijs_paradox_2019 make reference to some non-meritocratic aspects as talent, letting this out of the measurement. A different approach was followed by @kunovich_systems_2007, who decide to include non-meritocratic elements in the measurement of meritocracy. Using the items’ battery listing a number of reasons about “How important should be in deciding pay...” (as @duru-bellat_whos_2012 for desired meritocracy), he decided that reasons as education and responsibility are meritocratic and pointed 1 if considered essential, whereas reasons such as having a family and children were pointed 1 if they were considered "not important at all" (i.e. reverse coded). A similar approach was taken by @newman_false_2015, reverse-coding non-meritocratic items, similarly to what occurs with the "Preference for the Merit Principle Scale" [@davey_preference_1999]. The assumption that meritocratic and non-meritocratic elements are the poles of the same continuum was analyzed by @reynolds_perceptions_2014 using the same "get ahead" perceptions' battery items. They consider education, ambition and hard work as meritocratic and other reasons such as wealthy family and right connections and non-mertitocratic. Nevertheless, despite making this distinction the author ends up substracting one dimension from the other, assuming that they are two poles of the same continuum as @kunovich_systems_2007 did.
 
@@ -98,13 +99,14 @@ Regarding the selection of indicators, most of them some adaptations of previous
 
 # Methodology
 
-The study design consist in two main stages. The first stage was the questionnaire design, in which we collect a serie of background variables, including sex, age and educational level. On this regard, one of the main aspects of our design is that we tested three different application modalities, in order to observe how the display order of the indicators could affect the model fit. We decide to randomize the assignment of the subject to each application modality, and as a result we obtain three groups within the full sample. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. The second combination corresponds to the group in which the questions are displayed following a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions. The figure below describes the complete survey flow.        
+The study design consist in two main stages. The first stage was the questionnaire design, in which we collect a serie of background variables, including sex, age and educational level. On this regard, one of the main aspects of our design is that we tested three different application modalities, in order to observe how the display order of the indicators could affect the model fit. We decide to randomize the assignment of the subject to each application modality, and as a result we obtain three groups within the full sample. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. The second combination corresponds to the group in which the questions are displayed following a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions. The figure below describes the complete survey flow.
 
 ![Figure: Study design](../input/images/app_mod.png)
 
 To contact the subjects, we followed an online programmed survey approach using _Qualtrics_, and the field work was conducted by _Netquest_, which is a company with wide experience applying online survey, and for the case of Chile, they have a consolidated pool of individuals that systematically respond online surveys. On this regard, the company have their own incentive system, in which the subjects accumulates specific currencies that they can exchange for a wide range of goods.
 
 ## Data
+
 The Netquest company ([website](www.netquest.cl)) applied the online survey during December and January. The online survey distributed by the company was scheduled on the platform Qualtrics ([website](www.Qualtrics.com)). The sample was selected from a non-probabilistic design in three large cities in Chile. The quota method based on age, sex and educational level was used. Quotas were generated based on the survey of the Public Studies Center (CEP, 2019), which has a high prestige in the country. A total sample of 2141 people was collected, excluding those who did not answer the questions on the scale and those who did not accept informed consent. The representativeness of the sample is not satisfactory because, although the proportion by age and sex is consistent with the estimates of the CEP survey, a bias towards high educational levels is evident (as detailed in Annex __X__). This limitation must be considered when making inferences about the population.
 
 
@@ -131,15 +133,14 @@ The Netquest company ([website](www.netquest.cl)) applied the online survey duri
 
 Based on the recommendations of Wilson, Strite and Loiacono (2017) it has been considered pertinent transparency that the order the items of the meritocracy scale in the survey was random for a third of the sample. With the objective of evaluating the effect of the order of the indicators, the respondents were randomly divided into three groups as explained in __Diagram 1__. The scale was presented to the first group in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). The third group was presented with the scale with the randomized items to assess the possible bias produced by the order in which the questions are presented ((Budd, 1987) [https://psycnet.apa.org/record/1988-31448-001]; Davis and Venkatesh 1996; Goodhue and Loiacono, 2002; Schriesheim et al., 1989).
 
->Diagrama de flujo de la encuesta, orden de la escala. 
+!!! Diagrama de flujo de la encuesta, orden de la escala.
 
 ## Variables
 
 The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into the 4 dimensions indicated. The questions are adaptations of the "get ahead" scale. the terms of of this scale were used (i.e talent, effort, contacts and wealthy parents) which are included in different investigations on meritocracy [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. Unlike this scale, this proposal adds the difference between perceptions and preferences. In addition, a comparative component is incorporated into the question that refers to differences between people with little or fed up with some attribute (e.g. effort, contacts).The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from "I completely agree" (5) to "I completely disagree"(1). According to the recommendations of Xia and Yang ([2018](https://link.springer.com/article/10.3758/s13428-018-1055-2)) for categorical data, we present below a table with the descriptive table and another with correlations between the items on the scale.
-=======
-The field work was conducted during November and December of 2019 in Chile, obtaining a final sample of 2200 individuals, but considering that we use cases with complete information, the final analytical sample has 2141 observations.
 
-## Variables
+
+The field work was conducted during November and December of 2019 in Chile, obtaining a final sample of 2200 individuals, but considering that we use cases with complete information, the final analytical sample has 2141 observations.
 
 <!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
 
@@ -149,7 +150,7 @@ load(file = "output/tables/sumdat04.RData");sumdat04
 
 
 ```{r echo=FALSE,results='asis', warning=FALSE, message=FALSE}
-load(file = "../input/data/proc/dat04.RData")
+load(file = "input/data/proc/dat04.RData")
 library(stargazer)
 stargazer(dat04,type = "html",
           title = "Descriptive statistics",
@@ -170,7 +171,7 @@ MGCFA
 
 ## Methods
 
-We tested theoretical model of the scale of perceptions and preferences about meritocracy using confirmatory factor analysis (CFA) with for latent factor. CFA was conducted using the lavaan package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3). 
+We tested theoretical model of the scale of perceptions and preferences about meritocracy using confirmatory factor analysis (CFA) with for latent factor. CFA was conducted using the lavaan package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3).
 
 # Results
 
@@ -275,6 +276,10 @@ fit.fuer 58 35732 36124 129.94     10.546       8     0.2288
 fit.str  74 35772 36079 202.02     72.081      16  4.298e-09 ***
 
 El análisis de invarianza longitudinal muestra resultados moderadamente buenos. hay equivalencia configuracional,  métrica, pero no escalar escalar
+
+# Conclusiones
+
+uso conjunto percepciones-preferencias
 
 <div/>
 

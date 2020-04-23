@@ -3,8 +3,6 @@ output_dir: "." # Esto es para que se compile en el rootdir
 navbar:
   title: "Measuring meritocratic perceptions and beliefs"
   right:
-    - text: "Pre-analisis plan"
-      href: "preanalisis.html"
     - text: "Data preparation"
       href: "prod_prep-data-A.html"
     - text: "Analysis"

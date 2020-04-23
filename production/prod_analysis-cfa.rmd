@@ -593,6 +593,8 @@ nodeNames <-c("Perception effort","Perception talent","Perception rich family","
               "Preference effort","Preference talent","Preference rich family","Preference networks",
               "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
 
+dir.create("output/images")
+
 semPaths(plot01,
          style = "lisrel",
          fade=FALSE,
