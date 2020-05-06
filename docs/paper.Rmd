@@ -103,19 +103,19 @@ The data was obtained through an online questionnaire which was part of a larger
 
 The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into 4 dimensions referred above: Perceptions (meritocratic/nonmeritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which are mostly used for operationalizing meritocracy in previous empirical studies [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from "Completely disagree"(1) to "Completely agree" (5).
 
-![](../input/images/tabla2.png)
+![Tabla 2: Dimensiones](../input/images/tabla2.png)
 
-XX ojo con esta imagen, titularla en el documento, no en la imagen misma
+6 XX ojo con esta imagen, titularla en el documento, no en la imagen misma
 
 ## Administration sets
 
 With the objective of evaluating the effect of the order of the indicators, the respondents were randomly divided into three groups as explained in __Diagram 1__. The scale was presented to the first group in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). Finally, in the third group the items were completely randomized.
 
-XX agregar número de sujetos por grupo
+7 XX agregar número de sujetos por grupo
 
-XX referenciar y titular figuras y tablas compatible con html/pdf
+8 XX referenciar y titular figuras y tablas compatible con html/pdf
 
-![Figure: Study design](../input/images/app_mod.png)
+![Diagrama 1: Study design](../input/images/app_mod.png)
 
 ## Methods
 
@@ -131,13 +131,10 @@ CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with
 
 Table X presents de frequencies and correlations among the items:
 
-XX producir tabla y llamar directamente desde la fuente o como imagen
+1 XX producir tabla y llamar directamente desde la fuente o como imagen
 
 <!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
 
-```{r echo=FALSE}
-load(file = "output/tables/sumdat04.RData");sumdat04
-```
 
 ```{r echo=FALSE,results='asis', warning=FALSE, message=FALSE}
 load(file = "input/data/proc/dat04.RData")
@@ -153,36 +150,47 @@ stargazer(dat04,type = "html",
 ```
 
 
-<table style="text-align:center"><caption><strong>Descriptive statistics</strong></caption>
-<tr><td colspan="9" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Statistic</td><td>N</td><td>Mean</td><td>St. Dev.</td><td>Min</td><td>Pctl(25)</td><td>Median</td><td>Pctl(75)</td><td>Max</td></tr>
-<tr><td colspan="9" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">A. pc.effort</td><td>2141</td><td>3.20</td><td>1.38</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td style="text-align:left">B. pc.talent</td><td>2141</td><td>3.02</td><td>1.16</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td style="text-align:left">C. pc.wpart</td><td>2141</td><td>3.66</td><td>1.36</td><td>1</td><td>3</td><td>4</td><td>5</td><td>5</td></tr>
-<tr><td style="text-align:left">D. pc.netw</td><td>2141</td><td>3.79</td><td>1.24</td><td>1</td><td>3</td><td>4</td><td>5</td><td>5</td></tr>
-<tr><td style="text-align:left">E. pf.effort</td><td>2141</td><td>3.89</td><td>1.25</td><td>1</td><td>3</td><td>4</td><td>5</td><td>5</td></tr>
-<tr><td style="text-align:left">F. pf.talent</td><td>2141</td><td>3.24</td><td>1.19</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td style="text-align:left">G. pf.wpart</td><td>2141</td><td>2.69</td><td>1.18</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
-<tr><td style="text-align:left">H. pf.netw</td><td>2141</td><td>2.41</td><td>1.11</td><td>1</td><td>2</td><td>2</td><td>3</td><td>5</td></tr>
-<tr><td style="text-align:left">grupo</td><td>2141</td><td>2.00</td><td>0.82</td><td>1</td><td>1</td><td>2</td><td>3</td><td>3</td></tr>
-<tr><td colspan="9" style="border-bottom: 1px solid black"></td></tr></table>
+```{r echo=FALSE}
+#load(file = "output/tables/sumdat04.RData");sumdat04
+```
+
+```{r echo=FALSE}
+library(ggplot2)
+load(file = "output/images/grafico_descriptivo.RData")
+ggplot(tmp, aes(x = variable, y = value)) + geom_boxplot() +  facet_wrap(~ tipo)
+```
 
 
-XX Agregar gráficos de frecuencia , puede ser tipo trellis 2 x 4, arriba percepción abajo preferencias; la idea es generar un input más claro para la siguiente idea: En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
+```{r echo=FALSE}
+
+load(file = "output/images/correlation.RData")
+library(corrplot)
+corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```
+
+
+
+2 XX Agregar gráficos de frecuencia , puede ser tipo trellis 2 x 4, arriba percepción abajo preferencias; la idea es generar un input más claro para la siguiente idea: En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
+
+
+
 
 
 ```{r echo=FALSE}
 load(file = "output/tables/tb.fm01.RData");tb.fm01
 ```
 
-XX Sobre tablas en general, entonces:
+3 - XX Sobre tablas en general, entonces:
 - dejar tabla de descriptivos que ahora aparece junto a la de correlaciones
-- agregar gráficos
-- reemplazar tabla de correlaciones por un corrplot, creo que se aprecia más claramente el sentido de las asociaciones
+- agregar gráficos (listo)
+- reemplazar tabla de correlaciones por un corrplot, creo que se aprecia más claramente el sentido de las asociaciones (listo)
+
+
 
 
 ## Models estimation
 
-XX En tabla de cargas factoriales, los fit aparecen corridos hacia la izquierda
+4 XX En tabla de cargas factoriales, los fit aparecen corridos hacia la izquierda
 
 
 En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.
@@ -203,9 +211,9 @@ Table 3: **Fit indicators**
 Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, χ2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, χ2(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, χ2(df=14)=64.156, p < 0.001).
 
 
-XX explicar mejor lo que viene: invarianza de qué y por qué se realiza.
+5 XX explicar mejor lo que viene: invarianza de qué y por qué se realiza.
 
-A partir de los análisis de invarianza se puede decir que los distintos órdenes no son invariantes en términos configuracionales [@vandenbergReviewSynthesisMeasurement2000]. El modelo que incorpora la diferenciación de los grupos en la estimación del modelo, este presenta un ajuste moderado similar al de los modelos por separados, aunque posee un ratio de chi-square deficiente por lo que se descarta la invarianza. Esta varianza configuracional se debe a la sobre estimación que se genera en el orden uno de las correlaciones entre los indicadores de un mismo factor los cuales aparecen juntos para el encuestado, mientras que en el modelo 2 se presentan separados, disminuyendo la correlación entre los ítem de un mismo factor.Podríamos decir que las correlaciones entre los ítems son sub o sobre-estimadas según el orden en el que aparezcan. Coherentemente el modelo aleatorio tiene un ajuste intermedio entre ambos.
+Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
 
 |           | Contrast Model 1 Factor | theoretical model 4 Factors | Model with M.I. |
 |:---------:|:-----------------------:|:---------------------------:|:---------------:|
