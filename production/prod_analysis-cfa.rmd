@@ -443,9 +443,7 @@ stargazer(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,
 cor04<-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
 rownames(cor04$rho) <-c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw")
 colnames(cor04$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
-
 save(cor04, file = "output/images/correlation.RData")
-
 corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
@@ -1106,8 +1104,11 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
 <!--   collapse_rows(columns = 1,valign = "middle") %>% -->
 <!--   footnote(number = c("Model 1: Complete sample")) -->
 <!-- ``` -->
-```{r}
 
+
+```{r}
+library(ggplot2)
+library(reshape2)
 dat_per <- dat04 %>% select("Effort"=perc_effort,"Talent"=perc_talent, "Rich Parents"=perc_wpart, "Contacts"=perc_netw)    
 dat_pref <- dat04 %>% select("Effort"=pref_effort,"Talent"=pref_talent,"Rich Parents"=pref_wpart, "Contacts"=pref_netw)   
 
@@ -1124,3 +1125,5 @@ save(tmp, file = "output/images/grafico_descriptivo.RData")
 ggplot(tmp, aes(x = variable, y = value)) + geom_boxplot() +  facet_wrap(~ tipo)
 
 ```
+
+
