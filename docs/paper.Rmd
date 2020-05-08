@@ -4,12 +4,16 @@ css: "../input/css/custom.css"
 linestretch: '1.5'
 link-citations: yes
 output:
-    html_document:
-        number_sections: true
-        toc: true
-        toc_float: true
-        smart: false
+  html_document:
+    theme: flatly
+    number_sections: true
+    always_allow_html: yes
+  pdf_document:
+    keep_tex: false
+    template: null
+    number_sections: true
 linkcolor: blue
+
 bibliography:
   - ../input/bib/EconomiaMoral.bib
   - ../input/bib/meritocracy.bib
@@ -29,7 +33,32 @@ options(knitr.kable.NA = '')
 library(knitr)
 library(kableExtra)
 library(dplyr)
+#install.packages("captioner")
+library(captioner)
 ```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+table_nums<-captioner(prefix = "Table")
+plot_nums<-captioner(prefix = "Figure")
+diam_nums<-captioner(prefix = "Diagram")
+anx_nums<-captioner(prefix = "Annexed")
+
+table_nums("ta", "Dimensions of meritocratic beliefs.")
+table_nums("tb", "Items according to dimension.")
+table_nums("tc", "Descriptive statistics of the scale.")
+table_nums("td", "Factor loads and model fit.")
+table_nums("te", "Comparison between model fit.")
+
+diam_nums("da", "Survey flow")
+diam_nums("db", "Theorical model")
+
+plot_nums("fa", "Descriptive boxplot of the scale.")
+plot_nums("fb", "Polychoric correlation.")
+
+anx_nums("aa", "Representativeness of the sample.")
+```
+
+
 
 <div style="text-align: justify">
 
@@ -73,7 +102,7 @@ Based on the previous limitations in the measurement of meritocracy presented in
 
 The proposed measurement framework is based on two axis of analysis, as depicted in Table 1:
 
-Table 1: Model of perceptions and preferences for meritocracy and non-meritocracy
+`r table_nums("ta")`
 
 |                  	  | Perceptions 	| Preferences 	|
 |:-----------------	  |-------------	|-------------	|
@@ -105,7 +134,8 @@ The data was obtained through an online questionnaire which was part of a larger
 
 The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into 4 dimensions referred above: Perceptions (meritocratic/nonmeritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which are mostly used for operationalizing meritocracy in previous empirical studies [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from "Completely disagree"(1) to "Completely agree" (5).
 
-### Table 2
+`r table_nums("tb")`
+
 ![](../input/images/tabla2.png)
 
 1 XX ojo con esta imagen, titularla en el documento, no en la imagen misma
@@ -118,12 +148,15 @@ With the objective of evaluating the effect of the order of the indicators, the 
 
 3 XX referenciar y titular figuras y tablas compatible con html/pdf
 
-### Diagram 1 
+`r diam_nums("da")`
+
 ![](../input/images/app_mod.png)
 
 ## Methods
 
 For testing the scale's underlying constructs we estimate confirmatory factor analysis models (CFA). The model estimates one factor for each dimension, as represented in the following figure:
+
+`r diam_nums("db")`
 
 ![](../output/images/meas01.png)
 
@@ -135,14 +168,17 @@ CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with
 
 Table X presents de frequencies and correlations among the items:
 
-4 XX producir tabla y llamar directamente desde la fuente o como imagen [__Pendiente__]
-
 <!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
-
+`r table_nums("tc")`
 
 ```{r echo=FALSE}
-load(file = "output/tables/sumdat04.RData");sumdat04
+#load(file = "output/tables/sumdat04.RData");sumdat04
 ```
+
+4 XX producir tabla y llamar directamente desde la fuente o como imagen [__Pendiente__]
+5 XX Agregar gráficos de frecuencia , puede ser tipo trellis 2 x 4, arriba percepción abajo preferencias; la idea es generar un input más claro para la siguiente idea: 
+
+`r plot_nums("fa")`
 
 ```{r echo=FALSE}
 library(ggplot2)
@@ -150,37 +186,22 @@ load(file = "output/images/grafico_descriptivo.RData")
 ggplot(tmp, aes(x = variable, y = value)) + geom_boxplot() +  facet_wrap(~ tipo)
 ```
 
-5 XX Agregar gráficos de frecuencia , puede ser tipo trellis 2 x 4, arriba percepción abajo preferencias; la idea es generar un input más claro para la siguiente idea: 
 
 En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
 
-
-
+`r plot_nums("fb")`
 
 ```{r echo=FALSE}
-
 load(file = "output/images/correlation.RData")
 library(corrplot)
 corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
 ```
 
 
-
-
-
-
-
-
-```{r echo=FALSE}
-load(file = "output/tables/tb.fm01.RData");tb.fm01
-```
-
 6 - XX Sobre tablas en general, entonces:
 - dejar tabla de descriptivos que ahora aparece junto a la de correlaciones [_Pendiente_ ]
 - agregar gráficos (listo)
 - reemplazar tabla de correlaciones por un corrplot, creo que se aprecia más claramente el sentido de las asociaciones (listo)
-
-
 
 
 ## Models estimation
@@ -190,17 +211,11 @@ load(file = "output/tables/tb.fm01.RData");tb.fm01
 
 En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.
 
-Table 3: **Fit indicators**
+`r table_nums("td")`
 
-|           | Model order 1 | Model order 2 | Model order 3 |
-|:---------:|:-------------:|:-------------:|:-------------:|
-| **n**     |      697      |      702      |      697      |
-| **CFI**   |     0.997     |     0.984     |     0.991     |
-| **TLI**   |     0.992     |     0.968     |     0.984     |
-| **RMSEA** |     0.037     |     0.071     |     0.051     |
-| **χ2**    |     28.03     |     64.156    |     39.090    |
-| **p**     |      .000     |      .000     |      .000     |
-| **χ2/gl** | 2,00          | 4,58          | 2,78          |
+```{r echo=FALSE}
+#load(file = "output/tables/tb.fm01.RData");tb.fm01
+```
 
 
 Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, χ2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, χ2(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, χ2(df=14)=64.156, p < 0.001).
@@ -209,6 +224,8 @@ Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. c
 8 XX explicar mejor lo que viene: invarianza de qué y por qué se realiza.
 
 Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
+
+`r table_nums("te")`
 
 |           | Contrast Model 1 Factor | theoretical model 4 Factors | Model with M.I. |
 |:---------:|:-----------------------:|:---------------------------:|:---------------:|
@@ -236,6 +253,7 @@ uso conjunto percepciones-preferencias
 <div/>
 
 # Anexos
+`r anx_nums("aa")`
 
 |                     | Sample  |   CEP  |
 |---------------------|:-------:|:------:|
