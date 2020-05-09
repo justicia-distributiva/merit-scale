@@ -166,8 +166,6 @@ CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with
 
 ## Descriptive analysis
 
-Table X presents de frequencies and correlations among the items:
-
 <!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
 `r table_nums("tc")`
 
@@ -180,11 +178,9 @@ Table X presents de frequencies and correlations among the items:
 
 `r plot_nums("fa")`
 
-```{r echo=FALSE}
-library(ggplot2)
-load(file = "output/images/grafico_descriptivo.RData")
-ggplot(tmp, aes(x = variable, y = value)) + geom_boxplot() +  facet_wrap(~ tipo)
-```
+![](../output/images/plotlikert.png)
+
+
 
 
 En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.

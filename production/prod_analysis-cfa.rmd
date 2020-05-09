@@ -1109,20 +1109,24 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
 ```{r}
 library(ggplot2)
 library(reshape2)
-dat_per <- dat04 %>% select("Effort"=perc_effort,"Talent"=perc_talent, "Rich Parents"=perc_wpart, "Contacts"=perc_netw)    
-dat_pref <- dat04 %>% select("Effort"=pref_effort,"Talent"=pref_talent,"Rich Parents"=pref_wpart, "Contacts"=pref_netw)   
+library(sjPlot)
 
-tmp_per<- melt(dat_per)
-tmp_per$tipo<- "Perceptions"
+dat_merit <- dat04 %>% select("Effort"=perc_effort,"Talent"=perc_talent, "Rich Parents"=perc_wpart, "Contacts"=perc_netw, "Effort"=pref_effort,"Talent"=pref_talent,"Rich Parents"=pref_wpart, "Contacts"=pref_netw) 
 
-tmp_prf<- melt(dat_pref)
-tmp_prf$tipo<- "Preferences"
+  
+plotlikert<-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
+            groups.titles = c("Perceptions","Preferences"),
+            geom.colors ="PuBu", 
+            axis.labels=c("Effort","Talent","Rich Parents","Contacts"),
+            catcount = 4,
+            cat.neutral = 3, 
+            grid.range  =  c ( 1.2 , 1.4 ),
+            values  =  "sum.outside",
+            reverse.scale=TRUE)
 
-tmp <-rbind(tmp_per,tmp_prf) 
 
-save(tmp, file = "output/images/grafico_descriptivo.RData")
+ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 30,height = 15,dpi = "retina",units = "cm")
 
-ggplot(tmp, aes(x = variable, y = value)) + geom_boxplot() +  facet_wrap(~ tipo)
 
 ```
 
