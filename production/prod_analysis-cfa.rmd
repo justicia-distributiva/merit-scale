@@ -1,7 +1,7 @@
 ---
 title: "Analysis PPM-S"
 date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
-css: "../input/css/style.css"
+css: "../input/css/custom.css"
 output:
   html_document:
     number_sections: true
@@ -23,6 +23,15 @@ The scale has eight indicators, divided in four questions for perception and fou
 The rationale of the design relies on the possibility to test how different display modalities could affect the hypothesized factor structure of the scale. On this regard, we conducted the analysis on two stages. On the first stage we tested the hypothesized factor structure on the three groups corresponding to each application modality and the full sample using a Confirmatory Factor Analysis (CFA). On the second stage, we conducted a Multi-group confirmatory factor analysis (MGCFA) using the groups created by the randomization. Furthermore, we explore the possibility of a second order factor structure, in which we tested two models. The first alternative corresponds to a second-order Confirmatory Factor Analysis assuming the Perception/Preference dimension as a second order factor. On the other hand, we tested a model in which we assume that the second order factor structure follows the Meritocratic/Non-meritocratic constructs.        
 
 ---
+
+```{r}
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+```
+
 
 ```{r eval=FALSE, include=FALSE}
 rmarkdown::render(input = "production/prod_analysis-cfa.rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-cfa.html")
@@ -549,7 +558,9 @@ for (i in names(fm04.2)) {
 
 fm.df      <- bind_cols(fm04.1,fm04.2)
 fm.df$nobs <- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o)) 
-fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("M1.1","M2.1","M3.1")
+fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("M1.2","M2.2","M3.2")
+
+
 #------ merge ------#
 tb.fm<- bind_rows(tb.load,fm.df)
 tb.fm<- tb.fm %>% mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>% select(vars,everything())
@@ -568,6 +579,15 @@ tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccccccccccc",col.names = tb.col,
           add_indent(c(9:12)) %>% 
           footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01
 save(tb.fm01,file = "output/tables/tb.fm01.RData")
+
+
+save(tb.fm,file = "output/tables/tb.fm.RData")
+save(fm.df,file = "output/tables/fm.df.RData")
+save(tb.load,file = "output/tables/tb.load.RData")
+
+
+
+
 ```
 
 # Summary
@@ -1110,8 +1130,12 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
 library(ggplot2)
 library(reshape2)
 library(sjPlot)
+library(dplyr)
 
-dat_merit <- dat04 %>% select("Effort"=perc_effort,"Talent"=perc_talent, "Rich Parents"=perc_wpart, "Contacts"=perc_netw, "Effort"=pref_effort,"Talent"=pref_talent,"Rich Parents"=pref_wpart, "Contacts"=pref_netw) 
+#install.packages("cowplot")
+library(cowplot)
+
+dat_merit <- dat04 %>% select("a.Effort"=perc_effort,"a.Talent"=perc_talent, "a.Rich Parents"=perc_wpart, "a.Contacts"=perc_netw, "b.Effort"=pref_effort,"b.Talent"=pref_talent,"b.Rich Parents"=pref_wpart, "b.Contacts"=pref_netw) 
 
   
 plotlikert<-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
@@ -1123,7 +1147,7 @@ plotlikert<-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
             grid.range  =  c ( 1.2 , 1.4 ),
             values  =  "sum.outside",
             reverse.scale=TRUE)
-
+plotlikert
 
 ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 30,height = 15,dpi = "retina",units = "cm")
 

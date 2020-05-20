@@ -75,7 +75,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="../input/bib/style.css" type="text/css" />
+<link rel="stylesheet" href="..\input\bib\style.css" type="text/css" />
 
 
 
@@ -365,9 +365,6 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="preanalisis.html">Pre-analisis plan</a>
-</li>
-<li>
   <a href="prod_prep-data-A.html">Data preparation</a>
 </li>
 <li>
@@ -401,7 +398,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">miércoles 22 abril 2020 16:58:50</h4>
+<h4 class="date">miércoles 20 mayo 2020 5:01:35</h4>
 
 </div>
 
@@ -412,6 +409,11 @@ div.tocify {
 <p>The scale has eight indicators, divided in four questions for perception and four for preferences, which are also divided in meritocratic and non-meritocratic. The meritocratic indicators refers to topics such as effort and talent, and the non-meritocratic refers to family wealth and networks. The three combinations relies in how these indicators are displayed to the respondent. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. the second combination corresponds to the group in which the questions are displayed following the a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions.</p>
 <p>The rationale of the design relies on the possibility to test how different display modalities could affect the hypothesized factor structure of the scale. On this regard, we conducted the analysis on two stages. On the first stage we tested the hypothesized factor structure on the three groups corresponding to each application modality and the full sample using a Confirmatory Factor Analysis (CFA). On the second stage, we conducted a Multi-group confirmatory factor analysis (MGCFA) using the groups created by the randomization. Furthermore, we explore the possibility of a second order factor structure, in which we tested two models. The first alternative corresponds to a second-order Confirmatory Factor Analysis assuming the Perception/Preference dimension as a second order factor. On the other hand, we tested a model in which we assume that the second order factor structure follows the Meritocratic/Non-meritocratic constructs.</p>
 <hr />
+<pre class="r"><code>table_format = if(is_html_output()) {
+  &quot;html&quot;
+} else if(is_latex_output()) {
+  &quot;latex&quot;
+}</code></pre>
 <p><strong>Libraries</strong></p>
 <pre class="r"><code>library(sjPlot)
 library(dplyr)
@@ -1663,7 +1665,7 @@ H. pc.netw
 rownames(cor02$rho) &lt;-c(&quot;A. pc.effort&quot;,&quot;E. pf.effort&quot;,&quot;B. pc.talent&quot;,&quot;F. pf.talent&quot;,&quot;C. pc.wpart&quot;,&quot;G. pf.wpart&quot;,&quot;D. pc.netw&quot;,&quot;H. pc.netw&quot;)
 colnames(cor02$rho) &lt;-c(&quot;(A)&quot;, &quot;(E)&quot;,&quot;(B)&quot;,&quot;(F)&quot;,&quot;(C)&quot;,&quot;(G)&quot;,&quot;(D)&quot;, &quot;(H)&quot;)
 corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>model02 &lt;- &#39;perc_merit=~perc_effort+perc_talent
             perc_nmerit=~perc_wpart+perc_netw
             pref_merit=~pref_effort+pref_talent
@@ -2500,7 +2502,7 @@ H. pf.netw
 rownames(cor03$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
 colnames(cor03$rho) &lt;-c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~perc_effort+perc_talent
 perc_nmerit=~perc_wpart+perc_netw
@@ -3537,8 +3539,9 @@ H. pf.netw
 <pre class="r"><code>cor04&lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
 rownames(cor04$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
 colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
+save(cor04, file = &quot;output/images/correlation.RData&quot;)
 corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>model04 &lt;- &#39;
 perc_merit =~ perc_effort+perc_talent
 perc_nmerit=~perc_wpart +perc_netw
@@ -4036,7 +4039,9 @@ for (i in names(fm04.2)) {
 
 fm.df      &lt;- bind_cols(fm04.1,fm04.2)
 fm.df$nobs &lt;- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o)) 
-fm.df &lt;- data.frame(t(fm.df)); colnames(fm.df) &lt;- c(&quot;M1.1&quot;,&quot;M2.1&quot;,&quot;M3.1&quot;)
+fm.df &lt;- data.frame(t(fm.df)); colnames(fm.df) &lt;- c(&quot;M1.2&quot;,&quot;M2.2&quot;,&quot;M3.2&quot;)
+
+
 #------ merge ------#
 tb.fm&lt;- bind_rows(tb.load,fm.df)
 tb.fm&lt;- tb.fm %&gt;% mutate(vars=c(labs,&quot;$\\chi^2\\text{(df)}$&quot;,&quot;$\\text{CFI}$&quot;,&quot;$\\text{RMSEA}$&quot;,&quot;$N$&quot;)) %&gt;% select(vars,everything())
@@ -4391,6 +4396,8 @@ H. Is well that those who have good contacts get ahead.
 <span class="math inline">\(\chi^2\text{(df)}\)</span>
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 42.28(14)
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
@@ -4415,12 +4422,12 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\text{CFI}\)</span>
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 0.993
@@ -4447,12 +4454,12 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\text{RMSEA}\)</span>
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 0.053
@@ -4479,12 +4486,12 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(N\)</span>
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 712
@@ -4511,8 +4518,6 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 </tbody>
 <tfoot>
@@ -4523,7 +4528,12 @@ H. Is well that those who have good contacts get ahead.
 </tr>
 </tfoot>
 </table>
-<pre class="r"><code>save(tb.fm01,file = &quot;output/tables/tb.fm01.RData&quot;)</code></pre>
+<pre class="r"><code>save(tb.fm01,file = &quot;output/tables/tb.fm01.RData&quot;)
+
+
+save(tb.fm,file = &quot;output/tables/tb.fm.RData&quot;)
+save(fm.df,file = &quot;output/tables/fm.df.RData&quot;)
+save(tb.load,file = &quot;output/tables/tb.load.RData&quot;)</code></pre>
 </div>
 <div id="summary" class="section level1">
 <h1><span class="header-section-number">3</span> Summary</h1>
@@ -5720,6 +5730,29 @@ kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% sel
 <!--   collapse_rows(columns = 1,valign = "middle") %>% -->
 <!--   footnote(number = c("Model 1: Complete sample")) -->
 <!-- ``` -->
+<pre class="r"><code>library(ggplot2)
+library(reshape2)
+library(sjPlot)
+library(dplyr)
+
+#install.packages(&quot;cowplot&quot;)
+library(cowplot)
+
+dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw) 
+
+  
+plotlikert&lt;-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
+            groups.titles = c(&quot;Perceptions&quot;,&quot;Preferences&quot;),
+            geom.colors =&quot;PuBu&quot;, 
+            axis.labels=c(&quot;Effort&quot;,&quot;Talent&quot;,&quot;Rich Parents&quot;,&quot;Contacts&quot;),
+            catcount = 4,
+            cat.neutral = 3, 
+            grid.range  =  c ( 1.2 , 1.4 ),
+            values  =  &quot;sum.outside&quot;,
+            reverse.scale=TRUE)
+plotlikert</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 30,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
 </div>
 </div>
 </div>

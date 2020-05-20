@@ -4,16 +4,15 @@ css: "../input/css/custom.css"
 linestretch: '1.5'
 link-citations: yes
 output:
-  html_document:
-    theme: flatly
-    number_sections: true
-    always_allow_html: yes
   pdf_document:
     keep_tex: false
     template: null
     number_sections: true
+  html_document:
+    theme: flatly
+    number_sections: true
+    always_allow_html: yes
 linkcolor: blue
-
 bibliography:
   - ../input/bib/EconomiaMoral.bib
   - ../input/bib/meritocracy.bib
@@ -29,35 +28,42 @@ rm(list=ls())
 options(knitr.kable.NA = '')
 ```
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
 library(knitr)
+#install.packages("KableExtra")
 library(kableExtra)
 library(dplyr)
 #install.packages("captioner")
 library(captioner)
 ```
 
+```{r echo=FALSE }
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+
+
+```
+
+
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 table_nums<-captioner(prefix = "Table")
 plot_nums<-captioner(prefix = "Figure")
 diam_nums<-captioner(prefix = "Diagram")
 anx_nums<-captioner(prefix = "Annexed")
-
 table_nums("ta", "Dimensions of meritocratic beliefs.")
 table_nums("tb", "Items according to dimension.")
 table_nums("tc", "Descriptive statistics of the scale.")
 table_nums("td", "Factor loads and model fit.")
 table_nums("te", "Comparison between model fit.")
-
 diam_nums("da", "Survey flow")
 diam_nums("db", "Theorical model")
-
 plot_nums("fa", "Descriptive boxplot of the scale.")
 plot_nums("fb", "Polychoric correlation.")
-
 anx_nums("aa", "Representativeness of the sample.")
 ```
-
 
 
 <div style="text-align: justify">
@@ -100,6 +106,11 @@ Based on the previous limitations in the measurement of meritocracy presented in
 - Based on previous indicators as far as possible, for the sake of comparability between studies
 - Brief, as to be used in a regular survey. In this point it differs for instance from the proposal of the "Preference for the Merit Principle Scale" [@davey_preference_1999], as they use 15 items just for one dimension (besides the problem of reverse-coding non-meritocratic items).
 
+.
+.
+.
+
+
 The proposed measurement framework is based on two axis of analysis, as depicted in Table 1:
 
 `r table_nums("ta")`
@@ -112,6 +123,8 @@ The proposed measurement framework is based on two axis of analysis, as depicted
 The first axis distinguishes between different types of "beliefs", using instead the terms perceptions and preferences for meritocracy [@duru-bellat_whos_2012; @son_hing_merit_2011-1]. Perceptions refers to the extent to which people see meritocracy working in their society, which in terms of measurement relates to the "reasons to get ahead" battery, whereas preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The second axis consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014]. This aspect has been usually treated as different ends of a same continuum in part of the previous research, an assumption that requieres empirical scrutiny. These non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
 
 Regarding the selection of indicators, most of them some adaptations of previous items that where streamlined in order to a better fit with the specific dimensions. For meritocratic indicators we use effort and talent as the main components of the traditional concept of merit as defined by @young_rise_1962, whereas for non-meritocratic dimensions we use having rich parents and good contacts. The description of the specific items is presented in the methodology section.
+
+
 
 **Hypotheses**
 
@@ -138,15 +151,13 @@ The proposed scale of perceptions and preferences about meritocracy consists of 
 
 ![](../input/images/tabla2.png)
 
-1 XX ojo con esta imagen, titularla en el documento, no en la imagen misma
 
 ## Administration sets
 
 With the objective of evaluating the effect of the order of the indicators, the respondents (_n = 2141_) were randomly divided into three groups as explained in __Diagram 1__. The scale was presented to the first group (_n = 712_) in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group (_n = 717_)was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). Finally, in the third group (_n = 712_) the items were completely randomized.
 
-2 XX agregar número de sujetos por grupo
 
-3 XX referenciar y titular figuras y tablas compatible con html/pdf
+
 
 `r diam_nums("da")`
 
@@ -155,6 +166,7 @@ With the objective of evaluating the effect of the order of the indicators, the 
 ## Methods
 
 For testing the scale's underlying constructs we estimate confirmatory factor analysis models (CFA). The model estimates one factor for each dimension, as represented in the following figure:
+
 
 `r diam_nums("db")`
 
@@ -166,15 +178,31 @@ CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with
 
 ## Descriptive analysis
 
-<!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
-`r table_nums("tc")`
-
 ```{r echo=FALSE}
-#load(file = "output/tables/sumdat04.RData");sumdat04
+
+load(file = "input/data/proc/dat04.RData")
+
+dat04b<- dat04 %>% rename("Perception Effort" =perc_effort,
+                          "Perception Talent" = perc_talent,
+                          "Perception rich parents" = perc_wpart,
+                         "Perception contacts" = perc_netw,
+                          "Preferences Effort" = pref_effort,
+                          "Preferences Talent" =  pref_talent, 
+                         "Preferences rich parents" =  pref_wpart ,
+                          "Preferences contacts" = pref_netw  )
+
+sum04b  <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
+
+table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
+
+cap01 <- "Descriptive statistic"
+sumdat04<- kable(table04b, table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = cap01
+) %>% 
+          kable_styling(full_width = F,font_size = 8,position = "center");sumdat04
+
 ```
 
 4 XX producir tabla y llamar directamente desde la fuente o como imagen [__Pendiente__]
-5 XX Agregar gráficos de frecuencia , puede ser tipo trellis 2 x 4, arriba percepción abajo preferencias; la idea es generar un input más claro para la siguiente idea: 
 
 `r plot_nums("fa")`
 
@@ -196,8 +224,6 @@ corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.c
 
 6 - XX Sobre tablas en general, entonces:
 - dejar tabla de descriptivos que ahora aparece junto a la de correlaciones [_Pendiente_ ]
-- agregar gráficos (listo)
-- reemplazar tabla de correlaciones por un corrplot, creo que se aprecia más claramente el sentido de las asociaciones (listo)
 
 
 ## Models estimation
@@ -207,14 +233,50 @@ corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.c
 
 En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.
 
-`r table_nums("td")`
-
 ```{r echo=FALSE}
-#load(file = "output/tables/tb.fm01.RData");tb.fm01
+
+load(file = "output/tables/tb.fm.RData")
+
+
+tb.col  <- c("Variables",1:4,1:4,1:4)
+tb.caption <- "Factor loadings and fit measures" 
+tb.foot <- paste0("; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
+
+tb.fm <- tb.fm %>% 
+    mutate(vars = recode(vars, 
+                         "A. Who the more they try they manage to get bigger rewards that those who striveless."= "Perception Effort",
+                         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent."= "Perception Talent",
+                         "C. Who they have rich parents manage to get out ahead."="Perception rich parents",
+                         "D. Who they have good contacts they manage to get out ahead."="Perception contacts",
+                         "E. Who the more they try they should get greater rewards than those who they try less." = "Preferences Effort",
+                         "F. Who possess more talent they should get greater rewards than those who possess less talent."= "Preferences Talent",
+                         "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
+                         "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
+
+tb.fm01<- kable(tb.fm, table_format, booktabs = T, escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
+          kable_styling(position = "center", full_width = F,font_size = 6) %>% 
+          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
+          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12))
+
+tb.fm2<-as.data.frame(tb.fm[1:8,])
+
+
+tb.fm02<- kable(tb.fm2, table_format, booktabs = T, escape = FALSE,align = "lcccccccccccc", col.names = tb.col, caption = tb.caption) %>% 
+          kable_styling(position = "center", full_width = F,font_size = 8) %>% 
+          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
+          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
+          row_spec(row = 8,hline_after = F) 
+
+tb.fm02
+tb.fm01
 ```
 
 
-Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, χ2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, χ2(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, χ2(df=14)=64.156, p < 0.001).
+
+
+Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, x2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, x2(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, x2(df=14)=64.156, p < 0.001).
 
 
 8 XX explicar mejor lo que viene: invarianza de qué y por qué se realiza.
@@ -229,11 +291,12 @@ Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las d
 | **CFI**   |          0.595          |            0.988            |      0.994      |
 | **TLI**   |          0.433          |            0.976            |      0.985      |
 | **RMSEA** |          0.226          |            0.047            |      0.036      |
-| **χ2**    |         1830.839        |            68.661           |      40.250     |
+| **x2**    |         1830.839        |            68.661           |      40.250     |
 | **p**     |           .000          |             .000            |       .000      |
-| **χ2/gl** |          65.38          |             4.90            |       3.32      |
+| **x2/gl** |          65.38          |             4.90            |       3.32      |
 
-EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba χ2(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un X2 ratio menor a 3 y obtuvo cargas factoriales muy bajas ʎ < 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
+
+EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba x2(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un X2 ratio menor a 3 y obtuvo cargas factoriales muy bajas (cargas)< 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
 
 * agregar cuáles fueron las cargas sugeridas.
 
@@ -243,12 +306,12 @@ EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la t
 Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha decidido seguir utilizando el orden 3.
 
 # Conclusiones
-
+  
 uso conjunto percepciones-preferencias
 
-<div/>
 
 # Anexos
+
 `r anx_nums("aa")`
 
 |                     | Sample  |   CEP  |

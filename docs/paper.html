@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -19,16 +19,12 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
-<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
-<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
-<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -77,9 +73,7 @@ h6 {
 
 <link rel="stylesheet" href="..\input\bib\style.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -93,7 +87,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -103,6 +96,9 @@ img {
 }
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -118,7 +114,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -138,6 +133,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -159,114 +191,74 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
 
 
-<script>
-$(document).ready(function ()  {
+</head>
 
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
+<body>
 
 
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+<div class="container-fluid main-container">
 
 
 
@@ -318,7 +310,7 @@ div.tocify {
 
 <div style="text-align: justify">
 
-<div id="introduccion" class="section level1">
+<div id="introducción" class="section level1">
 <h1><span class="header-section-number">1</span> Introducción</h1>
 <p>La desigualdad económica se ha vuelto un tema que genera creciente preocupación y malestar alrededor del mundo. Esto se ha expresado en una serie de protestas como la emblemática “occupy wall street” el año 2011, así como también en una serie de análisis críticos respecto del desarrollo del capitalismo y sus consecuencias <span class="citation">(Piketty <a href="#ref-PikettyCapitalTwentyFirstCentury2014b" role="doc-biblioref">2014</a>)</span>. En este contexto, el estudio de las visiones, preferencias y percepciones respecto de la desigualdad han adquirido relevancia en las ciencias sociales, en temas como las preferencias redistributivas <span class="citation">(Alesina and Angeletos <a href="#ref-alesina_Fairness_2005" role="doc-biblioref">2005</a>; Dimick, Rueda, and Stegmueller <a href="#ref-dimick_Models_2018" role="doc-biblioref">2018</a>)</span> la legitimación de la desigualdad económica <span class="citation">(Schröder <a href="#ref-schroder_Income_2017" role="doc-biblioref">2017</a>)</span> y el funcionamiento de la meritocracia <span class="citation">(Duru-Bellat and Tenret <a href="#ref-Duru-BellatWhoMeritocracyIndividual2012b" role="doc-biblioref">2012</a><a href="#ref-Duru-BellatWhoMeritocracyIndividual2012b" role="doc-biblioref">a</a>; Mijs <a href="#ref-MijsParadoxInequalityIncome2019b" role="doc-biblioref">2019</a><a href="#ref-MijsParadoxInequalityIncome2019b" role="doc-biblioref">a</a>; Reynolds and Xian <a href="#ref-ReynoldsPerceptionsMeritocracyLand2014b" role="doc-biblioref">2014</a><a href="#ref-ReynoldsPerceptionsMeritocracyLand2014b" role="doc-biblioref">a</a>)</span>.</p>
 <p>En general, la meritocracia se define como un sistema de distribución de recursos y recompensas basados en el mérito individual, que en su concepción original es una suma de talento y esfuerzo <span class="citation">(Young <a href="#ref-young_rise_1962" role="doc-biblioref">1962</a>)</span> y que pone en un lugar secundario interferencia de factores estructurales como la herencia o los contactos <span class="citation">(Breen and Goldthorpe <a href="#ref-breenClassInequalityMeritocracy1999" role="doc-biblioref">1999</a>; Saunders <a href="#ref-saundersMightBritainBe1995" role="doc-biblioref">1995</a>; Yair <a href="#ref-yairMeritocracy2007" role="doc-biblioref">2007</a>; Land <a href="#ref-landWeSatTable2006" role="doc-biblioref">2006</a>; Young <a href="#ref-youngRiseMeritocracy1994" role="doc-biblioref">1994</a>)</span>. Una serie de estudios han realizado críticas a la realización de este estándar moral de distribución, planteando que es una promesa incumplida dada la influencia preponderante de otros elementos más allá del mérito en el estatus individual <span class="citation">(Witteveen and Attewell <a href="#ref-WitteveenReconsideringmeritocraticpower2020a" role="doc-biblioref">2020</a>; Arrow, Bowles, and Durlauf <a href="#ref-arrow_meritocracy_2000" role="doc-biblioref">2000</a>; Goldthorpe <a href="#ref-goldthorpe_myth_2003" role="doc-biblioref">2003</a>; Markovits <a href="#ref-markovits_Meritocracy_2019" role="doc-biblioref">2019</a>)</span>. Por otro lado, desde la psicología social y la sociología se han estudiado las características y consecuencias de las creencias en la meritocracia, en general basados en la hipótesis que mayor creencia en la meritocracia lleva a una mayor legitimación de las desigualdades <span class="citation">(Preminger <a href="#ref-PremingerMeritocracyserviceethnocracy2020" role="doc-biblioref">2020</a>; Trump <a href="#ref-TrumpWhenwhyeconomic2020" role="doc-biblioref">2020</a>; Meredith <a href="#ref-Meredithsocietydivisibleblessed2020" role="doc-biblioref">2020</a>; Hadjar <a href="#ref-hadjar_meritokratie_2008" role="doc-biblioref">2008</a>; Madeira et al. <a href="#ref-MadeiraPrimesConsequencesSystematic2019" role="doc-biblioref">2019</a>)</span>.</p>
@@ -326,7 +318,7 @@ div.tocify {
 <p>Para poder dar cuenta de los niveles de creencia en la meritocracia los estudios a la fecha generalmente han utilizado algunos indicadores de encuestas ya existentes, y en el menor de los casos se han creado instrumentos ad-hoc. Sin embargo, y como mostraremos más adelante, las formas de medición de meritocracia varían extremadamente entre estudios. Muchas veces fenómenos similares se asocian a indicadores distintos, y también ocurre que fenómenos distintos son medidos con indicadores similares, todo lo cual hace dificulta la comparabilidad entre estudios y el poder avanzar en la comprensión del concepto de meritocracia.</p>
 <p>Basados en el análisis crítico de las formas de medición de meritocracia a la fecha, el presente estudio propone un instrumento para medir y relacionar dos aspectos claves en el estudio de la meritocracia: percepciones y preferencias. Además, como un segundo eje de análisis considera la generación de indicadores respecto de aspectos meritocráticos y anti-meritocráticos, demostrando que no son los dos polos de un mismo continuo como muchos estudios anteriores parecen sugerir. La propuesta de medición además está orientada a generar un instrumento lo más breve posible de manera que pueda ser utilizado en encuestas de opinión.</p>
 </div>
-<div id="la-medicion-de-los-aspectos-subjetivos-de-la-meritocracia" class="section level1">
+<div id="la-medición-de-los-aspectos-subjetivos-de-la-meritocracia" class="section level1">
 <h1><span class="header-section-number">2</span> La medición de los aspectos subjetivos de la meritocracia</h1>
 <p>A continuación se presenta una revisión de una serie de investigaciones que se han abocado al estudio de la meritocracia y que para ello han hecho una propuesta de medición. El primer eje de análisis tiene que ver con el uso del concepto “creencias” para referir a distintos aspectos subjetivos relacionados con meritocracia. El segundo eje tiene que ver con el uso de indicadores sobre aspectos anti-meritocráticos como el polo opuesto de los meritocráticos.</p>
 <div id="la-caja-negra-de-las-creencias-en-la-meritocracia" class="section level2">
@@ -348,8 +340,9 @@ div.tocify {
 <li>Based on previous indicators as far as possible, for the sake of comparability between studies</li>
 <li>Brief, as to be used in a regular survey. In this point it differs for instance from the proposal of the “Preference for the Merit Principle Scale” <span class="citation">(Davey et al. <a href="#ref-davey_preference_1999" role="doc-biblioref">1999</a>)</span>, as they use 15 items just for one dimension (besides the problem of reverse-coding non-meritocratic items).</li>
 </ul>
+<p>. . .</p>
 <p>The proposed measurement framework is based on two axis of analysis, as depicted in Table 1:</p>
-<p>Table 1: Model of perceptions and preferences for meritocracy and non-meritocracy</p>
+<p>Table 1: Dimensions of meritocratic beliefs.</p>
 <table>
 <thead>
 <tr class="header">
@@ -391,25 +384,19 @@ div.tocify {
 <div id="instrument-design" class="section level2">
 <h2><span class="header-section-number">3.2</span> Instrument design</h2>
 <p>The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into 4 dimensions referred above: Perceptions (meritocratic/nonmeritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery “reasons to get ahead” (ISSP/GSS), which are mostly used for operationalizing meritocracy in previous empirical studies <span class="citation">(Mijs <a href="#ref-mijs_paradox_2019" role="doc-biblioref">2019</a><a href="#ref-mijs_paradox_2019" role="doc-biblioref">b</a>; Duru-Bellat and Tenret <a href="#ref-duru-bellat_whos_2012" role="doc-biblioref">2012</a><a href="#ref-duru-bellat_whos_2012" role="doc-biblioref">b</a>; Reynolds and Xian <a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">2014</a><a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">b</a>)</span>. The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from “Completely disagree”(1) to “Completely agree” (5).</p>
-<div id="table-2" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> Table 2</h3>
+<p>Table 2: Items according to dimension.</p>
 <p><img src="../input/images/tabla2.png" /></p>
-<p>1 XX ojo con esta imagen, titularla en el documento, no en la imagen misma</p>
-</div>
 </div>
 <div id="administration-sets" class="section level2">
 <h2><span class="header-section-number">3.3</span> Administration sets</h2>
 <p>With the objective of evaluating the effect of the order of the indicators, the respondents (<em>n = 2141</em>) were randomly divided into three groups as explained in <strong>Diagram 1</strong>. The scale was presented to the first group (<em>n = 712</em>) in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group (<em>n = 717</em>)was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). Finally, in the third group (<em>n = 712</em>) the items were completely randomized.</p>
-<p>2 XX agregar número de sujetos por grupo</p>
-<p>3 XX referenciar y titular figuras y tablas compatible con html/pdf</p>
-<div id="diagram-1" class="section level3">
-<h3><span class="header-section-number">3.3.1</span> Diagram 1</h3>
+<p>Diagram 1: Survey flow</p>
 <p><img src="../input/images/app_mod.png" /></p>
-</div>
 </div>
 <div id="methods" class="section level2">
 <h2><span class="header-section-number">3.4</span> Methods</h2>
 <p>For testing the scale’s underlying constructs we estimate confirmatory factor analysis models (CFA). The model estimates one factor for each dimension, as represented in the following figure:</p>
+<p>Diagram 2: Theorical model</p>
 <p><img src="../output/images/meas01.png" /></p>
 <p>CFA was conducted using the <code>lavaan</code> package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit &gt; 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit &lt; 0.08), Chi-square: (p-value; acceptable fit &gt; 0.05, and Chi-square ratio:&gt; 3).</p>
 </div>
@@ -418,26 +405,13 @@ div.tocify {
 <h1><span class="header-section-number">4</span> Results</h1>
 <div id="descriptive-analysis" class="section level2">
 <h2><span class="header-section-number">4.1</span> Descriptive analysis</h2>
-<p>Table X presents de frequencies and correlations among the items:</p>
-<p>4 XX producir tabla y llamar directamente desde la fuente o como imagen [<strong>Pendiente</strong>]</p>
-<!-- [Descriptive Table for the PPM-S, by group or the full sample] -->
-<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
+<table class="table" style="font-size: 8px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 Descriptive statistic
 </caption>
 <thead>
 <tr>
-<th style="border-bottom:hidden" colspan="5">
-</th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
-<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
-Polychoric correlations
-</div>
-</th>
-</tr>
-<tr>
-<th style="text-align:left;width: 10cm; min-width: 12cm; ">
-Variable
+<th style="text-align:left;">
 </th>
 <th style="text-align:left;">
 Mean
@@ -451,36 +425,12 @@ Min
 <th style="text-align:left;">
 Max
 </th>
-<th style="text-align:left;">
-A
-</th>
-<th style="text-align:left;">
-B
-</th>
-<th style="text-align:left;">
-C
-</th>
-<th style="text-align:left;">
-D
-</th>
-<th style="text-align:left;">
-E
-</th>
-<th style="text-align:left;">
-F
-</th>
-<th style="text-align:left;">
-G
-</th>
-<th style="text-align:left;">
-H
-</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-A. Who the more they try they manage to get bigger rewards that those who striveless.
+<td style="text-align:left;">
+Perception Effort
 </td>
 <td style="text-align:left;">
 3.20
@@ -494,27 +444,10 @@ A. Who the more they try they manage to get bigger rewards that those who strive
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.
+<td style="text-align:left;">
+Perception Talent
 </td>
 <td style="text-align:left;">
 3.02
@@ -528,28 +461,10 @@ B. Who possess more talent they manage to obtain greater rewards than those who 
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
-0.52***
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-C. Who they have rich parents manage to get out ahead.
+<td style="text-align:left;">
+Perception rich parents
 </td>
 <td style="text-align:left;">
 3.66
@@ -563,29 +478,10 @@ C. Who they have rich parents manage to get out ahead.
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
--0.06*
-</td>
-<td style="text-align:left;">
-0.07**
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-D. Who they have good contacts they manage to get out ahead.
+<td style="text-align:left;">
+Perception contacts
 </td>
 <td style="text-align:left;">
 3.79
@@ -599,30 +495,10 @@ D. Who they have good contacts they manage to get out ahead.
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
--0.02
-</td>
-<td style="text-align:left;">
-0.05**
-</td>
-<td style="text-align:left;">
-0.73***
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-E. Who the more they try they should get greater rewards than those who they try less.
+<td style="text-align:left;">
+Preferences Effort
 </td>
 <td style="text-align:left;">
 3.89
@@ -636,31 +512,10 @@ E. Who the more they try they should get greater rewards than those who they try
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
-0.40***
-</td>
-<td style="text-align:left;">
-0.28***
-</td>
-<td style="text-align:left;">
-0.30***
-</td>
-<td style="text-align:left;">
-0.34***
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-F. Who possess more talent they should get greater rewards than those who possess less talent.
+<td style="text-align:left;">
+Preferences Talent
 </td>
 <td style="text-align:left;">
 3.24
@@ -674,32 +529,10 @@ F. Who possess more talent they should get greater rewards than those who posses
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
-0.17***
-</td>
-<td style="text-align:left;">
-0.31***
-</td>
-<td style="text-align:left;">
-0.27***
-</td>
-<td style="text-align:left;">
-0.26***
-</td>
-<td style="text-align:left;">
-0.49***
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-G. It’s fine that those who have rich parents get ahead
+<td style="text-align:left;">
+Preferences rich parents
 </td>
 <td style="text-align:left;">
 2.69
@@ -713,33 +546,10 @@ G. It’s fine that those who have rich parents get ahead
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
-0.15***
-</td>
-<td style="text-align:left;">
-0.14***
-</td>
-<td style="text-align:left;">
-0.03
-</td>
-<td style="text-align:left;">
-0.05**
-</td>
-<td style="text-align:left;">
-0.07**
-</td>
-<td style="text-align:left;">
-0.15***
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
-<td style="text-align:left;">
-</td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-H. Is well that those who have good contacts get ahead.
+<td style="text-align:left;">
+Preferences contacts
 </td>
 <td style="text-align:left;">
 2.41
@@ -753,45 +563,22 @@ H. Is well that those who have good contacts get ahead.
 <td style="text-align:left;">
 5
 </td>
-<td style="text-align:left;">
-0.16***
-</td>
-<td style="text-align:left;">
-0.15***
-</td>
-<td style="text-align:left;">
--0.09**
-</td>
-<td style="text-align:left;">
--0.03
-</td>
-<td style="text-align:left;">
--0.01
-</td>
-<td style="text-align:left;">
-0.10***
-</td>
-<td style="text-align:left;">
-0.61***
-</td>
-<td style="text-align:left;">
-<span class="math inline">\(-\)</span>
-</td>
 </tr>
 </tbody>
-<tfoot>
-<tr>
-<td style="padding: 0; border: 0;" colspan="100%">
-<span style="font-style: italic;">Note: </span> <sup></sup> <span class="math inline">\(N\)</span>= 2141; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>
-</td>
-</tr>
-</tfoot>
 </table>
-<p><img src="paper_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<p>5 XX Agregar gráficos de frecuencia , puede ser tipo trellis 2 x 4, arriba percepción abajo preferencias; la idea es generar un input más claro para la siguiente idea:</p>
+<p>4 XX producir tabla y llamar directamente desde la fuente o como imagen [<strong>Pendiente</strong>]</p>
+<p>Figure 1: Descriptive boxplot of the scale.</p>
+<p><img src="../output/images/plotlikert.png" /></p>
 <p>En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.</p>
-<p><img src="paper_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<table class="table" style="font-size: 9px; width: auto !important; margin-left: auto; margin-right: auto;">
+<p>Figure 2: Polychoric correlation.</p>
+<p><img src="paper_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>6 - XX Sobre tablas en general, entonces: - dejar tabla de descriptivos que ahora aparece junto a la de correlaciones [<em>Pendiente</em> ]</p>
+</div>
+<div id="models-estimation" class="section level2">
+<h2><span class="header-section-number">4.2</span> Models estimation</h2>
+<p>7 XX En tabla de cargas factoriales, los fit aparecen corridos hacia la izquierda [<strong>Pendiente</strong>]</p>
+<p>En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.</p>
+<table class="table" style="font-size: 8px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 Factor loadings and fit measures
 </caption>
@@ -825,505 +612,772 @@ Version 3
 </th>
 </tr>
 <tr>
-<th style="text-align:left;width: 10cm; min-width: 12cm; ">
+<th style="text-align:left;">
 Variables
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 1
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 2
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 3
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 4
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 1
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 2
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 3
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 4
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 1
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 2
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 3
 </th>
-<th style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<th style="text-align:center;">
 4
 </th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-A. Who the more they try they manage to get bigger rewards that those who striveless.
+<td style="text-align:left;">
+Perception Effort
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.69
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.76
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.70
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.
+<td style="text-align:left;">
+Perception Talent
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.81
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.72
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.65
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-C. Who they have rich parents manage to get out ahead.
+<td style="text-align:left;">
+Perception rich parents
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.85
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.84
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.81
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-D. Who they have good contacts they manage to get out ahead.
+<td style="text-align:left;">
+Perception contacts
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.94
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.81
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.89
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-E. Who the more they try they should get greater rewards than those who they try less.
+<td style="text-align:left;">
+Preferences Effort
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.85
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.82
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.66
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-F. Who possess more talent they should get greater rewards than those who possess less talent.
+<td style="text-align:left;">
+Preferences Talent
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.64
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.65
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.59
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-G. It’s fine that those who have rich parents get ahead
+<td style="text-align:left;">
+Preferences rich parents
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.55
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 1.04
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.78
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm; ">
-H. Is well that those who have good contacts get ahead.
+<td style="text-align:left;">
+Preferences contacts
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 1.26
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.52
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
+0.77
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="font-size: 6px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+Factor loadings and fit measures
+</caption>
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="12">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="border-bottom:hidden" colspan="1">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Version 1
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Version 2
+</div>
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Version 3
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variables
+</th>
+<th style="text-align:center;">
+1
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+3
+</th>
+<th style="text-align:center;">
+4
+</th>
+<th style="text-align:center;">
+1
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+3
+</th>
+<th style="text-align:center;">
+4
+</th>
+<th style="text-align:center;">
+1
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+3
+</th>
+<th style="text-align:center;">
+4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Perception Effort
+</td>
+<td style="text-align:center;">
+0.69
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.76
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Perception Talent
+</td>
+<td style="text-align:center;">
+0.81
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.72
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.65
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Perception rich parents
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.84
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.81
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Perception contacts
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.94
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.81
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.89
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Preferences Effort
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.82
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.66
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Preferences Talent
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.64
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.65
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.59
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Preferences rich parents
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.55
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.04
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Preferences contacts
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.26
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.52
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
 0.77
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\chi^2\text{(df)}\)</span>
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
 42.28(14)
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 107.57(14)
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 63.34(14)
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\text{CFI}\)</span>
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
 0.993
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.961
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.979
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\text{RMSEA}\)</span>
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
 0.053
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.097
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 0.070
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 <tr>
-<td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
+<td style="text-align:left; padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(N\)</span>
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
 712
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 717
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 712
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+<td style="text-align:center;">
 </td>
 </tr>
 </tbody>
-<tfoot>
-<tr>
-<td style="padding: 0; border: 0;" colspan="100%">
-<span style="font-style: italic;">Note: </span> <sup></sup> ; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)
-</td>
-</tr>
-</tfoot>
 </table>
-<p>6 - XX Sobre tablas en general, entonces: - dejar tabla de descriptivos que ahora aparece junto a la de correlaciones [<em>Pendiente</em> ] - agregar gráficos (listo) - reemplazar tabla de correlaciones por un corrplot, creo que se aprecia más claramente el sentido de las asociaciones (listo)</p>
-</div>
-<div id="models-estimation" class="section level2">
-<h2><span class="header-section-number">4.2</span> Models estimation</h2>
-<p>7 XX En tabla de cargas factoriales, los fit aparecen corridos hacia la izquierda [<strong>Pendiente</strong>]</p>
-<p>En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.</p>
-<p>Table 3: <strong>Fit indicators</strong></p>
-<table>
-<thead>
-<tr class="header">
-<th align="center"></th>
-<th align="center">Model order 1</th>
-<th align="center">Model order 2</th>
-<th align="center">Model order 3</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>n</strong></td>
-<td align="center">697</td>
-<td align="center">702</td>
-<td align="center">697</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>CFI</strong></td>
-<td align="center">0.997</td>
-<td align="center">0.984</td>
-<td align="center">0.991</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>TLI</strong></td>
-<td align="center">0.992</td>
-<td align="center">0.968</td>
-<td align="center">0.984</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>RMSEA</strong></td>
-<td align="center">0.037</td>
-<td align="center">0.071</td>
-<td align="center">0.051</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>χ2</strong></td>
-<td align="center">28.03</td>
-<td align="center">64.156</td>
-<td align="center">39.090</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>p</strong></td>
-<td align="center">.000</td>
-<td align="center">.000</td>
-<td align="center">.000</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>χ2/gl</strong></td>
-<td align="center">2,00</td>
-<td align="center">4,58</td>
-<td align="center">2,78</td>
-</tr>
-</tbody>
-</table>
-<p>Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, χ2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, χ2(df=14)=39.09, p &lt; 0.001). Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, χ2(df=14)=64.156, p &lt; 0.001).</p>
+<p>Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, x2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, x2(df=14)=39.09, p &lt; 0.001). Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, x2(df=14)=64.156, p &lt; 0.001).</p>
 <p>8 XX explicar mejor lo que viene: invarianza de qué y por qué se realiza.</p>
 <p>Si bien todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico <span class="citation">(<span class="citeproc-not-found" data-reference-id="vandenbergReviewSynthesisMeasurement2000"><strong>???</strong></span>)</span>. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo. Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.</p>
+<p>Table 5: Comparison between model fit.</p>
 <table>
 <thead>
 <tr class="header">
@@ -1359,7 +1413,7 @@ H. Is well that those who have good contacts get ahead.
 <td align="center">0.036</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>χ2</strong></td>
+<td align="center"><strong>x2</strong></td>
 <td align="center">1830.839</td>
 <td align="center">68.661</td>
 <td align="center">40.250</td>
@@ -1371,31 +1425,30 @@ H. Is well that those who have good contacts get ahead.
 <td align="center">.000</td>
 </tr>
 <tr class="odd">
-<td align="center"><strong>χ2/gl</strong></td>
+<td align="center"><strong>x2/gl</strong></td>
 <td align="center">65.38</td>
 <td align="center">4.90</td>
 <td align="center">3.32</td>
 </tr>
 </tbody>
 </table>
-<p>EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba χ2(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un X2 ratio menor a 3 y obtuvo cargas factoriales muy bajas ʎ &lt; 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.</p>
+<p>EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba x2(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un X2 ratio menor a 3 y obtuvo cargas factoriales muy bajas (cargas)&lt; 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.</p>
 <ul>
 <li>agregar cuáles fueron las cargas sugeridas.</li>
 </ul>
 </div>
 </div>
-<div id="conclusion" class="section level1">
+<div id="conclusión" class="section level1">
 <h1><span class="header-section-number">5</span> Conclusión</h1>
 <p>Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha decidido seguir utilizando el orden 3.</p>
 </div>
 <div id="conclusiones" class="section level1">
 <h1><span class="header-section-number">6</span> Conclusiones</h1>
 <p>uso conjunto percepciones-preferencias</p>
-<div/>
-
 </div>
 <div id="anexos" class="section level1">
 <h1><span class="header-section-number">7</span> Anexos</h1>
+<p>Annexed 1: Representativeness of the sample.</p>
 <table>
 <thead>
 <tr class="header">
@@ -1478,7 +1531,7 @@ H. Is well that those who have good contacts get ahead.
 </tbody>
 </table>
 </div>
-<div id="bibliografia" class="section level1 unnumbered">
+<div id="bibliografía" class="section level1 unnumbered">
 <h1>Bibliografía</h1>
 <div id="refs" class="references">
 <div id="ref-AielloNewevidencefirmuniversity2019">
@@ -1603,8 +1656,6 @@ H. Is well that those who have good contacts get ahead.
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -1620,6 +1671,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
