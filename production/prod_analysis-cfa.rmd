@@ -542,7 +542,7 @@ fm03<- data.frame(t(data.frame(fitmeasures(fit3_o, output ="matrix")[c("chisq.sc
 #------chi2, df------#
 fm04<- round(rbind(fm01,fm02,fm03),3)
 fm04.1 <- fm04 %>% select(chisq.scaled,df) 
-fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 2)
+fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 1)
 fm04.1$df <- round(x = fm04.1$df,digits = 0)
 fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
 fm04.1 <- select(fm04.1,"chi2df")

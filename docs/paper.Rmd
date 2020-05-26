@@ -1,24 +1,35 @@
 ---
 title: "Perceptions and Preferences for Meritocracy"
+author:
+- Juan Carlos Castillo 
+- Julio Iturra 
+- Francisco Meneses 
 css: "../input/css/custom.css"
 linestretch: '1.5'
 link-citations: yes
 output:
-  pdf_document:
-    keep_tex: false
-    template: null
-    number_sections: true
   html_document:
     theme: flatly
     number_sections: true
     always_allow_html: yes
+  pdf_document:
+    keep_tex: false
+    template: null
+    number_sections: true
 linkcolor: blue
 bibliography:
   - ../input/bib/EconomiaMoral.bib
   - ../input/bib/meritocracy.bib
 editor_options:
   chunk_output_type: console
+geometry: margin=0.78in
 ---
+
+```{r include=FALSE}
+# for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
+# clean #in the yml
+```
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE)
@@ -35,6 +46,10 @@ library(kableExtra)
 library(dplyr)
 #install.packages("captioner")
 library(captioner)
+#install.packages("estimatr")
+library(estimatr)
+library(texreg)
+
 ```
 
 ```{r echo=FALSE }
@@ -45,23 +60,35 @@ table_format = if(is_html_output()) {
 }
 
 
+table_format2 = if(is_html_output()) {
+  T
+} else if(is_latex_output()) {
+  F
+}
+
+
 ```
 
+```{r include=FALSE}
+table_nums <- captioner(prefix = "Table")
+fig_nums   <- captioner(prefix = "Figure")
+```
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-table_nums<-captioner(prefix = "Table")
-plot_nums<-captioner(prefix = "Figure")
-diam_nums<-captioner(prefix = "Diagram")
 anx_nums<-captioner(prefix = "Annexed")
+
 table_nums("ta", "Dimensions of meritocratic beliefs.")
 table_nums("tb", "Items according to dimension.")
 table_nums("tc", "Descriptive statistics of the scale.")
 table_nums("td", "Factor loads and model fit.")
 table_nums("te", "Comparison between model fit.")
-diam_nums("da", "Survey flow")
-diam_nums("db", "Theorical model")
-plot_nums("fa", "Descriptive boxplot of the scale.")
-plot_nums("fb", "Polychoric correlation.")
+
+fig_nums("fa", "Descriptive boxplot of the scale.")
+fig_nums("fb", "Polychoric correlation.")
+anx_nums("aa", "Representativeness of the sample.")
+
+
+anx_nums<-captioner(prefix = "Annexed")
 anx_nums("aa", "Representativeness of the sample.")
 ```
 
@@ -106,10 +133,6 @@ Based on the previous limitations in the measurement of meritocracy presented in
 - Based on previous indicators as far as possible, for the sake of comparability between studies
 - Brief, as to be used in a regular survey. In this point it differs for instance from the proposal of the "Preference for the Merit Principle Scale" [@davey_preference_1999], as they use 15 items just for one dimension (besides the problem of reverse-coding non-meritocratic items).
 
-.
-.
-.
-
 
 The proposed measurement framework is based on two axis of analysis, as depicted in Table 1:
 
@@ -147,9 +170,12 @@ The data was obtained through an online questionnaire which was part of a larger
 
 The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into 4 dimensions referred above: Perceptions (meritocratic/nonmeritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which are mostly used for operationalizing meritocracy in previous empirical studies [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from "Completely disagree"(1) to "Completely agree" (5).
 
-`r table_nums("tb")`
+```{r include=FALSE}
+cap <- "Items according to dimension."
+if (knitr::is_html_output()) {tb <- fig_nums("tb",cap)} else {tb <- cap}
+```
 
-![](../input/images/tabla2.png)
+![`r tb`](../input/images/tabla2.png)
 
 
 ## Administration sets
@@ -158,25 +184,40 @@ With the objective of evaluating the effect of the order of the indicators, the 
 
 
 
+```{r include=FALSE}
+cap <- "Survey flow"
+if (knitr::is_html_output()) {diam1 <- fig_nums("diam1",cap)} else {diam1 <- cap}
+```
 
-`r diam_nums("da")`
+![`r diam1`](../input/images/app_mod.png)
 
-![](../input/images/app_mod.png)
+
+
 
 ## Methods
 
 For testing the scale's underlying constructs we estimate confirmatory factor analysis models (CFA). The model estimates one factor for each dimension, as represented in the following figure:
 
 
-`r diam_nums("db")`
+```{r include=FALSE}
+cap <- "Theorical model"
+if (knitr::is_html_output()) {diam2 <- fig_nums("diam2",cap)} else {diam2 <- cap}
+```
 
-![](../output/images/meas01.png)
+![`r diam2`](../output/images/meas01.png)
 
 CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3).
 
 # Results
 
 ## Descriptive analysis
+
+```{r include=FALSE}
+cap <- "Descriptive statistics of the scale."
+if (knitr::is_html_output()) {tades <- table_nums("tades",cap)} else {tades <- cap}
+```
+
+`r tades`
 
 ```{r echo=FALSE}
 
@@ -198,22 +239,23 @@ table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
 cap01 <- "Descriptive statistic"
 sumdat04<- kable(table04b, table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = cap01
 ) %>% 
-          kable_styling(full_width = F,font_size = 8,position = "center");sumdat04
+          kable_styling(full_width = table_format2,font_size = 12,position = "center");sumdat04
 
 ```
 
-4 XX producir tabla y llamar directamente desde la fuente o como imagen [__Pendiente__]
-
-`r plot_nums("fa")`
-
-![](../output/images/plotlikert.png)
 
 
 
+```{r include=FALSE}
+cap <- "Descriptive plot"
+if (knitr::is_html_output()) {liker <- fig_nums("liker",cap)} else {liker <- cap}
+```
+
+![`r liker`](../output/images/plotlikert.png)
 
 En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
 
-`r plot_nums("fb")`
+`r fig_nums("fb")`
 
 ```{r echo=FALSE}
 load(file = "output/images/correlation.RData")
@@ -222,16 +264,18 @@ corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.c
 ```
 
 
-6 - XX Sobre tablas en general, entonces:
-- dejar tabla de descriptivos que ahora aparece junto a la de correlaciones [_Pendiente_ ]
-
-
 ## Models estimation
-
-7 XX En tabla de cargas factoriales, los fit aparecen corridos hacia la izquierda [__Pendiente__]
 
 
 En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.
+
+
+```{r include=FALSE}
+cap <- "Factor loads and model fit."
+if (knitr::is_html_output()) {loadfit <- table_nums("loadfit",cap)} else {loadfit <- cap}
+```
+
+`r loadfit`
 
 ```{r echo=FALSE}
 
@@ -254,7 +298,7 @@ tb.fm <- tb.fm %>%
                          "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
 
 tb.fm01<- kable(tb.fm, table_format, booktabs = T, escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
-          kable_styling(position = "center", full_width = F,font_size = 6) %>% 
+          kable_styling(position = "center", full_width = table_format2,font_size = 9) %>% 
           add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
           row_spec(row = 8,hline_after = TRUE) %>%
@@ -264,24 +308,22 @@ tb.fm2<-as.data.frame(tb.fm[1:8,])
 
 
 tb.fm02<- kable(tb.fm2, table_format, booktabs = T, escape = FALSE,align = "lcccccccccccc", col.names = tb.col, caption = tb.caption) %>% 
-          kable_styling(position = "center", full_width = F,font_size = 8) %>% 
+          kable_styling(position = "center", full_width = table_format2,font_size = 11) %>% 
           add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
-          row_spec(row = 8,hline_after = F) 
+          row_spec(row = 8,hline_after = ) 
 
-tb.fm02
+
 tb.fm01
+tb.fm02
 ```
-
-
 
 
 Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, x2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, x2(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, x2(df=14)=64.156, p < 0.001).
 
 
-8 XX explicar mejor lo que viene: invarianza de qué y por qué se realiza.
-
 Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
+
 
 `r table_nums("te")`
 
@@ -313,7 +355,6 @@ uso conjunto percepciones-preferencias
 # Anexos
 
 `r anx_nums("aa")`
-
 |                     | Sample  |   CEP  |
 |---------------------|:-------:|:------:|
 | __gender__          |         |        |
