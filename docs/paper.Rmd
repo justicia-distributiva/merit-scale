@@ -23,6 +23,22 @@ bibliography:
 editor_options:
   chunk_output_type: console
 geometry: margin=0.78in
+header-includes:
+  # - \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+  - \usepackage{caption}
+  - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
 ---
 
 ```{r include=FALSE}
@@ -77,19 +93,6 @@ fig_nums   <- captioner(prefix = "Figure")
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 anx_nums<-captioner(prefix = "Annexed")
 
-table_nums("ta", "Dimensions of meritocratic beliefs.")
-table_nums("tb", "Items according to dimension.")
-table_nums("tc", "Descriptive statistics of the scale.")
-table_nums("td", "Factor loads and model fit.")
-table_nums("te", "Comparison between model fit.")
-
-fig_nums("fa", "Descriptive boxplot of the scale.")
-fig_nums("fb", "Polychoric correlation.")
-anx_nums("aa", "Representativeness of the sample.")
-
-
-anx_nums<-captioner(prefix = "Annexed")
-anx_nums("aa", "Representativeness of the sample.")
 ```
 
 
@@ -136,12 +139,19 @@ Based on the previous limitations in the measurement of meritocracy presented in
 
 The proposed measurement framework is based on two axis of analysis, as depicted in Table 1:
 
-`r table_nums("ta")`
+```{r include=FALSE}
+cap <- "Dimensions of meritocratic beliefs."
+if (knitr::is_html_output()) {ta <- table_nums("ta",cap)} else {ta <- cap}
+```
+
 
 |                  	  | Perceptions 	| Preferences 	|
 |:-----------------	  |-------------	|-------------	|
 | _Meritocracy_     	|             	|             	|
 | _Non-meritocracy_ 	|             	|             	|
+Table:`r ta`
+
+
 
 The first axis distinguishes between different types of "beliefs", using instead the terms perceptions and preferences for meritocracy [@duru-bellat_whos_2012; @son_hing_merit_2011-1]. Perceptions refers to the extent to which people see meritocracy working in their society, which in terms of measurement relates to the "reasons to get ahead" battery, whereas preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The second axis consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014]. This aspect has been usually treated as different ends of a same continuum in part of the previous research, an assumption that requieres empirical scrutiny. These non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
 
@@ -172,10 +182,23 @@ The proposed scale of perceptions and preferences about meritocracy consists of 
 
 ```{r include=FALSE}
 cap <- "Items according to dimension."
-if (knitr::is_html_output()) {tb <- fig_nums("tb",cap)} else {tb <- cap}
+if (knitr::is_html_output()) {tb <- table_nums("tb",cap)} else {tb <- cap}
 ```
 
-![`r tb`](../input/images/tabla2.png)
+
+```{r echo=FALSE}
+ tab01 <- read.csv(file = "input/data/original/materials/table01.csv",header = 1,sep = ";")
+
+ cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
+
+ kable(tab01,format = table_format,booktabs = T, linesep = "",col.names = cnames, caption = tb) %>%
+   kable_styling(full_width = T,latex_options = c("hold_position","scale_down"),position = "center",font_size = 9) %>%
+   column_spec(column = 1,width = "1.5cm",) %>%
+   column_spec(column = 2,width = "2 cm") %>%
+   collapse_rows(columns = 1:2,valign = "middle")
+
+```
+
 
 
 ## Administration sets
@@ -217,27 +240,24 @@ cap <- "Descriptive statistics of the scale."
 if (knitr::is_html_output()) {tades <- table_nums("tades",cap)} else {tades <- cap}
 ```
 
-`r tades`
-
 ```{r echo=FALSE}
 
 load(file = "input/data/proc/dat04.RData")
 
-dat04b<- dat04 %>% rename("Perception Effort" =perc_effort,
-                          "Perception Talent" = perc_talent,
-                          "Perception rich parents" = perc_wpart,
-                         "Perception contacts" = perc_netw,
-                          "Preferences Effort" = pref_effort,
-                          "Preferences Talent" =  pref_talent, 
-                         "Preferences rich parents" =  pref_wpart ,
-                          "Preferences contacts" = pref_netw  )
+dat04b<- dat04 %>% rename("A.Perception Effort" =perc_effort,
+                          "B.Perception Talent" = perc_talent,
+                          "c.Perception rich parents" = perc_wpart,
+                         "D.Perception contacts" = perc_netw,
+                          "E.Preferences Effort" = pref_effort,
+                          "F.Preferences Talent" =  pref_talent, 
+                         "G.Preferences rich parents" =  pref_wpart ,
+                          "H.Preferences contacts" = pref_netw  )
 
 sum04b  <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
 
 table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
 
-cap01 <- "Descriptive statistic"
-sumdat04<- kable(table04b, table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = cap01
+sumdat04<- kable(table04b, table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = tades
 ) %>% 
           kable_styling(full_width = table_format2,font_size = 12,position = "center");sumdat04
 
@@ -255,14 +275,12 @@ if (knitr::is_html_output()) {liker <- fig_nums("liker",cap)} else {liker <- cap
 
 En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
 
-`r fig_nums("fb")`
-
-```{r echo=FALSE}
-load(file = "output/images/correlation.RData")
-library(corrplot)
-corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```{r include=FALSE}
+cap <- "Descriptive plot"
+if (knitr::is_html_output()) {fb <- fig_nums("fb",cap)} else {fb <- cap}
 ```
 
+![`r fb`](../output/images/Rplot.png)
 
 ## Models estimation
 
@@ -275,7 +293,6 @@ cap <- "Factor loads and model fit."
 if (knitr::is_html_output()) {loadfit <- table_nums("loadfit",cap)} else {loadfit <- cap}
 ```
 
-`r loadfit`
 
 ```{r echo=FALSE}
 
@@ -297,35 +314,30 @@ tb.fm <- tb.fm %>%
                          "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
                          "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
 
-tb.fm01<- kable(tb.fm, table_format, booktabs = T, escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
+tb.fm01<- kable(tb.fm, table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
           kable_styling(position = "center", full_width = table_format2,font_size = 9) %>% 
           add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
           row_spec(row = 8,hline_after = TRUE) %>%
           add_indent(c(9:12))
 
-tb.fm2<-as.data.frame(tb.fm[1:8,])
-
-
-tb.fm02<- kable(tb.fm2, table_format, booktabs = T, escape = FALSE,align = "lcccccccccccc", col.names = tb.col, caption = tb.caption) %>% 
-          kable_styling(position = "center", full_width = table_format2,font_size = 11) %>% 
-          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
-          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
-          row_spec(row = 8,hline_after = ) 
-
 
 tb.fm01
-tb.fm02
+
 ```
 
 
-Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, x2(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, x2(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, x2(df=14)=64.156, p < 0.001).
+Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, $\chi2$(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
 
 
 Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
 
 
-`r table_nums("te")`
+```{r include=FALSE}
+cap <- "Items according to dimension."
+if (knitr::is_html_output()) {te <- table_nums("te",cap)} else {te <- cap}
+```
+
 
 |           | Contrast Model 1 Factor | theoretical model 4 Factors | Model with M.I. |
 |:---------:|:-----------------------:|:---------------------------:|:---------------:|
@@ -333,14 +345,14 @@ Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las d
 | **CFI**   |          0.595          |            0.988            |      0.994      |
 | **TLI**   |          0.433          |            0.976            |      0.985      |
 | **RMSEA** |          0.226          |            0.047            |      0.036      |
-| **x2**    |         1830.839        |            68.661           |      40.250     |
+| **$\chi2$**    |         1830.839        |            68.661           |      40.250     |
 | **p**     |           .000          |             .000            |       .000      |
-| **x2/gl** |          65.38          |             4.90            |       3.32      |
+| **$\chi2$/df** |          65.38          |             4.90            |       3.32      |
+Table:`r te`
 
 
-EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba x2(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un X2 ratio menor a 3 y obtuvo cargas factoriales muy bajas (cargas)< 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
+EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba $\chi2$(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un $\chi2$ ratio menor a 3 y obtuvo cargas factoriales muy bajas ($\tau$)< 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
 
-* agregar cuáles fueron las cargas sugeridas.
 
 
 # Conclusión
@@ -354,7 +366,11 @@ uso conjunto percepciones-preferencias
 
 # Anexos
 
-`r anx_nums("aa")`
+```{r include=FALSE}
+cap <- "Representativeness of the sample."
+if (knitr::is_html_output()) {aax <- table_nums("aax",cap)} else {aax <- cap}
+```
+
 |                     | Sample  |   CEP  |
 |---------------------|:-------:|:------:|
 | __gender__          |         |        |
@@ -371,7 +387,6 @@ uso conjunto percepciones-preferencias
 | Hig school          | 43,23%  | 37,04% |
 | Non university      | 32,63%  | 28,93% |
 | university or more  | 21,21%  | 18,13% |
-
-
+Table:`r aax`
 
 # Bibliografía

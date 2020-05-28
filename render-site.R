@@ -19,7 +19,7 @@ file.copy(file.path("production",production), "docs",overwrite = TRUE)# copy dat
 
 rmarkdown::render_site("docs",quiet = TRUE) # Render site
 
-# before you run this line, check if your R Markdown files have a .rmd or .Rmd extension
+# before you run this line, check if your R Markdown files have a .rmd or .Rmd extension 
 # on this case we use both
 ext <- c(grep("^prod_.*\\.rmd$",  x = dir(path = "docs"),value = T), # for .rmd
          grep("^prod_.*\\.Rmd$",  x = dir(path = "docs"),value = T), # for .Rmd
