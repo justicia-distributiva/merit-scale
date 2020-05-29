@@ -361,18 +361,18 @@ save(wide02,file = "input/data/proc/datawide_123.RData")
 # Wide to long data
 
 ```{r}
-library(datasets)
-library(data.table)
-wide <- setDT(wide02)
-long01<- melt(wide,variable.name = "wave",
-              measure = patterns("^perc_effort_","^perc_talent_","^perc_wpart_","^perc_netw_",
-                                       "^pref_effort_","^pref_talent_","^pref_wpart_","^pref_netw_",
-                                       "^sexo_","^edad_","^edcep_"),
-              value.name = c("perc_effort","perc_talent","perc_wpart","perc_netw",
-                             "pref_effort","pref_talent","pref_wpart","pref_netw",
-                             "sexo","edad","edcep"))
+#library(datasets)
+#library(data.table)
+#wide <- setDT(wide02)
+#long01<- melt(wide,variable.name = "wave",
+#              measure = patterns("^perc_effort_","^perc_talent_","^perc_wpart_","^perc_netw_",
+#                                       "^pref_effort_","^pref_talent_","^pref_wpart_","^pref_netw_",
+#                                       "^sexo_","^edad_","^edcep_"),
+#              value.name = c("perc_effort","perc_talent","perc_wpart","perc_netw",
+#                             "pref_effort","pref_talent","pref_wpart","pref_netw",
+#                             "sexo","edad","edcep"))
 ```
 
 ```{r}
-save(long01,file = "input/data/proc/datalong.RData")
+#save(long01,file = "input/data/proc/datalong.RData")
 ```

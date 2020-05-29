@@ -1,9 +1,5 @@
 ---
 title: "Perceptions and Preferences for Meritocracy"
-author:
-- Juan Carlos Castillo 
-- Julio Iturra 
-- Francisco Meneses 
 css: "../input/css/custom.css"
 linestretch: '1.5'
 link-citations: yes
@@ -106,6 +102,8 @@ En general, la meritocracia se define como un sistema de distribución de recurs
 
 Debido al rol que cumplen las creencias meritocráticas dentro del pensamiento neoliberal [@Bay-ChengTrackingHomoOeconomicus2015], han surgido múltiples investigaciones que evalúan la relación entre creencias meritocráticas y diversos ámbitos sociales de la actualidad. Se han desarrollado estudios que vinculan la meritocracia con el reforzamiento de estereotipos socioeconómicos, de género y de etnias [@MadeiraPrimesConsequencesSystematic2019; @GirerdNeoliberalismIdeologicalBarrier2020; @PremingerMeritocracyserviceethnocracy2020]. Igualmente, se han desarrollado líneas de investigación que evalúan el efecto de las creencias meritocráticas en el contexto educativo [@GenerettStoriesWeTell2020; @ReayPerilsPenaltiesMeritocracy2020; @OwensENGINESSOCIALMOBILITY2020]. y en el contexto organizacional de las empresas [@PerezAdvancingcareersmerit2020; @AielloNewevidencefirmuniversity2019]
 
+\pagebreak
+
 Para poder dar cuenta de los niveles de creencia en la meritocracia los estudios a la fecha generalmente han utilizado algunos indicadores de encuestas ya existentes, y en el menor de los casos se han creado instrumentos ad-hoc. Sin embargo, y como mostraremos más adelante, las formas de medición de meritocracia varían extremadamente entre estudios. Muchas veces fenómenos similares se asocian a indicadores distintos, y también ocurre que fenómenos distintos son medidos con indicadores similares, todo lo cual hace dificulta la comparabilidad entre estudios y el poder avanzar en la comprensión del concepto de meritocracia.
 
 Basados en el análisis crítico de las formas de medición de meritocracia a la fecha, el presente estudio propone un instrumento para medir y relacionar dos aspectos claves en el estudio de la meritocracia: percepciones y preferencias. Además, como un segundo eje de análisis considera la generación de indicadores respecto de aspectos meritocráticos y anti-meritocráticos, demostrando que no son los dos polos de un mismo continuo como muchos estudios anteriores parecen sugerir. La propuesta de medición además está orientada a generar un instrumento lo más breve posible de manera que pueda ser utilizado en encuestas de opinión.
@@ -124,6 +122,8 @@ most meritocratic part of Michael Young’s equation, ‘Merit = Intelligence + 
 b. Beliefs: the "get ahead" battery refers to "how important you think it is", considered by Mijs as a belief in meritocracy. Nevertheless, another version of this same battery asks about "how important you think it _should_ be". Which one of both is the "belief"? If we consider belief as related to a normative content, actually the more close version is the "should be", being the other one more close to the perception of the situation. Such distinction was already made by @duru-bellat_whos_2012, who used the item "how important should the number of years spent in education and training be in deciding how much money people ought to earn?" for "desired" meritocracy, whereas for "perceived" meritocracy they use two items: “Would you say that in your country, people are rewarded for their efforts?” and “... people are rewarded for their skills?”. Is the belief in meritocracy a perception or a preference? A comprehensive measurement should be in line with what @duru-bellat_whos_2012 did, in order to open up possibilities of analyzing whether perceptions and preferences are actually the same (i.e. correlation close to 1) or they are different aspects of the same phenomenon. Therefore, two main drawbacks of the term "beliefs" are that (i) it hides different operationalizations of the concept of meritocracy, and (ii) it blurs the distinction between perceptions and preferences. We argue that perceptions and preferences should be disentangled and used together, specially when analyzing preferences. As @son_hing_merit_2011-1 have pointed out, "People can believe that outcomes ought to be distributed on the basis of merit and yet vary in their perceptions of whether this is how society currently operates" (p. 435). In other words, preferences should be interpreted in the context of perception: a large preference for meritocracy certainly means something totally different for someone perceiving high meritocracy than for someone perceiving low meritocracy.
 
 c. Non-meritocratic aspects: @mijs_paradox_2019 make reference to some non-meritocratic aspects as talent, letting this out of the measurement. A different approach was followed by @kunovich_systems_2007, who decide to include non-meritocratic elements in the measurement of meritocracy. Using the items’ battery listing a number of reasons about “How important should be in deciding pay...” (as @duru-bellat_whos_2012 for desired meritocracy), he decided that reasons as education and responsibility are meritocratic and pointed 1 if considered essential, whereas reasons such as having a family and children were pointed 1 if they were considered "not important at all" (i.e. reverse coded). A similar approach was taken by @newman_false_2015, reverse-coding non-meritocratic items, similarly to what occurs with the "Preference for the Merit Principle Scale" [@davey_preference_1999]. The assumption that meritocratic and non-meritocratic elements are the poles of the same continuum was analyzed by @reynolds_perceptions_2014 using the same "get ahead" perceptions' battery items. They consider education, ambition and hard work as meritocratic and other reasons such as wealthy family and right connections and non-mertitocratic. Nevertheless, despite making this distinction the author ends up substracting one dimension from the other, assuming that they are two poles of the same continuum as @kunovich_systems_2007 did.
+
+\pagebreak
 
 d. Accounting for measurement error: finally, most of the studies in meritocracy so far have not incorporated the issue of measurement error @brown_confirmatory_2006, using single indicators and/or composite indexes for measuring meritocracy. This means assuming that the construct is measured perfectly by the indicators chosen, going as far as proposing that "we decided to rely on a summative index. In choosing this strategy of index construction, we argue that *support for meritocracy is not a latent variable* [@kunovich_systems_2007 p.653-654]. Some advances were done by @reynolds_perceptions_2014 by doing a principal component analysis of meritocratic and non-meritocratic dimensions, but somewhat contradictorily they end up in a sum index despite proving multidimensionality.
 
@@ -176,6 +176,8 @@ Regarding the selection of indicators, most of them some adaptations of previous
 
 The data was obtained through an online questionnaire which was part of a larger study on meritocracy and preferences developed in Chile in 2019 and funded by the national scientific agency FONDECYT. The questionnaire was programmed in Qualtrics and the fieldwork was in charge of an external online survey agency ([netquest.cl](www.netquest.cl))during December 2019 and January 2020. The sample was selected from a non-probabilistic design in three large cities in Chile. The quota method based on age, sex and educational level was used. Quotas were generated based on the survey of the Public Studies Center (CEP, 2019), which has a high prestige in the country and is also the counterpart agency of ISSP (International Social Survey Programme) in Chile. A total sample of 2141 people was collected, excluding those who did not answer the questions on the scale and those who did not accept informed consent. As it usually occurs online samples, there were some limitations in achieving the quotas for lower educational levels.
 
+\pagebreak
+
 ## Instrument design
 
 The proposed scale of perceptions and preferences about meritocracy consists of 8 indicators that are grouped into 4 dimensions referred above: Perceptions (meritocratic/nonmeritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which are mostly used for operationalizing meritocracy in previous empirical studies [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. The eight items ordered according to dimensions are presented in Table 2. These 8 likert-type items have 5 response alternatives ranging from "Completely disagree"(1) to "Completely agree" (5).
@@ -191,7 +193,7 @@ if (knitr::is_html_output()) {tb <- table_nums("tb",cap)} else {tb <- cap}
 
  cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
 
- kable(tab01,format = table_format,booktabs = T, linesep = "",col.names = cnames, caption = tb) %>%
+ kable(tab01,table_format,booktabs = T, linesep = "",col.names = cnames, caption = tb) %>%
    kable_styling(full_width = T,latex_options = c("hold_position","scale_down"),position = "center",font_size = 9) %>%
    column_spec(column = 1,width = "1.5cm",) %>%
    column_spec(column = 2,width = "2 cm") %>%
@@ -199,28 +201,26 @@ if (knitr::is_html_output()) {tb <- table_nums("tb",cap)} else {tb <- cap}
 
 ```
 
-
+\pagebreak
 
 ## Administration sets
 
-With the objective of evaluating the effect of the order of the indicators, the respondents (_n = 2141_) were randomly divided into three groups as explained in __Diagram 1__. The scale was presented to the first group (_n = 712_) in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group (_n = 717_)was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). Finally, in the third group (_n = 712_) the items were completely randomized.
-
-
+With the objective of evaluating the effect of the order of the indicators, the respondents (_n = 2141_) were randomly divided into three groups as explained in __Figure 1__. The scale was presented to the first group (_n = 712_) in the order that appears in Table 2, in such a way that the items of the same factor are found together. The second group (_n = 717_)was presented with the scale with the items of the same factor separated from each other, in such a way that they were consulted at the same time for their perceptions and preferences of a particular topic (e.g. distribution according to effort). Finally, in the third group (_n = 712_) the items were completely randomized.
 
 ```{r include=FALSE}
 cap <- "Survey flow"
 if (knitr::is_html_output()) {diam1 <- fig_nums("diam1",cap)} else {diam1 <- cap}
 ```
 
-![`r diam1`](../input/images/app_mod.png)
+![`r diam1`](../input/images/app_mod.png){ width=80% }
 
+\pagebreak
 
 
 
 ## Methods
 
 For testing the scale's underlying constructs we estimate confirmatory factor analysis models (CFA). The model estimates one factor for each dimension, as represented in the following figure:
-
 
 ```{r include=FALSE}
 cap <- "Theorical model"
@@ -231,9 +231,12 @@ if (knitr::is_html_output()) {diam2 <- fig_nums("diam2",cap)} else {diam2 <- cap
 
 CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3).
 
+
 # Results
 
 ## Descriptive analysis
+
+Como puede observarse en la tabla 3, los indicadores poseen valores que van desde el 1 al 5. Se observan promedios desde 2,41 correspondiente a la preferencia de distribucion según contactos, hasta 3,89, correspondiente a la preferencia de distribucion según esfuerzo. Ambos indicadores son coherentes con la adhesión  a las creencias meritocraticas, privilegiando la distribucion meritocratica por sobre aquella que se debe a ventajas externas. 
 
 ```{r include=FALSE}
 cap <- "Descriptive statistics of the scale."
@@ -241,49 +244,60 @@ if (knitr::is_html_output()) {tades <- table_nums("tades",cap)} else {tades <- c
 ```
 
 ```{r echo=FALSE}
-
 load(file = "input/data/proc/dat04.RData")
-
 dat04b<- dat04 %>% rename("A.Perception Effort" =perc_effort,
                           "B.Perception Talent" = perc_talent,
-                          "c.Perception rich parents" = perc_wpart,
+                          "C.Perception rich parents" = perc_wpart,
                          "D.Perception contacts" = perc_netw,
                           "E.Preferences Effort" = pref_effort,
                           "F.Preferences Talent" =  pref_talent, 
                          "G.Preferences rich parents" =  pref_wpart ,
                           "H.Preferences contacts" = pref_netw  )
-
 sum04b  <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
-
 table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
-
-sumdat04<- kable(table04b, table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = tades
-) %>% 
-          kable_styling(full_width = table_format2,font_size = 12,position = "center");sumdat04
-
+sumdat04<- kable(table04b,format =table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = tades
+) %>% kable_styling(full_width = table_format2, font_size = 9,position = "center");sumdat04
 ```
+    
+
+\pagebreak
 
 
-
+A partir del grafico liker  se observa que, en general, hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento. 
 
 ```{r include=FALSE}
 cap <- "Descriptive plot"
 if (knitr::is_html_output()) {liker <- fig_nums("liker",cap)} else {liker <- cap}
 ```
 
-![`r liker`](../output/images/plotlikert.png)
+<center>
 
-En general se observa que hay una mayor percepción de aspectos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
+![`r liker`](../output/images/plotlikert.png){ width=70% }
+
+</center>
+
+\pagebreak
+
+El grafico de correlaciones policoricas evidencia relaciones de moderada a alta intensidad entre los indicadores que corresponden al mismo factor, mientras que se observan correlaciones de baja intensidad en el resto de los cruces. Destacan además las relaciones entre las percepciones y preferencias de tipo meritocraticas, lo que no ocurre con los indicadores no meritocraticos. 
 
 ```{r include=FALSE}
-cap <- "Descriptive plot"
+cap <- "polychoric correlation plot"
 if (knitr::is_html_output()) {fb <- fig_nums("fb",cap)} else {fb <- cap}
 ```
 
-![`r fb`](../output/images/Rplot.png)
+<center>
+
+![`r fb`](../output/images/corpoly.png){ width=70% }
+</center>
+
+
+
+
+En suma, los análisis descriptivos señalan una relativa adhesión a la moral meritocratica, las cuales, a modo general, se expresan en una mayor preferencia de distribucion según criterios meritocraticos y una menor preferencia de criterios no meritocraticos. Igualmente, es observable una relativamente baja percepcion de distribucion meritocratica. Además se observa una relación coherente entre los indicadores según lo propuesto en el modelo teórico en el preregistro. 
+
+\pagebreak
 
 ## Models estimation
-
 
 En una primera instancia se probó el ajuste del modelo con tres distintos órdenes de los ítems, los cuales fueron aplicados a un tercio de la muestra de la primera ola cada uno. El primer orden de los ítems corresponde al orden de de la tabla 2, en el que primero se pregunta a los encuestados por todas las percepciones y después por todas las preferencias, en el segundo orden se les pregunta seguidamente por percepciones y preferencias respecto a un mismo tema, por ejemplo, al papel del esfuerzo, y en el tercero, los ítems aparecen de manera aleatoria.
 
@@ -301,7 +315,7 @@ load(file = "output/tables/tb.fm.RData")
 
 tb.col  <- c("Variables",1:4,1:4,1:4)
 tb.caption <- "Factor loadings and fit measures" 
-tb.foot <- paste0("; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
+tb.foot <- paste0("Standardised factor loadings using DWLS estimator")
 
 tb.fm <- tb.fm %>% 
     mutate(vars = recode(vars, 
@@ -314,23 +328,24 @@ tb.fm <- tb.fm %>%
                          "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
                          "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
 
-tb.fm01<- kable(tb.fm, table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
-          kable_styling(position = "center", full_width = table_format2,font_size = 9) %>% 
+tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = loadfit) %>% 
+          kable_styling(full_width = table_format2,latex_options = c("hold_position","scale_down"), position = "center",font_size = 9) %>% 
           add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
           row_spec(row = 8,hline_after = TRUE) %>%
-          add_indent(c(9:12))
-
-
-tb.fm01
+          add_indent(c(9:12))  %>%
+          footnote(general = tb.foot, number = c("CFI = Comparative fit index (scaled); ", " RMSEA = Root mean square error of approximation (scaled); "));tb.fm01
 
 ```
+
 
 
 Todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, $\chi2$(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
 
 
 Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
+
+\pagebreak
 
 
 ```{r include=FALSE}
@@ -359,9 +374,10 @@ EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la t
 
 Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha decidido seguir utilizando el orden 3.
 
-# Conclusiones
   
 uso conjunto percepciones-preferencias
+
+\pagebreak
 
 
 # Anexos
