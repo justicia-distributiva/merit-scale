@@ -59,9 +59,6 @@ library(dplyr)
 #install.packages("captioner")
 library(captioner)
 #install.packages("estimatr")
-library(estimatr)
-library(texreg)
-
 ```
 
 ```{r echo=FALSE }
@@ -84,12 +81,10 @@ table_format2 = if(is_html_output()) {
 ```{r include=FALSE}
 table_nums <- captioner(prefix = "Table")
 fig_nums   <- captioner(prefix = "Figure")
-```
-
-```{r message=FALSE, warning=FALSE, include=FALSE}
 anx_nums<-captioner(prefix = "Annexed")
-
 ```
+
+
 
 
 <div style="text-align: justify">
@@ -288,6 +283,8 @@ if (knitr::is_html_output()) {fb <- fig_nums("fb",cap)} else {fb <- cap}
 <center>
 
 ![`r fb`](../output/images/corpoly.png){ width=70% }
+
+
 </center>
 
 
@@ -315,7 +312,7 @@ load(file = "output/tables/tb.fm.RData")
 
 tb.col  <- c("Variables",1:4,1:4,1:4)
 tb.caption <- "Factor loadings and fit measures" 
-tb.foot <- paste0("Standardised factor loadings using DWLS estimator")
+tb.foot <- paste0("Standardised factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
 
 tb.fm <- tb.fm %>% 
     mutate(vars = recode(vars, 
@@ -334,7 +331,7 @@ tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape 
           add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
           row_spec(row = 8,hline_after = TRUE) %>%
           add_indent(c(9:12))  %>%
-          footnote(general = tb.foot, number = c("CFI = Comparative fit index (scaled); ", " RMSEA = Root mean square error of approximation (scaled); "));tb.fm01
+          footnote(general = tb.foot,threeparttable = T);tb.fm01
 
 ```
 

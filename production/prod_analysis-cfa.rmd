@@ -623,8 +623,8 @@ model01 <- 'perc_merit=~perc_effort+perc_talent
 
 plot01 <- cfa(model = model01,data = dat01,estimator="MLR",std.lv=TRUE)
 
-nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception networks",
-              "Preference effort","Preference talent","Preference rich family","Preference networks",
+nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception contacts",
+              "Preference effort","Preference talent","Preference rich family","Preference contacts",
               "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
 
 dir.create("output/images")

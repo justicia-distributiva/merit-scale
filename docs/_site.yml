@@ -4,7 +4,7 @@ navbar:
   title: "Measuring meritocratic perceptions and beliefs"
   right:
     - text: "Data preparation"
-      href: "prod_prep-data-A.html"
+      href: "prod_prep-data.html"
     - text: "Analysis"
       href: "prod_analysis-cfa.html"
     - text: "Paper"
