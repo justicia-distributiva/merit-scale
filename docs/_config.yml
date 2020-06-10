@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+
+baseurl: 'docs' 
+
+urls: "https://juancarloscastillo.github.io/merit-scale/"
