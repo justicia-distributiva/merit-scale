@@ -12,14 +12,14 @@
 
 # INSTRUCTIONS-------------------------:
 # 1. set your root dir at "merit-scale"
-# 2. Run this code.
+# 2. Run this code.4
 
 production<- list.files(path = "production",pattern = "prod_")        # a list with the names of the files to copy
 file.copy(file.path("production",production), "docs",overwrite = TRUE)# copy data proc and analysis files
 
 rmarkdown::render_site("docs",quiet = TRUE) # Render site
 
-# before you run this line, check if your R Markdown files have a .rmd or .Rmd extension
+# before you run this line, check if your R Markdown files have a .rmd or .Rmd extension 
 # on this case we use both
 ext <- c(grep("^prod_.*\\.rmd$",  x = dir(path = "docs"),value = T), # for .rmd
          grep("^prod_.*\\.Rmd$",  x = dir(path = "docs"),value = T), # for .Rmd
@@ -29,7 +29,7 @@ ext <- c(grep("^prod_.*\\.rmd$",  x = dir(path = "docs"),value = T), # for .rmd
          ".tex",".log",".RData",".Rhistory")                         # for .tex .log .RData .Rhistory
 
 for (i in 1:length(ext)) {
-  file.remove(paste0("docs/",dir(path="docs", pattern=ext[i]))) # delete files from /docs folder
+  file.remove(paste0("docs/",dir(path="docs", pattern=ext[i]))) # delete files from /docs folder4
   unlink(paste0("docs/",(ext[i])),recursive = TRUE)             # Remove the cache files (first)
 }
 

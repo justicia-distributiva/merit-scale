@@ -4,14 +4,18 @@ navbar:
   title: "Measuring meritocratic perceptions and beliefs"
   right:
     - text: "Data preparation"
-      href: "prod_prep-data-A.html"
+      href: "prod_prep-data.html"
     - text: "Analysis"
       href: "prod_analysis-cfa.html"
     - text: "Paper"
       href: "paper.html"
     - text: ""
+      icon: fa-file-pdf
+      href: "paper.pdf"  
+    - text: ""
       icon: fa-github fa-lg
-      href: https://github.com/juancarloscastillo/merit-scale
+      href: https://github.com/juancarloscastillo/meritocracy-preferences
+
 output:
   html_document:
     css: "../input/bib/style.css"

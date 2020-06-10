@@ -24,6 +24,8 @@ The rationale of the design relies on the possibility to test how different disp
 
 ---
 
+
+
 ```{r eval=FALSE, include=FALSE}
 rmarkdown::render(input = "production/prod_analysis-cfa.rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-cfa.html")
 ```
@@ -61,6 +63,14 @@ load(file = "input/data/proc/dat03.RData")
 load(file = "input/data/proc/dat04.RData")
 ```
 
+```{r}
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+
+```
 
 ```{r eval=FALSE, include=FALSE}
 data01 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola1.sav",verbose = FALSE)
@@ -134,9 +144,13 @@ stargazer(dat01,type = "html",
 
 ```{r correlacion v01}
 cor01<-polychoric(dat01)
-rownames(cor01$rho) <- c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw")
+rownames(cor01$rho) <- c("A.Perception Effort", "B.Perception Talent","C.Perception Rich parents","D.Perception contacts","E.Preferences Effort","F.Preferences Talent","G.Preferences rich parents", "H.Preferences contacts" )
 colnames(cor01$rho) <- c("(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
+
+
 corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+
 ```
 
 
@@ -442,9 +456,18 @@ stargazer(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,
 
 ```{r}
 cor04<-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) <-c("A. pc.effort", "B. pc.talent","C. pc.wpart","D. pc.netw","E. pf.effort","F. pf.talent","G. pf.wpart", "H. pf.netw")
+rownames(cor04$rho) <-c("A.Perception Effort", "B.Perception Talent","C.Perception Rich parents","D.Perception contacts","E.Preferences Effort","F.Preferences Talent","G.Preferences rich parents", "H.Preferences contacts" )
 colnames(cor04$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
+save(cor04, file = "output/images/correlation.RData")
 corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+png("output/images/corpoly.png",
+    width = 15,height = 15,units="cm",
+    pointsize=12,bg="white",res=300)
+
+corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+dev.off()
 ```
 
 ```{r,results='hold'}
@@ -533,7 +556,7 @@ fm03<- data.frame(t(data.frame(fitmeasures(fit3_o, output ="matrix")[c("chisq.sc
 #------chi2, df------#
 fm04<- round(rbind(fm01,fm02,fm03),3)
 fm04.1 <- fm04 %>% select(chisq.scaled,df) 
-fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 2)
+fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 1)
 fm04.1$df <- round(x = fm04.1$df,digits = 0)
 fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
 fm04.1 <- select(fm04.1,"chi2df")
@@ -549,7 +572,9 @@ for (i in names(fm04.2)) {
 
 fm.df      <- bind_cols(fm04.1,fm04.2)
 fm.df$nobs <- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o)) 
-fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("M1.1","M2.1","M3.1")
+fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("M1.2","M2.2","M3.2")
+
+
 #------ merge ------#
 tb.fm<- bind_rows(tb.load,fm.df)
 tb.fm<- tb.fm %>% mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>% select(vars,everything())
@@ -568,6 +593,15 @@ tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccccccccccc",col.names = tb.col,
           add_indent(c(9:12)) %>% 
           footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01
 save(tb.fm01,file = "output/tables/tb.fm01.RData")
+
+
+save(tb.fm,file = "output/tables/tb.fm.RData")
+save(fm.df,file = "output/tables/fm.df.RData")
+save(tb.load,file = "output/tables/tb.load.RData")
+
+
+
+
 ```
 
 # Summary
@@ -590,8 +624,8 @@ model01 <- 'perc_merit=~perc_effort+perc_talent
 
 plot01 <- cfa(model = model01,data = dat01,estimator="MLR",std.lv=TRUE)
 
-nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception networks",
-              "Preference effort","Preference talent","Preference rich family","Preference networks",
+nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception contacts",
+              "Preference effort","Preference talent","Preference rich family","Preference contacts",
               "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
 
 dir.create("output/images")
@@ -1104,6 +1138,38 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
 <!--   footnote(number = c("Model 1: Complete sample")) -->
 <!-- ``` -->
 
+
+```{r}
+library(ggplot2)
+library(reshape2)
+library(sjPlot)
+library(dplyr)
+
+#install.packages("cowplot")
+library(cowplot)
+
+dat_merit <- dat04 %>% select("a.Effort"=perc_effort,"a.Talent"=perc_talent, "a.Rich Parents"=perc_wpart, "a.Contacts"=perc_netw, "b.Effort"=pref_effort,"b.Talent"=pref_talent,"b.Rich Parents"=pref_wpart, "b.Contacts"=pref_netw) 
+
+  
+plotlikert<-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
+            groups.titles = c("Perceptions","Preferences"),
+            geom.colors ="PuBu", 
+            geom.size = 0.8,
+            axis.labels=c("Effort","Talent","Rich Parents","Contacts"),
+            catcount = 4,
+            cat.neutral = 3, 
+            grid.range  =  c ( 1.2 , 1.4 ),
+            values  =  "sum.outside",
+            reverse.scale=TRUE)
+plotlikert
+
+ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 18,height = 15,dpi = "retina",units = "cm")
+
+
+```
+
+
+=======
 # Anexo 1: Sample
 
 
@@ -1287,4 +1353,3 @@ cnames <- c("Perception Meritocratic","Perception Non Meritocratic", "Preference
 knitr::kable(Omega, format = "markdown",digits = 2, col.names = cnames)
 
 ```
-

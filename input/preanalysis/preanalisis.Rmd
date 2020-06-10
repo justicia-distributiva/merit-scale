@@ -148,16 +148,17 @@ table_format = if(is_html_output()) {
 
 ```{r echo=FALSE}
 
-# tab01 <- read.csv(file = "input/data/original/materials/table01.csv",header = 1,sep = ";")
-#
-# cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
-#
-# caption01 <- capTab("Meritocracy perception and preference")
-# kable(tab01,format = table_format,booktabs = T, linesep = "",col.names = cnames, caption = caption01) %>%
-#   kable_styling(full_width = T,latex_options = c("hold_position","scale_down"),position = "center",font_size = 9) %>%
-#   column_spec(column = 1,width = "1.5cm",) %>%
-#   column_spec(column = 2,width = "2 cm") %>%
-#   collapse_rows(columns = 1:2,valign = "middle")
+
+ #tab01 <- read.csv(file = "input/data/original/materials/table01.csv",header = 1,sep = ";")
+
+ cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
+
+ caption01 <- capTab("Meritocracy perception and preference")
+ kable(tab01,format = table_format,booktabs = T, linesep = "",col.names = cnames, caption = caption01) %>%
+   kable_styling(full_width = T,latex_options = c("hold_position","scale_down"),position = "center",font_size = 9) %>%
+   column_spec(column = 1,width = "1.5cm",) %>%
+   column_spec(column = 2,width = "2 cm") %>%
+   collapse_rows(columns = 1:2,valign = "middle")
 
 ```
 

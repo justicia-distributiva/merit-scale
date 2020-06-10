@@ -75,7 +75,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="../input/bib/style.css" type="text/css" />
+<link rel="stylesheet" href="..\input\bib\style.css" type="text/css" />
 
 
 
@@ -365,10 +365,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="preanalisis.html">Pre-analisis plan</a>
-</li>
-<li>
-  <a href="prod_prep-data-A.html">Data preparation</a>
+  <a href="prod_prep-data.html">Data preparation</a>
 </li>
 <li>
   <a href="prod_analysis-cfa.html">Analysis</a>
@@ -377,7 +374,14 @@ div.tocify {
   <a href="paper.html">Paper</a>
 </li>
 <li>
-  <a href="https://github.com/juancarloscastillo/merit-scale">
+  <a href="paper.pdf">
+    <span class="fa fa-file-pdf"></span>
+     
+    
+  </a>
+</li>
+<li>
+  <a href="https://github.com/juancarloscastillo/meritocracy-preferences">
     <span class="fa fa-github fa-lg"></span>
      
     
@@ -401,7 +405,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">miércoles 22 abril 2020 16:58:50</h4>
+<h4 class="date">domingo 31 mayo 2020 14:33:28</h4>
 
 </div>
 
@@ -429,6 +433,11 @@ source(&#39;production/prod_polychoric.R&#39;)</code></pre>
 load(file = &quot;input/data/proc/dat02.RData&quot;)
 load(file = &quot;input/data/proc/dat03.RData&quot;)
 load(file = &quot;input/data/proc/dat04.RData&quot;)</code></pre>
+<pre class="r"><code>table_format = if(is_html_output()) {
+  &quot;html&quot;
+} else if(is_latex_output()) {
+  &quot;latex&quot;
+}</code></pre>
 <hr />
 <p><strong>Modality</strong></p>
 <p>Each group correspond to the application modality of the scale.</p>
@@ -762,8 +771,10 @@ H. pf.netw
 </tr>
 </table>
 <pre class="r"><code>cor01&lt;-polychoric(dat01)
-rownames(cor01$rho) &lt;- c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
+rownames(cor01$rho) &lt;- c(&quot;A.Perception Effort&quot;, &quot;B.Perception Talent&quot;,&quot;C.Perception Rich parents&quot;,&quot;D.Perception contacts&quot;,&quot;E.Preferences Effort&quot;,&quot;F.Preferences Talent&quot;,&quot;G.Preferences rich parents&quot;, &quot;H.Preferences contacts&quot; )
 colnames(cor01$rho) &lt;- c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
+
+
 corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/correlacion%20v01-1.png" width="672" /></p>
 <pre class="r"><code>model01 &lt;- &#39;perc_merit=~perc_effort+perc_talent
@@ -1663,7 +1674,7 @@ H. pc.netw
 rownames(cor02$rho) &lt;-c(&quot;A. pc.effort&quot;,&quot;E. pf.effort&quot;,&quot;B. pc.talent&quot;,&quot;F. pf.talent&quot;,&quot;C. pc.wpart&quot;,&quot;G. pf.wpart&quot;,&quot;D. pc.netw&quot;,&quot;H. pc.netw&quot;)
 colnames(cor02$rho) &lt;-c(&quot;(A)&quot;, &quot;(E)&quot;,&quot;(B)&quot;,&quot;(F)&quot;,&quot;(C)&quot;,&quot;(G)&quot;,&quot;(D)&quot;, &quot;(H)&quot;)
 corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <pre class="r"><code>model02 &lt;- &#39;perc_merit=~perc_effort+perc_talent
             perc_nmerit=~perc_wpart+perc_netw
             pref_merit=~pref_effort+pref_talent
@@ -2500,7 +2511,7 @@ H. pf.netw
 rownames(cor03$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
 colnames(cor03$rho) &lt;-c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <pre class="r"><code>model03 &lt;- &#39;
 perc_merit=~perc_effort+perc_talent
 perc_nmerit=~perc_wpart+perc_netw
@@ -3535,10 +3546,20 @@ H. pf.netw
 </tr>
 </table>
 <pre class="r"><code>cor04&lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
+rownames(cor04$rho) &lt;-c(&quot;A.Perception Effort&quot;, &quot;B.Perception Talent&quot;,&quot;C.Perception Rich parents&quot;,&quot;D.Perception contacts&quot;,&quot;E.Preferences Effort&quot;,&quot;F.Preferences Talent&quot;,&quot;G.Preferences rich parents&quot;, &quot;H.Preferences contacts&quot; )
 colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
+save(cor04, file = &quot;output/images/correlation.RData&quot;)
 corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>png(&quot;output/images/corpoly.png&quot;,
+    width = 15,height = 15,units=&quot;cm&quot;,
+    pointsize=12,bg=&quot;white&quot;,res=300)
+
+corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+
+dev.off()</code></pre>
+<pre><code>## png 
+##   2</code></pre>
 <pre class="r"><code>model04 &lt;- &#39;
 perc_merit =~ perc_effort+perc_talent
 perc_nmerit=~perc_wpart +perc_netw
@@ -4020,7 +4041,7 @@ fm03&lt;- data.frame(t(data.frame(fitmeasures(fit3_o, output =&quot;matrix&quot;
 #------chi2, df------#
 fm04&lt;- round(rbind(fm01,fm02,fm03),3)
 fm04.1 &lt;- fm04 %&gt;% select(chisq.scaled,df) 
-fm04.1$chisq.scaled &lt;- round(x = fm04.1$chisq.scaled,digits = 2)
+fm04.1$chisq.scaled &lt;- round(x = fm04.1$chisq.scaled,digits = 1)
 fm04.1$df &lt;- round(x = fm04.1$df,digits = 0)
 fm04.1$chi2df &lt;- paste0(fm04.1$chisq.scaled,&quot;(&quot;,fm04.1$df,&quot;)&quot;)
 fm04.1 &lt;- select(fm04.1,&quot;chi2df&quot;)
@@ -4036,7 +4057,9 @@ for (i in names(fm04.2)) {
 
 fm.df      &lt;- bind_cols(fm04.1,fm04.2)
 fm.df$nobs &lt;- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o)) 
-fm.df &lt;- data.frame(t(fm.df)); colnames(fm.df) &lt;- c(&quot;M1.1&quot;,&quot;M2.1&quot;,&quot;M3.1&quot;)
+fm.df &lt;- data.frame(t(fm.df)); colnames(fm.df) &lt;- c(&quot;M1.2&quot;,&quot;M2.2&quot;,&quot;M3.2&quot;)
+
+
 #------ merge ------#
 tb.fm&lt;- bind_rows(tb.load,fm.df)
 tb.fm&lt;- tb.fm %&gt;% mutate(vars=c(labs,&quot;$\\chi^2\\text{(df)}$&quot;,&quot;$\\text{CFI}$&quot;,&quot;$\\text{RMSEA}$&quot;,&quot;$N$&quot;)) %&gt;% select(vars,everything())
@@ -4391,7 +4414,9 @@ H. Is well that those who have good contacts get ahead.
 <span class="math inline">\(\chi^2\text{(df)}\)</span>
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-42.28(14)
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+42.3(14)
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
@@ -4400,7 +4425,7 @@ H. Is well that those who have good contacts get ahead.
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-107.57(14)
+107.6(14)
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
@@ -4409,9 +4434,7 @@ H. Is well that those who have good contacts get ahead.
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-63.34(14)
-</td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
+63.3(14)
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
@@ -4421,6 +4444,8 @@ H. Is well that those who have good contacts get ahead.
 <tr>
 <td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\text{CFI}\)</span>
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 0.993
@@ -4447,12 +4472,12 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(\text{RMSEA}\)</span>
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 0.053
@@ -4479,12 +4504,12 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 <tr>
 <td style="text-align:left;width: 10cm; min-width: 12cm;  padding-left: 2em;" indentlevel="1">
 <span class="math inline">\(N\)</span>
+</td>
+<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 712
@@ -4511,8 +4536,6 @@ H. Is well that those who have good contacts get ahead.
 </td>
 <td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
 </td>
-<td style="text-align:center;width: 1cm; min-width: 1.3cm; ">
-</td>
 </tr>
 </tbody>
 <tfoot>
@@ -4523,7 +4546,12 @@ H. Is well that those who have good contacts get ahead.
 </tr>
 </tfoot>
 </table>
-<pre class="r"><code>save(tb.fm01,file = &quot;output/tables/tb.fm01.RData&quot;)</code></pre>
+<pre class="r"><code>save(tb.fm01,file = &quot;output/tables/tb.fm01.RData&quot;)
+
+
+save(tb.fm,file = &quot;output/tables/tb.fm.RData&quot;)
+save(fm.df,file = &quot;output/tables/fm.df.RData&quot;)
+save(tb.load,file = &quot;output/tables/tb.load.RData&quot;)</code></pre>
 </div>
 <div id="summary" class="section level1">
 <h1><span class="header-section-number">3</span> Summary</h1>
@@ -4548,8 +4576,8 @@ Mode 01, 02 and 03
 
 plot01 &lt;- cfa(model = model01,data = dat01,estimator=&quot;MLR&quot;,std.lv=TRUE)
 
-nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception networks&quot;,
-              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference networks&quot;,
+nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception contacts&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference contacts&quot;,
               &quot;Perception meritocratic&quot;,&quot;Perception non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
 
 dir.create(&quot;output/images&quot;)
@@ -5720,6 +5748,30 @@ kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% sel
 <!--   collapse_rows(columns = 1,valign = "middle") %>% -->
 <!--   footnote(number = c("Model 1: Complete sample")) -->
 <!-- ``` -->
+<pre class="r"><code>library(ggplot2)
+library(reshape2)
+library(sjPlot)
+library(dplyr)
+
+#install.packages(&quot;cowplot&quot;)
+library(cowplot)
+
+dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw) 
+
+  
+plotlikert&lt;-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
+            groups.titles = c(&quot;Perceptions&quot;,&quot;Preferences&quot;),
+            geom.colors =&quot;PuBu&quot;, 
+            geom.size = 0.8,
+            axis.labels=c(&quot;Effort&quot;,&quot;Talent&quot;,&quot;Rich Parents&quot;,&quot;Contacts&quot;),
+            catcount = 4,
+            cat.neutral = 3, 
+            grid.range  =  c ( 1.2 , 1.4 ),
+            values  =  &quot;sum.outside&quot;,
+            reverse.scale=TRUE)
+plotlikert</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 18,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
 </div>
 </div>
 </div>
