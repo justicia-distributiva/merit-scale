@@ -1,7 +1,7 @@
 ---
 title: "Analysis PPM-S"
 date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
-css: "../input/css/style.css"
+css: "../input/css/custom.css"
 output:
   html_document:
     number_sections: true
@@ -48,6 +48,7 @@ library(psych)
 library(knitr)
 library(kableExtra)
 library(rvest)
+library(sjlabelled)
 source('production/prod_polychoric.R')
 ```
 
@@ -594,7 +595,6 @@ nodeNames <-c("Perception effort","Perception talent","Perception rich family","
               "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
 
 dir.create("output/images")
-
 semPaths(plot01,
          style = "lisrel",
          fade=FALSE,
@@ -620,8 +620,8 @@ semPaths(plot01,
          width = 12,
          height= 10,
          filename = "output/images/meas01")
-```
 
+```
 
 ![](../output/images/meas01.png)
 
@@ -1103,3 +1103,188 @@ kable(standardizedsolution(fit4b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.
 <!--   collapse_rows(columns = 1,valign = "middle") %>% -->
 <!--   footnote(number = c("Model 1: Complete sample")) -->
 <!-- ``` -->
+
+# Anexo 1: Sample
+
+
+```{r}
+load(file = "input/data/original/issp2019CL.RData")
+w01 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola1.sav",verbose = F)
+```
+
+```{r}
+GS<- c("CERRILLOS",
+"CERRO NAVIA",
+"CONCHALÍ",
+"EL BOSQUE",
+"ESTACIÓN CENTRAL",
+"HUECHURABA",
+"INDEPENDENCIA",
+"LA CISTERNA",
+"LA FLORIDA",
+"LA GRANJA",
+"LA PINTANA",
+"LA REINA",
+"LAS CONDES",
+"LO BARNECHEA",
+"LO ESPEJO",
+"LO PRADO",
+"MACUL",
+"MAIPÚ",
+"ÑUÑOA",
+"PEDRO AGUIRRE CERDA",
+"PEÑALOLEN",
+"PROVIDENCIA",
+"PUDAHUEL",
+"PUENTE ALTO",
+"QUILICURA",
+"QUINTA NORMAL",
+"RECOLETA",
+"RENCA",
+"SAN BERNARDO",
+"SAN JOAQUÍN",
+"SAN MIGUEL",
+"SAN RAMÓN",
+"SANTIAGO",
+"VITACURA")
+
+cl19$COMUNA <- toupper(as_character(cl19$COMUNA))
+
+# cl19$DS_P1 # 1= hombre, 2= mujer
+# cl19$DS_P2_EXACTA  
+# cl19$DS_P4
+
+cep1 <- cl19 %>% 
+  select(COMUNA,DS_P1,DS_P2_EXACTA,DS_P4, FACTOR) %>% 
+  filter(COMUNA %in% GS)
+```
+
+
+
+```{r}
+cep1$edad_cat<- as.numeric(cep1$DS_P2_EXACTA) # Edad
+cep1$edad_cat[cep1$edad_cat %in%c(18:24)] <- 1   #"18 a 24"
+cep1$edad_cat[cep1$edad_cat %in%c(25:34)] <- 2 # "25 a 34"
+cep1$edad_cat[cep1$edad_cat %in%c(35:44)] <- 3 # "35 a 44"
+cep1$edad_cat[cep1$edad_cat %in%c(45:54)] <- 4 # "45 a 54"
+cep1$edad_cat[cep1$edad_cat >=  55]       <- 5 # "55 o más"
+
+cep1$educ <- cep1$DS_P4 # Educación
+cep1$educ <- as_numeric(cep1$educ)
+cep1$educ <- as.numeric(cep1$educ)
+cep1$educ[cep1$educ %in%c(88,99)] <- NA
+
+cep1$educ <- recode(cep1$educ, "0" = "1" , "1"="1", "2" = "1", "3"="2","4"="2", "5"="3","6"="3", "7" = "3", "8"="4" , "9"="4"   )
+
+cep1$sexo <- as.numeric(cep1$DS_P1) # 1= hombre, 2= mujer
+
+```
+
+
+
+```{r}
+
+
+# Gender
+
+cep1$Hombres<-ifelse(cep1$sexo==1,100,0)
+cep1$Mujeres<-ifelse(cep1$sexo==2,100,0)
+w01$Hombres<-ifelse(w01$sexo==1,100,0)
+w01$Mujeres<-ifelse(w01$sexo==2,100,0)
+
+
+cep1$ed_a<-ifelse(cep1$edad_cat==1,100,0)
+cep1$ed_b<-ifelse(cep1$edad_cat==2,100,0)
+cep1$ed_c<-ifelse(cep1$edad_cat==3,100,0)
+cep1$ed_d<-ifelse(cep1$edad_cat==4,100,0)
+cep1$ed_e<-ifelse(cep1$edad_cat==5,100,0)
+w01$ed_a<-ifelse(w01$edad==1,100,0)
+w01$ed_b<-ifelse(w01$edad==2,100,0)
+w01$ed_c<-ifelse(w01$edad==3,100,0)
+w01$ed_d<-ifelse(w01$edad==4,100,0)
+w01$ed_e<-ifelse(w01$edad==5,100,0)
+
+
+
+cep1$educ_a<-ifelse(cep1$educ==1,100,0)
+cep1$educ_b<-ifelse(cep1$educ==2,100,0)
+cep1$educ_c<-ifelse(cep1$educ==3,100,0)
+cep1$educ_d<-ifelse(cep1$educ==4,100,0)
+w01$educ_a<-ifelse(w01$educat==1,100,0)
+w01$educ_b<-ifelse(w01$educat==2,100,0)
+w01$educ_c<-ifelse(w01$educat==3,100,0)
+w01$educ_d<-ifelse(w01$educat==4,100,0)
+
+
+Men<-round(c(mean(w01$Hombres, na.rm = T), weighted.mean(cep1$Hombres,cep1$FACTOR, na.rm = T)),digits = 2)
+Women<-round(c(mean(w01$Mujeres, na.rm = T), weighted.mean(cep1$Mujeres,cep1$FACTOR, na.rm = T)),digits = 2)
+
+years.18.to.24<-round(c(mean(w01$ed_a, na.rm = T), weighted.mean(cep1$ed_a,cep1$FACTOR, na.rm = T)),digits = 2)
+years.25.to.34<-round(c(mean(w01$ed_b, na.rm = T), weighted.mean(cep1$ed_b,cep1$FACTOR, na.rm = T)),digits = 2)
+years.35.to.44<-round(c(mean(w01$ed_c, na.rm = T), weighted.mean(cep1$ed_c,cep1$FACTOR, na.rm = T)),digits = 2)
+years.45.to.54<-round(c(mean(w01$ed_d, na.rm = T), weighted.mean(cep1$ed_d,cep1$FACTOR, na.rm = T)),digits = 2)
+years.55.or.more<-round(c(mean(w01$ed_e, na.rm = T), weighted.mean(cep1$ed_e,cep1$FACTOR, na.rm = T)),digits = 2)
+
+ 
+
+Primary <-round(c(mean(w01$educ_a, na.rm = T), weighted.mean(cep1$educ_a,cep1$FACTOR, na.rm = T)),digits = 2)
+Secondary<-round(c(mean(w01$educ_b, na.rm = T), weighted.mean(cep1$educ_b,cep1$FACTOR, na.rm = T)),digits = 2)
+Technique<-round(c(mean(w01$educ_c, na.rm = T), weighted.mean(cep1$educ_c,cep1$FACTOR, na.rm = T)),digits = 2)
+University<-round(c(mean(w01$educ_d, na.rm = T), weighted.mean(cep1$educ_d,cep1$FACTOR, na.rm = T)),digits = 2)
+
+
+
+sample_cep<- rbind("__Gender__",Men,Women,"__Age__",years.18.to.24,years.25.to.34,years.35.to.44,years.45.to.54,years.55.or.more, "__Education__", Primary, Secondary, Technique, University)
+
+
+cnames <- c("Sample", "CEP") 
+knitr::kable(sample_cep, digits = 0, format = "markdown",col.names = cnames)
+
+```
+
+# Anexo 2: Fiability 
+
+```{r}
+load(file = "input/data/proc/dat01.RData")
+load(file = "input/data/proc/dat02.RData")
+load(file = "input/data/proc/dat03.RData")
+load(file = "input/data/proc/dat04.RData")
+```
+
+
+```{r}
+lav.mod.1 <- 'perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
+pref_nmerit=~pref_wpart +pref_netw'
+
+cor01a<-polychoric(dat01)
+cor02a<-polychoric(dat02)
+cor03a<-polychoric(dat03)
+cor04a <-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
+
+#Omega for group
+lav.jen.1<- cfa(lav.mod.1,sample.cov=cor01a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.2<- cfa(lav.mod.1,sample.cov=cor02a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.3<- cfa(lav.mod.1,sample.cov=cor03a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.4<- cfa(lav.mod.1,sample.cov=cor04a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+
+
+o1 <- omegaFromSem(lav.jen.1,cor04a$rho, plot = F)
+o2<-omegaFromSem(lav.jen.2,cor04a$rho, plot = F)
+o3<-omegaFromSem(lav.jen.3,cor04a$rho, plot = F)
+o4<-omegaFromSem(lav.jen.4,cor04a$rho, plot = F)
+
+
+Group_1 <- c(o1$omega.group$total)
+Group_2 <- c(o2$omega.group$total)
+Group_3 <- c(o3$omega.group$total)
+Total_sample <- c(o4$omega.group$total)
+
+Omega<- rbind(Group_1,Group_2,Group_3,Total_sample)
+
+cnames <- c("Perception Meritocratic","Perception Non Meritocratic", "Preference Meritocratic","Preference Non Meritocratic")
+knitr::kable(Omega, format = "markdown",digits = 2, col.names = cnames)
+
+```
+
