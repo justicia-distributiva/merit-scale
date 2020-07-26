@@ -1,9 +1,9 @@
-dimension;factor;items_eng;items_spa
-Perception;Meritocratic;Those who try harder get greater rewards than those who work less.;Quienes m·s se esfuerzan logran obtener mayores recompensas que quienes se esfuerzan menos.
-Perception;Meritocratic;Those who have more talent achieve greater rewards than those who have less talent.;Quienes poseen m·s talento logran obtener mayores recompensas que quienes poseen menos talento.                   
-Perception;Non meritocratic;Those who have rich parents succeed.;Quienes tienen padres ricos logran salir adelante.
-Perception;Non meritocratic;Those who have good contacts succeed.;Quienes tienen buenos contactos logran salir adelante.
-Preference;Meritocratic;Those who try harder should get greater rewards than those who work less.;Quienes m·s se esfuerzan deberÌan obtener mayores recompensas que quienes se esfuerzan menos.
-Preference;Meritocratic;Those who have more talent should get greater rewards than those who have less talent.;Quienes poseen m·s talento deberÌan obtener mayores recompensas que quienes poseen menos talento.
-Preference;Non meritocratic;It's fine that those with rich parents get ahead.;Est· bien que quienes tienen padres ricos salgan adelante.
-Preference;Non meritocratic;It's fine that those who have good contacts get ahead.;Est· bien que quienes tienen buenos contactos salgan adelante.
+dimension,factor,itemseng,itemsspa
+Perception,Meritocratic,Those who try harder get greater rewards than those who work less.,Quienes m√°s se esfuerzan logran obtener mayores recompensas que quienes se esfuerzan menos.
+Perception,Meritocratic,Those who have more talent achieve greater rewards than those who have less talent.,Quienes poseen m√°s talento logran obtener mayores recompensas que quienes poseen menos talento.
+Perception,Non meritocratic,Those who have rich parents succeed.,Quienes tienen padres ricos logran salir adelante.
+Perception,Non meritocratic,Those who have good contacts succeed.,Quienes tienen buenos contactos logran salir adelante.
+Preference,Meritocratic,Those who try harder should get greater rewards than those who work less.,Quienes m√°s se esfuerzan deber√≠an obtener mayores recompensas que quienes se esfuerzan menos.
+Preference,Meritocratic,Those who have more talent should get greater rewards than those who have less talent.,Quienes poseen m√°s talento deber√≠an obtener mayores recompensas que quienes poseen menos talento.
+Preference,Non meritocratic,It's fine that those with rich parents get ahead.,Est√° bien que quienes tienen padres ricos salgan adelante.
+Preference,Non meritocratic,It's fine that those who have good contacts get ahead.,Est√° bien que quienes tienen buenos contactos salgan adelante.
