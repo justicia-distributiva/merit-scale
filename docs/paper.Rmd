@@ -1,6 +1,6 @@
 ---
 title: "Measuring Perceptions and Preferences for Meritocracy"
-css: "../input/css/custom.css"
+css: "custom.css"
 linestretch: '1.5'
 link-citations: yes
 author: "Juan Carlos Castillo, Julio Iturra & Francisco Meneses <br><br>"

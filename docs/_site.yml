@@ -18,5 +18,5 @@ navbar:
 
 output:
   html_document:
-    css: "../input/css/custom.css"
+    css: "custom.css"
     theme: flatly
