@@ -21,6 +21,11 @@ h1, h2, h3{
   display:
 }
 
+h4{
+  font-size:20px;
+  font-family: "Times New Roman", Times, serif;
+}
+
 .right {
   text-align: right;
   line-height: 0.25;

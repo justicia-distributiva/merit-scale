@@ -17,6 +17,6 @@ navbar:
       href: https://github.com/juancarloscastillo/meritocracy-preferences
 
 output:
-  html_document:
-    css: "custom.css"
-    theme: flatly
+  bookdown::html_document2:
+      css: "custom.css"
+      theme: flatly

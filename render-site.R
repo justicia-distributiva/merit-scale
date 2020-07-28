@@ -17,7 +17,7 @@
 production<- list.files(path = "production",pattern = "prod_")        # a list with the names of the files to copy
 file.copy(file.path("production",production), "docs",overwrite = TRUE)# copy data proc and analysis files
 
-rmarkdown::render_site("docs",quiet = TRUE) # Render site
+rmarkdown::render_site("docs",quiet = FALSE) # Render site
 
 # before you run this line, check if your R Markdown files have a .rmd or .Rmd extension 
 # on this case we use both

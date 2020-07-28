@@ -2,10 +2,15 @@
 title: "prueba"
 css: "../input/css/custom.css"
 output:
-  bookdown::html_document2
+  bookdown::pdf_document2: default
+  bookdown::html_document2: default
 ---
 
 
+
+```{r setup}
+# knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+```
 
 # prueba
 
@@ -14,3 +19,8 @@ output:
 probando
 
 ![](../input/images/tabla2.png){ width=60% }
+
+```{r}
+knitr::include_graphics(path = "../input/images/generalf.png")
+```
+
