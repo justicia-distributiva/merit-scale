@@ -719,19 +719,352 @@ Figure 5: Polychoric correlation plot
 <p>This section tests the item’s battery and the corresponding conceptual framework under test. For this, we first estimate a confirmatory factor analysis model for the whole sample, and secondly we test the order effects applying the same model to each of the three order versions.</p>
 <div id="full-sample-cfa" class="section level3">
 <h3>Full sample CFA</h3>
-<p>Figure X shows the results of the estimation for the four-factor model:</p>
+<p>In <a href="#fig:meas02">6</a> the results of the estimation for the four-factor model with complete sample. This model have a good fit (CFI.sca = 0.977, RMSEA.sca = 0.079, <span class="math inline">\(\chi2\)</span>(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88. Furthermore, considering the correlation between the latent variables, it is observed that the most related variables are meritocratic perceptions and preferences, which have a positive correlation of 0.59, while non-meritocratic perceptions and preferences do not present a considerable correlation.</p>
+<div class="figure" style="text-align: center"><span id="fig:meas02"></span>
+<img src="../output/images/meas02.png" alt="Theorical model" width="75%" />
+<p class="caption">
+Figure 6: Theorical model
+</p>
+</div>
+<p>Como se puede observar en la Tabla <a href="#tab:tab-loads">4</a>, todos los modelos, independiente del grupo y el órden de los items, obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, <span class="math inline">\(\chi2\)</span>(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, <span class="math inline">\(\chi2\)</span>(df=14)=39.09, p &lt; 0.001). Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, <span class="math inline">\(\chi2\)</span>(df=14)=64.156, p &lt; 0.001).</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:tab03">Table 3: </span>Summary fit indices according group
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI.sca
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+<th style="text-align:right;">
+RMSEA.sca
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model 1
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+200.772
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.977
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 2
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+42.276
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.993
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 3
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+107.573
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.961
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 4
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+63.336
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.979
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> Model 1: Complete sample
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> Model 2: fixed order by percepction/preference
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> Model 3: fixed order by topic (i.e: effort)
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> Model 4: Randomized order
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Si bien todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico <span class="citation">(Vandenberg and Lance <a href="#ref-vandenbergReviewSynthesisMeasurement2000" role="doc-biblioref">2000</a>)</span>. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo. Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.</p>
+<div style="page-break-after: always;"></div>
 <blockquote>
-<p>Julio: Esta sección debe ser revisada:</p>
+<p>Julio: ¿Esto se debe mantener?</p>
 </blockquote>
-<ul>
-<li>CFA general</li>
-<li>Fit x modelo</li>
-</ul>
-<p>[Aquí SEM plot con cargas y ajuste global del modelo]</p>
-<p>Los modelos confirmatorios fueron estimados en primer lugar para cada uno de los tres administration-sets. Los resultados se presentan en la Tabla <a href="#tab:tab-loads">3</a></p>
+<table>
+<caption>Items according to dimension.</caption>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center">Contrast Model 1 Factor</th>
+<th align="center">theoretical model 4 Factors</th>
+<th align="center">Model with M.I.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><strong>n</strong></td>
+<td align="center">1769</td>
+<td align="center">1769</td>
+<td align="center">1769</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>CFI</strong></td>
+<td align="center">0.595</td>
+<td align="center">0.988</td>
+<td align="center">0.994</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong>TLI</strong></td>
+<td align="center">0.433</td>
+<td align="center">0.976</td>
+<td align="center">0.985</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>RMSEA</strong></td>
+<td align="center">0.226</td>
+<td align="center">0.047</td>
+<td align="center">0.036</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><span class="math inline">\(\chi2\)</span></strong></td>
+<td align="center">1830.839</td>
+<td align="center">68.661</td>
+<td align="center">40.250</td>
+</tr>
+<tr class="even">
+<td align="center"><strong>p</strong></td>
+<td align="center">.000</td>
+<td align="center">.000</td>
+<td align="center">.000</td>
+</tr>
+<tr class="odd">
+<td align="center"><strong><span class="math inline">\(\chi2\)</span>/df</strong></td>
+<td align="center">65.38</td>
+<td align="center">4.90</td>
+<td align="center">3.32</td>
+</tr>
+</tbody>
+</table>
+<p>EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba <span class="math inline">\(\chi2\)</span>(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un <span class="math inline">\(\chi2\)</span> ratio menor a 3 y obtuvo cargas factoriales muy bajas (<span class="math inline">\(\tau\)</span>)&lt; 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.</p>
+</div>
+</div>
+</div>
+<div id="conclusión" class="section level1">
+<h1>Conclusión</h1>
+<p>Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha decidido seguir utilizando el orden 3.</p>
+<p>uso conjunto percepciones-preferencias</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="refs">
+<div id="ref-aielloNewEvidenceFirmuniversity2019">
+<p>Aiello, Francesco, Paola Cardamone, and Valeria Pupo. 2019. “New Evidence on the Firm-University Linkages in Europe. The Role of Meritocratic Management Practices.” <em>International Review of Applied Economics</em> 33 (6): 813–28. <a href="https://doi.org/10.1080/02692171.2019.1608917">https://doi.org/10.1080/02692171.2019.1608917</a>.</p>
+</div>
+<div id="ref-alesina_Fairness_2005">
+<p>Alesina, A., and G. Angeletos. 2005. “Fairness and Redistribution.” <em>American Economic Review</em>, 960–80.</p>
+</div>
+<div id="ref-arrow_meritocracy_2000">
+<p>Arrow, Kenneth J., Samuel Bowles, and Steven N. Durlauf, eds. 2000. <em>Meritocracy and Economic Inequality</em>. Princeton, N.J: Princeton University Press.</p>
+</div>
+<div id="ref-bay-chengTrackingHomoOeconomicus2015">
+<p>Bay-Cheng, Laina Y., Caroline C. Fitz, Natalie M. Alizaga, and Alyssa N. Zucker. 2015. “Tracking Homo Oeconomicus: Development of the Neoliberal Beliefs Inventory.” <em>J. Soc. Polit. Psych.</em> 3 (1): 71–88. <a href="https://doi.org/10.5964/jspp.v3i1.366">https://doi.org/10.5964/jspp.v3i1.366</a>.</p>
+</div>
+<div id="ref-bollenStructuralEquationsLatent1989">
+<p>Bollen, Kenneth A. 1989. <em>Structural Equations with Latent Variables</em>. Wiley Series in Probability and Mathematical Statistics. New York: Wiley.</p>
+</div>
+<div id="ref-breenClassInequalityMeritocracy1999">
+<p>Breen, Richard, and John H. Goldthorpe. 1999. “Class Inequality and Meritocracy: A Critique of Saunders and an Alternative Analysis1.” <em>The British Journal of Sociology</em> 50 (1): 1–27. <a href="https://doi.org/10.1111/j.1468-4446.1999.00001.x">https://doi.org/10.1111/j.1468-4446.1999.00001.x</a>.</p>
+</div>
+<div id="ref-brownBookReviewTimothy2010">
+<p>Brown, Bryan D. 2010. “Book Review: Timothy a. Brown. (2006). Confirmatory Factor Analysis for Applied Research. New York: Guilford.” <em>Organizational Research Methods</em> 13 (1): 214–17. <a href="https://doi.org/10.1177/1094428108323758">https://doi.org/10.1177/1094428108323758</a>.</p>
+</div>
+<div id="ref-bubakPerceptionsMeritocracyNote2019">
+<p>Bubak, Oldrich. 2019. “Perceptions of Meritocracy: A Note on China.” <em>Asian Journal of Comparative Politics</em> 4 (2): 192–209. <a href="https://doi.org/10.1177/2057891118806065">https://doi.org/10.1177/2057891118806065</a>.</p>
+</div>
+<div id="ref-davey_preference_1999">
+<p>Davey, L. M., D. R. Bobocel, L. S. Son Hing, and M. P. Zanna. 1999. “Preference for the Merit Principle Scale: An Individual Difference Measure of Distributive Justice Preferences.” <em>Social Justice Research</em> 12 (3): 223–40.</p>
+</div>
+<div id="ref-dimick_Models_2018">
+<p>Dimick, Matthew, David Rueda, and Daniel Stegmueller. 2018. “Models of Other-Regarding Preferences, Inequality, and Redistribution.” <em>Annual Review of Political Science</em> 21 (1): 441–60. <a href="https://doi.org/10.1146/annurev-polisci-091515-030034">https://doi.org/10.1146/annurev-polisci-091515-030034</a>.</p>
+</div>
+<div id="ref-duru-bellat_whos_2012">
+<p>Duru-Bellat, Marie, and Elise Tenret. 2012. “Who’s for Meritocracy? Individual and Contextual Variations in the Faith.” <em>Comparative Education Review</em> 56 (2): 223–47. <a href="https://doi.org/10.1086/661290">https://doi.org/10.1086/661290</a>.</p>
+</div>
+<div id="ref-generettStoriesWeTell2020">
+<p>Generett, Gretchen Givens, and Amy M. Olson. 2020. “The Stories We Tell: How Merit Narratives Undermine Success for Urban Youth.” <em>Urban Education</em> 55 (3): 394–423. <a href="https://doi.org/10.1177/0042085918817342">https://doi.org/10.1177/0042085918817342</a>.</p>
+</div>
+<div id="ref-girerdNeoliberalismIdeologicalBarrier2020">
+<p>Girerd, Lola, and Virginie Bonnot. 2020a. “Neoliberalism: An Ideological Barrier to Feminist Identification and Collective Action.” <em>Soc Just Res</em> 33 (1): 81–109. <a href="https://doi.org/10.1007/s11211-020-00347-8">https://doi.org/10.1007/s11211-020-00347-8</a>.</p>
+</div>
+<div id="ref-girerdNeoliberalismIdeologicalBarrier2020a">
+<p>———. 2020b. “Neoliberalism: An Ideological Barrier to Feminist Identification and Collective Action.” <em>Soc Just Res</em> 33 (1): 81–109. <a href="https://doi.org/10.1007/s11211-020-00347-8">https://doi.org/10.1007/s11211-020-00347-8</a>.</p>
+</div>
+<div id="ref-goldthorpe_myth_2003">
+<p>Goldthorpe, John. 2003. “The Myth of Education-Based Meritocracy.” <em>New Economy</em> 10 (4): 234–39. <a href="https://doi.org/10.1046/j.1468-0041.2003.00324.x">https://doi.org/10.1046/j.1468-0041.2003.00324.x</a>.</p>
+</div>
+<div id="ref-hadjar_meritokratie_2008">
+<p>Hadjar, Andreas. 2008. <em>Meritokratie Als Legitimationsprinzip</em>. Wiesbaden: VS Verlag.</p>
+</div>
+<div id="ref-janmaatSubjectiveInequalityReview2013">
+<p>Janmaat, Jan Germen. 2013. “Subjective Inequality: A Review of International Comparative Studies on People’s Views About Inequality.” <em>Arch. Eur. Sociol.</em> 54 (3): 357–89. <a href="https://doi.org/10.1017/S0003975613000209">https://doi.org/10.1017/S0003975613000209</a>.</p>
+</div>
+<div id="ref-kunovich_systems_2007">
+<p>Kunovich, Sheri, and Kazimierz M. Slomczynski. 2007. “Systems of Distribution and a Sense of Equity: A Multilevel Analysis of Meritocratic Attitudes in Post-Industrial Societies.” <em>European Sociological Review</em> 23 (5): 649–63. <a href="https://doi.org/10.1093/esr/jcm026">https://doi.org/10.1093/esr/jcm026</a>.</p>
+</div>
+<div id="ref-landWeSatTable2006">
+<p>Land, Hilary. 2006. “We Sat down at the Table of Privilege and Complained About the Food <sup>1</sup>.” <em>The Political Quarterly</em> 77 (s1): 45–60. <a href="https://doi.org/10.1111/j.1467-923X.2006.00780.x">https://doi.org/10.1111/j.1467-923X.2006.00780.x</a>.</p>
+</div>
+<div id="ref-MadeiraPrimesConsequencesSystematic2019">
+<p>Madeira, Ana Filipa, Rui Costa-Lopes, John F. Dovidio, Gonçalo Freitas, and Mafalda F. Mascarenhas. 2019. “Primes and Consequences: A Systematic Review of Meritocracy in Intergroup Relations.” <em>Frontiers in Psychology</em> 10 (September). <a href="https://doi.org/10.3389/fpsyg.2019.02007">https://doi.org/10.3389/fpsyg.2019.02007</a>.</p>
+</div>
+<div id="ref-markovits_Meritocracy_2019">
+<p>Markovits, Daniel. 2019. <em>The Meritocracy Trap: How America’s Foundational Myth Feeds Inequality, Dismantles the Middle Class, and Devours the Elite</em>. New York: Penguin Press.</p>
+</div>
+<div id="ref-mijs_paradox_2019">
+<p>Mijs, Jonathan J B. 2019. “The Paradox of Inequality: Income Inequality and Belief in Meritocracy Go Hand in Hand.” <em>Socio-Economic Review</em>, January. <a href="https://doi.org/10.1093/ser/mwy051">https://doi.org/10.1093/ser/mwy051</a>.</p>
+</div>
+<div id="ref-newman_false_2015">
+<p>Newman, Benjamin J., Christopher D. Johnston, and Patrick L. Lown. 2015. “False Consciousness or Class Awareness? Local Income Inequality, Personal Economic Position, and Belief in American Meritocracy.” <em>American Journal of Political Science</em> 59 (2): 326–40. <a href="https://doi.org/10.1111/ajps.12153">https://doi.org/10.1111/ajps.12153</a>.</p>
+</div>
+<div id="ref-owensENGINESSOCIALMOBILITY2020">
+<p>Owens, John, and Tania de St Croix. 2020. “ENGINES OF SOCIAL MOBILITY? NAVIGATING MERITOCRATIC EDUCATION DISCOURSE IN AN UNEQUAL SOCIETY.” <em>British Journal of Educational Studies</em>, January, 1–21. <a href="https://doi.org/10.1080/00071005.2019.1708863">https://doi.org/10.1080/00071005.2019.1708863</a>.</p>
+</div>
+<div id="ref-perezAdvancingCareersMerit2020">
+<p>Pérez, Andrés, and Ida Sabelis. 2020. “Advancing Careers Through ‘Merit’: A Rationalized-Sensemaking Narrative in Hierarchical Organizations.” <em>Culture and Organization</em> 26 (4): 315–32. <a href="https://doi.org/10.1080/14759551.2019.1601723">https://doi.org/10.1080/14759551.2019.1601723</a>.</p>
+</div>
+<div id="ref-piketty_Capital_2014">
+<p>Piketty, Thomas. 2014. <em>Capital in the Twenty-First Century</em>. Translated by Arthur Goldhammer. Cambridge Massachusetts: The Belknap Press of Harvard University Press.</p>
+</div>
+<div id="ref-premingerMeritocracyServiceEthnocracy2020">
+<p>Preminger, Jonathan. 2020. “Meritocracy in the Service of Ethnocracy.” <em>Citizenship Studies</em> 24 (2): 247–63. <a href="https://doi.org/10.1080/13621025.2020.1720604">https://doi.org/10.1080/13621025.2020.1720604</a>.</p>
+</div>
+<div id="ref-reynolds_perceptions_2014">
+<p>Reynolds, Jeremy, and He Xian. 2014. “Perceptions of Meritocracy in the Land of Opportunity.” <em>Research in Social Stratification and Mobility</em> 36 (June): 121–37. <a href="https://doi.org/10.1016/j.rssm.2014.03.001">https://doi.org/10.1016/j.rssm.2014.03.001</a>.</p>
+</div>
+<div id="ref-saundersMightBritainBe1995">
+<p>Saunders, Peter. 1995. “Might Britain Be a Meritocracy?” <em>Sociology</em> 29 (1): 23–41. <a href="https://doi.org/10.1177/0038038595029001003">https://doi.org/10.1177/0038038595029001003</a>.</p>
+</div>
+<div id="ref-schroder_Income_2017">
+<p>Schröder, Martin. 2017. “Is Income Inequality Related to Tolerance for Inequality?” <em>Social Justice Research</em> 30 (1): 23–47. <a href="https://doi.org/10.1007/s11211-016-0276-8">https://doi.org/10.1007/s11211-016-0276-8</a>.</p>
+</div>
+<div id="ref-son_hing_merit_2011-1">
+<p>Son Hing, Leanne S., D. Ramona, Mark P. Zanna, Donna M. Garcia, Stephanie S. Gee, and Katie Orazietti. 2011. “The Merit of Meritocracy.” <em>Journal of Personality and Social Psychology</em> 101 (3): 433–50. <a href="https://doi.org/10.1037/a0024618">https://doi.org/10.1037/a0024618</a>.</p>
+</div>
+<div id="ref-trumpWhenWhyEconomic2020">
+<p>Trump, Kris-Stella. 2020. “When and Why Is Economic Inequality Seen as Fair.” <em>Current Opinion in Behavioral Sciences</em> 34 (August): 46–51. <a href="https://doi.org/10.1016/j.cobeha.2019.12.001">https://doi.org/10.1016/j.cobeha.2019.12.001</a>.</p>
+</div>
+<div id="ref-vandenbergReviewSynthesisMeasurement2000">
+<p>Vandenberg, Robert J., and Charles E. Lance. 2000. “A Review and Synthesis of the Measurement Invariance Literature: Suggestions, Practices, and Recommendations for Organizational Research.” <em>Organizational Research Methods</em> 3 (1): 4–70. <a href="https://doi.org/10.1177/109442810031002">https://doi.org/10.1177/109442810031002</a>.</p>
+</div>
+<div id="ref-witteveenReconsideringMeritocraticPower2020">
+<p>Witteveen, Dirk, and Paul Attewell. 2020. “Reconsidering the ‘Meritocratic Power of a College Degree’.” <em>Research in Social Stratification and Mobility</em> 66 (April): 100479. <a href="https://doi.org/10.1016/j.rssm.2020.100479">https://doi.org/10.1016/j.rssm.2020.100479</a>.</p>
+</div>
+<div id="ref-yairMeritocracy2007">
+<p>Yair, Gad. 2007. “Meritocracy.” In <em>The Blackwell Encyclopedia of Sociology</em>, edited by George Ritzer. Oxford, UK: John Wiley &amp; Sons, Ltd. <a href="https://doi.org/10.1002/9781405165518.wbeosm082">https://doi.org/10.1002/9781405165518.wbeosm082</a>.</p>
+</div>
+<div id="ref-young_rise_1962">
+<p>Young, M. 1962. <em>The Rise of the Meritocracy</em>. Baltimore: Penguin Books.</p>
+</div>
+<div id="ref-youngRiseMeritocracy1994">
+<p>Young, Michael Dunlop. 1994. <em>The Rise of the Meritocracy</em>. New Brunswick, N.J., U.S.A: Transaction Publishers.</p>
+</div>
+</div>
+<!-- Although <div> is an HTML tag, this method also works for other output formats such as PDF. -->
+</div>
+<div id="appendix" class="section level1 unnumbered">
+<h1>Appendix</h1>
 <table class="table" style="font-size: 9px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:tab-loads">Table 3: </span>Factor loads and model fit.
+<span id="tab:tab-loads">Table 4: </span>Factor loads and model fit.
 </caption>
 <thead>
 <tr>
@@ -1203,196 +1536,6 @@ Preferences contacts
 </tr>
 </tfoot>
 </table>
-<p>Como se puede observar en la Tabla XX, todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, <span class="math inline">\(\chi2\)</span>(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, <span class="math inline">\(\chi2\)</span>(df=14)=39.09, p &lt; 0.001). Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, <span class="math inline">\(\chi2\)</span>(df=14)=64.156, p &lt; 0.001).</p>
-<p>Si bien todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico <span class="citation">(Vandenberg and Lance <a href="#ref-vandenbergReviewSynthesisMeasurement2000" role="doc-biblioref">2000</a>)</span>. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo. Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.</p>
-<div style="page-break-after: always;"></div>
-<blockquote>
-<p>Julio: ¿Esto se debe mantener?</p>
-</blockquote>
-<table>
-<caption>Items according to dimension.</caption>
-<thead>
-<tr class="header">
-<th align="center"></th>
-<th align="center">Contrast Model 1 Factor</th>
-<th align="center">theoretical model 4 Factors</th>
-<th align="center">Model with M.I.</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="center"><strong>n</strong></td>
-<td align="center">1769</td>
-<td align="center">1769</td>
-<td align="center">1769</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>CFI</strong></td>
-<td align="center">0.595</td>
-<td align="center">0.988</td>
-<td align="center">0.994</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong>TLI</strong></td>
-<td align="center">0.433</td>
-<td align="center">0.976</td>
-<td align="center">0.985</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>RMSEA</strong></td>
-<td align="center">0.226</td>
-<td align="center">0.047</td>
-<td align="center">0.036</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong><span class="math inline">\(\chi2\)</span></strong></td>
-<td align="center">1830.839</td>
-<td align="center">68.661</td>
-<td align="center">40.250</td>
-</tr>
-<tr class="even">
-<td align="center"><strong>p</strong></td>
-<td align="center">.000</td>
-<td align="center">.000</td>
-<td align="center">.000</td>
-</tr>
-<tr class="odd">
-<td align="center"><strong><span class="math inline">\(\chi2\)</span>/df</strong></td>
-<td align="center">65.38</td>
-<td align="center">4.90</td>
-<td align="center">3.32</td>
-</tr>
-</tbody>
-</table>
-<p>EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba <span class="math inline">\(\chi2\)</span>(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un <span class="math inline">\(\chi2\)</span> ratio menor a 3 y obtuvo cargas factoriales muy bajas (<span class="math inline">\(\tau\)</span>)&lt; 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.</p>
-</div>
-</div>
-</div>
-<div id="conclusión" class="section level1">
-<h1>Conclusión</h1>
-<p>Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha decidido seguir utilizando el orden 3.</p>
-<p>uso conjunto percepciones-preferencias</p>
-<div style="page-break-after: always;"></div>
-</div>
-<div id="references" class="section level1">
-<h1>References</h1>
-<div id="refs">
-<div id="ref-aielloNewEvidenceFirmuniversity2019">
-<p>Aiello, Francesco, Paola Cardamone, and Valeria Pupo. 2019. “New Evidence on the Firm-University Linkages in Europe. The Role of Meritocratic Management Practices.” <em>International Review of Applied Economics</em> 33 (6): 813–28. <a href="https://doi.org/10.1080/02692171.2019.1608917">https://doi.org/10.1080/02692171.2019.1608917</a>.</p>
-</div>
-<div id="ref-alesina_Fairness_2005">
-<p>Alesina, A., and G. Angeletos. 2005. “Fairness and Redistribution.” <em>American Economic Review</em>, 960–80.</p>
-</div>
-<div id="ref-arrow_meritocracy_2000">
-<p>Arrow, Kenneth J., Samuel Bowles, and Steven N. Durlauf, eds. 2000. <em>Meritocracy and Economic Inequality</em>. Princeton, N.J: Princeton University Press.</p>
-</div>
-<div id="ref-bay-chengTrackingHomoOeconomicus2015">
-<p>Bay-Cheng, Laina Y., Caroline C. Fitz, Natalie M. Alizaga, and Alyssa N. Zucker. 2015. “Tracking Homo Oeconomicus: Development of the Neoliberal Beliefs Inventory.” <em>J. Soc. Polit. Psych.</em> 3 (1): 71–88. <a href="https://doi.org/10.5964/jspp.v3i1.366">https://doi.org/10.5964/jspp.v3i1.366</a>.</p>
-</div>
-<div id="ref-bollenStructuralEquationsLatent1989">
-<p>Bollen, Kenneth A. 1989. <em>Structural Equations with Latent Variables</em>. Wiley Series in Probability and Mathematical Statistics. New York: Wiley.</p>
-</div>
-<div id="ref-breenClassInequalityMeritocracy1999">
-<p>Breen, Richard, and John H. Goldthorpe. 1999. “Class Inequality and Meritocracy: A Critique of Saunders and an Alternative Analysis1.” <em>The British Journal of Sociology</em> 50 (1): 1–27. <a href="https://doi.org/10.1111/j.1468-4446.1999.00001.x">https://doi.org/10.1111/j.1468-4446.1999.00001.x</a>.</p>
-</div>
-<div id="ref-brownBookReviewTimothy2010">
-<p>Brown, Bryan D. 2010. “Book Review: Timothy a. Brown. (2006). Confirmatory Factor Analysis for Applied Research. New York: Guilford.” <em>Organizational Research Methods</em> 13 (1): 214–17. <a href="https://doi.org/10.1177/1094428108323758">https://doi.org/10.1177/1094428108323758</a>.</p>
-</div>
-<div id="ref-bubakPerceptionsMeritocracyNote2019">
-<p>Bubak, Oldrich. 2019. “Perceptions of Meritocracy: A Note on China.” <em>Asian Journal of Comparative Politics</em> 4 (2): 192–209. <a href="https://doi.org/10.1177/2057891118806065">https://doi.org/10.1177/2057891118806065</a>.</p>
-</div>
-<div id="ref-davey_preference_1999">
-<p>Davey, L. M., D. R. Bobocel, L. S. Son Hing, and M. P. Zanna. 1999. “Preference for the Merit Principle Scale: An Individual Difference Measure of Distributive Justice Preferences.” <em>Social Justice Research</em> 12 (3): 223–40.</p>
-</div>
-<div id="ref-dimick_Models_2018">
-<p>Dimick, Matthew, David Rueda, and Daniel Stegmueller. 2018. “Models of Other-Regarding Preferences, Inequality, and Redistribution.” <em>Annual Review of Political Science</em> 21 (1): 441–60. <a href="https://doi.org/10.1146/annurev-polisci-091515-030034">https://doi.org/10.1146/annurev-polisci-091515-030034</a>.</p>
-</div>
-<div id="ref-duru-bellat_whos_2012">
-<p>Duru-Bellat, Marie, and Elise Tenret. 2012. “Who’s for Meritocracy? Individual and Contextual Variations in the Faith.” <em>Comparative Education Review</em> 56 (2): 223–47. <a href="https://doi.org/10.1086/661290">https://doi.org/10.1086/661290</a>.</p>
-</div>
-<div id="ref-generettStoriesWeTell2020">
-<p>Generett, Gretchen Givens, and Amy M. Olson. 2020. “The Stories We Tell: How Merit Narratives Undermine Success for Urban Youth.” <em>Urban Education</em> 55 (3): 394–423. <a href="https://doi.org/10.1177/0042085918817342">https://doi.org/10.1177/0042085918817342</a>.</p>
-</div>
-<div id="ref-girerdNeoliberalismIdeologicalBarrier2020">
-<p>Girerd, Lola, and Virginie Bonnot. 2020a. “Neoliberalism: An Ideological Barrier to Feminist Identification and Collective Action.” <em>Soc Just Res</em> 33 (1): 81–109. <a href="https://doi.org/10.1007/s11211-020-00347-8">https://doi.org/10.1007/s11211-020-00347-8</a>.</p>
-</div>
-<div id="ref-girerdNeoliberalismIdeologicalBarrier2020a">
-<p>———. 2020b. “Neoliberalism: An Ideological Barrier to Feminist Identification and Collective Action.” <em>Soc Just Res</em> 33 (1): 81–109. <a href="https://doi.org/10.1007/s11211-020-00347-8">https://doi.org/10.1007/s11211-020-00347-8</a>.</p>
-</div>
-<div id="ref-goldthorpe_myth_2003">
-<p>Goldthorpe, John. 2003. “The Myth of Education-Based Meritocracy.” <em>New Economy</em> 10 (4): 234–39. <a href="https://doi.org/10.1046/j.1468-0041.2003.00324.x">https://doi.org/10.1046/j.1468-0041.2003.00324.x</a>.</p>
-</div>
-<div id="ref-hadjar_meritokratie_2008">
-<p>Hadjar, Andreas. 2008. <em>Meritokratie Als Legitimationsprinzip</em>. Wiesbaden: VS Verlag.</p>
-</div>
-<div id="ref-janmaatSubjectiveInequalityReview2013">
-<p>Janmaat, Jan Germen. 2013. “Subjective Inequality: A Review of International Comparative Studies on People’s Views About Inequality.” <em>Arch. Eur. Sociol.</em> 54 (3): 357–89. <a href="https://doi.org/10.1017/S0003975613000209">https://doi.org/10.1017/S0003975613000209</a>.</p>
-</div>
-<div id="ref-kunovich_systems_2007">
-<p>Kunovich, Sheri, and Kazimierz M. Slomczynski. 2007. “Systems of Distribution and a Sense of Equity: A Multilevel Analysis of Meritocratic Attitudes in Post-Industrial Societies.” <em>European Sociological Review</em> 23 (5): 649–63. <a href="https://doi.org/10.1093/esr/jcm026">https://doi.org/10.1093/esr/jcm026</a>.</p>
-</div>
-<div id="ref-landWeSatTable2006">
-<p>Land, Hilary. 2006. “We Sat down at the Table of Privilege and Complained About the Food <sup>1</sup>.” <em>The Political Quarterly</em> 77 (s1): 45–60. <a href="https://doi.org/10.1111/j.1467-923X.2006.00780.x">https://doi.org/10.1111/j.1467-923X.2006.00780.x</a>.</p>
-</div>
-<div id="ref-MadeiraPrimesConsequencesSystematic2019">
-<p>Madeira, Ana Filipa, Rui Costa-Lopes, John F. Dovidio, Gonçalo Freitas, and Mafalda F. Mascarenhas. 2019. “Primes and Consequences: A Systematic Review of Meritocracy in Intergroup Relations.” <em>Frontiers in Psychology</em> 10 (September). <a href="https://doi.org/10.3389/fpsyg.2019.02007">https://doi.org/10.3389/fpsyg.2019.02007</a>.</p>
-</div>
-<div id="ref-markovits_Meritocracy_2019">
-<p>Markovits, Daniel. 2019. <em>The Meritocracy Trap: How America’s Foundational Myth Feeds Inequality, Dismantles the Middle Class, and Devours the Elite</em>. New York: Penguin Press.</p>
-</div>
-<div id="ref-mijs_paradox_2019">
-<p>Mijs, Jonathan J B. 2019. “The Paradox of Inequality: Income Inequality and Belief in Meritocracy Go Hand in Hand.” <em>Socio-Economic Review</em>, January. <a href="https://doi.org/10.1093/ser/mwy051">https://doi.org/10.1093/ser/mwy051</a>.</p>
-</div>
-<div id="ref-newman_false_2015">
-<p>Newman, Benjamin J., Christopher D. Johnston, and Patrick L. Lown. 2015. “False Consciousness or Class Awareness? Local Income Inequality, Personal Economic Position, and Belief in American Meritocracy.” <em>American Journal of Political Science</em> 59 (2): 326–40. <a href="https://doi.org/10.1111/ajps.12153">https://doi.org/10.1111/ajps.12153</a>.</p>
-</div>
-<div id="ref-owensENGINESSOCIALMOBILITY2020">
-<p>Owens, John, and Tania de St Croix. 2020. “ENGINES OF SOCIAL MOBILITY? NAVIGATING MERITOCRATIC EDUCATION DISCOURSE IN AN UNEQUAL SOCIETY.” <em>British Journal of Educational Studies</em>, January, 1–21. <a href="https://doi.org/10.1080/00071005.2019.1708863">https://doi.org/10.1080/00071005.2019.1708863</a>.</p>
-</div>
-<div id="ref-perezAdvancingCareersMerit2020">
-<p>Pérez, Andrés, and Ida Sabelis. 2020. “Advancing Careers Through ‘Merit’: A Rationalized-Sensemaking Narrative in Hierarchical Organizations.” <em>Culture and Organization</em> 26 (4): 315–32. <a href="https://doi.org/10.1080/14759551.2019.1601723">https://doi.org/10.1080/14759551.2019.1601723</a>.</p>
-</div>
-<div id="ref-piketty_Capital_2014">
-<p>Piketty, Thomas. 2014. <em>Capital in the Twenty-First Century</em>. Translated by Arthur Goldhammer. Cambridge Massachusetts: The Belknap Press of Harvard University Press.</p>
-</div>
-<div id="ref-premingerMeritocracyServiceEthnocracy2020">
-<p>Preminger, Jonathan. 2020. “Meritocracy in the Service of Ethnocracy.” <em>Citizenship Studies</em> 24 (2): 247–63. <a href="https://doi.org/10.1080/13621025.2020.1720604">https://doi.org/10.1080/13621025.2020.1720604</a>.</p>
-</div>
-<div id="ref-reynolds_perceptions_2014">
-<p>Reynolds, Jeremy, and He Xian. 2014. “Perceptions of Meritocracy in the Land of Opportunity.” <em>Research in Social Stratification and Mobility</em> 36 (June): 121–37. <a href="https://doi.org/10.1016/j.rssm.2014.03.001">https://doi.org/10.1016/j.rssm.2014.03.001</a>.</p>
-</div>
-<div id="ref-saundersMightBritainBe1995">
-<p>Saunders, Peter. 1995. “Might Britain Be a Meritocracy?” <em>Sociology</em> 29 (1): 23–41. <a href="https://doi.org/10.1177/0038038595029001003">https://doi.org/10.1177/0038038595029001003</a>.</p>
-</div>
-<div id="ref-schroder_Income_2017">
-<p>Schröder, Martin. 2017. “Is Income Inequality Related to Tolerance for Inequality?” <em>Social Justice Research</em> 30 (1): 23–47. <a href="https://doi.org/10.1007/s11211-016-0276-8">https://doi.org/10.1007/s11211-016-0276-8</a>.</p>
-</div>
-<div id="ref-son_hing_merit_2011-1">
-<p>Son Hing, Leanne S., D. Ramona, Mark P. Zanna, Donna M. Garcia, Stephanie S. Gee, and Katie Orazietti. 2011. “The Merit of Meritocracy.” <em>Journal of Personality and Social Psychology</em> 101 (3): 433–50. <a href="https://doi.org/10.1037/a0024618">https://doi.org/10.1037/a0024618</a>.</p>
-</div>
-<div id="ref-trumpWhenWhyEconomic2020">
-<p>Trump, Kris-Stella. 2020. “When and Why Is Economic Inequality Seen as Fair.” <em>Current Opinion in Behavioral Sciences</em> 34 (August): 46–51. <a href="https://doi.org/10.1016/j.cobeha.2019.12.001">https://doi.org/10.1016/j.cobeha.2019.12.001</a>.</p>
-</div>
-<div id="ref-vandenbergReviewSynthesisMeasurement2000">
-<p>Vandenberg, Robert J., and Charles E. Lance. 2000. “A Review and Synthesis of the Measurement Invariance Literature: Suggestions, Practices, and Recommendations for Organizational Research.” <em>Organizational Research Methods</em> 3 (1): 4–70. <a href="https://doi.org/10.1177/109442810031002">https://doi.org/10.1177/109442810031002</a>.</p>
-</div>
-<div id="ref-witteveenReconsideringMeritocraticPower2020">
-<p>Witteveen, Dirk, and Paul Attewell. 2020. “Reconsidering the ‘Meritocratic Power of a College Degree’.” <em>Research in Social Stratification and Mobility</em> 66 (April): 100479. <a href="https://doi.org/10.1016/j.rssm.2020.100479">https://doi.org/10.1016/j.rssm.2020.100479</a>.</p>
-</div>
-<div id="ref-yairMeritocracy2007">
-<p>Yair, Gad. 2007. “Meritocracy.” In <em>The Blackwell Encyclopedia of Sociology</em>, edited by George Ritzer. Oxford, UK: John Wiley &amp; Sons, Ltd. <a href="https://doi.org/10.1002/9781405165518.wbeosm082">https://doi.org/10.1002/9781405165518.wbeosm082</a>.</p>
-</div>
-<div id="ref-young_rise_1962">
-<p>Young, M. 1962. <em>The Rise of the Meritocracy</em>. Baltimore: Penguin Books.</p>
-</div>
-<div id="ref-youngRiseMeritocracy1994">
-<p>Young, Michael Dunlop. 1994. <em>The Rise of the Meritocracy</em>. New Brunswick, N.J., U.S.A: Transaction Publishers.</p>
-</div>
-</div>
-<!-- Although <div> is an HTML tag, this method also works for other output formats such as PDF. -->
-</div>
-<div id="appendix" class="section level1 unnumbered">
-<h1>Appendix</h1>
 <table>
 <caption>Representativeness of the sample.</caption>
 <thead>

@@ -43,7 +43,7 @@ header-includes:
 ```
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '75%',fig.pos= "H")
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE,out.width = '75%',fig.pos= "H")
 # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
 # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
 options(scipen=999)
@@ -249,49 +249,44 @@ En suma, los análisis descriptivos señalan una relativa adhesión a la moral m
 
 ## Confirmatory Factor Analysis
 
-This section tests the item's battery and the corresponding conceptual framework under test. For this, we first estimate a confirmatory factor analysis model for the whole sample, and secondly we test the order effects applying the same model to each of the three order versions.
+This section tests the item's battery and the corresponding conceptual framework under test. For this, we first estimate a confirmatory factor analysis model for the whole sample, and secondly we test the order effects applying the same model to each of the three order versions. 
 
 ### Full sample CFA
 
-Figure X shows the results of the estimation for the four-factor model:
+In \@ref(fig:meas02) the results of the estimation for the four-factor model with complete sample. This model have a good fit (CFI.sca = 0.977, RMSEA.sca = 0.079, $\chi2$(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88. Furthermore, considering the correlation between the latent variables, it is observed that the most related variables are meritocratic perceptions and preferences, which have a positive correlation of 0.59, while non-meritocratic perceptions and preferences do not present a considerable correlation.
 
-> Julio: Esta sección debe ser revisada:
-
-- CFA general
-- Fit x modelo
-
-[Aquí SEM plot con cargas y ajuste global del modelo]
-
-Los modelos confirmatorios fueron estimados en primer lugar para cada uno de los tres administration-sets. Los resultados se presentan en la Tabla \@ref(tab:tab-loads)
-
-```{r tab-loads, echo=FALSE}
-load(file = "../output/tables/tb.fm.RData")
-cap <- "Factor loads and model fit."
-tb.col  <- c("Variables",1:4,1:4,1:4)
-tb.caption <- "Factor loadings and fit measures"
-tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
-
-tb.fm <- tb.fm %>%
-    mutate(vars = recode(vars,
-                         "A. Who the more they try they manage to get bigger rewards that those who striveless."= "Perception Effort",
-                         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent."= "Perception Talent",
-                         "C. Who they have rich parents manage to get out ahead."="Perception rich parents",
-                         "D. Who they have good contacts they manage to get out ahead."="Perception contacts",
-                         "E. Who the more they try they should get greater rewards than those who they try less." = "Preferences Effort",
-                         "F. Who possess more talent they should get greater rewards than those who possess less talent."= "Preferences Talent",
-                         "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
-                         "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
-
-tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = cap) %>%
-          kable_styling(full_width = table_format2,latex_options = c("hold_position","scale_down"), position = "center",font_size = 9) %>%
-          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>%
-          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>%
-          row_spec(row = 8,hline_after = TRUE) %>%
-          add_indent(c(9:12))  %>%
-          footnote(general = tb.foot,threeparttable = T);tb.fm01
+```{r meas02, echo=FALSE, fig.cap = "Theorical model", fig.align='center'}
+knitr::include_graphics('../output/images/meas02.png')
 ```
 
-Como se puede observar en la Tabla XX, todos los modelos independiente de los órdenes obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, $\chi2$(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968,RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
+Como se puede observar en la Tabla \@ref(tab:tab-loads), todos los modelos, independiente del grupo y el órden de los items, obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, $\chi2$(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968, RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
+
+```{r tab03, echo=FALSE}
+library(lavaan)
+load(file = "../output/tables/fit4_o.RData")
+load(file = "../output/tables/fit3_o.RData")
+load(file = "../output/tables/fit2_o.RData")
+load(file = "../output/tables/fit1_o.RData")
+
+sum_fit<- bind_rows(fitmeasures(fit4_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
+                    fitmeasures(fit1_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
+                    fitmeasures(fit2_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
+                    fitmeasures(fit3_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")])
+sum_fit$mod <- c("Model 1","Model 2","Model 3","Model 4")
+sum_fit$est <- c("DWLS","DWLS","DWLS","DWLS")
+sum_fit <- select(sum_fit,mod,est,everything())
+colnames <- c("Model","Estimator","$\\chi^2$","df","CFI.sca","RMSEA","RMSEA.sca")
+
+
+sumtable02<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices according group",col.names = colnames,escape = FALSE) %>%
+  kable_styling(full_width = F)  %>%
+      collapse_rows(columns = 1,valign = "middle")  %>%
+      footnote(number = c("Model 1: Complete sample",
+                          "Model 2: fixed order by percepction/preference",
+                          "Model 3:  fixed order by topic (i.e: effort)",
+                          "Model 4: Randomized order"));sumtable02
+```
+
 
 
 Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
@@ -337,6 +332,32 @@ uso conjunto percepciones-preferencias
 
 # Appendix {-}
 
+```{r tab-loads, echo=FALSE}
+load(file = "../output/tables/tb.fm.RData")
+cap <- "Factor loads and model fit."
+tb.col  <- c("Variables",1:4,1:4,1:4)
+tb.caption <- "Factor loadings and fit measures"
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
+
+tb.fm <- tb.fm %>%
+    mutate(vars = recode(vars,
+                         "A. Who the more they try they manage to get bigger rewards that those who striveless."= "Perception Effort",
+                         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent."= "Perception Talent",
+                         "C. Who they have rich parents manage to get out ahead."="Perception rich parents",
+                         "D. Who they have good contacts they manage to get out ahead."="Perception contacts",
+                         "E. Who the more they try they should get greater rewards than those who they try less." = "Preferences Effort",
+                         "F. Who possess more talent they should get greater rewards than those who possess less talent."= "Preferences Talent",
+                         "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
+                         "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
+
+tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = cap) %>%
+          kable_styling(full_width = table_format2,latex_options = c("hold_position","scale_down"), position = "center",font_size = 9) %>%
+          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>%
+          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>%
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12))  %>%
+          footnote(general = tb.foot,threeparttable = T);tb.fm01
+```
 
 
 ```{r include=FALSE}

@@ -517,7 +517,7 @@ label.font = 6,
 edge.width =1,
          sizeMan=5,
          sizeLat = 10, width = 12,
-         height= 15, nodeNames = nodeNames, intercepts = F, reorder = F, thresholds = F, nodeLabels = c("A","B","C","D","E","F","G","H","1","2","3","4"), filetype ="png", filename = "output/images/meas01") #arrow size)
+         height= 15, nodeNames = nodeNames, intercepts = F, reorder = F, thresholds = F, nodeLabels = c("A","B","C","D","E","F","G","H","1","2","3","4"), filetype ="png", filename = "output/images/meas02") #arrow size)
 
 ```
 
@@ -723,6 +723,12 @@ sumtable01<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, 
 
 
 ```{r}
+
+save(fit4_o,file = "output/tables/fit4_o.RData")
+save(fit3_o,file = "output/tables/fit3_o.RData")
+save(fit2_o,file = "output/tables/fit2_o.RData")
+save(fit1_o,file = "output/tables/fit1_o.RData")
+
 sum_fit<- bind_rows(fitmeasures(fit4_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
                     fitmeasures(fit1_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
                     fitmeasures(fit2_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
