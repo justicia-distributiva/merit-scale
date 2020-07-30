@@ -25,7 +25,6 @@ The rationale of the design relies on the possibility to test how different disp
 ---
 
 
-
 ```{r eval=FALSE, include=FALSE}
 rmarkdown::render(input = "production/prod_analysis-cfa.rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-cfa.html")
 ```
@@ -195,7 +194,7 @@ polyw01<- poly(sjlabelled::remove_all_labels(dat01),
                triangle = "l",
                fade.ns = F,
                remove.spaces = T,
-               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
+             string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
 matpolyw01 <- as.data.frame(read_html(x = polyw01[["page.content"]]) %>% html_table(fill=FALSE)) 
 matpolyw01 <- matpolyw01[-c(9),]
 colnames(matpolyw01) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)","(H)")
@@ -204,7 +203,7 @@ load01<- data.frame(round(cbind(inspect(fit1_c,what="std")$lambda,inspect(fit1_o
 load01[load01==c(0.00)] <- NA; names(load01) <- c(1:4,1:4)
 
 table01<- bind_cols(x = matpolyw01,y = load01)
-# %>% mutate(vars=labs)
+### %>% mutate(vars=labs)
 
 kable(table01,escape = TRUE,align = "l",col.names = cnametab,format = "html") %>% 
   footnote(general = paste0(paste0("$N$= ",nobs(fit1_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
@@ -283,7 +282,7 @@ load02<- data.frame(round(cbind(inspect(fit2_c,what="std")$lambda,inspect(fit2_o
 load02[load02==c(0.00)] <- NA; names(load02) <- c(1:4,1:4)
 
 table02<- bind_cols(x = matpolyw02,y = load02)
-# %>% mutate(vars=labs)
+## %>% mutate(vars=labs)
 
 kable(table02,escape = FALSE,align = "l",col.names = cnametab)  %>% 
   footnote(general = paste0(paste0("$N$= ",nobs(fit2_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
@@ -359,7 +358,7 @@ load03<- data.frame(round(cbind(inspect(fit3_c,what="std")$lambda,inspect(fit3_o
 load03[load03==c(0.00)] <- NA; names(load03) <- c(1:4,1:4)
 
 table03<- bind_cols(x = matpolyw03,y = load03)
-# %>% mutate(vars=labs)
+   ## %>% mutate(vars=labs)
 
 kable(table03,escape = FALSE,align = "l",col.names = cnametab) %>% 
   footnote(general = paste0(paste0("$N$= ",nobs(fit3_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
@@ -421,7 +420,7 @@ load03tau<- data.frame(round(cbind(inspect(fit3_c.tau,what="std")$lambda,inspect
 load03tau[load03tau==c(0.00)] <- NA; names(load03tau) <- c(1:4,1:4)
 
 table03tau<- bind_cols(x = matpolyw03tau,y = load03tau) 
-# %>% mutate(vars=labs)
+### %>% mutate(vars=labs)
 
 kable(table03tau,escape = FALSE,align = "l",col.names = cnametab) %>% 
   footnote(general = paste0(paste0("$N$= ",nobs(fit3_c.tau)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
@@ -459,13 +458,13 @@ cor04<-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref
 rownames(cor04$rho) <-c("A.Perception Effort", "B.Perception Talent","C.Perception Rich parents","D.Perception contacts","E.Preferences Effort","F.Preferences Talent","G.Preferences rich parents", "H.Preferences contacts" )
 colnames(cor04$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 save(cor04, file = "output/images/correlation.RData")
-corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = TRUE)
 
 png("output/images/corpoly.png",
     width = 15,height = 15,units="cm",
     pointsize=12,bg="white",res=300)
 
-corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = TRUE)
 
 dev.off()
 ```
@@ -489,6 +488,40 @@ kable(left_join(x = standardizedsolution(fit4_c ) %>% filter(op=="=~") %>% selec
       format = "markdown",digits = 2,col.names = cnames, caption = "Factor loadings")
 ```
 
+```{r}
+
+nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception contacts",
+              "Preference effort","Preference talent","Preference rich family","Preference contacts",
+              "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
+
+semPaths(fit4_o , 
+whatLabels = "std",
+what="col",
+label.cex=1,
+edge.label.cex=1,
+residuals=F, 
+edge.color = "black",
+style = "lisrel",
+fade=F, 
+nCharNodes = 0,
+ curvePivot = FALSE,
+         curve = 2,
+rotation = 4,
+layout = "tree3",
+         cardinal = "lat cov",  
+legend.cex = 0.6,
+         label.cex =1,
+label.font = 6,
+         edge.label.font= 1,
+         asize = 3,
+edge.width =1,
+         sizeMan=5,
+         sizeLat = 10, width = 12,
+         height= 15, nodeNames = nodeNames, intercepts = F, reorder = F, thresholds = F, nodeLabels = c("A","B","C","D","E","F","G","H","1","2","3","4"), filetype ="png", filename = "output/images/meas01") #arrow size)
+
+```
+
+
 ```{r tabla04, include=FALSE}
 polyw04<- poly(sjlabelled::remove_all_labels(dat04[,-c(1)]),
                digits = 2,
@@ -503,8 +536,8 @@ colnames(matpolyw04) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)
 load04<- data.frame(round(cbind(inspect(fit4_c,what="std")$lambda,inspect(fit4_o,what="std")$lambda),digits = 2))
 load04[load04==c(0.00)] <- NA; names(load04) <- c(1:4,1:4)
 
-table04<- bind_cols(x = matpolyw04,y = load04) 
-# %>% mutate(vars=labs)
+table04<- bind_cols(x = matpolyw04,y = load04)  
+  # %>% mutate(vars=labs)
 
 kable(table04,escape = FALSE,align = "l",col.names = cnametab) %>% 
   footnote(general = paste0(paste0("$N$= ",nobs(fit4_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
@@ -687,6 +720,28 @@ sumtable01<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, 
 # as_image(sumtable01,file = "output/sumtablew01.png")
 # save_kable(sumtable01,file = "output/tables/sumtablew01.html",self_contained = FALSE)
 ```
+
+
+```{r}
+sum_fit<- bind_rows(fitmeasures(fit4_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
+                    fitmeasures(fit1_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
+                    fitmeasures(fit2_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")],
+                    fitmeasures(fit3_o)[c("chisq.scaled","df","cfi.scaled","rmsea","rmsea.scaled")])
+sum_fit$mod <- c("Model 1","Model 2","Model 3","Model 4")
+sum_fit$est <- c("DWLS","DWLS","DWLS","DWLS")
+sum_fit <- select(sum_fit,mod,est,everything())
+colnames <- c("Model","Estimator","$\\chi^2$","df","CFI.sca","RMSEA","RMSEA.sca")
+
+
+sumtable02<- kable(sum_fit,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices",col.names = colnames,escape = FALSE) %>%
+  kable_styling(full_width = F)  %>%
+      collapse_rows(columns = 1,valign = "middle")  %>%
+      footnote(number = c("Model 1: Complete sample",
+                          "Model 2: fixed order by percepction/preference",
+                          "Model 3:  fixed order by topic (i.e: effort)",
+                          "Model 4: Randomized order"));sumtable02
+```
+
 
 ## Other analyses
 
@@ -1148,10 +1203,12 @@ library(dplyr)
 #install.packages("cowplot")
 library(cowplot)
 
-dat_merit <- dat04 %>% select("a.Effort"=perc_effort,"a.Talent"=perc_talent, "a.Rich Parents"=perc_wpart, "a.Contacts"=perc_netw, "b.Effort"=pref_effort,"b.Talent"=pref_talent,"b.Rich Parents"=pref_wpart, "b.Contacts"=pref_netw) 
+dat_merit <- dat04 %>% select("a.Effort"=perc_effort,"a.Talent"=perc_talent, "a.Rich Parents"=perc_wpart, "a.Contacts"=perc_netw, "b.Effort"=pref_effort,"b.Talent"=pref_talent,"b.Rich Parents"=pref_wpart, "b.Contacts"=pref_netw)
 
-  
-plotlikert<-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
+dat_merit_2<- dat_merit %>% sjmisc::rec(rec="rev") %>% select("a.Effort"=a.Effort_r,"a.Talent"=a.Talent_r, "a.Rich Parents"="a.Rich Parents_r", "a.Contacts"=a.Contacts_r, "b.Effort"=b.Effort_r,"b.Talent"=b.Talent_r,"b.Rich Parents"="b.Rich Parents_r", "b.Contacts"=b.Contacts_r)
+
+
+plotlikert<-plot_likert(dat_merit_2, c(1,1,1,1,2,2,2,2),
             groups.titles = c("Perceptions","Preferences"),
             geom.colors ="PuBu", 
             geom.size = 0.8,
@@ -1159,12 +1216,10 @@ plotlikert<-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
             catcount = 4,
             cat.neutral = 3, 
             grid.range  =  c ( 1.2 , 1.4 ),
-            values  =  "sum.outside",
-            reverse.scale=TRUE)
+            values  =  "sum.outside", reverse.colors = T)
 plotlikert
 
-ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 18,height = 15,dpi = "retina",units = "cm")
-
+ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 25,height = 15,dpi = "retina",units = "cm")
 
 ```
 
