@@ -406,7 +406,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">martes 28 julio 2020 13:23:46</h4>
+<h4 class="date">jueves 30 julio 2020 21:24:33</h4>
 
 </div>
 
@@ -873,7 +873,7 @@ cnametab&lt;- c(&quot;&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&qu
                triangle = &quot;l&quot;,
                fade.ns = F,
                remove.spaces = T,
-               string.diag = c(&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;))
+             string.diag = c(&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;))
 matpolyw01 &lt;- as.data.frame(read_html(x = polyw01[[&quot;page.content&quot;]]) %&gt;% html_table(fill=FALSE)) 
 matpolyw01 &lt;- matpolyw01[-c(9),]
 colnames(matpolyw01) &lt;- c(&quot;vars&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;,&quot;(H)&quot;)
@@ -882,7 +882,7 @@ load01&lt;- data.frame(round(cbind(inspect(fit1_c,what=&quot;std&quot;)$lambda,i
 load01[load01==c(0.00)] &lt;- NA; names(load01) &lt;- c(1:4,1:4)
 
 table01&lt;- bind_cols(x = matpolyw01,y = load01)
-# %&gt;% mutate(vars=labs)
+### %&gt;% mutate(vars=labs)
 
 kable(table01,escape = TRUE,align = &quot;l&quot;,col.names = cnametab,format = &quot;html&quot;) %&gt;% 
   footnote(general = paste0(paste0(&quot;$N$= &quot;,nobs(fit1_c)),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;%
@@ -2608,7 +2608,7 @@ load03&lt;- data.frame(round(cbind(inspect(fit3_c,what=&quot;std&quot;)$lambda,i
 load03[load03==c(0.00)] &lt;- NA; names(load03) &lt;- c(1:4,1:4)
 
 table03&lt;- bind_cols(x = matpolyw03,y = load03)
-# %&gt;% mutate(vars=labs)
+   ## %&gt;% mutate(vars=labs)
 
 kable(table03,escape = FALSE,align = &quot;l&quot;,col.names = cnametab) %&gt;% 
   footnote(general = paste0(paste0(&quot;$N$= &quot;,nobs(fit3_c)),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;%
@@ -3551,13 +3551,13 @@ H. pf.netw
 rownames(cor04$rho) &lt;-c(&quot;A.Perception Effort&quot;, &quot;B.Perception Talent&quot;,&quot;C.Perception Rich parents&quot;,&quot;D.Perception contacts&quot;,&quot;E.Preferences Effort&quot;,&quot;F.Preferences Talent&quot;,&quot;G.Preferences rich parents&quot;, &quot;H.Preferences contacts&quot; )
 colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 save(cor04, file = &quot;output/images/correlation.RData&quot;)
-corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = TRUE)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>png(&quot;output/images/corpoly.png&quot;,
     width = 15,height = 15,units=&quot;cm&quot;,
     pointsize=12,bg=&quot;white&quot;,res=300)
 
-corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = TRUE)
 
 dev.off()</code></pre>
 <pre><code>## png 
@@ -3638,6 +3638,46 @@ kable(left_join(x = standardizedsolution(fit4_c ) %&gt;% filter(op==&quot;=~&quo
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception contacts&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference contacts&quot;,
+              &quot;Perception meritocratic&quot;,&quot;Perception non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
+
+semPaths(
+  fit4_o ,
+  whatLabels = &quot;std&quot;,
+  # what = &quot;col&quot;,
+  label.cex = 1,
+  edge.label.cex = 0.7,
+  residuals = F,
+  optimizeLatRes =T,
+  edge.color = &quot;black&quot;,
+  style = &quot;lisrel&quot;,
+  fade = F,
+  nCharNodes = 0,
+  curvePivot = FALSE,
+  curve = 3,
+  rotation = 4,
+  layout = &quot;tree2&quot;,
+  cardinal = &quot;lat cov&quot;,
+  legend.cex = 0.6,
+  label.cex = 1,
+  label.font = 6,
+  edge.label.font = 7,
+  asize = 3,
+  edge.width = 1,
+  sizeMan = 5,
+  sizeLat = 10,
+  width = 20,
+  height = 15,
+  nodeNames = nodeNames,
+  intercepts = F,
+  reorder = F,
+  thresholds = F,
+  fixedStyle =1,
+  nodeLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;),
+  filetype = &quot;png&quot;,
+  filename = &quot;output/images/meas02&quot;
+) #arrow size)</code></pre>
 </div>
 </div>
 <div id="tables" class="section level1" number="2">
@@ -4635,7 +4675,7 @@ sumtable01&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F
                           &quot;Model 4: Complete sample&quot;));sumtable01</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-<span id="tab:unnamed-chunk-22">Table 3.1: </span>Summary fit indices wave 01
+<span id="tab:unnamed-chunk-23">Table 3.1: </span>Summary fit indices wave 01
 </caption>
 <thead>
 <tr>
@@ -4935,6 +4975,174 @@ DWLS
 <pre class="r"><code># Save sumamry table wave 01------------------------------#
 # as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
 # save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
+<pre class="r"><code>save(fit4_o,file = &quot;output/tables/fit4_o.RData&quot;)
+save(fit3_o,file = &quot;output/tables/fit3_o.RData&quot;)
+save(fit2_o,file = &quot;output/tables/fit2_o.RData&quot;)
+save(fit1_o,file = &quot;output/tables/fit1_o.RData&quot;)
+
+sum_fit&lt;- bind_rows(fitmeasures(fit4_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit2_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit3_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)])
+sum_fit$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;)
+sum_fit$est &lt;- c(&quot;DWLS&quot;,&quot;DWLS&quot;,&quot;DWLS&quot;,&quot;DWLS&quot;)
+sum_fit &lt;- select(sum_fit,mod,est,everything())
+colnames &lt;- c(&quot;Model&quot;,&quot;Estimator&quot;,&quot;$\\chi^2$&quot;,&quot;df&quot;,&quot;CFI.sca&quot;,&quot;RMSEA&quot;,&quot;RMSEA.sca&quot;)
+
+
+sumtable02&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices&quot;,col.names = colnames,escape = FALSE) %&gt;%
+  kable_styling(full_width = F)  %&gt;%
+      collapse_rows(columns = 1,valign = &quot;middle&quot;)  %&gt;%
+      footnote(number = c(&quot;Model 1: Complete sample&quot;,
+                          &quot;Model 2: fixed order by percepction/preference&quot;,
+                          &quot;Model 3:  fixed order by topic (i.e: effort)&quot;,
+                          &quot;Model 4: Randomized order&quot;));sumtable02</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-24">Table 3.2: </span>Summary fit indices
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI.sca
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+<th style="text-align:right;">
+RMSEA.sca
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model 1
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+200.772
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.977
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 2
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+42.276
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.993
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 3
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+107.573
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.961
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 4
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+63.336
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.979
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> Model 1: Complete sample
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> Model 2: fixed order by percepction/preference
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> Model 3: fixed order by topic (i.e: effort)
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> Model 4: Randomized order
+</td>
+</tr>
+</tfoot>
+</table>
 </div>
 <div id="other-analyses" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Other analyses</h2>
@@ -5757,22 +5965,36 @@ library(dplyr)
 #install.packages(&quot;cowplot&quot;)
 library(cowplot)
 
-dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw) 
+dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw)
 
-  
-plotlikert&lt;-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
-            groups.titles = c(&quot;Perceptions&quot;,&quot;Preferences&quot;),
-            geom.colors =&quot;PuBu&quot;, 
-            geom.size = 0.8,
-            axis.labels=c(&quot;Effort&quot;,&quot;Talent&quot;,&quot;Rich Parents&quot;,&quot;Contacts&quot;),
-            catcount = 4,
-            cat.neutral = 3, 
-            grid.range  =  c ( 1.2 , 1.4 ),
-            values  =  &quot;sum.outside&quot;,
-            reverse.scale=TRUE)
+dat_merit_2&lt;- dat_merit %&gt;% sjmisc::rec(rec=&quot;rev&quot;) %&gt;% 
+  select(
+    &quot;a.Effort&quot; = a.Effort_r,
+    &quot;a.Talent&quot; = a.Talent_r,
+    &quot;a.Rich Parents&quot; = &quot;a.Rich Parents_r&quot;,
+    &quot;a.Contacts&quot; = a.Contacts_r,
+    &quot;b.Effort&quot; = b.Effort_r,
+    &quot;b.Talent&quot; = b.Talent_r,
+    &quot;b.Rich Parents&quot; = &quot;b.Rich Parents_r&quot;,
+    &quot;b.Contacts&quot; = b.Contacts_r)
+
+
+plotlikert&lt;-plot_likert(dat_merit_2, 
+                        c(1, 1, 1, 1, 2, 2, 2, 2),
+                        groups.titles = c(&quot;Perceptions&quot;, &quot;Preferences&quot;),
+                        geom.colors = &quot;PuBu&quot;,
+                        geom.size = 0.8,
+                        axis.labels = c(&quot;Effort&quot;, &quot;Talent&quot;, &quot;Rich Parents&quot;, &quot;Contacts&quot;),
+                        catcount = 4,
+                        cat.neutral = 3,
+                        grid.range  =  c (1.2 , 1.4),
+                        values  =  &quot;sum.outside&quot;, 
+                        reverse.colors = T,
+                        reverse.scale = F)
+
 plotlikert</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 18,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 30,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
 <p>=======
 # Anexo 1: Sample</p>
 <pre class="r"><code>load(file = &quot;input/data/original/issp2019CL.RData&quot;)

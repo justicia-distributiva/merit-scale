@@ -494,30 +494,42 @@ nodeNames <-c("Perception effort","Perception talent","Perception rich family","
               "Preference effort","Preference talent","Preference rich family","Preference contacts",
               "Perception meritocratic","Perception non meritocratic","Preference meritocratic","Preference non meritocratic")
 
-semPaths(fit4_o , 
-whatLabels = "std",
-what="col",
-label.cex=1,
-edge.label.cex=1,
-residuals=F, 
-edge.color = "black",
-style = "lisrel",
-fade=F, 
-nCharNodes = 0,
- curvePivot = FALSE,
-         curve = 2,
-rotation = 4,
-layout = "tree3",
-         cardinal = "lat cov",  
-legend.cex = 0.6,
-         label.cex =1,
-label.font = 6,
-         edge.label.font= 1,
-         asize = 3,
-edge.width =1,
-         sizeMan=5,
-         sizeLat = 10, width = 12,
-         height= 15, nodeNames = nodeNames, intercepts = F, reorder = F, thresholds = F, nodeLabels = c("A","B","C","D","E","F","G","H","1","2","3","4"), filetype ="png", filename = "output/images/meas02") #arrow size)
+semPaths(
+  fit4_o ,
+  whatLabels = "std",
+  # what = "col",
+  label.cex = 1,
+  edge.label.cex = 0.7,
+  residuals = F,
+  optimizeLatRes =T,
+  edge.color = "black",
+  style = "lisrel",
+  fade = F,
+  nCharNodes = 0,
+  curvePivot = FALSE,
+  curve = 3,
+  rotation = 4,
+  layout = "tree2",
+  cardinal = "lat cov",
+  legend.cex = 0.6,
+  label.cex = 1,
+  label.font = 6,
+  edge.label.font = 7,
+  asize = 3,
+  edge.width = 1,
+  sizeMan = 5,
+  sizeLat = 10,
+  width = 20,
+  height = 15,
+  nodeNames = nodeNames,
+  intercepts = F,
+  reorder = F,
+  thresholds = F,
+  fixedStyle =1,
+  nodeLabels = c("A", "B", "C", "D", "E", "F", "G", "H", "1", "2", "3", "4"),
+  filetype = "png",
+  filename = "output/images/meas02"
+) #arrow size)
 
 ```
 
@@ -1211,24 +1223,35 @@ library(cowplot)
 
 dat_merit <- dat04 %>% select("a.Effort"=perc_effort,"a.Talent"=perc_talent, "a.Rich Parents"=perc_wpart, "a.Contacts"=perc_netw, "b.Effort"=pref_effort,"b.Talent"=pref_talent,"b.Rich Parents"=pref_wpart, "b.Contacts"=pref_netw)
 
-dat_merit_2<- dat_merit %>% sjmisc::rec(rec="rev") %>% select("a.Effort"=a.Effort_r,"a.Talent"=a.Talent_r, "a.Rich Parents"="a.Rich Parents_r", "a.Contacts"=a.Contacts_r, "b.Effort"=b.Effort_r,"b.Talent"=b.Talent_r,"b.Rich Parents"="b.Rich Parents_r", "b.Contacts"=b.Contacts_r)
+dat_merit_2<- dat_merit %>% sjmisc::rec(rec="rev") %>% 
+  select(
+    "a.Effort" = a.Effort_r,
+    "a.Talent" = a.Talent_r,
+    "a.Rich Parents" = "a.Rich Parents_r",
+    "a.Contacts" = a.Contacts_r,
+    "b.Effort" = b.Effort_r,
+    "b.Talent" = b.Talent_r,
+    "b.Rich Parents" = "b.Rich Parents_r",
+    "b.Contacts" = b.Contacts_r)
 
 
-plotlikert<-plot_likert(dat_merit_2, c(1,1,1,1,2,2,2,2),
-            groups.titles = c("Perceptions","Preferences"),
-            geom.colors ="PuBu", 
-            geom.size = 0.8,
-            axis.labels=c("Effort","Talent","Rich Parents","Contacts"),
-            catcount = 4,
-            cat.neutral = 3, 
-            grid.range  =  c ( 1.2 , 1.4 ),
-            values  =  "sum.outside", reverse.colors = T)
+plotlikert<-plot_likert(dat_merit_2, 
+                        c(1, 1, 1, 1, 2, 2, 2, 2),
+                        groups.titles = c("Perceptions", "Preferences"),
+                        geom.colors = "PuBu",
+                        geom.size = 0.8,
+                        axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
+                        catcount = 4,
+                        cat.neutral = 3,
+                        grid.range  =  c (1.2 , 1.4),
+                        values  =  "sum.outside", 
+                        reverse.colors = T,
+                        reverse.scale = F)
+
 plotlikert
 
-ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 25,height = 15,dpi = "retina",units = "cm")
-
+ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 30,height = 15,dpi = "retina",units = "cm")
 ```
-
 
 =======
 # Anexo 1: Sample
