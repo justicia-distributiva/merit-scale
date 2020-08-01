@@ -41,10 +41,11 @@ header-includes:
 # for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
 # clean #in the yml
 rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::pdf_document2")
+rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::html_document2")
 ```
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '75%',fig.pos= "H")
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H")
 # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
 # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
 options(scipen=999)
@@ -173,7 +174,7 @@ cnames <- c("Dimension", "Factor","Statement (english)" , "Statement (spanish)")
 kable(tab01,table_format,booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
   kable_styling(
     full_width = T,
-    latex_options = c("hold_position", "scale_down"),
+    latex_options = c("hold_position"),
     position = "center",
     font_size = 10,
     bootstrap_options=c("striped", "bordered")) %>%
@@ -225,7 +226,10 @@ dat04b<- dat04 %>% rename("A. Perception Effort" =perc_effort,
 sum04b  <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
 table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
 sumdat04<- kable(table04b,format =table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = cap
-) %>% kable_styling(full_width = table_format2, font_size = 10,position = "center",latex_options = c("hold_position"));sumdat04
+) %>% kable_styling(full_width = table_format2, 
+                    font_size = 10,
+                    position = "center", 
+                    latex_options = c("hold_position"));sumdat04
 ```
 
 A partir del la Figura \@ref(fig:plotlikert) se observa que en general hay una mayor percepción de elementos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
@@ -251,7 +255,7 @@ This section tests the item's battery and the corresponding conceptual framework
 
 In \@ref(fig:meas02) the results of the estimation for the four-factor model with complete sample. This model have a good fit (CFI = 0.977, RMSEA = 0.079, $\chi2$(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88. Furthermore, considering the correlation between the latent variables, it is observed that the most related variables are meritocratic perceptions and preferences, which have a positive correlation of 0.59, while non-meritocratic perceptions and preferences do not present a considerable correlation.
 
-```{r meas02, echo=FALSE, fig.cap = "Theorical model", fig.align='center'}
+```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions an Preferences for Meritocracy Scale", fig.align='center'}
 knitr::include_graphics('../output/images/meas02.png')
 ```
 
@@ -324,7 +328,7 @@ uso conjunto percepciones-preferencias
 
 # (APPENDIX) Appendix {-}
 
-`r if (knitr::is_latex_output()){ '\\appendix'}`
+`r if (knitr::is_latex_output()){ '\\appendix'}` 
 
 `r if (knitr::is_latex_output()){ '\\section{Appendix}'}`
 

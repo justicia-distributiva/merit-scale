@@ -406,7 +406,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">jueves 30 julio 2020 21:24:33</h4>
+<h4 class="date">viernes 31 julio 2020 23:31:28</h4>
 
 </div>
 
@@ -429,6 +429,7 @@ library(knitr)
 library(kableExtra)
 library(rvest)
 library(sjlabelled)
+library(ggplot2)
 source(&#39;production/prod_polychoric.R&#39;)</code></pre>
 <p><strong>Load data</strong></p>
 <pre class="r"><code>load(file = &quot;input/data/proc/dat01.RData&quot;)
@@ -3548,16 +3549,45 @@ H. pf.netw
 </tr>
 </table>
 <pre class="r"><code>cor04&lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) &lt;-c(&quot;A.Perception Effort&quot;, &quot;B.Perception Talent&quot;,&quot;C.Perception Rich parents&quot;,&quot;D.Perception contacts&quot;,&quot;E.Preferences Effort&quot;,&quot;F.Preferences Talent&quot;,&quot;G.Preferences rich parents&quot;, &quot;H.Preferences contacts&quot; )
+windowsFonts(A = windowsFont(&quot;Times New Roman&quot;))
+rownames(cor04$rho) &lt;-c(
+    &quot;A. Perception Effort&quot;,
+    &quot;B. Perception Talent&quot;,
+    &quot;C. Perception Rich parents&quot;,
+    &quot;D. Perception Contacts&quot;,
+    &quot;E. Preferences Effort&quot;,
+    &quot;F. Preferences Talent&quot;,
+    &quot;G. Preferences Rich parents&quot;,
+    &quot;H. Preferences Contacts&quot;)
 colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 save(cor04, file = &quot;output/images/correlation.RData&quot;)
-corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = TRUE)</code></pre>
+corrplot(
+  cor04$rho,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>png(&quot;output/images/corpoly.png&quot;,
-    width = 15,height = 15,units=&quot;cm&quot;,
+    width = 18,height = 13,units=&quot;cm&quot;,
     pointsize=12,bg=&quot;white&quot;,res=300)
 
-corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = TRUE)
+corrplot(
+  cor04$rho,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)
 
 dev.off()</code></pre>
 <pre><code>## png 
@@ -3667,17 +3697,18 @@ semPaths(
   edge.width = 1,
   sizeMan = 5,
   sizeLat = 10,
-  width = 20,
+  width = 22, 
   height = 15,
-  nodeNames = nodeNames,
-  intercepts = F,
+  # nodeNames = nodeNames,
+  intercepts = F, 
   reorder = F,
   thresholds = F,
   fixedStyle =1,
   nodeLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;),
   filetype = &quot;png&quot;,
   filename = &quot;output/images/meas02&quot;
-) #arrow size)</code></pre>
+) #arrow size)
+# text(2.5, -1, labels = &quot;Hola&quot;)</code></pre>
 </div>
 </div>
 <div id="tables" class="section level1" number="2">
@@ -5995,6 +6026,38 @@ plotlikert&lt;-plot_likert(dat_merit_2,
 plotlikert</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 30,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<pre class="r"><code>datli03 &lt;- dat04 %&gt;% select(starts_with(&quot;perc_&quot;),
+                            starts_with(&quot;pref_&quot;)) %&gt;%  sjmisc::rec(rec=&quot;rev&quot;,append = F)
+
+datli03 &lt;- remove_label(datli03)
+
+set_theme(base = theme_bw(),
+          theme.font = &quot;serif&quot;, 
+          axis.textsize.x = 1.2,
+          axis.textsize.y = 1.2, 
+          geom.label.size = 4, 
+          legend.just = 0.35, 
+          legend.size = 1.2,
+          legend.backgroundcol = &quot;white&quot;)
+# http://www.sthda.com/english/wiki/colors-in-r  = PALETAS de COLORES 
+plot01&lt;- plot_likert(
+  datli03,
+  c(rep(&quot;Perception&quot;, 4), rep(&quot;Preference&quot;, 4)),
+  values  =  &quot;sum.outside&quot;,
+  show.prc.sign = F,
+  sort.groups = FALSE,
+  grid.range = c(1.0, 1.0),
+  geom.colors = &quot;Blues&quot;,
+  rel_heights = c(4, 4),
+  wrap.labels = 100,
+  reverse.scale = FALSE,
+  cat.neutral = 3, 
+  legend.pos = &quot;bottom&quot;, 
+  group.legend.options = list(reverse = TRUE),
+  axis.labels = c(&quot;Effort&quot;, &quot;Talent&quot;, &quot;Rich parents&quot;, &quot;Contacts&quot;))
+plot01</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plot01,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 40,height = 25,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
 <p>=======
 # Anexo 1: Sample</p>
 <pre class="r"><code>load(file = &quot;input/data/original/issp2019CL.RData&quot;)

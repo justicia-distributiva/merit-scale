@@ -50,6 +50,7 @@ library(knitr)
 library(kableExtra)
 library(rvest)
 library(sjlabelled)
+library(ggplot2)
 source('production/prod_polychoric.R')
 ```
 
@@ -455,16 +456,45 @@ stargazer(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,
 
 ```{r}
 cor04<-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) <-c("A.Perception Effort", "B.Perception Talent","C.Perception Rich parents","D.Perception contacts","E.Preferences Effort","F.Preferences Talent","G.Preferences rich parents", "H.Preferences contacts" )
+windowsFonts(A = windowsFont("Times New Roman"))
+rownames(cor04$rho) <-c(
+    "A. Perception Effort",
+    "B. Perception Talent",
+    "C. Perception Rich parents",
+    "D. Perception Contacts",
+    "E. Preferences Effort",
+    "F. Preferences Talent",
+    "G. Preferences Rich parents",
+    "H. Preferences Contacts")
 colnames(cor04$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 save(cor04, file = "output/images/correlation.RData")
-corrplot(cor04$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = TRUE)
+corrplot(
+  cor04$rho,
+  method = "color",
+  type = "upper",
+  tl.col = "black",
+  addCoef.col = "black",
+  diag = TRUE,
+  family = "A", 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)
 
 png("output/images/corpoly.png",
-    width = 15,height = 15,units="cm",
+    width = 18,height = 13,units="cm",
     pointsize=12,bg="white",res=300)
 
-corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = TRUE)
+corrplot(
+  cor04$rho,
+  method = "color",
+  type = "upper",
+  tl.col = "black",
+  addCoef.col = "black",
+  diag = TRUE,
+  family = "A", 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)
 
 dev.off()
 ```
@@ -519,10 +549,10 @@ semPaths(
   edge.width = 1,
   sizeMan = 5,
   sizeLat = 10,
-  width = 20,
+  width = 22, 
   height = 15,
-  nodeNames = nodeNames,
-  intercepts = F,
+  # nodeNames = nodeNames,
+  intercepts = F, 
   reorder = F,
   thresholds = F,
   fixedStyle =1,
@@ -530,7 +560,7 @@ semPaths(
   filetype = "png",
   filename = "output/images/meas02"
 ) #arrow size)
-
+# text(2.5, -1, labels = "Hola")
 ```
 
 
@@ -1252,6 +1282,43 @@ plotlikert
 
 ggsave(plotlikert,filename = "output/images/plotlikert.png",device = "png",width = 30,height = 15,dpi = "retina",units = "cm")
 ```
+
+```{r}
+datli03 <- dat04 %>% select(starts_with("perc_"),
+                            starts_with("pref_")) %>%  sjmisc::rec(rec="rev",append = F)
+
+datli03 <- remove_label(datli03)
+
+set_theme(base = theme_bw(),
+          theme.font = "serif", 
+          axis.textsize.x = 1.2,
+          axis.textsize.y = 1.2, 
+          geom.label.size = 4, 
+          legend.just = 0.35, 
+          legend.size = 1.2,
+          legend.backgroundcol = "white")
+# http://www.sthda.com/english/wiki/colors-in-r  = PALETAS de COLORES 
+plot01<- plot_likert(
+  datli03,
+  c(rep("Perception", 4), rep("Preference", 4)),
+  values  =  "sum.outside",
+  show.prc.sign = F,
+  sort.groups = FALSE,
+  grid.range = c(1.0, 1.0),
+  geom.colors = "Blues",
+  rel_heights = c(4, 4),
+  wrap.labels = 100,
+  reverse.scale = FALSE,
+  cat.neutral = 3, 
+  legend.pos = "bottom", 
+  group.legend.options = list(reverse = TRUE),
+  axis.labels = c("Effort", "Talent", "Rich parents", "Contacts"))
+plot01
+
+ggsave(plot01,filename = "output/images/plotlikert.png",device = "png",width = 40,height = 25,dpi = "retina",units = "cm")
+```
+
+
 
 =======
 # Anexo 1: Sample

@@ -78,7 +78,7 @@ dat04 <- dat04 %>% select(starts_with(match = "perc_"),starts_with(match = "pref
 ## Translation of variable labels and value labels.
 ```{r}
 label(dat04$grupo) <- "This variable classifies the interviewees according to the order in which the indicators are shown within the scale. There are three orders  of items on the scale. In the first order (group 1), questions of the same factor are then presented to them, in the second order (group 2) they were separated and in the third order (group 3) at random."
-dat04$perc_effort <- set_labels(dat04$perc_effort,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$perc_effort <- set_labels(dat04$perc_effort,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$perc_effort) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
@@ -86,7 +86,7 @@ the following statements? - Who
 the more they try they manage to get bigger
 rewards that those who strive
 less."
-dat04$perc_talent <- set_labels(dat04$perc_talent,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$perc_talent <- set_labels(dat04$perc_talent,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$perc_talent) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
@@ -94,21 +94,21 @@ the following statements? - Who
 possess more talent they manage to obtain
 greater rewards than those who possess
 less talent."
-dat04$perc_wpart <- set_labels(dat04$perc_wpart,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$perc_wpart <- set_labels(dat04$perc_wpart,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$perc_wpart) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
 the following statements? - Who
 they have rich parents manage to get out
 ahead."
-dat04$perc_netw <- set_labels(dat04$perc_netw,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$perc_netw <- set_labels(dat04$perc_netw,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$perc_netw) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
 the following statements? - Who
 they have good contacts they manage to get out
 ahead."
-dat04$pref_effort <- set_labels(dat04$pref_effort,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$pref_effort <- set_labels(dat04$pref_effort,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$pref_effort) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
@@ -116,7 +116,7 @@ the following statements? - Who
 the more they try they should get
 greater rewards than those who
 they try less."
-dat04$pref_talent <- set_labels(dat04$pref_talent,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$pref_talent <- set_labels(dat04$pref_talent,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$pref_talent) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
@@ -124,12 +124,12 @@ the following statements? - Who
 possess more talent they should get
 greater rewards than those who possess
 less talent."
-dat04$pref_wpart <- set_labels(dat04$pref_wpart,  labels = c("strongly disagree" = 1, "disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "totally agree" = 5))
+dat04$pref_wpart <- set_labels(dat04$pref_wpart,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$pref_wpart) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
 the following statements? - It's fine that those who have rich parents get ahead" 
-dat04$pref_netw <- set_labels(dat04$pref_netw,  labels = c("strongly disagree", "disagreement", "Neither agree nor disagree","Agree", "totally agree"))
+dat04$pref_netw <- set_labels(dat04$pref_netw,  labels = c("Strongly disagree" = 1, "Disagreement" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
 label(dat04$pref_netw) <- "Thinking of Chilean society,
 what measure do you find of
 agree or disagree with each of
