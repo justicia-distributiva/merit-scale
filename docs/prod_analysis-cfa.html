@@ -13,6 +13,7 @@
 
 <title>Analysis PPM-S</title>
 
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -75,7 +76,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="..\input\bib\style.css" type="text/css" />
+<link rel="stylesheet" href="custom.css" type="text/css" />
 
 
 
@@ -357,7 +358,7 @@ div.tocify {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">Measuring meritocratic perceptions and beliefs</a>
+      <a class="navbar-brand" href="index.html">Measuring perceptions and preferences for meritocracy</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -405,12 +406,12 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Analysis PPM-S</h1>
-<h4 class="date">domingo 31 mayo 2020 14:33:28</h4>
+<h4 class="date">viernes 31 julio 2020 23:31:28</h4>
 
 </div>
 
 
-<div id="wave-01" class="section level1 tabset tabset-fade tabset-pills">
+<div id="wave-01" class="section level1 tabset tabset-fade tabset-pills" number="1">
 <h1><span class="header-section-number">1</span> Wave 01</h1>
 <p>On the first wave of the study we conducted the application of the Perceptions and Preferences Meritocracy Scale (PPM-S), in which we decided to test three different modalities for the application of the scale. The design of the study considered a sample of 2200 cases in Chile, using quotas for sex, age and educational level. The most important feature of this study consists in that we randomly assigned the participants to three different groups, in which the subjects complete one of the three combination of the questions. The key feature of these combinations relies on the display order of the questions regarding to each indicator of the scale. On this respect, we have three subsamples that correspond to each application modality that can be analysed separately, but also all together as a full sample.</p>
 <p>The scale has eight indicators, divided in four questions for perception and four for preferences, which are also divided in meritocratic and non-meritocratic. The meritocratic indicators refers to topics such as effort and talent, and the non-meritocratic refers to family wealth and networks. The three combinations relies in how these indicators are displayed to the respondent. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. the second combination corresponds to the group in which the questions are displayed following the a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions.</p>
@@ -427,6 +428,8 @@ library(psych)
 library(knitr)
 library(kableExtra)
 library(rvest)
+library(sjlabelled)
+library(ggplot2)
 source(&#39;production/prod_polychoric.R&#39;)</code></pre>
 <p><strong>Load data</strong></p>
 <pre class="r"><code>load(file = &quot;input/data/proc/dat01.RData&quot;)
@@ -447,7 +450,7 @@ load(file = &quot;input/data/proc/dat04.RData&quot;)</code></pre>
 <li><p><strong>Version 03:</strong> Random order (N=712)</p></li>
 <li><p><strong>Complete Sample:</strong> Complete sample (N=2141)</p></li>
 </ol>
-<div id="version-01-n712" class="section level2 tabset">
+<div id="version-01-n712" class="section level2 tabset" number="1.1">
 <h2><span class="header-section-number">1.1</span> Version 01 (N=712)</h2>
 <table>
 <caption>Mode 01: Fixed order by perception</caption>
@@ -871,7 +874,7 @@ cnametab&lt;- c(&quot;&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&qu
                triangle = &quot;l&quot;,
                fade.ns = F,
                remove.spaces = T,
-               string.diag = c(&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;))
+             string.diag = c(&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;))
 matpolyw01 &lt;- as.data.frame(read_html(x = polyw01[[&quot;page.content&quot;]]) %&gt;% html_table(fill=FALSE)) 
 matpolyw01 &lt;- matpolyw01[-c(9),]
 colnames(matpolyw01) &lt;- c(&quot;vars&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;,&quot;(H)&quot;)
@@ -880,7 +883,7 @@ load01&lt;- data.frame(round(cbind(inspect(fit1_c,what=&quot;std&quot;)$lambda,i
 load01[load01==c(0.00)] &lt;- NA; names(load01) &lt;- c(1:4,1:4)
 
 table01&lt;- bind_cols(x = matpolyw01,y = load01)
-# %&gt;% mutate(vars=labs)
+### %&gt;% mutate(vars=labs)
 
 kable(table01,escape = TRUE,align = &quot;l&quot;,col.names = cnametab,format = &quot;html&quot;) %&gt;% 
   footnote(general = paste0(paste0(&quot;$N$= &quot;,nobs(fit1_c)),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;%
@@ -1347,7 +1350,7 @@ pref_netw
 </ol></li>
 </ol>
 </div>
-<div id="version-02-n717" class="section level2">
+<div id="version-02-n717" class="section level2" number="1.2">
 <h2><span class="header-section-number">1.2</span> Version 02 (N=717)</h2>
 <table>
 <caption>Mode 02: Fixed order, by topic.</caption>
@@ -2212,7 +2215,7 @@ pref_netw
 </ol></li>
 </ol>
 </div>
-<div id="version-03-n712" class="section level2">
+<div id="version-03-n712" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Version 03 (N=712)</h2>
 <table>
 <caption>Mode 03: Randomized order.</caption>
@@ -2606,7 +2609,7 @@ load03&lt;- data.frame(round(cbind(inspect(fit3_c,what=&quot;std&quot;)$lambda,i
 load03[load03==c(0.00)] &lt;- NA; names(load03) &lt;- c(1:4,1:4)
 
 table03&lt;- bind_cols(x = matpolyw03,y = load03)
-# %&gt;% mutate(vars=labs)
+   ## %&gt;% mutate(vars=labs)
 
 kable(table03,escape = FALSE,align = &quot;l&quot;,col.names = cnametab) %&gt;% 
   footnote(general = paste0(paste0(&quot;$N$= &quot;,nobs(fit3_c)),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;%
@@ -3072,7 +3075,7 @@ pref_netw
 </ol></li>
 </ol></li>
 </ol>
-<div id="tau-equivalence" class="section level3">
+<div id="tau-equivalence" class="section level3" number="1.3.1">
 <h3><span class="header-section-number">1.3.1</span> Tau-equivalence</h3>
 <pre class="r"><code>model03.tau &lt;- &#39;
 perc_merit=~ r1*perc_effort+r1*perc_talent
@@ -3238,7 +3241,7 @@ kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~
 </blockquote>
 </div>
 </div>
-<div id="complete-sample-n2141" class="section level2">
+<div id="complete-sample-n2141" class="section level2" number="1.4">
 <h2><span class="header-section-number">1.4</span> Complete sample (N=2141)</h2>
 <table>
 <caption>Mode 04: Complete sample</caption>
@@ -3546,16 +3549,45 @@ H. pf.netw
 </tr>
 </table>
 <pre class="r"><code>cor04&lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
-rownames(cor04$rho) &lt;-c(&quot;A.Perception Effort&quot;, &quot;B.Perception Talent&quot;,&quot;C.Perception Rich parents&quot;,&quot;D.Perception contacts&quot;,&quot;E.Preferences Effort&quot;,&quot;F.Preferences Talent&quot;,&quot;G.Preferences rich parents&quot;, &quot;H.Preferences contacts&quot; )
+windowsFonts(A = windowsFont(&quot;Times New Roman&quot;))
+rownames(cor04$rho) &lt;-c(
+    &quot;A. Perception Effort&quot;,
+    &quot;B. Perception Talent&quot;,
+    &quot;C. Perception Rich parents&quot;,
+    &quot;D. Perception Contacts&quot;,
+    &quot;E. Preferences Effort&quot;,
+    &quot;F. Preferences Talent&quot;,
+    &quot;G. Preferences Rich parents&quot;,
+    &quot;H. Preferences Contacts&quot;)
 colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
 save(cor04, file = &quot;output/images/correlation.RData&quot;)
-corrplot(cor04$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+corrplot(
+  cor04$rho,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)</code></pre>
 <p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <pre class="r"><code>png(&quot;output/images/corpoly.png&quot;,
-    width = 15,height = 15,units=&quot;cm&quot;,
+    width = 18,height = 13,units=&quot;cm&quot;,
     pointsize=12,bg=&quot;white&quot;,res=300)
 
-corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+corrplot(
+  cor04$rho,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)
 
 dev.off()</code></pre>
 <pre><code>## png 
@@ -3636,9 +3668,50 @@ kable(left_join(x = standardizedsolution(fit4_c ) %&gt;% filter(op==&quot;=~&quo
 </tr>
 </tbody>
 </table>
+<pre class="r"><code>nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception contacts&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference contacts&quot;,
+              &quot;Perception meritocratic&quot;,&quot;Perception non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
+
+semPaths(
+  fit4_o ,
+  whatLabels = &quot;std&quot;,
+  # what = &quot;col&quot;,
+  label.cex = 1,
+  edge.label.cex = 0.7,
+  residuals = F,
+  optimizeLatRes =T,
+  edge.color = &quot;black&quot;,
+  style = &quot;lisrel&quot;,
+  fade = F,
+  nCharNodes = 0,
+  curvePivot = FALSE,
+  curve = 3,
+  rotation = 4,
+  layout = &quot;tree2&quot;,
+  cardinal = &quot;lat cov&quot;,
+  legend.cex = 0.6,
+  label.cex = 1,
+  label.font = 6,
+  edge.label.font = 7,
+  asize = 3,
+  edge.width = 1,
+  sizeMan = 5,
+  sizeLat = 10,
+  width = 22, 
+  height = 15,
+  # nodeNames = nodeNames,
+  intercepts = F, 
+  reorder = F,
+  thresholds = F,
+  fixedStyle =1,
+  nodeLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;),
+  filetype = &quot;png&quot;,
+  filename = &quot;output/images/meas02&quot;
+) #arrow size)
+# text(2.5, -1, labels = &quot;Hola&quot;)</code></pre>
 </div>
 </div>
-<div id="tables" class="section level1">
+<div id="tables" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Tables</h1>
 <pre class="r"><code>load04&lt;- data.frame(round(inspect(fit4_o,what=&quot;std&quot;)$lambda,digits = 2))
 load04[load04==c(0.00)] &lt;- NA; names(load04) &lt;- c(1:4)
@@ -3656,7 +3729,7 @@ sumdat04&lt;- kable(table04b, escape = FALSE,align = &quot;l&quot;,linesep = &qu
            kable_styling(full_width = TRUE,font_size = 8,position = &quot;center&quot;);sumdat04</code></pre>
 <table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-Descriptive statistic
+(#tab:tb_desc-corr)Descriptive statistic
 </caption>
 <thead>
 <tr>
@@ -4079,7 +4152,7 @@ tb.fm01&lt;- kable(tb.fm,escape = FALSE,align = &quot;lcccccccccccc&quot;,col.na
           footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01</code></pre>
 <table class="table" style="font-size: 9px; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-Factor loadings and fit measures
+(#tab:tb_loads-fitm)Factor loadings and fit measures
 </caption>
 <thead>
 <tr>
@@ -4553,9 +4626,9 @@ save(tb.fm,file = &quot;output/tables/tb.fm.RData&quot;)
 save(fm.df,file = &quot;output/tables/fm.df.RData&quot;)
 save(tb.load,file = &quot;output/tables/tb.load.RData&quot;)</code></pre>
 </div>
-<div id="summary" class="section level1">
+<div id="summary" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Summary</h1>
-<div id="correlations-plots" class="section level2">
+<div id="correlations-plots" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Correlations plots</h2>
 <pre class="r"><code>corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
 corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
@@ -4563,11 +4636,11 @@ corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col 
 <div class="figure">
 <img src="prod_analysis-cfa_files/figure-html/compare%20corr-1.png" alt="Mode 01, 02 and 03" width="33%" /><img src="prod_analysis-cfa_files/figure-html/compare%20corr-2.png" alt="Mode 01, 02 and 03" width="33%" /><img src="prod_analysis-cfa_files/figure-html/compare%20corr-3.png" alt="Mode 01, 02 and 03" width="33%" />
 <p class="caption">
-Mode 01, 02 and 03
+(#fig:compare corr)Mode 01, 02 and 03
 </p>
 </div>
 </div>
-<div id="measurement-model" class="section level2">
+<div id="measurement-model" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Measurement model</h2>
 <pre class="r"><code>model01 &lt;- &#39;perc_merit=~perc_effort+perc_talent
             perc_nmerit=~perc_wpart+perc_netw
@@ -4581,7 +4654,6 @@ nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&qu
               &quot;Perception meritocratic&quot;,&quot;Perception non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
 
 dir.create(&quot;output/images&quot;)
-
 semPaths(plot01,
          style = &quot;lisrel&quot;,
          fade=FALSE,
@@ -4609,7 +4681,7 @@ semPaths(plot01,
          filename = &quot;output/images/meas01&quot;)</code></pre>
 <p><img src="../output/images/meas01.png" /></p>
 </div>
-<div id="fit-indices-wave-01" class="section level2">
+<div id="fit-indices-wave-01" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Fit indices wave 01</h2>
 <pre class="r"><code>sum_fit&lt;- bind_rows(fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
                     fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
@@ -4634,7 +4706,7 @@ sumtable01&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F
                           &quot;Model 4: Complete sample&quot;));sumtable01</code></pre>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
-Summary fit indices wave 01
+<span id="tab:unnamed-chunk-23">Table 3.1: </span>Summary fit indices wave 01
 </caption>
 <thead>
 <tr>
@@ -4934,10 +5006,178 @@ DWLS
 <pre class="r"><code># Save sumamry table wave 01------------------------------#
 # as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
 # save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
+<pre class="r"><code>save(fit4_o,file = &quot;output/tables/fit4_o.RData&quot;)
+save(fit3_o,file = &quot;output/tables/fit3_o.RData&quot;)
+save(fit2_o,file = &quot;output/tables/fit2_o.RData&quot;)
+save(fit1_o,file = &quot;output/tables/fit1_o.RData&quot;)
+
+sum_fit&lt;- bind_rows(fitmeasures(fit4_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit2_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit3_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)])
+sum_fit$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;)
+sum_fit$est &lt;- c(&quot;DWLS&quot;,&quot;DWLS&quot;,&quot;DWLS&quot;,&quot;DWLS&quot;)
+sum_fit &lt;- select(sum_fit,mod,est,everything())
+colnames &lt;- c(&quot;Model&quot;,&quot;Estimator&quot;,&quot;$\\chi^2$&quot;,&quot;df&quot;,&quot;CFI.sca&quot;,&quot;RMSEA&quot;,&quot;RMSEA.sca&quot;)
+
+
+sumtable02&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices&quot;,col.names = colnames,escape = FALSE) %&gt;%
+  kable_styling(full_width = F)  %&gt;%
+      collapse_rows(columns = 1,valign = &quot;middle&quot;)  %&gt;%
+      footnote(number = c(&quot;Model 1: Complete sample&quot;,
+                          &quot;Model 2: fixed order by percepction/preference&quot;,
+                          &quot;Model 3:  fixed order by topic (i.e: effort)&quot;,
+                          &quot;Model 4: Randomized order&quot;));sumtable02</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-24">Table 3.2: </span>Summary fit indices
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI.sca
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+<th style="text-align:right;">
+RMSEA.sca
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model 1
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+200.772
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.977
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 2
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+42.276
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.993
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 3
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+107.573
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.961
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 4
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+63.336
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.979
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> Model 1: Complete sample
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> Model 2: fixed order by percepction/preference
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> Model 3: fixed order by topic (i.e: effort)
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> Model 4: Randomized order
+</td>
+</tr>
+</tfoot>
+</table>
 </div>
-<div id="other-analyses" class="section level2">
+<div id="other-analyses" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Other analyses</h2>
-<div id="multigroup-cfa" class="section level3">
+<div id="multigroup-cfa" class="section level3" number="3.4.1">
 <h3><span class="header-section-number">3.4.1</span> Multigroup CFA</h3>
 <ul>
 <li>The group specification correspond to the application modality of the scale.</li>
@@ -5188,9 +5428,9 @@ kable(left_join(x =gr01 ,
 </tbody>
 </table>
 </div>
-<div id="second-order-cfa" class="section level3">
+<div id="second-order-cfa" class="section level3" number="3.4.2">
 <h3><span class="header-section-number">3.4.2</span> Second order CFA</h3>
-<div id="so-cfa-perception-and-preference" class="section level4">
+<div id="so-cfa-perception-and-preference" class="section level4" number="3.4.2.1">
 <h4><span class="header-section-number">3.4.2.1</span> SO-CFA Perception and Preference</h4>
 <pre class="r"><code>model04b1or &lt;- &#39;
 perc_merit=~ perc_effort+perc_talent
@@ -5341,7 +5581,7 @@ kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quo
 <p><strong>NOTE:</strong> Second order factor loads are low. The fit of the model is not good.</p>
 </blockquote>
 </div>
-<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4">
+<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4" number="3.4.2.2">
 <h4><span class="header-section-number">3.4.2.2</span> SO-CFA Meritocratic y Non-meritocratic</h4>
 <pre class="r"><code>model04b2or &lt;-&#39;perc_merit=~ perc_effort+perc_talent
                perc_nmerit=~perc_wpart +perc_netw
@@ -5756,25 +5996,356 @@ library(dplyr)
 #install.packages(&quot;cowplot&quot;)
 library(cowplot)
 
-dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw) 
+dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw)
 
-  
-plotlikert&lt;-plot_likert(dat_merit, c(1,1,1,1,2,2,2,2),
-            groups.titles = c(&quot;Perceptions&quot;,&quot;Preferences&quot;),
-            geom.colors =&quot;PuBu&quot;, 
-            geom.size = 0.8,
-            axis.labels=c(&quot;Effort&quot;,&quot;Talent&quot;,&quot;Rich Parents&quot;,&quot;Contacts&quot;),
-            catcount = 4,
-            cat.neutral = 3, 
-            grid.range  =  c ( 1.2 , 1.4 ),
-            values  =  &quot;sum.outside&quot;,
-            reverse.scale=TRUE)
+dat_merit_2&lt;- dat_merit %&gt;% sjmisc::rec(rec=&quot;rev&quot;) %&gt;% 
+  select(
+    &quot;a.Effort&quot; = a.Effort_r,
+    &quot;a.Talent&quot; = a.Talent_r,
+    &quot;a.Rich Parents&quot; = &quot;a.Rich Parents_r&quot;,
+    &quot;a.Contacts&quot; = a.Contacts_r,
+    &quot;b.Effort&quot; = b.Effort_r,
+    &quot;b.Talent&quot; = b.Talent_r,
+    &quot;b.Rich Parents&quot; = &quot;b.Rich Parents_r&quot;,
+    &quot;b.Contacts&quot; = b.Contacts_r)
+
+
+plotlikert&lt;-plot_likert(dat_merit_2, 
+                        c(1, 1, 1, 1, 2, 2, 2, 2),
+                        groups.titles = c(&quot;Perceptions&quot;, &quot;Preferences&quot;),
+                        geom.colors = &quot;PuBu&quot;,
+                        geom.size = 0.8,
+                        axis.labels = c(&quot;Effort&quot;, &quot;Talent&quot;, &quot;Rich Parents&quot;, &quot;Contacts&quot;),
+                        catcount = 4,
+                        cat.neutral = 3,
+                        grid.range  =  c (1.2 , 1.4),
+                        values  =  &quot;sum.outside&quot;, 
+                        reverse.colors = T,
+                        reverse.scale = F)
+
 plotlikert</code></pre>
-<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 18,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 30,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<pre class="r"><code>datli03 &lt;- dat04 %&gt;% select(starts_with(&quot;perc_&quot;),
+                            starts_with(&quot;pref_&quot;)) %&gt;%  sjmisc::rec(rec=&quot;rev&quot;,append = F)
+
+datli03 &lt;- remove_label(datli03)
+
+set_theme(base = theme_bw(),
+          theme.font = &quot;serif&quot;, 
+          axis.textsize.x = 1.2,
+          axis.textsize.y = 1.2, 
+          geom.label.size = 4, 
+          legend.just = 0.35, 
+          legend.size = 1.2,
+          legend.backgroundcol = &quot;white&quot;)
+# http://www.sthda.com/english/wiki/colors-in-r  = PALETAS de COLORES 
+plot01&lt;- plot_likert(
+  datli03,
+  c(rep(&quot;Perception&quot;, 4), rep(&quot;Preference&quot;, 4)),
+  values  =  &quot;sum.outside&quot;,
+  show.prc.sign = F,
+  sort.groups = FALSE,
+  grid.range = c(1.0, 1.0),
+  geom.colors = &quot;Blues&quot;,
+  rel_heights = c(4, 4),
+  wrap.labels = 100,
+  reverse.scale = FALSE,
+  cat.neutral = 3, 
+  legend.pos = &quot;bottom&quot;, 
+  group.legend.options = list(reverse = TRUE),
+  axis.labels = c(&quot;Effort&quot;, &quot;Talent&quot;, &quot;Rich parents&quot;, &quot;Contacts&quot;))
+plot01</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plot01,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 40,height = 25,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<p>=======
+# Anexo 1: Sample</p>
+<pre class="r"><code>load(file = &quot;input/data/original/issp2019CL.RData&quot;)
+w01 &lt;- sjlabelled::read_spss(&quot;input/data/original/Estudio_3_ola1.sav&quot;,verbose = F)</code></pre>
+<pre class="r"><code>GS&lt;- c(&quot;CERRILLOS&quot;,
+&quot;CERRO NAVIA&quot;,
+&quot;CONCHALÍ&quot;,
+&quot;EL BOSQUE&quot;,
+&quot;ESTACIÓN CENTRAL&quot;,
+&quot;HUECHURABA&quot;,
+&quot;INDEPENDENCIA&quot;,
+&quot;LA CISTERNA&quot;,
+&quot;LA FLORIDA&quot;,
+&quot;LA GRANJA&quot;,
+&quot;LA PINTANA&quot;,
+&quot;LA REINA&quot;,
+&quot;LAS CONDES&quot;,
+&quot;LO BARNECHEA&quot;,
+&quot;LO ESPEJO&quot;,
+&quot;LO PRADO&quot;,
+&quot;MACUL&quot;,
+&quot;MAIPÚ&quot;,
+&quot;ÑUÑOA&quot;,
+&quot;PEDRO AGUIRRE CERDA&quot;,
+&quot;PEÑALOLEN&quot;,
+&quot;PROVIDENCIA&quot;,
+&quot;PUDAHUEL&quot;,
+&quot;PUENTE ALTO&quot;,
+&quot;QUILICURA&quot;,
+&quot;QUINTA NORMAL&quot;,
+&quot;RECOLETA&quot;,
+&quot;RENCA&quot;,
+&quot;SAN BERNARDO&quot;,
+&quot;SAN JOAQUÍN&quot;,
+&quot;SAN MIGUEL&quot;,
+&quot;SAN RAMÓN&quot;,
+&quot;SANTIAGO&quot;,
+&quot;VITACURA&quot;)
+
+cl19$COMUNA &lt;- toupper(as_character(cl19$COMUNA))
+
+# cl19$DS_P1 # 1= hombre, 2= mujer
+# cl19$DS_P2_EXACTA  
+# cl19$DS_P4
+
+cep1 &lt;- cl19 %&gt;% 
+  select(COMUNA,DS_P1,DS_P2_EXACTA,DS_P4, FACTOR) %&gt;% 
+  filter(COMUNA %in% GS)</code></pre>
+<pre class="r"><code>cep1$edad_cat&lt;- as.numeric(cep1$DS_P2_EXACTA) # Edad
+cep1$edad_cat[cep1$edad_cat %in%c(18:24)] &lt;- 1   #&quot;18 a 24&quot;
+cep1$edad_cat[cep1$edad_cat %in%c(25:34)] &lt;- 2 # &quot;25 a 34&quot;
+cep1$edad_cat[cep1$edad_cat %in%c(35:44)] &lt;- 3 # &quot;35 a 44&quot;
+cep1$edad_cat[cep1$edad_cat %in%c(45:54)] &lt;- 4 # &quot;45 a 54&quot;
+cep1$edad_cat[cep1$edad_cat &gt;=  55]       &lt;- 5 # &quot;55 o más&quot;
+
+cep1$educ &lt;- cep1$DS_P4 # Educación
+cep1$educ &lt;- as_numeric(cep1$educ)
+cep1$educ &lt;- as.numeric(cep1$educ)
+cep1$educ[cep1$educ %in%c(88,99)] &lt;- NA
+
+cep1$educ &lt;- recode(cep1$educ, &quot;0&quot; = &quot;1&quot; , &quot;1&quot;=&quot;1&quot;, &quot;2&quot; = &quot;1&quot;, &quot;3&quot;=&quot;2&quot;,&quot;4&quot;=&quot;2&quot;, &quot;5&quot;=&quot;3&quot;,&quot;6&quot;=&quot;3&quot;, &quot;7&quot; = &quot;3&quot;, &quot;8&quot;=&quot;4&quot; , &quot;9&quot;=&quot;4&quot;   )
+
+cep1$sexo &lt;- as.numeric(cep1$DS_P1) # 1= hombre, 2= mujer</code></pre>
+<pre class="r"><code># Gender
+
+cep1$Hombres&lt;-ifelse(cep1$sexo==1,100,0)
+cep1$Mujeres&lt;-ifelse(cep1$sexo==2,100,0)
+w01$Hombres&lt;-ifelse(w01$sexo==1,100,0)
+w01$Mujeres&lt;-ifelse(w01$sexo==2,100,0)
+
+
+cep1$ed_a&lt;-ifelse(cep1$edad_cat==1,100,0)
+cep1$ed_b&lt;-ifelse(cep1$edad_cat==2,100,0)
+cep1$ed_c&lt;-ifelse(cep1$edad_cat==3,100,0)
+cep1$ed_d&lt;-ifelse(cep1$edad_cat==4,100,0)
+cep1$ed_e&lt;-ifelse(cep1$edad_cat==5,100,0)
+w01$ed_a&lt;-ifelse(w01$edad==1,100,0)
+w01$ed_b&lt;-ifelse(w01$edad==2,100,0)
+w01$ed_c&lt;-ifelse(w01$edad==3,100,0)
+w01$ed_d&lt;-ifelse(w01$edad==4,100,0)
+w01$ed_e&lt;-ifelse(w01$edad==5,100,0)
+
+
+
+cep1$educ_a&lt;-ifelse(cep1$educ==1,100,0)
+cep1$educ_b&lt;-ifelse(cep1$educ==2,100,0)
+cep1$educ_c&lt;-ifelse(cep1$educ==3,100,0)
+cep1$educ_d&lt;-ifelse(cep1$educ==4,100,0)
+w01$educ_a&lt;-ifelse(w01$educat==1,100,0)
+w01$educ_b&lt;-ifelse(w01$educat==2,100,0)
+w01$educ_c&lt;-ifelse(w01$educat==3,100,0)
+w01$educ_d&lt;-ifelse(w01$educat==4,100,0)
+
+
+Men&lt;-round(c(mean(w01$Hombres, na.rm = T), weighted.mean(cep1$Hombres,cep1$FACTOR, na.rm = T)),digits = 2)
+Women&lt;-round(c(mean(w01$Mujeres, na.rm = T), weighted.mean(cep1$Mujeres,cep1$FACTOR, na.rm = T)),digits = 2)
+
+years.18.to.24&lt;-round(c(mean(w01$ed_a, na.rm = T), weighted.mean(cep1$ed_a,cep1$FACTOR, na.rm = T)),digits = 2)
+years.25.to.34&lt;-round(c(mean(w01$ed_b, na.rm = T), weighted.mean(cep1$ed_b,cep1$FACTOR, na.rm = T)),digits = 2)
+years.35.to.44&lt;-round(c(mean(w01$ed_c, na.rm = T), weighted.mean(cep1$ed_c,cep1$FACTOR, na.rm = T)),digits = 2)
+years.45.to.54&lt;-round(c(mean(w01$ed_d, na.rm = T), weighted.mean(cep1$ed_d,cep1$FACTOR, na.rm = T)),digits = 2)
+years.55.or.more&lt;-round(c(mean(w01$ed_e, na.rm = T), weighted.mean(cep1$ed_e,cep1$FACTOR, na.rm = T)),digits = 2)
+
+ 
+
+Primary &lt;-round(c(mean(w01$educ_a, na.rm = T), weighted.mean(cep1$educ_a,cep1$FACTOR, na.rm = T)),digits = 2)
+Secondary&lt;-round(c(mean(w01$educ_b, na.rm = T), weighted.mean(cep1$educ_b,cep1$FACTOR, na.rm = T)),digits = 2)
+Technique&lt;-round(c(mean(w01$educ_c, na.rm = T), weighted.mean(cep1$educ_c,cep1$FACTOR, na.rm = T)),digits = 2)
+University&lt;-round(c(mean(w01$educ_d, na.rm = T), weighted.mean(cep1$educ_d,cep1$FACTOR, na.rm = T)),digits = 2)
+
+
+
+sample_cep&lt;- rbind(&quot;__Gender__&quot;,Men,Women,&quot;__Age__&quot;,years.18.to.24,years.25.to.34,years.35.to.44,years.45.to.54,years.55.or.more, &quot;__Education__&quot;, Primary, Secondary, Technique, University)
+
+
+cnames &lt;- c(&quot;Sample&quot;, &quot;CEP&quot;) 
+knitr::kable(sample_cep, digits = 0, format = &quot;markdown&quot;,col.names = cnames)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Sample</th>
+<th align="left">CEP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><strong>Gender</strong></td>
+<td align="left"><strong>Gender</strong></td>
+</tr>
+<tr class="even">
+<td align="left">Men</td>
+<td align="left">49.82</td>
+<td align="left">50.52</td>
+</tr>
+<tr class="odd">
+<td align="left">Women</td>
+<td align="left">50.18</td>
+<td align="left">49.48</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><strong>Age</strong></td>
+<td align="left"><strong>Age</strong></td>
+</tr>
+<tr class="odd">
+<td align="left">years.18.to.24</td>
+<td align="left">18.55</td>
+<td align="left">18.18</td>
+</tr>
+<tr class="even">
+<td align="left">years.25.to.34</td>
+<td align="left">18.86</td>
+<td align="left">17.48</td>
+</tr>
+<tr class="odd">
+<td align="left">years.35.to.44</td>
+<td align="left">19.09</td>
+<td align="left">19.99</td>
+</tr>
+<tr class="even">
+<td align="left">years.45.to.54</td>
+<td align="left">17.96</td>
+<td align="left">19.24</td>
+</tr>
+<tr class="odd">
+<td align="left">years.55.or.more</td>
+<td align="left">25.54</td>
+<td align="left">25.12</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><strong>Education</strong></td>
+<td align="left"><strong>Education</strong></td>
+</tr>
+<tr class="odd">
+<td align="left">Primary</td>
+<td align="left">2.93</td>
+<td align="left">15.88</td>
+</tr>
+<tr class="even">
+<td align="left">Secondary</td>
+<td align="left">43.23</td>
+<td align="left">37.04</td>
+</tr>
+<tr class="odd">
+<td align="left">Technique</td>
+<td align="left">32.63</td>
+<td align="left">28.94</td>
+</tr>
+<tr class="even">
+<td align="left">University</td>
+<td align="left">21.21</td>
+<td align="left">18.14</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
+</div>
+<div id="anexo-2-fiability" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Anexo 2: Fiability</h1>
+<pre class="r"><code>load(file = &quot;input/data/proc/dat01.RData&quot;)
+load(file = &quot;input/data/proc/dat02.RData&quot;)
+load(file = &quot;input/data/proc/dat03.RData&quot;)
+load(file = &quot;input/data/proc/dat04.RData&quot;)</code></pre>
+<pre class="r"><code>lav.mod.1 &lt;- &#39;perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
+pref_nmerit=~pref_wpart +pref_netw&#39;
+
+cor01a&lt;-polychoric(dat01)
+cor02a&lt;-polychoric(dat02)
+cor03a&lt;-polychoric(dat03)
+cor04a &lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
+
+#Omega for group
+lav.jen.1&lt;- cfa(lav.mod.1,sample.cov=cor01a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.2&lt;- cfa(lav.mod.1,sample.cov=cor02a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.3&lt;- cfa(lav.mod.1,sample.cov=cor03a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.4&lt;- cfa(lav.mod.1,sample.cov=cor04a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+
+
+o1 &lt;- omegaFromSem(lav.jen.1,cor04a$rho, plot = F)
+o2&lt;-omegaFromSem(lav.jen.2,cor04a$rho, plot = F)
+o3&lt;-omegaFromSem(lav.jen.3,cor04a$rho, plot = F)
+o4&lt;-omegaFromSem(lav.jen.4,cor04a$rho, plot = F)
+
+
+Group_1 &lt;- c(o1$omega.group$total)
+Group_2 &lt;- c(o2$omega.group$total)
+Group_3 &lt;- c(o3$omega.group$total)
+Total_sample &lt;- c(o4$omega.group$total)
+
+Omega&lt;- rbind(Group_1,Group_2,Group_3,Total_sample)
+
+cnames &lt;- c(&quot;Perception Meritocratic&quot;,&quot;Perception Non Meritocratic&quot;, &quot;Preference Meritocratic&quot;,&quot;Preference Non Meritocratic&quot;)
+knitr::kable(Omega, format = &quot;markdown&quot;,digits = 2, col.names = cnames)</code></pre>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="20%" />
+<col width="23%" />
+<col width="20%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Perception Meritocratic</th>
+<th align="right">Perception Non Meritocratic</th>
+<th align="right">Preference Meritocratic</th>
+<th align="right">Preference Non Meritocratic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Group_1</td>
+<td align="right">0.86</td>
+<td align="right">0.79</td>
+<td align="right">0.71</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="even">
+<td align="left">Group_2</td>
+<td align="right">0.83</td>
+<td align="right">0.73</td>
+<td align="right">0.70</td>
+<td align="right">0.71</td>
+</tr>
+<tr class="odd">
+<td align="left">Group_3</td>
+<td align="right">0.80</td>
+<td align="right">0.77</td>
+<td align="right">0.59</td>
+<td align="right">0.75</td>
+</tr>
+<tr class="even">
+<td align="left">Total_sample</td>
+<td align="right">0.83</td>
+<td align="right">0.76</td>
+<td align="right">0.67</td>
+<td align="right">0.76</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 

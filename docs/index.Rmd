@@ -4,10 +4,11 @@ csl: "../input/bib/apa6.csl"
 bibliography: "../input/bib/zlibrary.bib"
 author: " "
 output:
-    html_document:
-        smart: false
-        includes:
-          in_header: head_github-activity.html
+    bookdown::html_document2:
+            smart: false
+            includes:
+              in_header: head_github-activity.html
+            number_sections: false          
 ---
 
 ## This is the project website for the development and testing of the Perceptions and Preferences for Meritocracy Scale.
