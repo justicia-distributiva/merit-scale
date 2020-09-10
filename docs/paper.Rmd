@@ -4,11 +4,11 @@ css: "custom.css"
 linestretch: '1.5'
 link-citations: yes
 author: "Juan Carlos Castillo, Julio Iturra & Francisco Meneses <br><br>"
-abstract: "Economic and social inequality have raised growing concerns and crises across societies. One of social science concepts associated to the maintenance of inequality is the belief in meritocracy, which would legitimize economic differences based on effort and talent. Despite its wide use,  empirical research on meritocracy is something relatively novel. A number of studies have relied mostly in secondary data to operationalize meritocracy, with a large variation in the use and interpretation of survey items. Starting from a review of studies that measure meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding the conceptualization and measurement of meritocracy. Based on this critical analysis, we propose  an items battery called *Perceptions and preferences for meritocracy scale*, which is tested with confirmatory factor analysis with data from an online survey study (N=2,141). The results support the proposed conceptual structure which not only distinguishes between perceptions and preferences, but also between meritocratic and non-meritocratic dimensions. The discussion highlights the relevance of considering these different dimensions in order to advance in the study of meritocracy."
+abstract: "Economic and social inequality have raised growing concerns and crises across societies. One of social science concepts associated to the maintenance of inequality is the belief in meritocracy, which would legitimize economic differences based on effort and talent. Despite its wide use, empirical research on meritocracy is something relatively novel. A number of studies have relied mostly in secondary data to operationalize meritocracy, with a large variation in the use and interpretation of survey items. Starting from a review of studies that measure meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding the conceptualization and indicators of meritocracy. Based on this critical analysis, we propose an item's battery called *Perceptions and preferences for meritocracy scale*, which is tested with confirmatory factor analysis with data from an online survey study (N=2,141). The results support the proposed conceptual structure which not only distinguishes between perceptions and preferences, but also between meritocratic and non-meritocratic dimensions. The discussion highlights the relevance of considering these different dimensions in order to advance in the study of meritocracy."
 output:
   bookdown::pdf_document2:
     template: null
-    toc: false 
+    toc: false
   bookdown::html_document2:
     number_sections: false
 linkcolor: blue
@@ -75,7 +75,7 @@ table_format2 = if(is_html_output()) {
 
 ```
 
-# Introducción 
+# Introducción
 
 La desigualdad económica se ha vuelto un tema que genera creciente preocupación y malestar alrededor del mundo. Esto se ha expresado en una serie de protestas como la emblemática "occupy wall street" el año 2011, así como también en una serie de análisis críticos respecto del desarrollo del capitalismo y sus consecuencias [@piketty_Capital_2014]. En este contexto, el estudio de las visiones, preferencias y percepciones respecto de la desigualdad han adquirido relevancia en las ciencias sociales, en temas como las preferencias redistributivas [@alesina_Fairness_2005; @dimick_Models_2018] la legitimación de la desigualdad económica [@schroder_Income_2017]  y el funcionamiento de la meritocracia [@duru-bellat_whos_2012; @mijs_paradox_2019; @reynolds_perceptions_2014].
 
@@ -87,7 +87,7 @@ Para poder dar cuenta de los niveles de creencia en la meritocracia los estudios
 
 Basados en el análisis crítico de las formas de medición de meritocracia a la fecha, el presente artículo propone un instrumento para medir y relacionar dos aspectos claves en el estudio de la meritocracia: percepciones y preferencias. Además, como un segundo eje de análisis considera la generación de indicadores respecto de aspectos meritocráticos y anti-meritocráticos, demostrando que no son los dos polos de un mismo continuo como muchos estudios anteriores parecen sugerir. La propuesta de medición además está orientada a generar un instrumento lo más breve posible de manera que pueda ser utilizado en encuestas de opinión pública y así ser asociado a otros fenómenos sociales.
 
-# La medición de los aspectos subjetivos de la meritocracia 
+# La medición de los aspectos subjetivos de la meritocracia
 
 A continuación se presenta una revisión de una serie de investigaciones que se han abocado al estudio de la meritocracia y que para ello han hecho una propuesta de medición. El primer eje de análisis tiene que ver con el uso del concepto "creencias" para referir a distintos aspectos subjetivos relacionados con meritocracia. El segundo eje tiene que ver con el uso de indicadores sobre aspectos anti-meritocráticos como el polo opuesto de los meritocráticos.
 
@@ -121,7 +121,7 @@ Finally, most of the studies in meritocracy so far have not incorporated the iss
 
 ## An instrument proposal {-#instrumentprop}
 
-Based on the previous limitations and confussions in the measurement of meritocracy presented in the previous section, in this paper we propose and test an instrument with the following characteristics:
+Based on the previous limitations and confusions in the measurement of meritocracy presented in the previous section, in this paper we propose and test an instrument with the following characteristics:
 
 - Multidimensional, incorporating previous distinctions between preferences and perceptions as well as between meritocratic and non-meritocratic aspects.
 
@@ -156,7 +156,7 @@ The research hypotheses behind this conceptualization are the following:
 
 ## Data collection {-#data}
 
-The data was obtained through an online questionnaire which was part of a larger study on meritocracy and preferences developed in Chile in 2019 and funded by the national scientific agency FONDECYT. The questionnaire was programmed in Qualtrics and the fieldwork was in charge of an external online survey agency ([netquest.cl](www.netquest.cl)) during December 2019 and January 2020. The sample was selected from a non-probabilistic design in three large cities in Chile. The quota method based on age, sex and educational level was used. Quotas were generated based on the survey of the Public Studies Center (CEP, 2019), which has a high prestige in the country and is also the counterpart agency of ISSP (International Social Survey Programme) in Chile. A total sample of 2,141 people was collected, excluding those who did not answer the questions on the scale and those who did not accept informed consent. As it usually occurs online samples, there were some limitations in achieving the quotas for lower educational levels.
+The data was obtained through an online questionnaire which was part of a larger study on meritocracy and preferences developed in Chile in 2019 and funded by the national scientific agency FONDECYT. The questionnaire was programmed in Qualtrics and the fieldwork was in charge of an external online survey agency ([netquest.cl](www.netquest.cl)) during December 2019 and January 2020. The sample was selected from a non-probabilistic quota design in three large cities in Chile. The quotas were generated based on the survey of the Public Studies Center (CEP, 2019), which has a high prestige in the country and is also the counterpart agency of ISSP (International Social Survey Programme) in Chile. A total sample of 2,141 people was collected, excluding those who did not answer the questions on the scale and those who did not accept informed consent. As it usually occurs online samples, there were some limitations in achieving the quotas for lower educational levels.
 
 ## Instrument design
 
@@ -201,16 +201,15 @@ For testing the scale's underlying constructs we estimate confirmatory factor an
 knitr::include_graphics('../output/images/meas01.png')
 ```
 
-CFA was conducted using the `lavaan` package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3).
+CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020) with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio:> 3).
 
-A pre-registration was made in the OSF platform, [Perceptions and Preferences for Meritocracy Scale
-Public registration](https://osf.io/z45y2) In it, it was indicated, before carrying out the analyzes, the four-dimensional theoretical model, the level of measurement of the variables, the statistical tests to be used with their respective evaluation parameters, along with other important aspects of the research design.
+A pre-registration was made in the OSF platform, available in the following link: [https://osf.io/z45y2](https://osf.io/z45y2). In this pre-registration are the hypothesis regarding the four-dimensional conceptual model underlying the scale,  the variables measurement levels, the statistical tests to be performed with their respective evaluation parameters, along with other important aspects of the research design.
 
 # Results
 
 ## Descriptive analysis
 
-Como puede observarse en la tabla \@ref(tab:desc01), los indicadores poseen valores que van desde el 1 (totalmente en desacuerdo) al 5 (totalmente de acuerdo). Se observan promedios desde 2.41 correspondiente a preferencia-contactos, hasta 3.89 correspondiente a la preferencia-esfuerzo. Ambos indicadores son coherentes con la adhesión general a la meritocracia, privilegiando aspectos individuales como el esfuerzo.
+Como puede observarse en la tabla \@ref(tab:desc01), los indicadores poseen valores que van desde el 1 (totalmente en desacuerdo) al 5 (totalmente de acuerdo). Se observan promedios desde 2.41 correspondiente a preferencia-contactos, hasta 3.89 correspondiente a la preferencia-esfuerzo. Ambos indicadores son coherentes con la adhesión general a la meritocracia reportada en estudios previos, privilegiando aspectos individuales como el esfuerzo.
 
 ```{r desc01, echo=FALSE}
 cap <- "Descriptive statistics of the scale."
@@ -226,40 +225,40 @@ dat04b<- dat04 %>% rename("A. Perception Effort" =perc_effort,
 sum04b  <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
 table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
 sumdat04<- kable(table04b,format =table_format, booktabs= T, escape = FALSE,align = "l",linesep = "", caption = cap
-) %>% kable_styling(full_width = table_format2, 
+) %>% kable_styling(full_width = table_format2,
                     font_size = 10,
-                    position = "center", 
+                    position = "center",
                     latex_options = c("hold_position"));sumdat04
 ```
 
-A partir del la Figura \@ref(fig:plotlikert) se observa que en general hay una mayor percepción de elementos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento.
+Los gráficos presentados en la Figura \@ref(fig:plotlikert) presentan información desagregada y comparable de las distintas categorías de respuesta de cada item.  Se observa que en general hay una mayor percepción de elementos no meritocráticos que meritocráticos, mientras que en el caso de preferencias ocurre lo opuesto. En cuanto a las preferencias, llama la atención el rol preponderante del esfuerzo por sobre el talento como criterio de preferencia meritocrático.
 
 ```{r plotlikert, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center'}
 knitr::include_graphics('../output/images/plotlikert.png')
 ```
 
-En la Figura \@ref(fig:corpoly) se observan relaciones de moderada a alta intensidad entre los indicadores que corresponden al mismo factor (por ejemplo, percepción de meritocracia esfuerzo con talento r=0.56), mientras que se observan correlaciones de baja intensidad entre el resto de los cruces. Destacan además las relaciones entre las percepciones y preferencias de tipo meritocráticas, lo que no ocurre con los indicadores no meritocraticos.
+En la Figura \@ref(fig:corpoly) se observan relaciones de moderada a alta intensidad entre los indicadores que corresponden al mismo factor (por ejemplo, percepción de meritocracia por esfuerzo y por talento, r=0.56). Destacan además las relaciones entre las percepciones y preferencias de tipo meritocráticas, lo que no ocurre con los indicadores no meritocraticos.
 
 ```{r corpoly, echo=FALSE, fig.cap = "Polychoric correlation plot", fig.align='center'}
 knitr::include_graphics('../output/images/corpoly.png')
 ```
 
-En suma, los análisis descriptivos señalan una relativa adhesión a la moral meritocratica, las cuales, a modo general, se expresan en una mayor preferencia por criterios meritocraticos y una menor por no meritocráticos. Igualmente, es observable una relativamente baja percepción de meritocracia. Se observa además una relación coherente entre los indicadores según lo propuesto en el modelo teórico en el preregistro del estudio, es decir, los pares de items asociados a un factor específico muestran correlaciones con un tamaño de efecto grande (por ejemplo, preferencias meritocrácticas por los items asociados a esfuerzo y a talento). En particular las asociaciones entre esfuerzo y talento son relevantes, ya que desestiman previos supuestos sobre que el talento no sería un criterio meritocrático [@mijs_paradox_2019], de otra manera la correlación sería cero o negativa. Junto a ello, vemos que no existe una correlacion negativa entre aspectos meritocráticos y no meritocráticos, desestimando los supuestos de estudios previos que  señalaban que estas dimensiones serían los polos opuestos de un mismo continuo [@reynolds_perceptions_2014].
+En suma, los análisis descriptivos señalan una relativa adhesión a la moral meritocratica, las cuales se expresan en una mayor preferencia por criterios meritocraticos y una menor por no meritocráticos, aún cuando la preferencia por elementos no-meritocraticos alcanza una proporción de más de 20%. Igualmente, es observable una relativamente baja percepción de meritocracia. Se observa además una relación coherente entre los indicadores según lo propuesto en el modelo teórico en el preregistro del estudio, es decir, los pares de items asociados a un factor específico muestran correlaciones con un tamaño de efecto grande (por ejemplo, preferencias meritocrácticas por los items asociados a esfuerzo y a talento). En particular las asociaciones entre esfuerzo y talento son relevantes, ya que desestiman previos supuestos sobre que el talento no sería un criterio meritocrático [@mijs_paradox_2019], de otra manera la correlación sería cero o negativa. Junto a ello, vemos que no existe una correlación negativa entre aspectos meritocráticos y no meritocráticos, desestimando los supuestos de estudios previos que  señalaban que estas dimensiones serían los polos opuestos de un mismo continuo [@reynolds_perceptions_2014].
 
 
 ## Confirmatory Factor Analysis
 
-This section tests the item's battery and the corresponding conceptual framework under test. For this, we first estimate a confirmatory factor analysis model for the whole sample, and secondly we test the order effects applying the same model to each of the three order versions. 
+This section estimates the fit of the conceptual model behind the Perceptions and Preferences for Meritocracy Scale. For this, we first estimate a confirmatory factor analysis model for the whole sample, and secondly we test the order effects applying the same model to each of the three order versions.
 
 ### Full sample CFA
 
-In \@ref(fig:meas02) the results of the estimation for the four-factor model with complete sample. This model have a good fit (CFI = 0.977, RMSEA = 0.079, $\chi2$(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88. Furthermore, considering the correlation between the latent variables, it is observed that the most related variables are meritocratic perceptions and preferences, which have a positive correlation of 0.59, while non-meritocratic perceptions and preferences do not present a considerable correlation.
+\@ref(fig:meas02) SHOWS the results of the estimation for the four-factor model with complete sample. This model presents adequate fit indicators (CFI = 0.977, RMSEA = 0.079, $\chi2$(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88. Furthermore, considering the correlation between the latent variables, it is observed that the variables with the highest correlations are meritocratic perceptions and preferences, which have a positive correlation of 0.59, while non-meritocratic perceptions and preferences do not present a considerable correlation.
 
 ```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions an Preferences for Meritocracy Scale", fig.align='center'}
 knitr::include_graphics('../output/images/meas02.png')
 ```
 
-Como se puede observar en la Tabla \@ref(tab:tab-loads), todos los modelos, independiente del grupo y el órden de los items, obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8, por contraparte ni un modelo logró un chi-square no significativo, aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, $\chi2$(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001).  Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968, RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
+Como se puede observar en la Tabla \@ref(tab:tab-loads), todos los modelos, independiente del grupo y el órden de los items, obtuvieron un ajuste adecuado. con CFI superiores a .95 y RMSEA inferiores a .8. Sin embargo ningún modelo logró un chi-square no significativo (algo esperable en muestras grandes), aunque tanto el modelo aleatorio como el primero obtuvieron un adecuado chi-square ratio menor a 3. El primero de los órdenes fue el que obtuvo mejor ajuste (CFI=0.998, TLI= 0.995,RMSEA=0.037, $\chi2$(df=14)=28,03, p = 0.014), seguido por el orden aleatorio de los ítems (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001). Por su parte, la escala ordenada por temáticas parece generar un efecto framing en el cual la relación entre las percepciones y las preferencias parecen sobreestimadas, afectando de esta manera el ajuste (CFI=0.984, TLI=0.968, RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
 
 ```{r tab03, echo=FALSE,eval=TRUE}
 load(file = "../output/tables/fit4_o.RData")
@@ -289,7 +288,7 @@ sumtable02<- kable(sum_fit,digits = 3,format = table_format,row.names = F,bookta
                           "Model 4: Randomized order"));sumtable02
 ```
 
-Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo.  Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
+Si bien  todas las pruebas obtuvieron indicadores relativamente adecuados, las diferencias mencionadas entre los ajustes de los modelos según orden son estadísticamente significativas, lo cual fue evaluado a partir de un análisis de invarianza. Se concluye que entre los tres órdenes no existe invarianza configuracional, es decir, no poseen la misma dimensionalidad y por ello no ajustan igualmente al modelo teórico [@vandenbergReviewSynthesisMeasurement2000]. Esto se debe al efecto producido por la aparición conjunta de los ítems de un mismo factor en el orden 1, lo cual aumenta el ajuste del modelo. Además, en el orden 2, al preguntarse seguidamente por la percepción y la preferencia en torno al mismo indicador, aumentan las relaciones cruzadas disminuyendo el ajuste del modelo. De modo coherente, el modelo aleatorio presentó un ajuste intermedio entre el orden 1 y el orden 2.
 
 \pagebreak
 
@@ -308,13 +307,13 @@ Table: `r as.character(paste("(\\#tab:items-dim)", "Items according to dimension
 
 
 
-EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba $\chi2$(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un $\chi2$ ratio menor a 3 y obtuvo cargas factoriales muy bajas ($\tau$)< 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoria y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
-
-
+EL modelo teórico propuesto de cuatro factores ajustó, como se observa en la tabla 4, mejor que el modelo de contraste de 1 factor. El modelo teórico ajustó de manera relativamente adecuada, pues muestra indicadores óptimos para CFI= 0.987, TLI = 0.975 y RMSEA=.041, aunque posee indicadores deficientes para la prueba $\chi2$(df=14)=67.6, p-value=.000. Para evaluar posibles mejoras de la escala, se analizaron las relaciones propuestas por los índices de modificación. Estos indican la existencia de dos cargas cruzadas no especificadas. Cuando se generó un modelo siguiendo estas recomendaciones, hubo una mejora considerable del modelo, aunque el nuevo modelo tampoco obtuvo un $\chi2$ ratio menor a 3 y obtuvo cargas factoriales muy bajas ($\tau$)< 0.15, por lo tanto, siguiendo las recomendación de Brown (2006) de solo aceptar las propuesta de los índices de modificación cuando se posee teoría y evidencia sólida, se ha decidido no incorporar estos parámetros al modelo.
 
 # Conclusión
 
 Considerando la ventaja del orden, respecto aleatorio despeja la posibilidad del efecto framing, es decir, de que el resultado del modelo se deba al orden de las preguntas, se ha decidido seguir utilizando el orden 3.
+
+
 
 
 uso conjunto percepciones-preferencias
@@ -328,7 +327,7 @@ uso conjunto percepciones-preferencias
 
 # (APPENDIX) Appendix {-}
 
-`r if (knitr::is_latex_output()){ '\\appendix'}` 
+`r if (knitr::is_latex_output()){ '\\appendix'}`
 
 `r if (knitr::is_latex_output()){ '\\section{Appendix}'}`
 
