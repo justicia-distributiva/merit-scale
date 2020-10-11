@@ -210,8 +210,8 @@ kable(table01,escape = TRUE,align = "l",col.names = cnametab,format = "html") %>
   footnote(general = paste0(paste0("$N$= ",nobs(fit1_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
   add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>%
   add_header_above(c(" " = 9,"Factor loadings"=8)) %>%
-  column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  # # column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  # # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
   kable_styling(full_width = FALSE)
 ```
 
@@ -289,8 +289,8 @@ kable(table02,escape = FALSE,align = "l",col.names = cnametab)  %>%
   footnote(general = paste0(paste0("$N$= ",nobs(fit2_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
   add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
   add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
   kable_styling(full_width = FALSE) %>% 
   kable_styling(full_width = F)
 ```
@@ -365,8 +365,8 @@ kable(table03,escape = FALSE,align = "l",col.names = cnametab) %>%
   footnote(general = paste0(paste0("$N$= ",nobs(fit3_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
   add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
   add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
   kable_styling(full_width = F)
 ```
 
@@ -427,8 +427,8 @@ kable(table03tau,escape = FALSE,align = "l",col.names = cnametab) %>%
   footnote(general = paste0(paste0("$N$= ",nobs(fit3_c.tau)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
   add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
   add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
   kable_styling(full_width = F)
 ```
 
@@ -564,12 +564,12 @@ semPaths(
 ```
 
  
-```{r meas03-0}
+```{r meas03-0, eval=FALSE, include=TRUE}
 nodeNames <-c("Perception effort","Perception talent","Perception rich family","Perception contacts",
               "Preference effort","Preference talent","Preference rich family","Preference contacts",
               "Perception \n meritocratic","Perception \n non meritocratic","Preference \n meritocratic","Preference \n non meritocratic")
 
-graphics.off()
+# graphics.off()
 fm03<- data.frame(v1=fitmeasures(fit4_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),])
 fm03 <- round(fm03,3)
 par(mai = c(2,2,2,2)) # Set the margin on all sides to 2
@@ -609,7 +609,7 @@ semPaths(
   sizeMan = 8,# largo manifest
   sizeMan2= 8,# alto manifest
   sizeLat = 5.5, # largo de los circulos
-  sizeLat2 = 25, # alto de los circulos
+  sizeLat2 = 20, # alto de los circulos
   residScale = 10,
   width = 21.5, # 17
   height = 10, # 10
@@ -712,8 +712,8 @@ kable(table04,escape = FALSE,align = "l",col.names = cnametab) %>%
   footnote(general = paste0(paste0("$N$= ",nobs(fit4_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
   add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
   add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
+  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
+  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
   kable_styling(full_width = F)
 ```
 
@@ -730,7 +730,7 @@ table04b<- bind_cols(x = sum04b,y = matpolyw04) %>% select(Variable, everything(
 
 cap01 <- "Descriptive statistic"
 sumdat04<- kable(table04b, escape = FALSE,align = "l",linesep = "", caption = cap01) %>% 
-           column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
+           # column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
            footnote(general = paste0(paste0("$N$= ","2141"),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>% 
            add_header_above(header = c(" "=5,"Polychoric correlations"= 8)) %>% 
            kable_styling(full_width = TRUE,font_size = 8,position = "center");sumdat04
@@ -787,8 +787,8 @@ tb.caption <- "Factor loadings and fit measures"
 
 tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = tb.caption) %>% 
           kable_styling(full_width = F,font_size = 9) %>% 
-          column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
-          column_spec(column = 2:13,width = "1cm",width_min = "1.3cm",include_thead = TRUE) %>% 
+          # column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
+          # column_spec(column = 2:13,width = "1cm",width_min = "1.3cm",include_thead = TRUE) %>% 
           add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>% 
           row_spec(row = 8,hline_after = TRUE) %>%
