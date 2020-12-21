@@ -183,16 +183,16 @@ fm.df$nobs <- c(nobs(fs1_o))
 fm.df      <- data.frame(t(fm.df))
 
 #------ merge ------#
-tb.fm<- bind_rows(loads01,fm.df)
-tb.fm<- tb.fm %>% 
+tb.fm2<- bind_rows(loads01,fm.df)
+tb.fm2<- tb.fm2 %>% 
   mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>%
   select(vars,everything())
 #--table---#
 tb.col  <- c("Variables",1:4)
-tb.foot <- paste0("; p<0.05=$^{*}$; p<0.01=$^{**}$; p<0.001=$^{***}$. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
-tb.caption <- "Factor loadings and fit measuresfor the second sample" 
+tb.foot <- paste0("Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
+tb.caption <- "Factor loadings and fit measures for the second sample" 
 
-tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption) %>% 
+tb.fm01<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption) %>% 
           kable_classic(full_width = F,font_size = 9,bootstrap_options = c("striped", "hover"),html_font = "Sans") %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
           column_spec(column = 1,width = "5cm") %>% 
@@ -201,7 +201,7 @@ tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccc",col.names = tb.col, caption
           add_indent(c(9:12)) %>% 
           footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01
 
-save(tb.fm,tb.col,tb.foot,tb.caption,file = "output/tables/tb.fact-f02.RData")
+save(tb.fm2,tb.col,tb.foot,tb.caption,file = "output/tables/tb.fact-f02.RData")
 ```
 
 ## Invariance

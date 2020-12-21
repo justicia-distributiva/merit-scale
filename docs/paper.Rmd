@@ -699,9 +699,9 @@ modalidad de aplicación del Grupo 3 presente en la Figura
 lista, obtuvimos una muestra analítica final de 1242 casos donde 605
 (48,71%) son mujeres y 637 (51,28%) son hombres. El 48,84% de ellos
 tienen 45 años o más, y el 33,97% poseen educación terciaria o superior.
-En la Tabla \@ref(tab:factloads2) se pueden observar los resultados del ajuste de la
-escala en esta muestra. Análisis El modelamiento para el testeo
-invarianza consiste en una serie de modelos anidados a los que
+En la Tabla \@ref(tab:fcloads-inv) se pueden observar los resultados del
+ajuste de la escala en esta muestra. Análisis El modelamiento para el
+testeo invarianza consiste en una serie de modelos anidados a los que
 progresivamente se le van incorporando restricciones sobre los
 parámetros del modelo de medición , permitiendo esta progresión
 localizar la fuente de una violación de invarianza, lo cual ha sido
@@ -755,11 +755,11 @@ modelos anidados [@newsom_Longitudinal_2015].
 load(file = "../output/tables/tb.inv-group.RData")
 col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
              "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
-footnote <- paste0("N = ",nobs(conf),"; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], "***p < .001")
+footnote <- paste0("N = ",nobs(conf),"; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
 
 kable(tab.inv, col.names = col.nam, align = "l",
       booktabs=TRUE,format = table_format,escape = FALSE,
-      caption = "Multiple Group meassurement invariance Perceptions and Preferences for Meritocracy") %>% 
+      caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>% 
   kable_styling(full_width = FALSE) %>%
   footnote(general = footnote, footnote_as_chunk = T)
 ```
@@ -943,16 +943,15 @@ tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape 
           footnote(general = tb.foot,threeparttable = T);tb.fm01
 ```
 
-```{r factloads2}
+```{r fcloads-inv, echo=FALSE}
 load(file = "../output/tables/tb.fact-f02.RData")
-tb.fm01<- kable(tb.fm,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption) %>% 
-          kable_styling(full_width = F,font_size = 9) %>% 
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
+tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>% 
+          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 9) %>% 
           add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
-          column_spec(column = 1,width = "5cm") %>% 
-          column_spec(column = c(2:5),width = "0.5cm") %>% 
           row_spec(row = 8,hline_after = TRUE) %>%
           add_indent(c(9:12)) %>% 
-          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm02
 ```
 
 \pagebreak
