@@ -41,8 +41,8 @@ header-includes:
 ```{r eval=FALSE, include=FALSE}
 # for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
 # clean #in the yml
-rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::pdf_document2")
-rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::html_document2")
+rmarkdown::render("paper.Rmd", output_format = "bookdown::pdf_document2")
+rmarkdown::render("paper.Rmd", output_format = "bookdown::html_document2")
 ```
 
 
@@ -50,8 +50,8 @@ rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::html_document2")
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H")
-# knitr::opts_knit$set(base.url = "../") #relative path for .html output file
-# knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+# knitr::opts_knit$set(base.url = NULL) #relative path for .html output file
+# knitr::opts_knit$set(root.dir = NULL) #relative path for chunks within .rmd files
 options(scipen=999)
 rm(list=ls())
 options(knitr.kable.NA = '')
@@ -82,9 +82,6 @@ table_format2 = if(is_html_output()) {
 } else if(is_latex_output()) {
   F
 }
-
-
-
 
 ```
 
@@ -369,7 +366,10 @@ dat04b<- dat04 %>% rename("A. Perception Effort" =perc_effort,
  "F. Preferences Talent" = pref_talent,
  "G. Preferences rich parents" = pref_wpart ,
  "H. Preferences contacts" = pref_netw )
-sum04b <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
+sum04b <- psych::describe(dat04b[,-c(1)], fast = T) %>% 
+  as.data.frame() %>%
+  select(mean,sd,min,max) %>% 
+  round(digits = 2)
 table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
 sumdat04<- kable(table04b,format =table_format,
                  booktabs= T,
