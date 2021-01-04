@@ -529,7 +529,7 @@ footnote <- paste0("N = ",nobs(conf),"; Group 1, n = ",conf@Data@nobs[[1]],"; Gr
 kable(tab.inv, col.names = col.nam, align = "l",
       booktabs=TRUE,format = table_format,escape = FALSE,
       caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>% 
-  kable_styling(full_width = FALSE) %>%
+  kable_styling(full_width = FALSE,latex_options = "HOLD_position") %>%
   footnote(general = footnote, footnote_as_chunk = T)
 ```
 
@@ -653,6 +653,17 @@ tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape 
           row_spec(row = 8,hline_after = TRUE) %>%
           add_indent(c(9:12))  %>%
           footnote(general = tb.foot,threeparttable = T);tb.fm01
+```
+
+```{r fcloads-inv, echo=FALSE}
+load(file = "../output/tables/tb.fact-f02.RData")
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
+tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>% 
+          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 9) %>% 
+          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12)) %>% 
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm02
 ```
 
 \pagebreak

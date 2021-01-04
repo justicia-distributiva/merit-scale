@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.21)  21 DEC 2020 10:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/W32TeX) (preloaded format=pdflatex 2020.12.21)  4 JAN 2021 12:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -474,21 +474,28 @@ Package graphics Info: Driver file: pdftex.def on input line 105.
 )
 \Gin@req@height=\dimen182
 \Gin@req@width=\dimen183
+) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count288
+\float@exts=\toks25
+\float@box=\box54
+\@float@everytoks=\toks26
+\@floatcapt=\box55
 ) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
 Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 \col@sep=\dimen184
-\ar@mcellbox=\box54
+\ar@mcellbox=\box56
 \extrarowheight=\dimen185
-\NC@list=\toks25
+\NC@list=\toks27
 \extratabsurround=\skip57
 \backup@length=\skip58
-\ar@cellbox=\box55
+\ar@cellbox=\box57
 )
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.
 sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 \multirow@colwidth=\skip59
-\multirow@cntb=\count288
+\multirow@cntb=\count289
 \multirow@dima=\skip60
 \bigstrutjot=\dimen186
 )
@@ -496,17 +503,10 @@ Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
 y
 \wrapoverhang=\dimen187
 \WF@size=\dimen188
-\c@WF@wrappedlines=\count289
-\WF@box=\box56
-\WF@everypar=\toks26
+\c@WF@wrappedlines=\count290
+\WF@box=\box58
+\WF@everypar=\toks28
 Package: wrapfig 2003/01/31  v 3.6
-) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/float/float.sty
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count290
-\float@exts=\toks27
-\float@box=\box57
-\@float@everytoks=\toks28
-\@floatcapt=\box58
 )
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.
 sty
@@ -562,84 +562,52 @@ eeparttable.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box64
 )
-(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/threeparttablex/th
-reeparttablex.sty
-Package: threeparttablex 2013/07/23 v0.3 by daleif
-
-(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.st
-y
-Package: environ 2014/05/04 v0.3 A new way to define environments
-
-(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspa
-ces.sty
-Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
-))
-\TPTL@width=\skip63
-) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box65
-\UL@hyphenbox=\box66
-\UL@skip=\skip64
-\UL@hook=\toks32
-\UL@height=\dimen256
-\UL@pe=\count298
-\UL@pixel=\dimen257
-\ULC@box=\box67
-Package: ulem 2019/11/18
-\ULdepth=\dimen258
-)
-(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/makecell/makecell.
-sty
-Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen259
-\c@nlinenum=\count299
-\TeXr@lab=\toks33
-)
-\cslhangindent=\skip65
-\csllabelwidth=\skip66
+\cslhangindent=\skip63
+\csllabelwidth=\skip64
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count300
-\calc@Bcount=\count301
-\calc@Adimen=\dimen260
-\calc@Bdimen=\dimen261
-\calc@Askip=\skip67
-\calc@Bskip=\skip68
+\calc@Acount=\count298
+\calc@Bcount=\count299
+\calc@Adimen=\dimen256
+\calc@Bdimen=\dimen257
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count302
-\calc@Cskip=\skip69
+\calc@Ccount=\count300
+\calc@Cskip=\skip67
 )
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 11
-1.
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 10
+8.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backen
 d-pdftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count303
-\l__pdf_internal_box=\box68
+\l__kernel_color_stack_int=\count301
+\l__pdf_internal_box=\box65
 ) (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 108.
+LaTeX Font Info:    ... okay on input line 108.
 
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epsto
 pdf-base.sty
@@ -652,7 +620,7 @@ df-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring ON on input line 111.
+Package hyperref Info: Link coloring ON on input line 108.
 
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.s
 ty
@@ -666,11 +634,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ettitlestring.sty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count304
+\c@section@level=\count302
 )
-LaTeX Info: Redefining \ref on input line 111.
-LaTeX Info: Redefining \pageref on input line 111.
-LaTeX Info: Redefining \nameref on input line 111.
+LaTeX Info: Redefining \ref on input line 108.
+LaTeX Info: Redefining \pageref on input line 108.
+LaTeX Info: Redefining \nameref on input line 108.
 (./paper.out) (./paper.out)
 \@outlinefile=\write3
 \openout3 = `paper.out'.
@@ -715,37 +683,37 @@ Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-13.
+10.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-13.
+10.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-113.
+110.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-113.
+110.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 113.
+(Font)              <12> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 113.
+(Font)              <8> on input line 110.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 113.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 113
+(Font)              <6> on input line 110.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 110
 .
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 113
+LaTeX Font Info:    Trying to load font information for U+msb on input line 110
 .
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -753,25 +721,25 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
 x.map}] [2] [3]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 3
-46.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
+71.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
 <../input/images/generalf.png, id=218, 976.64874pt x 332.24126pt>
 File: ../input/images/generalf.png Graphic file (type png)
 <use ../input/images/generalf.png>
-Package pdftex.def Info: ../input/images/generalf.png  used on input line 368.
+Package pdftex.def Info: ../input/images/generalf.png  used on input line 184.
 (pdftex.def)             Requested size: 426.32396pt x 145.03073pt.
 [4]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 402.
+(Font)              <10> on input line 199.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 402.
+(Font)              <7> on input line 199.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 402.
+(Font)              <5> on input line 199.
 [5 <../input/images/generalf.png>]
-Overfull \hbox (1.21036pt too wide) in paragraph at lines 486--486
+Overfull \hbox (1.21036pt too wide) in paragraph at lines 247--247
 []\T1/ptm/m/n/10 Dimension|  
  []
 
@@ -779,50 +747,50 @@ Overfull \hbox (1.21036pt too wide) in paragraph at lines 486--486
 <../input/images/app_mod.png, id=261, 722.7pt x 455.45157pt>
 File: ../input/images/app_mod.png Graphic file (type png)
 <use ../input/images/app_mod.png>
-Package pdftex.def Info: ../input/images/app_mod.png  used on input line 506.
+Package pdftex.def Info: ../input/images/app_mod.png  used on input line 259.
 (pdftex.def)             Requested size: 426.32396pt x 268.6724pt.
 <../output/images/meas01.png, id=262, 1213.91016pt x 722.7pt>
 File: ../output/images/meas01.png Graphic file (type png)
 <use ../output/images/meas01.png>
-Package pdftex.def Info: ../output/images/meas01.png  used on input line 522.
+Package pdftex.def Info: ../output/images/meas01.png  used on input line 273.
 (pdftex.def)             Requested size: 426.32396pt x 253.80893pt.
 [7 <../input/images/app_mod.png>]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 52
-9.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 28
+0.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [8 <../output/images/meas01.png>]
 <../output/images/plotlikert.png, id=285, 1138.02666pt x 711.18198pt>
 File: ../output/images/plotlikert.png Graphic file (type png)
 <use ../output/images/plotlikert.png>
-Package pdftex.def Info: ../output/images/plotlikert.png  used on input line 59
-1.
+Package pdftex.def Info: ../output/images/plotlikert.png  used on input line 31
+7.
 (pdftex.def)             Requested size: 426.32396pt x 266.42128pt.
 <../output/images/corpoly.png, id=287, 511.9125pt x 369.7815pt>
 File: ../output/images/corpoly.png Graphic file (type png)
 <use ../output/images/corpoly.png>
-Package pdftex.def Info: ../output/images/corpoly.png  used on input line 606.
+Package pdftex.def Info: ../output/images/corpoly.png  used on input line 328.
 (pdftex.def)             Requested size: 426.32396pt x 307.95676pt.
 [9 <../output/images/plotlikert.png>] [10 <../output/images/corpoly.png (PNG co
 py)>]
 <../output/images/meas03.png, id=305, 511.9125pt x 426.6339pt>
 File: ../output/images/meas03.png Graphic file (type png)
 <use ../output/images/meas03.png>
-Package pdftex.def Info: ../output/images/meas03.png  used on input line 655.
+Package pdftex.def Info: ../output/images/meas03.png  used on input line 349.
 (pdftex.def)             Requested size: 426.32396pt x 355.30385pt.
 <../output/images/latcor.png, id=307, 511.9125pt x 369.7815pt>
 File: ../output/images/latcor.png Graphic file (type png)
 <use ../output/images/latcor.png>
-Package pdftex.def Info: ../output/images/latcor.png  used on input line 678.
+Package pdftex.def Info: ../output/images/latcor.png  used on input line 360.
 (pdftex.def)             Requested size: 426.32396pt x 307.95676pt.
 [11 <../output/images/meas03.png>] [12 <../output/images/latcor.png (PNG copy)>
 ] [13] [14] [15] [16] [17]pdfTeX warning (ext4): destination with the same iden
 tifier (name{ref-dimick_Models_2018}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.1049 ...de\hypertarget{ref-dimick_Models_2018}{}
+l.583 ...ode\hypertarget{ref-dimick_Models_2018}{}
                                                   % [18]
-Underfull \hbox (badness 1014) in paragraph at lines 1130--1132
+Underfull \hbox (badness 1014) in paragraph at lines 664--666
 [][]\T1/ptm/m/n/10 Saunders, Pe-ter. 1995. ``Might Britain Be a Mer-i-toc-racy?
 '' \T1/ptm/m/it/10 So-ci-ol-ogy \T1/ptm/m/n/10 29 (1): 23--41. [][]$https : / /
  doi . org / 10 . 1177 /
@@ -830,9 +798,9 @@ Underfull \hbox (badness 1014) in paragraph at lines 1130--1132
 
 [19]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 1210.
+(Font)              <9> on input line 744.
 
-Overfull \hbox (88.49182pt too wide) in paragraph at lines 1218--1240
+Overfull \hbox (88.49182pt too wide) in paragraph at lines 752--774
  [][] 
  []
 
@@ -855,13 +823,13 @@ Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 924416EB954D2E92ECFAE7C16B626CA8;2578.
  ) 
 Here is how much of TeX's memory you used:
- 13923 strings out of 481346
- 207391 string characters out of 5916644
- 543552 words of memory out of 5000000
- 30323 multiletter control sequences out of 15000+600000
- 471216 words of font info for 93 fonts, out of 8000000 for 9000
+ 13618 strings out of 481346
+ 203130 string characters out of 5916644
+ 538223 words of memory out of 5000000
+ 30039 multiletter control sequences out of 15000+600000
+ 471110 words of font info for 92 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,16n,72p,1489b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,16n,72p,2389b,518s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.e
 nc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mat
 hit.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base
@@ -875,7 +843,7 @@ onts/type1/urw/courier/ucrr8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf
 -dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/
 texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/Julio/AppData/Roaming/Tin
 yTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper.pdf (21 pages, 636359 bytes).
+Output written on paper.pdf (21 pages, 636429 bytes).
 PDF statistics:
  520 PDF objects out of 1000 (max. 8388607)
  472 compressed objects within 5 object streams
