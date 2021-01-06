@@ -376,3 +376,80 @@ long01<- melt(wide,variable.name = "wave",
 ```{r}
 #save(long01,file = "input/data/proc/datalong.RData")
 ```
+
+# Factorial survey data:
+
+Prepare poverty experiment data (wave 01):
+
+
+```{r}
+w01c <- w01 %>% filter(Intro==1) %>% as.data.frame()
+w01c$ID<- stringr::str_split_fixed(w01c$ticket,"_", 4)[,1]
+w01c$grupo <- NA
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v01==1] <- 1
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v02==1] <- 2
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v03==1] <- 3
+w01c$perc_effort_w1 <- rowSums(w01c[,c(matches(match = "perc_effort",vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_talent_w1 <- rowSums(w01c[,c(matches(match = "perc_talent",vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_wpart_w1  <- rowSums(w01c[,c(matches(match = "perc_wpart" ,vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_netw_w1   <- rowSums(w01c[,c(matches(match = "perc_netw"  ,vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_effort_w1 <- rowSums(w01c[,c(matches(match = "pref_effort",vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_talent_w1 <- rowSums(w01c[,c(matches(match = "pref_talent",vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_wpart_w1  <- rowSums(w01c[,c(matches(match = "pref_wpart" ,vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_netw_w1   <- rowSums(w01c[,c(matches(match = "pref_netw"  ,vars = names(w01c)))],na.rm = TRUE)
+w01c[w01c==0] <- NA
+w01c <- w01c %>% select(grupo,
+                        perc_effort_w1,perc_talent_w1,perc_wpart_w1,perc_netw_w1,
+                        pref_effort_w1,pref_talent_w1,pref_wpart_w1,pref_netw_w1,
+                        sexo_w1=sexo,edad_w1=edad,edcep_w1=edcep, ID)
+```
+
+
+```{r}
+w01fs <- w01c
+names(w01fs)<- stringr::str_replace_all(string = names(w01fs),pattern = "_w1",replacement = "") 
+```
+
+Prepare factorial survey data (wave 02):
+
+```{r}
+fs01 <- sjlabelled::read_spss("input/data/original/factorial_ola2.sav",verbose = F)
+```
+
+```{r}
+names(long01)
+fs02 <- fs01 %>% 
+  filter(consen==1) %>% 
+  mutate(grupo=4,ID=ResponseId,) %>% 
+  select(grupo,ID,"perc_effort"="merit_perc_effort",
+         "perc_talent" = "merit_perc_talent",
+         "perc_wpart" = "merit_perc_wpart",
+         "perc_netw"  = "merit_perc_netw",
+         "pref_effort" = "merit_pref_effort",
+         "pref_talent" = "merit_pref_talent",
+         "pref_wpart" = "merit_pref_wpart",
+         "pref_netw"  = "merit_pref_netw",
+         sexo,edad,
+         edcep=educ)
+```
+
+
+Identify dataset of origin:
+
+```{r}
+w01fs$dataset <- "pvw01"
+fs02$dataset  <- "fsw02"
+```
+
+Merge data sets:
+
+```{r}
+pov_fs<-bind_rows(fs02,w01fs) %>%
+  set_label(label = get_label(fs02)) %>%
+  set_labels(labels = get_labels(fs02))
+```
+
+```{r}
+save(pov_fs,file = "input/data/proc/pov01_fact02.RData")
+```
+
