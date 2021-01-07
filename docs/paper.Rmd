@@ -498,42 +498,10 @@ Table: `r as.character(paste("(\\#tab:items-dim)", "Items according to dimension
 
 As shown in Table \@ref(tab:items-dim), the proposed theoretical four-factor model fits better than the one-factor contrast model. The theoretical model adjusted relatively well, as it shows preferable indicators of IFC=0.987, TLI=0.975 and RMSEA=0.041, although it also has poor indicators of $\chi2$(df=14)=67.6 and p-value<0.001. To evaluate possible improvements in the scale, the relationships proposed by the modification indexes were analyzed. These indicate the existence of two unspecified cross-loads. When a model was generated following these recommendations, there was a considerable improvement in the model, although the new model still did not obtain a $\chi2$ ratio of less than 3, and had very low factorial loads ($\tau$)< 0.15. Therefore, following the recommendation of Brown (2006) to only accept the proposals of modification when theory and solid evidence are available, we decided not to incorporate these parameters into the model.
 
-## Reliability and validity analyses
+## Additional validity analyses
 
-We performed two further analyses in order to add evidence regarding the reliability and validity of the scale. Firstly we test the stability of the scale scores along time through longitudinal measurement invariance methods, and secondly we analyze the convergent validity by assessing the association of the merit scale with related concepts and correspondent measurements.
+We performed two further analyses in order to add evidence regarding the reliability and validity of the scale. Firstly we analyze the convergent validity by assessing the association of the merit scale with related concepts and correspondent measurements. Secondly, we test the internal consistency  of the scale in different studies through measurement invariance methods.
 
-### Measurement invariance
-
-*Datos*
-
-Para el desarrollo de esta sección, se empleó una fuente de datos externa a los resultados presentados en el apartado anterior. Los datos provienen de un estudio realizado durante el primer semestre de 2020, dentro del cual se realizó una medición usando la escala a través de aleatorización completa de los indicadores, lo cual corresponde a la modalidad de aplicación del Grupo 3 presente en la Figura \@ref(fig:appmod). Después de la eliminación de casos perdidos por lista, obtuvimos una muestra analítica final de 1242 casos donde 605 (48,71%) son mujeres y 637 (51,28%) son hombres. El 48,84% de ellos tienen 45 años o más, y el 33,97% poseen educación terciaria o superior. En la Tabla \@ref(tab:fcloads-inv) se pueden observar los resultados del ajuste de la escala en esta muestra. Análisis El modelamiento para el testeo invarianza consiste en una serie de modelos anidados a los que progresivamente se le van incorporando restricciones sobre los parámetros del modelo de medición , permitiendo esta progresión localizar la fuente de una violación de invarianza, lo cual ha sido tomando mayor relevancia en los estudios sociológicos a través de encuestas, principalmente por la validez del uso de escalas de medición en estudios de carácter comparado en diversos contextos sociales y culturales [@Davidovetal2014]. En esta sección emplearemos un análisis de invarianza entre grupos, donde se espera que la estructura factorial sea independiente de la pertenencia a las la muestra correspondiente al estudio original y a los datos del estudio más reciente. Para el desarrollo del test de invarianza, los autores sostienen que el modelamiento debe realizarse a través de cuatro niveles o tipos de restricción progresiva [@Milfont2010; @millsap_Statistical_2011; @vandeschoot_checklist_2012]:
-
-1.  **Configural:** Se estima el Modelo solo de indicando la estructura  de este, razón por lo cual todos los parámetros se estiman libremente.
-
-2.  **Débil:** Posteriormente, en el modelo se restringen las cargas factoriales de cada ítem, haciéndolas idénticas en ambas mediciones.
-
-3.  **Fuerte:** Luego, se estima el modelo restringiendo las cargas factoriales y los interceptos de cada ítem, haciéndolos idénticos para cada ambas mediciones.
-
-4.  **Estricta:** Finalmente, se estima un modelo donde se restringen las cargas factoriales, los interceptos y las varianzas de error para cada ítem, haciéndolos idénticos para ambas mediciones.
-
-El primer paso para el testeo de invarianza es la estimación del modelo Configural, el cual se espera que cumpla adecuadamente con los criterios de ajuste global de un modelo de medición, debido a que es el modelo base en proceso de comparación. Convencionalmente el estadístico chi-cuadrado es empleado como medida global de ajuste de un modelo de medición. Sin embargo, al ser sensible al tamaño de la muestra, se recomienda emplear tres índices de ajuste adicionales: Comparative Fit Index (CFI), el cual debe tener un valor mayor a 0.9; Root Mean Square Error Approximation (RMSEA), el cual debe estar en el rango de valores de 0.05 y 0.08; y el Standardised Root Mean Square Residuals (SRMR) que debe ser menor a 0.08 (@vandeschoot_checklist_2012)
-
-La literatura sobre invarianza métrica sugiere dos aproximaciones complementarias para el testeo de invarianza. En nuestro caso, emplearemos la comparación basada en el ajuste incremental de los estadísticos de ajuste [@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010] y el test ANOVA para comparación de medias en modelos anidados [@newsom_Longitudinal_2015].
-
-```{r invargroup, eval=TRUE, echo=FALSE}
-load(file = "../output/tables/tb.inv-group.RData")
-col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
-             "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
-footnote <- paste0("N = ",nobs(conf),"; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
-
-kable(tab.inv, col.names = col.nam, align = "l",
-      booktabs=TRUE,format = table_format,escape = FALSE,
-      caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>% 
-  kable_styling(full_width = FALSE,latex_options = "HOLD_position") %>%
-  footnote(general = footnote, footnote_as_chunk = T)
-```
-
-Como se puede observar en la Table \@ref(tab:invargroup)
 
 ### Convergent validity
 
@@ -589,17 +557,57 @@ Preferences
 0,2082
 
 
+### Measurement invariance
+
+El modelamiento para el testeo invarianza ha ido tomando mayor relevancia en los estudios sociológicos de encuestas, principalmente por el interés en la validez de escalas de medición en estudios de carácter comparado en diversos contextos sociales y culturales [@Davidovetal2014]. En esta sección emplearemos un análisis de invarianza entre grupos, donde se espera que la estructura factorial propuesta sea independiente de la pertenencia a las la muestra correspondiente al estudio original y a los datos del estudio más reciente.
+
+El procedimiento de medición de invarianza consiste en una serie de modelos anidados a los que progresivamente se le van incorporando restricciones sobre los parámetros del modelo de medición. La literatura sugiere en general que este modelamiento debe realizarse a través de cuatro niveles o tipos de restricción progresiva [@Milfont2010; @millsap_Statistical_2011; @vandeschoot_checklist_2012]:
+
+1.  **Configural:** Se estima el Modelo solo indicando la estructura  factorial utilizada en el CFA.
+
+2.  **Débil:** se aplica una restricción de igualdad a las cargas factoriales en los distintos grupos, es decir, se fuerza a que las cargas sean idénticas en ambas mediciones.
+
+3.  **Fuerte:** se suman restricciones de igualdad a los interceptos de cada indicador.
+
+4.  **Estricta:** se suman restricciones a las varianzas de error de cada indicador.
+
+*Data*
+
+Para el desarrollo de este estudio se empleó una fuente de datos distinta a la utilizada hasta ahora, consistente en una encuesta online realizada durante el primer semestre de 2020, cuyas características en términos de aplicación y cobertura son equivalentes a la del estudio anterior. La muestra final obtenida contiene 1,242 casos, donde 605 (48,71%) son mujeres y 637 (51,28%) son hombres. El 48,84% de ellos tienen 45 años o más, y el 33,97% poseen educación terciaria o superior.
+
+En la Tabla \@ref(tab:fcloads-inv) se pueden observar los resultados del ajuste de la escala en esta muestra.
+
+_Instruments_
+
+., dentro del cual se realizó una medición usando la escala a través de aleatorización completa de los indicadores, lo cual corresponde a la modalidad de aplicación del Grupo 3 presente en la Figura \@ref(fig:appmod).
+
+_Results_
+
+El primer paso para el testeo de invarianza es la estimación del modelo Configural, el cual se espera que cumpla adecuadamente con los criterios de ajuste global de un modelo de medición, debido a que es el modelo base en proceso de comparación. Convencionalmente el estadístico chi-cuadrado es empleado como medida global de ajuste de un modelo de medición. Sin embargo, al ser sensible al tamaño de la muestra, se recomienda emplear tres índices de ajuste adicionales: Comparative Fit Index (CFI), el cual debe tener un valor mayor a 0.9; Root Mean Square Error Approximation (RMSEA), el cual debe estar en el rango de valores de 0.05 y 0.08; y el Standardised Root Mean Square Residuals (SRMR) que debe ser menor a 0.08 (@vandeschoot_checklist_2012)
+
+La literatura sobre invarianza métrica sugiere dos aproximaciones complementarias para el testeo de invarianza. En nuestro caso, emplearemos la comparación basada en el ajuste incremental de los estadísticos de ajuste [@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010] y el test ANOVA para comparación de medias en modelos anidados [@newsom_Longitudinal_2015].
+
+```{r invargroup, eval=TRUE, echo=FALSE}
+load(file = "../output/tables/tb.inv-group.RData")
+col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
+             "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
+footnote <- paste0("N = ",nobs(conf),"; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
+
+kable(tab.inv, col.names = col.nam, align = "l",
+      booktabs=TRUE,format = table_format,escape = FALSE,
+      caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>%
+  kable_styling(full_width = FALSE,latex_options = "HOLD_position") %>%
+  footnote(general = footnote, footnote_as_chunk = T)
+```
+
+Table \@ref(tab:invargroup) shows the results of the measurement invariance tests. When attending to the traditional invariance test of $\\Delta \\chi^2 (\\Delta \\text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such results is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold using $\\Delta \\chi^2 (\\Delta \\text{df})$. Nevertheless the criteria of $\\Delta \\text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\\Delta \\text{RMSEA}$ is below the cut-off criteria suggested by this criteria [citar  @chen 2007 ]. Therefore, the evidence for strict invariance is still not concluding.
+
+
 # Conclusions
 
 Studies that attempt to characterize and compare societies by their support for meritocratic beliefs have used differencing approaches. As most studies use secondary survey data, they tend to assume that the available indicators represent an underlying construct. A review of these studies reveals several non-tested assumptions, as well as the use of similar indicators to represent different constructs and dimensions of meritocracy. As the existence of heterogeneous approaches certainly has consequences for the advancement of the study of meritocracy, this paper presents a comprehensive conceptual framework for the empirical study of meritocracy, building upon previous research. This framework was then tested against new survey data.
 
-
-
-
-We identified four critical aspects regarding the measurement of meritocracy in previous studies: unidimensionality, the ambiguous use of the term “beliefs”, the use of non-meritocratic indicators as opposed to meritocratic indicators, and the consideration of measurement error. The proposed 8-item scale, “Perceptions and Preferences for Meritocracy”, was designed and tested in order to deal with these four issues. Our results indicate that perceptions and preferences seem to be two related but different dimensions, often confounded in previous research under the label of "beliefs". Additionally, meritocratic and non-meritocratic dimensions do not appear to constitute poles of the same continuum, as some previous studies have assumed.
-
-
-
+We identified four critical aspects regarding the measurement of meritocracy in previous studies: unidimensionality, the ambiguous use of the term “beliefs”, the use of non-meritocratic indicators as opposed to meritocratic indicators, and the consideration of measurement error. The proposed 8-item scale, “Perceptions and Preferences for Meritocracy”, was designed and tested in order to deal with these four issues. Our results indicate that perceptions and preferences seem to be two related but different dimensions, often confounded in previous research under the label of "beliefs". Meritocratic and non-meritocratic dimensions do not appear to constitute poles of the same continuum, as some previous studies have assumed. Besides, we find evidence of convergent validity as well as measurement invariance that approach well the requirement of comparability between samples.
 
 The four-dimensional framework and structure of the Perceptions and Preferences for Meritocracy scale opens several avenues for future research. For instance, distinguishing perceptions from preferences will allow us to evaluate the extent to which different societies are accustomed to, or satisfied with, the perceived level of meritocracy, in terms of differences between what is perceived and what is preferred. Additionally, given that non-meritocratic factors are not necessarily related to meritocratic ones, our framework makes it possible to assess the perceived legitimacy of practices such as the use of personal contacts and their interference (or not), within meritocratic ideals in different societies. The consideration of structural factors, both individual and societal, will allow us to advance future hypotheses relating to meritocratic legitimacy to a more comprehensive level than the one currently used, which is based solely on meritocratic perceptions. Furthermore, the impacts of different configurations of the four-dimensional framework on practices and behaviors such as corruption, civic involvement, and political alignment, is an area that requires additional research. Such future agendas could be specially relevant in times of economic crisis and growing inequalities, that could entail changes in the legitimation of the current distributive structure based on meritocratic ideals.
 
@@ -658,11 +666,11 @@ tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape 
 ```{r fcloads-inv, echo=FALSE}
 load(file = "../output/tables/tb.fact-f02.RData")
 tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
-tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>% 
-          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 9) %>% 
+tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>%
+          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 9) %>%
           add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
           row_spec(row = 8,hline_after = TRUE) %>%
-          add_indent(c(9:12)) %>% 
+          add_indent(c(9:12)) %>%
           footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm02
 ```
 
