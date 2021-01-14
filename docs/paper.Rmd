@@ -6,11 +6,11 @@ link-citations: yes
 author: "Juan Carlos Castillo, Julio Iturra & Francisco Meneses <br><br>"
 abstract: "Economic and social inequalities have generated growing concern and crises across contemporary societies. One of the mechanisms proposed by the social sciences to explain the maintenance of inequality is the belief in meritocracy, which would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel, and as it is based upon multiple approaches and techniques, its interpretation can be difficult and confusing. Adding to these difficulties, is the fact that many such studies have relied upon secondary data to operationalize meritocracy, with significant variation in the use and interpretation of survey items. Based on a review of studies that measure meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding the conceptualization and indicators of meritocracy. Based on this critical analysis, we propose a scale named the *Perceptions and Preferences for Meritocracy Scale*, which we test with confirmatory factor analysis, using data from an online survey study (N=2,141). Our results support the proposed conceptual structure, which not only distinguishes between perceptions and preferences, but also between meritocratic and non-meritocratic dimensions. Our discussion highlights the importance of considering these different dimensions in order to advance the study of meritocracy."
 output:
+  bookdown::html_document2:
+    number_sections: false
   bookdown::pdf_document2:
     template: null
     toc: false
-  bookdown::html_document2:
-    number_sections: false
 linkcolor: blue
 bibliography:
   - ../input/bib/EconomiaMoral.bib
@@ -513,9 +513,9 @@ _Intruments_
 
 The following scales were included for testing their correlation with the the 8-item meritocracy scale:
 
-- Opportunity beliefs: We used two items of the social inequality module of the International Social Survey Programme. Studies use generally both indicators to measure meritocratic and non-meritocratic beliefs (McCall et al., 2017; Mijs, 2019).  One item measures the importance of individual factors in determining life outcomes by asking for the importance of hard work for getting ahead in life (M=3.76, SD=0.93). The second item asks for the importance of coming from a wealthy family and captures the importance of structural factors in getting ahead (M=2.75, SD=1.27). Participants responded to each item using a 1 (not at all important) to 5 (essential) response scale.
+- Opportunity beliefs: We used two items of the social inequality module of the International Social Survey Programme. Studies use generally both indicators to measure meritocratic and non-meritocratic beliefs [@McCall2017Exposurerisinginequality; @mijs_paradox_2019].  One item measures the importance of individual factors in determining life outcomes by asking for the importance of hard work for getting ahead in life (M=3.76, SD=0.93). The second item asks for the importance of coming from a wealthy family and captures the importance of structural factors in getting ahead (M=2.75, SD=1.27). Participants responded to each item using a 1 (not at all important) to 5 (essential) response scale.
 
-- Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which consider four factors: [completar] (Bay-Cheng et al., 2015). We used the factor personal wherewithal that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be succesful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simple computed mean scores [reportar alfa the cronbach], with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.89, =0.89).
+- Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which consider four factors: Government Interference preferences, Competition preferences, System Inequality perception and Personal Wherewithal [@bay-chengTrackingHomoOeconomicus2015]. We used the factor personal wherewithal that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be succesful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simple computed mean scores [reportar alfa the cronbach], with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.88, $\alpha$ = 0.89).
 
 Both instruments cover mainly the perceptual side of the concept. Therefore, in general we expect larger correlation with meritocratic perceptions than with preferences. In the case of opportunity beliefs, the hard work item should correlate positively with meritocratic perception whereas the importance for coming from a wealthy family is expected to correlate positively with non-meritocratic perceptions. Regarding the second instrument of personal wherewithal, we also anticipate a positive correlation with meritocratic perception and low to null correlations with the other dimensions of the merit scale.
 
@@ -523,39 +523,20 @@ _Results_
 
 We used polyserial correlations to evaluate relationships of meritocractic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal,  we examined Pearson correlations.
 
-Table XX about here.
+Table \@ref(tab:val-conv) table shows the polyserial and pearson correlations between the PPM-S and other common measures of meritocracy. The findings provide evidence for convergent validity for the scale. En términos generales como era esperable las preferencias poseen relaciones de menor intensidad con estas escalas que son utilizadas usualmente para medir percepciones. A continuación, evaluamos la relación de ambas escalas con las dimensiones de PPM-S 
 
-Table X shows ... [completar ]. The findings provide evidence for convergent validity for meritocratic perceptions [re-escribir en el orden de los instrumentos ].
-As expected, we see a substantial positive correlation for the association between meritocratic perception and personal wherewithal. Finding for the association of non-meritocratic perception and non-meritocratic item of opportunity beliefs battery is also consistent with our expectation, insofar as the size of the correlation is relevant and the direction of it is positive. For the rest of correlations, we note weak correlations but most directions are consistent with our expectations. One exception is personal wherewithal, with a positive association for this construct. Correlations for meritocratic preference are also weak.
 
-Table XX. Correlations
+|                                      |     Origen     |     Hard Work    |     Wherewithal    |
+|--------------------------------------|----------------|------------------|--------------------|
+|     Meritocratic     Perception      |     -0,1975    |     0,1877       |     0,3921         |
+|     Unmeritocratic    Perception     |     0,3547     |     -0,0775      |     -0,1844        |
+|     Meritocratic    Preferences      |     0,1078     |     0,0779       |     0,0819         |
+|     Unmeritocratic    Preferences    |     -0,0397    |     0,0824       |     0,2082         |
+Table: `r as.character(paste("(\\#tab:val-conv)", "Polyserial and Pearson correlation whit other merit scales"))`.
 
-[insertar tabla imagen o markdown]
+Los dos indicadores de la batería “salir a delante” se correlacionan coherentemente, pero con una intensidad de moderada a baja. Considerar importante tener padres con recursos para salir a delante posee una asociación positiva de moderada intensidad con la percepción de distribución no meritocrática (r = .354) y una relación negativa de baja intensidad con percepción meritocrática (-0.197), lo cual constituye una evidencia de valides considerando la relación entre los constructos. Por su parte, la importancia asignada trabajar duro para salir adelante solo se relaciona débilmente con la percepción de meritocrática (r = .187).
 
-Coming from a wealthy family
-Hard work
-Personal wherewithal
-Meritocratic
-Perception
--0,1975
-0,1877
-0,3921
-Unmeritocratic
-Perception
-0,3547
--0,0775
--0,1844
-Meritocratic
-Preferences
-0,1078
-0,0779
-0,0819
-Unmeritocratic
-Preferences
--0,0397
-0,0824
-0,2082
-
+La dimensión de la escala NBI “Creer que los recursos personales producen el éxito” posee una relación positiva de moderada intensidad con la percepción de meritocracia (r = .392), lo cual constituye una evidencia de valides considerando que miden conceptos parcialmente similares. La escala de recursos personales también se asocia débil pero positivamente a las preferencias no meritocraticas (r = .208). Esta asociación es coherente tomando en cuenta que la creencia en la meritocracia se asocia a la justificación de distintas desigualdades [@mccoy_Priming_2007;@MadeiraPrimesConsequencesSystematic2019] y considerando que dentro de nuestra escala PPM-S la percepción de meritocracia y la preferencia no meritocracia también se relacionan positiva y débilmente.
 
 ### Measurement invariance
 
@@ -600,7 +581,7 @@ kable(tab.inv, col.names = col.nam, align = "l",
   footnote(general = footnote, footnote_as_chunk = T)
 ```
 
-Table \@ref(tab:invargroup) shows the results of the measurement invariance tests. When attending to the traditional invariance test of $\\Delta \\chi^2 (\\Delta \\text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such results is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold using $\\Delta \\chi^2 (\\Delta \\text{df})$. Nevertheless the criteria of $\\Delta \\text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\\Delta \\text{RMSEA}$ is below the cut-off criteria suggested by this criteria [citar  @chen 2007 ]. Therefore, the evidence for strict invariance is still not concluding.
+Table \@ref(tab:invargroup) shows the results of the measurement invariance tests. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such results is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold using $\Delta \chi^2 (\Delta \text{df})$. Nevertheless the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ is below the cut-off criteria suggested by this criteria [citar  @chen 2007 ]. Therefore, the evidence for strict invariance is still not concluding.
 
 
 # Conclusions
