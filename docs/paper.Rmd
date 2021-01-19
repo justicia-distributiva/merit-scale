@@ -370,7 +370,7 @@ dat04b<- dat04 %>% rename("A. Perception Effort" =perc_effort,
  "F. Preferences Talent" = pref_talent,
  "G. Preferences rich parents" = pref_wpart ,
  "H. Preferences contacts" = pref_netw )
-sum04b <- psych::describe(dat04b[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
+sum04b <- psych::describe(dat04b[,-c(1)], fast = T) %>% data.frame() %>% select(mean,sd,min,max) %>% round(digits = 2)
 table04b<- sum04b %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
 sumdat04<- kable(table04b,format =table_format,
                  booktabs= T,
@@ -500,19 +500,19 @@ As shown in Table \@ref(tab:items-dim), the proposed theoretical four-factor mod
 
 ## Additional validity analyses
 
-We performed two further analyses in order to add evidence regarding the reliability and validity of the scale. Firstly we analyze the convergent validity by assessing the association of the merit scale with related concepts and correspondent measurements. Secondly, we test the internal consistency  of the scale in different studies through measurement invariance methods.
+We performed two further analyses in order to add evidence regarding the quality of the scale. Firstly we analyze the convergent validity by assessing the association of the merit scale with related concepts and correspondent measurements. Secondly, we test the internal consistency of the measurement model behind the scale through measurement invariance procedures.
 
 
 ### Convergent validity
 
 _Data_
 
-For this analysis we examined information of the third wave of the study, which included additional measures that allow testing the correlations of the merit scale with some related constructs as opportunity beliefs and personal wherewithal. After listwise deletion of missing cases in socio-demographics information, a total of 1422 individuals took part in the third wave: 668 (46.97%) women and 754 (53.03%) men. The ages of 50.57% of them are 45 years or older, and 36.28% held a tertiary degree.
+For this analysis we examined data from one wave of the same study described above, which was a three-wave panel survey. The last wave of the study included additional measures that allow testing the correlations of the merit scale with some related constructs as opportunity beliefs and personal wherewithal. After listwise deletion of missing cases in socio-demographics information, a total of 1422 individuals took part in the third wave: 668 (46.97%) women and 754 (53.03%) men. The ages of 50.57% of them are 45 years or older, and 36.28% held a tertiary degree.
 
 _Intruments_
 
 The following scales were included for testing their correlations with the the 8-item meritocracy scale:
-  
+
 - Opportunity beliefs: We used two items of the social inequality module of the International Social Survey Programme. Studies use generally both indicators to measure meritocratic and non-meritocratic beliefs [@McCall2017Exposurerisinginequality; @mijs_paradox_2019].  One item measures the importance of individual factors in determining life outcomes by asking for the importance of hard work for getting ahead in life (M=3.76, SD=0.93). The second item asks for the importance of coming from a wealthy family and captures the importance of structural factors in getting ahead (M=2.75, SD=1.27). Participants responded to each item using a 1 (not important at all) to 5 (essential) response scale. We call the first item \textit{hard work} and the second one \textit{social origin}.
 
 - Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which consider four factors: Government Interference preferences, Competition preferences, System Inequality perception and Personal Wherewithal [@bay-chengTrackingHomoOeconomicus2015]. We used the factor personal wherewithal that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be succesful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simple computed mean scores, with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.88, $\alpha$ = 0.89).
@@ -525,7 +525,7 @@ We used polyserial correlations to evaluate relationships of meritocractic and n
 
 Table \@ref(tab:val-conv) table shows the polyserial and pearson correlations between the PPM-S and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with meritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents---only 8.6 percent indicate \textit{not very important} or \textit{noy importat at all}.
 
-                             
+
   |                                      | Social Origin  |     Hard Work    |     Wherewithal    |
   |--------------------------------------|----------------|------------------|--------------------|
   |     Meritocratic     Perception      |     -0.1975    |     0.1877       |     0.3921         |
@@ -533,8 +533,8 @@ Table \@ref(tab:val-conv) table shows the polyserial and pearson correlations be
   |     Meritocratic    Preference       |     0.1078     |     0.0779       |     0.0819         |
   |     Unmeritocratic    Preference     |     -0.0397    |     0.0824       |     0.2082         |
   Table: `r as.character(paste("(\\#tab:val-conv)", "Polyserial and Pearson correlation whit other merit scales"))`.
- 
-Findings the measure of NBI for \textit{personal wherewithal} also provide evidence for the convergent validity of PPM-S. Results indicate a positive correlation of this measure with meritocratic preference (r=.392), suggesting that both variables capture similar concepts. The NBI's factor depicts a positive association with unmeritocratic preference (r=.208). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality [@McCall2017Exposurerisinginequality;@MadeiraPrimesConsequencesSystematic2019]. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perception and unmeritocratic preferences shows a positive and weak correlation.  
+
+Findings the measure of NBI for \textit{personal wherewithal} also provide evidence for the convergent validity of PPM-S. Results indicate a positive correlation of this measure with meritocratic preference (r=.392), suggesting that both variables capture similar concepts. The NBI's factor depicts a positive association with unmeritocratic preference (r=.208). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality [@McCall2017Exposurerisinginequality;@MadeiraPrimesConsequencesSystematic2019]. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perception and unmeritocratic preferences shows a positive and weak correlation.
 
 ### Measurement invariance
 
@@ -542,7 +542,7 @@ El modelamiento para el testeo invarianza ha ido tomando mayor relevancia en los
 
 El procedimiento de medición de invarianza consiste en una serie de modelos anidados a los que progresivamente se le van incorporando restricciones sobre los parámetros del modelo de medición. La literatura sugiere en general que este modelamiento debe realizarse a través de cuatro niveles o tipos de restricción progresiva [@Milfont2010; @millsap_Statistical_2011; @vandeschoot_checklist_2012]:
 
-1.  **Configural:** Se estima el Modelo solo indicando la estructura  factorial utilizada en el CFA.
+1.  **Configural:** se estima el modelo solo indicando la estructura  factorial utilizada en el CFA.
 
 2.  **Débil:** se aplica una restricción de igualdad a las cargas factoriales en los distintos grupos, es decir, se fuerza a que las cargas sean idénticas en ambas mediciones.
 
@@ -558,7 +558,7 @@ En la Tabla \@ref(tab:fcloads-inv) se pueden observar los resultados del ajuste 
 
 _Instruments_
 
-., dentro del cual se realizó una medición usando la escala a través de aleatorización completa de los indicadores, lo cual corresponde a la modalidad de aplicación del Grupo 3 presente en la Figura \@ref(fig:appmod).
+La aplicación de la PPM-S se realizó con aleatorización completa de los indicadores, lo cual corresponde a la modalidad de aplicación del Grupo 3 presente en la Figura \@ref(fig:appmod).
 
 _Results_
 
@@ -579,7 +579,7 @@ kable(tab.inv, col.names = col.nam, align = "l",
   footnote(general = footnote, footnote_as_chunk = T)
 ```
 
-Table \@ref(tab:invargroup) shows the results of the measurement invariance tests. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such results is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold using $\Delta \chi^2 (\Delta \text{df})$. Nevertheless the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ is below the cut-off criteria suggested by this criteria [citar  @chen 2007 ]. Therefore, the evidence for strict invariance is still not concluding.
+Table \@ref(tab:invargroup) shows the results of the measurement invariance tests. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such results is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold using $\Delta \chi^2 (\Delta \text{df})$. Nevertheless the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ is below the cut-off criteria suggested by this criteria [citar  @chen 2007 ]. Therefore, the tests for strict invariance show mixed evidence.
 
 
 # Conclusions
