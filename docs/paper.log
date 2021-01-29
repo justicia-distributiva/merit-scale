@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.25)  29 JAN 2021 11:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.25)  29 JAN 2021 20:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -619,23 +619,23 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 {/home/juank/.TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
 LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 1
-56.
+58.
 (/home/juank/.TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 ) [4]
-<../input/images/generalf.png, id=75, 976.64874pt x 332.24126pt>
+<../input/images/generalf.png, id=79, 976.64874pt x 332.24126pt>
 File: ../input/images/generalf.png Graphic file (type png)
 <use ../input/images/generalf.png>
-Package pdftex.def Info: ../input/images/generalf.png  used on input line 169.
+Package pdftex.def Info: ../input/images/generalf.png  used on input line 171.
 (pdftex.def)             Requested size: 426.32396pt x 145.03073pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 184.
+(Font)              <10> on input line 186.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 184.
+(Font)              <7> on input line 186.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 184.
+(Font)              <5> on input line 186.
 [5 <../input/images/generalf.png>]
-Overfull \hbox (4.14462pt too wide) in paragraph at lines 232--232
+Overfull \hbox (4.14462pt too wide) in paragraph at lines 234--234
 []\T1/ptm/m/n/10 (-20) Dimensions|  
  []
 
@@ -643,52 +643,52 @@ Overfull \hbox (4.14462pt too wide) in paragraph at lines 232--232
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [6]
-<../input/images/app_mod.png, id=104, 722.7pt x 455.45157pt>
+<../input/images/app_mod.png, id=109, 722.7pt x 455.45157pt>
 File: ../input/images/app_mod.png Graphic file (type png)
 <use ../input/images/app_mod.png>
-Package pdftex.def Info: ../input/images/app_mod.png  used on input line 244.
+Package pdftex.def Info: ../input/images/app_mod.png  used on input line 246.
 (pdftex.def)             Requested size: 426.32396pt x 268.6724pt.
 [7]
-<../output/images/meas01.png, id=113, 1213.91016pt x 722.7pt>
+<../output/images/meas01.png, id=118, 1213.91016pt x 722.7pt>
 File: ../output/images/meas01.png Graphic file (type png)
 <use ../output/images/meas01.png>
-Package pdftex.def Info: ../output/images/meas01.png  used on input line 258.
+Package pdftex.def Info: ../output/images/meas01.png  used on input line 260.
 (pdftex.def)             Requested size: 426.32396pt x 253.80893pt.
 LaTeX Font Info:    Trying to load font information for T1+pcr on input line 26
-5.
+7.
 (/home/juank/.TinyTeX/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [8 <../input/images/app_mod.png> <../output/images/meas01.png>]
-<../output/images/plotlikert.png, id=126, 1138.02666pt x 711.18198pt>
+<../output/images/plotlikert.png, id=131, 1138.02666pt x 711.18198pt>
 File: ../output/images/plotlikert.png Graphic file (type png)
 <use ../output/images/plotlikert.png>
 Package pdftex.def Info: ../output/images/plotlikert.png  used on input line 30
-2.
+4.
 (pdftex.def)             Requested size: 426.32396pt x 266.42128pt.
 [9]
-<../output/images/corpoly.png, id=139, 511.9125pt x 369.7815pt>
+<../output/images/corpoly.png, id=144, 511.9125pt x 369.7815pt>
 File: ../output/images/corpoly.png Graphic file (type png)
 <use ../output/images/corpoly.png>
-Package pdftex.def Info: ../output/images/corpoly.png  used on input line 313.
+Package pdftex.def Info: ../output/images/corpoly.png  used on input line 315.
 (pdftex.def)             Requested size: 426.32396pt x 307.95676pt.
 [10 <../output/images/plotlikert.png>]
-<../output/images/meas03.png, id=150, 511.9125pt x 426.6339pt>
+<../output/images/meas03.png, id=155, 511.9125pt x 426.6339pt>
 File: ../output/images/meas03.png Graphic file (type png)
 <use ../output/images/meas03.png>
-Package pdftex.def Info: ../output/images/meas03.png  used on input line 331.
+Package pdftex.def Info: ../output/images/meas03.png  used on input line 333.
 (pdftex.def)             Requested size: 426.32396pt x 355.30385pt.
 [11 <../output/images/corpoly.png (PNG copy)>]
-<../output/images/latcor.png, id=160, 511.9125pt x 369.7815pt>
+<../output/images/latcor.png, id=165, 511.9125pt x 369.7815pt>
 File: ../output/images/latcor.png Graphic file (type png)
 <use ../output/images/latcor.png>
-Package pdftex.def Info: ../output/images/latcor.png  used on input line 342.
+Package pdftex.def Info: ../output/images/latcor.png  used on input line 344.
 (pdftex.def)             Requested size: 426.32396pt x 307.95676pt.
 [12 <../output/images/meas03.png>] [13 <../output/images/latcor.png (PNG copy)>
 ] [14] [15] [16] [17] [18] [19]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 602.
+(Font)              <9> on input line 613.
 
-Overfull \hbox (88.49182pt too wide) in paragraph at lines 610--633
+Overfull \hbox (88.49182pt too wide) in paragraph at lines 621--644
  [][] 
  []
 
@@ -709,10 +709,10 @@ See the caption package documentation for explanation.
 [21] (./paper.aux) ) 
 Here is how much of TeX's memory you used:
  15775 strings out of 481236
- 236717 string characters out of 5914679
- 602960 words of memory out of 5000000
+ 236782 string characters out of 5914679
+ 604960 words of memory out of 5000000
  31912 multiletter control sequences out of 15000+600000
- 484961 words of font info for 286 fonts, out of 8000000 for 9000
+ 485030 words of font info for 284 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  79i,16n,85p,1753b,508s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/home/juank/.TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.e
@@ -726,10 +726,10 @@ X/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></home/juank/.TinyTeX/texmf-dis
 t/fonts/type1/urw/times/utmb8a.pfb></home/juank/.TinyTeX/texmf-dist/fonts/type1
 /urw/times/utmr8a.pfb></home/juank/.TinyTeX/texmf-dist/fonts/type1/urw/times/ut
 mri8a.pfb>
-Output written on paper.pdf (21 pages, 633202 bytes).
+Output written on paper.pdf (21 pages, 635053 bytes).
 PDF statistics:
- 379 PDF objects out of 1000 (max. 8388607)
- 332 compressed objects within 4 object streams
- 100 named destinations out of 1000 (max. 500000)
+ 387 PDF objects out of 1000 (max. 8388607)
+ 340 compressed objects within 4 object streams
+ 103 named destinations out of 1000 (max. 500000)
  53420 words of extra memory for PDF output out of 61914 (max. 10000000)
 
