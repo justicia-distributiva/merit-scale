@@ -149,8 +149,6 @@ colnames(cor01$rho) <- c("(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
 
 
 corrplot(cor01$rho,method = "color" ,type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
-
-
 ```
 
 
@@ -467,6 +465,7 @@ rownames(cor04$rho) <-c(
     "G. Preferences Rich parents",
     "H. Preferences Contacts")
 colnames(cor04$rho) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
+cor04$rho[cor04$rho==1] <- NA
 save(cor04, file = "output/images/correlation.RData")
 corrplot(
   cor04$rho,
@@ -475,7 +474,8 @@ corrplot(
   tl.col = "black",
   addCoef.col = "black",
   diag = TRUE,
-  family = "A", 
+  family = "A",
+  na.label = "-",
   number.font = 6,
   tl.cex =0.75,
   number.cex = 1)
@@ -492,6 +492,7 @@ corrplot(
   addCoef.col = "black",
   diag = TRUE,
   family = "A", 
+  na.label = "-",
   number.font = 6,
   tl.cex =0.75,
   number.cex = 1)
@@ -672,6 +673,7 @@ rownames(latcor) <-c(
   "D. Non-Meritocratic Preferences"
 )
 colnames(latcor) <-c("(A)", "(B)","(C)","(D)")
+latcor[latcor==1] <- NA
 png("output/images/latcor.png",
     width = 18,height = 13,units="cm",
     pointsize=12,bg="white",res=300)
@@ -682,7 +684,8 @@ corrplot(
   tl.col = "black",
   addCoef.col = "black",
   diag = TRUE,
-  family = "A", 
+  family = "A",
+  na.label = "-",
   number.font = 6,
   tl.cex =0.75,
   number.cex = 1)
@@ -751,23 +754,23 @@ for (i in names(tb.load)) {
 tb.load[tb.load=="NA"] <- ""
 
 #-------#
-fm01<- data.frame(t(data.frame(fitmeasures(fit1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm01) ="M1.1"
-fm02<- data.frame(t(data.frame(fitmeasures(fit2_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm02) ="M2.1"
-fm03<- data.frame(t(data.frame(fitmeasures(fit3_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm03) ="M3.1"
+fm01<- data.frame(t(data.frame(fitmeasures(fit1_o, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm01) ="M1.1"
+fm02<- data.frame(t(data.frame(fitmeasures(fit2_o, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm02) ="M2.1"
+fm03<- data.frame(t(data.frame(fitmeasures(fit3_o, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm03) ="M3.1"
 
 #------chi2, df------#
 fm04<- round(rbind(fm01,fm02,fm03),3)
-fm04.1 <- fm04 %>% select(chisq.scaled,df) 
-fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 1)
+fm04.1 <- fm04 %>% select(chisq,df) 
+fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1)
 fm04.1$df <- round(x = fm04.1$df,digits = 0)
-fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
+fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")")
 fm04.1 <- select(fm04.1,"chi2df")
 for (i in names(fm04.1)) {
   fm04.1[,i] <- as.character(fm04.1[,i])
 }
 
 #------CFI, RMSEA------#
-fm04.2 <- fm04 %>% select(cfi.scaled,rmsea.scaled) 
+fm04.2 <- fm04 %>% select(cfi,tli,rmsea) 
 for (i in names(fm04.2)) {
   fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
 }
@@ -779,7 +782,7 @@ fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("M1.2","M2.2","M3.2")
 
 #------ merge ------#
 tb.fm<- bind_rows(tb.load,fm.df)
-tb.fm<- tb.fm %>% mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>% select(vars,everything())
+tb.fm<- tb.fm %>% mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{TLI}$","$\\text{RMSEA}$","$N$")) %>% select(vars,everything())
 #--table---#
 tb.col  <- c("Variables",1:4,1:4,1:4)
 tb.foot <- paste0("; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
