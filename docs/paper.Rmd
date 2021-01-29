@@ -108,7 +108,7 @@ _c. Non-meritocratic aspects_
 
 Unlike studies that consider talent to be a non-meritocratic aspect, and therefore rule it out of the operationalization of meritocracy, @kunovich_systems_2007 follow a different approach, by including some non-meritocratic elements. Using an items’ battery listing a number of factors in relation to “How important each should be in deciding pay...” (as @duru-bellat_whos_2012 for desired meritocracy), they consider factors such as education and responsibility as meritocratic, giving them a value of 1 if considered “essential” in the scale response, whereas factors such as having a family or children are valued 1 when rated as "not important at all" (i.e. reverse coded). The assumption behind this approach is that rejecting a supposed non-meritocratic aspect (as having family and/or children) implies a stronger belief in meritocracy. A similar approach of reverse-coding non-meritocratic items was taken by @newman_false_2015, using the same principles applied in the "Preference for the Merit Principle Scale" [@davey_preference_1999].
 
-The assumption that meritocratic and non-meritocratic elements are poles of the same continuum was tested by @reynolds_perceptions_2014 using the "get ahead" perceptions' battery items mentioned above. They considered education, ambition, and hard work as meritocratic, and other factors such as family wealth and connections as non-meritocratic. Despite making and proving this distinction, however, the authors end up subtracting one dimension from the other, thus coming back to the assumption that they are two poles of the same continuum as @kunovich_systems_2007 did. We suggest that non-meritocratic factors should be part of meritocratic measurements, though it should be considered independently rather than adding to or subtracting from meritocratic factors, unless it is empirically proved that they belong to the same conceptual dimension.
+The assumption that meritocratic and non-meritocratic elements are poles of the same continuum was tested by @reynolds_perceptions_2014 using the "get ahead" perceptions' battery items mentioned above. They considered education, ambition, and hard work as meritocratic, and other factors such as family wealth and connections as non-meritocratic. Despite making and proving this distinction, however, the authors end up subtracting one dimension from the other, thus coming back to the assumption that they are two poles of the same continuum as @kunovich_systems_2007 did. Similarly, @roex_attitudes_2019 used ISSP indicators for perceived meritocracy and non-meritocracy to build a single score by reverse coding the non-meritocratic items. We suggest that non-meritocratic factors should be part of meritocratic measurements, though it should be considered independently rather than adding to or subtracting from meritocratic factors, unless it is empirically proved that they belong to the same conceptual dimension.
 
 _d. Accounting for measurement error_
 
@@ -131,7 +131,7 @@ The proposed measurement framework is depicted in Figure \@ref(fig:merit-model):
 ```{r merit-model, echo=FALSE, fig.cap = "Model of perception and preferences for meritocracy and non-meritocracy", fig.align='center'}
 knitr::include_graphics("../input/images/generalf.png")
 ```
-The columns "Perceptions" and "Preferences" represent the distinction between these two concepts, usually confused under the label "beliefs". Perceptions refer to the extent to which people observe that meritocracy works or applies in their society, which relates to items such as "I think hard work is important to get ahead in society". Preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The rows in Figure 1 consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014]. These aspects have usually been treated as different ends of the same continuum in previous research, an assumption that requires empirical scrutiny. Non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
+The columns "Perceptions" and "Preferences" represent the distinction between these two concepts, usually confused under the label "beliefs" [@castillo_Meritocracia_2019]. Perceptions refer to the extent to which people observe that meritocracy works or applies in their society, which relates to items such as "I think hard work is important to get ahead in society". Preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The rows in Figure 1 consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014]. These aspects have usually been treated as different ends of the same continuum in previous research, an assumption that requires empirical scrutiny. Non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
 
 Regarding the selection of indicators, most are taken or adapted from previous studies for the sake of comparability. For meritocratic indicators, we use effort and talent as the main components of the traditional concept of merit as defined by @young_rise_1962, whereas for non-meritocratic dimensions, we use wealthy parents and good contacts. Descriptions of the specific items are outlined in the methodology section.
 
@@ -180,7 +180,7 @@ kable(tab01,table_format,booktabs = T, linesep = "",col.names = cnames, caption 
 
 ## Administration sets
 
-With the objective of evaluating the effect of indicator ordering, the respondents (_n = 2141_) were randomly divided into three different set-order versions, as explained in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order that appears in Table 2. For the second group (_n = 717_), the order of the items was reorganized according to the topics of the items, e.g. for the topic of hard work, the item about perception was followed by the item about preference, and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were completely randomized.
+With the objective of evaluating the effect of indicator ordering in the responses, three different versions of items' order were designed and randomly assigned, as depicted in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order that appears in Table \@ref(tab:table-indicadores) according to perceptions and preferences. For the second group (_n = 717_), the order  was reorganized according to perceptions and preferences over the same topic, e.g. for the topic of hard work, the item about perception was followed by the item about preference, and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were completely randomized.
 
 ```{r appmod, echo=FALSE, fig.cap = "Survey flow", fig.align='center'}
 knitr::include_graphics('../input/images/app_mod.png')
@@ -193,7 +193,6 @@ To test the scale's underlying constructs, we employed confirmatory factor analy
 ```{r meas01, echo=FALSE, fig.cap = "Theoretical model", fig.align='center'}
 knitr::include_graphics('../output/images/meas01.png')
 ```
-
 CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
 
 A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2](https://osf.io/z45y2). Included in this pre-registration are the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
@@ -202,7 +201,7 @@ A pre-registration was made in the OSF platform, available at the following link
 
 ## Descriptive analyses
 
-As can be seen in the Table \@ref(tab:desc01), the indicators have values ranging from 1 (totally disagree) to 5 (totally agree). Averages are observed from 2.41, corresponding to preference-contacts; to 3.89, corresponding to preference-effort. Both indicators are consistent with a general adherence to meritocracy as reported in previous studies, privileging individual aspects such as effort (Frei et al 2020, Bucca, 2016). **[citar desde Bibtex]**
+As can be seen in the Table \@ref(tab:desc01), the indicators have values ranging from 1 (totally disagree) to 5 (totally agree). Averages are observed from 2.41, corresponding to preference-contacts; to 3.89, corresponding to preference-effort. Both indicators are consistent with a general adherence to meritocracy as reported in previous studies, privileging individual aspects such as effort [@bucca_merit_2016; @frei_fruto_2020].
 
 ```{r desc01, echo=FALSE}
 cap <- "Descriptive statistics of the scale."
@@ -240,83 +239,51 @@ In Figure \@ref(fig:corpoly), moderate to high intensity relationships are obser
 ```{r corpoly, echo=FALSE, fig.cap = "Polychoric correlation plot", fig.align='center'}
 knitr::include_graphics('../output/images/corpoly.png')
 ```
-
-In sum, descriptive analyses point to a relative adherence to meritocracy, which is expressed as a greater preference for meritocratic criteria, and a lesser preference for non-meritocratic criteria, even when the preference for non-meritocratic elements reaches a proportion of more than 20%. Likewise, a relatively low perception of meritocracy is observable. In addition, we observed a coherent relationship between the indicators of the same dimension as proposed in the pre-registration of the study; that is, the pairs of items associated with a specific factor show correlations with a large effect size (for example, meritocratic preferences for items associated with effort and talent). In particular, the associations between effort and talent are relevant, challenging previous assumptions that talent would not be a meritocratic criterion [@mijs_paradox_2019], otherwise the correlation would be zero or negative. In addition, we see that there is no negative correlation between meritocratic and non-meritocratic aspects, dismissing the assumptions of previous studies that these dimensions would be the opposite poles of the same continuum [@reynolds_perceptions_2014].
+In sum, descriptive analyses point to a relative adherence to meritocracy, which is expressed as a greater preference for meritocratic criteria, and a lesser preference for non-meritocratic criteria, even when the preference for non-meritocratic elements reaches a proportion of more than 20%. Likewise, a relatively low perception of meritocracy is observable. In addition, we observed a coherent relationship between the indicators of the same dimension as proposed in the pre-registration of the study; that is, the pairs of items associated with a specific factor show correlations with a large effect size (for example, meritocratic preferences for items associated with effort and talent). In particular, the associations between effort and talent are relevant, challenging previous assumptions that talent would not be a meritocratic criterion [@mijs_paradox_2019], otherwise the correlation would be zero or negative. In addition, we observe that there is no negative correlation between meritocratic and non-meritocratic aspects, undermining the assumptions of previous studies that suggested that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
 
 ## Confirmatory Factor Analysis
 
 This section estimates the fit of the conceptual model behind the Perceptions and Preferences for Meritocracy Scale. For this, we first estimate a confirmatory factor analysis model for the whole sample, and secondly we test the order effects applying the same model to each of the three order permutations.
 
-### Full sample CFA
-
-Figure \@ref(fig:meas02) shows the results of the estimation for the four-factor model using the complete sample. This model shows adequate fit indicators (CFI = 0.977, RMSEA = 0.079, $\chi2$(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88. Considering the correlations between the latent variables, it is observed that the variables with the strongest correlations are meritocratic perceptions and preferences, which have a positive correlation of 0.59, while non-meritocratic perceptions and preferences do not show considerable correlation.
+Figure \@ref(fig:meas02) shows the results of the estimation for the four-factor model using the complete sample. This model shows adequate fit indicators (CFI = 0.977, RMSEA = 0.079, $\chi2$(df = 14) = 28,03, p = 0.014) and it presents factorial loads with weights that vary between 0.63 and 0.88.
 
 ```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale", fig.align='center'}
 knitr::include_graphics('../output/images/meas03.png')
 ```
-
-As can be seen in the Table \@ref(tab:tab-loads), all models, regardless of the group and order of items, obtained an adequate fit, with CFI's above 0.95 and RMSEA's below 0.08. However, no model achieved a non-significant chi-square (something to be expected in large samples), although both the randomized and the first model obtained an adequate chi-square ratio of less than 3. The first order was the one that obtained the best fit (CFI=0.998, TLI=0.995, RMSEA=0.037, $\chi2$(df=14)=28.03, p = 0.014), followed by the random order of items (CFI=0.992, TLI=0.984,RMSEA=0.051, $\chi2$(df=14)=39.09, p < 0.001). On the other hand, the scale ordered by themes seems to generate a framing effect, in which the relationship between perceptions and preferences seemed to be overestimated, thus affecting the adjustment (CFI=0.984, TLI=0.968, RMSEA=.071, $\chi2$(df=14)=64.156, p < 0.001).
-
+Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:latcor), it is observed that the variables with the strongest correlations are meritocratic perceptions and preferences, whit an $r=0.59$, while non-meritocratic perceptions and preferences show a correlation close to 0. Besides, and as commented before in the analysis of the single items correlations, the latent variables of meritocratic and non-meritocratic versions of both perceptions and preferences show very low correlations. This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects: they do not appear as the opposite poles of the same continuum and based on this evidence the use of reverse-coding for non-meritocratic items as indicators of meritocracy should be avoided.
 
 ```{r latcor, echo=FALSE, fig.cap = "Latent variables correlation", fig.align='center'}
 knitr::include_graphics('../output/images/latcor.png')
 ```
-
+In a second step we test the effect of the items' order in the confirmatory model. Table \@ref(tab:tab03) shows the fit indicators of the models estimated for each of the three versions of the items' order described in the methodology, being the first one according to perceptions and preferences, the second one according to meritocratic and non-meritocratic aspects, and the third one completely randomized. Regardless of the group and order of items, all models obtained an adquate fit, with CFI's above 0.95 and RMSEA's below 0.08. However, none of the models achieved a non-significant chi-square, something expected in large samples as the one used here). Model 1 shows the fit indicators for the estimation of the CFA model to the first version order (perceptions-preferences), which was the one obtaining best fit (CFI=0.993, TLI=0.995, RMSEA=0.034, $\chi2$(df=14)=42.276), whereas Model 2 for the fixed order according to merit/non-merit items shows the comparatively worst indicators. The CFA fit indices for the completely randomized items' order (Model 3) is somehow an intermediate fit indexes when compared with the previous two. Still, it keeps all the indicators within the acceptable cut-off criteria and besides it controls for possible order effects in the administration of the instrument.
 
 ```{r tab03, echo=FALSE,eval=TRUE}
 load(file = "../output/tables/fit4_o.RData")
 load(file = "../output/tables/fit3_o.RData")
 load(file = "../output/tables/fit2_o.RData")
 load(file = "../output/tables/fit1_o.RData")
-
-
-sum_fit<- bind_rows(fitmeasures(fit4_o)[c("chisq.scaled","df","cfi.scaled","rmsea.scaled")],
-                    fitmeasures(fit1_o)[c("chisq.scaled","df","cfi.scaled","rmsea.scaled")],
-                    fitmeasures(fit2_o)[c("chisq.scaled","df","cfi.scaled","rmsea.scaled")],
-                    fitmeasures(fit3_o)[c("chisq.scaled","df","cfi.scaled","rmsea.scaled")])
-sum_fit$mod <- c("Model 1","Model 2","Model 3","Model 4")
-sum_fit$est <- c("DWLS","DWLS","DWLS","DWLS")
-sum_fit$nobs <- c(nobs(fit4_o),nobs(fit1_o),nobs(fit2_o),nobs(fit3_o))
+sum_fit<- bind_rows(fitmeasures(fit1_o)[c("chisq","df","cfi","tli","rmsea")],
+                    fitmeasures(fit2_o)[c("chisq","df","cfi","tli","rmsea")],
+                    fitmeasures(fit3_o)[c("chisq","df","cfi","tli","rmsea")])
+sum_fit$mod <- c("Model 1","Model 2","Model 3")
+sum_fit$est <- c("DWLS","DWLS","DWLS")
+sum_fit$nobs <- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o))
 sum_fit <- select(sum_fit,mod,nobs,est,everything())
-colnames <- c("Model","$N$","Estimator","$\\chi^2$","df","CFI","RMSEA")
-
-
+colnames <- c("Model","$N$","Estimator","$\\chi^2$","df","CFI","TLI","RMSEA")
 sumtable02<- kable(sum_fit,digits = 3,format = table_format,row.names = F,booktabs=T, align = c("lcccccc"),
                    caption = "Summary fit indices according group",
                    col.names = colnames,
                    escape = FALSE) %>%
   kable_styling(full_width = F,
                 font_size = 10)  %>%
-      footnote(number = c("Model 1: Complete sample",
-                          "Model 2: fixed order by perception/preference",
-                          "Model 3:  fixed order by topic (i.e: effort)",
-                          "Model 4: Randomized order"));sumtable02
-
-
+      footnote(number = c("Model 1: fixed order by perception/preference",
+                          "Model 2: fixed order by merit-non merit",
+                          "Model 3: Randomized order"));sumtable02
 ```
-
-Although all tests obtained relatively adequate indicators, the aforementioned differences between the adjustments of the models according to order are statistically significant, as evaluated by an invariance analysis. It was concluded that among the three orders there was no configurational invariance, that is, they did not have the same dimensionality, and therefore did not equally fit the theoretical model [@vandenbergReviewSynthesisMeasurement2000]. This is due to the effect produced by the joint appearance of items relating to the same factor in order one, which improved the fit of the model. Furthermore, in order two, when asking about perception and preference around the same indicator, the correlations between the error terms increased and the model fit worsened. Consistently, the random model presented an intermediate case between order one and order two.
-
-\pagebreak
-
-
-|           | Contrast Model 1 Factor | theoretical model 4 Factors | Model with M.I. |
-|:---------:|:-----------------------:|:---------------------------:|:---------------:|
-| **n**     |           1769          |             1769            |       1769      |
-| **CFI**   |          0.595          |            0.988            |      0.994      |
-| **TLI**   |          0.433          |            0.976            |      0.985      |
-| **RMSEA** |          0.226          |            0.047            |      0.036      |
-| **$\chi2$**    |         1830.839        |            68.661           |      40.250     |
-| **p**     |           .000          |             .000            |       .000      |
-| **$\chi2$/df** |          65.38          |             4.90            |       3.32      |
-Table: `r as.character(paste("(\\#tab:items-dim)", "Items according to dimension."))`.
-
-As shown in Table \@ref(tab:items-dim), the proposed theoretical four-factor model fits better than the one-factor contrast model. The theoretical model adjusted relatively well, as it shows preferable indicators of IFC=0.987, TLI=0.975 and RMSEA=0.041, although it also has poor indicators of $\chi2$(df=14)=67.6 and p-value<0.001. To evaluate possible improvements in the scale, the relationships proposed by the modification indexes were analyzed. These indicate the existence of two unspecified cross-loads. When a model was generated following these recommendations, there was a considerable improvement in the model, although the new model still did not obtain a $\chi2$ ratio of less than 3, and had very low factorial loads ($\tau$)< 0.15. Therefore, following the recommendation of Brown (2006) to only accept the proposals of modification when theory and solid evidence are available, we decided not to incorporate these parameters into the model.
 
 ## Additional validity analyses
 
-We performed two further analyses in order to add evidence regarding the quality of the scale. Firstly we analyze the convergent validity by assessing the association of the merit scale with related concepts and correspondent measurements. Secondly, we test the internal consistency of the measurement model behind the scale through measurement invariance procedures.
-
+We performed two further analyses in order to add evidence regarding the quality of the scale. Firstly we analyzed the convergent validity by exploring the association of the merit scale with related concepts and itscorrespondent measurements. Secondly, we test the internal consistency of the measurement model behind the scale comparing with a different sample through measurement invariance procedures .
 
 ### Convergent validity
 
@@ -330,7 +297,7 @@ The following scales were included for testing their correlations with the the 8
 
 - Opportunity beliefs: We used two items of the social inequality module of the International Social Survey Programme. Studies use generally both indicators to measure meritocratic and non-meritocratic beliefs [@McCall2017Exposurerisinginequality; @mijs_paradox_2019].  One item measures the importance of individual factors in determining life outcomes by asking for the importance of hard work for getting ahead in life (M=3.76, SD=0.93). The second item asks for the importance of coming from a wealthy family and captures the importance of structural factors in getting ahead (M=2.75, SD=1.27). Participants responded to each item using a 1 (not important at all) to 5 (essential) response scale. We call the first item \textit{hard work} and the second one \textit{social origin}.
 
-- Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which considers four factors: Government Interference preferences, Competition preferences, System Inequality perception and Personal Wherewithal [@bay-chengTrackingHomoOeconomicus2015]. We used the factor personal wherewithal that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be succesful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simple computed mean scores, with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.88, $\alpha$ = 0.89).
+- Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which considers four factors: Government Interference preferences, Competition preferences, System Inequality perception and Personal Wherewithal [@bay-chengTrackingHomoOeconomicus2015]. We used the factor _personal wherewithal_ that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be succesful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simple computed mean scores, with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.88, $\alpha$ = 0.89).
 
 Both instruments cover mainly the perceptual side of the concept. Therefore, in general we expect larger correlation with meritocratic perceptions than with preferences. In the case of opportunity beliefs, the hard work item should correlate positively with meritocratic perception whereas the importance for coming from a wealthy family is expected to correlate positively with non-meritocratic perceptions. Regarding the second instrument of personal wherewithal, we also anticipate a positive correlation with meritocratic perception and low to null correlations with the other dimensions of the merit scale.
 
@@ -338,7 +305,7 @@ _Results_
 
 We used polyserial correlations to evaluate relationships of meritocractic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal, we examined Pearson correlations.
 
-Table \@ref(tab:val-conv) shows the polyserial and pearson correlations between the PPM-S and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with meritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents---only 8.6 percent indicate \textit{not very important} or \textit{not importat at all}.
+Table \@ref(tab:val-conv) shows the polyserial and pearson correlations between our meritocracy scale and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents---only 8.6 percent indicates _not very important_ or _not important at all_.
 
 
   |                                      | Social Origin  |     Hard Work    |     Wherewithal    |
@@ -349,37 +316,36 @@ Table \@ref(tab:val-conv) shows the polyserial and pearson correlations between 
   |     Unmeritocratic    Preference     |     -0.0397    |     0.0824       |     0.2082         |
   Table: `r as.character(paste("(\\#tab:val-conv)", "Polyserial and Pearson correlation whit other merit scales"))`.
 
-The measure of NBI for \textit{personal wherewithal} also provides evidence for the convergent validity of PPM-S. Results indicate a positive correlation of this measure with meritocratic preference (r=.392), suggesting that both variables capture similar concepts. The NBI's factor depicts a positive association with unmeritocratic preference (r=.208). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality [@McCall2017Exposurerisinginequality;@MadeiraPrimesConsequencesSystematic2019]. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perceptions and unmeritocratic preferences show a positive and weak correlation.
+The measure of NBI for _personal wherewithal_ also provides evidence for the convergent validity of PPM-S. Results indicate a positive correlation of this measure with meritocratic preference (r=.392), suggesting that both variables capture similar concepts. The NBI's factor depicts a positive association with unmeritocratic preference (r=.208). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality [@McCall2017Exposurerisinginequality; @MadeiraPrimesConsequencesSystematic2019]. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perceptions and unmeritocratic preferences show a positive and weak correlation.
 
 ### Measurement invariance
 
-El modelamiento para el testeo invarianza ha ido tomando mayor relevancia en los estudios sociológicos de encuestas, principalmente por el interés en la validez de escalas de medición en estudios de carácter comparado en diversos contextos sociales y culturales [@Davidovetal2014]. En esta sección emplearemos un análisis de invarianza entre grupos, donde se espera que la estructura factorial propuesta sea independiente de la pertenencia a la muestra correspondiente al estudio original, comparándola con otro estudio disponible más reciente y donde también se incorporó la escala de meritocracia.
+The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts [@Davidovetal2014]. In this section we will use an analysis of invariance between groups, where the proposed factorial structure is expected to be independent of belonging to the sample corresponding to the original study, comparing it with another more recent study available and where the meritocracy scale was also incorporated.
 
-El procedimiento de medición de invarianza consiste en una serie de modelos anidados a los que progresivamente se le van incorporando restricciones sobre los parámetros del modelo de medición. La literatura sugiere en general que este modelamiento debe realizarse a través de cuatro niveles o tipos de restricción progresiva [@Milfont2010; @millsap_Statistical_2011; @vandeschoot_checklist_2012]:
+The invariance measurement procedure consists of a series of nested models to which restrictions are progressively incorporated on the parameters of the measurement model. The literature generally suggests that this modeling should be done through four levels or types of progressive restriction [@Milfont2010; @millsap_Statistical_2011; @vandeschoot_checklist_2012]:
 
-1.  **Configural:** se estima el modelo solo indicando la estructura  factorial utilizada en el CFA.
+1. **Configural:** the model is estimated only indicating the factorial structure used in the CFA.
 
-2.  **Débil:** se aplica una restricción de igualdad a las cargas factoriales en los distintos grupos, es decir, se fuerza a que las cargas sean idénticas en ambas mediciones.
+2. **Weak:** an equality restriction is applied to the factor loadings in the different groups, that is, the loadings are forced to be identical in both measurements.
 
-3.  **Fuerte:** se suman restricciones de igualdad a los interceptos de cada indicador.
+3. **Strong:** equality restrictions are added to the intercepts of each indicator.
 
-4.  **Estricta:** se suman restricciones a las varianzas de error de cada indicador.
+4. **Strict:** equality restrictions are added to the error variances of each indicator.
 
 *Data*
 
-Para el desarrollo de este estudio se empleó una fuente de datos distinta a la utilizada hasta ahora, consistente en una encuesta online realizada durante el primer semestre de 2020, cuyas características en términos de aplicación y cobertura son equivalentes a las del estudio anterior. La muestra final obtenida contiene 1,242 casos, donde 605 (48,71%) son mujeres y 637 (51,28%) son hombres. El 48,84% de ellos tiene 45 años o más, y el 33,97% posee educación terciaria o superior.
-
-En la Tabla \@ref(tab:fcloads-inv) se pueden observar los resultados del ajuste de la escala en esta muestra.
+For testing the invariance we compared the data described previously with a new data source coming from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample obtained contains 1,242 cases, where 605 (48.71%) are women and 637 (51.28%) are men. 48.84% of them are 45 years of age or older, and 33.97% have tertiary education or higher.
 
 _Instruments_
 
-La aplicación de la PPM-S se realizó con aleatorización completa de los indicadores, lo cual corresponde a la modalidad de aplicación del Grupo 3 presente en la Figura \@ref(fig:appmod).
+The items of the meritocracy scale were identical to the original. The items were administrated in a randomized order (which corresponds to the application modality of Group 3 present in Figure \@ref(fig: appmod)).
 
 _Results_
 
-El primer paso para el testeo de invarianza es la estimación del modelo Configural, el cual se espera que cumpla adecuadamente con los criterios de ajuste global de un modelo de medición, debido a que es el modelo base en el proceso de comparación. Convencionalmente el estadístico chi-cuadrado es empleado como medida global de ajuste de un modelo de medición. Sin embargo, al ser sensible al tamaño de la muestra, se recomienda emplear tres índices de ajuste adicionales: Comparative Fit Index (CFI), el cual debe tener un valor mayor a 0.9; Root Mean Square Error Approximation (RMSEA), el cual debe estar en el rango de valores de 0.05 y 0.08; y el Standardised Root Mean Square Residuals (SRMR) que debe ser menor a 0.08 [@vandeschoot_checklist_2012].
+Tabla \@ref(tab:fcloads-inv) shows de results of the CFA estimation of the meritocracy scale in this new sample. As observed, the loadings and the fit indices show similar results as the ones presented for the original study above, which gives a first base with wich to start the invariance analysis.
 
-La literatura sobre invarianza métrica sugiere dos aproximaciones complementarias para el testeo de invarianza. En nuestro caso, emplearemos la comparación basada en el ajuste incremental de los estadísticos de ajuste [@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010] y el test ANOVA para comparación de medias en modelos anidados [@newsom_Longitudinal_2015].
+The first step for invariance testing is the estimation of the configural model, which serves as the baseline for further comparison and it is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit,since its sensitivity to sample size it is recommended to use three additional fit indices: Comparative Fit Index (CFI), which should have a value greater than 0.95; Root Mean Square Error Approximation (RMSEA), which must be in the range of values ​​of 0.05 and 0.08; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 [@vandeschoot_checklist_2012]. Besides, the literature on measurement invariance suggests some complementary approaches for the evaluation of the fit, from which we will consider the incremental adjustment of the fit indexes [@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010] and the ANOVA test for means comparison in nested models [@newsom_Longitudinal_2015].
+
 
 ```{r invargroup, eval=TRUE, echo=FALSE}
 load(file = "../output/tables/tb.inv-group.RData")
@@ -394,16 +360,16 @@ kable(tab.inv, col.names = col.nam, align = "l",
   footnote(general = footnote, footnote_as_chunk = T)
 ```
 
-Table \@ref(tab:invargroup) shows the results of the measurement invariance tests. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold using $\Delta \chi^2 (\Delta \text{df})$. Nevertheless the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ is below the cut-off criteria suggested by this criteria [citar  @chen 2007 ]. Therefore, the tests for strict invariance show mixed evidence.
+Table \@ref(tab:invargroup) shows the results of the measurement invariance estimation. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the PPM-S scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold when considering $\Delta \chi^2 (\Delta \text{df})$. Nevertheless, the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ fulfills the requirements of being below of the cut-off criteria as suggested by [ @chen 2007 ]. Therefore, using this last standard the level for strict invariance holds for the meritocracy scale.
 
 
 # Conclusions
 
-Studies that attempt to characterize and compare societies by their support for meritocratic beliefs have used different approaches. As most studies use secondary survey data, they tend to assume that the available indicators represent an underlying construct. A review of these studies reveals several non-tested assumptions, as well as the use of similar indicators to represent different constructs and dimensions of meritocracy. As the existence of heterogeneous approaches certainly has consequences for the advancement of the study of meritocracy, this paper presents a comprehensive conceptual framework for the empirical study of meritocracy, building upon previous research. This framework was then tested against new survey data.
+Studies that attempt to characterize and compare societies by their support for meritocratic beliefs have used different approaches. As most studies use secondary survey data, they tend to assume that the available indicators represent an underlying meritocratic construct. A review of these studies reveals several non-tested assumptions, as well as the use of similar indicators to represent different constructs and dimensions of meritocracy. As the existence of heterogeneous approaches certainly has consequences for the advancement of the study of meritocracy, this paper presented a comprehensive conceptual framework for the empirical study of meritocracy, building upon previous research. This framework was then tested against new survey data.
 
-We identified four critical aspects regarding the measurement of meritocracy in previous studies: unidimensionality, the ambiguous use of the term “beliefs”, the use of non-meritocratic indicators as opposed to meritocratic indicators, and the consideration of measurement error. The proposed 8-item scale, “Perceptions and Preferences for Meritocracy”, was designed and tested in order to deal with these four issues. Our results indicate that perceptions and preferences seem to be two related but different dimensions, often confounded in previous research under the label of "beliefs". Meritocratic and non-meritocratic dimensions do not appear to constitute poles of the same continuum, as some previous studies have assumed. Besides, we find evidence of convergent validity as well as measurement invariance that approach well the requirement of comparability between samples.
+We identified four critical aspects regarding the measurement of meritocracy in previous studies: unidimensionality, the ambiguous use of the term “beliefs”, the use of non-meritocratic indicators as opposed to meritocratic indicators, and the consideration of measurement error. The proposed 8-item scale, “Perceptions and Preferences for Meritocracy”, was designed and tested in order to deal with these four issues. Our results indicate that perceptions and preferences seem to be two related but different dimensions, often confounded in previous research under the label of "beliefs". Meritocratic and non-meritocratic dimensions do not appear to constitute poles of the same continuum, as some previous studies have assumed. Regarding the possible effects of items order in the estimation of latent variable, we tested three different order versions and found evidence that suggest the use of the randomized version of the scale. Furthermore, we found evidence of convergent validity as well as measurement invariance that approach well the requirement of comparability between samples.
 
-The four-dimensional framework and structure of the Perceptions and Preferences for Meritocracy scale opens several avenues for future research. For instance, distinguishing perceptions from preferences will allow us to evaluate the extent to which different societies are accustomed to, or satisfied with, the perceived level of meritocracy, in terms of differences between what is perceived and what is preferred. Additionally, given that non-meritocratic factors are not necessarily related to meritocratic ones, our framework makes it possible to assess the perceived legitimacy of practices such as the use of personal contacts and their interference (or not), within meritocratic ideals in different societies. The consideration of structural factors, both individual and societal, will allow us to advance future hypotheses relating to meritocratic legitimacy to a more comprehensive level than the curren one, which is based solely on meritocratic perceptions. Furthermore, the impacts of different configurations of the four-dimensional framework on practices and behaviors such as corruption, civic involvement, and political alignment, is an area that requires additional research. Such future agendas could be specially relevant in times of economic crisis and growing inequalities, that could entail changes in the legitimation of the current distributive structure based on meritocratic ideals.
+The four-dimensional framework and structure of the Perceptions and Preferences for Meritocracy scale opens several avenues for future research. For instance, distinguishing perceptions from preferences will allow us to evaluate the extent to which different societies are accustomed to, or satisfied with, the perceived level of meritocracy, in terms of differences between what is perceived and what is preferred. Additionally, given that non-meritocratic factors are not necessarily related to meritocratic ones, our framework makes it possible to assess the perceived legitimacy of practices such as the use of personal contacts and their interference (or not) with meritocratic ideals in different societies. The consideration of structural factors, both individual and societal, will allow us to advance future hypotheses relating to meritocratic legitimacy to a more comprehensive level than the current one, which is based solely on meritocratic perceptions. Furthermore, the impacts of different configurations of the four-dimensional framework on practices and behaviors such as corruption, civic involvement, and political alignment, is an area that requires additional research. Such future agendas could be specially relevant in times of economic crisis and growing inequalities, that could entail changes in the legitimation of the current distributive structure based on meritocratic ideals.
 
 
 \pagebreak

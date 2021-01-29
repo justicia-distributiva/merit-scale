@@ -162,17 +162,17 @@ loads01[loads01=="NA"] <- ""
 ```
 
 ```{r tb_loads-fit-fac02}
-fm01<- data.frame(t(data.frame(fitmeasures(fs1_o, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm01) ="M1.1"
+fm01<- data.frame(t(data.frame(fitmeasures(fs1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm01) ="M1.1"
 
 #------chi2, df------#
-fm04.1 <- fm01 %>% select(chisq,df) 
-fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1)
+fm04.1 <- fm01 %>% select(chisq.scaled,df) 
+fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 1)
 fm04.1$df <- round(x = fm04.1$df,digits = 0)
-fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")")
+fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
 fm04.1 <- select(fm04.1,"chi2df")
 
 #------CFI, RMSEA------#
-fm04.2 <- fm01 %>% select(cfi,tli,rmsea)
+fm04.2 <- fm01 %>% select(cfi.scaled,rmsea.scaled)
 for (i in names(fm04.2)) {
   fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
 }
@@ -185,7 +185,7 @@ fm.df      <- data.frame(t(fm.df))
 #------ merge ------#
 tb.fm2<- bind_rows(loads01,fm.df)
 tb.fm2<- tb.fm2 %>% 
-  mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{TLI}$","$\\text{RMSEA}$","$N$")) %>%
+  mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>%
   select(vars,everything())
 #--table---#
 tb.col  <- c("Variables",1:4)
