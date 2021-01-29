@@ -413,7 +413,8 @@ names(w01fs)<- stringr::str_replace_all(string = names(w01fs),pattern = "_w1",re
 Prepare factorial survey data (wave 02):
 
 ```{r}
-fs01 <- sjlabelled::read_spss("input/data/original/factorial_ola2.sav",verbose = F)
+# fs01 <- sjlabelled::read_spss("input/data/original/factorial_ola2.sav",verbose = F)
+load(file = "input/data/original/factorial_ola2.RData")
 ```
 
 ```{r}

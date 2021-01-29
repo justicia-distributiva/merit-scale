@@ -186,33 +186,6 @@ labs<- c("A. Who the more they try they manage to get bigger rewards that those 
 cnametab<- c("","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)","(1)","(2)","(3)","(4)","(1)","(2)","(3)","(4)")
 ```
 
-
-```{r tabla01, eval=TRUE, include=TRUE}
-polyw01<- poly(sjlabelled::remove_all_labels(dat01),
-               digits = 2,
-               triangle = "l",
-               fade.ns = F,
-               remove.spaces = T,
-             string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
-matpolyw01 <- as.data.frame(read_html(x = polyw01[["page.content"]]) %>% html_table(fill=FALSE)) 
-matpolyw01 <- matpolyw01[-c(9),]
-colnames(matpolyw01) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)","(H)")
-
-load01<- data.frame(round(cbind(inspect(fit1_c,what="std")$lambda,inspect(fit1_o,what="std")$lambda),digits = 2))
-load01[load01==c(0.00)] <- NA; names(load01) <- c(1:4,1:4)
-
-table01<- bind_cols(x = matpolyw01,y = load01)
-### %>% mutate(vars=labs)
-
-kable(table01,escape = TRUE,align = "l",col.names = cnametab,format = "html") %>% 
-  footnote(general = paste0(paste0("$N$= ",nobs(fit1_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
-  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>%
-  add_header_above(c(" " = 9,"Factor loadings"=8)) %>%
-  # # column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  # # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
-  kable_styling(full_width = FALSE)
-```
-
 ## Version 02  (N=`r dim(dat02)[1]`)
 
 | Spanish (original)          | English (translated)   |
@@ -266,33 +239,6 @@ kable(left_join(x = standardizedsolution(fit2_c) %>% filter(op=="=~") %>% select
 ```
 > **NOTE**: bad fit, heywood case using DWLS
 
-```{r tabla02, echo=FALSE, include=TRUE}
-polyw02<- poly(sjlabelled::remove_all_labels(dat02),
-               digits = 2,
-               triangle = "l",
-               fade.ns = F,
-               remove.spaces = T,
-               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
-matpolyw02 <- as.data.frame(read_html(x = polyw02[["page.content"]]) %>% html_table(fill=FALSE)) 
-matpolyw02 <- matpolyw02[-c(9),] 
-colnames(matpolyw02) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
-
-load02<- data.frame(round(cbind(inspect(fit2_c,what="std")$lambda,inspect(fit2_o,what="std")$lambda),digits = 2))
-load02[load02==c(0.00)] <- NA; names(load02) <- c(1:4,1:4)
-
-table02<- bind_cols(x = matpolyw02,y = load02)
-## %>% mutate(vars=labs)
-
-kable(table02,escape = FALSE,align = "l",col.names = cnametab)  %>% 
-  footnote(general = paste0(paste0("$N$= ",nobs(fit2_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
-  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
-  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
-  kable_styling(full_width = FALSE) %>% 
-  kable_styling(full_width = F)
-```
-
 ## Version 03 (N=`r dim(dat03)[1]`)
 
 
@@ -341,34 +287,6 @@ kable(left_join(x = standardizedsolution(fit3_c) %>% filter(op=="=~") %>% select
 
 > **NOTE**: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence
 
-```{r}
-polyw03<- poly(sjlabelled::remove_all_labels(dat03),
-               digits = 2,
-               triangle = "l",
-               fade.ns = F,
-               remove.spaces = T,
-               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
-matpolyw03 <- as.data.frame(read_html(x = polyw03[["page.content"]]) %>% html_table(fill=FALSE)) 
-matpolyw03 <- matpolyw03[-c(9),] 
-
-colnames(matpolyw03) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
-
-load03<- data.frame(round(cbind(inspect(fit3_c,what="std")$lambda,inspect(fit3_o,what="std")$lambda),digits = 2))
-load03[load03==c(0.00)] <- NA; names(load03) <- c(1:4,1:4)
-
-table03<- bind_cols(x = matpolyw03,y = load03)
-   ## %>% mutate(vars=labs)
-
-kable(table03,escape = FALSE,align = "l",col.names = cnametab) %>% 
-  footnote(general = paste0(paste0("$N$= ",nobs(fit3_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
-  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
-  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
-  kable_styling(full_width = F)
-```
-
-
 ### Tau-equivalence
 
 ```{r,results='hold'}
@@ -403,32 +321,6 @@ kable(anova(fit3_o,fit3_o.tau),
 <!-- > **NOTE:** El modelo con igualdad de cargas factoriales (en Percepción meritocracia) no deteriora significativamente el ajuste del modelo. -->
 
 > **NOTE:** The model with equal factor loadings (in Meritocracy Perception) does not significantly deteriorate the model fit.
-
-```{r tabla03, include=FALSE}
-polyw03tau<- poly(sjlabelled::remove_all_labels(dat03),
-               digits = 2,
-               triangle = "l",
-               fade.ns = F,
-               remove.spaces = T,
-               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
-matpolyw03tau <- as.data.frame(read_html(x = polyw03tau[["page.content"]]) %>% html_table(fill=FALSE)) 
-matpolyw03tau <- matpolyw03tau[-c(9),] 
-
-colnames(matpolyw03tau) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
-load03tau<- data.frame(round(cbind(inspect(fit3_c.tau,what="std")$lambda,inspect(fit3_o.tau,what="std")$lambda),digits = 2))
-load03tau[load03tau==c(0.00)] <- NA; names(load03tau) <- c(1:4,1:4)
-
-table03tau<- bind_cols(x = matpolyw03tau,y = load03tau) 
-### %>% mutate(vars=labs)
-
-kable(table03tau,escape = FALSE,align = "l",col.names = cnametab) %>% 
-  footnote(general = paste0(paste0("$N$= ",nobs(fit3_c.tau)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
-  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
-  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
-  kable_styling(full_width = F)
-```
 
 
 ## Complete sample (N=`r dim(dat04)[1]`)
@@ -692,53 +584,7 @@ corrplot(
 dev.off()
 ```
 
-
-
-```{r tabla04, include=FALSE}
-polyw04<- poly(sjlabelled::remove_all_labels(dat04[,-c(1)]),
-               digits = 2,
-               triangle = "l",
-               fade.ns = F,
-               remove.spaces = T,
-               string.diag = c("$-$","$-$","$-$","$-$","$-$","$-$","$-$","$-$"))
-matpolyw04 <- as.data.frame(read_html(x = polyw04[["page.content"]]) %>% html_table(fill=FALSE)) 
-matpolyw04 <- matpolyw04[-c(9),] 
-
-colnames(matpolyw04) <- c("vars","(A)","(B)","(C)","(D)","(E)","(F)","(G)", "(H)") 
-load04<- data.frame(round(cbind(inspect(fit4_c,what="std")$lambda,inspect(fit4_o,what="std")$lambda),digits = 2))
-load04[load04==c(0.00)] <- NA; names(load04) <- c(1:4,1:4)
-
-table04<- bind_cols(x = matpolyw04,y = load04)  
-  # %>% mutate(vars=labs)
-
-kable(table04,escape = FALSE,align = "l",col.names = cnametab) %>% 
-  footnote(general = paste0(paste0("$N$= ",nobs(fit4_c)),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>%
-  add_header_above(c(" " = 1,"Polychoric correlations"=8, "MLR" = 4, "DWLS" = 4))%>% 
-  add_header_above(c(" " = 9,"Factor loadings"=8)) %>% 
-  # column_spec(column = c(1),width ="7in",include_thead = T) %>%
-  # column_spec(column = c(2:17),width ="0.5in",include_thead = T) %>% 
-  kable_styling(full_width = F)
-```
-
 # Tables 
-
-```{r tb_desc-corr}
-load04<- data.frame(round(inspect(fit4_o,what="std")$lambda,digits = 2))
-load04[load04==c(0.00)] <- NA; names(load04) <- c(1:4)
-
-colnames(matpolyw04) <- c("Variable","A","B","C","D","E","F","G", "H") 
-
-sum04b  <- psych::describe(dat04[,-c(1)], fast = T) %>% select(mean,sd,min,max) %>% data.frame() %>% round(digits = 2)
-table04b<- bind_cols(x = sum04b,y = matpolyw04) %>% select(Variable, everything()) %>% mutate(Variable=labs) %>% rename("Mean"=mean, "SD"=sd, "Min"=min,"Max"=max)
-
-cap01 <- "Descriptive statistic"
-sumdat04<- kable(table04b, escape = FALSE,align = "l",linesep = "", caption = cap01) %>% 
-           # column_spec(column = 1,width = "10cm",width_min = "12cm",include_thead = TRUE) %>% 
-           footnote(general = paste0(paste0("$N$= ","2141"),"; p<0.05=$*$; p<0.01=$**$; p<0.001=$***$"),footnote_as_chunk = T) %>% 
-           add_header_above(header = c(" "=5,"Polychoric correlations"= 8)) %>% 
-           kable_styling(full_width = TRUE,font_size = 8,position = "center");sumdat04
-save(sumdat04,file = "output/tables/sumdat04.RData")
-```
 
 ```{r tb_loads-fitm}
 tb.load<- data.frame(round(cbind(inspect(fit1_o,what="std")$lambda,
