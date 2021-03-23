@@ -149,6 +149,67 @@ The research hypotheses behind this conceptualization and measurement model are 
 
 # Methodology
 
+The analysis is organized in three studies. Study 1 serves as a background to our instrument proposal by attempting to operationalize the meritocracy dimensions with available data. For this we use data from the International Social Survey Programme (ISSP). Although we are aware that the available indicators in this dataset do not allow a precise operationalization of the conceptual model, we know that this dataset is the most widely used in comparative meritocracy studies (as well as overall subjective inequality) and therefore it is certainly useful to look at its potentials and limitations to this regard. Study 2 is the core of this paper and consists of the proposal of a new scale for measuring meritocratic perceptions and preferences. Finally, in Study 3 we perform additional validity analysis of the meritocracy scale.
+
+## Study 1
+
+### Data
+
+The data used in the analysis corresponds to the last available wave of the social inequality module from the International Social Survey Programm (ISSP), which is the most specialized international comparative survey in perceptions, attitudes and beliefs about inequality related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 26 countries and XXXX individuals. Although there is data available from this module for previous waves (1987, 1992 and 1999), unfortunately there are several variables that are important for this research that were not included, particularly in 1987 and 1999, reason why we only use the last wave.
+
+### Variables
+
+There are a series of indicators in the ISSP survey that in the following we attempt to classify in our meritocracy measurement scheme. However, it is important to mention  that the items were not originally thought as a specific measure of meritocracy. Still, many of the items have been used in previous research on meritocracy (and certainly will keep being used in the future) and before proposing a new measure we consider to give a first test to our proposed conceptualization using available data that not only covers several countries but also is validated by the research community.
+
+The variables are presented below organized in perceptions and preferences:
+
+- _Perception of meritocracy/non-meritocracy_: for operationalizing perceptions the closest set of ISSP's indicators comes from the question asking about perceptions for opportunities to get ahead, which are usually considered as "meritocratic beliefs" in previous research. The general heading of the battery is: _"To begin we have some questions about opportunities for getting ahead. Please tick one box for each of these to show how important you think it is for getting ahead in life."_ This is followed by a list of statements to be answered in a scale with the following levels numbered from 1 to 5: essential, very important, fairly important, not very important, not important at all. Below the items are listed classified according to the meritocracy/non-meritocracy character:
+
+  - Meritocratic perception:
+    - How important is having ambition?
+    - How important is hard work?
+
+  - Non-meritocratic perception
+    - How important is coming from a wealthy family?
+    - How important is having well-educated parents
+    - How important is knowing the right people
+    - How important is having political connections
+    - How important is a person's race?
+    - How important is being born a man or a woman?
+
+<br>
+  The classification is based on criteria of internal motivation (meritocratic) and structural constraints (non-meritocratic). There were two items from the battery that were excluded from the analysis as they would not fit into the classification. The first one was "having good education yourself", since it was not clear whether this is could be due to individual motivation or system opportunities, and the second was "giving bribes", as introduced elements of criminality that were beyond a non-meritocratic perception.
+
+- Preferences for meritocracy-non meritocracy: for operationalizing normative preferences we used a list of items related to reasons for pay. The ISSP question was: _In deciding how much people ought to earn, how important should each of these things be, in your opinion_, rated in the same _essential-non important at all_ scale as the questions for meritocratic preferences. The reasons are:
+
+  - Meritocratic preferences
+    - How well he or she does the job?
+    - How hard he or she works at the job?
+
+  - Non-meritocratic preferences
+    - What is needed to support a family?
+    - Whether the person has children to support?
+
+(here summary descriptive table - @julio)
+
+
+### Methods
+
+The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
+
+### Results
+
+[diagrama SEM]
+
+
+[tabla CFA]
+
+
+
+
+## Study 2
+
+
 ## Data collection {-#data}
 
 The data was obtained through an online questionnaire, which was part of a larger study on meritocracy and preferences developed in Chile in 2019 funded by the national scientific agency ANID. The questionnaire was programmed in Qualtrics and the fieldwork was conducted by an external online survey agency ([netquest.cl](www.netquest.cl)) between December 2019 and January 2020. The sample was selected from a non-probabilistic quota design in three large cities in Chile (Santiago, Concepción & Antofagasta). The quotas for gender, age, and education level were generated based on a survey by the Public Studies Center [@cepEncuestaCEPMayo2019], which is a well regarded counterpart agency of the ISSP (International Social Survey Programme) in Chile. A total sample of 2,141 people was collected, excluding those who did not answer the questions on the scale, and those who did not accept informed consent. There were no significant differences between our sample and the wider population for most socio-demographic characteristics, with the exception of educational level (see Table \@ref(tab:rep-samp) in appendix). As is often the case with online surveys, there were some limitations in achieving the quotas for lower educational levels **[citas - LUCHO]**.
@@ -195,7 +256,7 @@ To test the scale's underlying constructs, we employed confirmatory factor analy
 ```{r meas01, echo=FALSE, fig.cap = "Theoretical model", fig.align='center'}
 knitr::include_graphics('../output/images/meas01.png')
 ```
-CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
+As in Study 1, CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). The fit indexes and cut-off criteria were the same as in Study 1.
 
 A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2](https://osf.io/z45y2). Included in this pre-registration are the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
 
