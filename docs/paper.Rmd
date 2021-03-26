@@ -190,7 +190,23 @@ The variables are presented below organized in perceptions and preferences:
     - What is needed to support a family?
     - Whether the person has children to support?
 
-(here summary descriptive table - @julio)
+<!-- (here summary descriptive table - @julio) -->
+
+```{r desc.issp, results='asis'}
+load(file = "../output/tables/desc.issp.Rdata")
+sum.issp09<- kable(desc.issp,format =table_format,
+                 booktabs= T,
+                 align = "l",
+                 linesep = "",
+                 caption = "Descriptive statistics for the ISSP 2009 sample") %>%
+  kable_styling(full_width = table_format2,
+                font_size = 10,
+                position = "center",
+                latex_options = c("HOLD_position"));sum.issp09
+```
+
+
+
 
 
 ### Methods
@@ -199,13 +215,26 @@ The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was c
 
 ### Results
 
-[diagrama SEM]
+<!-- [diagrama SEM] -->
 
+```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center'}
+knitr::include_graphics('../output/images/meas02-issp.PNG')
+```
 
-[tabla CFA]
-
-
-
+<!-- [tabla CFA] -->
+```{r tb.perpref1, echo=FALSE}
+load(file = "../output/tables/tb.perpref1.RData")
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation")
+tb.col <- c("","Meritocratic","Non-meritocratic","Meritocratic","Non-meritocratic")
+tb.caption <- c(" Factor loadings and fit measures for ISSP 2009")
+tb.issp<- kable(tb.perpref1,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>%
+          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 12) %>%
+          add_header_above(header = c(" "=1,"Perception"= 2,"Preference"= 2)) %>%
+          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
+          row_spec(row = 12,hline_after = TRUE) %>%
+          add_indent(c(13:17)) %>%
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.issp
+```
 
 ## Study 2
 
