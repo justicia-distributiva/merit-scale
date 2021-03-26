@@ -192,7 +192,9 @@ The variables are presented below organized in perceptions and preferences:
 
 <!-- (here summary descriptive table - @julio) -->
 
-```{r desc.issp, results='asis'}
+Table \@ref(tab:desc-issp)
+
+```{r desc-issp, echo=FALSE, results='asis'}
 load(file = "../output/tables/desc.issp.Rdata")
 sum.issp09<- kable(desc.issp,format =table_format,
                  booktabs= T,
@@ -217,12 +219,17 @@ The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was c
 
 <!-- [diagrama SEM] -->
 
+Figure \@ref(fig:meas02-issp)
+
 ```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center'}
 knitr::include_graphics('../output/images/meas02-issp.PNG')
 ```
 
 <!-- [tabla CFA] -->
-```{r tb.perpref1, echo=FALSE}
+
+Table \@ref(tab:tb-perpref1)
+
+```{r tb-perpref1, echo=FALSE}
 load(file = "../output/tables/tb.perpref1.RData")
 tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation")
 tb.col <- c("","Meritocratic","Non-meritocratic","Meritocratic","Non-meritocratic")
