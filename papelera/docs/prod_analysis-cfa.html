@@ -1,0 +1,6552 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Analysis PPM-S</title>
+
+<script src="site_libs/header-attrs-2.1/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Measuring perceptions and preferences for meritocracy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="prod_prep-data.html">Data preparation</a>
+</li>
+<li>
+  <a href="prod_analysis-cfa.html">Analysis</a>
+</li>
+<li>
+  <a href="paper.html">Paper</a>
+</li>
+<li>
+  <a href="paper.pdf">
+    <span class="fa fa-file-pdf"></span>
+     
+    
+  </a>
+</li>
+<li>
+  <a href="https://github.com/juancarloscastillo/meritocracy-preferences">
+    <span class="fa fa-github fa-lg"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Analysis PPM-S</h1>
+<h4 class="date">sábado 10 octubre 2020 17:30:01</h4>
+
+</div>
+
+
+<div id="wave-01" class="section level1 tabset tabset-fade tabset-pills" number="1">
+<h1><span class="header-section-number">1</span> Wave 01</h1>
+<p>On the first wave of the study we conducted the application of the Perceptions and Preferences Meritocracy Scale (PPM-S), in which we decided to test three different modalities for the application of the scale. The design of the study considered a sample of 2200 cases in Chile, using quotas for sex, age and educational level. The most important feature of this study consists in that we randomly assigned the participants to three different groups, in which the subjects complete one of the three combination of the questions. The key feature of these combinations relies on the display order of the questions regarding to each indicator of the scale. On this respect, we have three subsamples that correspond to each application modality that can be analysed separately, but also all together as a full sample.</p>
+<p>The scale has eight indicators, divided in four questions for perception and four for preferences, which are also divided in meritocratic and non-meritocratic. The meritocratic indicators refers to topics such as effort and talent, and the non-meritocratic refers to family wealth and networks. The three combinations relies in how these indicators are displayed to the respondent. The first combination corresponds to the group that answered the questions that were sorted by the Perceptions/Preferences dimension. the second combination corresponds to the group in which the questions are displayed following the a topic-sorted way, this means that the effort, talent, rich family and networks questions for perception and preference were displayed together. The last and third group corresponds to a completely randomized display order of the questions.</p>
+<p>The rationale of the design relies on the possibility to test how different display modalities could affect the hypothesized factor structure of the scale. On this regard, we conducted the analysis on two stages. On the first stage we tested the hypothesized factor structure on the three groups corresponding to each application modality and the full sample using a Confirmatory Factor Analysis (CFA). On the second stage, we conducted a Multi-group confirmatory factor analysis (MGCFA) using the groups created by the randomization. Furthermore, we explore the possibility of a second order factor structure, in which we tested two models. The first alternative corresponds to a second-order Confirmatory Factor Analysis assuming the Perception/Preference dimension as a second order factor. On the other hand, we tested a model in which we assume that the second order factor structure follows the Meritocratic/Non-meritocratic constructs.</p>
+<hr />
+<p><strong>Libraries</strong></p>
+<pre class="r"><code>library(sjPlot)
+library(dplyr)
+library(lavaan)
+library(semPlot)
+library(stargazer)
+library(corrplot)
+library(psych)
+library(knitr)
+library(kableExtra)
+library(rvest)
+library(sjlabelled)
+library(ggplot2)
+source(&#39;production/prod_polychoric.R&#39;)</code></pre>
+<p><strong>Load data</strong></p>
+<pre class="r"><code>load(file = &quot;input/data/proc/dat01.RData&quot;)
+load(file = &quot;input/data/proc/dat02.RData&quot;)
+load(file = &quot;input/data/proc/dat03.RData&quot;)
+load(file = &quot;input/data/proc/dat04.RData&quot;)</code></pre>
+<pre class="r"><code>table_format = if(is_html_output()) {
+  &quot;html&quot;
+} else if(is_latex_output()) {
+  &quot;latex&quot;
+}</code></pre>
+<hr />
+<p><strong>Modality</strong></p>
+<p>Each group correspond to the application modality of the scale.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Version 01:</strong> Fixed order by perception / preferences (N=712)</p></li>
+<li><p><strong>Version 02:</strong> Fixed order, by topic (N=717)</p></li>
+<li><p><strong>Version 03:</strong> Random order (N=712)</p></li>
+<li><p><strong>Complete Sample:</strong> Complete sample (N=2141)</p></li>
+</ol>
+<div id="version-01-n712" class="section level2 tabset" number="1.1">
+<h2><span class="header-section-number">1.1</span> Version 01 (N=712)</h2>
+<table>
+<caption>Mode 01: Fixed order by perception</caption>
+<thead>
+<tr class="header">
+<th>Spanish (original)</th>
+<th>English (translated)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A. Percepción esfuerzo</td>
+<td>Perception effort</td>
+</tr>
+<tr class="even">
+<td>B. Percepción talento</td>
+<td>Perception talent</td>
+</tr>
+<tr class="odd">
+<td>C. Percepción familia rica</td>
+<td>Perception rich family</td>
+</tr>
+<tr class="even">
+<td>D. Percepción redes</td>
+<td>Perception networks</td>
+</tr>
+<tr class="odd">
+<td>E. Preferencia esfuerzo</td>
+<td>Preference effort</td>
+</tr>
+<tr class="even">
+<td>F. Preferencia talento</td>
+<td>Preference talent</td>
+</tr>
+<tr class="odd">
+<td>G. Preferencia familia rica</td>
+<td>Preference rich family</td>
+</tr>
+<tr class="even">
+<td>H. Preferencia redes</td>
+<td>Preference networks</td>
+</tr>
+</tbody>
+</table>
+<table style="text-align:center">
+<caption>
+<strong>Descriptive statistics</strong>
+</caption>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St. Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+A. pc.effort
+</td>
+<td>
+712
+</td>
+<td>
+3.16
+</td>
+<td>
+1.36
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+B. pc.talent
+</td>
+<td>
+712
+</td>
+<td>
+2.98
+</td>
+<td>
+1.12
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+C. pc.wpart
+</td>
+<td>
+712
+</td>
+<td>
+3.60
+</td>
+<td>
+1.36
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+D. pc.netw
+</td>
+<td>
+712
+</td>
+<td>
+3.73
+</td>
+<td>
+1.27
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+E. pf.effort
+</td>
+<td>
+712
+</td>
+<td>
+3.91
+</td>
+<td>
+1.22
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F. pf.talent
+</td>
+<td>
+712
+</td>
+<td>
+3.27
+</td>
+<td>
+1.17
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+G. pf.wpart
+</td>
+<td>
+712
+</td>
+<td>
+2.55
+</td>
+<td>
+1.12
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+H. pf.netw
+</td>
+<td>
+712
+</td>
+<td>
+2.33
+</td>
+<td>
+1.06
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<pre class="r"><code>cor01&lt;-polychoric(dat01)
+rownames(cor01$rho) &lt;- c(&quot;A.Perception Effort&quot;, &quot;B.Perception Talent&quot;,&quot;C.Perception Rich parents&quot;,&quot;D.Perception contacts&quot;,&quot;E.Preferences Effort&quot;,&quot;F.Preferences Talent&quot;,&quot;G.Preferences rich parents&quot;, &quot;H.Preferences contacts&quot; )
+colnames(cor01$rho) &lt;- c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
+
+
+corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/correlacion%20v01-1.png" width="672" /></p>
+<pre class="r"><code>model01 &lt;- &#39;perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw&#39;
+
+fit1_c &lt;- cfa(model = model01,data = dat01,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
+
+fit1_o &lt;- cfa(model = model01,data = dat01,
+            ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                        &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                        &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                        &quot;pref_wpart&quot;,&quot;pref_netw&quot;))
+
+#---------------------------------------------------#
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit1_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit1_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames, caption = &quot;Factor loadings&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.70</td>
+<td align="right">0.69</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.72</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.80</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.92</td>
+<td align="right">0.94</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.82</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.58</td>
+<td align="right">0.64</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.46</td>
+<td align="right">0.55</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">1.37</td>
+<td align="right">1.26</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>NOTE</strong>: good fit, heywood case item 8.</p>
+</blockquote>
+<pre class="r"><code>labs&lt;- c(&quot;A. Who the more they try they manage to get bigger rewards that those who striveless.&quot;,
+         &quot;B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.&quot;,
+         &quot;C. Who they have rich parents manage to get out ahead.&quot;,
+         &quot;D. Who they have good contacts they manage to get out ahead.&quot;,
+         &quot;E. Who the more they try they should get greater rewards than those who they try less.&quot; ,
+         &quot;F. Who possess more talent they should get greater rewards than those who possess less talent.&quot; ,
+         &quot;G. It&#39;s fine that those who have rich parents get ahead&quot;,
+         &quot;H. Is well that those who have good contacts get ahead.&quot; )
+cnametab&lt;- c(&quot;&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;,&quot;(1)&quot;,&quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;,&quot;(1)&quot;,&quot;(2)&quot;,&quot;(3)&quot;,&quot;(4)&quot;)</code></pre>
+<pre class="r"><code>polyw01&lt;- poly(sjlabelled::remove_all_labels(dat01),
+               digits = 2,
+               triangle = &quot;l&quot;,
+               fade.ns = F,
+               remove.spaces = T,
+             string.diag = c(&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;))
+matpolyw01 &lt;- as.data.frame(read_html(x = polyw01[[&quot;page.content&quot;]]) %&gt;% html_table(fill=FALSE)) 
+matpolyw01 &lt;- matpolyw01[-c(9),]
+colnames(matpolyw01) &lt;- c(&quot;vars&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;,&quot;(H)&quot;)
+
+load01&lt;- data.frame(round(cbind(inspect(fit1_c,what=&quot;std&quot;)$lambda,inspect(fit1_o,what=&quot;std&quot;)$lambda),digits = 2))
+load01[load01==c(0.00)] &lt;- NA; names(load01) &lt;- c(1:4,1:4)
+
+table01&lt;- bind_cols(x = matpolyw01,y = load01)
+### %&gt;% mutate(vars=labs)
+
+kable(table01,escape = TRUE,align = &quot;l&quot;,col.names = cnametab,format = &quot;html&quot;) %&gt;% 
+  footnote(general = paste0(paste0(&quot;$N$= &quot;,nobs(fit1_c)),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;%
+  add_header_above(c(&quot; &quot; = 1,&quot;Polychoric correlations&quot;=8, &quot;MLR&quot; = 4, &quot;DWLS&quot; = 4))%&gt;%
+  add_header_above(c(&quot; &quot; = 9,&quot;Factor loadings&quot;=8)) %&gt;%
+  # # column_spec(column = c(1),width =&quot;7in&quot;,include_thead = T) %&gt;%
+  # # column_spec(column = c(2:17),width =&quot;0.5in&quot;,include_thead = T) %&gt;% 
+  kable_styling(full_width = FALSE)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="9">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Polychoric correlations
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+MLR
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+DWLS
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+<ol style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="5" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="6" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="7" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="8" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+perc_effort
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.70
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.69
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_talent
+</td>
+<td style="text-align:left;">
+0.56***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.72
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.81
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_wpart
+</td>
+<td style="text-align:left;">
+-0.02
+</td>
+<td style="text-align:left;">
+0.04
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.80
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.85
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_netw
+</td>
+<td style="text-align:left;">
+0.02
+</td>
+<td style="text-align:left;">
+0.04
+</td>
+<td style="text-align:left;">
+0.80***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.92
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.94
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_effort
+</td>
+<td style="text-align:left;">
+0.37***
+</td>
+<td style="text-align:left;">
+0.35***
+</td>
+<td style="text-align:left;">
+0.37***
+</td>
+<td style="text-align:left;">
+0.42***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.82
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.85
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_talent
+</td>
+<td style="text-align:left;">
+0.18***
+</td>
+<td style="text-align:left;">
+0.32***
+</td>
+<td style="text-align:left;">
+0.31***
+</td>
+<td style="text-align:left;">
+0.31***
+</td>
+<td style="text-align:left;">
+0.54***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.58
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.64
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_wpart
+</td>
+<td style="text-align:left;">
+0.07
+</td>
+<td style="text-align:left;">
+0.10*
+</td>
+<td style="text-align:left;">
+0.02
+</td>
+<td style="text-align:left;">
+-0.00
+</td>
+<td style="text-align:left;">
+0.03
+</td>
+<td style="text-align:left;">
+0.11**
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.46
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.55
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_netw
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+-0.11
+</td>
+<td style="text-align:left;">
+-0.10
+</td>
+<td style="text-align:left;">
+-0.03
+</td>
+<td style="text-align:left;">
+0.09*
+</td>
+<td style="text-align:left;">
+0.68***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.37
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.26
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> <span class="math inline">\(N\)</span>= 712; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>
+</td>
+</tr>
+</tfoot>
+</table></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+</div>
+<div id="version-02-n717" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Version 02 (N=717)</h2>
+<table>
+<caption>Mode 02: Fixed order, by topic.</caption>
+<thead>
+<tr class="header">
+<th>Spanish (original)</th>
+<th>English (translated)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A. Percepción esfuerzo</td>
+<td>Perception effort</td>
+</tr>
+<tr class="even">
+<td>E. Preferencia esfuerzo</td>
+<td>Preference effort</td>
+</tr>
+<tr class="odd">
+<td>B. Percepción talento</td>
+<td>Perception talent</td>
+</tr>
+<tr class="even">
+<td>F. Preferencia talento</td>
+<td>Preference talent</td>
+</tr>
+<tr class="odd">
+<td>C. Percepción familia rica</td>
+<td>Perception rich family</td>
+</tr>
+<tr class="even">
+<td>G. Preferencia familia rica</td>
+<td>Preference rich family</td>
+</tr>
+<tr class="odd">
+<td>D. Percepción redes</td>
+<td>Perception networks</td>
+</tr>
+<tr class="even">
+<td>H. Preferencia redes</td>
+<td>Preference networks</td>
+</tr>
+</tbody>
+</table>
+<table style="text-align:center">
+<caption>
+<strong>Descriptive statistics</strong>
+</caption>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St. Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+A. pc.effort
+</td>
+<td>
+717
+</td>
+<td>
+3.10
+</td>
+<td>
+1.40
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+E. pf.effort
+</td>
+<td>
+717
+</td>
+<td>
+3.73
+</td>
+<td>
+1.35
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+B. pc.talent
+</td>
+<td>
+717
+</td>
+<td>
+3.03
+</td>
+<td>
+1.11
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F. pf.talent
+</td>
+<td>
+717
+</td>
+<td>
+3.13
+</td>
+<td>
+1.16
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+C. pc.wpart
+</td>
+<td>
+717
+</td>
+<td>
+3.66
+</td>
+<td>
+1.37
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+G. pf.wpart
+</td>
+<td>
+717
+</td>
+<td>
+2.75
+</td>
+<td>
+1.20
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+D. pc.netw
+</td>
+<td>
+717
+</td>
+<td>
+3.73
+</td>
+<td>
+1.22
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+H. pc.netw
+</td>
+<td>
+717
+</td>
+<td>
+2.39
+</td>
+<td>
+1.11
+</td>
+<td>
+1
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<pre class="r"><code>cor02&lt;-polychoric(dat02)
+rownames(cor02$rho) &lt;-c(&quot;A. pc.effort&quot;,&quot;E. pf.effort&quot;,&quot;B. pc.talent&quot;,&quot;F. pf.talent&quot;,&quot;C. pc.wpart&quot;,&quot;G. pf.wpart&quot;,&quot;D. pc.netw&quot;,&quot;H. pc.netw&quot;)
+colnames(cor02$rho) &lt;-c(&quot;(A)&quot;, &quot;(E)&quot;,&quot;(B)&quot;,&quot;(F)&quot;,&quot;(C)&quot;,&quot;(G)&quot;,&quot;(D)&quot;, &quot;(H)&quot;)
+corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>model02 &lt;- &#39;perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw&#39;
+
+fit2_c &lt;- cfa(model = model02,data = dat02,estimator=&quot;MLR&quot;) # Continuous/ estimator ML Robust
+
+fit2_o &lt;- cfa(model = model02,data = dat02,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                       &quot;perc_wpart&quot;  ,&quot;perc_netw&quot;,
+                                                       &quot;pref_effort&quot; ,&quot;pref_talent&quot;,
+                                                       &quot;pref_wpart&quot;  ,&quot;pref_netw&quot;))
+
+#---------------------------------------------------#
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit2_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit2_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames, caption = &quot;Factor loadings&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.82</td>
+<td align="right">0.76</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.59</td>
+<td align="right">0.72</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.74</td>
+<td align="right">0.84</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.80</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.83</td>
+<td align="right">0.82</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.54</td>
+<td align="right">0.65</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.88</td>
+<td align="right">1.04</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.55</td>
+<td align="right">0.52</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>NOTE</strong>: bad fit, heywood case using DWLS</p>
+</blockquote>
+<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="9">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Polychoric correlations
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+MLR
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+DWLS
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+<ol style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="5" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="6" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="7" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="8" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+perc_effort
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.82
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.76
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_effort
+</td>
+<td style="text-align:left;">
+0.52***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.59
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.72
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_talent
+</td>
+<td style="text-align:left;">
+0.54***
+</td>
+<td style="text-align:left;">
+0.33***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.74
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.84
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_talent
+</td>
+<td style="text-align:left;">
+0.23***
+</td>
+<td style="text-align:left;">
+0.53***
+</td>
+<td style="text-align:left;">
+0.40***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.80
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.81
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_wpart
+</td>
+<td style="text-align:left;">
+-0.04
+</td>
+<td style="text-align:left;">
+0.28***
+</td>
+<td style="text-align:left;">
+0.13***
+</td>
+<td style="text-align:left;">
+0.27***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.83
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.82
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_wpart
+</td>
+<td style="text-align:left;">
+0.18***
+</td>
+<td style="text-align:left;">
+0.11**
+</td>
+<td style="text-align:left;">
+0.18***
+</td>
+<td style="text-align:left;">
+0.18***
+</td>
+<td style="text-align:left;">
+0.07*
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.54
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.65
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_netw
+</td>
+<td style="text-align:left;">
+-0.02
+</td>
+<td style="text-align:left;">
+0.28***
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+<td style="text-align:left;">
+0.21***
+</td>
+<td style="text-align:left;">
+0.68***
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.88
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+1.04
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_netw
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+-0.01
+</td>
+<td style="text-align:left;">
+0.13**
+</td>
+<td style="text-align:left;">
+0.05
+</td>
+<td style="text-align:left;">
+-0.06
+</td>
+<td style="text-align:left;">
+0.54***
+</td>
+<td style="text-align:left;">
+0.02
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.55
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.52
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> <span class="math inline">\(N\)</span>= 717; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>
+</td>
+</tr>
+</tfoot>
+</table></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+</div>
+<div id="version-03-n712" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Version 03 (N=712)</h2>
+<table>
+<caption>Mode 03: Randomized order.</caption>
+<thead>
+<tr class="header">
+<th>Spanish (original)</th>
+<th>English (translated)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Orden aleatorio</td>
+<td>Randomized order</td>
+</tr>
+</tbody>
+</table>
+<table style="text-align:center">
+<caption>
+<strong>Descriptive statistics</strong>
+</caption>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St. Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+A. pc.effort
+</td>
+<td>
+712
+</td>
+<td>
+3.33
+</td>
+<td>
+1.37
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+B. pc.talent
+</td>
+<td>
+712
+</td>
+<td>
+3.07
+</td>
+<td>
+1.25
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+C. pc.wpart
+</td>
+<td>
+712
+</td>
+<td>
+3.72
+</td>
+<td>
+1.36
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+D. pc.netw
+</td>
+<td>
+712
+</td>
+<td>
+3.90
+</td>
+<td>
+1.24
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+E. pf.effort
+</td>
+<td>
+712
+</td>
+<td>
+4.04
+</td>
+<td>
+1.16
+</td>
+<td>
+1
+</td>
+<td>
+4
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F. pf.talent
+</td>
+<td>
+712
+</td>
+<td>
+3.33
+</td>
+<td>
+1.23
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+G. pf.wpart
+</td>
+<td>
+712
+</td>
+<td>
+2.77
+</td>
+<td>
+1.19
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+H. pf.netw
+</td>
+<td>
+712
+</td>
+<td>
+2.50
+</td>
+<td>
+1.14
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<pre class="r"><code>cor03&lt;-polychoric(dat03)
+rownames(cor03$rho) &lt;-c(&quot;A. pc.effort&quot;, &quot;B. pc.talent&quot;,&quot;C. pc.wpart&quot;,&quot;D. pc.netw&quot;,&quot;E. pf.effort&quot;,&quot;F. pf.talent&quot;,&quot;G. pf.wpart&quot;, &quot;H. pf.netw&quot;)
+colnames(cor03$rho) &lt;-c(&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
+corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre class="r"><code>model03 &lt;- &#39;
+perc_merit=~perc_effort+perc_talent
+perc_nmerit=~perc_wpart+perc_netw
+pref_merit=~pref_effort+pref_talent
+pref_nmerit=~pref_wpart+pref_netw&#39;
+
+fit3_c &lt;- cfa(model = model03,data = dat03,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
+
+fit3_o &lt;- cfa(model = model03,data = dat03,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                       &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                       &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                                                       &quot;pref_wpart&quot;,&quot;pref_netw&quot;),std.lv=FALSE)
+#---------------------------------------------------#
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit3_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit3_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames, caption = &quot;Factor loadings&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.73</td>
+<td align="right">0.70</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.56</td>
+<td align="right">0.65</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.76</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.80</td>
+<td align="right">0.89</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.57</td>
+<td align="right">0.66</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.54</td>
+<td align="right">0.59</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.76</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.71</td>
+<td align="right">0.77</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>NOTE</strong>: fit not very goood (RMSEA .7), no heywood. Try tau-equivalence</p>
+</blockquote>
+<pre class="r"><code>polyw03&lt;- poly(sjlabelled::remove_all_labels(dat03),
+               digits = 2,
+               triangle = &quot;l&quot;,
+               fade.ns = F,
+               remove.spaces = T,
+               string.diag = c(&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;,&quot;$-$&quot;))
+matpolyw03 &lt;- as.data.frame(read_html(x = polyw03[[&quot;page.content&quot;]]) %&gt;% html_table(fill=FALSE)) 
+matpolyw03 &lt;- matpolyw03[-c(9),] 
+
+colnames(matpolyw03) &lt;- c(&quot;vars&quot;,&quot;(A)&quot;,&quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;) 
+
+load03&lt;- data.frame(round(cbind(inspect(fit3_c,what=&quot;std&quot;)$lambda,inspect(fit3_o,what=&quot;std&quot;)$lambda),digits = 2))
+load03[load03==c(0.00)] &lt;- NA; names(load03) &lt;- c(1:4,1:4)
+
+table03&lt;- bind_cols(x = matpolyw03,y = load03)
+   ## %&gt;% mutate(vars=labs)
+
+kable(table03,escape = FALSE,align = &quot;l&quot;,col.names = cnametab) %&gt;% 
+  footnote(general = paste0(paste0(&quot;$N$= &quot;,nobs(fit3_c)),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;%
+  add_header_above(c(&quot; &quot; = 1,&quot;Polychoric correlations&quot;=8, &quot;MLR&quot; = 4, &quot;DWLS&quot; = 4))%&gt;% 
+  add_header_above(c(&quot; &quot; = 9,&quot;Factor loadings&quot;=8)) %&gt;% 
+  # column_spec(column = c(1),width =&quot;7in&quot;,include_thead = T) %&gt;%
+  # column_spec(column = c(2:17),width =&quot;0.5in&quot;,include_thead = T) %&gt;% 
+  kable_styling(full_width = F)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="9">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Polychoric correlations
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+MLR
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+DWLS
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+<ol style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="5" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="6" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="7" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol start="8" style="list-style-type: upper-alpha">
+<li></th>
+<th style="text-align:left;">
+<ol style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="2" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="3" style="list-style-type: decimal">
+<li></th>
+<th style="text-align:left;">
+<ol start="4" style="list-style-type: decimal">
+<li></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+perc_effort
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.73
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.70
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_talent
+</td>
+<td style="text-align:left;">
+0.46***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.56
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.65
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_wpart
+</td>
+<td style="text-align:left;">
+-0.11**
+</td>
+<td style="text-align:left;">
+0.03
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.76
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.81
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+perc_netw
+</td>
+<td style="text-align:left;">
+-0.08
+</td>
+<td style="text-align:left;">
+0.07
+</td>
+<td style="text-align:left;">
+0.72***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.80
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.89
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_effort
+</td>
+<td style="text-align:left;">
+0.27***
+</td>
+<td style="text-align:left;">
+0.17**
+</td>
+<td style="text-align:left;">
+0.25***
+</td>
+<td style="text-align:left;">
+0.32***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.57
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.66
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_talent
+</td>
+<td style="text-align:left;">
+0.10*
+</td>
+<td style="text-align:left;">
+0.22***
+</td>
+<td style="text-align:left;">
+0.24***
+</td>
+<td style="text-align:left;">
+0.24***
+</td>
+<td style="text-align:left;">
+0.39***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.54
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.59
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_wpart
+</td>
+<td style="text-align:left;">
+0.18***
+</td>
+<td style="text-align:left;">
+0.12**
+</td>
+<td style="text-align:left;">
+-0.01
+</td>
+<td style="text-align:left;">
+-0.02
+</td>
+<td style="text-align:left;">
+0.06
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.76
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+pref_netw
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+0.17***
+</td>
+<td style="text-align:left;">
+-0.10*
+</td>
+<td style="text-align:left;">
+-0.04
+</td>
+<td style="text-align:left;">
+-0.02
+</td>
+<td style="text-align:left;">
+0.14***
+</td>
+<td style="text-align:left;">
+0.60***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.71
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+0.77
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> <span class="math inline">\(N\)</span>= 712; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>
+</td>
+</tr>
+</tfoot>
+</table></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol></li>
+</ol>
+<div id="tau-equivalence" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Tau-equivalence</h3>
+<pre class="r"><code>model03.tau &lt;- &#39;
+perc_merit=~ r1*perc_effort+r1*perc_talent
+perc_nmerit=~r2*perc_wpart+ r2*perc_netw
+pref_merit=~ r3*pref_effort+r3*pref_talent
+pref_nmerit=~r4*pref_wpart+ r4*pref_netw&#39;
+
+fit3_c.tau &lt;- cfa(model = model03.tau,data = dat03,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
+
+fit3_o.tau &lt;- cfa(model = model03.tau,data = dat03,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                               &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                               &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                                                               &quot;pref_wpart&quot;,&quot;pref_netw&quot;), std.lv=FALSE)
+#---------------------------------------------------#
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit3_c.tau ) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit3_o.tau) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.61</td>
+<td align="right">0.68</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.66</td>
+<td align="right">0.68</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.75</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.82</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.57</td>
+<td align="right">0.62</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.54</td>
+<td align="right">0.62</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.72</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.75</td>
+<td align="right">0.78</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>kable(rbind(Ordinal    =fitmeasures(fit3_o    )[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+            Ordinal.tau=fitmeasures(fit3_o.tau)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
+      format = &quot;markdown&quot;,
+      digits = 3, caption = &quot;Fit tau-equivalence&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">chisq.scaled</th>
+<th align="right">df</th>
+<th align="right">cfi</th>
+<th align="right">cfi.scaled</th>
+<th align="right">cfi.robust</th>
+<th align="right">rmsea</th>
+<th align="right">rmsea.scaled</th>
+<th align="right">rmsea.robust</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Ordinal</td>
+<td align="right">63.336</td>
+<td align="right">14</td>
+<td align="right">0.991</td>
+<td align="right">0.979</td>
+<td align="right"></td>
+<td align="right">0.053</td>
+<td align="right">0.070</td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">Ordinal.tau</td>
+<td align="right">61.430</td>
+<td align="right">18</td>
+<td align="right">0.992</td>
+<td align="right">0.981</td>
+<td align="right"></td>
+<td align="right">0.044</td>
+<td align="right">0.058</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>kable(anova(fit3_o,fit3_o.tau),
+      format = &quot;markdown&quot;,
+      digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Df</th>
+<th align="left">AIC</th>
+<th align="left">BIC</th>
+<th align="right">Chisq</th>
+<th align="right">Chisq diff</th>
+<th align="right">Df diff</th>
+<th align="right">Pr(&gt;Chisq)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">fit3_o</td>
+<td align="right">14</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="right">41.633</td>
+<td align="right"></td>
+<td align="right"></td>
+<td align="right"></td>
+</tr>
+<tr class="even">
+<td align="left">fit3_o.tau</td>
+<td align="right">18</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="right">43.152</td>
+<td align="right">1.945</td>
+<td align="right">4</td>
+<td align="right">0.746</td>
+</tr>
+</tbody>
+</table>
+<!-- > **NOTE:** El modelo con igualdad de cargas factoriales (en Percepción meritocracia) no deteriora significativamente el ajuste del modelo. -->
+<blockquote>
+<p><strong>NOTE:</strong> The model with equal factor loadings (in Meritocracy Perception) does not significantly deteriorate the model fit.</p>
+</blockquote>
+</div>
+</div>
+<div id="complete-sample-n2141" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Complete sample (N=2141)</h2>
+<table>
+<caption>Mode 04: Complete sample</caption>
+<colgroup>
+<col width="54%" />
+<col width="45%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Spanish (original)</th>
+<th>English (translated)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Orden fijo, según percepción/preferencia</td>
+<td>Fixed order, by perception/preference</td>
+</tr>
+<tr class="even">
+<td>Orden fijo, por tópico</td>
+<td>Fixed order, by topic.</td>
+</tr>
+<tr class="odd">
+<td>Orden aleatorizado</td>
+<td>Randomized order</td>
+</tr>
+</tbody>
+</table>
+<table style="text-align:center">
+<caption>
+<strong>Descriptive statistics</strong>
+</caption>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+Statistic
+</td>
+<td>
+N
+</td>
+<td>
+Mean
+</td>
+<td>
+St. Dev.
+</td>
+<td>
+Min
+</td>
+<td>
+Pctl(25)
+</td>
+<td>
+Median
+</td>
+<td>
+Pctl(75)
+</td>
+<td>
+Max
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+A. pc.effort
+</td>
+<td>
+2141
+</td>
+<td>
+3.20
+</td>
+<td>
+1.38
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+B. pc.talent
+</td>
+<td>
+2141
+</td>
+<td>
+3.02
+</td>
+<td>
+1.16
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+C. pc.wpart
+</td>
+<td>
+2141
+</td>
+<td>
+3.66
+</td>
+<td>
+1.36
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+D. pc.netw
+</td>
+<td>
+2141
+</td>
+<td>
+3.79
+</td>
+<td>
+1.24
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+E. pf.effort
+</td>
+<td>
+2141
+</td>
+<td>
+3.89
+</td>
+<td>
+1.25
+</td>
+<td>
+1
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+F. pf.talent
+</td>
+<td>
+2141
+</td>
+<td>
+3.24
+</td>
+<td>
+1.19
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+G. pf.wpart
+</td>
+<td>
+2141
+</td>
+<td>
+2.69
+</td>
+<td>
+1.18
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+4
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left">
+H. pf.netw
+</td>
+<td>
+2141
+</td>
+<td>
+2.41
+</td>
+<td>
+1.11
+</td>
+<td>
+1
+</td>
+<td>
+2
+</td>
+<td>
+2
+</td>
+<td>
+3
+</td>
+<td>
+5
+</td>
+</tr>
+<tr>
+<td colspan="9" style="border-bottom: 1px solid black">
+</td>
+</tr>
+</table>
+<pre class="r"><code>cor04&lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
+windowsFonts(A = windowsFont(&quot;Times New Roman&quot;))
+rownames(cor04$rho) &lt;-c(
+    &quot;A. Perception Effort&quot;,
+    &quot;B. Perception Talent&quot;,
+    &quot;C. Perception Rich parents&quot;,
+    &quot;D. Perception Contacts&quot;,
+    &quot;E. Preferences Effort&quot;,
+    &quot;F. Preferences Talent&quot;,
+    &quot;G. Preferences Rich parents&quot;,
+    &quot;H. Preferences Contacts&quot;)
+colnames(cor04$rho) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;,&quot;(E)&quot;,&quot;(F)&quot;,&quot;(G)&quot;, &quot;(H)&quot;)
+save(cor04, file = &quot;output/images/correlation.RData&quot;)
+corrplot(
+  cor04$rho,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>png(&quot;output/images/corpoly.png&quot;,
+    width = 18,height = 13,units=&quot;cm&quot;,
+    pointsize=12,bg=&quot;white&quot;,res=300)
+
+corrplot(
+  cor04$rho,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)
+
+dev.off()</code></pre>
+<pre><code>## png 
+##   2</code></pre>
+<pre class="r"><code>model04 &lt;- &#39;
+perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
+pref_nmerit=~pref_wpart +pref_netw&#39;
+
+fit4_c &lt;- cfa(model = model04,data = dat04,estimator=&quot;MLR&quot;,std.lv=FALSE) # Continuous/ estimator ML Robust
+
+fit4_o &lt;- cfa(model = model04,data = dat04,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                       &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                       &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                                                       &quot;pref_wpart&quot;,&quot;pref_netw&quot;),std.lv=FALSE)
+#---------------------------------------------------#
+cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit4_c ) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),y = standardizedsolution(fit4_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames, caption = &quot;Factor loadings&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.75</td>
+<td align="right">0.72</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.62</td>
+<td align="right">0.72</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.77</td>
+<td align="right">0.83</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.85</td>
+<td align="right">0.88</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.76</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.55</td>
+<td align="right">0.63</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.71</td>
+<td align="right">0.80</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.77</td>
+<td align="right">0.76</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception contacts&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference contacts&quot;,
+              &quot;Perception meritocratic&quot;,&quot;Perception non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
+
+semPaths(
+  fit4_o ,
+  whatLabels = &quot;std&quot;,
+  # what = &quot;col&quot;,
+  label.cex = 1,
+  edge.label.cex = 0.7,
+  residuals = F,
+  optimizeLatRes =T,
+  edge.color = &quot;black&quot;,
+  style = &quot;lisrel&quot;,
+  fade = F,
+  nCharNodes = 0,
+  curvePivot = FALSE,
+  curve = 3,
+  rotation = 4,
+  layout = &quot;tree2&quot;,
+  cardinal = &quot;lat cov&quot;,
+  legend.cex = 0.6,
+  label.cex = 1,
+  label.font = 6,
+  edge.label.font = 7,
+  asize = 3,
+  edge.width = 1,
+  sizeMan = 5,
+  sizeLat = 10,
+  width = 22, 
+  height = 15,
+  # nodeNames = nodeNames,
+  intercepts = F, 
+  reorder = F,
+  thresholds = F,
+  fixedStyle =1,
+  nodeLabels = c(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;, &quot;E&quot;, &quot;F&quot;, &quot;G&quot;, &quot;H&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;),
+  filetype = &quot;png&quot;,
+  filename = &quot;output/images/meas02&quot;
+) #arrow size)
+# text(2.5, -1, labels = &quot;Hola&quot;)</code></pre>
+<pre class="r"><code>nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception contacts&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference contacts&quot;,
+              &quot;Perception \n meritocratic&quot;,&quot;Perception \n non meritocratic&quot;,&quot;Preference \n meritocratic&quot;,&quot;Preference \n non meritocratic&quot;)
+
+# graphics.off()
+fm03&lt;- data.frame(v1=fitmeasures(fit4_o, output =&quot;matrix&quot;)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea.scaled&quot;),])
+fm03 &lt;- round(fm03,3)
+par(mai = c(2,2,2,2)) # Set the margin on all sides to 2
+par(mar = c(5, 5, 5, 5)) # Set the margin on all sides to 6
+layout(matrix(c(1, # semPlot
+                1, # semPlot
+                1,
+                1,
+                1,
+                2),# ajuste
+              nrow=6,
+              byrow=TRUE))
+
+layout.show(n = 2)
+semPaths(
+  fit4_o ,
+  # whatLabels = &quot;std&quot;, # Indica si aparecen los valores
+  what = &quot;mod&quot;,
+  label.cex = 1.3, # Tamaño de las etiquetas dentro de los nodos.
+  edge.label.cex =  0.8, #  0.8 Tamaño de los valores estimados.
+  residuals = T,
+  optimizeLatRes =F,
+  edge.color = &quot;black&quot;,
+  style = &quot;lisrel&quot;,
+  nCharNodes = 0,
+  curvePivot = F,
+  curve = 2.5,
+  rotation = 4,
+  layout = &quot;tree2&quot;,
+  cardinal = &quot;lat cov&quot;,
+  legend.cex = 0.6, # 0.6
+  label.cex = 1,
+  label.font = 6,
+  edge.label.font = 14,
+  asize = 3,
+  edge.width = 1.2,
+  sizeMan = 8,# largo manifest
+  sizeMan2= 8,# alto manifest
+  sizeLat = 5.5, # largo de los circulos
+  sizeLat2 = 20, # alto de los circulos
+  residScale = 10,
+  width = 21.5, # 17
+  height = 10, # 10
+  # nodeNames = nodeNames,
+  intercepts = F,
+  reorder = T,
+  thresholds = F,
+  fixedStyle =1,
+  node.height = 1,
+  node.width = 4,
+  label.scale = F,
+  shapeMan = &quot;rectangle&quot;,
+  shapeLat = &quot;ellipse&quot;,
+  nodeLabels = nodeNames,
+  details = T)
+
+ld&lt;- standardizedsolution(fit4_o) %&gt;% select(lhs,op,rhs,est.std) %&gt;% filter(op==&quot;=~&quot;) 
+ld$est.std&lt;- sprintf(&quot;%.2f&quot;, ld$est.std)
+
+#pegar cargas factoriales al plot
+text(x = -0.1,y =  1.00, ld$est.std[1],font = 5,cex = 1.20)
+text(x = -0.1,y =  0.85, ld$est.std[2],font = 5,cex = 1.20)
+text(x = -0.1,y =  0.43, ld$est.std[3],font = 5,cex = 1.20)
+text(x = -0.1,y =  0.26, ld$est.std[4],font = 5,cex = 1.20)
+text(x = -0.1,y = -0.15, ld$est.std[5],font = 5,cex = 1.20)
+text(x = -0.1,y = -0.30, ld$est.std[6],font = 5,cex = 1.20)
+text(x = -0.1,y = -0.73, ld$est.std[7],font = 5,cex = 1.20)
+text(x = -0.1,y = -0.88, ld$est.std[8],font = 5,cex = 1.20)
+
+library(draw) #para hacer rectangulo de fit
+
+adj_y &lt;- 0.6
+adj_x &lt;- 0.2
+drawBox(x = 3.5, y = 1.2-adj_y, width = 7.5, height = 2,fillColor = &quot;grey&quot;,opacity = 0)# marca espacio
+drawBox(x = 3.5, y = 1.4-adj_y, width = 5.5, height = 1,fillColor = &quot;grey&quot;,opacity = 0.5) # crea rectangulo
+
+# paste0(&quot;Estimator DWLS&quot;, &quot;, N=&quot;,nobs(fit4_o))
+# paste0(&quot;Model fit: &quot;, &quot;χ²&quot;,&quot;(&quot;,fm03[2,],&quot;)=&quot;,fm03[1,],&quot;***&quot;,&quot;; CFI=&quot;,fm03[3,],&quot;; RMSEA=&quot;,fm03[4,])
+# paste0(&quot;***p&lt;0.001&quot;)
+
+#pegar texto fit en rectangulo
+
+size &lt;- 10
+
+drawText(x = 1.4+adj_x, y = 1.75-adj_y, text = paste0(&quot;Estimator: DWLS&quot;, &quot;, N=&quot;,nobs(fit4_o)),family = &quot;serif&quot;,size = size)
+drawText(x = 2.3+adj_x, y = 1.59-adj_y, text = paste0(&quot;Model fit: &quot;, &quot;χ²&quot;,&quot;(&quot;,fm03[2,],&quot;)=&quot;,fm03[1,],&quot;***&quot;,&quot;; CFI=&quot;,fm03[3,],&quot;; RMSEA=&quot;,fm03[4,]),family = &quot;serif&quot;,size = size)
+drawText(x = 1.0+adj_x, y = 1.43-adj_y, text = paste0(&quot;***p&lt;0.001&quot;),family = &quot;serif&quot;,size = size)
+
+#guardar en png
+drawExport(&quot;output/images/meas03.png&quot;,units = &quot;cm&quot;,width = 18,height = 15,ppi = 300) </code></pre>
+<pre class="r"><code>latcor&lt;- lavInspect(fit4_o,what = &quot;cor.lv&quot;)
+windowsFonts(A = windowsFont(&quot;Times New Roman&quot;))
+rownames(latcor) &lt;-c(
+  &quot;A. Meritocratic Perception&quot;,
+  &quot;B. Non-Meritocratic Perception&quot;,
+  &quot;C. Meritocratic Preferences&quot;,
+  &quot;D. Non-Meritocratic Preferences&quot;
+)
+colnames(latcor) &lt;-c(&quot;(A)&quot;, &quot;(B)&quot;,&quot;(C)&quot;,&quot;(D)&quot;)
+png(&quot;output/images/latcor.png&quot;,
+    width = 18,height = 13,units=&quot;cm&quot;,
+    pointsize=12,bg=&quot;white&quot;,res=300)
+corrplot(
+  latcor,
+  method = &quot;color&quot;,
+  type = &quot;upper&quot;,
+  tl.col = &quot;black&quot;,
+  addCoef.col = &quot;black&quot;,
+  diag = TRUE,
+  family = &quot;A&quot;, 
+  number.font = 6,
+  tl.cex =0.75,
+  number.cex = 1)
+dev.off()</code></pre>
+<pre><code>## png 
+##   2</code></pre>
+</div>
+</div>
+<div id="tables" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Tables</h1>
+<pre class="r"><code>load04&lt;- data.frame(round(inspect(fit4_o,what=&quot;std&quot;)$lambda,digits = 2))
+load04[load04==c(0.00)] &lt;- NA; names(load04) &lt;- c(1:4)
+
+colnames(matpolyw04) &lt;- c(&quot;Variable&quot;,&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;, &quot;H&quot;) 
+
+sum04b  &lt;- psych::describe(dat04[,-c(1)], fast = T) %&gt;% select(mean,sd,min,max) %&gt;% data.frame() %&gt;% round(digits = 2)
+table04b&lt;- bind_cols(x = sum04b,y = matpolyw04) %&gt;% select(Variable, everything()) %&gt;% mutate(Variable=labs) %&gt;% rename(&quot;Mean&quot;=mean, &quot;SD&quot;=sd, &quot;Min&quot;=min,&quot;Max&quot;=max)
+
+cap01 &lt;- &quot;Descriptive statistic&quot;
+sumdat04&lt;- kable(table04b, escape = FALSE,align = &quot;l&quot;,linesep = &quot;&quot;, caption = cap01) %&gt;% 
+           # column_spec(column = 1,width = &quot;10cm&quot;,width_min = &quot;12cm&quot;,include_thead = TRUE) %&gt;% 
+           footnote(general = paste0(paste0(&quot;$N$= &quot;,&quot;2141&quot;),&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$&quot;),footnote_as_chunk = T) %&gt;% 
+           add_header_above(header = c(&quot; &quot;=5,&quot;Polychoric correlations&quot;= 8)) %&gt;% 
+           kable_styling(full_width = TRUE,font_size = 8,position = &quot;center&quot;);sumdat04</code></pre>
+<table class="table" style="font-size: 8px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+(#tab:tb_desc-corr)Descriptive statistic
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="5">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="8">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Polychoric correlations
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Mean
+</th>
+<th style="text-align:left;">
+SD
+</th>
+<th style="text-align:left;">
+Min
+</th>
+<th style="text-align:left;">
+Max
+</th>
+<th style="text-align:left;">
+A
+</th>
+<th style="text-align:left;">
+B
+</th>
+<th style="text-align:left;">
+C
+</th>
+<th style="text-align:left;">
+D
+</th>
+<th style="text-align:left;">
+E
+</th>
+<th style="text-align:left;">
+F
+</th>
+<th style="text-align:left;">
+G
+</th>
+<th style="text-align:left;">
+H
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A. Who the more they try they manage to get bigger rewards that those who striveless.
+</td>
+<td style="text-align:left;">
+3.20
+</td>
+<td style="text-align:left;">
+1.38
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.
+</td>
+<td style="text-align:left;">
+3.02
+</td>
+<td style="text-align:left;">
+1.16
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0.52***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C. Who they have rich parents manage to get out ahead.
+</td>
+<td style="text-align:left;">
+3.66
+</td>
+<td style="text-align:left;">
+1.36
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+-0.06*
+</td>
+<td style="text-align:left;">
+0.07**
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D. Who they have good contacts they manage to get out ahead.
+</td>
+<td style="text-align:left;">
+3.79
+</td>
+<td style="text-align:left;">
+1.24
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+-0.02
+</td>
+<td style="text-align:left;">
+0.05**
+</td>
+<td style="text-align:left;">
+0.73***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E. Who the more they try they should get greater rewards than those who they try less.
+</td>
+<td style="text-align:left;">
+3.89
+</td>
+<td style="text-align:left;">
+1.25
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0.40***
+</td>
+<td style="text-align:left;">
+0.28***
+</td>
+<td style="text-align:left;">
+0.30***
+</td>
+<td style="text-align:left;">
+0.34***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F. Who possess more talent they should get greater rewards than those who possess less talent.
+</td>
+<td style="text-align:left;">
+3.24
+</td>
+<td style="text-align:left;">
+1.19
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0.17***
+</td>
+<td style="text-align:left;">
+0.31***
+</td>
+<td style="text-align:left;">
+0.27***
+</td>
+<td style="text-align:left;">
+0.26***
+</td>
+<td style="text-align:left;">
+0.49***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G. It’s fine that those who have rich parents get ahead
+</td>
+<td style="text-align:left;">
+2.69
+</td>
+<td style="text-align:left;">
+1.18
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0.15***
+</td>
+<td style="text-align:left;">
+0.14***
+</td>
+<td style="text-align:left;">
+0.03
+</td>
+<td style="text-align:left;">
+0.05**
+</td>
+<td style="text-align:left;">
+0.07**
+</td>
+<td style="text-align:left;">
+0.15***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H. Is well that those who have good contacts get ahead.
+</td>
+<td style="text-align:left;">
+2.41
+</td>
+<td style="text-align:left;">
+1.11
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0.16***
+</td>
+<td style="text-align:left;">
+0.15***
+</td>
+<td style="text-align:left;">
+-0.09**
+</td>
+<td style="text-align:left;">
+-0.03
+</td>
+<td style="text-align:left;">
+-0.01
+</td>
+<td style="text-align:left;">
+0.10***
+</td>
+<td style="text-align:left;">
+0.61***
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(-\)</span>
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> <span class="math inline">\(N\)</span>= 2141; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>
+</td>
+</tr>
+</tfoot>
+</table>
+<pre class="r"><code>save(sumdat04,file = &quot;output/tables/sumdat04.RData&quot;)</code></pre>
+<pre class="r"><code>tb.load&lt;- data.frame(round(cbind(inspect(fit1_o,what=&quot;std&quot;)$lambda,
+                                 inspect(fit2_o,what=&quot;std&quot;)$lambda,
+                                 inspect(fit3_o,what=&quot;std&quot;)$lambda),
+                           digits = 2))
+tb.load[tb.load==c(0.00)] &lt;- NA; names(tb.load) &lt;- c(paste0(&quot;M1.&quot;,1:4),paste0(&quot;M2.&quot;,1:4),paste0(&quot;M3.&quot;,1:4))
+
+for (i in names(tb.load)) {
+  # tb.load[,i] &lt;- sjlabelled::as_character(tb.load[,i])
+  tb.load[,i] &lt;- sprintf(tb.load[,i], fmt = &#39;%#.2f&#39;)
+}
+tb.load[tb.load==&quot;NA&quot;] &lt;- &quot;&quot;
+
+#-------#
+fm01&lt;- data.frame(t(data.frame(fitmeasures(fit1_o, output =&quot;matrix&quot;)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea.scaled&quot;),]))); row.names(fm01) =&quot;M1.1&quot;
+fm02&lt;- data.frame(t(data.frame(fitmeasures(fit2_o, output =&quot;matrix&quot;)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea.scaled&quot;),]))); row.names(fm02) =&quot;M2.1&quot;
+fm03&lt;- data.frame(t(data.frame(fitmeasures(fit3_o, output =&quot;matrix&quot;)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea.scaled&quot;),]))); row.names(fm03) =&quot;M3.1&quot;
+
+#------chi2, df------#
+fm04&lt;- round(rbind(fm01,fm02,fm03),3)
+fm04.1 &lt;- fm04 %&gt;% select(chisq.scaled,df) 
+fm04.1$chisq.scaled &lt;- round(x = fm04.1$chisq.scaled,digits = 1)
+fm04.1$df &lt;- round(x = fm04.1$df,digits = 0)
+fm04.1$chi2df &lt;- paste0(fm04.1$chisq.scaled,&quot;(&quot;,fm04.1$df,&quot;)&quot;)
+fm04.1 &lt;- select(fm04.1,&quot;chi2df&quot;)
+for (i in names(fm04.1)) {
+  fm04.1[,i] &lt;- as.character(fm04.1[,i])
+}
+
+#------CFI, RMSEA------#
+fm04.2 &lt;- fm04 %&gt;% select(cfi.scaled,rmsea.scaled) 
+for (i in names(fm04.2)) {
+  fm04.2[,i] &lt;- sprintf(fm04.2[,i], fmt = &#39;%#.3f&#39;)
+}
+
+fm.df      &lt;- bind_cols(fm04.1,fm04.2)
+fm.df$nobs &lt;- c(nobs(fit1_o),nobs(fit2_o),nobs(fit3_o)) 
+fm.df &lt;- data.frame(t(fm.df)); colnames(fm.df) &lt;- c(&quot;M1.2&quot;,&quot;M2.2&quot;,&quot;M3.2&quot;)
+
+
+#------ merge ------#
+tb.fm&lt;- bind_rows(tb.load,fm.df)
+tb.fm&lt;- tb.fm %&gt;% mutate(vars=c(labs,&quot;$\\chi^2\\text{(df)}$&quot;,&quot;$\\text{CFI}$&quot;,&quot;$\\text{RMSEA}$&quot;,&quot;$N$&quot;)) %&gt;% select(vars,everything())
+#--table---#
+tb.col  &lt;- c(&quot;Variables&quot;,1:4,1:4,1:4)
+tb.foot &lt;- paste0(&quot;; p&lt;0.05=$*$; p&lt;0.01=$**$; p&lt;0.001=$***$. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)&quot;)
+tb.caption &lt;- &quot;Factor loadings and fit measures&quot; 
+
+tb.fm01&lt;- kable(tb.fm,escape = FALSE,align = &quot;lcccccccccccc&quot;,col.names = tb.col, caption = tb.caption) %&gt;% 
+          kable_styling(full_width = F,font_size = 9) %&gt;% 
+          # column_spec(column = 1,width = &quot;10cm&quot;,width_min = &quot;12cm&quot;,include_thead = TRUE) %&gt;% 
+          # column_spec(column = 2:13,width = &quot;1cm&quot;,width_min = &quot;1.3cm&quot;,include_thead = TRUE) %&gt;% 
+          add_header_above(header = c(&quot; &quot;=1,&quot;Version 1&quot;= 4,&quot;Version 2&quot;= 4,&quot;Version 3&quot;= 4)) %&gt;% 
+          add_header_above(header = c(&quot; &quot;=1,&quot;Factor loadings&quot;= 12)) %&gt;% 
+          row_spec(row = 8,hline_after = TRUE) %&gt;%
+          add_indent(c(9:12)) %&gt;% 
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01</code></pre>
+<table class="table" style="font-size: 9px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+(#tab:tb_loads-fitm)Factor loadings and fit measures
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="12">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Version 1
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Version 2
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Version 3
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Variables
+</th>
+<th style="text-align:center;">
+1
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+3
+</th>
+<th style="text-align:center;">
+4
+</th>
+<th style="text-align:center;">
+1
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+3
+</th>
+<th style="text-align:center;">
+4
+</th>
+<th style="text-align:center;">
+1
+</th>
+<th style="text-align:center;">
+2
+</th>
+<th style="text-align:center;">
+3
+</th>
+<th style="text-align:center;">
+4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A. Who the more they try they manage to get bigger rewards that those who striveless.
+</td>
+<td style="text-align:center;">
+0.69
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.76
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.70
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.
+</td>
+<td style="text-align:center;">
+0.81
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.72
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.65
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C. Who they have rich parents manage to get out ahead.
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.84
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.81
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D. Who they have good contacts they manage to get out ahead.
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.94
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.81
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.89
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E. Who the more they try they should get greater rewards than those who they try less.
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.85
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.82
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.66
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F. Who possess more talent they should get greater rewards than those who possess less talent.
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.64
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.65
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.59
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G. It’s fine that those who have rich parents get ahead
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.55
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.04
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H. Is well that those who have good contacts get ahead.
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+1.26
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.52
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+<span class="math inline">\(\chi^2\text{(df)}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+42.3(14)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+107.6(14)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+63.3(14)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+<span class="math inline">\(\text{CFI}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.993
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.961
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.979
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+<span class="math inline">\(\text{RMSEA}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.053
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.097
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.070
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left; padding-left:  2em;" indentlevel="1">
+<span class="math inline">\(N\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+712
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+717
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+712
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> ; p&lt;0.05=<span class="math inline">\(*\)</span>; p&lt;0.01=<span class="math inline">\(**\)</span>; p&lt;0.001=<span class="math inline">\(***\)</span>. Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)
+</td>
+</tr>
+</tfoot>
+</table>
+<pre class="r"><code>save(tb.fm01,file = &quot;output/tables/tb.fm01.RData&quot;)
+
+
+save(tb.fm,file = &quot;output/tables/tb.fm.RData&quot;)
+save(fm.df,file = &quot;output/tables/fm.df.RData&quot;)
+save(tb.load,file = &quot;output/tables/tb.load.RData&quot;)</code></pre>
+</div>
+<div id="summary" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Summary</h1>
+<div id="correlations-plots" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Correlations plots</h2>
+<pre class="r"><code>corrplot(cor01$rho,method = &quot;color&quot; ,type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+corrplot(cor02$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)
+corrplot(cor03$rho,method = &quot;color&quot;, type = &quot;upper&quot;, tl.col = &quot;black&quot;, addCoef.col = &quot;black&quot;,diag = FALSE)</code></pre>
+<div class="figure">
+<img src="prod_analysis-cfa_files/figure-html/compare%20corr-1.png" alt="Mode 01, 02 and 03" width="33%" /><img src="prod_analysis-cfa_files/figure-html/compare%20corr-2.png" alt="Mode 01, 02 and 03" width="33%" /><img src="prod_analysis-cfa_files/figure-html/compare%20corr-3.png" alt="Mode 01, 02 and 03" width="33%" />
+<p class="caption">
+(#fig:compare corr)Mode 01, 02 and 03
+</p>
+</div>
+</div>
+<div id="measurement-model" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Measurement model</h2>
+<pre class="r"><code>model01 &lt;- &#39;perc_merit=~perc_effort+perc_talent
+            perc_nmerit=~perc_wpart+perc_netw
+            pref_merit=~pref_effort+pref_talent
+            pref_nmerit=~pref_wpart+pref_netw&#39;
+
+plot01 &lt;- cfa(model = model01,data = dat01,estimator=&quot;MLR&quot;,std.lv=TRUE)
+
+nodeNames &lt;-c(&quot;Perception effort&quot;,&quot;Perception talent&quot;,&quot;Perception rich family&quot;,&quot;Perception contacts&quot;,
+              &quot;Preference effort&quot;,&quot;Preference talent&quot;,&quot;Preference rich family&quot;,&quot;Preference contacts&quot;,
+              &quot;Perception meritocratic&quot;,&quot;Perception non meritocratic&quot;,&quot;Preference meritocratic&quot;,&quot;Preference non meritocratic&quot;)
+
+dir.create(&quot;output/images&quot;)
+semPaths(plot01,
+         style = &quot;lisrel&quot;,
+         fade=FALSE,
+         edge.color = &quot;black&quot;,
+         nCharNodes = 0,
+         curvePivot = FALSE,
+         curve = 2,
+         rotation = 4,
+         layout = &quot;tree3&quot;,
+         cardinal = &quot;lat cov&quot;,
+         legend.cex = 0.6,
+         label.cex =1,
+         reorder = FALSE,
+         nodeNames = nodeNames,
+         nodeLabels = c(&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;D&quot;,&quot;E&quot;,&quot;F&quot;,&quot;G&quot;,&quot;H&quot;,&quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;),
+         label.font = 6,
+         edge.label.font= 1,
+         asize = 3, #arrow size
+         edge.width =1,
+         sizeMan=5,
+         sizeLat = 10,
+         filetype =&quot;png&quot;,
+         width = 12,
+         height= 10,
+         filename = &quot;output/images/meas01&quot;)</code></pre>
+<p><img src="../output/images/meas01.png" /></p>
+</div>
+<div id="fit-indices-wave-01" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Fit indices wave 01</h2>
+<pre class="r"><code>sum_fit&lt;- bind_rows(fitmeasures(fit1_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit2_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit2_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit3_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit3_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit4_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+                    fitmeasures(fit4_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)])
+sum_fit$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;,&quot;Model 4&quot;)
+sum_fit$est &lt;- c(&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;,&quot;MLR&quot;,&quot;DWLS&quot;)
+sum_fit &lt;- select(sum_fit,mod,est,everything())
+colnames &lt;- c(&quot;Model&quot;,&quot;Estimator&quot;,&quot;$\\chi^2$&quot;,&quot;df&quot;,&quot;CFI&quot;,&quot;CFI.sca&quot;,&quot;CFI.rob&quot;,&quot;RMSEA&quot;,&quot;RMSEA.sca&quot;,&quot;RMSEA.rob&quot;)
+
+
+sumtable01&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices wave 01&quot;,col.names = colnames,escape = FALSE) %&gt;%
+  kable_styling(full_width = F)  %&gt;%
+      collapse_rows(columns = 1,valign = &quot;middle&quot;)  %&gt;%
+      footnote(number = c(&quot;Model 1: fixed order by percepction/preference&quot;,
+                          &quot;Model 2: fixed order by topic (i.e: effort)&quot;,
+                          &quot;Model 3: Randomized order&quot;,
+                          &quot;Model 4: Complete sample&quot;));sumtable01</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-22">Table 3.1: </span>Summary fit indices wave 01
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI
+</th>
+<th style="text-align:right;">
+CFI.sca
+</th>
+<th style="text-align:right;">
+CFI.rob
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+<th style="text-align:right;">
+RMSEA.sca
+</th>
+<th style="text-align:right;">
+RMSEA.rob
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Model 1
+</td>
+<td style="text-align:left;">
+MLR
+</td>
+<td style="text-align:right;">
+39.029
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.982
+</td>
+<td style="text-align:right;">
+0.981
+</td>
+<td style="text-align:right;">
+0.983
+</td>
+<td style="text-align:right;">
+0.054
+</td>
+<td style="text-align:right;">
+0.050
+</td>
+<td style="text-align:right;">
+0.052
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+42.276
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.998
+</td>
+<td style="text-align:right;">
+0.993
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Model 2
+</td>
+<td style="text-align:left;">
+MLR
+</td>
+<td style="text-align:right;">
+107.824
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.923
+</td>
+<td style="text-align:right;">
+0.907
+</td>
+<td style="text-align:right;">
+0.922
+</td>
+<td style="text-align:right;">
+0.098
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+<td style="text-align:right;">
+0.098
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+107.573
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.984
+</td>
+<td style="text-align:right;">
+0.961
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Model 3
+</td>
+<td style="text-align:left;">
+MLR
+</td>
+<td style="text-align:right;">
+57.590
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.951
+</td>
+<td style="text-align:right;">
+0.941
+</td>
+<td style="text-align:right;">
+0.951
+</td>
+<td style="text-align:right;">
+0.068
+</td>
+<td style="text-align:right;">
+0.066
+</td>
+<td style="text-align:right;">
+0.068
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+63.336
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.991
+</td>
+<td style="text-align:right;">
+0.979
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;vertical-align: middle !important;" rowspan="2">
+Model 4
+</td>
+<td style="text-align:left;">
+MLR
+</td>
+<td style="text-align:right;">
+181.105
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.953
+</td>
+<td style="text-align:right;">
+0.943
+</td>
+<td style="text-align:right;">
+0.953
+</td>
+<td style="text-align:right;">
+0.076
+</td>
+<td style="text-align:right;">
+0.075
+</td>
+<td style="text-align:right;">
+0.076
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+200.772
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.990
+</td>
+<td style="text-align:right;">
+0.977
+</td>
+<td style="text-align:right;">
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+<td style="text-align:right;">
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> Model 1: fixed order by percepction/preference
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> Model 2: fixed order by topic (i.e: effort)
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> Model 3: Randomized order
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> Model 4: Complete sample
+</td>
+</tr>
+</tfoot>
+</table>
+<pre class="r"><code># Save sumamry table wave 01------------------------------#
+# as_image(sumtable01,file = &quot;output/sumtablew01.png&quot;)
+# save_kable(sumtable01,file = &quot;output/tables/sumtablew01.html&quot;,self_contained = FALSE)</code></pre>
+<pre class="r"><code>save(fit4_o,file = &quot;output/tables/fit4_o.RData&quot;)
+save(fit3_o,file = &quot;output/tables/fit3_o.RData&quot;)
+save(fit2_o,file = &quot;output/tables/fit2_o.RData&quot;)
+save(fit1_o,file = &quot;output/tables/fit1_o.RData&quot;)
+
+sum_fit&lt;- bind_rows(fitmeasures(fit4_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit1_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit2_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)],
+                    fitmeasures(fit3_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi.scaled&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;)])
+sum_fit$mod &lt;- c(&quot;Model 1&quot;,&quot;Model 2&quot;,&quot;Model 3&quot;,&quot;Model 4&quot;)
+sum_fit$est &lt;- c(&quot;DWLS&quot;,&quot;DWLS&quot;,&quot;DWLS&quot;,&quot;DWLS&quot;)
+sum_fit &lt;- select(sum_fit,mod,est,everything())
+colnames &lt;- c(&quot;Model&quot;,&quot;Estimator&quot;,&quot;$\\chi^2$&quot;,&quot;df&quot;,&quot;CFI.sca&quot;,&quot;RMSEA&quot;,&quot;RMSEA.sca&quot;)
+
+
+sumtable02&lt;- kable(sum_fit,digits = 3,format = &quot;html&quot;,row.names = F,booktabs=T, caption = &quot;Summary fit indices&quot;,col.names = colnames,escape = FALSE) %&gt;%
+  kable_styling(full_width = F)  %&gt;%
+      collapse_rows(columns = 1,valign = &quot;middle&quot;)  %&gt;%
+      footnote(number = c(&quot;Model 1: Complete sample&quot;,
+                          &quot;Model 2: fixed order by percepction/preference&quot;,
+                          &quot;Model 3:  fixed order by topic (i.e: effort)&quot;,
+                          &quot;Model 4: Randomized order&quot;));sumtable02</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-23">Table 3.2: </span>Summary fit indices
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI.sca
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+<th style="text-align:right;">
+RMSEA.sca
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Model 1
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+200.772
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.977
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.079
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 2
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+42.276
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.993
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 3
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+107.573
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.961
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+<td style="text-align:right;">
+0.097
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Model 4
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+63.336
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.979
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+<td style="text-align:right;">
+0.070
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>1</sup> Model 1: Complete sample
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>2</sup> Model 2: fixed order by percepction/preference
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>3</sup> Model 3: fixed order by topic (i.e: effort)
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup>4</sup> Model 4: Randomized order
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div id="other-analyses" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Other analyses</h2>
+<div id="multigroup-cfa" class="section level3" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Multigroup CFA</h3>
+<ul>
+<li>The group specification correspond to the application modality of the scale.</li>
+</ul>
+<pre class="r"><code>model04 &lt;- &#39;
+perc_merit =~ perc_effort + perc_talent
+perc_nmerit=~ perc_wpart  + perc_netw
+pref_merit =~ pref_effort + pref_talent
+pref_nmerit=~ pref_wpart  + pref_netw&#39;
+
+fit4_c_mg &lt;- cfa(model = model04,data = dat04,estimator=&quot;MLR&quot;,std.lv=FALSE,group = &quot;grupo&quot;) # Continuous/ estimator ML Robust
+fit4_o_mg &lt;- cfa(model = model04,data = dat04,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,
+                                                          &quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                          &quot;pref_effort&quot;,&quot;pref_talent&quot;,
+                                                          &quot;pref_wpart&quot;,&quot;pref_netw&quot;),std.lv=FALSE, group = &quot;grupo&quot;)
+#---------------------------------------------------#
+kable(rbind(Continuous=fitmeasures(fit4_c_mg)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+            Ordinal=  fitmeasures(fit4_o_mg)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
+      format = &quot;markdown&quot;,digits = 3,caption = &quot;Fit indices&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">chisq.scaled</th>
+<th align="right">df</th>
+<th align="right">cfi</th>
+<th align="right">cfi.scaled</th>
+<th align="right">cfi.robust</th>
+<th align="right">rmsea</th>
+<th align="right">rmsea.scaled</th>
+<th align="right">rmsea.robust</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Continuous</td>
+<td align="right">202.373</td>
+<td align="right">42</td>
+<td align="right">0.955</td>
+<td align="right">0.947</td>
+<td align="right">0.955</td>
+<td align="right">0.076</td>
+<td align="right">0.073</td>
+<td align="right">0.075</td>
+</tr>
+<tr class="even">
+<td align="left">Ordinal</td>
+<td align="right">212.262</td>
+<td align="right">42</td>
+<td align="right">0.992</td>
+<td align="right">0.981</td>
+<td align="right"></td>
+<td align="right">0.056</td>
+<td align="right">0.075</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>gr01=standardizedsolution(fit4_c_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std)
+gr02=standardizedsolution(fit4_o_mg) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(group,lhs,rhs,est.std)
+gr01$group=dplyr::recode(gr01$group, `1` = &quot;mod03&quot;, `2` = &quot;mod02&quot;, `3` = &quot;mod01&quot;)
+gr02$group=dplyr::recode(gr02$group, `1` = &quot;mod03&quot;, `2` = &quot;mod02&quot;, `3` = &quot;mod01&quot;)
+
+cnames &lt;- c(&quot;Grupo&quot;,&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x =gr01 ,
+                y =gr02 ,
+                c(&quot;group&quot;,&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings by group&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Grupo</th>
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">mod03</td>
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.73</td>
+<td align="right">0.70</td>
+</tr>
+<tr class="even">
+<td align="left">mod03</td>
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.56</td>
+<td align="right">0.65</td>
+</tr>
+<tr class="odd">
+<td align="left">mod03</td>
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.76</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="even">
+<td align="left">mod03</td>
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.80</td>
+<td align="right">0.89</td>
+</tr>
+<tr class="odd">
+<td align="left">mod03</td>
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.57</td>
+<td align="right">0.66</td>
+</tr>
+<tr class="even">
+<td align="left">mod03</td>
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.54</td>
+<td align="right">0.59</td>
+</tr>
+<tr class="odd">
+<td align="left">mod03</td>
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.76</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="even">
+<td align="left">mod03</td>
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.71</td>
+<td align="right">0.77</td>
+</tr>
+<tr class="odd">
+<td align="left">mod02</td>
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.82</td>
+<td align="right">0.76</td>
+</tr>
+<tr class="even">
+<td align="left">mod02</td>
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.59</td>
+<td align="right">0.72</td>
+</tr>
+<tr class="odd">
+<td align="left">mod02</td>
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.74</td>
+<td align="right">0.84</td>
+</tr>
+<tr class="even">
+<td align="left">mod02</td>
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.80</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="odd">
+<td align="left">mod02</td>
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.83</td>
+<td align="right">0.82</td>
+</tr>
+<tr class="even">
+<td align="left">mod02</td>
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.54</td>
+<td align="right">0.65</td>
+</tr>
+<tr class="odd">
+<td align="left">mod02</td>
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.88</td>
+<td align="right">1.04</td>
+</tr>
+<tr class="even">
+<td align="left">mod02</td>
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.55</td>
+<td align="right">0.52</td>
+</tr>
+<tr class="odd">
+<td align="left">mod01</td>
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.70</td>
+<td align="right">0.69</td>
+</tr>
+<tr class="even">
+<td align="left">mod01</td>
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.72</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="odd">
+<td align="left">mod01</td>
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.80</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="left">mod01</td>
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.92</td>
+<td align="right">0.94</td>
+</tr>
+<tr class="odd">
+<td align="left">mod01</td>
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.82</td>
+<td align="right">0.85</td>
+</tr>
+<tr class="even">
+<td align="left">mod01</td>
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.58</td>
+<td align="right">0.64</td>
+</tr>
+<tr class="odd">
+<td align="left">mod01</td>
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.46</td>
+<td align="right">0.55</td>
+</tr>
+<tr class="even">
+<td align="left">mod01</td>
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">1.37</td>
+<td align="right">1.26</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="second-order-cfa" class="section level3" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Second order CFA</h3>
+<div id="so-cfa-perception-and-preference" class="section level4" number="3.4.2.1">
+<h4><span class="header-section-number">3.4.2.1</span> SO-CFA Perception and Preference</h4>
+<pre class="r"><code>model04b1or &lt;- &#39;
+perc_merit=~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit=~ pref_effort+pref_talent
+pref_nmerit=~pref_wpart +pref_netw
+percep=~ perc_merit + perc_nmerit
+prefer=~ pref_merit + pref_nmerit&#39;
+
+fit4a_c &lt;- cfa(model = model04b1or,data = dat04, estimator=&quot;MLR&quot;)
+
+fit4b_c &lt;- cfa(model = model04b1or,data = dat04,ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,&quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                                                            &quot;pref_effort&quot;,&quot;pref_talent&quot;,&quot;pref_wpart&quot;,&quot;pref_netw&quot;))
+
+#---------------------------------------------------#
+kable(rbind(Continuous=fitmeasures(fit4a_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)],
+            Ordinal= fitmeasures(fit4b_c)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">chisq.scaled</th>
+<th align="right">df</th>
+<th align="right">cfi</th>
+<th align="right">cfi.scaled</th>
+<th align="right">cfi.robust</th>
+<th align="right">rmsea</th>
+<th align="right">rmsea.scaled</th>
+<th align="right">rmsea.robust</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Continuous</td>
+<td align="right">192.862</td>
+<td align="right">15</td>
+<td align="right">0.947</td>
+<td align="right">0.939</td>
+<td align="right">0.948</td>
+<td align="right">0.078</td>
+<td align="right">0.074</td>
+<td align="right">0.078</td>
+</tr>
+<tr class="even">
+<td align="left">Ordinal</td>
+<td align="right">249.925</td>
+<td align="right">15</td>
+<td align="right">0.983</td>
+<td align="right">0.971</td>
+<td align="right"></td>
+<td align="right">0.077</td>
+<td align="right">0.086</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (MLR)&quot;,&quot;Loading (DWLS)&quot;)
+kable(left_join(x = standardizedsolution(fit4a_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                y = standardizedsolution(fit4b_c) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+                c(&quot;lhs&quot;,&quot;rhs&quot;)),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (MLR)</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.75</td>
+<td align="right">0.72</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.61</td>
+<td align="right">0.72</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.76</td>
+<td align="right">0.82</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.85</td>
+<td align="right">0.89</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.76</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.55</td>
+<td align="right">0.62</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">0.90</td>
+<td align="right">1.07</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.61</td>
+<td align="right">0.57</td>
+</tr>
+<tr class="odd">
+<td align="left">percep</td>
+<td align="left">perc_merit</td>
+<td align="right">0.17</td>
+<td align="right">0.15</td>
+</tr>
+<tr class="even">
+<td align="left">percep</td>
+<td align="left">perc_nmerit</td>
+<td align="right">0.14</td>
+<td align="right">0.11</td>
+</tr>
+<tr class="odd">
+<td align="left">prefer</td>
+<td align="left">pref_merit</td>
+<td align="right">0.69</td>
+<td align="right">0.77</td>
+</tr>
+<tr class="even">
+<td align="left">prefer</td>
+<td align="left">pref_nmerit</td>
+<td align="right">0.18</td>
+<td align="right">0.17</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>NOTE:</strong> Second order factor loads are low. The fit of the model is not good.</p>
+</blockquote>
+</div>
+<div id="so-cfa-meritocratic-y-non-meritocratic" class="section level4" number="3.4.2.2">
+<h4><span class="header-section-number">3.4.2.2</span> SO-CFA Meritocratic y Non-meritocratic</h4>
+<pre class="r"><code>model04b2or &lt;-&#39;perc_merit=~ perc_effort+perc_talent
+               perc_nmerit=~perc_wpart +perc_netw
+               pref_merit=~ pref_effort+pref_talent
+               pref_nmerit=~pref_wpart +pref_netw
+               merit =~ perc_merit  + pref_merit
+               nmerit=~ perc_nmerit + pref_nmerit&#39;
+
+# fit4b_c &lt;- cfa(model = model04b2or,data = dat04,estimator=&quot;MLR&quot;) # No converge
+
+fit4b_o &lt;- cfa(model = model04b2or,data = dat04,
+               ordered = c(&quot;perc_effort&quot;,&quot;perc_talent&quot;,&quot;perc_wpart&quot;,&quot;perc_netw&quot;,
+                           &quot;pref_effort&quot;,&quot;pref_talent&quot;,&quot;pref_wpart&quot;,&quot;pref_netw&quot;))
+
+#---------------------------------------------------#
+kable(rbind(Ordinal=fitmeasures(fit4b_o)[c(&quot;chisq.scaled&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;cfi.scaled&quot;,&quot;cfi.robust&quot;,&quot;rmsea&quot;,&quot;rmsea.scaled&quot;,&quot;rmsea.robust&quot;)]),
+      format = &quot;markdown&quot;,digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">chisq.scaled</th>
+<th align="right">df</th>
+<th align="right">cfi</th>
+<th align="right">cfi.scaled</th>
+<th align="right">cfi.robust</th>
+<th align="right">rmsea</th>
+<th align="right">rmsea.scaled</th>
+<th align="right">rmsea.robust</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Ordinal</td>
+<td align="right">361.273</td>
+<td align="right">15</td>
+<td align="right">0.976</td>
+<td align="right">0.957</td>
+<td align="right"></td>
+<td align="right">0.091</td>
+<td align="right">0.104</td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>cnames &lt;- c(&quot;Factor&quot;,&quot;Indicator&quot;,&quot;Loading (DWLS)&quot;)
+kable(standardizedsolution(fit4b_o) %&gt;% filter(op==&quot;=~&quot;) %&gt;% select(lhs,rhs,est.std),
+      format = &quot;markdown&quot;,digits = 2,col.names = cnames,caption = &quot;Factor loadings&quot;)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Factor</th>
+<th align="left">Indicator</th>
+<th align="right">Loading (DWLS)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">perc_merit</td>
+<td align="left">perc_effort</td>
+<td align="right">0.70</td>
+</tr>
+<tr class="even">
+<td align="left">perc_merit</td>
+<td align="left">perc_talent</td>
+<td align="right">0.74</td>
+</tr>
+<tr class="odd">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_wpart</td>
+<td align="right">0.83</td>
+</tr>
+<tr class="even">
+<td align="left">perc_nmerit</td>
+<td align="left">perc_netw</td>
+<td align="right">0.88</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_merit</td>
+<td align="left">pref_effort</td>
+<td align="right">0.78</td>
+</tr>
+<tr class="even">
+<td align="left">pref_merit</td>
+<td align="left">pref_talent</td>
+<td align="right">0.63</td>
+</tr>
+<tr class="odd">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_wpart</td>
+<td align="right">1.07</td>
+</tr>
+<tr class="even">
+<td align="left">pref_nmerit</td>
+<td align="left">pref_netw</td>
+<td align="right">0.57</td>
+</tr>
+<tr class="odd">
+<td align="left">merit</td>
+<td align="left">perc_merit</td>
+<td align="right">0.35</td>
+</tr>
+<tr class="even">
+<td align="left">merit</td>
+<td align="left">pref_merit</td>
+<td align="right">1.68</td>
+</tr>
+<tr class="odd">
+<td align="left">nmerit</td>
+<td align="left">perc_nmerit</td>
+<td align="right">0.14</td>
+</tr>
+<tr class="even">
+<td align="left">nmerit</td>
+<td align="left">pref_nmerit</td>
+<td align="right">0.05</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>NOTE:</strong> The model estimated with MLR with second order factors “meritocracy / non meritocracy” does not converge. The model estimated through DWLS converges, has very low loads and a very high one (merit ~ pref_merit). Fit is bad (RMSEA&gt; .10)</p>
+</blockquote>
+<!-- # Wave 02 {.tabset .tabset-fade .tabset-pills} -->
+<!-- Each sample correspond to one of the three conditions generated by the randomized assignment. -->
+<!-- 1. **Control group:** the group that has been assigned to the control group (placebo condition) -->
+<!-- 2. **Poverty condition sample** the group that has been assigned to the Poverty treatment condition. -->
+<!-- 3. **Inequality condition sample:** the group that has been assigned to the Inequality treatment condition. -->
+<!-- 4. **Complete sample:** Control, Poverty and Inequality treatment. -->
+<!-- ```{r} -->
+<!-- data02 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola2.sav",verbose = FALSE) -->
+<!-- load(file = "input/data/proc/datawide.RData") -->
+<!-- dat01 <- data02 %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+<!-- **ATE on observed indicators** -->
+<!-- ```{r, out.width="75%",results='asis'} -->
+<!-- m01<- lm(perc_effort_w2~treat,data = wide01) -->
+<!-- m02<- lm(perc_talent_w2~treat,data = wide01) -->
+<!-- m03<- lm(perc_wpart_w2~treat, data = wide01) -->
+<!-- m04<- lm(perc_netw_w2~treat,  data = wide01) -->
+<!-- #--------------------------------------------# -->
+<!-- m05<- lm(pref_effort_w2~treat,data = wide01) -->
+<!-- m06<- lm(pref_talent_w2~treat,data = wide01) -->
+<!-- m07<- lm(pref_wpart_w2 ~treat, data = wide01) -->
+<!-- m08<- lm(pref_netw_w2  ~treat,  data = wide01) -->
+<!-- #--------------------------------------------# -->
+<!-- stargazer::stargazer(m01,m02,m03,m04,type = "html") -->
+<!-- stargazer::stargazer(m05,m06,m07,m08,type = "html") -->
+<!-- ``` -->
+<!-- > **NOTE**: There are no statistically significant effects of the treatment conditions on the observed indicators of the meritocracy scale. -->
+<!-- ## Control group -->
+<!-- ```{r} -->
+<!-- w02con <- data02 %>% filter(FL_6_DO_Control==1) %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+<!-- ```{r results='asis'} -->
+<!-- stargazer(w02con,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- corw02_1<-polychoric(w02con) -->
+<!-- rownames(corw02_1$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(corw02_1$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(corw02_1$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+<!-- fitw02a_c <- cfa(model = model03,data = w02con,estimator="MLR") # Continuous/ estimator ML Robust -->
+<!-- fitw02a_o <- cfa(model = model03,data = w02con,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02a_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02a_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- ## Poverty condition -->
+<!-- ```{r} -->
+<!-- w02pob <- data02 %>% filter(FL_6_DO_Tratamiento==1) %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+<!-- ```{r results='asis'} -->
+<!-- stargazer(w02pob,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- corw02_2<-polychoric(w02pob) -->
+<!-- rownames(corw02_2$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(corw02_2$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(corw02_2$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+<!-- fitw02b_c <- cfa(model = model03,data = w02pob,estimator="MLR") # Continuous/ estimator ML Robust -->
+<!-- fitw02b_o <- cfa(model = model03,data = w02pob,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02b_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02b_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- ## Inequality condition -->
+<!-- ```{r} -->
+<!-- w02des <- data02 %>% filter(FL_6_DO_Tratamiento_desigualdad==1) %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+<!-- ```{r results='asis'} -->
+<!-- stargazer(w02des,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- corw02_3<-polychoric(w02des) -->
+<!-- rownames(corw02_3$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(corw02_3$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(corw02_3$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+<!-- fitw02c_c <- cfa(model = model03,data = w02des,estimator="MLR") # Continuous/ estimator ML Robust -->
+<!-- fitw02c_o <- cfa(model = model03,data = w02des,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02c_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02c_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02c_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- ## Complete sample -->
+<!-- ```{r results='asis'} -->
+<!-- stargazer(dat01,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- dat01cor<- select(dat01,meritv03_perc_effort,meritv03_perc_talent, -->
+<!--                         meritv03_perc_wpart,meritv03_perc_netw, -->
+<!--                         meritv03_pref_effort,meritv03_pref_talent, -->
+<!--                         meritv03_pref_wpart,meritv03_pref_netw) -->
+<!-- cor01<-polychoric(dat01cor) -->
+<!-- rownames(cor01$rho) <-c("1. pc_effort", "2. pc_talent","3. pc_wpart","4. pc_netw","5. pf_effort","6. pf_talent","7. pf_wpart", "8. pf_netw") -->
+<!-- colnames(cor01$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)") -->
+<!-- corrplot(cor01$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE) -->
+<!-- ``` -->
+<!-- ```{r,results='hold'} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+<!-- fitw02_c <- cfa(model = model03,data = dat01,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust -->
+<!-- fitw02_o <- cfa(model = model03,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                          "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                          "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                          "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw02_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw02_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw02_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw02_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- > **NOTE**: El ajuste de muestra completa en wave 02 con estimator MLR (robusto) es bastante bueno (CFI, RMSEA). El ajuste con DWLS es bastante bueno, CFI mejora, RMSEA aumenta un poco (0.59). -->
+<!-- ### Second order CFA -->
+<!-- ```{r} -->
+<!-- modw2 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw -->
+<!-- merit =~perc_merit+pref_merit -->
+<!-- nmerit=~perc_nmerit+pref_nmerit' -->
+<!-- # mod2_merit_c <- cfa(model = modw2,data = dat01) # Continuous/ estimator ML Robust -->
+<!-- mod2_merit_o <- cfa(model = modw2,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                            "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                            "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                            "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Ordinal=fitmeasures(mod2_merit_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+<!-- cnames <- c("Factor","Indicator","Loading (DWLS)") -->
+<!-- kable(standardizedsolution(mod2_merit_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- > * Second order factor using MLR does not converge. -->
+<!-- > * Second order factor using DWLS converges, but loads are not good and the fit is not. -->
+<!-- # Summary fit indices wave 02 -->
+<!-- ```{r} -->
+<!-- sum_fitw02<- bind_rows(fitmeasures(fitw02a_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02a_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02b_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02b_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02_c)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw02_o)[ c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],) -->
+<!-- sum_fitw02$mod <- c("Model 1","Model 1","Model 2","Model 2","Model 3","Model 3","Model 4","Model 4") -->
+<!-- sum_fitw02$est <- c("MLR","DWLS","MLR","DWLS","MLR","DWLS","MLR","DWLS") -->
+<!-- sum_fitw02 <- select(sum_fitw02,mod,est,everything()) -->
+<!-- colnames <- c("Model","Estimator","$\\chi^2$","df","CFI","CFI.sca","CFI.rob","RMSEA","RMSEA.sca","RMSEA.rob") -->
+<!-- kable(sum_fitw02,digits = 3,format = "html",row.names = F,booktabs=T, caption = "Summary fit indices wave 02", col.names = colnames, escape = F) %>% -->
+<!--   kable_styling(full_width = F) %>% -->
+<!--   collapse_rows(columns = 1,valign = "middle") %>% -->
+<!--   footnote(number = c("Model 1: Control group sample", -->
+<!--                       "Model 2: Poverty treatment condition sample", -->
+<!--                       "Model 3: Inequality treatment condition sample", -->
+<!--                       "Model 4: Complete sample")) -->
+<!-- ``` -->
+<!-- # Wave 03 -->
+<!-- ```{r} -->
+<!-- data03 <- sjlabelled::read_spss(path = "input/data/original/Estudio_3_ola3.sav",verbose = FALSE) -->
+<!-- dat01 <- data03 %>% select(starts_with("meritv03_p")) -->
+<!-- ``` -->
+<!-- ```{r echo=TRUE,results='asis'} -->
+<!-- stargazer(dat01,type = "html", -->
+<!--           title = "Descriptive statistics", -->
+<!--           font.size = "small", -->
+<!--           median = TRUE, -->
+<!--           header=FALSE, -->
+<!--           digit.separator = "", -->
+<!--           digits = 2) -->
+<!-- ``` -->
+<!-- ```{r} -->
+<!-- model03 <- ' -->
+<!-- perc_merit=~meritv03_perc_effort+meritv03_perc_talent -->
+<!-- perc_nmerit=~meritv03_perc_wpart+meritv03_perc_netw -->
+<!-- pref_merit=~meritv03_pref_effort+meritv03_pref_talent -->
+<!-- pref_nmerit=~meritv03_pref_wpart+meritv03_pref_netw' -->
+<!-- fitw03c_c <- cfa(model = model03,data = dat01,estimator="MLR") # Continuous/ estimator ML Robust -->
+<!-- fitw03c_o <- cfa(model = model03,data = dat01,ordered = c("meritv03_perc_effort","meritv03_perc_talent", -->
+<!--                                                           "meritv03_perc_wpart","meritv03_perc_netw", -->
+<!--                                                           "meritv03_pref_effort","meritv03_pref_talent", -->
+<!--                                                           "meritv03_pref_wpart","meritv03_pref_netw")) -->
+<!-- #---------------------------------------------------# -->
+<!-- kable(rbind(Continuous=fitmeasures(fitw03c_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--             Ordinal= fitmeasures(fitw03c_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]), -->
+<!--       format = "markdown",digits = 3) -->
+<!-- cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)") -->
+<!-- kable(left_join(x = standardizedsolution(fitw03c_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 y = standardizedsolution(fitw03c_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std), -->
+<!--                 c("lhs","rhs")), -->
+<!--       format = "markdown",digits = 2,col.names = cnames) -->
+<!-- ``` -->
+<!-- **summary** -->
+<!-- > * Adjustment using MLR estimator is good (CFI = 0.971, RMSEA = 0.052). The chi2 (robust) is 62,421 -->
+<!-- > * Fit using DWLS estimator is good (CFI = 0.974, RMSEA = 0.067). The chi2 (robust) is 106,111 -->
+<!-- # Summary fit indices wave 03 -->
+<!-- ```{r} -->
+<!-- sum_fitw03<- bind_rows(fitmeasures(fitw03c_c)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")], -->
+<!--                        fitmeasures(fitw03c_o)[ c("cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]) -->
+<!-- sum_fitw03$mod <- c("Model 1","Model 1") -->
+<!-- sum_fitw03$est <- c("Continuous","Ordinal") -->
+<!-- sum_fitw03 <- select(sum_fitw03,mod,est,everything()) -->
+<!-- kable(sum_fitw03,digits = 3,format = "html",row.names = F,booktabs=T,caption = "Summary fit indices wave 03") %>% -->
+<!--   kable_styling(full_width = F) %>% -->
+<!--   collapse_rows(columns = 1,valign = "middle") %>% -->
+<!--   footnote(number = c("Model 1: Complete sample")) -->
+<!-- ``` -->
+<pre class="r"><code>library(ggplot2)
+library(reshape2)
+library(sjPlot)
+library(dplyr)
+
+#install.packages(&quot;cowplot&quot;)
+library(cowplot)
+
+dat_merit &lt;- dat04 %&gt;% select(&quot;a.Effort&quot;=perc_effort,&quot;a.Talent&quot;=perc_talent, &quot;a.Rich Parents&quot;=perc_wpart, &quot;a.Contacts&quot;=perc_netw, &quot;b.Effort&quot;=pref_effort,&quot;b.Talent&quot;=pref_talent,&quot;b.Rich Parents&quot;=pref_wpart, &quot;b.Contacts&quot;=pref_netw)
+
+dat_merit_2&lt;- dat_merit %&gt;% sjmisc::rec(rec=&quot;rev&quot;) %&gt;% 
+  select(
+    &quot;a.Effort&quot; = a.Effort_r,
+    &quot;a.Talent&quot; = a.Talent_r,
+    &quot;a.Rich Parents&quot; = &quot;a.Rich Parents_r&quot;,
+    &quot;a.Contacts&quot; = a.Contacts_r,
+    &quot;b.Effort&quot; = b.Effort_r,
+    &quot;b.Talent&quot; = b.Talent_r,
+    &quot;b.Rich Parents&quot; = &quot;b.Rich Parents_r&quot;,
+    &quot;b.Contacts&quot; = b.Contacts_r)
+
+
+plotlikert&lt;-plot_likert(dat_merit_2, 
+                        c(1, 1, 1, 1, 2, 2, 2, 2),
+                        groups.titles = c(&quot;Perceptions&quot;, &quot;Preferences&quot;),
+                        geom.colors = &quot;PuBu&quot;,
+                        geom.size = 0.8,
+                        axis.labels = c(&quot;Effort&quot;, &quot;Talent&quot;, &quot;Rich Parents&quot;, &quot;Contacts&quot;),
+                        catcount = 4,
+                        cat.neutral = 3,
+                        grid.range  =  c (1.2 , 1.4),
+                        values  =  &quot;sum.outside&quot;, 
+                        reverse.colors = T,
+                        reverse.scale = F)
+
+plotlikert</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plotlikert,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 30,height = 15,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<pre class="r"><code>datli03 &lt;- dat04 %&gt;% select(starts_with(&quot;perc_&quot;),
+                            starts_with(&quot;pref_&quot;)) %&gt;%  sjmisc::rec(rec=&quot;rev&quot;,append = F)
+
+datli03 &lt;- remove_label(datli03)
+
+set_theme(base = theme_bw(),
+          theme.font = &quot;serif&quot;, 
+          axis.textsize.x = 1.2,
+          axis.textsize.y = 1.2, 
+          geom.label.size = 4, 
+          legend.just = 0.35, 
+          legend.size = 1.2,
+          legend.backgroundcol = &quot;white&quot;)
+# http://www.sthda.com/english/wiki/colors-in-r  = PALETAS de COLORES 
+plot01&lt;- plot_likert(
+  datli03,
+  c(rep(&quot;Perception&quot;, 4), rep(&quot;Preference&quot;, 4)),
+  values  =  &quot;sum.outside&quot;,
+  show.prc.sign = F,
+  sort.groups = FALSE,
+  grid.range = c(1.0, 1.0),
+  geom.colors = &quot;Blues&quot;,
+  rel_heights = c(4, 4),
+  wrap.labels = 100,
+  reverse.scale = FALSE,
+  cat.neutral = 3, 
+  legend.pos = &quot;bottom&quot;, 
+  group.legend.options = list(reverse = TRUE),
+  axis.labels = c(&quot;Effort&quot;, &quot;Talent&quot;, &quot;Rich parents&quot;, &quot;Contacts&quot;))
+plot01</code></pre>
+<p><img src="prod_analysis-cfa_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(plot01,filename = &quot;output/images/plotlikert.png&quot;,device = &quot;png&quot;,width = 40,height = 25,dpi = &quot;retina&quot;,units = &quot;cm&quot;)</code></pre>
+<p>=======
+# Anexo 1: Sample</p>
+<pre class="r"><code>load(file = &quot;input/data/original/issp2019CL.RData&quot;)
+w01 &lt;- sjlabelled::read_spss(&quot;input/data/original/Estudio_3_ola1.sav&quot;,verbose = F)</code></pre>
+<pre class="r"><code>GS&lt;- c(&quot;CERRILLOS&quot;,
+&quot;CERRO NAVIA&quot;,
+&quot;CONCHALÍ&quot;,
+&quot;EL BOSQUE&quot;,
+&quot;ESTACIÓN CENTRAL&quot;,
+&quot;HUECHURABA&quot;,
+&quot;INDEPENDENCIA&quot;,
+&quot;LA CISTERNA&quot;,
+&quot;LA FLORIDA&quot;,
+&quot;LA GRANJA&quot;,
+&quot;LA PINTANA&quot;,
+&quot;LA REINA&quot;,
+&quot;LAS CONDES&quot;,
+&quot;LO BARNECHEA&quot;,
+&quot;LO ESPEJO&quot;,
+&quot;LO PRADO&quot;,
+&quot;MACUL&quot;,
+&quot;MAIPÚ&quot;,
+&quot;ÑUÑOA&quot;,
+&quot;PEDRO AGUIRRE CERDA&quot;,
+&quot;PEÑALOLEN&quot;,
+&quot;PROVIDENCIA&quot;,
+&quot;PUDAHUEL&quot;,
+&quot;PUENTE ALTO&quot;,
+&quot;QUILICURA&quot;,
+&quot;QUINTA NORMAL&quot;,
+&quot;RECOLETA&quot;,
+&quot;RENCA&quot;,
+&quot;SAN BERNARDO&quot;,
+&quot;SAN JOAQUÍN&quot;,
+&quot;SAN MIGUEL&quot;,
+&quot;SAN RAMÓN&quot;,
+&quot;SANTIAGO&quot;,
+&quot;VITACURA&quot;)
+
+cl19$COMUNA &lt;- toupper(as_character(cl19$COMUNA))
+
+# cl19$DS_P1 # 1= hombre, 2= mujer
+# cl19$DS_P2_EXACTA  
+# cl19$DS_P4
+
+cep1 &lt;- cl19 %&gt;% 
+  select(COMUNA,DS_P1,DS_P2_EXACTA,DS_P4, FACTOR) %&gt;% 
+  filter(COMUNA %in% GS)</code></pre>
+<pre class="r"><code>cep1$edad_cat&lt;- as.numeric(cep1$DS_P2_EXACTA) # Edad
+cep1$edad_cat[cep1$edad_cat %in%c(18:24)] &lt;- 1   #&quot;18 a 24&quot;
+cep1$edad_cat[cep1$edad_cat %in%c(25:34)] &lt;- 2 # &quot;25 a 34&quot;
+cep1$edad_cat[cep1$edad_cat %in%c(35:44)] &lt;- 3 # &quot;35 a 44&quot;
+cep1$edad_cat[cep1$edad_cat %in%c(45:54)] &lt;- 4 # &quot;45 a 54&quot;
+cep1$edad_cat[cep1$edad_cat &gt;=  55]       &lt;- 5 # &quot;55 o más&quot;
+
+cep1$educ &lt;- cep1$DS_P4 # Educación
+cep1$educ &lt;- as_numeric(cep1$educ)
+cep1$educ &lt;- as.numeric(cep1$educ)
+cep1$educ[cep1$educ %in%c(88,99)] &lt;- NA
+
+cep1$educ &lt;- recode(cep1$educ, &quot;0&quot; = &quot;1&quot; , &quot;1&quot;=&quot;1&quot;, &quot;2&quot; = &quot;1&quot;, &quot;3&quot;=&quot;2&quot;,&quot;4&quot;=&quot;2&quot;, &quot;5&quot;=&quot;3&quot;,&quot;6&quot;=&quot;3&quot;, &quot;7&quot; = &quot;3&quot;, &quot;8&quot;=&quot;4&quot; , &quot;9&quot;=&quot;4&quot;   )
+
+cep1$sexo &lt;- as.numeric(cep1$DS_P1) # 1= hombre, 2= mujer</code></pre>
+<pre class="r"><code># Gender
+
+cep1$Hombres&lt;-ifelse(cep1$sexo==1,100,0)
+cep1$Mujeres&lt;-ifelse(cep1$sexo==2,100,0)
+w01$Hombres&lt;-ifelse(w01$sexo==1,100,0)
+w01$Mujeres&lt;-ifelse(w01$sexo==2,100,0)
+
+
+cep1$ed_a&lt;-ifelse(cep1$edad_cat==1,100,0)
+cep1$ed_b&lt;-ifelse(cep1$edad_cat==2,100,0)
+cep1$ed_c&lt;-ifelse(cep1$edad_cat==3,100,0)
+cep1$ed_d&lt;-ifelse(cep1$edad_cat==4,100,0)
+cep1$ed_e&lt;-ifelse(cep1$edad_cat==5,100,0)
+w01$ed_a&lt;-ifelse(w01$edad==1,100,0)
+w01$ed_b&lt;-ifelse(w01$edad==2,100,0)
+w01$ed_c&lt;-ifelse(w01$edad==3,100,0)
+w01$ed_d&lt;-ifelse(w01$edad==4,100,0)
+w01$ed_e&lt;-ifelse(w01$edad==5,100,0)
+
+
+
+cep1$educ_a&lt;-ifelse(cep1$educ==1,100,0)
+cep1$educ_b&lt;-ifelse(cep1$educ==2,100,0)
+cep1$educ_c&lt;-ifelse(cep1$educ==3,100,0)
+cep1$educ_d&lt;-ifelse(cep1$educ==4,100,0)
+w01$educ_a&lt;-ifelse(w01$educat==1,100,0)
+w01$educ_b&lt;-ifelse(w01$educat==2,100,0)
+w01$educ_c&lt;-ifelse(w01$educat==3,100,0)
+w01$educ_d&lt;-ifelse(w01$educat==4,100,0)
+
+
+Men&lt;-round(c(mean(w01$Hombres, na.rm = T), weighted.mean(cep1$Hombres,cep1$FACTOR, na.rm = T)),digits = 2)
+Women&lt;-round(c(mean(w01$Mujeres, na.rm = T), weighted.mean(cep1$Mujeres,cep1$FACTOR, na.rm = T)),digits = 2)
+
+years.18.to.24&lt;-round(c(mean(w01$ed_a, na.rm = T), weighted.mean(cep1$ed_a,cep1$FACTOR, na.rm = T)),digits = 2)
+years.25.to.34&lt;-round(c(mean(w01$ed_b, na.rm = T), weighted.mean(cep1$ed_b,cep1$FACTOR, na.rm = T)),digits = 2)
+years.35.to.44&lt;-round(c(mean(w01$ed_c, na.rm = T), weighted.mean(cep1$ed_c,cep1$FACTOR, na.rm = T)),digits = 2)
+years.45.to.54&lt;-round(c(mean(w01$ed_d, na.rm = T), weighted.mean(cep1$ed_d,cep1$FACTOR, na.rm = T)),digits = 2)
+years.55.or.more&lt;-round(c(mean(w01$ed_e, na.rm = T), weighted.mean(cep1$ed_e,cep1$FACTOR, na.rm = T)),digits = 2)
+
+ 
+
+Primary &lt;-round(c(mean(w01$educ_a, na.rm = T), weighted.mean(cep1$educ_a,cep1$FACTOR, na.rm = T)),digits = 2)
+Secondary&lt;-round(c(mean(w01$educ_b, na.rm = T), weighted.mean(cep1$educ_b,cep1$FACTOR, na.rm = T)),digits = 2)
+Technique&lt;-round(c(mean(w01$educ_c, na.rm = T), weighted.mean(cep1$educ_c,cep1$FACTOR, na.rm = T)),digits = 2)
+University&lt;-round(c(mean(w01$educ_d, na.rm = T), weighted.mean(cep1$educ_d,cep1$FACTOR, na.rm = T)),digits = 2)
+
+
+
+sample_cep&lt;- rbind(&quot;__Gender__&quot;,Men,Women,&quot;__Age__&quot;,years.18.to.24,years.25.to.34,years.35.to.44,years.45.to.54,years.55.or.more, &quot;__Education__&quot;, Primary, Secondary, Technique, University)
+
+
+cnames &lt;- c(&quot;Sample&quot;, &quot;CEP&quot;) 
+knitr::kable(sample_cep, digits = 0, format = &quot;markdown&quot;,col.names = cnames)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">Sample</th>
+<th align="left">CEP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"></td>
+<td align="left"><strong>Gender</strong></td>
+<td align="left"><strong>Gender</strong></td>
+</tr>
+<tr class="even">
+<td align="left">Men</td>
+<td align="left">49.82</td>
+<td align="left">50.52</td>
+</tr>
+<tr class="odd">
+<td align="left">Women</td>
+<td align="left">50.18</td>
+<td align="left">49.48</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><strong>Age</strong></td>
+<td align="left"><strong>Age</strong></td>
+</tr>
+<tr class="odd">
+<td align="left">years.18.to.24</td>
+<td align="left">18.55</td>
+<td align="left">18.18</td>
+</tr>
+<tr class="even">
+<td align="left">years.25.to.34</td>
+<td align="left">18.86</td>
+<td align="left">17.48</td>
+</tr>
+<tr class="odd">
+<td align="left">years.35.to.44</td>
+<td align="left">19.09</td>
+<td align="left">19.99</td>
+</tr>
+<tr class="even">
+<td align="left">years.45.to.54</td>
+<td align="left">17.96</td>
+<td align="left">19.24</td>
+</tr>
+<tr class="odd">
+<td align="left">years.55.or.more</td>
+<td align="left">25.54</td>
+<td align="left">25.12</td>
+</tr>
+<tr class="even">
+<td align="left"></td>
+<td align="left"><strong>Education</strong></td>
+<td align="left"><strong>Education</strong></td>
+</tr>
+<tr class="odd">
+<td align="left">Primary</td>
+<td align="left">2.93</td>
+<td align="left">15.88</td>
+</tr>
+<tr class="even">
+<td align="left">Secondary</td>
+<td align="left">43.23</td>
+<td align="left">37.04</td>
+</tr>
+<tr class="odd">
+<td align="left">Technique</td>
+<td align="left">32.63</td>
+<td align="left">28.94</td>
+</tr>
+<tr class="even">
+<td align="left">University</td>
+<td align="left">21.21</td>
+<td align="left">18.14</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div id="anexo-2-fiability" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Anexo 2: Fiability</h1>
+<pre class="r"><code>load(file = &quot;input/data/proc/dat01.RData&quot;)
+load(file = &quot;input/data/proc/dat02.RData&quot;)
+load(file = &quot;input/data/proc/dat03.RData&quot;)
+load(file = &quot;input/data/proc/dat04.RData&quot;)</code></pre>
+<pre class="r"><code>lav.mod.1 &lt;- &#39;perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
+pref_nmerit=~pref_wpart +pref_netw&#39;
+
+cor01a&lt;-polychoric(dat01)
+cor02a&lt;-polychoric(dat02)
+cor03a&lt;-polychoric(dat03)
+cor04a &lt;-polychoric(select(dat04,perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw))
+
+#Omega for group
+lav.jen.1&lt;- cfa(lav.mod.1,sample.cov=cor01a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.2&lt;- cfa(lav.mod.1,sample.cov=cor02a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.3&lt;- cfa(lav.mod.1,sample.cov=cor03a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+lav.jen.4&lt;- cfa(lav.mod.1,sample.cov=cor04a$rho,sample.nobs=500,orthogonal=TRUE,std.lv=TRUE) # Total sample
+
+
+o1 &lt;- omegaFromSem(lav.jen.1,cor04a$rho, plot = F)
+o2&lt;-omegaFromSem(lav.jen.2,cor04a$rho, plot = F)
+o3&lt;-omegaFromSem(lav.jen.3,cor04a$rho, plot = F)
+o4&lt;-omegaFromSem(lav.jen.4,cor04a$rho, plot = F)
+
+
+Group_1 &lt;- c(o1$omega.group$total)
+Group_2 &lt;- c(o2$omega.group$total)
+Group_3 &lt;- c(o3$omega.group$total)
+Total_sample &lt;- c(o4$omega.group$total)
+
+Omega&lt;- rbind(Group_1,Group_2,Group_3,Total_sample)
+
+cnames &lt;- c(&quot;Perception Meritocratic&quot;,&quot;Perception Non Meritocratic&quot;, &quot;Preference Meritocratic&quot;,&quot;Preference Non Meritocratic&quot;)
+knitr::kable(Omega, format = &quot;markdown&quot;,digits = 2, col.names = cnames)</code></pre>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="20%" />
+<col width="23%" />
+<col width="20%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Perception Meritocratic</th>
+<th align="right">Perception Non Meritocratic</th>
+<th align="right">Preference Meritocratic</th>
+<th align="right">Preference Non Meritocratic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Group_1</td>
+<td align="right">0.86</td>
+<td align="right">0.79</td>
+<td align="right">0.71</td>
+<td align="right">0.81</td>
+</tr>
+<tr class="even">
+<td align="left">Group_2</td>
+<td align="right">0.83</td>
+<td align="right">0.73</td>
+<td align="right">0.70</td>
+<td align="right">0.71</td>
+</tr>
+<tr class="odd">
+<td align="left">Group_3</td>
+<td align="right">0.80</td>
+<td align="right">0.77</td>
+<td align="right">0.59</td>
+<td align="right">0.75</td>
+</tr>
+<tr class="even">
+<td align="left">Total_sample</td>
+<td align="right">0.83</td>
+<td align="right">0.76</td>
+<td align="right">0.67</td>
+<td align="right">0.76</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,251 @@
+---
+title: "Measuring Perceptions and Preferences for Meritocracy"
+css: "custom.css"
+linestretch: '1.5'
+link-citations: yes
+output:
+  bookdown::pdf_document2:
+    template: null
+    toc: false
+  bookdown::html_document2:
+    number_sections: false
+linkcolor: blue
+bibliography:
+#  - ../input/bib/EconomiaMoral.bib
+#  - ../input/bib/meritocracy.bib
+#  - ../input/bib/invariance.bib
+editor_options:
+  chunk_output_type: console
+geometry: margin=0.78in
+header-includes:
+  # - \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+  - \usepackage{times}           # Times New Roman
+  - \usepackage{caption}
+  - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+---
+
+```{r eval=FALSE, include=FALSE}
+# for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
+# clean #in the yml
+rmarkdown::render("paper_study2.Rmd", output_format = "bookdown::pdf_document2")
+rmarkdown::render("paper.Rmd", output_format = "bookdown::html_document2")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H")
+# knitr::opts_knit$set(base.url = "../") #relative path for .html output file
+# knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+options(knitr.graphics.error = FALSE)
+Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
+#RUN THIS BEFORE THE ANALYSIS
+pacman::p_load(knitr)
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+
+table_format2 = if(is_html_output()) {
+  T
+} else if(is_latex_output()) {
+  F
+}
+```
+
+## Study 2: The Perceptions and Preferences for Meritocracy Scale
+
+## Data collection {-#data}
+
+The data was obtained through an online questionnaire, which was part of a larger study on meritocracy and preferences developed in Chile in 2019 funded by the national scientific agency ANID. The questionnaire was programmed in Qualtrics and the fieldwork was conducted by an external online survey agency ([netquest.cl](www.netquest.cl)) between December 2019 and January 2020. The sample was selected from a non-probabilistic quota design in three large cities in Chile (Santiago, Concepción & Antofagasta). The quotas for gender, age, and education level were generated based on a survey by the Public Studies Center [@cepEncuestaCEPMayo2019], which is a well regarded counterpart agency of the ISSP (International Social Survey Programme) in Chile. A total sample of 2,141 people was collected, excluding those who did not answer the questions on the scale, and those who did not accept informed consent. There were no significant differences between our sample and the wider population for most socio-demographic characteristics, with the exception of educational level (see Table \@ref(tab:rep-samp) in appendix). As is often the case with online surveys, there were some limitations in achieving the quotas for lower educational levels **[citas - LUCHO]**.
+
+## Instrument design
+
+The proposed scale of perceptions and preferences relating to meritocracy consisted of eight indicators that were grouped into the four dimensions listed earlier: Perceptions (meritocratic/non-meritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which has been widely used for operationalizing meritocracy in previous studies [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. The aforementioned eight items, ordered according to dimensions, are presented in Table \@ref(tab:table-indicadores). These eight likert-type items have five response alternatives, ranging from "Completely disagree"(1) to "Completely agree" (5).
+
+```{r include=FALSE}
+
+# if (knitr::is_html_output()) {tb <- table_nums("tb",cap)} else {tb <- cap}
+```
+
+```{r table-indicadores, echo=FALSE}
+pacman::p_load(knitr, kableExtra, dplyr)
+
+tabitems <- read.csv(file = "input/tables/table01.csv",header = 1,sep = ",",encoding = "UTF-8") # call file generated externally for the table
+cnames <- c("Component", "Dimensions","Item (english)" , "Item original (spanish)")
+cap <- "Items of the perceptions and preferences for meritocracy scale."
+
+kable(tabitems, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
+  kable_styling(
+    full_width = T,
+    latex_options = c("hold_position"),
+    position = "center",
+    font_size = 12,
+    bootstrap_options=c("striped", "bordered")) %>%
+  column_spec(column = 1, width = "1.5cm", ) %>%
+  column_spec(column = 2,width = "2 cm") %>%
+  collapse_rows(columns = 1:2,valign = "middle")
+```
+
+\pagebreak
+
+## Administration sets
+
+With the objective of evaluating the effect of indicator ordering in the responses, three different versions of items' order were designed and randomly assigned to the respondents, as depicted in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order that appears in Table \@ref(tab:table-indicadores) according to perceptions and preferences. For the second group (_n = 717_), the order was reorganized according to perceptions and preferences over the same topic, e.g. for the topic of hard work, the item about perception was followed by the item about preference, and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were presented as completely randomized.
+
+```{r appmod, echo=FALSE, fig.cap = "Survey flow", fig.align='center'}
+knitr::include_graphics('output/images/app_mod.png')
+```
+
+# Methods
+
+To test the scale's underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table \@ref(tab:table-indicadores). As in Study 1, CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). The fit indexes and cut-off criteria were the same as the ones used in Study 1.
+
+A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2](https://osf.io/z45y2). Included in this pre-registration are the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
+
+# Results
+
+## Descriptive analyses
+
+The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and comparable information of the different response categories for each item. As it can be observed, in general there is more agreement in the perception of non-meritocratic items than in meritocratic ones, while in the case of preferences the opposite occurs. As far as preferences are concerned, the preponderant role of effort over talent as a criterion of meritocratic preference is noteworthy.
+
+```{r produce-likert_s2}
+pacman::p_load(dplyr)
+load(file = "input/data/proc/data_s2.RData")
+names(data_s2)
+dat_likert_s2 <- data_s2 %>% select(!group) # exclude group variable
+dat_likert_s2 <- sjmisc::rec(dat_likert_s2, rec="rev", append=FALSE)
+names(dat_likert_s2) # reverse coding for likert graph
+
+table(data_s2$perc_effort)
+table(dat_likert_s2$perc_effort_r) # check ok.
+
+plotlikert_s2<- sjPlot::plot_likert(dat_likert_s2,
+                        c(1, 1, 1, 1, 2, 2, 2, 2),
+                        groups.titles = c("Perceptions", "Preferences"),
+                        geom.colors = "PuBu",
+                        geom.size = 0.8,
+                        axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
+                        catcount = 4,
+                        cat.neutral = 3,
+                        grid.range  =  c (1.2 , 1.4),
+                        values  =  "sum.outside",
+                        reverse.colors = T,
+                        reverse.scale = F,
+                        show.n=FALSE)
+```
+
+
+```{r plotlikert, echo=FALSE, fig.cap = "Distribution of responses in the Merit Scale items", fig.align='center'}
+plotlikert_s2
+```
+
+Attending now to the association among the scale items, Figure \@ref(fig:corpoly) shows items polychoric correlations. There are three main aspects to highlight from this correlation matrix.  Firstly, as expected the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, r=0.52). Secondly, among this correlations the highest are those between the non- meritocratic dimension buth in perceptions (r=0.73) and preferences (r=0.61). thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations. This is noteworthy because it indicates that even the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, we observe that there are no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining the assumptions of previous studies that suggested that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
+
+```{r corpoly, echo=FALSE, fig.cap = "Perceptions & preferences for meritcoracy items' polychoric correlations", fig.align='center'}
+load(file = "input/data/proc/data_s2.RData")
+
+# generate polychoric matrix
+cor_s2<- data_s2 %>% select(perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw) %>% lavaan::lavCor(., ordered=names(.))
+
+diag(cor_s2) = NA
+
+# windowsFonts(A = windowsFont("Times New Roman"))
+
+rownames(cor_s2) <-c(
+    "A. Perception Effort",
+    "B. Perception Talent",
+    "C. Perception Rich parents",
+    "D. Perception Contacts",
+    "E. Preferences Effort",
+    "F. Preferences Talent",
+    "G. Preferences Rich parents",
+    "H. Preferences Contacts")
+colnames(cor_s2) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", "(H)")
+
+corrplot::corrplot(cor_s2,
+  method = "color",
+  addCoef.col = "#000390",
+  type = "upper",
+  tl.col = "black",
+  col=colorRampPalette(c("white","#0068DC"))(8),
+  bg = "white",
+  na.label = "-",
+  lower.col = "black")
+
+
+```
+
+## Confirmatory Factor Analysis
+
+The present sections shows the results of the confirmatory factor analysis estimation. The model estimates four latent factors: perception meritocratic, perception non-meritocratic, preferences meritocratic and preferences non-meritocratic. Each factor is estimated based on two items of the scale as detailed in Table \@ref(tab:table-indicadores).
+
+The first step in the analysis consists of comparing the model fit indicators for the three versions of the scale that were randomly assigned to the participants: order according to perceptions/preferences, order according to topics and random order (see Figure \@ref(fig:appmod)).
+
+```{r model-generation-cfa}
+# Libraries & data
+pacman::p_load(lavaan)
+load(file = "input/data/proc/data_s2.RData")
+names(data_s2)
+
+# model
+model_cfa <- '
+perc_merit =~ perc_effort+perc_talent
+perc_nmerit=~perc_wpart +perc_netw
+pref_merit =~ pref_effort+pref_talent
+pref_nmerit=~pref_wpart +pref_netw
+'
+
+# estimation for each order set
+fit_cfa1 <- cfa(model_cfa, data = data_s2[data_s2$group == 1,], ordered = TRUE, std.lv=FALSE)
+fit_cfa2 <- cfa(model_cfa, data = data_s2[data_s2$group == 2,], ordered = TRUE, std.lv=FALSE)
+fit_cfa3 <- cfa(model_cfa, data = data_s2[data_s2$group == 3,], ordered = TRUE, std.lv=FALSE)
+
+```
+
+```{r table_cfa_fits, echo=FALSE}
+pacman::p_load(dplyr, kableExtra, knitr)
+
+# extract fit indices from models and add to table
+sum_fit<- dplyr::bind_rows(fitmeasures(fit_cfa1)[c("chisq","df","cfi","tli","rmsea")],
+                    fitmeasures(fit_cfa2)[c("chisq","df","cfi","tli","rmsea")],
+                    fitmeasures(fit_cfa3)[c("chisq","df","cfi","tli","rmsea")])
+
+# Customize object
+sum_fit$mod <- c("Version 1","Version 2","Version 3")
+sum_fit$nobs <- c(nobs(fit_cfa1),nobs(fit_cfa2),nobs(fit_cfa3))
+sum_fit$est <- c("DWLS","DWLS","DWLS")
+sum_fit <- dplyr::select(sum_fit,mod,nobs,est,everything())
+colnames <- c("Model","$N$","Estimator","$\\chi^2$","df","CFI","TLI","RMSEA")
+
+# Create table
+table_cfa_fits <-kable(sum_fit, format="html", digits=3, booktabs=T, col.names=colnames,  caption = "Summary fit indices according to order versions", escape = FALSE) %>% kable_styling(full_width = F, font_size = 10)
+table_cfa_fits
+```
+
+Table \@ref(tab:table_cfa_fits) shows the fit indicators of the models estimated for each of the three versions of the items' order described in the methodology. Regardless of the version, all models obtained adequate fit indicators, with CFI's above 0.95 and RMSEA's below 0.08. However, none of the models achieved a non-significant chi-square, something expected in large samples as the one used here. The first version order (perceptions-preferences) was the one obtaining best fit (CFI=0.993, TLI=0.995, RMSEA=0.034, $\chi2$(df=14)=42.276), whereas version 2 with the fixed order according to merit/non-merit items shows the comparatively worst indicators. The CFA fit indices for the completely randomized items' order (Model 3) it keeps all the indicators within the acceptable cut-off criteria and besides it controls for possible order effects in the administration of the instrument. The model and parameter estimates for this version are depicted in Figure \@ref(fig:meas02):
+
+```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale", fig.align='center'}
+
+# estimation for diagram: summary(fit_cfa3, standardized = TRUE, fit.measures=TRUE)
+knitr::include_graphics('output/images/cfa_randomized_study2.png')
+```
+
+Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:meas02), it is observed that meritocratic preferences are correlated with preferences, both meritocratic ($r=0.457$) and non-meritocratic ($r=0.500$). The correlation between both types of perceptions ($r=-0.044$) and both types preferences ($r=0.185$) are low, as well as between non-meritocratic preferences and perceptions ($r=-0.059$). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects: they do not appear as the opposite poles of the same continuum and based on this evidence the use of reverse-coding for non-meritocratic items as indicators of meritocracy should be avoided.

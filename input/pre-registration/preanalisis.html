@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Pre-registration</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="../input/bib/style.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Measuring meritocratic perceptions and beliefs</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="preanalisis.html">Pre-analisis plan</a>
+</li>
+<li>
+  <a href="prod_prep-data-A.html">Data preparation</a>
+</li>
+<li>
+  <a href="prod_analysis-cfa.html">Analysis</a>
+</li>
+<li>
+  <a href="paper.html">Paper</a>
+</li>
+<li>
+  <a href="https://github.com/juancarloscastillo/merit-scale">
+    <span class="fa fa-github fa-lg"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Pre-registration</h1>
+
+</div>
+
+
+<div id="perceptions-and-preferences-for-meritocracy-scale-ppm-s" class="section level1">
+<h1><span class="header-section-number">1</span> Perceptions and Preferences for Meritocracy Scale (PPM-S)</h1>
+<p>(link to <a href="docs/preanalisis.pdf">PDF file</a>)</p>
+</div>
+<div id="research-questions" class="section level1">
+<h1><span class="header-section-number">2</span> Research questions</h1>
+<p>Is it possible to identify and measure perceptions and preferences for meritocracy as two distinct but related factors?</p>
+</div>
+<div id="general-description-and-hypotheses" class="section level1">
+<h1><span class="header-section-number">3</span> General description and hypotheses</h1>
+<p>This research builds upon previous studies attempting to develop a comprehensive approach to measuring meritocratic beliefs <span class="citation">(Duru-Bellat &amp; Tenret, <a href="#ref-Duru-bellat2012" role="doc-biblioref">2012</a>; Kunovich &amp; Slomczynski, <a href="#ref-Kunovich2007" role="doc-biblioref">2007</a>; Newman et al., <a href="#ref-Newman2015" role="doc-biblioref">2015</a>; Reynolds &amp; Xian, <a href="#ref-Reynolds2014" role="doc-biblioref">2014</a>)</span>. The proposed measurement model is based on two axis of analysis, as depicted in Table 1. The first one distinguishes between different types of “beliefs”, using instead the terms perceptions and preferences for meritocracy. Perceptions refers to the extent to which people see meritocracy working in their society, which in terms of measurement relates to the “reasons to get ahead” battery, whereas preferences refer to normative expectations that are usually linked to a “should” expression (e.g. whether hard work should be related to payment). The second axis consider the distinction between meritocratic and non-meritocratic dimensions. This aspect has been usually treated as different ends of a same continuum in part of the previous research, an assumption that requieres empirical scrutiny. These non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.</p>
+<p>Table 1: Model of perceptions and preferences for meritocracy and non-meritocracy</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th>Perceptions</th>
+<th>Preferences</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><em>Meritocracy</em></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td align="left"><em>Non-meritocracy</em></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Hypotheses</strong></p>
+<ul>
+<li>H1. The perception of meritocracy is a latent variable based on indicators of the importance attributed to talent and the effort to get ahead in life.</li>
+<li>H2. The non-meritocratic perception is a latent variable that derives from two indicators related to the agreement with the statement that people with contacts and rich parents manage to get ahead.</li>
+<li>H3. Meritocratic preferences behave as the latent variable based on a normative value of effort and talent.</li>
+<li>H4. Non-meritocratic preferences behave as a latent variable based on the normative value of the use of personal contacts and having rich parents.</li>
+</ul>
+</div>
+<div id="type-of-study" class="section level1">
+<h1><span class="header-section-number">4</span> Type of study</h1>
+<p>The scale will be included in an online three-wave panel survey study. This study covers among other things an experiment of the effect of information about poverty and inequality on opportunity beliefs. The scale will be presented in wave 1 and wave 3.</p>
+</div>
+<div id="sample" class="section level1">
+<h1><span class="header-section-number">5</span> Sample</h1>
+<div id="detailed-data-and-explanations-of-its-use." class="section level2">
+<h2><span class="header-section-number">5.1</span> Detailed data and explanations of its use.</h2>
+<p>The data will come from a representative sample of the large cities of Chile (Gran Santiago, Valparaíso-Viña del Mar, Concepción and Antofagasta). In order to ensure representativeness, quotas for sex, education and age will be provided to the agency in charge of the online fieldwork.</p>
+</div>
+<div id="magnitude-of-the-sample-and-explanation-of-the-magnitude." class="section level2">
+<h2><span class="header-section-number">5.2</span> Magnitude of the sample and explanation of the magnitude.</h2>
+<p>The sample will have an initial number for the first wave of 2100 cases, which are expected to be at least 1800 in the second wave. From the second to the third wave it has been considered as “free fall”, from which we expect to retain about 1500 cases.</p>
+<p>The sample size was calculated from power analysis that used information from a pilot study that was applied in June 2019. This pilot study consisted of an online experiment applied to 949 subjects, randomly separating participants to two stimuli and a placebo, leaving a third of the sample in each condition. From these data, the low power of a two-tailed test was calculated, considering an average treatment effect of 0.26, with a standard deviation of the result of the treatment group of 1.23 and a significance level of 0.05. Based on multiple comparison correlations (Bonferroni), we adjusted alpha for six tests (three results * two comparisons between conditions and placebo). The results indicated that the number of subjects exposed to each stimulus should be 580, so we will work with three samples of 600 cases, which gives us a total of 1800 cases for the second wave in which the experiment will be applied. To guarantee the above and in consideration of a high non-response rate, we will start with a sample of 2100 subjects.</p>
+<div id="data-collection-procedure" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Data collection procedure:</h3>
+<p>Respondents will be invited to participate in the online survey under the incentive provided by the external company. Respondents have 4 business days to answer the survey, with a maximum of 20 minutes per survey. In order to achieve greater representativeness of the sample, the quota method will be used, that is, the program will only allow respondents with the required demographic characteristics. The quotas used were age, sex and education. It should be noted that the time between wave and wave is around 7 and 9 days.</p>
+</div>
+<div id="stop-rule" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Stop Rule:</h3>
+<p>The rule of detention is to reach the number of respondents indicated in the quotas. However, there may be modifications depending on the contingencies of the field work and the response rates.</p>
+</div>
+</div>
+</div>
+<div id="variables-to-use" class="section level1">
+<h1><span class="header-section-number">6</span> Variables to use:</h1>
+<p>All the variables used in the scale use the following question and answer options:</p>
+<ul>
+<li>To what extent do you agree or disagree with each of the following affirmations?
+<ul>
+<li>Response scale:
+<ul>
+<li>Strongly disagree</li>
+<li>Disagree</li>
+<li>Neither agree nor disagree</li>
+<li>Agree</li>
+<li>Totally agree</li>
+</ul></li>
+</ul></li>
+</ul>
+<div id="variable-manipulation" class="section level3">
+<h3><span class="header-section-number">6.0.1</span> Variable manipulation</h3>
+<p>There will not be variable manipulation.</p>
+</div>
+<div id="indexes" class="section level3">
+<h3><span class="header-section-number">6.0.2</span> Indexes</h3>
+<p>The investigation of the validity of this scale does not rely on indices but rather confirmatory factor analysis will be used to estimate the value of the latent variables underlying the indicators.</p>
+</div>
+<div id="blinding-of-information" class="section level3">
+<h3><span class="header-section-number">6.0.3</span> Blinding of information</h3>
+<p>No special blinding is used for this study.</p>
+</div>
+<div id="randomization" class="section level3">
+<h3><span class="header-section-number">6.0.4</span> Randomization</h3>
+<p>To test the items’ order effects we present the items in three different order conditions which will be assigned randomly. The conditions are the following:</p>
+<ul>
+<li>Order 1: the order in which items are presented in Table 1</li>
+<li>Order 2: the items are ordered based on topics (work harder, talent, rich parents, connections), and for each of them they have to respond first about perceptions and then about preferences. For instance: a) those who work harder get greater rewards, b) those who work arder should get greater rewards …</li>
+<li>Order 3: the order is randomized within this condition</li>
+</ul>
+</div>
+</div>
+<div id="analysis-plan" class="section level1">
+<h1><span class="header-section-number">7</span> Analysis plan</h1>
+<p>To evaluate the hypotheses, confirmatory factor analysis (CFA) will be used as we rely on a theory regarding the underlying four factors. The method of estimation will be Weighted Least Squares Mean Variance Approximation (WLMSV) for categorical ordered indicators. For the analysis we will use the R package Lavaan <span class="citation">(Rosseel, <a href="#ref-Rosseel2012" role="doc-biblioref">2012</a>)</span>.</p>
+<div id="inference-criteria" class="section level3">
+<h3><span class="header-section-number">7.0.1</span> Inference criteria</h3>
+<p>The values that will be used as evaluation criteria for the goodness of the adjustment of the model were taken from the proposal of <span class="citation">Brown (<a href="#ref-Brown2008" role="doc-biblioref">2008</a>)</span> and are the following:</p>
+<ul>
+<li>Chi-square:&gt; 0.05</li>
+<li>Chi-square ratio:&gt; 3</li>
+<li>Comparative adjustment goodness index (CFI):&gt; 0.95</li>
+<li>Tucker-Lewis Index (TLI):&gt; 0.95</li>
+<li>Root of the average squared residual approximation &lt;0.08.</li>
+</ul>
+</div>
+<div id="secondary-analysis" class="section level3">
+<h3><span class="header-section-number">7.0.2</span> Secondary analysis</h3>
+<p>To evaluate the metric stability of the measurement model <span class="citation">(Davidov et al., <a href="#ref-Davidovetal2014" role="doc-biblioref">2014</a>)</span> we will conduct a longitudinal invariance test using the first and third wave of our study. Following <span class="citation">Liu et al. (<a href="#ref-liuTestingMeasurementInvariance2017" role="doc-biblioref">2017</a>)</span>, we will test a series of four hierarchical models: Configural, Weak, Strong and Strict invariance models for ordered-categorical indicators based on the assumption that a five category likert scale cannot be treated as a continous variable because can lead to biased parameter estimates.</p>
+</div>
+<div id="data-exclusion" class="section level3">
+<h3><span class="header-section-number">7.0.3</span> Data Exclusion</h3>
+<p>All cases will be used as long as they do not show missing values in any of the items on the scale. No imputation criteria will be used.</p>
+</div>
+<div id="ethics." class="section level3">
+<h3><span class="header-section-number">7.0.4</span> Ethics.</h3>
+<p>The experiment and survey instruments are approved by the IRB of the University of Chile.</p>
+</div>
+</div>
+<div id="bibliography" class="section level1 unnumbered">
+<h1>Bibliography</h1>
+<div id="refs" class="references">
+<div id="ref-Brown2008">
+<p>Brown, T. A. (2008). <em>Confirmatory Factor Analysis for Applied Research</em>. <a href="https://doi.org/10.1198/tas.2008.s98">https://doi.org/10.1198/tas.2008.s98</a></p>
+</div>
+<div id="ref-Davidovetal2014">
+<p>Davidov, E., Meuleman, B., Cieciuch, J., Schmidt, P., &amp; Billiet, J. (2014). Measurement Equivalence in Cross-National Research. <em>Annual Review of Sociology</em>, <em>40</em>(1), 55–75. <a href="https://doi.org/10.1146/annurev-soc-071913-043137">https://doi.org/10.1146/annurev-soc-071913-043137</a></p>
+</div>
+<div id="ref-Duru-bellat2012">
+<p>Duru-Bellat, A. M., &amp; Tenret, E. (2012). Who’s for Meritocracy? Individual and Contextual Variations in the Faith. <em>Comparative Education Review</em>, <em>56</em>(2), 223–247.</p>
+</div>
+<div id="ref-Kunovich2007">
+<p>Kunovich, S., &amp; Slomczynski, K. M. (2007). Systems of distribution and a sense of equity: A multilevel analysis of meritocratic attitudes in post-industrial societies. <em>European Sociological Review</em>, <em>23</em>(5), 649–663. <a href="https://doi.org/10.1093/esr/jcm026">https://doi.org/10.1093/esr/jcm026</a></p>
+</div>
+<div id="ref-liuTestingMeasurementInvariance2017">
+<p>Liu, Y., Millsap, R. E., West, S. G., Tein, J.-Y., Tanaka, R., &amp; Grimm, K. J. (2017). Testing measurement invariance in longitudinal data with ordered-categorical measures. <em>Psychological Methods</em>, <em>22</em>(3), 486–506. <a href="https://doi.org/10.1037/met0000075">https://doi.org/10.1037/met0000075</a></p>
+</div>
+<div id="ref-Newman2015">
+<p>Newman, B. J., Johnston, C. D., &amp; Lown, P. L. (2015). False Consciousness or Class Awareness? Local Income Inequality, Personal Economic Position, and Belief in American Meritocracy. <em>American Journal of Political Science</em>, <em>59</em>(2), 326–340. <a href="https://doi.org/10.1111/ajps.12153">https://doi.org/10.1111/ajps.12153</a></p>
+</div>
+<div id="ref-Reynolds2014">
+<p>Reynolds, J., &amp; Xian, H. (2014). Perceptions of meritocracy in the land of opportunity. <em>Research in Social Stratification and Mobility</em>, <em>36</em>, 121–137. <a href="https://doi.org/10.1016/j.rssm.2014.03.001">https://doi.org/10.1016/j.rssm.2014.03.001</a></p>
+</div>
+<div id="ref-Rosseel2012">
+<p>Rosseel, Y. (2012). Lavaan: An R package for structural equation modeling and more. Version 0.5–12 (BETA). <em>Journal of Statistical Software</em>, <em>48</em>(2), 1–36.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+---
+title: "Measuring Perceptions and Preferences for Meritocracy"
+css: "custom.css"
+linestretch: '1.5'
+link-citations: yes
+author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
+abstract: "Economic and social inequalities have generated growing concern and crises across contemporary societies. One of the mechanisms proposed by social sciences to explain the persistence of inequality is the belief in meritocracy, which would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualization and measures that make the findings and their interpretation rather confusing. Most of the studies in the area have relied upon secondary data to operationalize meritocracy, with a wide variation in the use and interpretation of the same survey items. Taking into account the extant literature that uses measures of meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding conceptualization and operationalization. Based on this critical analysis, we propose a survey instrument called *Perceptions and Preferences for Meritocracy Scale*, which we test with confirmatory factor analysis using data from an online survey study (N=2,141). Our results support the proposed conceptual structure, which not only distinguishes between perceptions and preferences, but also between meritocratic and non-meritocratic dimensions. Our discussion highlights the importance of considering these different dimensions in order to advance the study of meritocracy."
+output:
+  bookdown::pdf_document2:
+    template: null
+    toc: false
+  bookdown::html_document2:
+    number_sections: false
+linkcolor: blue
+bibliography:
+  - ../input/bib/EconomiaMoral.bib
+  - ../input/bib/meritocracy.bib
+  - ../input/bib/invariance.bib
+editor_options:
+  chunk_output_type: console
+geometry: margin=0.78in
+header-includes:
+  # - \usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+  - \usepackage{times}           # Times New Roman
+  - \usepackage{caption}
+  - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+---
+
+```{r eval=FALSE, include=FALSE}
+# for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
+# clean #in the yml
+rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::pdf_document2")
+rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::html_document2")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H")
+# knitr::opts_knit$set(base.url = "../") #relative path for .html output file
+# knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+options(knitr.graphics.error = FALSE)
+Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
+#RUN THIS BEFORE THE ANALYSIS
+pacman::p_load(knitr)
+
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+
+table_format2 = if(is_html_output()) {
+  T
+} else if(is_latex_output()) {
+  F
+}
+```
+
+
+## Study 1: Measuring meritocracy with international secondary data
+
+### Data
+
+The data used in the analysis corresponds to the last available wave of the social inequality module from the International Social Survey Programme (ISSP), which is the most specialized international comparative survey in perceptions, attitudes and beliefs about inequality related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 26 countries and XXXX individuals. Although there is data available from this module for previous waves (1987, 1992 and 1999), unfortunately there are several variables that are important for this research that were not included, particularly in 1987 and 1999, reason why we only use the 2009 wave.
+
+### Variables
+
+There are a series of indicators in the ISSP survey that in the following we attempt to classify in our meritocracy measurement scheme. However, it is important to mention  that the items were not originally thought as a specific measure of meritocracy. Still, many of the items have been used in previous research on meritocracy (and certainly will keep being used in the future) and before proposing a new measure we consider to give a first test to our proposed conceptualization using available data that not only covers several countries but also is validated by the research community.
+
+The variables are presented below organized in perceptions and preferences:
+
+- _Perception of meritocracy/non-meritocracy_: for operationalizing perceptions the closest set of ISSP's indicators comes from the question asking about perceptions for opportunities to get ahead, which are usually considered as "meritocratic beliefs" in previous research. The general heading of the battery is: _"To begin we have some questions about opportunities for getting ahead. Please tick one box for each of these to show how important you think it is for getting ahead in life."_ This is followed by a list of statements to be answered in a scale with the following levels numbered from 1 to 5: essential, very important, fairly important, not very important, not important at all. Below the items are listed classified according to the meritocracy/non-meritocracy character:
+
+  - Meritocratic perception:
+    - How important is having ambition?
+    - How important is hard work?
+
+  - Non-meritocratic perception
+    - How important is coming from a wealthy family?
+    - How important is having well-educated parents
+    - How important is knowing the right people
+    - How important is having political connections
+    - How important is a person's race?
+    - How important is being born a man or a woman?
+
+<br>
+  The classification is based on criteria of internal motivation (meritocratic) and structural constraints (non-meritocratic). There were two items from the battery that were excluded from the analysis as they would not fit into the classification. The first one was "having good education yourself", since it was not clear whether this is could be due to individual motivation or system opportunities, and the second was "giving bribes", as introduced elements of criminality that were beyond a non-meritocratic perception.
+
+- Preferences for meritocracy-non meritocracy: for operationalizing normative preferences we used a list of items related to reasons for pay. The ISSP question was: _In deciding how much people ought to earn, how important should each of these things be, in your opinion_, rated in the same _essential-non important at all_ scale as the questions for meritocratic preferences. The reasons are:
+
+  - Meritocratic preferences
+    - How well he or she does the job?
+    - How hard he or she works at the job?
+
+  - Non-meritocratic preferences
+    - What is needed to support a family?
+    - Whether the person has children to support?
+
+<!-- (here summary descriptive table - @julio) -->
+
+Table \@ref(tab:desc-issp)
+
+```{r desc-issp, echo=FALSE, results='asis'}
+load(file = "../output/tables/desc.issp.Rdata")
+sum.issp09<- kable(desc.issp,format =table_format,
+                 booktabs= T,
+                 align = "l",
+                 linesep = "",
+                 caption = "Descriptive statistics for the ISSP 2009 sample") %>%
+  kable_styling(full_width = table_format2,
+                font_size = 10,
+                position = "center",
+                latex_options = c("HOLD_position"));sum.issp09
+```
+
+### Methods
+
+The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
+
+### Results
+
+<!-- [diagrama SEM] -->
+
+Figure \@ref(fig:meas02-issp)
+
+```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center'}
+knitr::include_graphics('../output/images/meas02-issp.PNG')
+```
+
+<!-- [tabla CFA] -->
+
+Table \@ref(tab:tb-perpref1)
+
+```{r tb-perpref1, echo=FALSE}
+load(file = "../output/tables/tb.perpref1.RData")
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation")
+tb.col <- c("","Meritocratic","Non-meritocratic","Meritocratic","Non-meritocratic")
+tb.caption <- c(" Factor loadings and fit measures for ISSP 2009")
+tb.issp<- kable(tb.perpref1,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>%
+          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 12) %>%
+          add_header_above(header = c(" "=1,"Perception"= 2,"Preference"= 2)) %>%
+          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
+          row_spec(row = 12,hline_after = TRUE) %>%
+          add_indent(c(13:17)) %>%
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.issp
+```

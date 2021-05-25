@@ -1,0 +1,14 @@
+base
+knitr
+kableExtra
+dplyr
+lavaan
+sjPlot
+semPlot
+stargazer
+corrplot
+psych
+xml2
+rvest
+sjlabelled
+ggplot2

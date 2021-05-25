@@ -1,0 +1,228 @@
+---
+title: "Data preparation Study 2 - Merit Scale"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
+css: "../input/bib/style.css"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    toc: true
+    toc_float:
+        collapsed: false
+    toc_depth: 2
+    code_folding: "hide"
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r include=FALSE}
+# Knitr options
+
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,results = "hold")
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+```
+
+This is the preparation code of the data for Study 2,: the Perceptions and Preferences of Meritocracy Scale. The prepared data is `data_s2.RData`
+
+# Libraries
+```{r}
+pacman::p_load(sjmisc, sjPlot, dplyr, tidyr, lavaan, stargazer, corrplot, psych, knitr, kableExtra, summarytools, sjlabelled, Hmisc)
+```
+
+# Load original data
+
+```{r}
+data <- sjlabelled::read_spss("input/data/original/Estudio_3_ola1.sav",verbose = F)
+dim(data)
+```
+
+# Select variables subset
+
+First we select those who that accepted to participate in the informed consent based on the response to the variable `Intro`:
+
+```{r}
+table(data$Intro)
+```
+
+There are 2236 who accepted to participate (1) and 221 who does not (221). Now we filter them:
+
+```{r}
+data_s2 <- data %>% filter(Intro==1)
+```
+
+Now we select the variables of the scale which are the ones with "meritv0" in the label are the ones used in the scale (8 items):
+
+```{r}
+find_var(data = data_s2,"meritv03")
+```
+
+There are 4 topics (effort, talents, parents' wealth & networks) both for perceptions and preferences, summing up 8 items in total.
+
+Suffixes v01, v02 & v03 make reference to the different order sets in which items were administrated (see paper for more details). Besides, we select variables that indicate the order set, beggining with FL_21_DO
+
+
+```{r}
+data_s2 <- data_s2 %>%
+  select(starts_with("meritv01"),
+         starts_with("meritv02"),
+         starts_with("meritv03"),
+         starts_with("FL_21_DO"))
+
+dim(data_s2)
+sjmisc::descr(data_s2, show = "short") # labels too long: shorten
+
+```
+
+Change long labels from FL_21 ... variables
+
+```{r}
+data_s2 <- data_s2 %>% rename(
+  "id_v1"=FL_21_DO_merit_perc_pref_julio19v01,
+  "id_v2"=FL_21_DO_merit_perc_pref_julio19v02,
+  "id_v3"=FL_21_DO_merit_perc_pref_julio19v03
+  )
+```
+
+# Process variables for analysis
+
+In the following we make a unique identification for each item across order sets, and create a variable that allows identifying to which administration set they belong.
+
+First just check whether the set's id variables are working properly identifying the corresponding items:
+
+```{r}
+data_s2 %>% filter(id_v1==1) %>%sjmisc::descr(., show = "short")
+data_s2 %>% filter(id_v2==1) %>%sjmisc::descr(., show = "short")
+data_s2 %>% filter(id_v3==1) %>%sjmisc::descr(., show = "short")
+```
+
+Ok. Now recode de values on the version in order to be able to identify the groups afterwards
+
+```{r}
+data_s2$id_v2 <- car::recode(data_s2$id_v2, "1=2")
+data_s2$id_v3 <- car::recode(data_s2$id_v3, "1=3")
+
+```
+
+Now we create the variables across response set versions. For this first we create a vector with the corresponding variable names, e.g. the three containing "perc_effort" (independent of the ser version). Then we use these vectors for creating the new variables with `coalesce`.
+
+
+```{r}
+#create vector with names
+match_perc_effort = rlang::syms(grep("perc_effort", names(data_s2), value = TRUE))
+match_perc_talent = rlang::syms(grep("perc_talent", names(data_s2), value = TRUE))
+match_perc_wpart = rlang::syms(grep("perc_wpart", names(data_s2), value = TRUE))
+match_perc_netw = rlang::syms(grep("perc_netw", names(data_s2), value = TRUE))
+match_pref_effort = rlang::syms(grep("pref_effort", names(data_s2), value = TRUE))
+match_pref_talent = rlang::syms(grep("pref_talent", names(data_s2), value = TRUE))
+match_pref_wpart = rlang::syms(grep("pref_wpart", names(data_s2), value = TRUE))
+match_pref_netw = rlang::syms(grep("pref_netw", names(data_s2), value = TRUE))
+match_set_version = rlang::syms(grep("id_v", names(data_s2), value = TRUE))
+
+#create variables
+data_s2 <- data_s2 %>%
+  mutate(perc_effort = coalesce(!!! match_perc_effort),
+         perc_talent = coalesce(!!! match_perc_talent),
+         perc_wpart = coalesce(!!! match_perc_wpart),
+         perc_netw = coalesce(!!! match_perc_netw),
+         pref_effort = coalesce(!!! match_pref_effort),
+         pref_talent = coalesce(!!! match_pref_talent),
+         pref_wpart = coalesce(!!! match_pref_wpart),
+         pref_netw = coalesce(!!! match_pref_netw),
+         group = coalesce(!!! match_set_version)
+        )
+
+#check:
+data_s2 %>% select(perc_effort, meritv01_perc_effort, meritv02_perc_effort, meritv03_perc_effort) %>% slice_head(n=10)
+
+sjmisc::descr(data_s2)
+frq(data_s2$group)
+
+# 75 NAs in group, probably those who not continued the survey, check:
+
+data_s2 %>%  filter(is.na(group))
+
+# Ok, remove NAs in groups
+
+data_s2 <- data_s2 %>%  filter(!is.na(group))
+```
+
+Now select the final variables
+
+```{r}
+data_s2 <- data_s2 %>% select(perc_effort,perc_talent,perc_wpart, perc_netw,
+                              pref_effort,pref_talent,pref_wpart, pref_netw,
+                              group)
+
+names(data_s2)
+dim(data_s2)
+```
+
+
+## Labels
+
+### Variable labels
+
+```{r}
+
+set_label(data_s2$group) <- "Order sets"
+
+set_label(data_s2$perc_effort)  <- "More effort get greater rewards"
+set_label(data_s2$perc_talent)  <- "More talent get greater rewards"
+set_label(data_s2$perc_wpart)   <- "Rich parents to get ahead"
+set_label(data_s2$perc_netw)    <- "Contacts to get ahead"
+
+set_label(data_s2$pref_effort)  <- "More effort should get greater rewards"
+set_label(data_s2$pref_talent)  <- "More talent should get greater rewards"
+set_label(data_s2$pref_wpart)   <- "Rich parents should get ahead"
+set_label(data_s2$pref_netw)    <- "Contacts should get ahead"
+
+sjmisc::descr(data_s2)
+sjmisc::frq(data_s2$perc_effort)
+
+```
+
+### Value labels
+```{r}
+get_labels(data_s2$perc_effort) # translate
+
+# generate vector of variables to relabel:
+perc_or_pref = rlang::syms(grep("perc_|pref_", names(data_s2), value = TRUE))
+perc_or_pref
+
+
+# label values
+
+data_s2 <- data_s2  %>% replace_labels(labels = c("Strongly disagree" = 1, "Disagree" = 2, "Neither agree nor disagree"=3,"Agree"=4, "Totally agree" = 5))
+
+data_s2$group<- set_labels(data_s2$group, labels = c("Order set 1"=1,"Order set 2"=2,"Order set 3"=3 ))
+
+
+#check
+get_labels(data_s2$perc_effort) # ok
+get_labels(data_s2$group) # ok
+
+sjmisc::descr(data_s2)
+
+```
+
+# Final summary
+```{r}
+sjmisc::descr(data_s2,
+      show = c("label","range", "mean", "sd", "NA.prc", "n"))%>%
+      kable(.,"markdown")
+
+print(dfSummary(data_s2, valid.col = FALSE, graph.magnif = 0.75),
+      max.tbl.height = 300, method = "render")
+
+```
+
+
+## save data
+
+```{r}
+
+save(data_s2,file = "input/data/proc/data_s2.RData")
+```

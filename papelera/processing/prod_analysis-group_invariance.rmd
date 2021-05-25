@@ -1,0 +1,289 @@
+---
+title: "Group invariance "
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+css: "../input/bib/style.css"
+output: 
+  html_document:
+    number_sections: true
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    code_folding: "hide"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r eval=FALSE, include=FALSE}
+rmarkdown::render(input = "production/prod_analysis-group_invariance.Rmd",output_format = "html_document"); browseURL(url = "production/")
+```
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE)
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+```
+
+
+# Analysis
+
+**load libraries**
+```{r}
+library(sjPlot)
+library(dplyr)
+library(lavaan)
+library(semPlot)
+library(semTools)
+library(stargazer)
+library(corrplot)
+library(psych)
+library(knitr)
+library(kableExtra)
+
+```
+
+**load data**
+```{r}
+load(file = "input/data/proc/pov01_fact02.RData")
+names(pov_fs)
+```
+
+```{r}
+pov01 <- pov_fs %>% filter(dataset=="pvw01")
+fs01  <- pov_fs %>% filter(dataset=="fsw02")
+```
+
+Meassurement model
+
+```{r}
+model01 <- '
+perc_merit  =~ perc_effort + perc_talent
+perc_nmerit =~ perc_wpart  + perc_netw
+pref_merit  =~ pref_effort + pref_talent
+pref_nmerit =~ pref_wpart  + pref_netw'
+```
+
+
+## Poverty Experiment Sample (wave 01)
+```{r}
+pov1_c <- cfa(model = model01,data = pov01,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
+
+pov1_o <- cfa(model = model01,data = pov01,ordered = c("perc_effort","perc_talent",
+                                                       "perc_wpart","perc_netw",
+                                                       "pref_effort","pref_talent",
+                                                       "pref_wpart","pref_netw"),std.lv=FALSE)
+#---------------------------------------------------#
+cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
+kable(left_join(x = standardizedsolution(pov1_c) %>% 
+                  filter(op=="=~") %>% 
+                  select(lhs,rhs,est.std),y = standardizedsolution(pov1_o) %>% 
+                  filter(op=="=~") %>%
+                  select(lhs,rhs,est.std),c("lhs","rhs")),
+      format = "markdown",digits = 2,col.names = cnames, caption = "Factor loadings")
+```
+
+```{r eval=FALSE, include=FALSE}
+fitmeasures(pov1_c, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]
+fitmeasures(pov1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]
+```
+
+## Factorial Survey sample (wave 02)
+
+```{r}
+fs1_c <- cfa(model = model01,data = fs01,estimator="MLR",std.lv=FALSE) # Continuous/ estimator ML Robust
+
+fs1_o <- cfa(model = model01,data = fs01,ordered = c("perc_effort","perc_talent",
+                                                      "perc_wpart","perc_netw",
+                                                      "pref_effort","pref_talent",
+                                                      "pref_wpart","pref_netw"),std.lv=FALSE)
+#---------------------------------------------------#
+cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
+kable(left_join(x = standardizedsolution(fs1_c) %>% 
+                  filter(op=="=~") %>% 
+                  select(lhs,rhs,est.std),y = standardizedsolution(fs1_o) %>% 
+                  filter(op=="=~") %>%
+                  select(lhs,rhs,est.std),c("lhs","rhs")),
+      format = "markdown",digits = 2,col.names = cnames, caption = "Factor loadings")
+```
+
+```{r eval=FALSE, include=FALSE}
+fitmeasures(fs1_c, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]
+fitmeasures(fs1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]
+```
+
+## Group CFA
+```{r}
+group_c <- cfa(model01, 
+           data = pov_fs, 
+           group = "dataset",estimator="MLR",std.lv=FALSE)
+
+group_o <- cfa(model = model01,data = pov_fs,ordered = c("perc_effort","perc_talent",
+                                                        "perc_wpart","perc_netw",
+                                                        "pref_effort","pref_talent",
+                                                        "pref_wpart","pref_netw"),std.lv=FALSE,group = "dataset")
+```
+
+```{r}
+summary(group_c, standardized=TRUE,fit.measures=TRUE)
+summary(group_o, standardized=TRUE,fit.measures=TRUE)
+```
+
+```{r eval=FALSE, include=FALSE}
+fitmeasures(group_c, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]
+fitmeasures(group_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]
+```
+
+# Tables
+## CFA
+
+```{r}
+labs<- c("A. Who the more they try they manage to get bigger rewards that those who striveless.",
+         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent.",
+         "C. Who they have rich parents manage to get out ahead.",
+         "D. Who they have good contacts they manage to get out ahead.",
+         "E. Who the more they try they should get greater rewards than those who they try less." ,
+         "F. Who possess more talent they should get greater rewards than those who possess less talent." ,
+         "G. It's fine that those who have rich parents get ahead",
+         "H. Is well that those who have good contacts get ahead." )
+```
+
+
+```{r}
+loads01<- data.frame(round(inspect(fs1_o,what="std")$lambda,digits = 2))
+loads01[loads01==c(0.00)] <- NA; names(loads01) <- c(paste0("M1.",1:4))
+
+for (i in names(loads01)) {
+  # tb.load[,i] <- sjlabelled::as_character(tb.load[,i])
+  loads01[,i] <- sprintf(loads01[,i], fmt = '%#.2f')
+}
+loads01[loads01=="NA"] <- ""
+```
+
+```{r tb_loads-fit-fac02}
+fm01<- data.frame(t(data.frame(fitmeasures(fs1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm01) ="M1.1"
+
+#------chi2, df------#
+fm04.1 <- fm01 %>% select(chisq.scaled,df) 
+fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 1)
+fm04.1$df <- round(x = fm04.1$df,digits = 0)
+fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
+fm04.1 <- select(fm04.1,"chi2df")
+
+#------CFI, RMSEA------#
+fm04.2 <- fm01 %>% select(cfi.scaled,rmsea.scaled)
+for (i in names(fm04.2)) {
+  fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
+}
+
+#------ merge fit indices ------#
+fm.df      <- bind_cols(fm04.1,fm04.2)
+fm.df$nobs <- c(nobs(fs1_o)) 
+fm.df      <- data.frame(t(fm.df))
+
+#------ merge ------#
+tb.fm2<- bind_rows(loads01,fm.df)
+tb.fm2<- tb.fm2 %>% 
+  mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>%
+  select(vars,everything())
+#--table---#
+tb.col  <- c("Variables",1:4)
+tb.foot <- paste0("Standardised factor loadings using DWLS estimator. CFI = Comparative fit index (scaled), RMSEA = Root mean square error of approximation (scaled)")
+tb.caption <- "Factor loadings and fit measures for the second sample" 
+
+tb.fm01<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption) %>% 
+          kable_classic(full_width = F,font_size = 9,bootstrap_options = c("striped", "hover"),html_font = "Sans") %>% 
+          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
+          column_spec(column = 1,width = "5cm") %>% 
+          column_spec(column = c(2:5),width = "0.5cm") %>% 
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12)) %>% 
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm01
+
+save(tb.fm2,tb.col,tb.foot,tb.caption,file = "output/tables/tb.fact-f02.RData")
+```
+
+## Invariance
+
+```{r}
+inv01<- measurementInvariance(model=model01,data=pov_fs,group="dataset",estimator = "ML",strict=TRUE)
+```
+
+```{r}
+conf  <- inv01$fit.configural
+weak  <- inv01$fit.loadings
+strong<- inv01$fit.intercepts
+strict<- inv01$fit.residuals
+
+tab01<- anova(conf,weak,strong,strict,SB.classic=TRUE) %>% 
+  as_tibble() %>% 
+  select("Chisq","Df","chisq_diff"=`Chisq diff`,"df_diff"=`Df diff`,"pvalue"=`Pr(>Chisq)`) %>% 
+  mutate(stars=gtools::stars.pval(pvalue),
+         chisqt=paste0(round(Chisq,2)," (",Df,") "),
+         decision=ifelse(pvalue>0.05,yes = "Accept",no = "Reject"),
+         model=c("Configural","Weak","Strong","Strict")) 
+ 
+fit.meas<- bind_rows(fitmeasures(inv01$fit.configural,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                     fitmeasures(inv01$fit.loadings,  output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                     fitmeasures(inv01$fit.intercepts,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                     fitmeasures(inv01$fit.residuals, output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),])
+
+# compute differences in chisq, df, cfi and rmsea (90%, lower.ci - upper.ci )
+fit.meas<- fit.meas %>% 
+  mutate(diff.chi2 = chisq    - lag(chisq,default = first(chisq)),
+         diff.df   = df       - lag(df,   default = first(df)),
+         diff.cfi  = cfi      - lag(cfi,  default = first(cfi)),
+         diff.rmsea   = rmsea - lag(rmsea,default = first(rmsea))) %>%
+  round(3) %>% 
+  mutate(rmsea.ci=paste0(rmsea," \n ", "(",rmsea.ci.lower,"-",rmsea.ci.upper,")"))
+
+tab.inv<- bind_cols(tab01,fit.meas) %>% 
+  select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.df,diff.cfi,diff.rmsea,stars,decision) %>% 
+  mutate(diff.chi2=paste0(diff.chi2," (",diff.df,") ",stars)) %>% 
+  select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.cfi,diff.rmsea,decision)
+
+#clean values
+tab.inv[tab.inv == c("0 (0) ")] <- NA
+tab.inv[tab.inv == c(0)] <- NA
+```
+
+```{r}
+col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90% CI)",
+             "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
+footnote <- paste0("$N$ = ",nobs(conf),"; group 1 $n$ = ",conf@Data@nobs[[1]],"; group 2 $n$ = ",conf@Data@nobs[[2]], "\n ***p < .001")
+
+kable(tab.inv, col.names = col.nam, booktabs=TRUE) %>% 
+  kable_classic(full_width = F, bootstrap_options = c("striped", "hover"),html_font = "Serif") %>% 
+  footnote(general = footnote, footnote_as_chunk = T) 
+
+save(tab.inv,conf,file = "output/tables/tb.inv-group.RData")
+```
+
+
+```{r eval=FALSE, include=FALSE}
+### Check an alternative method
+configural        <- cfa(model01, data=pov_fs, group = "dataset", estimator="ML")
+weak.invariance   <- cfa(model01, data=pov_fs, group = "dataset",group.equal = "loadings", estimator="ML")
+strong.invariance <- cfa(model01, data=pov_fs, group = "dataset",group.equal = c( "loadings", "intercepts"), estimator="ML")
+strict.invariance <- cfa(model01, data=pov_fs, group = "dataset",group.equal = c( "loadings", "intercepts", "residuals"), estimator="ML")
+```
+
+```{r eval=FALSE, include=FALSE}
+anova(configural,weak.invariance,strong.invariance,strict.invariance)
+```
+
+```{r eval=FALSE, include=FALSE}
+fitmeasures(configural       )
+fitmeasures(weak.invariance  )
+fitmeasures(strong.invariance) 
+fitmeasures(strict.invariance) 
+```
+
+* The results are the same in both methods
+
+* Tabla de CFA con la segunda muestra
+* Tabla resultados de invarianza entre muestras  
+* Modelo de reporte: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5145197/
+
+

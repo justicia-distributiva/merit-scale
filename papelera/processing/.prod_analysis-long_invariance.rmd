@@ -1,0 +1,1263 @@
+---
+title: "Longitudinal analysis "
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+css: "../input/bib/style.css"
+output: 
+  html_document:
+    number_sections: true
+    toc: true
+    toc_float: true
+    toc_depth: 2
+    code_folding: "hide"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r eval=FALSE, include=FALSE}
+rmarkdown::render(input = "production/prod_analysis-long_invariance.Rmd",output_format = "html_document"); browseURL(url = "production/prod_analysis-long_invariance.html")
+```
+
+
+
+```{r include=FALSE}
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = TRUE)
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+```
+
+
+# Longitudinal analysis
+
+```{r}
+library(sjPlot)
+library(dplyr)
+library(lavaan)
+library(stargazer)
+library(corrplot)
+library(psych)
+library(knitr)
+library(kableExtra)
+load(file = "input/data/proc/datawide_123.RData")
+```
+
+```{r}
+g01<- wide02 %>% filter(grupo==1) %>% select(starts_with("perc_"),starts_with("pref_")) # Fixed by perception/preference
+g02<- wide02 %>% filter(grupo==2) %>% select(starts_with("perc_"),starts_with("pref_")) # Fixed by topic (i.e: effort)
+g03<- wide02 %>% filter(grupo==3) %>% select(starts_with("perc_"),starts_with("pref_")) # Randomized
+```
+
+### Grupo Versión 01
+
+```{r, out.width="75%", results='asis'}
+stargazer(g01,type = "html", median = T,digits = 2)
+```
+
+```{r, out.width=c("75%","75%"), fig.cap=c("Percepción","Preferencia"), fig.align='center'}
+corwide01a<- polychoric(x = select(g01 ,starts_with(match = "perc_")),na.rm = T)
+rownames(corwide01a$rho) <-c("1. pc_effortw1","2. pc_talentw1","3. pc_wpartw1 ","4. pc_netww1","5. pc_effortw2","6. pc_talentw2","7. pc_wpartw2","8. pc_netww2","9. pc_effortw3","10. pc_talentw3","11. pc_wpartw3 ","12. pc_netww3")
+colnames(corwide01a$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwide01a$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+corwide01b<- polychoric(x = select(g01 ,starts_with(match = "pref_")),na.rm = T)
+rownames(corwide01b$rho) <-c("1. pf_effortw1","2. pf_talentw1","3. pf_wpartw1 ","4. pf_netww1","5. pf_effortw2","6. pf_talentw2","7. pf_wpartw2","8. pf_netww2","9. pf_effortw3","10. pf_talentw3","11. pf_wpartw3 ","12. pf_netww3")
+colnames(corwide01b$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwide01b$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+```
+
+
+
+
+### Grupo Versión 02 
+
+```{r, out.width="75%", results='asis'}
+stargazer(g02,type = "html", median = T,digits = 2)
+```
+
+```{r, out.width=c("75%","75%"), fig.cap=c("Percepción","Preferencia"), fig.align='center'}
+corwide02a<- polychoric(x = select(g02 ,starts_with(match = "perc_")),na.rm = T)
+rownames(corwide02a$rho) <-c("1. pc_effortw1","2. pc_talentw1","3. pc_wpartw1 ","4. pc_netww1","5. pc_effortw2","6. pc_talentw2","7. pc_wpartw2","8. pc_netww2","9. pc_effortw3","10. pc_talentw3","11. pc_wpartw3 ","12. pc_netww3")
+colnames(corwide02a$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwide02a$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+corwide02b<- polychoric(x = select(g02 ,starts_with(match = "pref_")),na.rm = T)
+rownames(corwide02b$rho) <-c("1. pf_effortw1","2. pf_talentw1","3. pf_wpartw1 ","4. pf_netww1","5. pf_effortw2","6. pf_talentw2","7. pf_wpartw2","8. pf_netww2","9. pf_effortw3","10. pf_talentw3","11. pf_wpartw3 ","12. pf_netww3")
+colnames(corwide02b$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwide02b$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```
+
+### Grupo Versión 03
+
+```{r, results='asis'}
+stargazer(g03,type = "html", median = T,digits = 2)
+```
+
+```{r, out.width=c("75%","75%"), fig.cap=c("Percepción","Preferencia"), fig.align='center'}
+corwide03a<- polychoric(x = select(g03 ,starts_with(match = "perc_")),na.rm = T)
+rownames(corwide03a$rho) <-c("1. pc_effortw1","2. pc_talentw1","3. pc_wpartw1 ","4. pc_netww1","5. pc_effortw2","6. pc_talentw2","7. pc_wpartw2","8. pc_netww2","9. pc_effortw3","10. pc_talentw3","11. pc_wpartw3 ","12. pc_netww3")
+colnames(corwide03a$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwide03a$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+corwide03b<- polychoric(x = select(g03 ,starts_with(match = "pref_")),na.rm = T)
+rownames(corwide03b$rho) <-c("1. pf_effortw1","2. pf_talentw1","3. pf_wpartw1 ","4. pf_netww1","5. pf_effortw2","6. pf_talentw2","7. pf_wpartw2","8. pf_netww2","9. pf_effortw3","10. pf_talentw3","11. pf_wpartw3 ","12. pf_netww3")
+colnames(corwide03b$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwide03b$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```
+
+### Muestra completa 
+
+```{r, results='asis'}
+stargazer(select(wide02 ,starts_with(match = "perc_"), starts_with("pref_")),type = "html", median = T,digits = 2)
+```
+
+```{r, out.width=c("75%","75%"), fig.cap=c("Percepción","Preferencia"), fig.align='center'}
+corwideA<- polychoric(x = select(wide02 ,starts_with(match = "perc_")),na.rm = T)
+rownames(corwideA$rho) <-c("1. pc_effortw1","2. pc_talentw1","3. pc_wpartw1 ","4. pc_netww1","5. pc_effortw2","6. pc_talentw2","7. pc_wpartw2","8. pc_netww2","9. pc_effortw3","10. pc_talentw3","11. pc_wpartw3 ","12. pc_netww3")
+colnames(corwideA$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwideA$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+
+corwideB<- polychoric(x = select(wide02 ,starts_with(match = "pref_")),na.rm = T)
+rownames(corwideB$rho) <-c("1. pf_effortw1","2. pf_talentw1","3. pf_wpartw1 ","4. pf_netww1","5. pf_effortw2","6. pf_talentw2","7. pf_wpartw2","8. pf_netww2","9. pf_effortw3","10. pf_talentw3","11. pf_wpartw3 ","12. pf_netww3")
+colnames(corwideB$rho) <-c("(1)", "(2)","(3)","(4)","(5)","(6)","(7)", "(8)","(9)","(10)","(11)","(12)")
+corrplot(corwideB$rho,method = "color", type = "upper", tl.col = "black", addCoef.col = "black",diag = FALSE)
+```
+
+## CFA wave01, wave02 y wave03
+
+```{r}
+model_long <- '
+# wave 01
+perc_merit1 =~perc_effort_w1+perc_talent_w1 
+perc_nmerit1=~perc_wpart_w1 +perc_netw_w1  
+pref_merit1 =~pref_effort_w1+pref_talent_w1 
+pref_nmerit1=~pref_wpart_w1 +pref_netw_w1
+# wave 02
+perc_merit2 =~perc_effort_w2+perc_talent_w2 
+perc_nmerit2=~perc_wpart_w2 +perc_netw_w2  
+pref_merit2 =~pref_effort_w2+pref_talent_w2 
+pref_nmerit2=~pref_wpart_w2 +pref_netw_w2
+# wave 03
+perc_merit3 =~perc_effort_w3+perc_talent_w3 
+perc_nmerit3=~perc_wpart_w3 +perc_netw_w3  
+pref_merit3 =~pref_effort_w3+pref_talent_w3 
+pref_nmerit3=~pref_wpart_w3 +pref_netw_w3
+'
+
+fitlong_c <- cfa(model = model_long,data = wide02,estimator="MLR") # Continuous/ estimador ML Robust
+
+Indicatores <-c("perc_effort_w1","perc_talent_w1","perc_wpart_w1","perc_netw_w1",
+                "pref_effort_w1","pref_talent_w1","pref_wpart_w1","pref_netw_w1",
+                "perc_effort_w2","perc_talent_w2","perc_wpart_w2","perc_netw_w2",
+                "pref_effort_w2","pref_talent_w2","pref_wpart_w2","pref_netw_w2")  
+
+fitlong_o <- cfa(model = model_long,data = wide02,ordered = Indicatores)
+
+#---------------------------------------------------#
+kable(rbind(Continuous=fitmeasures(fitlong_c)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            ordinal= fitmeasures(fitlong_o)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),
+      format = "markdown",digits = 3)
+
+cnames <- c("Factor","Indicator","Loading (MLR)","Loading (DWLS)")
+kable(left_join(x = standardizedsolution(fitlong_c) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
+                y = standardizedsolution(fitlong_o) %>% filter(op=="=~") %>% select(lhs,rhs,est.std),
+                c("lhs","rhs")),
+      format = "markdown",digits = 2,col.names = cnames)
+```
+
+```{r,fig.cap="Correlación entre variables latentes w01, w02 y w03"}
+cormat<- as.matrix(inspect(fitlong_o, "cor.lv"))
+corrplot(cormat, method = "color" ,type = "upper", tl.col = "black", tl.srt = 45,addCoef.col = "black",diag = FALSE)
+```
+
+# Invarianza
+
+## Invarianza entre modalidades en ola 1,2 y 3 (between groups invariance)
+
+**NOTE**: En vista de que no existe una librería que permita estimar invarianza longitudinal asumiendo Indicatores ordinales, las primeras estimaciones las realizaré asumiendo Indicatores Continuouss (estimator=MLR).
+
+```{r}
+library(semTools)
+```
+
+```{r}
+load(file = "input/data/proc/datalong.RData")     # Datos formato long
+load(file = "input/data/proc/datawide_123.RData") # Datos formato wide 3 olas
+load(file = "input/data/proc/dat04.RData") # Datos formato wide 3 olas
+
+wide_m1 <- subset(wide02,grupo==1) # subset for mode 01
+wide_m2 <- subset(wide02,grupo==2) # subset for mode 02
+wide_m3 <- subset(wide02,grupo==3) # subset for mode 03
+```
+
+```{r}
+m_inv_modalidad <- 'perc_merit=~ perc_effort+perc_talent 
+                    perc_nmerit=~perc_wpart +perc_netw  
+                    pref_merit=~ pref_effort+pref_talent 
+                    pref_nmerit=~pref_wpart +pref_netw'
+
+indicators  <-c("perc_effort","perc_talent","perc_wpart","perc_netw",
+                "pref_effort","pref_talent","pref_wpart","pref_netw")  
+
+fit.conf=cfa(m_inv_modalidad,data=dat04,group="grupo",estimator="MLR")
+fit.deb =cfa(m_inv_modalidad,data=dat04,group="grupo",group.equal=c("loadings"),estimator="MLR")
+fit.fuer=cfa(m_inv_modalidad,data=dat04,group="grupo",group.equal=c("loadings","intercepts"),estimator="MLR")
+fit.str =cfa(m_inv_modalidad,data=dat04,group="grupo",group.equal=c("loadings","intercepts","residuals"),estimator="MLR")
+```
+
+```{r}
+kable(rbind(fit.conf=fitmeasures(fit.conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.deb =fitmeasures(fit.deb )[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.fuer=fitmeasures(fit.fuer)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.str =fitmeasures(fit.str )[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+
+kable(anova(fit.conf, fit.deb, fit.fuer, fit.str),format = "markdown",digits = 3)
+```
+
+
+## Invarianza Longitudinal
+
+> Adapted from Templin (2018), consulted at 24th of march of 2020 from: [here](https://jonathantemplin.com/wp-content/uploads/2017/08/EPSY906_Example07b_CFA_Longitudinal_Invariance.nb_.html)  
+
+### 1. Configural Longitudinal Invariance Model (everything separate across time) 
+
+```{r configural}
+configuralSyntax = "
+#===================================================================================================
+#Factor loadings all freely estimated in each group with labels
+perc_merit1  =~ L1T1*perc_effort_w1 + L2T1*perc_talent_w1 
+perc_merit2  =~ L1T2*perc_effort_w2 + L2T2*perc_talent_w2
+perc_merit3  =~ L1T3*perc_effort_w3 + L2T3*perc_talent_w3
+
+perc_nmerit1 =~ L3T1*perc_wpart_w1  + L4T1*perc_netw_w1  
+perc_nmerit2 =~ L3T2*perc_wpart_w2  + L4T2*perc_netw_w2  
+perc_nmerit3 =~ L3T3*perc_wpart_w3  + L4T3*perc_netw_w3  
+
+pref_merit1  =~ L5T1*pref_effort_w1 + L6T1*pref_talent_w1
+pref_merit2  =~ L5T2*pref_effort_w2 + L6T2*pref_talent_w2
+pref_merit3  =~ L5T3*pref_effort_w3 + L6T3*pref_talent_w3
+
+pref_nmerit1 =~ L7T1*pref_wpart_w1 + L8T1*pref_netw_w1
+pref_nmerit2 =~ L7T2*pref_wpart_w2 + L8T2*pref_netw_w2
+pref_nmerit3 =~ L7T3*pref_wpart_w3 + L8T3*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all freely estimated in each group with labels (8 items for each wave 8x3 = 16 intercepts)
+perc_effort_w1 ~ I1T1*1; perc_talent_w1 ~ I2T1*1; perc_wpart_w1 ~ I3T1*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5T1*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7T1*1; pref_netw_w1 ~ I8T1*1; 
+perc_effort_w2 ~ I1T2*1; perc_talent_w2 ~ I2T2*1; perc_wpart_w2 ~ I3T2*1; perc_netw_w2 ~ I4T2*1; pref_effort_w2 ~ I5T2*1; pref_talent_w2 ~ I6T2*1; pref_wpart_w2 ~ I7T2*1; pref_netw_w2 ~ I8T2*1; 
+perc_effort_w3 ~ I1T3*1; perc_talent_w3 ~ I2T3*1; perc_wpart_w3 ~ I3T3*1; perc_netw_w3 ~ I4T3*1; pref_effort_w3 ~ I5T3*1; pref_talent_w3 ~ I6T3*1; pref_wpart_w3 ~ I7T3*1; pref_netw_w3 ~ I8T3*1; 
+
+#===================================================================================================
+#Residual variances all freely estimated in each group with labels 
+perc_effort_w1 ~~ E1T1*perc_effort_w1; perc_talent_w1 ~~ E2T1*perc_talent_w1; perc_wpart_w1 ~~ E3T1*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5T1*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7T1*pref_wpart_w1; pref_netw_w1 ~~ E8T1*pref_netw_w1;
+perc_effort_w2 ~~ E1T2*perc_effort_w2; perc_talent_w2 ~~ E2T2*perc_talent_w2; perc_wpart_w2 ~~ E3T2*perc_wpart_w2; perc_netw_w2 ~~ E4T2*perc_netw_w2; pref_effort_w2 ~~ E5T2*pref_effort_w2; pref_talent_w2 ~~ E6T2*pref_talent_w2; pref_wpart_w2 ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8T2*pref_netw_w2;
+perc_effort_w3 ~~ E1T3*perc_effort_w3; perc_talent_w3 ~~ E2T3*perc_talent_w3; perc_wpart_w3 ~~ E3T3*perc_wpart_w3; perc_netw_w3 ~~ E4T3*perc_netw_w3; pref_effort_w3 ~~ E5T3*pref_effort_w3; pref_talent_w3 ~~ E6T3*pref_talent_w3; pref_wpart_w3 ~~ E7T3*pref_wpart_w3; pref_netw_w3 ~~ E8T2*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+
+#===================================================================================================
+#Factor variance fixed to 1 for identification in each group
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ 1*perc_merit2
+perc_merit3  ~~ 1*perc_merit3
+
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ 1*perc_nmerit2
+perc_nmerit3 ~~ 1*perc_nmerit3
+
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ 1*pref_merit2
+pref_merit3  ~~ 1*pref_merit3
+
+pref_nmerit1 ~~ 1*pref_nmerit1
+pref_nmerit2 ~~ 1*pref_nmerit2
+pref_nmerit3 ~~ 1*pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification in each group
+perc_merit1  ~ 0
+perc_merit2  ~ 0
+perc_merit3  ~ 0
+
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 0
+perc_nmerit3 ~ 0
+
+pref_merit1  ~ 0
+pref_merit2  ~ 0
+pref_merit3  ~ 0
+
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 0
+pref_nmerit3 ~ 0
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+#===================================================================================================
+"
+```
+
+```{r}
+#configural invariance for mode 01
+conf_m1 = lavaan(model = configuralSyntax, data = wide_m1, estimator = "MLR")
+```
+
+```{r}
+#configural invariance for mode 02
+conf_m2 = lavaan(model = configuralSyntax, data = wide_m2, estimator = "MLR")
+```
+
+```{r}
+#configural invariance for mode 03
+conf_m3 = lavaan(model = configuralSyntax, data = wide_m3, estimator = "MLR")
+```
+
+```{r}
+#configural invariance for complete sample (mode 1, 2 & 3)
+conf = lavaan(model = configuralSyntax, data = wide02, estimator = "MLR")
+```
+
+```{r}
+kable(rbind(fit.conf=fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),format = "markdown",digits = 3)
+```
+
+
+### 2. Metric Invariance Models (ALL loadings held equal across time - identified model using Time1 Factor Variance = 1)
+
+```{r metric}
+metricSyntax1 = "
+#===================================================================================================
+#Factor loadings all constrained across groups with labels *****
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4*perc_netw_w1  
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3  
+
+pref_merit1  =~ L5*pref_effort_w1 + L6*pref_talent_w1
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+
+pref_nmerit1 =~ L7*pref_wpart_w1 + L8*pref_netw_w1
+pref_nmerit2 =~ L7*pref_wpart_w2 + L8*pref_netw_w2
+pref_nmerit3 =~ L7*pref_wpart_w3 + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all freely estimated in each group with labels (8 items for each wave 8x3 = 16 intercepts)
+perc_effort_w1 ~ I1T1*1; perc_talent_w1 ~ I2T1*1; perc_wpart_w1 ~ I3T1*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5T1*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7T1*1; pref_netw_w1 ~ I8T1*1; 
+perc_effort_w2 ~ I1T2*1; perc_talent_w2 ~ I2T2*1; perc_wpart_w2 ~ I3T2*1; perc_netw_w2 ~ I4T2*1; pref_effort_w2 ~ I5T2*1; pref_talent_w2 ~ I6T2*1; pref_wpart_w2 ~ I7T2*1; pref_netw_w2 ~ I8T2*1; 
+perc_effort_w3 ~ I1T3*1; perc_talent_w3 ~ I2T3*1; perc_wpart_w3 ~ I3T3*1; perc_netw_w3 ~ I4T3*1; pref_effort_w3 ~ I5T3*1; pref_talent_w3 ~ I6T3*1; pref_wpart_w3 ~ I7T3*1; pref_netw_w3 ~ I8T3*1; 
+
+#===================================================================================================
+#Residual variances all freely estimated in each group with labels 
+perc_effort_w1 ~~ E1T1*perc_effort_w1; perc_talent_w1 ~~ E2T1*perc_talent_w1; perc_wpart_w1 ~~ E3T1*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5T1*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7T1*pref_wpart_w1; pref_netw_w1 ~~ E8T1*pref_netw_w1;
+perc_effort_w2 ~~ E1T2*perc_effort_w2; perc_talent_w2 ~~ E2T2*perc_talent_w2; perc_wpart_w2 ~~ E3T2*perc_wpart_w2; perc_netw_w2 ~~ E4T2*perc_netw_w2; pref_effort_w2 ~~ E5T2*pref_effort_w2; pref_talent_w2 ~~ E6T2*pref_talent_w2; pref_wpart_w2 ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8T2*pref_netw_w2;
+perc_effort_w3 ~~ E1T3*perc_effort_w3; perc_talent_w3 ~~ E2T3*perc_talent_w3; perc_wpart_w3 ~~ E3T3*perc_wpart_w3; perc_netw_w3 ~~ E4T3*perc_netw_w3; pref_effort_w3 ~~ E5T3*pref_effort_w3; pref_talent_w3 ~~ E6T3*pref_talent_w3; pref_wpart_w3 ~~ E7T3*pref_wpart_w3; pref_netw_w3 ~~ E8T2*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+
+#===================================================================================================
+# Factor variance fixed to 1 for identification in first group; estimated in others *****
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2  # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+perc_merit3  ~~ perc_merit3  # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2 # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+perc_nmerit3 ~~ perc_nmerit3 # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2  # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+pref_merit3  ~~ pref_merit3  # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+
+pref_nmerit1 ~~ 1*pref_nmerit1
+pref_nmerit2 ~~ pref_nmerit2 # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+pref_nmerit3 ~~ pref_nmerit3 # deje fijado la varianza de los factores en 1 (esto lo cambie yo respecto al script original)
+
+#===================================================================================================
+#Factor mean fixed to zero for identification in each group
+perc_merit1  ~ 0
+perc_merit2  ~ 0
+perc_merit3  ~ 0
+
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 0
+perc_nmerit3 ~ 0
+
+pref_merit1  ~ 0
+pref_merit2  ~ 0
+pref_merit3  ~ 0
+
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 0
+pref_nmerit3 ~ 0
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+#===================================================================================================
+"
+```
+
+```{r}
+#metric invariance for mode 01
+metr_m1A = lavaan(model = metricSyntax1, data = wide_m1, estimator = "MLR")
+```
+
+```{r}
+#metric invariance for mode 02
+metr_m2A = lavaan(model = metricSyntax1, data = wide_m2, estimator = "MLR")
+```
+
+```{r}
+#metric invariance for mode 03
+metr_m3A = lavaan(model = metricSyntax1, data = wide_m3, estimator = "MLR")
+```
+
+```{r}
+#metric invariance for complete sample (mode 1, 2 & 3)
+metrA = lavaan(model = metricSyntax1, data = wide02, estimator = "MLR")
+```
+
+```{r}
+#lavTestLRT(metr_m1A, conf_m1,scaled.shifted = TRUE, method = "satorra.bentler.2001")#conf_m1 was not estimated using scaled (robust) fit measures  
+# lavTestLRT(metr_m2A, conf_m2,scaled.shifted = TRUE, method = "satorra.bentler.2001") # invariantes
+# lavTestLRT(metr_m3A, conf_m3,scaled.shifted = TRUE, method = "satorra.bentler.2001") # invariantes
+
+kable(rbind(fit.conf=fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+
+kable(lavTestLRT(metrA,conf,scaled.shifted = TRUE, method = "satorra.bentler.2001"),digits = 3,format = "markdown") # no es invariante, ver modind
+```
+
+**Mod Indices**:
+
+```{r, modind metric1}
+#get modification indices for all parameters:
+metricMI1 = modificationindices(metrA, free.remove = FALSE, maximum.number = 10000)
+#restrict output to only factor loading parameters
+metricMI1a = metricMI1[which(metricMI1$op == "=~"),]
+#restrict output to only factors and items with same time point
+metricMI1a$factorTime = metricMI1a$lhs
+#extract time characters from items
+metricMI1a$itemTime = ifelse(test =endsWith(x = metricMI1a$rhs,suffix = "w1"),yes = "wave01",
+                              no = ifelse(test = endsWith(x = metricMI1a$rhs,suffix = "w2"),yes = "wave02",
+                                          no = "wave03"))
+
+metricMI1a$factorTime = ifelse(test =endsWith(x = metricMI1a$lhs,suffix = "1"),yes = "wave01",
+                               no = ifelse(test = endsWith(x = metricMI1a$lhs,suffix = "2"),yes = "wave02",
+                                           no = "wave03"))
+metricMI1a$factor     = ifelse(test =startsWith(x = metricMI1a$lhs,prefix = "perc_merit"),yes = "perc_merit",
+                               no = ifelse(test = startsWith(x = metricMI1a$lhs,prefix = "perc_nmerit"),yes = "perc_nmerit",
+                                           no = ifelse(test = startsWith(x = metricMI1a$lhs,prefix = "pref_merit"),yes = "pref_merit",
+                                                       no = "pref_nmerit" )))
+
+metricMI1a$item     = ifelse(test =startsWith(x = metricMI1a$rhs,prefix = "perc_effort") | startsWith(x = metricMI1a$rhs,prefix = "perc_talent"),yes = "perc_merit",
+                               no = ifelse(test = startsWith(x = metricMI1a$rhs,prefix = "perc_wpart")  | startsWith(x = metricMI1a$rhs,prefix = "perc_netw"),yes = "perc_nmerit",
+                                           no = ifelse(test = startsWith(x = metricMI1a$rhs,prefix = "pref_effort") | startsWith(x = metricMI1a$rhs,prefix = "pref_talent"),yes = "pref_merit",
+                                                       no = "pref_nmerit" )))
+
+metricMI1b<- metricMI1a %>% filter(factorTime==itemTime & factor==item) # quedarme con los que son de la misma ola y mismo factor
+
+#show only MIs for same time
+metricMI1b <- metricMI1b[order(-metricMI1b$mi),]
+```
+
+```{r metric2}
+metricSyntax2 = "
+#===================================================================================================
+#Factor loadings all constrained across groups with labels *****
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4T1*perc_netw_w1 #FREE PARAMETER    
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3    
+pref_merit1  =~ L5*pref_effort_w1 + L6*pref_talent_w1
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+pref_nmerit1 =~ L7*pref_wpart_w1  + L8*pref_netw_w1    
+pref_nmerit2 =~ L7*pref_wpart_w2  + L8*pref_netw_w2  
+pref_nmerit3 =~ L7*pref_wpart_w3  + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all freely estimated in each group with labels (8 items for each wave 8x3 = 16 intercepts)
+perc_effort_w1 ~ I1T1*1; perc_talent_w1 ~ I2T1*1; perc_wpart_w1 ~ I3T1*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5T1*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7T1*1; pref_netw_w1 ~ I8T1*1; 
+perc_effort_w2 ~ I1T2*1; perc_talent_w2 ~ I2T2*1; perc_wpart_w2 ~ I3T2*1; perc_netw_w2 ~ I4T2*1; pref_effort_w2 ~ I5T2*1; pref_talent_w2 ~ I6T2*1; pref_wpart_w2 ~ I7T2*1; pref_netw_w2 ~ I8T2*1; 
+perc_effort_w3 ~ I1T3*1; perc_talent_w3 ~ I2T3*1; perc_wpart_w3 ~ I3T3*1; perc_netw_w3 ~ I4T3*1; pref_effort_w3 ~ I5T3*1; pref_talent_w3 ~ I6T3*1; pref_wpart_w3 ~ I7T3*1; pref_netw_w3 ~ I8T3*1; 
+
+#===================================================================================================
+#Residual variances all freely estimated in each group with labels 
+perc_effort_w1 ~~ E1T1*perc_effort_w1; perc_talent_w1 ~~ E2T1*perc_talent_w1; perc_wpart_w1 ~~ E3T1*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5T1*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7T1*pref_wpart_w1; pref_netw_w1 ~~ E8T1*pref_netw_w1;
+perc_effort_w2 ~~ E1T2*perc_effort_w2; perc_talent_w2 ~~ E2T2*perc_talent_w2; perc_wpart_w2 ~~ E3T2*perc_wpart_w2; perc_netw_w2 ~~ E4T2*perc_netw_w2; pref_effort_w2 ~~ E5T2*pref_effort_w2; pref_talent_w2 ~~ E6T2*pref_talent_w2; pref_wpart_w2 ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8T2*pref_netw_w2;
+perc_effort_w3 ~~ E1T3*perc_effort_w3; perc_talent_w3 ~~ E2T3*perc_talent_w3; perc_wpart_w3 ~~ E3T3*perc_wpart_w3; perc_netw_w3 ~~ E4T3*perc_netw_w3; pref_effort_w3 ~~ E5T3*pref_effort_w3; pref_talent_w3 ~~ E6T3*pref_talent_w3; pref_wpart_w3 ~~ E7T3*pref_wpart_w3; pref_netw_w3 ~~ E8T2*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+#===================================================================================================
+# Factor variance fixed to 1 for identification in first group; estimated in others *****
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2
+perc_merit3  ~~ perc_merit3
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2
+perc_nmerit3 ~~ perc_nmerit3
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2
+pref_merit3  ~~ pref_merit3
+pref_nmerit1 ~~ 1*pref_nmerit1 
+pref_nmerit2 ~~ pref_nmerit2
+pref_nmerit3 ~~ pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification in each group
+perc_merit1  ~ 0
+perc_merit2  ~ 0
+perc_merit3  ~ 0
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 0
+perc_nmerit3 ~ 0
+pref_merit1  ~ 0
+pref_merit2  ~ 0
+pref_merit3  ~ 0
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 0
+pref_nmerit3 ~ 0
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+"
+```
+
+```{r}
+#metric invariance (v02) for complete sample (mode 1, 2 & 3) +  free parameter
+metrA2 = lavaan(model = metricSyntax2, data = wide02, estimator = "MLR")
+
+kable(rbind(fit.conf=fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA2 =fitmeasures(metrA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+
+#fit.metrA  = all factor loading restricted
+#fit.metrA2 = one free estimated factor loading
+kable(lavTestLRT(metrA2,conf,scaled.shifted = TRUE,method = "satorra.bentler.2001"),format = "markdown",digits = 3) #non invariant, see modind metric2 below
+```
+
+**NOTE**: El modelo que deja libre 1 parámetro (metrA2) mejora el ajuste, pero la diff del chi2 sigue siendo significativa al 0.05.
+
+**Mod Indices**:
+
+```{r, modind metric2}
+#get modification indices for all parameters:
+metricMI1 = modificationindices(metrA2, free.remove = FALSE, maximum.number = 10000)
+#restrict output to only factor loading parameters
+metricMI1a = metricMI1[which(metricMI1$op == "=~"),]
+#restrict output to only factors and items with same time point
+metricMI1a$factorTime = metricMI1a$lhs
+#extract time characters from items
+metricMI1a$itemTime   = ifelse(test =endsWith(x = metricMI1a$rhs,suffix = "w1"),yes = "wave01",
+                                no = ifelse(test = endsWith(x = metricMI1a$rhs,suffix = "w2"),yes = "wave02",
+                                            no = "wave03"))
+
+metricMI1a$factorTime = ifelse(test =endsWith(x = metricMI1a$lhs,suffix = "1"),yes = "wave01",
+                               no = ifelse(test = endsWith(x = metricMI1a$lhs,suffix = "2"),yes = "wave02",
+                                           no = "wave03"))
+metricMI1a$factor     = ifelse(test =startsWith(x = metricMI1a$lhs,prefix = "perc_merit"),yes = "perc_merit",
+                               no = ifelse(test = startsWith(x = metricMI1a$lhs,prefix = "perc_nmerit"),yes = "perc_nmerit",
+                                           no = ifelse(test = startsWith(x = metricMI1a$lhs,prefix = "pref_merit"),yes = "pref_merit",
+                                                       no = "pref_nmerit" )))
+
+metricMI1a$item      = ifelse(test =startsWith(x = metricMI1a$rhs,prefix = "perc_effort") | startsWith(x = metricMI1a$rhs,prefix = "perc_talent"),yes = "perc_merit",
+                              no = ifelse(test = startsWith(x = metricMI1a$rhs,prefix = "perc_wpart")  | startsWith(x = metricMI1a$rhs,prefix = "perc_netw"),yes = "perc_nmerit",
+                                          no = ifelse(test = startsWith(x = metricMI1a$rhs,prefix = "pref_effort") | startsWith(x = metricMI1a$rhs,prefix = "pref_talent"),yes = "pref_merit",
+                                                      no = "pref_nmerit" )))
+
+metricMI1b<- metricMI1a %>% filter(factorTime==itemTime & factor==item) # quedarme con los que son de la misma ola y mismo factor
+
+#show only MIs for same time
+metricMI1b <- metricMI1b[order(-metricMI1b$mi),]
+```
+
+```{r metric3}
+metricSyntax3 = "
+#===================================================================================================
+#Factor loadings all constrained across groups with labels *****
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4T1*perc_netw_w1  #FREE PARAMETER    
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3    
+pref_merit1  =~ L5*pref_effort_w1 + L6T1*pref_talent_w1 #FREE PARAMETER
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+pref_nmerit1 =~ L7*pref_wpart_w1  + L8*pref_netw_w1    
+pref_nmerit2 =~ L7*pref_wpart_w2  + L8*pref_netw_w2  
+pref_nmerit3 =~ L7*pref_wpart_w3  + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all freely estimated in each group with labels (8 items for each wave 8x3 = 16 intercepts)
+perc_effort_w1 ~ I1T1*1; perc_talent_w1 ~ I2T1*1; perc_wpart_w1 ~ I3T1*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5T1*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7T1*1; pref_netw_w1 ~ I8T1*1; 
+perc_effort_w2 ~ I1T2*1; perc_talent_w2 ~ I2T2*1; perc_wpart_w2 ~ I3T2*1; perc_netw_w2 ~ I4T2*1; pref_effort_w2 ~ I5T2*1; pref_talent_w2 ~ I6T2*1; pref_wpart_w2 ~ I7T2*1; pref_netw_w2 ~ I8T2*1; 
+perc_effort_w3 ~ I1T3*1; perc_talent_w3 ~ I2T3*1; perc_wpart_w3 ~ I3T3*1; perc_netw_w3 ~ I4T3*1; pref_effort_w3 ~ I5T3*1; pref_talent_w3 ~ I6T3*1; pref_wpart_w3 ~ I7T3*1; pref_netw_w3 ~ I8T3*1; 
+
+#===================================================================================================
+#Residual variances all freely estimated in each group with labels 
+perc_effort_w1 ~~ E1T1*perc_effort_w1; perc_talent_w1 ~~ E2T1*perc_talent_w1; perc_wpart_w1 ~~ E3T1*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5T1*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7T1*pref_wpart_w1; pref_netw_w1 ~~ E8T1*pref_netw_w1;
+perc_effort_w2 ~~ E1T2*perc_effort_w2; perc_talent_w2 ~~ E2T2*perc_talent_w2; perc_wpart_w2 ~~ E3T2*perc_wpart_w2; perc_netw_w2 ~~ E4T2*perc_netw_w2; pref_effort_w2 ~~ E5T2*pref_effort_w2; pref_talent_w2 ~~ E6T2*pref_talent_w2; pref_wpart_w2 ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8T2*pref_netw_w2;
+perc_effort_w3 ~~ E1T3*perc_effort_w3; perc_talent_w3 ~~ E2T3*perc_talent_w3; perc_wpart_w3 ~~ E3T3*perc_wpart_w3; perc_netw_w3 ~~ E4T3*perc_netw_w3; pref_effort_w3 ~~ E5T3*pref_effort_w3; pref_talent_w3 ~~ E6T3*pref_talent_w3; pref_wpart_w3 ~~ E7T3*pref_wpart_w3; pref_netw_w3 ~~ E8T2*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+#===================================================================================================
+# Factor variance fixed to 1 for identification in first group; estimated in others *****
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2
+perc_merit3  ~~ perc_merit3
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2
+perc_nmerit3 ~~ perc_nmerit3
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2
+pref_merit3  ~~ pref_merit3
+pref_nmerit1 ~~ 1*pref_nmerit1 
+pref_nmerit2 ~~ pref_nmerit2
+pref_nmerit3 ~~ pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification in each group
+perc_merit1  ~ 0
+perc_merit2  ~ 0
+perc_merit3  ~ 0
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 0
+perc_nmerit3 ~ 0
+pref_merit1  ~ 0
+pref_merit2  ~ 0
+pref_merit3  ~ 0
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 0
+pref_nmerit3 ~ 0
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+"
+```
+
+```{r}
+#metric invariance (v03) for complete sample (mode 1, 2 & 3) +  free parameter
+metrA3 = lavaan(model = metricSyntax3, data = wide02, estimator = "MLR")
+
+#metrA  = all factor loading restricted
+#metrA2 = one free estimated factor loading
+#metrA3 = two free estimated factor loading
+
+kable(rbind(fit.conf   =fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA  =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA2 =fitmeasures(metrA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA3 =fitmeasures(metrA3)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+
+kable(lavTestLRT(metrA3,conf,scaled.shifted = TRUE,method = "satorra.bentler.2001"),format = "markdown",digits = 3)
+```
+
+**NOTE**: the model with two free parameters (metric v03) at factor loadings works fine. Chi2 diff test is not significant
+
+### 3. Scalar Invariance Models (ALL loadings held equal across time - identified model using Time1 Factor Mean = 1)
+
+```{r, scalar1}
+scalarSyntax1 = "
+#===================================================================================================
+#Factor loadings constrained across groups except non-invariant ones
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4T1*perc_netw_w1   #FREE PARAMETER    
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3    
+pref_merit1  =~ L5*pref_effort_w1 + L6T1*pref_talent_w1 #FREE PARAMETER
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+pref_nmerit1 =~ L7*pref_wpart_w1  + L8*pref_netw_w1    
+pref_nmerit2 =~ L7*pref_wpart_w2  + L8*pref_netw_w2  
+pref_nmerit3 =~ L7*pref_wpart_w3  + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all constrained across groups except non-invariant ones ****
+perc_effort_w1 ~ I1*1; perc_talent_w1 ~ I2*1; perc_wpart_w1 ~ I3*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7*1; pref_netw_w1 ~ I8*1; # TWO FREE INTERCEPTS
+perc_effort_w2 ~ I1*1; perc_talent_w2 ~ I2*1; perc_wpart_w2 ~ I3*1; perc_netw_w2 ~ I4*1; pref_effort_w2   ~ I5*1; pref_talent_w2 ~ I6*1; pref_wpart_w2   ~ I7*1; pref_netw_w2 ~ I8*1; 
+perc_effort_w3 ~ I1*1; perc_talent_w3 ~ I2*1; perc_wpart_w3 ~ I3*1; perc_netw_w3 ~ I4*1; pref_effort_w3   ~ I5*1; pref_talent_w3 ~ I6*1; pref_wpart_w3   ~ I7*1; pref_netw_w3 ~ I8*1; 
+
+#===================================================================================================
+#Residual variances all freely estimated in each group with labels 
+perc_effort_w1 ~~ E1T1*perc_effort_w1; perc_talent_w1 ~~ E2T1*perc_talent_w1; perc_wpart_w1 ~~ E3T1*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5T1*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7T1*pref_wpart_w1; pref_netw_w1 ~~ E8T1*pref_netw_w1;
+perc_effort_w2 ~~ E1T2*perc_effort_w2; perc_talent_w2 ~~ E2T2*perc_talent_w2; perc_wpart_w2 ~~ E3T2*perc_wpart_w2; perc_netw_w2 ~~ E4T2*perc_netw_w2; pref_effort_w2 ~~ E5T2*pref_effort_w2; pref_talent_w2 ~~ E6T2*pref_talent_w2; pref_wpart_w2 ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8T2*pref_netw_w2;
+perc_effort_w3 ~~ E1T3*perc_effort_w3; perc_talent_w3 ~~ E2T3*perc_talent_w3; perc_wpart_w3 ~~ E3T3*perc_wpart_w3; perc_netw_w3 ~~ E4T3*perc_netw_w3; pref_effort_w3 ~~ E5T3*pref_effort_w3; pref_talent_w3 ~~ E6T3*pref_talent_w3; pref_wpart_w3 ~~ E7T3*pref_wpart_w3; pref_netw_w3 ~~ E8T2*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+
+#===================================================================================================
+#Factor variance fixed to 1 for identification in first group; estimated in others
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2
+perc_merit3  ~~ perc_merit3
+
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2
+perc_nmerit3 ~~ perc_nmerit3
+
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2
+pref_merit3  ~~ pref_merit3
+
+pref_nmerit1 ~~ 1*pref_nmerit1
+pref_nmerit2 ~~ pref_nmerit2
+pref_nmerit3 ~~ pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification first group, estimated in others ****
+perc_merit1  ~ 0
+perc_merit2  ~ 1
+perc_merit3  ~ 1
+
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 1
+perc_nmerit3 ~ 1
+
+pref_merit1  ~ 0
+pref_merit2  ~ 1
+pref_merit3  ~ 1
+
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 1
+pref_nmerit3 ~ 1
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+#===================================================================================================
+"
+```
+
+```{r}
+#scalar invariance for mode 01
+sca_m1A = lavaan(model = scalarSyntax1, data = wide_m1, estimator = "MLR")
+```
+
+```{r}
+#scalar invariance for mode 02
+sca_m2A = lavaan(model = scalarSyntax1, data = wide_m2, estimator = "MLR")
+```
+
+```{r}
+#scalar invariance for mode 03
+sca_m3A = lavaan(model = scalarSyntax1, data = wide_m3, estimator = "MLR")
+```
+
+```{r}
+#scalar invariance for complete sample (mode 1, 2 & 3)
+scaA = lavaan(model = scalarSyntax1, data = wide02, estimator = "MLR")
+```
+
+```{r}
+kable(rbind(fit.conf   =fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA  =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA2 =fitmeasures(metrA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA3 =fitmeasures(metrA3)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.scaA   =fitmeasures(scaA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+```
+
+```{r}
+kable(lavTestLRT(scaA,metrA3,conf,scaled.shifted = TRUE,method = "satorra.bentler.2001"),format = "markdown",digits = 3)
+```
+
+**NOTE**: the chi2 test shows that scalar vs metric models are not significant. 
+
+### 4. Residual Variance Invariance Model (error variances held equal for all except non-invariant items) 
+
+```{r residual1}
+residVarSyntax1 = "
+#===================================================================================================
+#Factor loadings constrained across groups except non-invariant ones
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4T1*perc_netw_w1   #FREE PARAMETER    
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3    
+pref_merit1  =~ L5*pref_effort_w1 + L6T1*pref_talent_w1 #FREE PARAMETER
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+pref_nmerit1 =~ L7*pref_wpart_w1  + L8*pref_netw_w1    
+pref_nmerit2 =~ L7*pref_wpart_w2  + L8*pref_netw_w2  
+pref_nmerit3 =~ L7*pref_wpart_w3  + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all constrained across groups except non-invariant ones 
+perc_effort_w1 ~ I1*1; perc_talent_w1 ~ I2*1; perc_wpart_w1 ~ I3*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7*1; pref_netw_w1 ~ I8*1; # TWO FREE INTERCEPTS
+perc_effort_w2 ~ I1*1; perc_talent_w2 ~ I2*1; perc_wpart_w2 ~ I3*1; perc_netw_w2 ~ I4*1; pref_effort_w2   ~ I5*1; pref_talent_w2 ~ I6*1; pref_wpart_w2   ~ I7*1; pref_netw_w2 ~ I8*1; 
+perc_effort_w3 ~ I1*1; perc_talent_w3 ~ I2*1; perc_wpart_w3 ~ I3*1; perc_netw_w3 ~ I4*1; pref_effort_w3   ~ I5*1; pref_talent_w3 ~ I6*1; pref_wpart_w3   ~ I7*1; pref_netw_w3 ~ I8*1; 
+
+#===================================================================================================
+#Redidual variances all constrained in each group except non-invariant ones ****
+perc_effort_w1 ~~ E1*perc_effort_w1; perc_talent_w1 ~~ E2*perc_talent_w1; perc_wpart_w1 ~~ E3*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7*pref_wpart_w1; pref_netw_w1 ~~ E8*pref_netw_w1;
+perc_effort_w2 ~~ E1*perc_effort_w2; perc_talent_w2 ~~ E2*perc_talent_w2; perc_wpart_w2 ~~ E3*perc_wpart_w2; perc_netw_w2 ~~ E4*perc_netw_w2; pref_effort_w2   ~~ E5*pref_effort_w2; pref_talent_w2 ~~ E6*pref_talent_w2; pref_wpart_w2   ~~ E7*pref_wpart_w2; pref_netw_w2 ~~ E8*pref_netw_w2;
+perc_effort_w3 ~~ E1*perc_effort_w3; perc_talent_w3 ~~ E2*perc_talent_w3; perc_wpart_w3 ~~ E3*perc_wpart_w3; perc_netw_w3 ~~ E4*perc_netw_w3; pref_effort_w3   ~~ E5*pref_effort_w3; pref_talent_w3 ~~ E6*pref_talent_w3; pref_wpart_w3   ~~ E7*pref_wpart_w3; pref_netw_w3 ~~ E8*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+
+#===================================================================================================
+#Factor variance fixed to 1 for identification in first group; estimated in others
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2
+perc_merit3  ~~ perc_merit3
+
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2
+perc_nmerit3 ~~ perc_nmerit3
+
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2
+pref_merit3  ~~ pref_merit3
+
+pref_nmerit1 ~~ 1*pref_nmerit1
+pref_nmerit2 ~~ pref_nmerit2
+pref_nmerit3 ~~ pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification first group, estimated in others ****
+perc_merit1  ~ 0
+perc_merit2  ~ 1
+perc_merit3  ~ 1
+
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 1
+perc_nmerit3 ~ 1
+
+pref_merit1  ~ 0
+pref_merit2  ~ 1
+pref_merit3  ~ 1
+
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 1
+pref_nmerit3 ~ 1
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+#===================================================================================================
+"
+```
+
+```{r}
+#residual invariance for complete sample (mode 1, 2 & 3)
+resA = lavaan(model =residVarSyntax1 , data = wide02, estimator = "MLR")
+```
+
+```{r}
+kable(rbind(fit.conf   =fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA  =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA2 =fitmeasures(metrA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA3 =fitmeasures(metrA3)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.scaA   =fitmeasures(scaA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.resA   =fitmeasures(resA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+```
+
+```{r}
+kable(lavTestLRT(resA,scaA,metrA3,conf,scaled.shifted = TRUE,method = "satorra.bentler.2001"),format = "markdown",digits = 3)
+```
+
+**Mod Indices**:
+
+```{r modind residual1}
+#get modification indices for all parameters:
+residVarMI1 = modificationindices(resA, free.remove = FALSE, maximum.number = 10000)
+#restrict output to only residual variance parameters:
+residVarMI1a = residVarMI1[which(residVarMI1$op == "~~" & residVarMI1$lhs == residVarMI1$rhs),]
+residVarMI1a = residVarMI1a[order(-residVarMI1a$mi),] # change: pref_wpart_w2 ~~  pref_wpart_w2
+```
+
+```{r residual2}
+residVarSyntax2 = "
+#===================================================================================================
+#Factor loadings constrained across groups except non-invariant ones
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4T1*perc_netw_w1   #FREE PARAMETER    
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3    
+pref_merit1  =~ L5*pref_effort_w1 + L6T1*pref_talent_w1 #FREE PARAMETER
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+pref_nmerit1 =~ L7*pref_wpart_w1  + L8*pref_netw_w1    
+pref_nmerit2 =~ L7*pref_wpart_w2  + L8*pref_netw_w2  
+pref_nmerit3 =~ L7*pref_wpart_w3  + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all constrained across groups except non-invariant ones 
+perc_effort_w1 ~ I1*1; perc_talent_w1 ~ I2*1; perc_wpart_w1 ~ I3*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7*1; pref_netw_w1 ~ I8*1; # TWO FREE INTERCEPTS
+perc_effort_w2 ~ I1*1; perc_talent_w2 ~ I2*1; perc_wpart_w2 ~ I3*1; perc_netw_w2 ~ I4*1; pref_effort_w2   ~ I5*1; pref_talent_w2 ~ I6*1; pref_wpart_w2   ~ I7*1; pref_netw_w2 ~ I8*1; 
+perc_effort_w3 ~ I1*1; perc_talent_w3 ~ I2*1; perc_wpart_w3 ~ I3*1; perc_netw_w3 ~ I4*1; pref_effort_w3   ~ I5*1; pref_talent_w3 ~ I6*1; pref_wpart_w3   ~ I7*1; pref_netw_w3 ~ I8*1; 
+
+#===================================================================================================
+#Redidual variances all constrained in each group except non-invariant ones ****
+perc_effort_w1 ~~ E1*perc_effort_w1; perc_talent_w1 ~~ E2*perc_talent_w1; perc_wpart_w1 ~~ E3*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7*pref_wpart_w1; pref_netw_w1 ~~ E8*pref_netw_w1;
+perc_effort_w2 ~~ E1*perc_effort_w2; perc_talent_w2 ~~ E2*perc_talent_w2; perc_wpart_w2 ~~ E3*perc_wpart_w2; perc_netw_w2 ~~ E4*perc_netw_w2; pref_effort_w2   ~~ E5*pref_effort_w2; pref_talent_w2 ~~ E6*pref_talent_w2; pref_wpart_w2   ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8*pref_netw_w2; # F-RES
+perc_effort_w3 ~~ E1*perc_effort_w3; perc_talent_w3 ~~ E2*perc_talent_w3; perc_wpart_w3 ~~ E3*perc_wpart_w3; perc_netw_w3 ~~ E4*perc_netw_w3; pref_effort_w3   ~~ E5*pref_effort_w3; pref_talent_w3 ~~ E6*pref_talent_w3; pref_wpart_w3   ~~ E7*pref_wpart_w3; pref_netw_w3 ~~ E8*pref_netw_w3;
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+
+#===================================================================================================
+#Factor variance fixed to 1 for identification in first group; estimated in others
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2
+perc_merit3  ~~ perc_merit3
+
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2
+perc_nmerit3 ~~ perc_nmerit3
+
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2
+pref_merit3  ~~ pref_merit3
+
+pref_nmerit1 ~~ 1*pref_nmerit1
+pref_nmerit2 ~~ pref_nmerit2
+pref_nmerit3 ~~ pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification first group, estimated in others ****
+perc_merit1  ~ 0
+perc_merit2  ~ 1
+perc_merit3  ~ 1
+
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 1
+perc_nmerit3 ~ 1
+
+pref_merit1  ~ 0
+pref_merit2  ~ 1
+pref_merit3  ~ 1
+
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 1
+pref_nmerit3 ~ 1
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+#===================================================================================================
+"
+```
+
+```{r}
+#residual invariance (v02) for complete sample (mode 1, 2 & 3)
+resA2 = lavaan(model =residVarSyntax2 , data = wide02, estimator = "MLR")
+```
+
+```{r}
+kable(rbind(fit.conf   =fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA  =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA2 =fitmeasures(metrA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA3 =fitmeasures(metrA3)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.scaA   =fitmeasures(scaA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.resA   =fitmeasures(resA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.resA2  =fitmeasures(resA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+
+```
+
+```{r}
+kable(lavTestLRT(resA2,scaA,metrA3,conf,scaled.shifted = TRUE,method = "satorra.bentler.2001"),format = "markdown",digits = 3)
+```
+
+**Mod Indices**:
+
+```{r modind residual2}
+#get modification indices for all parameters:
+residVarMI1 = modificationindices(resA2, free.remove = FALSE, maximum.number = 10000)
+#restrict output to only residual variance parameters:
+residVarMI1a = residVarMI1[which(residVarMI1$op == "~~" & residVarMI1$lhs == residVarMI1$rhs),]
+residVarMI1a <- residVarMI1a[order(-residVarMI1a$mi),] # changes: pref_wpart_w3 ~~  pref_wpart_w3
+```
+
+```{r residual3}
+residVarSyntax3 = "
+#===================================================================================================
+#Factor loadings constrained across groups except non-invariant ones
+perc_merit1  =~ L1*perc_effort_w1 + L2*perc_talent_w1 
+perc_merit2  =~ L1*perc_effort_w2 + L2*perc_talent_w2
+perc_merit3  =~ L1*perc_effort_w3 + L2*perc_talent_w3
+perc_nmerit1 =~ L3*perc_wpart_w1  + L4T1*perc_netw_w1   #FREE PARAMETER    
+perc_nmerit2 =~ L3*perc_wpart_w2  + L4*perc_netw_w2  
+perc_nmerit3 =~ L3*perc_wpart_w3  + L4*perc_netw_w3    
+pref_merit1  =~ L5*pref_effort_w1 + L6T1*pref_talent_w1 #FREE PARAMETER
+pref_merit2  =~ L5*pref_effort_w2 + L6*pref_talent_w2
+pref_merit3  =~ L5*pref_effort_w3 + L6*pref_talent_w3
+pref_nmerit1 =~ L7*pref_wpart_w1  + L8*pref_netw_w1    
+pref_nmerit2 =~ L7*pref_wpart_w2  + L8*pref_netw_w2  
+pref_nmerit3 =~ L7*pref_wpart_w3  + L8*pref_netw_w3
+
+#===================================================================================================
+#Item intercepts all constrained across groups except non-invariant ones 
+perc_effort_w1 ~ I1*1; perc_talent_w1 ~ I2*1; perc_wpart_w1 ~ I3*1; perc_netw_w1 ~ I4T1*1; pref_effort_w1 ~ I5*1; pref_talent_w1 ~ I6T1*1; pref_wpart_w1 ~ I7*1; pref_netw_w1 ~ I8*1; # TWO FREE INTERCEPTS
+perc_effort_w2 ~ I1*1; perc_talent_w2 ~ I2*1; perc_wpart_w2 ~ I3*1; perc_netw_w2 ~ I4*1; pref_effort_w2   ~ I5*1; pref_talent_w2 ~ I6*1; pref_wpart_w2   ~ I7*1; pref_netw_w2 ~ I8*1; 
+perc_effort_w3 ~ I1*1; perc_talent_w3 ~ I2*1; perc_wpart_w3 ~ I3*1; perc_netw_w3 ~ I4*1; pref_effort_w3   ~ I5*1; pref_talent_w3 ~ I6*1; pref_wpart_w3   ~ I7*1; pref_netw_w3 ~ I8*1; 
+
+#===================================================================================================
+#Redidual variances all constrained in each group except non-invariant ones ****
+perc_effort_w1 ~~ E1*perc_effort_w1; perc_talent_w1 ~~ E2*perc_talent_w1; perc_wpart_w1 ~~ E3*perc_wpart_w1; perc_netw_w1 ~~ E4T1*perc_netw_w1; pref_effort_w1 ~~ E5*pref_effort_w1; pref_talent_w1 ~~ E6T1*pref_talent_w1; pref_wpart_w1 ~~ E7*pref_wpart_w1; pref_netw_w1 ~~ E8*pref_netw_w1;
+perc_effort_w2 ~~ E1*perc_effort_w2; perc_talent_w2 ~~ E2*perc_talent_w2; perc_wpart_w2 ~~ E3*perc_wpart_w2; perc_netw_w2 ~~ E4*perc_netw_w2; pref_effort_w2   ~~ E5*pref_effort_w2; pref_talent_w2 ~~ E6*pref_talent_w2; pref_wpart_w2   ~~ E7T2*pref_wpart_w2; pref_netw_w2 ~~ E8*pref_netw_w2; # F-RES2
+perc_effort_w3 ~~ E1*perc_effort_w3; perc_talent_w3 ~~ E2*perc_talent_w3; perc_wpart_w3 ~~ E3*perc_wpart_w3; perc_netw_w3 ~~ E4*perc_netw_w3; pref_effort_w3   ~~ E5*pref_effort_w3; pref_talent_w3 ~~ E6*pref_talent_w3; pref_wpart_w3   ~~ E7T3*pref_wpart_w3; pref_netw_w3 ~~ E8*pref_netw_w3; # F-RES3
+#===================================================================================================
+#Residual covariances freely estimated in each group with labels (C1T12= covariance 1 between time 1&2)
+
+perc_effort_w1 ~~ C1T12*perc_effort_w2 + C1T13*perc_effort_w3; perc_effort_w2 ~~ C1T23*perc_effort_w3;  
+perc_talent_w1 ~~ C2T12*perc_talent_w2 + C2T13*perc_talent_w3; perc_talent_w2 ~~ C2T23*perc_talent_w3;  
+perc_wpart_w1  ~~ C3T12*perc_wpart_w2  + C3T13*perc_wpart_w3 ; perc_wpart_w2  ~~ C3T23*perc_wpart_w3 ; 
+perc_netw_w1   ~~ C4T12*perc_netw_w2   + C4T13*perc_netw_w3  ; perc_netw_w2   ~~ C4T23*perc_netw_w3  ;
+pref_effort_w1 ~~ C5T12*pref_effort_w2 + C5T13*pref_effort_w3; pref_effort_w2 ~~ C5T23*pref_effort_w3;  
+pref_talent_w1 ~~ C6T12*pref_talent_w2 + C6T13*pref_talent_w3; pref_talent_w2 ~~ C6T23*pref_talent_w3;  
+pref_wpart_w1  ~~ C7T12*pref_wpart_w2  + C7T13*pref_wpart_w3 ; pref_wpart_w2  ~~ C7T23*pref_wpart_w3 ; 
+pref_netw_w1   ~~ C8T12*pref_netw_w2   + C8T13*pref_netw_w3  ; pref_netw_w2   ~~ C8T23*pref_netw_w3  ;
+
+
+#===================================================================================================
+#Factor variance fixed to 1 for identification in first group; estimated in others
+perc_merit1  ~~ 1*perc_merit1
+perc_merit2  ~~ perc_merit2
+perc_merit3  ~~ perc_merit3
+
+perc_nmerit1 ~~ 1*perc_nmerit1
+perc_nmerit2 ~~ perc_nmerit2
+perc_nmerit3 ~~ perc_nmerit3
+
+pref_merit1  ~~ 1*pref_merit1
+pref_merit2  ~~ pref_merit2
+pref_merit3  ~~ pref_merit3
+
+pref_nmerit1 ~~ 1*pref_nmerit1
+pref_nmerit2 ~~ pref_nmerit2
+pref_nmerit3 ~~ pref_nmerit3
+
+#===================================================================================================
+#Factor mean fixed to zero for identification first group, estimated in others ****
+perc_merit1  ~ 0
+perc_merit2  ~ 1
+perc_merit3  ~ 1
+
+perc_nmerit1 ~ 0
+perc_nmerit2 ~ 1
+perc_nmerit3 ~ 1
+
+pref_merit1  ~ 0
+pref_merit2  ~ 1
+pref_merit3  ~ 1
+
+pref_nmerit1 ~ 0
+pref_nmerit2 ~ 1
+pref_nmerit3 ~ 1
+
+#===================================================================================================
+#Factor covariances all freely estimated
+perc_merit1  ~~ perc_merit2 + perc_merit3
+perc_merit2  ~~ perc_merit3
+
+perc_nmerit1 ~~ perc_nmerit2 + perc_nmerit3
+perc_nmerit2 ~~ perc_nmerit3
+
+pref_merit1  ~~ pref_merit2 + pref_merit3
+pref_merit2  ~~ pref_merit3
+
+pref_nmerit1 ~~ pref_nmerit2 + pref_nmerit3
+pref_nmerit2 ~~ pref_nmerit3
+#===================================================================================================
+"
+```
+
+```{r}
+#residual invariance (v03) for complete sample (mode 1, 2 & 3)
+resA3 = lavaan(model =residVarSyntax3 , data = wide02, estimator = "MLR")
+```
+
+```{r}
+kable(rbind(fit.conf   =fitmeasures(conf)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA  =fitmeasures(metrA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA2 =fitmeasures(metrA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.metrA3 =fitmeasures(metrA3)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.scaA   =fitmeasures(scaA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.resA   =fitmeasures(resA)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.resA2  =fitmeasures(resA2)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")],
+            fit.resA3  =fitmeasures(resA3)[c("chisq.scaled","df","cfi","cfi.scaled","cfi.robust","rmsea","rmsea.scaled","rmsea.robust")]),digits = 3,format = "markdown")
+```
+
+```{r}
+kable(lavTestLRT(resA3,scaA,metrA3,conf,scaled.shifted = TRUE,method = "satorra.bentler.2001"),format = "markdown",digits = 3)
+```
+
+**Mod Indices**:
+
+```{r modind residual3}
+#get modification indices for all parameters:
+residVarMI1 = modificationindices(resA3, free.remove = FALSE, maximum.number = 10000)
+#restrict output to only residual variance parameters:
+residVarMI1a = residVarMI1[which(residVarMI1$op == "~~" & residVarMI1$lhs == residVarMI1$rhs),]
+residVarMI1a <- residVarMI1a[order(-residVarMI1a$mi),] # change: pref_wpart_w3 ~~  pref_wpart_w3 (?)
+```
+
+**NOTE**: The residual is too big. Mod indices suggest to freely estimate the pref_wpart_w3 covariance, but this one is already free.
+
+
+* Invarianza Longitudinal en lavaan
+  * https://quantdev.ssri.psu.edu/tutorials/intro-basics-longitudinal-measurement-invariance 
+  * https://jonathantemplin.com/wp-content/uploads/2017/08/EPSY906_Example07b_CFA_Longitudinal_Invariance.nb_.html 
+
+* https://users.ugent.be/~yrosseel/lavaan/multiplegroup6Dec2012.pdf 
+
+* Invarianza con Indicatores categóricos
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5121102/pdf/nihms757737.pdf
+
+* Parametrización tetha: 
+https://groups.google.com/forum/#!topic/lavaan/nfdatPgLLhc
+
+* Colapsing categories:
+https://www.tandfonline.com/doi/abs/10.1080/10705511.2018.1547640?journalCode=hsem20
+
+
+
+
+
