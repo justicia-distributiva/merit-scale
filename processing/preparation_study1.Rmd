@@ -1,0 +1,205 @@
+---
+title: "Data preparation: Study 1"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    toc: true
+    toc_float:
+        collapsed: false
+    toc_depth: 2
+    code_folding: "show"
+editor_options:
+  chunk_output_type: console
+---
+
+# Setup
+
+```{r setup}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      echo = TRUE 
+                      )
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=9999) # desactivar notacion cientifica
+```
+
+```{css, echo=FALSE}
+# /* expandir el espacio del documento*/
+body .main-container {
+      max-width: 1600px !important;
+      width: 1600px !important;
+    }
+#/* expandir width de la TOC*/
+div.tocify {
+    width: 22% !important;
+    max-width: 331px !important;
+    max-height: 102% !important;
+}
+```
+
+## Libraries
+```{r}
+if (!require("pacman")) install.packages("pacman") # install pacman
+pacman::p_load(dplyr,lavaan,sjPlot,sjmisc,sjlabelled,haven,stringr,summarytools)
+```
+
+# Data 
+
+```{r}
+issp2009 <- read_dta("../input/data/original/ZA5400_v4-0-0.dta")
+```
+
+```{r }
+names(issp2009) <- tolower(names(issp2009))
+# Check & generate IDs (v4: respondent, v5: country)
+tapply(issp2009$v4, issp2009$v5, mean, na.rm = TRUE)
+# Algunos paises (ej:826) tienen ids raros ...
+# Generar nueva id secuencial individuos por país para merges
+issp2009$id <- sequence(tabulate(issp2009$v5))
+tapply(issp2009$id, issp2009$v5, mean, na.rm = TRUE) # ok
+summary(issp2009$id)
+issp2009$idtem = issp2009$v5 * 10000
+issp2009$id = issp2009$idtem + issp2009$id
+```
+
+## Perceptions (getting-ahead)
+
+*  v6: wealthy family
+*  v7: educated parents
+*  v9: ambition 
+* v10: hard work 
+* v11: right people
+* v12: political connections
+* v14: race 
+* v16: gender 
+* IDs: v5 (country) & id (individual id)
+
+```{r}
+# names(issp2009)          #Check names
+get_label(issp2009[8:18])#Check variable labels
+
+# 1. Select and generate new variables
+getahead <- 
+  issp2009 %>%
+  select("id","v5","v6","v7","v9","v10","v11","v12","v14","v16") %>% 
+  mutate(wealthy = v6,
+         pareduc = v7,
+         ambition = v9,
+         hwork = v10,
+         people = v11,
+         polcone = v12,
+         race = v14,
+         gender = v16) %>% 
+  select(-c("v6","v7","v9","v10","v11","v12","v14","v16"))
+
+names(getahead)
+
+#2. Recode missing values
+# * 8 & 9 to NA
+frq(getahead$wealthy)
+getahead[3:10][getahead[3:10] > 5] <- NA
+frq(getahead$gender) # OK
+summary(getahead)    # OK
+
+#3. value labels
+get_labels(getahead$wealthy)
+getahead[, 3:10] <- 
+  set_na(x = getahead[, 3:10],
+         na = c(8,9))
+get_labels(getahead[3:10]) # OK
+frq(getahead[3:10])        # OK
+
+# 4. variable label
+
+getahed.label <-  str_remove_all(string = get_label(getahead[3:10]),
+                                 pattern = "Q1[abcdefghijk] ")
+getahed.label
+
+getahead[3:10] = 6 - getahead[3:10] # Reverse code for SEM models
+getahead[3:10] <- set_label(getahead[3:10],label = getahed.label) # variable label
+get_label(getahead[3:10]) # OK
+
+# 5. final ckeck   
+view_df(getahead,show.frq = T, show.prc = T)
+```
+
+## Preferences (detearn)
+
+```{r}	    
+# names(issp2009)
+
+# 1. Select and generate new variables
+detearn <- 
+  issp2009 %>%
+  select("id","v5","v47", "v48", "v49", "v50", "v51","v52") %>% 
+  mutate(respons 	= v47,
+         yeduc  	= v48,
+         family   = v49,
+         child    = v50,
+         welljob  = v51,
+         hardjob  = v52) %>% 
+  select(-c("v47", "v48", "v49", "v50", "v51","v52"))
+
+
+#2. Recode missing values
+# * 8 & 9 to NA
+summary(detearn)
+frq(detearn$respons)
+detearn[3:8][detearn[3:8] > 5] <- NA
+frq(detearn$respons) 
+
+# Out Portugal (no answer in well job item)
+detearn[which(detearn$v5 == 620), ] = NA
+
+#3. value labels
+get_labels(detearn[3:8])
+detearn[, 3:8] <- 
+  set_na(detearn[, 3:8],
+         na =  c(8, 9)) 
+summary(detearn)      # Value 0 in Portugal Answers
+frq(detearn$welljob)  # Check 
+
+detearn$welljob[detearn$welljob == 0] = NA # recode to NA value 0 in welljob
+get_labels(detearn$welljob)
+frq(detearn$welljob)
+
+# value label correction in welljob
+detearn$welljob <- set_labels(x = detearn$welljob,
+                              labels = get_labels(detearn$hardjob))
+frq(detearn$welljob) # OK, solved
+frq(detearn[3:8])    # Check value labels
+
+
+# 4. Variable label
+get_label(detearn[3:8])
+detearn.label <-  str_remove_all(string = get_label(detearn[3:8]),
+                                 pattern = "Q12[abcdef] ")
+
+detearn[3:8] <-  6 - detearn[3:8] # Reverse code for SEM models
+detearn[3:8] <- set_label(detearn[3:8],label = detearn.label) # variable label
+
+frq(detearn[3:8])
+
+# 5. final ckeck   
+view_df(detearn,show.frq = T, show.prc = T)
+```
+
+# Merge
+
+```{r}
+merit_per_pref   <- left_join(getahead, detearn, by = c("id", "v5"))
+
+```
+
+# Summary
+```{r,results='asis', echo=FALSE}
+st_css() # esto configura el css de dfsummary
+print(dfSummary(merit_per_pref),
+      method = "render")
+```
+
+```{r}
+save(merit_per_pref, file = "../input/data/proc/merit_per_pref.rda")
+```
+

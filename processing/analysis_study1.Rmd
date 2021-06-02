@@ -1,0 +1,304 @@
+---
+title: "Analysis Study 1"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    toc: true
+    toc_float:
+        collapsed: false
+    toc_depth: 2
+    code_folding: "hide"
+editor_options:
+  chunk_output_type: console
+---
+
+# Setup
+
+```{r setup}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      echo = TRUE 
+                      )
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=9999) # desactivar notacion cientifica
+rm(list=ls())
+options(knitr.kable.NA = '')
+```
+
+```{css, echo=FALSE}
+# /* expandir el espacio del documento*/
+body .main-container {
+      max-width: 1600px !important;
+      width: 1600px !important;
+    }
+#/* expandir width de la TOC*/
+div.tocify {
+    width: 22% !important;
+    max-width: 331px !important;
+    max-height: 102% !important;
+}
+```
+
+## Libraries
+
+```{r}
+if (!require("pacman")) install.packages("pacman") # instalar pacman
+                            # cargar librerias
+pacman::p_load(dplyr,sjPlot,lavaan,psych, knitr,kableExtra,ggplot2,stargazer,
+               corrplot,semPlot)
+```
+
+```{r}
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+
+```
+
+
+# Analysis
+
+## Descriptives
+
+- Meritocratic perception:
+  - How important is having ambition?
+  - How important is hard work?
+
+- Non-meritocratic perception
+  - How important is coming from a wealthy family?
+  - How important is having well-educated parents
+  - How important is knowing the right people
+  - How important is having political connections
+  - How important is a person's race?
+  - How important is being born a man or a woman?
+  
+- Meritocratic preferences
+  - How well he or she does the job?
+  - How hard he or she works at the job?
+
+- Non-meritocratic preferences
+  - What is needed to support a family?
+  - Whether the person has children to support?  
+
+
+```{r}
+load(file = "input/data/proc/merit_per_pref.rda")
+pacman::p_load(dplyr,sjPlot,lavaan,psych, knitr,kableExtra,ggplot2,stargazer,
+               corrplot,semPlot)
+names(merit_per_pref)
+merit_per_pref %>% 
+  dplyr::select(ambition,hwork,wealthy,pareduc,people,polcone,race,gender,welljob,hardjob,family,child) %>% 
+  psych::describe() %>% 
+  as.data.frame() %>% 
+  dplyr::select("Mean"=mean,"SD"=sd,"Min"=min,"Max"=max) %>% 
+  round(2) ->desc.issp
+
+
+row.names(desc.issp) <- c(
+  "Importance: hard work",
+  "Importance: having ambition",
+  "Importance: wealthy family",
+  "Importance: educated parents",
+  "Importance: race",
+  "Importance: gender",
+  "Importance: knowing people",
+  "Importance: political connections",
+  "Important for pay: well job",
+  "Important for pay: hard job",
+  "Important for pay: support family",
+  "Important for pay: has children"
+)
+
+# save(desc.issp,file = "output/tables/desc.issp.Rdata")
+```
+
+## Measurement model
+
+```{r}    
+# 3. MEASURING BELIEFS & PERCEPTIONS 
+load(file = "input/data/proc/merit_per_pref.rda")
+cfa_perpref1 <- '
+	  # latent variables
+	  percmerit =~ hwork + ambition
+	  percnmerit=~ wealthy + pareduc +race + gender +people + polcone
+	  prefmerit =~ welljob + hardjob
+	  prefnmerit=~ family + child
+	  '
+fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,
+                            ordered = c("wealthy","pareduc","ambition","hwork",
+                                        "people","polcone","race","gender",
+                                        "respons","yeduc",
+                                        "family","child",
+                                        "welljob","hardjob"))
+summary(fit_perpref1,
+        fit.measures = TRUE,
+        standardized = TRUE)
+```
+
+```{r, fig.width=10,fig.height=8}
+load(file = "input/data/proc/merit_per_pref.rda")
+plot_m_perpref1 <- '
+	  # latent variables
+	  percmerit =~ 1*hwork + ambition
+	  percnmerit=~ 1*wealthy + pareduc +race + gender +people + polcone
+	  prefmerit =~ 1*welljob + hardjob
+	  prefnmerit=~ 1*family + child
+	  '
+plot_perpref1 <- lavaan::cfa(plot_m_perpref1, data = merit_per_pref)
+
+nodeNames<- c(
+  "Importance: hard work",
+  "Importance: having ambition",
+  "Importance: wealthy family",
+  "Importance: educated parents",
+  "Importance: race",
+  "Importance: gender",
+  "Importance: knowing people",
+  "Importance: political connections",
+  "Important for pay: well job",
+  "Important for pay: hard job",
+  "Important for pay: support family",
+  "Important for pay: has children",
+  "Perception \n meritocratic",
+  "Perception \n non meritocratic",
+  "Preference \n meritocratic",
+  "Preference \n non meritocratic"
+)
+ 
+  
+xfa <- 1*0.5
+
+# Path model
+semPlot::semPaths(
+  plot_perpref1 ,
+  # whatLabels = "std", # Indica si aparecen los valores
+  what = "mod",
+  label.cex = 0.38, # Tamaño de las etiquetas dentro de los nodos.
+  edge.label.cex =  0.8, #  0.8 Tamaño de los valores estimados.
+  residuals = T,
+  optimizeLatRes =T,
+  edge.color = "black",
+  style = "lisrel",
+  nCharNodes = 0,
+  curvePivot = F,
+  curve = 3,
+  rotation = 4,
+  layout = "tree3",
+  cardinal = "lat cov",
+  legend.cex = 0.8, # 0.6
+  label.cex = 4,
+  label.font = 6,
+  edge.label.font = 14,
+  asize = 3,
+  edge.width = 1.5,
+  sizeMan = 6,# largo manifest
+  sizeMan2= 3,# alto manifest
+  sizeLat = 5, # largo de los circulos
+  sizeLat2 = 11.5, # alto de los circulos
+  residScale = 10,
+  width =6, # 17
+  height = 3, # 10
+  # nodeNames = nodeNames,
+  intercepts = F,
+  reorder = T,
+  thresholds = F,
+  fixedStyle =1,
+  node.height = 1,
+  node.width = 3,
+  label.scale = F,
+  shapeMan = "rectangle",
+  shapeLat = "ellipse",
+  nodeLabels = nodeNames,
+  details = T,
+  mar = c(1,
+          4, #left
+          1, #top
+          4), #right
+  # filetype ="pdf",
+  # filename = "output/images/meas-issp01"
+  )->semplot01
+
+```
+
+```{r}
+load(file = "input/data/proc/merit_per_pref.rda")
+pacman::p_load(dplyr)
+cfa_perpref1 <- '
+	  # latent variables
+	  percmerit =~ hwork + ambition
+	  percnmerit=~ wealthy + pareduc +race + gender +people + polcone
+	  prefmerit =~ welljob + hardjob
+	  prefnmerit=~ family + child
+	  '
+fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,
+                            ordered = c("wealthy","pareduc","ambition","hwork",
+                                        "people","polcone","race","gender",
+                                        "respons","yeduc",
+                                        "family","child",
+                                        "welljob","hardjob"))
+labs <- c(
+  "How important is having ambition?",
+  "How important is hard work?",
+  "How important is coming from a wealthy family?",
+  "How important is having welleducated parents",
+  "How important is knowing the right people",
+  "How important is having political connections",
+  "How important is a person's race?",
+  "How important is being born a man or a woman?",
+  "How well he or she does the job?",
+  "How hard he or she works at the job?",
+  "What is needed to support a family?",
+  "Whether the person has children to support?"
+)
+
+tb.load<- data.frame(round(cbind(lavaan::inspect(fit_perpref1,
+                                                        what="std")$lambda),
+                           digits = 2))
+tb.load[tb.load==c(0.00)] <- NA
+
+for (i in names(tb.load)) {
+  # tb.load[,i] <- sjlabelled::as_character(tb.load[,i])
+  tb.load[,i] <- sprintf(tb.load[,i], fmt = '%#.2f')
+}
+tb.load[tb.load=="NA"] <- ""
+#-------#
+fm01<- data.frame(t(data.frame(lavaan::fitmeasures(fit_perpref1, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm01) ="percnmerit"
+
+#------chi2, df------#
+fm04<- round(rbind(fm01),3)
+fm04.1 <- fm04 %>% dplyr::select(chisq,df) 
+fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1)
+fm04.1$df <- round(x = fm04.1$df,digits = 0)
+fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")")
+fm04.1 <- dplyr::select(fm04.1,"chi2df")
+for (i in names(fm04.1)) {
+  fm04.1[,i] <- as.character(fm04.1[,i])
+}
+
+#------CFI, RMSEA------#
+fm04.2 <- fm04 %>% dplyr::select(cfi,tli,rmsea) 
+for (i in names(fm04.2)) {
+  fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
+}
+
+fm.df      <- dplyr::bind_cols(fm04.1,fm04.2)
+fm.df$nobs <- c(lavaan::nobs(fit_perpref1)) 
+fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("percnmerit")
+
+
+#------ merge ------#
+tb.fm<- dplyr::bind_rows(tb.load,fm.df)
+tb.fm<- tb.fm %>% 
+  dplyr::mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$",
+                       "$\\text{TLI}$","$\\text{RMSEA}$","$N$")) %>%
+  dplyr::select(vars,everything())
+tb.perpref1 <- tb.fm
+```
+
+```{r}
+# save(tb.perpref1,file = "output/tables/tb.perpref1.RData")
+```
+
