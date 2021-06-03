@@ -187,8 +187,8 @@ fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,
 
 Figure \@ref(fig:meas02-issp)
 
-```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center',fig.cap="Meassurement model for Perceptions and Preferences in meritocracy"}
-knitr::include_graphics('output/images/meas02-issp.PNG')
+```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center',fig.cap="Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy"}
+knitr::include_graphics('output/images/cfa_issp_study1.PNG')
 ```
 
 <!-- [tabla CFA] -->
