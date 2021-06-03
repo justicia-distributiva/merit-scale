@@ -3,8 +3,6 @@ title: "Measuring Perceptions and Preferences for Meritocracy"
 css: "custom.css"
 linestretch: '1.5'
 link-citations: yes
-author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
-abstract: "Economic and social inequalities have generated growing concern and crises across contemporary societies. One of the mechanisms proposed by social sciences to explain the persistence of inequality is the belief in meritocracy, which would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualization and measures that make the findings and their interpretation rather confusing. Most of the studies in the area have relied upon secondary data to operationalize meritocracy, with a wide variation in the use and interpretation of the same survey items. Taking into account the extant literature that uses measures of meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding conceptualization and operationalization. Based on this critical analysis, we propose a survey instrument called *Perceptions and Preferences for Meritocracy Scale*, which we test with confirmatory factor analysis using data from an online survey study (N=2,141). Our results support the proposed conceptual structure, which not only distinguishes between perceptions and preferences, but also between meritocratic and non-meritocratic dimensions. Our discussion highlights the importance of considering these different dimensions in order to advance the study of meritocracy."
 output:
   bookdown::pdf_document2:
     template: null
@@ -12,10 +10,10 @@ output:
   bookdown::html_document2:
     number_sections: false
 linkcolor: blue
-bibliography:
-  - ../input/bib/EconomiaMoral.bib
-  - ../input/bib/meritocracy.bib
-  - ../input/bib/invariance.bib
+#bibliography:
+#  - ../input/bib/EconomiaMoral.bib
+#  - ../input/bib/meritocracy.bib
+#  - ../input/bib/invariance.bib
 editor_options:
   chunk_output_type: console
 geometry: margin=0.78in
@@ -99,13 +97,46 @@ We used polyserial correlations to evaluate relationships of meritocractic and n
 
 Table \@ref(tab:val-conv) shows the polyserial and pearson correlations between our meritocracy scale and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents---only 8.6 percent indicates _not very important_ or _not important at all_.
 
-  |                                      | Social Origin  |     Hard Work    |     Wherewithal    |
-  |--------------------------------------|----------------|------------------|--------------------|
-  |     Meritocratic     Perception      |     -0.1975    |     0.1877       |     0.3921         |
-  |     Unmeritocratic    Perception     |     0.3547     |     -0.0775      |     -0.1844        |
-  |     Meritocratic    Preference       |     0.1078     |     0.0779       |     0.0819         |
-  |     Unmeritocratic    Preference     |     -0.0397    |     0.0824       |     0.2082         |
-  Table: `r as.character(paste("(\\#tab:val-conv)", "Polyserial and Pearson correlation whit other merit scales"))`.
+
+```{r val-conv}
+pacman::p_load(kableExtra, polycor)
+
+load(file="input/data/proc/data_s3_conv.RData")
+
+pl1 <- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_1)
+pl2 <- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_1)
+pl3 <- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_1)
+pl4 <- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_1)
+valores1 <- round(c(pl1,pl2,pl3,pl4),4)
+
+
+pl1b <- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_5)
+pl2b <- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_5)
+pl3b <- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_5)
+pl4b <- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_5)
+valores2 <- round(c(pl1b,pl2b,pl3b,pl4b),4)
+
+pl1c <- cor(data_s3_conv$perc_merit,data_s3_conv$nbmerit)
+pl2c <- cor(data_s3_conv$pref_merit,data_s3_conv$nbmerit)
+pl3c <- cor(data_s3_conv$perc_nmerit,data_s3_conv$nbmerit)
+pl4c <- cor(data_s3_conv$pref_nmerit,data_s3_conv$nbmerit)
+valores3 <- round(c(pl1c,pl2c,pl3c,pl4c),4)
+
+
+variables= c("Meritocratic Perception", "Meritocratic Preferences", "Unmeritocratic Perception","Unmeritocratic Preferences")
+
+table01 <- cbind(variables, valores1, valores2, valores3)
+
+
+kable(table01, col.names = c("Merit-Scale","Social Origin ", "Hard Work " , "Wherewithal"), full_width = T, linesep = "", caption = c("Polyserial and Pearson correlation whit other merit scales")) %>% kable_styling(
+    full_width = T,
+    position = "center",
+    font_size = 14,
+    bootstrap_options=c("striped", "bordered")) %>%
+  column_spec(column = 1, width = "1.5cm", ) 
+
+```
+
 
 The measure of NBI for _personal wherewithal_ also provides evidence for the convergent validity of the merit scale. Results indicate a positive correlation of this measure with meritocratic preference (r=.392), suggesting that both variables capture similar concepts. The NBI's factor depicts a positive association with unmeritocratic preference (r=.208). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality [@McCall2017Exposurerisinginequality; @MadeiraPrimesConsequencesSystematic2019]. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perceptions and unmeritocratic preferences show a positive and weak correlation.
 
@@ -138,17 +169,100 @@ Tabla \@ref(tab:fcloads-inv) shows de results of the CFA estimation of the merit
 The first step for invariance testing is the estimation of the configural model, which serves as the baseline for further comparison and it is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit,since its sensitivity to sample size it is recommended to use three additional fit indices: Comparative Fit Index (CFI), which should have a value greater than 0.95; Root Mean Square Error Approximation (RMSEA), which must be in the range of values ​​of 0.05 and 0.08; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 [@vandeschoot_checklist_2012]. Besides, the literature on measurement invariance suggests some complementary approaches for the evaluation of the fit, from which we will consider the incremental adjustment of the fit indexes [@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010] and the ANOVA test for means comparison in nested models [@newsom_Longitudinal_2015].
 
 
-```{r invargroup, eval=TRUE, echo=FALSE}
-load(file = "../output/tables/tb.inv-group.RData")
+
+# Analysis
+
+```{r invargroup}
+
+#---Load packages and data -------------------------------------#
+
+pacman::p_load(sjPlot,dplyr,lavaan,semPlot,semTools,stargazer,corrplot,psych,knitr,kableExtra,stats)
+
+
+load(file = "input/data/proc/pov01_fact02.RData")
+
+pov01 <- data_s3_inv %>% filter(dataset=="pvw01")
+fs01  <- data_s3_inv %>% filter(dataset=="fsw02")
+
+#-----Meassurement model--------------------------------------#
+
+
+
+model01 <- '
+perc_merit  =~ perc_effort + perc_talent
+perc_nmerit =~ perc_wpart  + perc_netw
+pref_merit  =~ pref_effort + pref_talent
+pref_nmerit =~ pref_wpart  + pref_netw'
+
+
+#-----Invariance---------------------------------------------#
+
+
+
+inv01<- measurementInvariance(model=model01,data=data_s3_inv,group="dataset",estimator = "ML",strict=TRUE)
+
+conf  <- inv01$fit.configural
+weak  <- inv01$fit.loadings
+strong<- inv01$fit.intercepts
+strict<- inv01$fit.residuals
+
+tab01<- anova(conf,weak,strong,strict,SB.classic=TRUE) %>% 
+  as_tibble() %>% 
+  select("Chisq","Df","chisq_diff"=`Chisq diff`,"df_diff"=`Df diff`,"pvalue"=`Pr(>Chisq)`) %>% 
+  mutate(stars=gtools::stars.pval(pvalue),
+         chisqt=paste0(round(Chisq,2)," (",Df,") "),
+         decision=ifelse(pvalue>0.05,yes = "Accept",no = "Reject"),
+         model=c("Configural","Weak","Strong","Strict")) 
+ 
+fit.meas<- bind_rows(fitmeasures(inv01$fit.configural,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                     fitmeasures(inv01$fit.loadings,  output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                     fitmeasures(inv01$fit.intercepts,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                     fitmeasures(inv01$fit.residuals, output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),])
+
+# compute differences in chisq, df, cfi and rmsea (90%, lower.ci - upper.ci )
+fit.meas<- fit.meas %>% 
+  mutate(diff.chi2 = chisq    - lag(chisq,default = first(chisq)),
+         diff.df   = df       - lag(df,   default = first(df)),
+         diff.cfi  = cfi      - lag(cfi,  default = first(cfi)),
+         diff.rmsea   = rmsea - lag(rmsea,default = first(rmsea))) %>%
+  round(3) %>% 
+  mutate(rmsea.ci=paste0(rmsea," \n ", "(",rmsea.ci.lower,"-",rmsea.ci.upper,")"))
+
+
+tab.inv<- bind_cols(tab01,fit.meas) %>% 
+  select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.df,diff.cfi,diff.rmsea,stars,decision) %>% 
+  mutate(diff.chi2=paste0(diff.chi2," (",diff.df,") ",stars)) %>% 
+  select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.cfi,diff.rmsea,decision)
+
+#clean values
+tab.inv[tab.inv == c("0 (0) ")] <- NA
+tab.inv[tab.inv == c(0)] <- NA
+
+### Check an alternative method
+configural        <- cfa(model01, data=data_s3_inv, group = "dataset", estimator="ML")
+weak.invariance   <- cfa(model01, data=data_s3_inv, group = "dataset",group.equal = "loadings", estimator="ML")
+strong.invariance <- cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts"), estimator="ML")
+strict.invariance <- cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts", "residuals"), estimator="ML")
+
+
+
+table_format = if(is_html_output()) {
+  "html"
+} else if(is_latex_output()) {
+  "latex"
+}
+
 col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
              "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
-footnote <- paste0("N = ",nobs(conf),"; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
+footnote <- paste0("N = ","; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", **p < 0.001")
 
 kable(tab.inv, col.names = col.nam, align = "l",
       booktabs=TRUE,format = table_format,escape = FALSE,
       caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>%
   kable_styling(full_width = FALSE,latex_options = "HOLD_position") %>%
   footnote(general = footnote, footnote_as_chunk = T)
+
 ```
+
 
 Table \@ref(tab:invargroup) shows the results of the measurement invariance estimation. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results  support the invariance at the strong level meaning that the fit of the factor model of the merit scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold when considering $\Delta \chi^2 (\Delta \text{df})$. Nevertheless, the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ fulfills the requirements of being below of the cut-off criteria as suggested by [ @chen 2007 ]. Therefore, using this last standard the level for strict invariance holds for the meritocracy scale.

@@ -1,0 +1,507 @@
+---
+title: "Data preparation Study 3 - Merit Scale"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    toc: true
+    toc_float:
+        collapsed: false
+    toc_depth: 2
+    code_folding: "hide"
+editor_options:
+  chunk_output_type: console
+---
+
+```{r include=FALSE}
+# Knitr options
+
+knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,results = "hold")
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=999)
+rm(list=ls())
+options(knitr.kable.NA = '')
+```
+
+This is the preparation code of the data for Study 3:  Additional validity analyses. The prepared data is `data_s3_conv.RData` in "Convergence section" and `data_s3_conv.RData` in "Invariance section"
+
+
+# Convergence
+
+## Libraries
+```{r}
+pacman::p_load(haven, sjPlot, dplyr, mice, lavaan, stargazer, corrplot, polycor, knitr, kableExtra, summarytools, sjlabelled)
+```
+
+
+## Load original data
+
+```{r}
+dat04w3 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola3.sav",verbose = F)
+dim(data) 
+```
+
+
+## Create Perceptions and Preferences for Meritocracy (PPM-S) factor scores
+
+The following code creates new variables corresponding to the four dimensions of the PPM scale. Based on the measurement model, four factorial scores are created. To retrieve cases the "mice" function is used
+
+```{r results='hide'}
+dat04w3
+
+dat04w3$meritv03_perc_effort <- as.numeric(dat04w3$meritv03_perc_effort)
+dat04w3$meritv03_perc_talent <- as.numeric(dat04w3$meritv03_perc_talent)
+dat04w3$meritv03_perc_netw <- as.numeric(dat04w3$meritv03_perc_netw)
+dat04w3$meritv03_perc_wpart <- as.numeric(dat04w3$meritv03_perc_wpart)
+dat04w3$meritv03_pref_effort <- as.numeric(dat04w3$meritv03_pref_effort)
+dat04w3$meritv03_pref_talent <- as.numeric(dat04w3$meritv03_pref_talent)
+dat04w3$meritv03_pref_wpart <- as.numeric(dat04w3$meritv03_pref_wpart)
+dat04w3$meritv03_pref_netw <- as.numeric(dat04w3$meritv03_pref_netw)
+
+
+
+model04 <- '
+perc_merit =~  meritv03_perc_effort + meritv03_perc_talent
+perc_nmerit=~ meritv03_perc_wpart + meritv03_perc_netw
+pref_merit =~ meritv03_pref_effort + meritv03_pref_talent
+pref_nmerit=~ meritv03_pref_wpart + meritv03_pref_netw'
+
+
+
+# generate 5 multiple complete datasets
+out <- mice(dat04w3[23:30], m = 5)
+
+D1 <- complete(out, 1)
+D2 <- complete(out, 2)
+D3 <- complete(out, 3)
+D4 <- complete(out, 4)
+D5 <- complete(out, 5)
+
+# fit model for each complete dataset
+fit1 <- cfa(model04, data = D1)
+fit2 <- cfa(model04, data = D2)
+fit3 <- cfa(model04, data = D3)
+fit4 <- cfa(model04, data = D4)
+fit5 <- cfa(model04, data = D5)
+
+# predict scores for all models
+p1 <- predict(fit1)
+p2 <- predict(fit2)
+p3 <- predict(fit3)
+p4 <- predict(fit4)
+p5 <- predict(fit5)
+
+# compute 'average' across 5 sets of scores:
+scores <- (p1 + p2 + p3 + p4 + p5) / 5
+
+#Generate factor scores
+scores_dat = as.data.frame(scores)
+
+# Adaptar base para agregar factor scores (sacar todos NA)
+dat04w3 = dat04w3[rowSums(is.na(dat04w3[23:28])) != 5, ]
+
+# Merge with factor scores
+dat04w3 = cbind(dat04w3, scores)
+
+# Check
+stargazer(dat04w3[, 78:81], type = "text")
+
+```
+
+
+## Create The Neoliberal Beliefs Inventory (NBI) factor scores
+
+The following code creates new variables corresponding to the four dimensions of the NBI scale. Based on the measurement model, four factorial scores are created. To retrieve cases the "mice" function is used
+```{r results='hide'}
+datnbmerit <- dat04w3 %>% select(nb_merit_1,
+nb_merit_2,
+nb_merit_3,
+nb_merit_4,
+nb_merit_5,
+nb_merit_6,
+nb_merit_7,
+nb_merit_8)
+psych::alpha(datnbmerit)
+
+
+
+
+dat04w3$nb_merit_1 <- as.numeric(dat04w3$nb_merit_1)
+dat04w3$nb_merit_2 <- as.numeric(dat04w3$nb_merit_2)
+dat04w3$nb_merit_3 <- as.numeric(dat04w3$nb_merit_3)
+dat04w3$nb_merit_4 <- as.numeric(dat04w3$nb_merit_4)
+dat04w3$nb_merit_5 <- as.numeric(dat04w3$nb_merit_5)
+dat04w3$nb_merit_6 <- as.numeric(dat04w3$nb_merit_6)
+dat04w3$nb_merit_7 <- as.numeric(dat04w3$nb_merit_7)
+dat04w3$nb_merit_8 <- as.numeric(dat04w3$nb_merit_8)
+
+
+
+model04 <- '
+nbmerit =~  nb_merit_1+
+nb_merit_2+
+nb_merit_3+
+nb_merit_4+
+nb_merit_5+
+nb_merit_6+
+nb_merit_7'
+
+
+
+# generate 5 multiple complete datasets
+out <- mice(dat04w3[57:64], m = 5)
+
+D1 <- complete(out, 1)
+D2 <- complete(out, 2)
+D3 <- complete(out, 3)
+D4 <- complete(out, 4)
+D5 <- complete(out, 5)
+
+# fit model for each complete dataset
+fit1 <- cfa(model04, data = D1)
+fit2 <- cfa(model04, data = D2)
+fit3 <- cfa(model04, data = D3)
+fit4 <- cfa(model04, data = D4)
+fit5 <- cfa(model04, data = D5)
+
+# predict scores for all models
+p1 <- predict(fit1)
+p2 <- predict(fit2)
+p3 <- predict(fit3)
+p4 <- predict(fit4)
+p5 <- predict(fit5)
+
+# compute 'average' across 5 sets of scores:
+scores <- (p1 + p2 + p3 + p4 + p5) / 5
+
+#Generate factor scores
+scores_dat = as.data.frame(scores)
+
+# Adaptar base para agregar factor scores (sacar todos NA)
+dat04w3 = dat04w3[rowSums(is.na(dat04w3[57:64])) != 5, ]
+
+# Merge with factor scores
+dat04w3 = cbind(dat04w3, scores)
+
+data_s3_conv <- dat04w3 %>% select(nbmerit, perc_merit,pref_merit,perc_nmerit,pref_nmerit,get_ah_1, get_ah_5) %>% na.omit()
+
+
+```
+
+
+## Labels
+
+### Variable labels
+
+Created variables are labeled and described
+
+```{r}
+
+set_label(data_s3_conv$nbmerit)  <- "Personal wherewithal - NBI"
+set_label(data_s3_conv$perc_merit)  <- "Meritocratic perception"
+set_label(data_s3_conv$pref_merit)   <- "Meritocratic preferences"
+set_label(data_s3_conv$perc_wpart)    <- "Unmeritocratic perception"
+set_label(data_s3_conv$pref_nmerit)  <-  "Unmeritocratic preferences"
+
+
+set_label(data_s3_conv$get_ah_1)  <- "Importance of a rich family to get ahead"
+set_label(data_s3_conv$get_ah_5)   <- "Importance of hard work to get ahead"
+
+sjmisc::descr(data_s3_conv) 
+
+```
+
+## Final summary
+```{r}
+sjmisc::descr(data_s3_conv,
+      show = c("label","range", "mean", "sd", "NA.prc", "n"))%>%
+      kable(.,"markdown")
+
+print(dfSummary(data_s3_conv, valid.col = FALSE, graph.magnif = 0.75),
+      max.tbl.height = 300, method = "render")
+
+```
+
+## save data
+
+```{r}
+
+save(data_s3_conv,file = "input/data/proc/data_s3_conv.RData")
+```
+
+
+# Invariance 
+
+
+## Libraries
+```{r}
+pacman::p_load(haven, sjPlot, dplyr, lavaan, stargazer, corrplot, knitr, kableExtra, summarytools, sjlabelled,Hmisc,psych,tidyr)
+
+```
+
+
+## Load longitudinal data
+
+ 
+```{r}
+w01 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola1.sav",verbose = F)
+w02 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola2.sav",verbose = F)
+w03 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola3.sav",verbose = F)
+```
+
+## Preparation wave 1
+
+Add tags wave 1
+```{r }
+label(w01$Intro) <- "If you wish to participate, select the alternative I ACCEPT take part in this investigation. If you do not want to participate in this study, press the alternative I NOT ACCEPT take part in this investigation."
+w01$Intro <- set_labels(w01$Intro,  labels = c("I ACCEPT take part in this investigation","I NOT ACCEPT take part in this investigation."))
+```
+
+
+Frequency of respondents who Accept and Finish wave 1.
+```{r fig.width= 10}
+w01_Intro <- w01 %>% select(Intro,Finished) %>% as.data.frame()
+sjPlot::view_df(w01_Intro, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+Delete those who do not accept and Delete those who do not accept
+```{r}
+w01b <- w01 %>% filter(Intro==1, Finished==1) %>% as.data.frame()
+w01b$ID<- stringr::str_split_fixed(w01b$ticket,"_", 4)[,1] # En la variable ticket el primer código es el ID, todo lo demás se borra
+```
+
+Frequency of respondents who Accept and Finish wave 1.
+```{r fig.width= 20 }
+w01b$Intro <- set_labels(w01b$Intro,  labels = c("I ACCEPT take part in this investigation", "I NOT ACCEPT take part in this investigation."))
+w01_Introb <- w01b %>% select(Intro,Finished) %>% as.data.frame()
+sjPlot::view_df(w01_Introb, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+A variable is created to indicate the order in which the items on the PPM scale are presented. The variables are renamed and those of interest are selected. The results are described.
+```{r}
+w01c <- w01b
+w01c$grupo <- NA
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v01==1] <- 1
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v02==1] <- 2
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v03==1] <- 3
+w01c$perc_effort_w1 <- rowSums(w01c[,c(matches(match = "perc_effort",vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_talent_w1 <- rowSums(w01c[,c(matches(match = "perc_talent",vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_wpart_w1  <- rowSums(w01c[,c(matches(match = "perc_wpart" ,vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_netw_w1   <- rowSums(w01c[,c(matches(match = "perc_netw"  ,vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_effort_w1 <- rowSums(w01c[,c(matches(match = "pref_effort",vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_talent_w1 <- rowSums(w01c[,c(matches(match = "pref_talent",vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_wpart_w1  <- rowSums(w01c[,c(matches(match = "pref_wpart" ,vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_netw_w1   <- rowSums(w01c[,c(matches(match = "pref_netw"  ,vars = names(w01c)))],na.rm = TRUE)
+w01c[w01c==0] <- NA
+w01c <- w01c %>% select(grupo,
+                        perc_effort_w1,perc_talent_w1,perc_wpart_w1,perc_netw_w1,
+                        pref_effort_w1,pref_talent_w1,pref_wpart_w1,pref_netw_w1,
+                        sexo_w1=sexo,edad_w1=edad,edcep_w1=edcep, ID)
+#-----------------------------------------------------------------------#
+print(dfSummary(w01c, valid.col = FALSE, graph.magnif = 0.75),
+      max.tbl.height = 300, method = "render")
+```
+
+
+## Preparation wave 2
+
+Add tags wave 2
+```{r }
+label(w02$Intro) <- "If you wish to participate, select the alternative I ACCEPT take part in this investigation. If you do not want to participate in this study, press the alternative I NOT ACCEPT take part in this investigation."
+w02$Intro <- set_labels(w02$Intro,  labels = c("I ACCEPT take part in this investigation","I NOT ACCEPT take part in this investigation."))
+```
+
+
+Frequency of respondents who Accept and Finish wave 2.
+```{r}
+w02_Intro <- w02 %>% select(Intro,Finished) %>% as.data.frame()
+sjPlot::view_df(w02_Intro, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+Delete those who do not accept and Delete those who do not accept
+```{r}
+w02b <- w02 %>% filter(Intro==1, Finished==1) %>% as.data.frame()
+w02b$ID <- stringr::str_split_fixed(w02b$ticket, "_", 4)[,1]
+```
+
+Frequency of respondents who Accept and Finish wave 2.
+```{r }
+w02b$Intro <- set_labels(w02b$Intro,  labels = c("I ACCEPT take part in this investigation", "I NOT ACCEPT take part in this investigation."))
+w02_Introb <- w02b %>% select(Intro,Finished) %>% as.data.frame()
+sjPlot::view_df(w02_Introb, show.type = T,show.frq = T, show.string.values = T, verbose = F, show.id = F)
+```
+
+A variable is created to indicate the treatment to which the respondent was exposed. The variables are renamed and those of interest are selected. The results are described.
+
+```{r}
+w02c <- w02b
+w02c$treat <- NA
+w02c$treat[w02c$FL_6_DO_Control==1] <- 1
+w02c$treat[w02c$FL_6_DO_Tratamiento==1] <- 2
+w02c$treat[w02c$FL_6_DO_Tratamiento_desigualdad==1] <- 3
+w02c$treat <- factor(w02c$treat,levels = c(1,2,3),labels = c("control","pobreza","desiguald"))
+w02c <- w02c %>% rename(perc_effort_w2=meritv03_perc_effort,
+                        perc_talent_w2=meritv03_perc_talent,
+                        perc_wpart_w2 =meritv03_perc_wpart,
+                        perc_netw_w2  =meritv03_perc_netw,
+                        pref_effort_w2=meritv03_pref_effort,
+                        pref_talent_w2=meritv03_pref_talent,
+                        pref_wpart_w2 =meritv03_pref_wpart,
+                        pref_netw_w2  =meritv03_pref_netw)
+w02c <- w02c %>% select(perc_effort_w2,perc_talent_w2,perc_wpart_w2,perc_netw_w2,
+                        pref_effort_w2,pref_talent_w2,pref_wpart_w2,pref_netw_w2,
+                        sexo_w2=sexo,edad_w2=edad,edcep_w2=edcep, treat, ID)
+#-----------------------------------------------------------------------#
+print(dfSummary(w02c, valid.col = FALSE, graph.magnif = 0.75),
+      max.tbl.height = 300, method = "render")
+```
+
+
+## Preparation wave 3
+
+
+```{r}
+table(w03$Finished==1)
+w03b <- filter(w03,Finished==1) # Elimina los que no aceptan
+dim(w03b)
+w03b$ID <- stringr::str_split_fixed(w03b$ticket, "_", 4)[,1]
+```
+
+The variables of the PPM scale are renamed indicating the wave. Those of interest are selected. The results are described.
+```{r}
+w03c <- w03b
+w03c <- w03c %>% rename(perc_effort_w3=meritv03_perc_effort,
+                        perc_talent_w3=meritv03_perc_talent,
+                        perc_wpart_w3 =meritv03_perc_wpart,
+                        perc_netw_w3  =meritv03_perc_netw,
+                        pref_effort_w3=meritv03_pref_effort,
+                        pref_talent_w3=meritv03_pref_talent,
+                        pref_wpart_w3 =meritv03_pref_wpart,
+                        pref_netw_w3  =meritv03_pref_netw)
+w03c <- w03c %>% select(perc_effort_w3,perc_talent_w3,perc_wpart_w3,perc_netw_w3,
+                        pref_effort_w3,pref_talent_w3,pref_wpart_w3,pref_netw_w3,
+                        sexo_w3=sexo,edad_w3=edad,edcep_w3=edcep, ID)
+#-----------------------------------------------------------------------#
+print(dfSummary(w03c, valid.col = FALSE, graph.magnif = 0.75),
+      max.tbl.height = 300, method = "render")
+```
+
+## Merge wide data
+
+```{r}
+wide01 <- inner_join(x = w01c,y = w02c, by = "ID") 
+dim(wide01) #en w01 y w02
+```
+
+```{r}
+wide02 <- inner_join(x = wide01,y = w03c, by = "ID") 
+dim(wide02) #en w01, w02 y w03
+```
+
+```{r}
+print(dfSummary(w02, valid.col = FALSE, graph.magnif = 0.75),
+      max.tbl.height = 300, method = "render")
+```
+
+```{r}
+#save(wide01,file = "input/data/proc/datawide.RData")
+#save(wide02,file = "input/data/proc/datawide_123.RData")
+```
+
+## Wide to long data
+
+```{r}
+library(datasets)
+library(data.table)
+wide <- setDT(wide02)
+long01<- melt(wide,variable.name = "wave",
+              measure = patterns("^perc_effort_","^perc_talent_","^perc_wpart_","^perc_netw_",
+                                       "^pref_effort_","^pref_talent_","^pref_wpart_","^pref_netw_",
+                                       "^sexo_","^edad_","^edcep_"),
+              value.name = c("perc_effort","perc_talent","perc_wpart","perc_netw",
+                             "pref_effort","pref_talent","pref_wpart","pref_netw",
+                             "sexo","edad","edcep"))
+#save(long01,file = "input/data/proc/datalong.RData")
+
+```
+
+
+
+## Factorial survey data:
+
+Prepare poverty experiment data (wave 01):
+
+
+```{r}
+w01c <- w01 %>% filter(Intro==1) %>% as.data.frame()
+w01c$ID<- stringr::str_split_fixed(w01c$ticket,"_", 4)[,1]
+w01c$grupo <- NA
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v01==1] <- 1
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v02==1] <- 2
+w01c$grupo[w01c$FL_21_DO_merit_perc_pref_julio19v03==1] <- 3
+w01c$perc_effort_w1 <- rowSums(w01c[,c(matches(match = "perc_effort",vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_talent_w1 <- rowSums(w01c[,c(matches(match = "perc_talent",vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_wpart_w1  <- rowSums(w01c[,c(matches(match = "perc_wpart" ,vars = names(w01c)))],na.rm = TRUE)
+w01c$perc_netw_w1   <- rowSums(w01c[,c(matches(match = "perc_netw"  ,vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_effort_w1 <- rowSums(w01c[,c(matches(match = "pref_effort",vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_talent_w1 <- rowSums(w01c[,c(matches(match = "pref_talent",vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_wpart_w1  <- rowSums(w01c[,c(matches(match = "pref_wpart" ,vars = names(w01c)))],na.rm = TRUE)
+w01c$pref_netw_w1   <- rowSums(w01c[,c(matches(match = "pref_netw"  ,vars = names(w01c)))],na.rm = TRUE)
+w01c[w01c==0] <- NA
+w01c <- w01c %>% select(grupo,
+                        perc_effort_w1,perc_talent_w1,perc_wpart_w1,perc_netw_w1,
+                        pref_effort_w1,pref_talent_w1,pref_wpart_w1,pref_netw_w1,
+                        sexo_w1=sexo,edad_w1=edad,edcep_w1=edcep, ID)
+```
+
+
+```{r}
+w01fs <- w01c
+names(w01fs)<- stringr::str_replace_all(string = names(w01fs),pattern = "_w1",replacement = "") 
+```
+
+Prepare factorial survey data (wave 02):
+
+```{r}
+# fs01 <- sjlabelled::read_spss("input/data/original/factorial_ola2.sav",verbose = F)
+load(file = "papelera/input/data/original/factorial_ola2.RData") 
+```
+
+```{r}
+names(long01)
+fs02 <- fs01 %>% 
+  filter(consen==1) %>% 
+  mutate(grupo=4,ID=ResponseId,) %>% 
+  select(grupo,ID,"perc_effort"="merit_perc_effort",
+         "perc_talent" = "merit_perc_talent",
+         "perc_wpart" = "merit_perc_wpart",
+         "perc_netw"  = "merit_perc_netw",
+         "pref_effort" = "merit_pref_effort",
+         "pref_talent" = "merit_pref_talent",
+         "pref_wpart" = "merit_pref_wpart",
+         "pref_netw"  = "merit_pref_netw",
+         sexo,edad,
+         edcep=educ)
+```
+
+
+Identify dataset of origin:
+
+```{r}
+w01fs$dataset <- "pvw01"
+fs02$dataset  <- "fsw02"
+```
+
+Merge data sets:
+
+```{r}
+data_s3_inv<-bind_rows(fs02,w01fs) %>%
+  set_label(label = get_label(fs02)) %>%
+  set_labels(labels = get_labels(fs02))
+```
+
+```{r}
+save(data_s3_inv,file = "input/data/proc/data_s3_inv.RData")
+```
+
+
