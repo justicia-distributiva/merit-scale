@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses &amp; Jorge Atria   " />
+
+
+<title>Measuring Perceptions and Preferences for Meritocracy</title>
+
+<script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Measuring perceptions and preferences for meritocracy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="paper.html">Paper</a>
+</li>
+<li>
+  <a href="paper.pdf">
+    <span class="fas fa-file-pdf"></span>
+     
+    
+  </a>
+</li>
+<li>
+  <a href="https://github.com/juancarloscastillo/merit-scale">
+    <span class="fas fa-github fa-lg"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Measuring Perceptions and Preferences for Meritocracy</h1>
+<h4 class="author">Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses &amp; Jorge Atria <br><br></h4>
+
+</div>
+
+
+<div id="study-1-measuring-meritocracy-with-international-secondary-data" class="section level2">
+<h2>Study 1: Measuring meritocracy with international secondary data</h2>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>The data used in the analysis corresponds to the last available wave of the social inequality module from the International Social Survey Programme (ISSP), which is the most specialized international comparative survey in perceptions, attitudes and beliefs about inequality related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 41 countries and 56021 individuals. Although there is data available from this module for previous waves (1987, 1992 and 1999), unfortunately there are several variables that are important for this research that were not included, particularly in 1987 and 1999, reason why we only use the 2009 wave.</p>
+</div>
+<div id="variables" class="section level3">
+<h3>Variables</h3>
+<p>There are a series of indicators in the ISSP survey that in the following we attempt to classify in our meritocracy measurement scheme. However, it is important to mention that the items were not originally thought as a specific measure of meritocracy. Still, many of the items have been used in previous research on meritocracy (and certainly will keep being used in the future) and before proposing a new measure we consider to give a first test to our proposed conceptualization using available data that not only covers several countries but also is validated by the research community.</p>
+<p>The variables are presented below organized in perceptions and preferences:</p>
+<ul>
+<li><p><em>Perception of meritocracy/non-meritocracy</em>: for operationalizing perceptions the closest set of ISSP’s indicators comes from the question asking about perceptions for opportunities to get ahead, which are usually considered as “meritocratic beliefs” in previous research. The general heading of the battery is: <em>“To begin we have some questions about opportunities for getting ahead. Please tick one box for each of these to show how important you think it is for getting ahead in life.”</em> This is followed by a list of statements to be answered in a scale with the following levels numbered from 1 to 5: essential, very important, fairly important, not very important, not important at all. Below the items are listed classified according to the meritocracy/non-meritocracy character:</p>
+<ul>
+<li>Meritocratic perception:
+<ul>
+<li>How important is having ambition?</li>
+<li>How important is hard work?</li>
+</ul></li>
+<li>Non-meritocratic perception
+<ul>
+<li>How important is coming from a wealthy family?</li>
+<li>How important is having well-educated parents</li>
+<li>How important is knowing the right people</li>
+<li>How important is having political connections</li>
+<li>How important is a person’s race?</li>
+<li>How important is being born a man or a woman?</li>
+</ul></li>
+</ul></li>
+</ul>
+<p><br>
+The classification is based on criteria of internal motivation (meritocratic) and structural constraints (non-meritocratic). There were two items from the battery that were excluded from the analysis as they would not fit into the classification. The first one was “having good education yourself”, since it was not clear whether this is could be due to individual motivation or system opportunities, and the second was “giving bribes”, as introduced elements of criminality that were beyond a non-meritocratic perception.</p>
+<ul>
+<li><p>Preferences for meritocracy-non meritocracy: for operationalizing normative preferences we used a list of items related to reasons for pay. The ISSP question was: <em>In deciding how much people ought to earn, how important should each of these things be, in your opinion</em>, rated in the same <em>essential-non important at all</em> scale as the questions for meritocratic preferences. The reasons are:</p>
+<ul>
+<li>Meritocratic preferences
+<ul>
+<li>How well he or she does the job?</li>
+<li>How hard he or she works at the job?</li>
+</ul></li>
+<li>Non-meritocratic preferences
+<ul>
+<li>What is needed to support a family?</li>
+<li>Whether the person has children to support?</li>
+</ul></li>
+</ul></li>
+</ul>
+<!-- (here summary descriptive table - @julio) -->
+<p>Table <a href="#tab:desc-issp">1</a></p>
+<table class="table" style="font-size: 15px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:desc-issp">Table 1: </span>Descriptive statistics for the ISSP 2009 sample
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Mean
+</th>
+<th style="text-align:left;">
+SD
+</th>
+<th style="text-align:left;">
+Min
+</th>
+<th style="text-align:left;">
+Max
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Importance: hard work
+</td>
+<td style="text-align:left;">
+3.89
+</td>
+<td style="text-align:left;">
+0.93
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: having ambition
+</td>
+<td style="text-align:left;">
+4.01
+</td>
+<td style="text-align:left;">
+0.87
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: wealthy family
+</td>
+<td style="text-align:left;">
+2.91
+</td>
+<td style="text-align:left;">
+1.16
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: educated parents
+</td>
+<td style="text-align:left;">
+3.24
+</td>
+<td style="text-align:left;">
+1.06
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: race
+</td>
+<td style="text-align:left;">
+3.56
+</td>
+<td style="text-align:left;">
+1.01
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: gender
+</td>
+<td style="text-align:left;">
+2.66
+</td>
+<td style="text-align:left;">
+1.20
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: knowing people
+</td>
+<td style="text-align:left;">
+2.21
+</td>
+<td style="text-align:left;">
+1.15
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: political connections
+</td>
+<td style="text-align:left;">
+2.21
+</td>
+<td style="text-align:left;">
+1.16
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: well job
+</td>
+<td style="text-align:left;">
+4.11
+</td>
+<td style="text-align:left;">
+0.75
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: hard job
+</td>
+<td style="text-align:left;">
+4.02
+</td>
+<td style="text-align:left;">
+0.79
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: support family
+</td>
+<td style="text-align:left;">
+3.48
+</td>
+<td style="text-align:left;">
+1.04
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: has children
+</td>
+<td style="text-align:left;">
+3.30
+</td>
+<td style="text-align:left;">
+1.12
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="methods" class="section level3">
+<h3>Methods</h3>
+<p>The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the <code>lavaan</code> R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit &gt; 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit &lt; 0.08), Chi-square: (p-value; acceptable fit &gt; 0.05, and Chi-square ratio &gt; 3).</p>
+</div>
+<div id="results" class="section level3">
+<h3>Results</h3>
+<!-- [diagrama SEM] -->
+<p>Figure <a href="#fig:meas02-issp">1</a></p>
+<div class="figure" style="text-align: center"><span id="fig:meas02-issp"></span>
+<img src="output/images/cfa_issp_study1.PNG" alt="Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy" width="85%" />
+<p class="caption">
+Figure 1: Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy
+</p>
+</div>
+<!-- [tabla CFA] -->
+<p>Table <a href="#tab:tb-perpref1">2</a></p>
+<table class="table" style="font-size: 12px; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption style="font-size: initial !important;">
+<span id="tab:tb-perpref1">Table 2: </span> Factor loadings and fit measures for ISSP 2009
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Perception
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Preference
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Meritocratic
+</th>
+<th style="text-align:center;">
+Non-meritocratic
+</th>
+<th style="text-align:center;">
+Meritocratic
+</th>
+<th style="text-align:center;">
+Non-meritocratic
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+How important is having ambition?
+</td>
+<td style="text-align:center;">
+0.71
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is hard work?
+</td>
+<td style="text-align:center;">
+0.73
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is coming from a wealthy family?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.69
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is having welleducated parents
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.61
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is knowing the right people
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.62
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is having political connections
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.59
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is a person’s race?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.61
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How important is being born a man or a woman?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.64
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How well he or she does the job?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.76
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+How hard he or she works at the job?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.91
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+What is needed to support a family?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Whether the person has children to support?
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.92
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\chi^2\text{(df)}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+21308.5(48)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{CFI}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.959
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{TLI}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.944
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{RMSEA}\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.098
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(N\)</span>
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+46594
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
