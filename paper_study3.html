@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Measuring Perceptions and Preferences for Meritocracy</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Measuring perceptions and preferences for meritocracy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="paper.html">Paper</a>
+</li>
+<li>
+  <a href="paper.pdf">
+    <span class="fas fa-file-pdf"></span>
+     
+    
+  </a>
+</li>
+<li>
+  <a href="https://github.com/juancarloscastillo/merit-scale">
+    <span class="fas fa-github fa-lg"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Measuring Perceptions and Preferences for Meritocracy</h1>
+
+</div>
+
+
+<div id="study-3-additional-validity-analyses" class="section level2">
+<h2>Study 3: Additional validity analyses</h2>
+<p>We performed two further analyses in order to add evidence regarding the quality of the scale. Firstly we analyzed the convergent validity by exploring the association of the merit scale with related concepts and its correspondent measurements. Secondly, we test the internal consistency of the measurement model behind the scale comparing with a different sample through measurement invariance procedures .</p>
+<div id="convergent-validity" class="section level3">
+<h3>Convergent validity</h3>
+<p><em>Data</em></p>
+<p>For this analysis we examined data from one wave of the same study described above, which was a three-wave panel survey. The last wave of the study included additional measures that allow testing the correlations of the merit scale with some related constructs as opportunity beliefs and personal wherewithal. After listwise deletion of missing cases in socio-demographics information, a total of 1422 individuals took part in the third wave: 668 (46.97%) women and 754 (53.03%) men. The ages of 50.57% of them are 45 years or older, and 36.28% held a tertiary degree.</p>
+<p><em>Intruments</em></p>
+<p>The following scales were included for testing their correlations with the the 8-item meritocracy scale:</p>
+<ul>
+<li><p>Opportunity beliefs: We used two items of the social inequality module of the International Social Survey Programme. Studies use generally both indicators to measure meritocratic and non-meritocratic beliefs <span class="citation">[@McCall2017Exposurerisinginequality; @mijs_paradox_2019]</span>. One item measures the importance of individual factors in determining life outcomes by asking for the importance of hard work for getting ahead in life (M=3.76, SD=0.93). The second item asks for the importance of coming from a wealthy family and captures the importance of structural factors in getting ahead (M=2.75, SD=1.27). Participants responded to each item using a 1 (not important at all) to 5 (essential) response scale. We call the first item  and the second one .</p></li>
+<li><p>Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which considers four factors: Government Interference preferences, Competition preferences, System Inequality perception and Personal Wherewithal <span class="citation">[@bay-chengTrackingHomoOeconomicus2015]</span>. We used the factor <em>personal wherewithal</em> that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be succesful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simple computed mean scores, with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.88, <span class="math inline">\(\alpha\)</span> = 0.89).</p></li>
+</ul>
+<p>Both instruments cover mainly the perceptual side of the concept. Therefore, in general we expect larger correlation with meritocratic perceptions than with preferences. In the case of opportunity beliefs, the hard work item should correlate positively with meritocratic perception whereas the importance for coming from a wealthy family is expected to correlate positively with non-meritocratic perceptions. Regarding the second instrument of personal wherewithal, we also anticipate a positive correlation with meritocratic perception and low to null correlations with the other dimensions of the merit scale.</p>
+<p><em>Results</em></p>
+<p>We used polyserial correlations to evaluate relationships of meritocractic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal, we examined Pearson correlations.</p>
+<p>Table <a href="#tab:val-conv">1</a> shows the polyserial and pearson correlations between our meritocracy scale and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents—only 8.6 percent indicates <em>not very important</em> or <em>not important at all</em>.</p>
+<pre class="r"><code>pacman::p_load(kableExtra, polycor)
+
+load(file=&quot;input/data/proc/data_s3_conv.RData&quot;)
+
+pl1 &lt;- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_1)
+pl2 &lt;- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_1)
+pl3 &lt;- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_1)
+pl4 &lt;- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_1)
+valores1 &lt;- round(c(pl1,pl2,pl3,pl4),4)
+
+
+pl1b &lt;- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_5)
+pl2b &lt;- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_5)
+pl3b &lt;- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_5)
+pl4b &lt;- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_5)
+valores2 &lt;- round(c(pl1b,pl2b,pl3b,pl4b),4)
+
+pl1c &lt;- cor(data_s3_conv$perc_merit,data_s3_conv$nbmerit)
+pl2c &lt;- cor(data_s3_conv$pref_merit,data_s3_conv$nbmerit)
+pl3c &lt;- cor(data_s3_conv$perc_nmerit,data_s3_conv$nbmerit)
+pl4c &lt;- cor(data_s3_conv$pref_nmerit,data_s3_conv$nbmerit)
+valores3 &lt;- round(c(pl1c,pl2c,pl3c,pl4c),4)
+
+
+variables= c(&quot;Meritocratic Perception&quot;, &quot;Meritocratic Preferences&quot;, &quot;Unmeritocratic Perception&quot;,&quot;Unmeritocratic Preferences&quot;)
+
+table01 &lt;- cbind(variables, valores1, valores2, valores3)
+
+
+kable(table01, col.names = c(&quot;Merit-Scale&quot;,&quot;Social Origin &quot;, &quot;Hard Work &quot; , &quot;Wherewithal&quot;), full_width = T, linesep = &quot;&quot;, caption = c(&quot;Polyserial and Pearson correlation whit other merit scales&quot;)) %&gt;% kable_styling(
+    full_width = T,
+    position = &quot;center&quot;,
+    font_size = 14,
+    bootstrap_options=c(&quot;striped&quot;, &quot;bordered&quot;)) %&gt;%
+  column_spec(column = 1, width = &quot;1.5cm&quot;, ) </code></pre>
+<table class="table table-striped table-bordered" style="font-size: 14px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:val-conv">Table 1: </span>Polyserial and Pearson correlation whit other merit scales
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Merit-Scale
+</th>
+<th style="text-align:left;">
+Social Origin
+</th>
+<th style="text-align:left;">
+Hard Work
+</th>
+<th style="text-align:left;">
+Wherewithal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 1.5cm; ">
+Meritocratic Perception
+</td>
+<td style="text-align:left;">
+-0.1884
+</td>
+<td style="text-align:left;">
+0.2002
+</td>
+<td style="text-align:left;">
+0.41
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.5cm; ">
+Meritocratic Preferences
+</td>
+<td style="text-align:left;">
+0.1004
+</td>
+<td style="text-align:left;">
+0.095
+</td>
+<td style="text-align:left;">
+0.1196
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.5cm; ">
+Unmeritocratic Perception
+</td>
+<td style="text-align:left;">
+0.3609
+</td>
+<td style="text-align:left;">
+-0.0737
+</td>
+<td style="text-align:left;">
+-0.1866
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.5cm; ">
+Unmeritocratic Preferences
+</td>
+<td style="text-align:left;">
+-0.026
+</td>
+<td style="text-align:left;">
+0.0801
+</td>
+<td style="text-align:left;">
+0.2311
+</td>
+</tr>
+</tbody>
+</table>
+<p>The measure of NBI for <em>personal wherewithal</em> also provides evidence for the convergent validity of the merit scale. Results indicate a positive correlation of this measure with meritocratic preference (r=.392), suggesting that both variables capture similar concepts. The NBI’s factor depicts a positive association with unmeritocratic preference (r=.208). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality <span class="citation">[@McCall2017Exposurerisinginequality; @MadeiraPrimesConsequencesSystematic2019]</span>. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perceptions and unmeritocratic preferences show a positive and weak correlation.</p>
+</div>
+<div id="measurement-invariance" class="section level3">
+<h3>Measurement invariance</h3>
+<p>The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts <span class="citation">[@Davidovetal2014]</span>. In this section we will use an analysis of invariance between groups, where the proposed factorial structure is expected to be independent of belonging to the sample corresponding to the original study, comparing it with another more recent study available and where the meritocracy scale was also incorporated.</p>
+<p>The invariance measurement procedure consists of a series of nested models to which restrictions are progressively incorporated on the parameters of the measurement model. The literature generally suggests that this modeling should be done through four levels or types of progressive restriction <span class="citation">[@Milfont2010; @millsap_Statistical_2011; @vandeschoot_checklist_2012]</span>:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Configural:</strong> the model is estimated only indicating the factorial structure used in the CFA.</p></li>
+<li><p><strong>Weak:</strong> an equality restriction is applied to the factor loadings in the different groups, that is, the loadings are forced to be identical in both measurements.</p></li>
+<li><p><strong>Strong:</strong> equality restrictions are added to the intercepts of each indicator.</p></li>
+<li><p><strong>Strict:</strong> equality restrictions are added to the error variances of each indicator.</p></li>
+</ol>
+<p><em>Data</em></p>
+<p>For testing the invariance we compared the data described previously with a new data source coming from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample obtained contains 1,242 cases, where 605 (48.71%) are women and 637 (51.28%) are men. 48.84% of them are 45 years of age or older, and 33.97% have tertiary education or higher.</p>
+<p><em>Instruments</em></p>
+<p>The items of the meritocracy scale were identical to the original. The items were administrated in a randomized order (which corresponds to the application modality of Group 3 present in Figure @ref(fig: appmod)).</p>
+<p><em>Results</em></p>
+<p>Tabla <a href="#tab:fcloads-inv"><strong>??</strong></a> shows de results of the CFA estimation of the meritocracy scale in this new sample. As observed, the loadings and the fit indices show similar results as the ones presented for the original study above, which gives a first base with wich to start the invariance analysis.</p>
+<p>The first step for invariance testing is the estimation of the configural model, which serves as the baseline for further comparison and it is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit,since its sensitivity to sample size it is recommended to use three additional fit indices: Comparative Fit Index (CFI), which should have a value greater than 0.95; Root Mean Square Error Approximation (RMSEA), which must be in the range of values ​​of 0.05 and 0.08; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 <span class="citation">[@vandeschoot_checklist_2012]</span>. Besides, the literature on measurement invariance suggests some complementary approaches for the evaluation of the fit, from which we will consider the incremental adjustment of the fit indexes <span class="citation">[@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010]</span> and the ANOVA test for means comparison in nested models <span class="citation">[@newsom_Longitudinal_2015]</span>.</p>
+</div>
+</div>
+<div id="analysis" class="section level1">
+<h1>Analysis</h1>
+<pre class="r"><code>#---Load packages and data -------------------------------------#
+
+pacman::p_load(sjPlot,dplyr,lavaan,semPlot,semTools,stargazer,corrplot,psych,knitr,kableExtra,stats)
+
+
+load(file = &quot;input/data/proc/pov01_fact02.RData&quot;)
+
+pov01 &lt;- data_s3_inv %&gt;% filter(dataset==&quot;pvw01&quot;)
+fs01  &lt;- data_s3_inv %&gt;% filter(dataset==&quot;fsw02&quot;)
+
+#-----Meassurement model--------------------------------------#
+
+
+
+model01 &lt;- &#39;
+perc_merit  =~ perc_effort + perc_talent
+perc_nmerit =~ perc_wpart  + perc_netw
+pref_merit  =~ pref_effort + pref_talent
+pref_nmerit =~ pref_wpart  + pref_netw&#39;
+
+
+#-----Invariance---------------------------------------------#
+
+
+
+inv01&lt;- measurementInvariance(model=model01,data=data_s3_inv,group=&quot;dataset&quot;,estimator = &quot;ML&quot;,strict=TRUE)</code></pre>
+<pre><code>## 
+## Measurement invariance models:
+## 
+## Model 1 : fit.configural
+## Model 2 : fit.loadings
+## Model 3 : fit.intercepts
+## Model 4 : fit.residuals
+## Model 5 : fit.means
+## 
+## Chi-Squared Difference Test
+## 
+##                Df   AIC   BIC  Chisq Chisq diff Df diff          Pr(&gt;Chisq)    
+## fit.configural 28 81282 81650 316.27                                           
+## fit.loadings   32 81282 81625 323.62      7.347       4              0.1187    
+## fit.intercepts 36 81281 81599 330.66      7.045       4              0.1336    
+## fit.residuals  44 81361 81630 426.74     96.080       8 &lt;0.0000000000000002 ***
+## fit.means      48 81536 81781 610.17    183.430       4 &lt;0.0000000000000002 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## 
+## Fit measures:
+## 
+##                  cfi rmsea cfi.delta rmsea.delta
+## fit.configural 0.944 0.078        NA          NA
+## fit.loadings   0.943 0.073     0.001       0.005
+## fit.intercepts 0.942 0.070     0.001       0.004
+## fit.residuals  0.925 0.072     0.017       0.002
+## fit.means      0.890 0.083     0.035       0.011</code></pre>
+<pre class="r"><code>conf  &lt;- inv01$fit.configural
+weak  &lt;- inv01$fit.loadings
+strong&lt;- inv01$fit.intercepts
+strict&lt;- inv01$fit.residuals
+
+tab01&lt;- anova(conf,weak,strong,strict,SB.classic=TRUE) %&gt;% 
+  as_tibble() %&gt;% 
+  select(&quot;Chisq&quot;,&quot;Df&quot;,&quot;chisq_diff&quot;=`Chisq diff`,&quot;df_diff&quot;=`Df diff`,&quot;pvalue&quot;=`Pr(&gt;Chisq)`) %&gt;% 
+  mutate(stars=gtools::stars.pval(pvalue),
+         chisqt=paste0(round(Chisq,2),&quot; (&quot;,Df,&quot;) &quot;),
+         decision=ifelse(pvalue&gt;0.05,yes = &quot;Accept&quot;,no = &quot;Reject&quot;),
+         model=c(&quot;Configural&quot;,&quot;Weak&quot;,&quot;Strong&quot;,&quot;Strict&quot;)) 
+ 
+fit.meas&lt;- bind_rows(fitmeasures(inv01$fit.configural,output =&quot;matrix&quot;)[c(&quot;chisq&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;rmsea&quot;,&quot;rmsea.ci.lower&quot;,&quot;rmsea.ci.upper&quot;),],
+                     fitmeasures(inv01$fit.loadings,  output =&quot;matrix&quot;)[c(&quot;chisq&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;rmsea&quot;,&quot;rmsea.ci.lower&quot;,&quot;rmsea.ci.upper&quot;),],
+                     fitmeasures(inv01$fit.intercepts,output =&quot;matrix&quot;)[c(&quot;chisq&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;rmsea&quot;,&quot;rmsea.ci.lower&quot;,&quot;rmsea.ci.upper&quot;),],
+                     fitmeasures(inv01$fit.residuals, output =&quot;matrix&quot;)[c(&quot;chisq&quot;,&quot;df&quot;,&quot;cfi&quot;,&quot;rmsea&quot;,&quot;rmsea.ci.lower&quot;,&quot;rmsea.ci.upper&quot;),])
+
+# compute differences in chisq, df, cfi and rmsea (90%, lower.ci - upper.ci )
+fit.meas&lt;- fit.meas %&gt;% 
+  mutate(diff.chi2 = chisq    - lag(chisq,default = first(chisq)),
+         diff.df   = df       - lag(df,   default = first(df)),
+         diff.cfi  = cfi      - lag(cfi,  default = first(cfi)),
+         diff.rmsea   = rmsea - lag(rmsea,default = first(rmsea))) %&gt;%
+  round(3) %&gt;% 
+  mutate(rmsea.ci=paste0(rmsea,&quot; \n &quot;, &quot;(&quot;,rmsea.ci.lower,&quot;-&quot;,rmsea.ci.upper,&quot;)&quot;))
+
+
+tab.inv&lt;- bind_cols(tab01,fit.meas) %&gt;% 
+  select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.df,diff.cfi,diff.rmsea,stars,decision) %&gt;% 
+  mutate(diff.chi2=paste0(diff.chi2,&quot; (&quot;,diff.df,&quot;) &quot;,stars)) %&gt;% 
+  select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.cfi,diff.rmsea,decision)
+
+#clean values
+tab.inv[tab.inv == c(&quot;0 (0) &quot;)] &lt;- NA
+tab.inv[tab.inv == c(0)] &lt;- NA
+
+### Check an alternative method
+configural        &lt;- cfa(model01, data=data_s3_inv, group = &quot;dataset&quot;, estimator=&quot;ML&quot;)
+weak.invariance   &lt;- cfa(model01, data=data_s3_inv, group = &quot;dataset&quot;,group.equal = &quot;loadings&quot;, estimator=&quot;ML&quot;)
+strong.invariance &lt;- cfa(model01, data=data_s3_inv, group = &quot;dataset&quot;,group.equal = c( &quot;loadings&quot;, &quot;intercepts&quot;), estimator=&quot;ML&quot;)
+strict.invariance &lt;- cfa(model01, data=data_s3_inv, group = &quot;dataset&quot;,group.equal = c( &quot;loadings&quot;, &quot;intercepts&quot;, &quot;residuals&quot;), estimator=&quot;ML&quot;)
+
+
+
+table_format = if(is_html_output()) {
+  &quot;html&quot;
+} else if(is_latex_output()) {
+  &quot;latex&quot;
+}
+
+col.nam &lt;- c(&quot;Model&quot;,&quot;$\\chi^2 (\\text{df})$&quot;,&quot;CFI&quot;,&quot;RMSEA (90 CI)&quot;,
+             &quot;$\\Delta \\chi^2 (\\Delta \\text{df}$)&quot;,&quot;$\\Delta \\text{CFI}$&quot;,&quot;$\\Delta \\text{RMSEA}$&quot;,&quot;Decision&quot;)
+footnote &lt;- paste0(&quot;N = &quot;,&quot;; Group 1, n = &quot;,conf@Data@nobs[[1]],&quot;; Group 2, n = &quot;,conf@Data@nobs[[2]], &quot;, **p &lt; 0.001&quot;)
+
+kable(tab.inv, col.names = col.nam, align = &quot;l&quot;,
+      booktabs=TRUE,format = table_format,escape = FALSE,
+      caption = &quot;Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy&quot;) %&gt;%
+  kable_styling(full_width = FALSE,latex_options = &quot;HOLD_position&quot;) %&gt;%
+  footnote(general = footnote, footnote_as_chunk = T)</code></pre>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption>
+<span id="tab:invargroup">Table 2: </span>Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\chi^2 (\text{df})\)</span>
+</th>
+<th style="text-align:left;">
+CFI
+</th>
+<th style="text-align:left;">
+RMSEA (90 CI)
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\Delta \chi^2 (\Delta \text{df}\)</span>)
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\Delta \text{CFI}\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\Delta \text{RMSEA}\)</span>
+</th>
+<th style="text-align:left;">
+Decision
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Configural
+</td>
+<td style="text-align:left;">
+316.27 (28)
+</td>
+<td style="text-align:left;">
+0.944
+</td>
+<td style="text-align:left;">
+0.078
+(0.07-0.086)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weak
+</td>
+<td style="text-align:left;">
+323.62 (32)
+</td>
+<td style="text-align:left;">
+0.943
+</td>
+<td style="text-align:left;">
+0.073
+(0.066-0.081)
+</td>
+<td style="text-align:left;">
+7.347 (4)
+</td>
+<td style="text-align:left;">
+-0.001
+</td>
+<td style="text-align:left;">
+-0.005
+</td>
+<td style="text-align:left;">
+Accept
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strong
+</td>
+<td style="text-align:left;">
+330.66 (36)
+</td>
+<td style="text-align:left;">
+0.942
+</td>
+<td style="text-align:left;">
+0.07
+(0.063-0.077)
+</td>
+<td style="text-align:left;">
+7.045 (4)
+</td>
+<td style="text-align:left;">
+-0.001
+</td>
+<td style="text-align:left;">
+-0.004
+</td>
+<td style="text-align:left;">
+Accept
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strict
+</td>
+<td style="text-align:left;">
+426.74 (44)
+</td>
+<td style="text-align:left;">
+0.925
+</td>
+<td style="text-align:left;">
+0.072
+(0.066-0.078)
+</td>
+<td style="text-align:left;">
+96.08 (8) ***
+</td>
+<td style="text-align:left;">
+-0.017
+</td>
+<td style="text-align:left;">
+0.002
+</td>
+<td style="text-align:left;">
+Reject
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> N = ; Group 1, n = 1242; Group 2, n = 2141, **p &lt; 0.001
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Table <a href="#tab:invargroup">2</a> shows the results of the measurement invariance estimation. When attending to the traditional invariance test of <span class="math inline">\(\Delta \chi^2 (\Delta \text{df})\)</span>, the results support the invariance at the strong level meaning that the fit of the factor model of the merit scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [citar paper Fischer en SJR], as strict forms of measurement invariance rarely hold [citar van der Schoot et al]. Still, the comparability of latents means requires strict invariance which in this case does not hold when considering <span class="math inline">\(\Delta \chi^2 (\Delta \text{df})\)</span>. Nevertheless, the criteria of <span class="math inline">\(\Delta \text{CFI}\)</span> used for comparing models is close to the rejection criteria of &gt;.01, whereas the <span class="math inline">\(\Delta \text{RMSEA}\)</span> fulfills the requirements of being below of the cut-off criteria as suggested by <span class="citation">[ @chen 2007 ]</span>. Therefore, using this last standard the level for strict invariance holds for the meritocracy scale.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
