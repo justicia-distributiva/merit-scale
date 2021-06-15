@@ -321,7 +321,7 @@ table_issp_fits <-
 table_issp_fits
 ```
 
-Table \@ref(tab:sum-fit-issp) shows the four-factor model fit permitting comparison of first and second-order factors. The model restricted to four first-order factor dimensions shows a regular fit (CFI=0.959, TLI=0.944, RMSEA=0.098, χ2(df=48)= 21308.535; more detail se Table \@ref(tab:tb-perpref1)) in contrast to the model considering a second-order factor for non-meritocratic perception that has a slightly better fit based on the standard fit measures (CFI=0.959, TLI=0.944, RMSEA=0.098, χ2(df=48)= 21308.535).  
+Table \@ref(tab:sum-fit-issp) shows the four-factor model fit allowing comparison of first and second-order factors. The model restricted to four first-order factor dimensions shows a regular fit (CFI=0.959, TLI=0.944, RMSEA=0.098, χ2(df=48)= 21308.535; more detail in Table \@ref(tab:tb-perpref1)) in contrast to the model considering a second-order factor for non-meritocratic perception that has a slightly better fit based on the standard fit measures (CFI=0.959, TLI=0.944, RMSEA=0.098, χ2(df=48)= 21308.535).  
 
 
 <!-- [diagrama SEM] -->
@@ -332,7 +332,7 @@ knitr::include_graphics('output/images/cfa_issp_study1.PNG')
 
 <!-- [tabla CFA] -->
 
-Figure \@ref(fig:meas02-issp) shows the overall results for this model, evidencing an improvement in factor loadings as well as in the overall fit of the measurement model. On the one hand, we see that perceptions are correlated with preferences, but this correlation is stronger for the meritocratic dimension of perception and preference ($r$=0.46) than for the non-meritocratic ($r$=0.27), which is much stronger when looking at the correlations between meritocratic and non-meritocratic, both in perception ($r$=0.04) and preference ($r$=0.13). These results show that, on one hand, the positive correlation between perception indicates that the two are not completely opposite poles of a continuum ($r$=0.30), which is reflected in the correlation between preferences ($r$=0.25). Furthermore, it is shown that the indicators of non-meritocratic perception refer to three other sub-dimensions and cannot be completely attributed to a an entirely common factor as has been employed in previous research.
+Figure \@ref(fig:meas02-issp) shows the overall results for this model, evidencing an improvement in factor loadings as well as in the overall fit of the measurement model. On one hand, we see that perceptions are correlated with preferences, but this correlation is stronger for the meritocratic dimension of perception and preference ($r$=0.46) than for the non-meritocratic ($r$=0.27), which is much stronger when looking at the correlations between meritocratic and non-meritocratic, both in perception ($r$=0.04) and preference ($r$=0.13). These results show that, on one hand, the positive correlation between perception indicates that the two are not completely opposite poles of a continuum ($r$=0.30), which is reflected in the correlation between preferences ($r$=0.25). Furthermore, it is shown that the indicators of non-meritocratic perception refer to three other sub-dimensions and cannot be completely attributed to a an entirely common factor as has been employed in previous research.
 
 
 
