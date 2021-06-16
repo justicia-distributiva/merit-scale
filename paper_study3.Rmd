@@ -4,16 +4,13 @@ css: "custom.css"
 linestretch: '1.5'
 link-citations: yes
 output:
+  bookdown::html_document2:
+    number_sections: false
   bookdown::pdf_document2:
     template: null
     toc: false
-  bookdown::html_document2:
-    number_sections: false
 linkcolor: blue
 #bibliography:
-#  - ../input/bib/EconomiaMoral.bib
-#  - ../input/bib/meritocracy.bib
-#  - ../input/bib/invariance.bib
 editor_options:
   chunk_output_type: console
 geometry: margin=0.78in
@@ -99,41 +96,65 @@ Table \@ref(tab:val-conv) shows the polyserial and pearson correlations between 
 
 
 ```{r val-conv}
-pacman::p_load(kableExtra, polycor)
+pacman::p_load(kableExtra, lavaan, dplyr,tidyr)
 
 load(file="input/data/proc/data_s3_conv.RData")
 
-pl1 <- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_1)
-pl2 <- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_1)
-pl3 <- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_1)
-pl4 <- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_1)
-valores1 <- round(c(pl1,pl2,pl3,pl4),4)
+#
+model <- '
+perc_merit =~  meritv03_perc_effort + meritv03_perc_talent
+perc_nmerit=~ meritv03_perc_wpart + meritv03_perc_netw
+pref_merit =~ meritv03_pref_effort + meritv03_pref_talent
+pref_nmerit=~ meritv03_pref_wpart + meritv03_pref_netw
+
+nbmerit =~  nb_merit_1 + nb_merit_2 + nb_merit_3 + nb_merit_4 + nb_merit_5 + nb_merit_6 + nb_merit_7 
+
+perc_merit ~~  get_ah_1
+perc_nmerit ~~ get_ah_1
+pref_merit ~~ get_ah_1
+pref_nmerit ~~ get_ah_1
+nbmerit ~~ get_ah_1
+
+perc_merit ~~  get_ah_5
+perc_nmerit ~~ get_ah_5
+pref_merit ~~ get_ah_5
+pref_nmerit ~~ get_ah_5
+nbmerit ~~ get_ah_5
+
+perc_merit ~~  nbmerit
+perc_nmerit ~~ nbmerit
+pref_merit ~~ nbmerit
+pref_nmerit ~~ nbmerit
+
+'
+fit3_o1=lavaan::cfa(model,data = dat04w3, estimator = "DWLS", ordered = c("meritv03_perc_effort","meritv03_perc_talent",
+"meritv03_perc_wpart","meritv03_perc_netw","meritv03_pref_effort","meritv03_pref_talent","meritv03_pref_wpart","meritv03_pref_netw" ,"nb_merit_1" , "nb_merit_2" , "nb_merit_3" , "nb_merit_4" , "nb_merit_5" , "nb_merit_6" , "nb_merit_7","get_ah_1","get_ah_5"))
 
 
-pl1b <- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_5)
-pl2b <- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_5)
-pl3b <- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_5)
-pl4b <- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_5)
-valores2 <- round(c(pl1b,pl2b,pl3b,pl4b),4)
+# extract correlation matrix from lavaan model
+correlations = standardizedsolution(fit3_o1) %>% filter(op=="~~") %>% 
+                dplyr::select(lhs,rhs,est.std) %>% 
+                dplyr::filter(lhs== "perc_merit" | 
+                             lhs== "pref_merit" | 
+                             lhs== "perc_nmerit"| 
+                             lhs== "pref_nmerit") %>%
+                pivot_wider(names_from = "rhs", values_from = "est.std") %>% 
+                dplyr::select(lhs,get_ah_1, get_ah_5, nbmerit) %>% 
+                mutate(merit_scale=
+                      case_when(lhs == "perc_merit" ~  "Meritocratic perception",
+                                lhs=="perc_nmerit" ~ "Unmeritocratic perception", 
+                                lhs =="pref_merit" ~ "Meritocratic preferences" , 
+                                lhs =="pref_nmerit" ~ "Unmeritocratic preferences"))%>% 
+                select(merit_scale, get_ah_1, get_ah_5,nbmerit)
 
-pl1c <- cor(data_s3_conv$perc_merit,data_s3_conv$nbmerit)
-pl2c <- cor(data_s3_conv$pref_merit,data_s3_conv$nbmerit)
-pl3c <- cor(data_s3_conv$perc_nmerit,data_s3_conv$nbmerit)
-pl4c <- cor(data_s3_conv$pref_nmerit,data_s3_conv$nbmerit)
-valores3 <- round(c(pl1c,pl2c,pl3c,pl4c),4)
-
-
-variables= c("Meritocratic Perception", "Meritocratic Preferences", "Unmeritocratic Perception","Unmeritocratic Preferences")
-
-table01 <- cbind(variables, valores1, valores2, valores3)
-
-
-kable(table01, col.names = c("Merit-Scale","Social Origin ", "Hard Work " , "Wherewithal"), full_width = T, linesep = "", caption = c("Polyserial and Pearson correlation whit other merit scales")) %>% kable_styling(
+# Make table 
+kable(correlations,col.names = c("Merit-Scale","Social Origin ", "Hard Work " , "Wherewithal"), full_width = T, linesep = "", caption = c("Correlation whit other merit scales")) %>% kable_styling(
     full_width = T,
     position = "center",
     font_size = 14,
     bootstrap_options=c("striped", "bordered")) %>%
   column_spec(column = 1, width = "1.5cm", ) 
+
 
 ```
 
@@ -179,7 +200,7 @@ The first step for invariance testing is the estimation of the configural model,
 pacman::p_load(sjPlot,dplyr,lavaan,semPlot,semTools,stargazer,corrplot,psych,knitr,kableExtra,stats)
 
 
-load(file = "input/data/proc/pov01_fact02.RData")
+load(file = "input/data/proc/data_s3_inv.RData")
 
 pov01 <- data_s3_inv %>% filter(dataset=="pvw01")
 fs01  <- data_s3_inv %>% filter(dataset=="fsw02")

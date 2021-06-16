@@ -30,7 +30,7 @@ This is the preparation code of the data for Study 3:  Additional validity analy
 
 ## Libraries
 ```{r}
-pacman::p_load(haven, sjPlot, dplyr, mice, lavaan, stargazer, corrplot, polycor, knitr, kableExtra, summarytools, sjlabelled)
+pacman::p_load(haven, sjPlot, dplyr, tidyr, mice, lavaan, stargazer, corrplot, polycor, knitr, kableExtra, summarytools, sjlabelled)
 ```
 
 
@@ -38,186 +38,120 @@ pacman::p_load(haven, sjPlot, dplyr, mice, lavaan, stargazer, corrplot, polycor,
 
 ```{r}
 dat04w3 <- sjlabelled::read_spss("input/data/original/Estudio_3_ola3.sav",verbose = F)
-dim(data) 
+dim(dat04w3) 
 ```
 
 
-## Create Perceptions and Preferences for Meritocracy (PPM-S) factor scores
+## Estimate the measurement model with the dimensions of the merit-scale and other meritocracy scales
 
 The following code creates new variables corresponding to the four dimensions of the PPM scale. Based on the measurement model, four factorial scores are created. To retrieve cases the "mice" function is used
 
 ```{r results='hide'}
-dat04w3
 
-dat04w3$meritv03_perc_effort <- as.numeric(dat04w3$meritv03_perc_effort)
-dat04w3$meritv03_perc_talent <- as.numeric(dat04w3$meritv03_perc_talent)
-dat04w3$meritv03_perc_netw <- as.numeric(dat04w3$meritv03_perc_netw)
-dat04w3$meritv03_perc_wpart <- as.numeric(dat04w3$meritv03_perc_wpart)
-dat04w3$meritv03_pref_effort <- as.numeric(dat04w3$meritv03_pref_effort)
-dat04w3$meritv03_pref_talent <- as.numeric(dat04w3$meritv03_pref_talent)
-dat04w3$meritv03_pref_wpart <- as.numeric(dat04w3$meritv03_pref_wpart)
-dat04w3$meritv03_pref_netw <- as.numeric(dat04w3$meritv03_pref_netw)
-
-
-
-model04 <- '
+model <- '
 perc_merit =~  meritv03_perc_effort + meritv03_perc_talent
 perc_nmerit=~ meritv03_perc_wpart + meritv03_perc_netw
 pref_merit =~ meritv03_pref_effort + meritv03_pref_talent
-pref_nmerit=~ meritv03_pref_wpart + meritv03_pref_netw'
+pref_nmerit=~ meritv03_pref_wpart + meritv03_pref_netw
+
+nbmerit =~  nb_merit_1 + nb_merit_2 + nb_merit_3 + nb_merit_4 + nb_merit_5 + nb_merit_6 + nb_merit_7 
+
+perc_merit ~~  get_ah_1
+perc_nmerit ~~ get_ah_1
+pref_merit ~~ get_ah_1
+pref_nmerit ~~ get_ah_1
+nbmerit ~~ get_ah_1
+
+perc_merit ~~  get_ah_5
+perc_nmerit ~~ get_ah_5
+pref_merit ~~ get_ah_5
+pref_nmerit ~~ get_ah_5
+nbmerit ~~ get_ah_5
+
+perc_merit ~~  nbmerit
+perc_nmerit ~~ nbmerit
+pref_merit ~~ nbmerit
+pref_nmerit ~~ nbmerit
+
+'
 
 
 
-# generate 5 multiple complete datasets
-out <- mice(dat04w3[23:30], m = 5)
+fit3_c1=lavaan::cfa(model,data = dat04w3)
 
-D1 <- complete(out, 1)
-D2 <- complete(out, 2)
-D3 <- complete(out, 3)
-D4 <- complete(out, 4)
-D5 <- complete(out, 5)
-
-# fit model for each complete dataset
-fit1 <- cfa(model04, data = D1)
-fit2 <- cfa(model04, data = D2)
-fit3 <- cfa(model04, data = D3)
-fit4 <- cfa(model04, data = D4)
-fit5 <- cfa(model04, data = D5)
-
-# predict scores for all models
-p1 <- predict(fit1)
-p2 <- predict(fit2)
-p3 <- predict(fit3)
-p4 <- predict(fit4)
-p5 <- predict(fit5)
-
-# compute 'average' across 5 sets of scores:
-scores <- (p1 + p2 + p3 + p4 + p5) / 5
-
-#Generate factor scores
-scores_dat = as.data.frame(scores)
-
-# Adaptar base para agregar factor scores (sacar todos NA)
-dat04w3 = dat04w3[rowSums(is.na(dat04w3[23:28])) != 5, ]
-
-# Merge with factor scores
-dat04w3 = cbind(dat04w3, scores)
-
-# Check
-stargazer(dat04w3[, 78:81], type = "text")
-
-```
+fit3_o1=lavaan::cfa(model,data = dat04w3, estimator = "DWLS", ordered = c("meritv03_perc_effort","meritv03_perc_talent",
+"meritv03_perc_wpart","meritv03_perc_netw","meritv03_pref_effort","meritv03_pref_talent","meritv03_pref_wpart","meritv03_pref_netw" ,"nb_merit_1" , "nb_merit_2" , "nb_merit_3" , "nb_merit_4" , "nb_merit_5" , "nb_merit_6" , "nb_merit_7","get_ah_1","get_ah_5"))
 
 
-## Create The Neoliberal Beliefs Inventory (NBI) factor scores
+cargas1 = left_join(x = standardizedsolution(fit3_c1) %>% filter(op=="=~") %>% dplyr::select(lhs,rhs,est.std),y = standardizedsolution(fit3_o1) %>% filter(op=="=~") %>% dplyr::select(lhs,rhs,est.std),c("lhs","rhs"))
 
-The following code creates new variables corresponding to the four dimensions of the NBI scale. Based on the measurement model, four factorial scores are created. To retrieve cases the "mice" function is used
-```{r results='hide'}
-datnbmerit <- dat04w3 %>% select(nb_merit_1,
-nb_merit_2,
-nb_merit_3,
-nb_merit_4,
-nb_merit_5,
-nb_merit_6,
-nb_merit_7,
-nb_merit_8)
-psych::alpha(datnbmerit)
+kable(cargas1,
+      format = "html",digits = 2, booktabs=T, caption = "Cargas factoriales",escape = FALSE) %>%  
+   kable_styling(full_width = T, font_size = 8,  bootstrap_options=c("striped", "bordered")) %>%
+     column_spec(column = 1,width = "2 cm") %>% 
+   column_spec(column = 2,width = "11 cm") %>%
+  column_spec(column = 3,width = "1 cm") %>%
+  column_spec(column = 4,width = "1 cm") %>%
+      collapse_rows(columns = 1,valign = "middle")
 
+pacman::p_load(dplyr, kableExtra, knitr)
 
-
-
-dat04w3$nb_merit_1 <- as.numeric(dat04w3$nb_merit_1)
-dat04w3$nb_merit_2 <- as.numeric(dat04w3$nb_merit_2)
-dat04w3$nb_merit_3 <- as.numeric(dat04w3$nb_merit_3)
-dat04w3$nb_merit_4 <- as.numeric(dat04w3$nb_merit_4)
-dat04w3$nb_merit_5 <- as.numeric(dat04w3$nb_merit_5)
-dat04w3$nb_merit_6 <- as.numeric(dat04w3$nb_merit_6)
-dat04w3$nb_merit_7 <- as.numeric(dat04w3$nb_merit_7)
-dat04w3$nb_merit_8 <- as.numeric(dat04w3$nb_merit_8)
+# extract fit indices from models and add to table
+sum_fit1<- dplyr::bind_rows(fitmeasures(fit3_c1)[c("chisq","df","cfi","tli","rmsea","srmr")],
+                    fitmeasures(fit3_o1)[c("chisq","df","cfi","tli","rmsea","srmr")])
 
 
+# Customize object
+sum_fit1$mod <- c("Continuous","Ordinals")
+sum_fit1$nobs <- c(nobs(fit3_c1),nobs(fit3_o1))
+sum_fit1$est <- c("MLR","DWLS")
+sum_fit1 <- dplyr::select(sum_fit1,mod,nobs,est,everything())
+colnames <- c("Treated as","$N$","Estimator","$\\chi^2$","df","CFI","TLI","RMSEA","SRMR")
 
-model04 <- '
-nbmerit =~  nb_merit_1+
-nb_merit_2+
-nb_merit_3+
-nb_merit_4+
-nb_merit_5+
-nb_merit_6+
-nb_merit_7'
-
-
-
-# generate 5 multiple complete datasets
-out <- mice(dat04w3[57:64], m = 5)
-
-D1 <- complete(out, 1)
-D2 <- complete(out, 2)
-D3 <- complete(out, 3)
-D4 <- complete(out, 4)
-D5 <- complete(out, 5)
-
-# fit model for each complete dataset
-fit1 <- cfa(model04, data = D1)
-fit2 <- cfa(model04, data = D2)
-fit3 <- cfa(model04, data = D3)
-fit4 <- cfa(model04, data = D4)
-fit5 <- cfa(model04, data = D5)
-
-# predict scores for all models
-p1 <- predict(fit1)
-p2 <- predict(fit2)
-p3 <- predict(fit3)
-p4 <- predict(fit4)
-p5 <- predict(fit5)
-
-# compute 'average' across 5 sets of scores:
-scores <- (p1 + p2 + p3 + p4 + p5) / 5
-
-#Generate factor scores
-scores_dat = as.data.frame(scores)
-
-# Adaptar base para agregar factor scores (sacar todos NA)
-dat04w3 = dat04w3[rowSums(is.na(dat04w3[57:64])) != 5, ]
-
-# Merge with factor scores
-dat04w3 = cbind(dat04w3, scores)
-
-data_s3_conv <- dat04w3 %>% select(nbmerit, perc_merit,pref_merit,perc_nmerit,pref_nmerit,get_ah_1, get_ah_5) %>% na.omit()
-
+# Create table
+table_cfa_fits1 <-kable(sum_fit1, format="html", digits=3, booktabs=T, col.names=colnames, escape = FALSE) %>% kable_styling(full_width = F, font_size = 10)
+table_cfa_fits1
 
 ```
 
 
-## Labels
-
-### Variable labels
-
-Created variables are labeled and described
+## Calculate the correlations between the scale of this work and other measures of meritocratic beliefs.
 
 ```{r}
 
-set_label(data_s3_conv$nbmerit)  <- "Personal wherewithal - NBI"
-set_label(data_s3_conv$perc_merit)  <- "Meritocratic perception"
-set_label(data_s3_conv$pref_merit)   <- "Meritocratic preferences"
-set_label(data_s3_conv$perc_wpart)    <- "Unmeritocratic perception"
-set_label(data_s3_conv$pref_nmerit)  <-  "Unmeritocratic preferences"
+correlaciones = standardizedsolution(fit3_o1) %>% filter(op=="~~") %>% 
+                dplyr::select(lhs,rhs,est.std) %>% 
+                dplyr::filter(lhs== "perc_merit" | 
+                             lhs== "pref_merit" | 
+                             lhs== "perc_nmerit"| 
+                             lhs== "pref_nmerit") %>%
+                pivot_wider(names_from = "rhs", values_from = "est.std") %>% 
+                dplyr::select(lhs,get_ah_1, get_ah_5, nbmerit) %>% 
+                mutate(merit_scale=
+                      case_when(lhs == "perc_merit" ~  "Meritocratic perception",
+                                lhs=="perc_nmerit" ~ "Unmeritocratic perception", 
+                                lhs =="pref_merit" ~ "Meritocratic preferences" , 
+                                lhs =="pref_nmerit" ~ "Unmeritocratic preferences"))%>% 
+                select(merit_scale, get_ah_1, get_ah_5,nbmerit)
 
-
-set_label(data_s3_conv$get_ah_1)  <- "Importance of a rich family to get ahead"
-set_label(data_s3_conv$get_ah_5)   <- "Importance of hard work to get ahead"
-
-sjmisc::descr(data_s3_conv) 
-
+kable(correlaciones,col.names = c("Merit-Scale","Social Origin ", "Hard Work " , "Personal wherewithal - NBI"),
+      format = "html",digits = 2, booktabs=T,escape = FALSE) %>%  
+      kable_styling(full_width = T, font_size = 8,  bootstrap_options=c("striped", "bordered")) %>%
+      column_spec(column = 1,width = "2 cm") %>% 
+      column_spec(column = 2,width = "11 cm") %>%
+      column_spec(column = 3,width = "1 cm") %>%
+      collapse_rows(columns = 1,valign = "middle")
 ```
+
+
 
 ## Final summary
 ```{r}
-sjmisc::descr(data_s3_conv,
-      show = c("label","range", "mean", "sd", "NA.prc", "n"))%>%
-      kable(.,"markdown")
+#sjmisc::descr(dat04w3,
+#      show = c("label","range", "mean", "sd", "NA.prc", "n"))%>%
+#      kable(.,"markdown")
 
-print(dfSummary(data_s3_conv, valid.col = FALSE, graph.magnif = 0.75),
+print(dfSummary(dat04w3, valid.col = FALSE, graph.magnif = 0.75),
       max.tbl.height = 300, method = "render")
 
 ```
@@ -226,7 +160,7 @@ print(dfSummary(data_s3_conv, valid.col = FALSE, graph.magnif = 0.75),
 
 ```{r}
 
-save(data_s3_conv,file = "input/data/proc/data_s3_conv.RData")
+save(dat04w3,file = "input/data/proc/data_s3_conv.RData")
 ```
 
 

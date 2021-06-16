@@ -296,36 +296,56 @@ $(document).ready(function () {
 <p><em>Results</em></p>
 <p>We used polyserial correlations to evaluate relationships of meritocractic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal, we examined Pearson correlations.</p>
 <p>Table <a href="#tab:val-conv">1</a> shows the polyserial and pearson correlations between our meritocracy scale and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents—only 8.6 percent indicates <em>not very important</em> or <em>not important at all</em>.</p>
-<pre class="r"><code>pacman::p_load(kableExtra, polycor)
+<pre class="r"><code>pacman::p_load(kableExtra, lavaan, dplyr,tidyr)
 
 load(file=&quot;input/data/proc/data_s3_conv.RData&quot;)
 
-pl1 &lt;- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_1)
-pl2 &lt;- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_1)
-pl3 &lt;- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_1)
-pl4 &lt;- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_1)
-valores1 &lt;- round(c(pl1,pl2,pl3,pl4),4)
 
+model &lt;- &#39;
+perc_merit =~  meritv03_perc_effort + meritv03_perc_talent
+perc_nmerit=~ meritv03_perc_wpart + meritv03_perc_netw
+pref_merit =~ meritv03_pref_effort + meritv03_pref_talent
+pref_nmerit=~ meritv03_pref_wpart + meritv03_pref_netw
 
-pl1b &lt;- polycor::polyserial(data_s3_conv$perc_merit,data_s3_conv$get_ah_5)
-pl2b &lt;- polycor::polyserial(data_s3_conv$pref_merit,data_s3_conv$get_ah_5)
-pl3b &lt;- polycor::polyserial(data_s3_conv$perc_nmerit,data_s3_conv$get_ah_5)
-pl4b &lt;- polycor::polyserial(data_s3_conv$pref_nmerit,data_s3_conv$get_ah_5)
-valores2 &lt;- round(c(pl1b,pl2b,pl3b,pl4b),4)
+nbmerit =~  nb_merit_1 + nb_merit_2 + nb_merit_3 + nb_merit_4 + nb_merit_5 + nb_merit_6 + nb_merit_7 
 
-pl1c &lt;- cor(data_s3_conv$perc_merit,data_s3_conv$nbmerit)
-pl2c &lt;- cor(data_s3_conv$pref_merit,data_s3_conv$nbmerit)
-pl3c &lt;- cor(data_s3_conv$perc_nmerit,data_s3_conv$nbmerit)
-pl4c &lt;- cor(data_s3_conv$pref_nmerit,data_s3_conv$nbmerit)
-valores3 &lt;- round(c(pl1c,pl2c,pl3c,pl4c),4)
+perc_merit ~~  get_ah_1
+perc_nmerit ~~ get_ah_1
+pref_merit ~~ get_ah_1
+pref_nmerit ~~ get_ah_1
+nbmerit ~~ get_ah_1
 
+perc_merit ~~  get_ah_5
+perc_nmerit ~~ get_ah_5
+pref_merit ~~ get_ah_5
+pref_nmerit ~~ get_ah_5
+nbmerit ~~ get_ah_5
 
-variables= c(&quot;Meritocratic Perception&quot;, &quot;Meritocratic Preferences&quot;, &quot;Unmeritocratic Perception&quot;,&quot;Unmeritocratic Preferences&quot;)
+perc_merit ~~  nbmerit
+perc_nmerit ~~ nbmerit
+pref_merit ~~ nbmerit
+pref_nmerit ~~ nbmerit
 
-table01 &lt;- cbind(variables, valores1, valores2, valores3)
+&#39;
+fit3_o1=lavaan::cfa(model,data = dat04w3, estimator = &quot;DWLS&quot;, ordered = c(&quot;meritv03_perc_effort&quot;,&quot;meritv03_perc_talent&quot;,
+&quot;meritv03_perc_wpart&quot;,&quot;meritv03_perc_netw&quot;,&quot;meritv03_pref_effort&quot;,&quot;meritv03_pref_talent&quot;,&quot;meritv03_pref_wpart&quot;,&quot;meritv03_pref_netw&quot; ,&quot;nb_merit_1&quot; , &quot;nb_merit_2&quot; , &quot;nb_merit_3&quot; , &quot;nb_merit_4&quot; , &quot;nb_merit_5&quot; , &quot;nb_merit_6&quot; , &quot;nb_merit_7&quot;,&quot;get_ah_1&quot;,&quot;get_ah_5&quot;))
 
+correlations = standardizedsolution(fit3_o1) %&gt;% filter(op==&quot;~~&quot;) %&gt;% 
+                dplyr::select(lhs,rhs,est.std) %&gt;% 
+                dplyr::filter(lhs== &quot;perc_merit&quot; | 
+                             lhs== &quot;pref_merit&quot; | 
+                             lhs== &quot;perc_nmerit&quot;| 
+                             lhs== &quot;pref_nmerit&quot;) %&gt;%
+                pivot_wider(names_from = &quot;rhs&quot;, values_from = &quot;est.std&quot;) %&gt;% 
+                dplyr::select(lhs,get_ah_1, get_ah_5, nbmerit) %&gt;% 
+                mutate(merit_scale=
+                      case_when(lhs == &quot;perc_merit&quot; ~  &quot;Meritocratic perception&quot;,
+                                lhs==&quot;perc_nmerit&quot; ~ &quot;Unmeritocratic perception&quot;, 
+                                lhs ==&quot;pref_merit&quot; ~ &quot;Meritocratic preferences&quot; , 
+                                lhs ==&quot;pref_nmerit&quot; ~ &quot;Unmeritocratic preferences&quot;))%&gt;% 
+                select(merit_scale, get_ah_1, get_ah_5,nbmerit)
 
-kable(table01, col.names = c(&quot;Merit-Scale&quot;,&quot;Social Origin &quot;, &quot;Hard Work &quot; , &quot;Wherewithal&quot;), full_width = T, linesep = &quot;&quot;, caption = c(&quot;Polyserial and Pearson correlation whit other merit scales&quot;)) %&gt;% kable_styling(
+kable(correlations,col.names = c(&quot;Merit-Scale&quot;,&quot;Social Origin &quot;, &quot;Hard Work &quot; , &quot;Wherewithal&quot;), full_width = T, linesep = &quot;&quot;, caption = c(&quot;Correlation whit other merit scales&quot;)) %&gt;% kable_styling(
     full_width = T,
     position = &quot;center&quot;,
     font_size = 14,
@@ -333,20 +353,20 @@ kable(table01, col.names = c(&quot;Merit-Scale&quot;,&quot;Social Origin &quot;,
   column_spec(column = 1, width = &quot;1.5cm&quot;, ) </code></pre>
 <table class="table table-striped table-bordered" style="font-size: 14px; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
-<span id="tab:val-conv">Table 1: </span>Polyserial and Pearson correlation whit other merit scales
+<span id="tab:val-conv">Table 1: </span>Correlation whit other merit scales
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
 Merit-Scale
 </th>
-<th style="text-align:left;">
+<th style="text-align:right;">
 Social Origin
 </th>
-<th style="text-align:left;">
+<th style="text-align:right;">
 Hard Work
 </th>
-<th style="text-align:left;">
+<th style="text-align:right;">
 Wherewithal
 </th>
 </tr>
@@ -354,58 +374,58 @@ Wherewithal
 <tbody>
 <tr>
 <td style="text-align:left;width: 1.5cm; ">
-Meritocratic Perception
+Meritocratic perception
 </td>
-<td style="text-align:left;">
--0.1884
+<td style="text-align:right;">
+-0.2348432
 </td>
-<td style="text-align:left;">
-0.2002
+<td style="text-align:right;">
+0.2518906
 </td>
-<td style="text-align:left;">
-0.41
-</td>
-</tr>
-<tr>
-<td style="text-align:left;width: 1.5cm; ">
-Meritocratic Preferences
-</td>
-<td style="text-align:left;">
-0.1004
-</td>
-<td style="text-align:left;">
-0.095
-</td>
-<td style="text-align:left;">
-0.1196
+<td style="text-align:right;">
+0.5569264
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 1.5cm; ">
-Unmeritocratic Perception
+Unmeritocratic perception
 </td>
-<td style="text-align:left;">
-0.3609
+<td style="text-align:right;">
+0.4557150
 </td>
-<td style="text-align:left;">
--0.0737
+<td style="text-align:right;">
+-0.1018438
 </td>
-<td style="text-align:left;">
--0.1866
+<td style="text-align:right;">
+-0.2692695
 </td>
 </tr>
 <tr>
 <td style="text-align:left;width: 1.5cm; ">
-Unmeritocratic Preferences
+Meritocratic preferences
 </td>
-<td style="text-align:left;">
--0.026
+<td style="text-align:right;">
+0.1423210
 </td>
-<td style="text-align:left;">
-0.0801
+<td style="text-align:right;">
+0.1296301
 </td>
-<td style="text-align:left;">
-0.2311
+<td style="text-align:right;">
+0.1270966
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.5cm; ">
+Unmeritocratic preferences
+</td>
+<td style="text-align:right;">
+-0.0287736
+</td>
+<td style="text-align:right;">
+0.0957470
+</td>
+<td style="text-align:right;">
+0.2890307
 </td>
 </tr>
 </tbody>
@@ -438,7 +458,7 @@ Unmeritocratic Preferences
 pacman::p_load(sjPlot,dplyr,lavaan,semPlot,semTools,stargazer,corrplot,psych,knitr,kableExtra,stats)
 
 
-load(file = &quot;input/data/proc/pov01_fact02.RData&quot;)
+load(file = &quot;input/data/proc/data_s3_inv.RData&quot;)
 
 pov01 &lt;- data_s3_inv %&gt;% filter(dataset==&quot;pvw01&quot;)
 fs01  &lt;- data_s3_inv %&gt;% filter(dataset==&quot;fsw02&quot;)
