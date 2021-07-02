@@ -208,9 +208,9 @@ likert_issp <-
 ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill = "gray85",
                                                                            colour = "gray85"),
                                   panel.border = ggplot2::element_blank(),
-                                  axis.text.y = ggplot2::element_text(size = 12,
+                                  axis.text.y = ggplot2::element_text(size = 13,
                                                                       hjust = 1),
-                                  title = ggplot2::element_text(size = 12,
+                                  title = ggplot2::element_text(size = 13,
                                                                 face = "bold"),
                                   legend.text = ggplot2::element_text(size = 12),
                                   plot.caption = ggplot2::element_text(size = 10,
@@ -283,7 +283,7 @@ leg<- ggpubr::as_ggplot(
 ```
 
 
-```{r likert-issp,fig.height=10,fig.width=12,fig.cap="Distribution of responses in the ISSP meritocracy items"}
+```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items", out.height='80%'}
 cowplot::add_sub(
   cowplot::plot_grid(p1,p2,p3,p4,leg,
     align = "hv",
@@ -297,7 +297,7 @@ cowplot::add_sub(
     " (n=",dim(likert_issp)[1],")"
     ),
   size = 10,
-  hjust = 0.15
+  hjust = 0.25
   ) %>% 
   cowplot::ggdraw() 
 ```
@@ -412,8 +412,6 @@ Figure \@ref(fig:meas02-issp) shows the overall results for this model, evidenci
 
 
 # Appendix
-
-Table \@ref(tab:tb-perpref1)
 
 ```{r tb-perpref1, echo=FALSE}
 load(file = "input/data/proc/merit_per_pref.rda")
