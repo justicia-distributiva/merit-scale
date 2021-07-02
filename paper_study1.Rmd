@@ -263,7 +263,7 @@ p4<-likert_issp %>%
                         catcount = 5,
                         expand.grid = T,
                         values  =  "sum.outside",
-                        reverse.colors = F,
+                        reverse.colors = T,
                         reverse.scale = F,
                         show.n = FALSE) +
   ggplot2::theme(legend.position = "none") 
