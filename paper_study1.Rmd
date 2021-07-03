@@ -94,16 +94,17 @@ tableissp <- read.csv(file = "input/tables/table-issp.csv",header = 1,sep = ";",
 cnames <- c("Component", "Dimensions","Item")
 cap <- "Items of the ISSP meritocratic perceptions and preferences measures"
 
-kable(tableissp, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
-  kable_styling(
+knitr::kable(tableissp, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
+  kableExtra::kable_styling(
     full_width = F,
     latex_options = c("hold_position"),
     position = "center",
-    font_size = 12,
+    font_size = 20,
     bootstrap_options=c("striped", "bordered")) %>%
-  column_spec(column = 1, width = "1.5cm", ) %>%
-  column_spec(column = 2,width = "2 cm") %>%
-  collapse_rows(columns = 1:2,valign = "middle")
+  kableExtra::column_spec(column = 1, width = "2cm", ) %>%
+  kableExtra::column_spec(column = 2,width = "5cm") %>%
+  kableExtra::column_spec(column = 3,width = "12cm") %>%
+  kableExtra::collapse_rows(columns = 1:2,valign = "middle")
 ```    
 
 
@@ -162,18 +163,18 @@ sum.issp09<- knitr::kable(desc.issp,format =table_format,
                  align = "l",
                  linesep = "",
                  caption = "Descriptive statistics for the ISSP 2009 sample") %>%
-  kableExtra::kable_styling(full_width = table_format2,
-                            font_size = 15,
+  kableExtra::kable_styling(full_width = T,
+                            font_size = 20,
                             position = "center",
                             latex_options = c("HOLD_position"));sum.issp09
 ```
 
 
-Figure \@ref(fig:likert-issp) shows the distribution of responses across the indicators for each perception and preference in the meritocratic and non-meritocratic dimensions. On one side, we see that there is a certain degree of importance attributed to factors such as hard work and ambition in the process of getting ahead, concentrating 94.8% and 92.8% in the fairly important to essential categories. 
+Figure \@ref(fig:likert-issp) shows the distribution of responses across the indicators for each perception and preference in the meritocratic and non-meritocratic dimensions. On one side, we see that there is a certain degree of importance attributed to factors such as hard work and ambition in the process of getting ahead, concentrating 94.9% and 92.8% in the fairly important to essential categories. 
 
-By contrast, for the non-meritocratic aspects, parental background showed a more dispersed opinion, where 61.2% considers that coming from a wealthy family is important, and 76% considers that having educated parents is important.  On the other hand, the background dimension shows that people' opinions are generally in the opposite sense, in which 64.2% consider that a person's racial origin is not very important or not important at all in the process of getting ahead in life, while 35% consider it important, and this is nearly identical regarding the importance of gender. Lastly, we can observe differences in the networks dimension, in which 85.5% consider it to be important to know the right people in the process of getting ahead in life, contrasting with 50% who consider political connections to be important. 
+By contrast, for the non-meritocratic aspects, parental background showed a more dispersed opinion, where 61.2% considers that coming from a wealthy family is important, and 76% considers that having educated parents is important.  On the other hand, the background dimension shows that people' opinions are generally in the opposite sense, in which 63.7% consider that a person's racial origin is not very important or not important at all in the process of getting ahead in life, while 35% consider it important, and this is nearly identical regarding the importance of gender. Lastly, we can observe differences in the networks dimension, in which 85.7% consider it to be important to know the right people in the process of getting ahead in life, contrasting with 50% who consider political connections to be important. 
 
-Regarding normative preferences, we observe how well a person performs his or her job and amount of effort involved concentrates 98% and 96.8% of the responses in the categories that attribute importance to these characteristics when evaluating the pay that people deserve. Finally, in relation to structural constrains, 83.3% attribute importance to the fact that supporting a family should be a relevant factor with respect to the pay obtained, while having children to support translates into 76.5% of importance in this dimension. 
+Regarding normative preferences, we observe how well a person performs his or her job and amount of effort involved concentrates 98% and 96.9% of the responses in the categories that attribute importance to these characteristics when evaluating the pay that people deserve. Finally, in relation to structural constrains, 83% attribute importance to the fact that supporting a family should be a relevant factor with respect to the pay obtained, while having children to support translates into 76.4% of importance in this dimension. 
 
 
 ```{r}
@@ -182,7 +183,7 @@ pacman::p_load(dplyr)
 likert_issp<- merit_per_pref %>% 
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
-                welljob,hardjob,family,child)
+                welljob,hardjob,family,child) %>% na.omit()
 
 likert_issp <- sjlabelled::set_label(likert_issp,
                                      label = c("Hard work",
@@ -198,33 +199,107 @@ likert_issp <- sjlabelled::set_label(likert_issp,
                                                "Support family",
                                                "Has children"))
 
-
 likert_issp <- sjmisc::rec(likert_issp, rec="rev", append=FALSE)
 likert_issp <- 
   sjlabelled::set_labels(likert_issp,
-                         labels = c("Essential","Very important",
-                                    "Fairly important","Not very important",
-                                    "Not important at all"))
+                         labels = c("Essential","Very important","Fairly important",
+                                    "Not very important","Not important at all"))
 
-plot_likert_issp<- sjPlot::plot_likert(likert_issp,
-                        c(1, 1, 2, 2, 2, 2, 2, 2,3,3,4,4),
-                        groups.titles = c("Perception meritocratic", "Perception Non-meritocratic",
-                                          "Preference meritocratic", "Preference Non-meritocratic"),
-                        geom.colors = "PuBu",
-                        geom.size = 0.8,
+ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill = "gray85",
+                                                                           colour = "gray85"),
+                                  panel.border = ggplot2::element_blank(),
+                                  axis.text.y = ggplot2::element_text(size = 13,
+                                                                      hjust = 1),
+                                  title = ggplot2::element_text(size = 13,
+                                                                face = "bold"),
+                                  legend.text = ggplot2::element_text(size = 12),
+                                  plot.caption = ggplot2::element_text(size = 10,
+                                                                       face = "plain",
+                                                                       hjust = 1)))
+p1<- likert_issp %>%
+  dplyr::select(hwork_r:ambition_r) %>%
+  sjPlot::plot_likert(geom.colors = "PuBu",
+                      title = "Perception meritocratic",
+                        geom.size = c(0.62),
                         catcount = 5,
-                        # cat.neutral = 3,
-                        grid.range  =  c(1.2 , 1.4),
+                        expand.grid = T,
                         values  =  "sum.outside",
                         reverse.colors = T,
                         reverse.scale = F,
-                        show.n=FALSE)
+                        show.n = FALSE) + 
+  ggplot2::theme(legend.position = "none") 
 
+p2<-likert_issp %>%
+  dplyr::select(wealthy_r:polcone_r) %>% 
+  sjPlot::plot_likert(geom.colors = "PuBu",
+                      title = "Perception Non-meritocratic",
+                        geom.size = c(0.9),
+                        catcount = 5,
+                        expand.grid = T,
+                        values  =  "sum.outside",
+                        reverse.colors = T,
+                        reverse.scale = F,
+                        show.n = FALSE)  + 
+  ggplot2::theme(legend.position = "none")
+
+p3<-likert_issp %>% 
+  dplyr::select(welljob_r:hardjob_r) %>% 
+  sjPlot::plot_likert(geom.colors = "PuBu",
+                      title = "Preference meritocratic",
+                        geom.size = c(0.62),
+                        catcount = 5,
+                        expand.grid = T,
+                        values  =  "sum.outside",
+                        reverse.colors = T,
+                        reverse.scale = F,
+                        show.n = FALSE) + 
+  ggplot2::theme(legend.position = "none")
+
+p4<-likert_issp %>% 
+  dplyr::select(family_r:child_r) %>% 
+  sjPlot::plot_likert(geom.colors = "PuBu",
+                      title = "Preference Non-meritocratic",
+                        geom.size = c(0.62),
+                        catcount = 5,
+                        expand.grid = T,
+                        values  =  "sum.outside",
+                        reverse.colors = T,
+                        reverse.scale = F,
+                        show.n = FALSE) +
+  ggplot2::theme(legend.position = "none") 
+
+leg<- ggpubr::as_ggplot(
+  ggpubr::get_legend(
+    dplyr::select(likert_issp, family_r:child_r) %>%
+      sjPlot::plot_likert(geom.colors = "PuBu", catcount = 5) +
+      ggplot2::scale_fill_brewer(
+        breaks = c(5:1),
+        direction = -1,
+        labels = c("Not important at all","Not very important","Fairly important",
+                   "Very important","Essential")) +
+      ggplot2::theme(legend.position = "bottom")
+    )
+  )
 ```
 
 
-```{r likert-issp,fig.height=10,fig.width=12,fig.cap="Distribution of responses in the ISSP meritocracy items"}
-plot_likert_issp
+```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items", out.height='80%'}
+cowplot::add_sub(
+  cowplot::plot_grid(p1,p2,p3,p4,leg,
+    align = "hv",
+    axis = "a",
+    nrow = 5,
+    ncol = 1,
+    rel_heights = c(1,2,1,1,0.25)
+    ),
+  label = paste0(
+    "Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009",
+    " (n=",dim(likert_issp)[1],")"
+    ),
+  size = 10,
+  hjust = 0.25
+  ) %>% 
+  cowplot::ggdraw() 
 ```
 
 
@@ -337,8 +412,6 @@ Figure \@ref(fig:meas02-issp) shows the overall results for this model, evidenci
 
 
 # Appendix
-
-Table \@ref(tab:tb-perpref1)
 
 ```{r tb-perpref1, echo=FALSE}
 load(file = "input/data/proc/merit_per_pref.rda")
