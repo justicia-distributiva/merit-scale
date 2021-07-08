@@ -38,22 +38,21 @@ header-includes:
 ---
 
 ```{r eval=FALSE, include=FALSE}
-# for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
-# clean #in the yml
-rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::pdf_document2")
-rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::html_document2")
+rmarkdown::render("paper_study1.Rmd", output_format = "bookdown::pdf_document2")
+rmarkdown::render("paper_study1.Rmd", output_format = "bookdown::html_document2")
 ```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
 	echo = FALSE,
 	fig.pos = "H",
+	fig.align = "center",
 	message = FALSE,
 	warning = FALSE,
-	cache = FALSE
+	cache = FALSE, 
+	out.width = if(knitr::is_html_output()) {"80%"} 
+	            else if(knitr::is_latex_output()) {"80%"}
 )
-# knitr::opts_knit$set(base.url = "../") #relative path for .html output file
-# knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
 options(scipen=999)
 rm(list=ls())
 options(knitr.kable.NA = '')
@@ -90,6 +89,12 @@ table_format = if(knitr::is_html_output()) {
   "latex"
 }
 
+fsize = if(knitr::is_html_output()) {
+  20
+} else if(knitr::is_latex_output()) {
+  12
+}
+
 tableissp <- read.csv(file = "input/tables/table-issp.csv",header = 1,sep = ";",encoding = "UTF-8") # call file generated externally for the table
 cnames <- c("Component", "Dimensions","Item")
 cap <- "Items of the ISSP meritocratic perceptions and preferences measures"
@@ -99,11 +104,11 @@ knitr::kable(tableissp, table_format, booktabs = T, linesep = "",col.names = cna
     full_width = F,
     latex_options = c("hold_position"),
     position = "center",
-    font_size = 20,
+    font_size = fsize,
     bootstrap_options=c("striped", "bordered")) %>%
   kableExtra::column_spec(column = 1, width = "2cm", ) %>%
   kableExtra::column_spec(column = 2,width = "5cm") %>%
-  kableExtra::column_spec(column = 3,width = "12cm") %>%
+  # kableExtra::column_spec(column = 3,width = "12cm") %>%
   kableExtra::collapse_rows(columns = 1:2,valign = "middle")
 ```    
 
@@ -121,7 +126,7 @@ The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was c
 <!-- Table \@ref(tab:desc-issp) -->
 
 ```{r desc-issp, eval=FALSE, include=FALSE, results='asis'}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
 table_format = if(knitr::is_html_output()) {
   "html"
@@ -135,7 +140,7 @@ table_format2 = if(knitr::is_html_output()) {
   F
 }
 
-merit_per_pref %>% 
+data_s1 %>% 
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,welljob,hardjob,family,child) %>% 
   psych::describe() %>% 
@@ -178,9 +183,9 @@ Regarding normative preferences, we observe how well a person performs his or he
 
 
 ```{r}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
-likert_issp<- merit_per_pref %>% 
+likert_issp<- data_s1 %>% 
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
                 welljob,hardjob,family,child) %>% na.omit()
@@ -283,7 +288,7 @@ leg<- ggpubr::as_ggplot(
 ```
 
 
-```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items", out.height='80%'}
+```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items"}
 cowplot::add_sub(
   cowplot::plot_grid(p1,p2,p3,p4,leg,
     align = "hv",
@@ -306,10 +311,11 @@ cowplot::add_sub(
 In terms of the association between the indicators, Figure \@ref(fig:corr-issp) shows the polychoric correlation matrix. Firstly, we see that the correlations between the indicators are consistent with the structure of the initially proposed structure of dimensions distinguishing between the perception and preferences of meritocratic and non-meritocratic factors.  In general, the associations are positive between the perception and preference dimensions, such as the importance of hard work to get ahead and the importance of how hard the work is ($r$=0.34), however, they tend to be weak. A further aspect to consider is the relatively low correlation between dimensions concerning meritocratic and non-meritocratic aspects, (e.g. importance of hard work with educated parents, $r$=0.15). However, with respect to the non-meritocratic perception indicators, we can see that the associations demonstrate dimensionality, however, it is not entirely clear. In this regard, the indicators referring to parental characteristics have a positive and stronger association ($r$=0.56), but this association is much weaker in comparison to the other indicators of Non-meritocratic perception (e.g. Wealthy family and Gender, $r$=0.01).  The same holds true for the Gender and Race indicators ($r$=0.6), and also applies to both the indicators of knowing the right people and having political connections ($r$=0.55). On this point, we will return to it in the next section.
 
 
-```{r corr-issp,fig.cap = "Perceptions & preferences for ISSP  meritocracy items' polychoric correlations", fig.align='center',fig.height=6,fig.width=8}
+```{r corr-issp,fig.cap = "Perceptions and preferences for ISSP meritocracy items polychoric correlations", fig.align='center',fig.height=6,fig.width=8}
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
 cor_issp<- 
-  merit_per_pref %>%
+  data_s1 %>%
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
                 welljob,hardjob,family,child) %>% 
@@ -347,8 +353,26 @@ This section presents the results of the confirmatory factor analysis. First, a 
 
 
 ```{r sum-fit-issp}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr, kableExtra, knitr)
+
+table_format = if(knitr::is_html_output()) {
+  "html"
+} else if(knitr::is_latex_output()) {
+  "latex"
+}
+
+table_format2 = if(knitr::is_html_output()) {
+  T
+} else if(knitr::is_latex_output()) {
+  F
+}
+
+fsize = if(knitr::is_html_output()) {
+  20
+} else if(knitr::is_latex_output()) {
+  12
+}
 
 cfa_perpref1 <- '
 	  # latent variables
@@ -357,7 +381,7 @@ cfa_perpref1 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
-fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,ordered = T)
+fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = data_s1,ordered = T)
 
 cfa_perpref2 <- '
 	  # latent variables
@@ -369,7 +393,7 @@ cfa_perpref2 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
-fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = merit_per_pref,ordered = T)
+fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = data_s1,ordered = T)
 
 # extract fit indices from models and add to table
 sum_fit_issp<- dplyr::bind_rows(
@@ -386,22 +410,21 @@ colnames <- c("Model","$N$","Estimator","$\\chi^2$","df","CFI","TLI","RMSEA")
 
 # Create table
 table_issp_fits <-
-  knitr::kable(sum_fit_issp, format="html", digits=3, booktabs=T, 
+  knitr::kable(sum_fit_issp, format=table_format, digits=3, booktabs=T, 
                col.names=colnames,  
                caption = "Summary fit indices according to model", 
                escape = FALSE) %>%
-  kableExtra::kable_styling(full_width = F, 
-                            font_size = 15,
+  kableExtra::kable_styling(font_size = fsize,
+                            full_width = F,
                             bootstrap_options=c("striped", "bordered"))
 table_issp_fits
 ```
 
-Table \@ref(tab:sum-fit-issp) shows the four-factor model fit allowing comparison of first and second-order factors. The model restricted to four first-order factor dimensions shows a regular fit (CFI=0.959, TLI=0.944, RMSEA=0.098, χ2(df=48)= 21308.535; more detail in Table \@ref(tab:tb-perpref1)) in contrast to the model considering a second-order factor for non-meritocratic perception that has a slightly better fit based on the standard fit measures (CFI=0.959, TLI=0.944, RMSEA=0.098, χ2(df=48)= 21308.535).  
-
+Table \@ref(tab:sum-fit-issp) shows the four-factor model fit allowing comparison of first and second-order factors. The model restricted to four first-order factor dimensions shows a regular fit (CFI=0.959, TLI=0.944, RMSEA=0.098, $\chi^2$(df=48)= 21308.535; more detail in Table \@ref(tab:tb-perpref1)) in contrast to the model considering a second-order factor for non-meritocratic perception that has a slightly better fit based on the standard fit measures (CFI=0.959, TLI=0.944, RMSEA=0.098, $\chi^2$(df=48)= 21308.535).  
 
 <!-- [diagrama SEM] -->
 
-```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center',fig.cap="Confirmatory factor analysis of the ISSP indicators of Perceptions and Preferences for Meritocracy"}
+```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center',fig.cap="Confirmatory factor analysis of the ISSP indicators of Perceptions and Preferences for Meritocracy",out.width='100%'}
 knitr::include_graphics('output/images/cfa_issp_study1.PNG')
 ```
 
@@ -414,7 +437,7 @@ Figure \@ref(fig:meas02-issp) shows the overall results for this model, evidenci
 # Appendix
 
 ```{r tb-perpref1, echo=FALSE}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr,knitr,kableExtra)
 options(knitr.kable.NA = '')
 table_format = if(knitr::is_html_output()) {
@@ -429,6 +452,8 @@ table_format2 = if(knitr::is_html_output()) {
   F
 }
 
+
+
 cfa_perpref1 <- '
 	  # latent variables
 	  percmerit =~ hwork + ambition
@@ -436,7 +461,7 @@ cfa_perpref1 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
-fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,
+fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = data_s1,
                             ordered = c("wealthy","pareduc","ambition","hwork",
                                         "people","polcone","race","gender",
                                         "respons","yeduc",
@@ -511,13 +536,13 @@ tb.issp<- kable(tb.perpref1,escape = FALSE,digits = 3,
                 booktabs = T,
                 linesep = "",
                 format = table_format) %>%
-          kable_styling(full_width = table_format2,
-                        latex_options = c("hold_position"), 
+          kable_styling(latex_options = c("hold_position"),
+                        bootstrap_options = c("striped", "bordered"),
                         position = "center",
                         font_size = 12) %>%
           add_header_above(header = c(" "=1,"Perception"= 2,"Preference"= 2)) %>%
           add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
           row_spec(row = 12,hline_after = TRUE) %>%
           add_indent(c(13:17)) %>%
-          footnote(general =tb.foot ,footnote_as_chunk = T);tb.issp
+          footnote(general =tb.foot ,footnote_as_chunk = T,threeparttable = T);tb.issp
 ```
