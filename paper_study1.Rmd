@@ -83,21 +83,21 @@ Table \@ref(tab:table-issp) below summarise the items classified according to th
 
 ```{r table-issp, echo=FALSE}
 pacman::p_load(knitr, kableExtra, dplyr)
-table_format = if(knitr::is_html_output()) {
-  "html"
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
 } else if(knitr::is_latex_output()) {
-  "latex"
+  "latex"#if latex set "latex" in format
 }
 
-fsize = if(knitr::is_html_output()) {
-  20
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
 } else if(knitr::is_latex_output()) {
-  12
+  12 # if latex set table fontsize to 12
 }
 
 tableissp <- read.csv(file = "input/tables/table-issp.csv",header = 1,sep = ";",encoding = "UTF-8") # call file generated externally for the table
-cnames <- c("Component", "Dimensions","Item")
-cap <- "Items of the ISSP meritocratic perceptions and preferences measures"
+cnames <- c("Component", "Dimensions","Item") # table column names
+cap <- "Items of the ISSP meritocratic perceptions and preferences measures" # Table caption
 
 knitr::kable(tableissp, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
   kableExtra::kable_styling(
@@ -128,16 +128,16 @@ The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was c
 ```{r desc-issp, eval=FALSE, include=FALSE, results='asis'}
 load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
-table_format = if(knitr::is_html_output()) {
-  "html"
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
 } else if(knitr::is_latex_output()) {
-  "latex"
+  "latex"#if latex set "latex" in format
 }
 
-table_format2 = if(knitr::is_html_output()) {
-  T
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
 } else if(knitr::is_latex_output()) {
-  F
+  12 # if latex set table fontsize to 12
 }
 
 data_s1 %>% 
@@ -188,8 +188,8 @@ pacman::p_load(dplyr)
 likert_issp<- data_s1 %>% 
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
-                welljob,hardjob,family,child) %>% na.omit()
-
+                welljob,hardjob,family,child) %>% na.omit() #Subset variables
+# Set labels for each variable
 likert_issp <- sjlabelled::set_label(likert_issp,
                                      label = c("Hard work",
                                                "Having ambition",
@@ -202,14 +202,16 @@ likert_issp <- sjlabelled::set_label(likert_issp,
                                                "Well job",
                                                "Hard job",
                                                "Support family",
-                                               "Has children"))
-
+                                               "Has children")) 
+#Reverse coding (ONLY) for plot
 likert_issp <- sjmisc::rec(likert_issp, rec="rev", append=FALSE)
+#Set value labels for plot
 likert_issp <- 
   sjlabelled::set_labels(likert_issp,
                          labels = c("Essential","Very important","Fairly important",
                                     "Not very important","Not important at all"))
 
+# Declare ggplot2 features
 ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill = "gray85",
                                                                            colour = "gray85"),
                                   panel.border = ggplot2::element_blank(),
@@ -221,6 +223,7 @@ ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill 
                                   plot.caption = ggplot2::element_text(size = 10,
                                                                        face = "plain",
                                                                        hjust = 1)))
+#Plot 1: Perception meritocratic
 p1<- likert_issp %>%
   dplyr::select(hwork_r:ambition_r) %>%
   sjPlot::plot_likert(geom.colors = "PuBu",
@@ -233,7 +236,7 @@ p1<- likert_issp %>%
                         reverse.scale = F,
                         show.n = FALSE) + 
   ggplot2::theme(legend.position = "none") 
-
+#Plot 2: Perception Non-meritocratic
 p2<-likert_issp %>%
   dplyr::select(wealthy_r:polcone_r) %>% 
   sjPlot::plot_likert(geom.colors = "PuBu",
@@ -246,7 +249,7 @@ p2<-likert_issp %>%
                         reverse.scale = F,
                         show.n = FALSE)  + 
   ggplot2::theme(legend.position = "none")
-
+#Plot 3: Preference meritocratic
 p3<-likert_issp %>% 
   dplyr::select(welljob_r:hardjob_r) %>% 
   sjPlot::plot_likert(geom.colors = "PuBu",
@@ -259,7 +262,7 @@ p3<-likert_issp %>%
                         reverse.scale = F,
                         show.n = FALSE) + 
   ggplot2::theme(legend.position = "none")
-
+#Plot 4: Preference Non-meritocratic
 p4<-likert_issp %>% 
   dplyr::select(family_r:child_r) %>% 
   sjPlot::plot_likert(geom.colors = "PuBu",
@@ -273,6 +276,7 @@ p4<-likert_issp %>%
                         show.n = FALSE) +
   ggplot2::theme(legend.position = "none") 
 
+#Legend: Extract legend for the final plot using ggpubr
 leg<- ggpubr::as_ggplot(
   ggpubr::get_legend(
     dplyr::select(likert_issp, family_r:child_r) %>%
@@ -289,20 +293,21 @@ leg<- ggpubr::as_ggplot(
 
 
 ```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items"}
+#Final plot
 cowplot::add_sub(
-  cowplot::plot_grid(p1,p2,p3,p4,leg,
+  cowplot::plot_grid(p1,p2,p3,p4,leg, #plot 1,2,3,4 and legend (bottom)
     align = "hv",
     axis = "a",
-    nrow = 5,
-    ncol = 1,
-    rel_heights = c(1,2,1,1,0.25)
+    nrow = 5, #5 plots
+    ncol = 1, #1 column
+    rel_heights = c(1,2,1,1,0.25) #fig size within plot
     ),
   label = paste0(
     "Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009",
     " (n=",dim(likert_issp)[1],")"
-    ),
-  size = 10,
-  hjust = 0.25
+    ),        # Caption: source and sample size 
+  size = 10,  # Caption font size
+  hjust = 0.25# Caption align 
   ) %>% 
   cowplot::ggdraw() 
 ```
@@ -314,14 +319,16 @@ In terms of the association between the indicators, Figure \@ref(fig:corr-issp) 
 ```{r corr-issp,fig.cap = "Perceptions and preferences for ISSP meritocracy items polychoric correlations", fig.align='center',fig.height=6,fig.width=8}
 load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
+# create polychoric correlation matrix
 cor_issp<- 
   data_s1 %>%
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
                 welljob,hardjob,family,child) %>% 
-  lavaan::lavCor(., ordered=names(.))
-diag(cor_issp) = NA
-rownames(cor_issp) <- c("A. Hard work",
+  lavaan::lavCor(., ordered=names(.)) 
+diag(cor_issp) = NA #set diagonal values to NA
+# Set Row names of the matrix
+rownames(cor_issp) <- c("A. Hard work", 
                        "B. Having ambition",
                        "C. Wealthy family",
                        "D. Educated parents",
@@ -333,8 +340,11 @@ rownames(cor_issp) <- c("A. Hard work",
                        "J. Hard job",
                        "K. Support family",
                        "L. Has children")
+#set Column names of the matrix
 colnames(cor_issp) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", 
                        "(H)", "(I)","(J)","(K)","(L)")
+
+#Plot the matrix using corrplot
 corrplot::corrplot(cor_issp,
   method = "color",
   addCoef.col = "#000390",
@@ -355,34 +365,29 @@ This section presents the results of the confirmatory factor analysis. First, a 
 ```{r sum-fit-issp}
 load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr, kableExtra, knitr)
-
-table_format = if(knitr::is_html_output()) {
-  "html"
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
 } else if(knitr::is_latex_output()) {
-  "latex"
+  "latex"#if latex set "latex" in format
 }
 
-table_format2 = if(knitr::is_html_output()) {
-  T
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
 } else if(knitr::is_latex_output()) {
-  F
+  12 # if latex set table fontsize to 12
 }
-
-fsize = if(knitr::is_html_output()) {
-  20
-} else if(knitr::is_latex_output()) {
-  12
-}
-
-cfa_perpref1 <- '
+# meassurement model: First order 
+cfa_perpref1 <- ' 
 	  # latent variables
 	  percmerit =~ hwork + ambition
 	  percnmerit=~ wealthy + pareduc +race + gender +people + polcone
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
+# Model fit: First order 
 fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = data_s1,ordered = T)
 
+# meassurement model: Second order 
 cfa_perpref2 <- '
 	  # latent variables
 	  percmerit =~ hwork + ambition
@@ -393,6 +398,7 @@ cfa_perpref2 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
+# Model fit: second order 
 fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = data_s1,ordered = T)
 
 # extract fit indices from models and add to table
@@ -440,20 +446,19 @@ Figure \@ref(fig:meas02-issp) shows the overall results for this model, evidenci
 load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr,knitr,kableExtra)
 options(knitr.kable.NA = '')
-table_format = if(knitr::is_html_output()) {
-  "html"
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
 } else if(knitr::is_latex_output()) {
-  "latex"
+  "latex"#if latex set "latex" in format
 }
 
-table_format2 = if(knitr::is_html_output()) {
-  T
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
 } else if(knitr::is_latex_output()) {
-  F
+  12 # if latex set table fontsize to 12
 }
 
-
-
+# First order model for Appendix
 cfa_perpref1 <- '
 	  # latent variables
 	  percmerit =~ hwork + ambition
@@ -461,12 +466,14 @@ cfa_perpref1 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
+# Fit First order model for Appendix
 fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = data_s1,
                             ordered = c("wealthy","pareduc","ambition","hwork",
                                         "people","polcone","race","gender",
                                         "respons","yeduc",
                                         "family","child",
                                         "welljob","hardjob"))
+# Labels of First order model for Appendix
 labs <- c(
   "Importance: hard work",
   "Importance: having ambition",
@@ -481,48 +488,48 @@ labs <- c(
   "Reasons for pay: support family",
   "Reasons for pay: has children"
 )
-
+#Extract factor loadings
 tb.load<- data.frame(round(cbind(lavaan::inspect(fit_perpref1,
                                                         what="std")$lambda),
                            digits = 3))
-tb.load[tb.load==c(0.00)] <- NA
+tb.load[tb.load==c(0.00)] <- NA #set to NA factor loadings of 0
 
 for (i in names(tb.load)) {
-  tb.load[,i] <- sprintf(tb.load[,i], fmt = '%#.3f')
+  tb.load[,i] <- sprintf(tb.load[,i], fmt = '%#.3f') #set values as character
 }
-tb.load[tb.load=="NA"] <- ""
-#-------#
+tb.load[tb.load=="NA"] <- "" #set NA values to "" (empty space)
+#---extract fit measures-------#
 fm01<- data.frame(t(data.frame(lavaan::fitmeasures(fit_perpref1, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm01) ="percnmerit"
 
 #------chi2, df------#
-fm04<- round(rbind(fm01),3)
-fm04.1 <- fm04 %>% dplyr::select(chisq,df) 
-fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1)
-fm04.1$df <- round(x = fm04.1$df,digits = 0)
-fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")")
-fm04.1 <- dplyr::select(fm04.1,"chi2df")
+fm04<- round(rbind(fm01),3) #select and round to 4 digits
+fm04.1 <- fm04 %>% dplyr::select(chisq,df) #select chi2 and degrees of freedom
+fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1) # round Chi2 to 1 digit
+fm04.1$df <- round(x = fm04.1$df,digits = 0) #round Df to 0 digits
+fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")") #Paste chi2(df)
+fm04.1 <- dplyr::select(fm04.1,"chi2df") #select final column
 for (i in names(fm04.1)) {
-  fm04.1[,i] <- as.character(fm04.1[,i])
+  fm04.1[,i] <- as.character(fm04.1[,i]) # transform all to character
 }
 
 #------CFI, RMSEA------#
-fm04.2 <- fm04 %>% dplyr::select(cfi,tli,rmsea) 
-for (i in names(fm04.2)) {
+fm04.2 <- fm04 %>% dplyr::select(cfi,tli,rmsea) # select CFI, TLI and RMSEA
+for (i in names(fm04.2)) {                      # transform all to character
   fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
 }
 
-fm.df      <- dplyr::bind_cols(fm04.1,fm04.2)
-fm.df$nobs <- c(lavaan::nobs(fit_perpref1)) 
-fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("percnmerit")
+fm.df      <- dplyr::bind_cols(fm04.1,fm04.2) # factor loading and labels
+fm.df$nobs <- c(lavaan::nobs(fit_perpref1))   # add number of observations
+fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("percnmerit") #transpose and set colnames
 
 
 #------ merge ------#
-tb.fm<- dplyr::bind_rows(tb.load,fm.df)
+tb.fm<- dplyr::bind_rows(tb.load,fm.df) #merge factor loadings and fit indices
 tb.fm<- tb.fm %>% 
   dplyr::mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$",
                        "$\\text{TLI}$","$\\text{RMSEA}$","$N$")) %>%
-  dplyr::select(vars,everything())
-tb.perpref1 <- tb.fm
+  dplyr::select(vars,everything()) #Change names of Fit meassures to latex symbols
+tb.perpref1 <- tb.fm #final matrix for Table
 
 # Table --------------------------------------------------------------------.
 tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation")
