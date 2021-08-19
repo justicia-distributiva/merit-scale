@@ -111,7 +111,7 @@ The proposed conceptual and measurement framework is depicted in Figure \@ref(fi
 ```{r merit-model, echo=FALSE, fig.cap = "Model of perception and preferences for meritocracy and non-meritocracy", fig.align='center'}
 knitr::include_graphics("input/images/generalf.png")
 ```
-The columns "Perceptions" and "Preferences" represent the distinction between these two concepts, usually confused under the label "beliefs" [@castillo_meritocracia_2019]. Perceptions refer to the extent to which people observe that meritocracy functions or applies in their society, which relates to items such as "I think hard work is important to get ahead in society". Preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The rows in Figure 1 consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014]. These aspects have usually been treated as different ends of the same continuum in previous research, an assumption that requires empirical scrutiny. Non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
+The columns "Perceptions" and "Preferences" represent the distinction between these two concepts, usually confused under the label "beliefs" [@castillo_meritocracia_2019]. Perceptions refer to the extent to which people observe that meritocracy functions or applies in their society, which relates to items such as "I think hard work is important to get ahead in society". Preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The rows in Figure \@ref(fig:merit-model) consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014]. These aspects have usually been treated as different ends of the same continuum in previous research, an assumption that requires empirical scrutiny. Non-meritocratic elements usually refer to the use of personal contacts or family advantages to get ahead in life.
 
 Regarding the selection of indicators, most are taken or adapted from previous studies for the sake of comparability. For meritocratic indicators, we use effort and talent as the main components of the traditional concept of merit as defined by @young_rise_1962, whereas for non-meritocratic dimensions, we use wealthy parents and good contacts. Descriptions of the specific items are outlined in the methodology section.
 
@@ -673,10 +673,10 @@ cowplot::add_sub(
     ncol = 1, #1 column
     rel_heights = c(1,1,0.25) #fig size within plot
     ),
-  label = paste0("n=",dim(dat_likert_s2)[1]
+  label = paste0("Source: Authors calculations based on Study 1 sample"," (n=",dim(na.omit(dat_likert_s2))[1],")"
     ),        # Caption: source and sample size 
   size = 12,  # Caption font size
-  hjust = -8# Caption align 
+  hjust = -0.15# Caption align 
   ) %>% 
   cowplot::ggdraw() 
 ```
