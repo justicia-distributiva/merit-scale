@@ -39,8 +39,8 @@ header-includes:
 ```{r eval=FALSE, include=FALSE}
 # for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
 # clean #in the yml
-rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::pdf_document2")
-rmarkdown::render("docs/paper.Rmd", output_format = "bookdown::html_document2")
+rmarkdown::render("paper.Rmd", output_format = "bookdown::pdf_document2")
+rmarkdown::render("paper.Rmd", output_format = "bookdown::html_document2")
 ```
 
 ```{r setup, include=FALSE}
@@ -127,10 +127,10 @@ The research hypotheses behind this conceptualization and measurement model are 
 
 # Methodology
 
-pacman::p_load(knitr)
+
 ```{r message=FALSE, warning=FALSE, include=FALSE, echo=FALSE}
 #RUN THIS BEFORE THE ANALYSIS
-
+pacman::p_load(knitr)
 table_format = if(is_html_output()) {
   "html"
 } else if(is_latex_output()) {
@@ -148,11 +148,11 @@ The analysis is organized in three studies. Study 1 serves as a background to ou
 
 ## Study 1: Measuring meritocracy with international secondary data
 
-## Data
+### Data
 
 The data is the last available wave of the social inequality module from the International Social Survey Programme (ISSP), which is the most specialized international comparative survey in perceptions, attitudes and beliefs about inequality related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 41 countries and 56021 individuals. Although there is data available from this module for previous waves (1987, 1992 and 1999), unfortunately there are several variables that are important for this research that were not included, particularly in 1987 and 1999, reason why we only use the 2009 wave.
 
-## Variables
+### Variables
 
 There are a series of indicators in the ISSP survey that in the following we attempt to classify in our meritocracy measurement scheme. However, it is important to mention  that the items were not originally designed as a specific measure of meritocracy. Still, as this database is one of the most widely used for international social research, many of the items have been used in previous research on meritocracy (and certainly will keep being used in the future). Therefore, before proposing a new measure of meritocracy we  give a first test to our proposed conceptualization using available data that not only covers several countries but also is validated by the research community.
 
@@ -192,39 +192,39 @@ knitr::kable(tableissp, table_format, booktabs = T, linesep = "",col.names = cna
 ```
 
 
-# Methods
+### Methods
 
 The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). As recommended by Brown (2008), we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
 
-# Results
+### Results
 
-## Descriptive analyses
+#### Descriptive analyses
 
 <!-- (here summary descriptive table - @julio) -->
 
 <!-- Table \@ref(tab:desc-issp) -->
 
 ```{r desc-issp, eval=FALSE, include=FALSE, results='asis'}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
-table_format = if(knitr::is_html_output()) {
-  "html"
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
 } else if(knitr::is_latex_output()) {
-  "latex"
+  "latex"#if latex set "latex" in format
 }
 
-table_format2 = if(knitr::is_html_output()) {
-  T
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
 } else if(knitr::is_latex_output()) {
-  F
+  12 # if latex set table fontsize to 12
 }
 
-merit_per_pref %>%
+data_s1 %>% 
   dplyr::select(hwork,ambition,wealthy,pareduc,
-                race,gender,people,polcone,welljob,hardjob,family,child) %>%
-  psych::describe() %>%
-  as.data.frame() %>%
-  dplyr::select("Mean"=mean,"SD"=sd,"Min"=min,"Max"=max) %>%
+                race,gender,people,polcone,welljob,hardjob,family,child) %>% 
+  psych::describe() %>% 
+  as.data.frame() %>% 
+  dplyr::select("Mean"=mean,"SD"=sd,"Min"=min,"Max"=max) %>% 
   round(2) ->desc.issp
 
 row.names(desc.issp) <- c(
@@ -261,14 +261,14 @@ By contrast, for the non-meritocratic aspects, parental background showed a more
 Regarding normative preferences, we observe how well a person performs his or her job and amount of effort involved concentrates 98% and 96.9% of the responses in the categories that attribute importance to these characteristics when evaluating the pay that people deserve. Finally, in relation to structural constrains, 83% attribute importance to the fact that supporting a family should be a relevant factor with respect to the pay obtained, while having children to support translates into 76.4% of importance in this dimension.
 
 
-```{r}
-load(file = "input/data/proc/merit_per_pref.rda")
+```{r build-likert}
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
-likert_issp<- merit_per_pref %>%
+likert_issp<- data_s1 %>% 
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
-                welljob,hardjob,family,child) %>% na.omit()
-
+                welljob,hardjob,family,child) %>% na.omit() #Subset variables
+# Set labels for each variable
 likert_issp <- sjlabelled::set_label(likert_issp,
                                      label = c("Hard work",
                                                "Having ambition",
@@ -281,14 +281,16 @@ likert_issp <- sjlabelled::set_label(likert_issp,
                                                "Well job",
                                                "Hard job",
                                                "Support family",
-                                               "Has children"))
-
+                                               "Has children")) 
+#Reverse coding (ONLY) for plot
 likert_issp <- sjmisc::rec(likert_issp, rec="rev", append=FALSE)
-likert_issp <-
+#Set value labels for plot
+likert_issp <- 
   sjlabelled::set_labels(likert_issp,
                          labels = c("Essential","Very important","Fairly important",
                                     "Not very important","Not important at all"))
 
+# Declare ggplot2 features
 ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill = "gray85",
                                                                            colour = "gray85"),
                                   panel.border = ggplot2::element_blank(),
@@ -300,6 +302,7 @@ ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill 
                                   plot.caption = ggplot2::element_text(size = 10,
                                                                        face = "plain",
                                                                        hjust = 1)))
+#Plot 1: Perception meritocratic
 p1<- likert_issp %>%
   dplyr::select(hwork_r:ambition_r) %>%
   sjPlot::plot_likert(geom.colors = "PuBu",
@@ -310,11 +313,11 @@ p1<- likert_issp %>%
                         values  =  "sum.outside",
                         reverse.colors = T,
                         reverse.scale = F,
-                        show.n = FALSE) +
-  ggplot2::theme(legend.position = "none")
-
+                        show.n = FALSE) + 
+  ggplot2::theme(legend.position = "none") 
+#Plot 2: Perception Non-meritocratic
 p2<-likert_issp %>%
-  dplyr::select(wealthy_r:polcone_r) %>%
+  dplyr::select(wealthy_r:polcone_r) %>% 
   sjPlot::plot_likert(geom.colors = "PuBu",
                       title = "Perception Non-meritocratic",
                         geom.size = c(0.9),
@@ -323,11 +326,11 @@ p2<-likert_issp %>%
                         values  =  "sum.outside",
                         reverse.colors = T,
                         reverse.scale = F,
-                        show.n = FALSE)  +
+                        show.n = FALSE)  + 
   ggplot2::theme(legend.position = "none")
-
-p3<-likert_issp %>%
-  dplyr::select(welljob_r:hardjob_r) %>%
+#Plot 3: Preference meritocratic
+p3<-likert_issp %>% 
+  dplyr::select(welljob_r:hardjob_r) %>% 
   sjPlot::plot_likert(geom.colors = "PuBu",
                       title = "Preference meritocratic",
                         geom.size = c(0.62),
@@ -336,11 +339,11 @@ p3<-likert_issp %>%
                         values  =  "sum.outside",
                         reverse.colors = T,
                         reverse.scale = F,
-                        show.n = FALSE) +
+                        show.n = FALSE) + 
   ggplot2::theme(legend.position = "none")
-
-p4<-likert_issp %>%
-  dplyr::select(family_r:child_r) %>%
+#Plot 4: Preference Non-meritocratic
+p4<-likert_issp %>% 
+  dplyr::select(family_r:child_r) %>% 
   sjPlot::plot_likert(geom.colors = "PuBu",
                       title = "Preference Non-meritocratic",
                         geom.size = c(0.62),
@@ -350,8 +353,9 @@ p4<-likert_issp %>%
                         reverse.colors = T,
                         reverse.scale = F,
                         show.n = FALSE) +
-  ggplot2::theme(legend.position = "none")
+  ggplot2::theme(legend.position = "none") 
 
+#Legend: Extract legend for the final plot using ggpubr
 leg<- ggpubr::as_ggplot(
   ggpubr::get_legend(
     dplyr::select(likert_issp, family_r:child_r) %>%
@@ -368,22 +372,23 @@ leg<- ggpubr::as_ggplot(
 
 
 ```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items", out.height='80%'}
+#Final plot
 cowplot::add_sub(
-  cowplot::plot_grid(p1,p2,p3,p4,leg,
+  cowplot::plot_grid(p1,p2,p3,p4,leg, #plot 1,2,3,4 and legend (bottom)
     align = "hv",
     axis = "a",
-    nrow = 5,
-    ncol = 1,
-    rel_heights = c(1,2,1,1,0.25)
+    nrow = 5, #5 plots
+    ncol = 1, #1 column
+    rel_heights = c(1,2,1,1,0.25) #fig size within plot
     ),
   label = paste0(
     "Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009",
     " (n=",dim(likert_issp)[1],")"
-    ),
-  size = 10,
-  hjust = 0.25
-  ) %>%
-  cowplot::ggdraw()
+    ),        # Caption: source and sample size 
+  size = 10,  # Caption font size
+  hjust = 0.25# Caption align 
+  ) %>% 
+  cowplot::ggdraw() 
 ```
 
 
@@ -391,15 +396,18 @@ In terms of the association between the indicators, Figure \@ref(fig:corr-issp) 
 
 
 ```{r corr-issp,fig.cap = "Perceptions & preferences for ISSP  meritocracy items' polychoric correlations", fig.align='center',fig.height=6,fig.width=8}
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr)
-cor_issp<-
-  merit_per_pref %>%
+# create polychoric correlation matrix
+cor_issp<- 
+  data_s1 %>%
   dplyr::select(hwork,ambition,wealthy,pareduc,
                 race,gender,people,polcone,
-                welljob,hardjob,family,child) %>%
-  lavaan::lavCor(., ordered=names(.))
-diag(cor_issp) = NA
-rownames(cor_issp) <- c("A. Hard work",
+                welljob,hardjob,family,child) %>% 
+  lavaan::lavCor(., ordered=names(.)) 
+diag(cor_issp) = NA #set diagonal values to NA
+# Set Row names of the matrix
+rownames(cor_issp) <- c("A. Hard work", 
                        "B. Having ambition",
                        "C. Wealthy family",
                        "D. Educated parents",
@@ -411,8 +419,11 @@ rownames(cor_issp) <- c("A. Hard work",
                        "J. Hard job",
                        "K. Support family",
                        "L. Has children")
-colnames(cor_issp) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)",
+#set Column names of the matrix
+colnames(cor_issp) <-c("(A)", "(B)","(C)","(D)","(E)","(F)","(G)", 
                        "(H)", "(I)","(J)","(K)","(L)")
+
+#Plot the matrix using corrplot
 corrplot::corrplot(cor_issp,
   method = "color",
   addCoef.col = "#000390",
@@ -425,24 +436,37 @@ corrplot::corrplot(cor_issp,
 ```
 
 
-## Confirmatory Factor Analysis
+#### Confirmatory Factor Analysis
 
 This section presents the results of the confirmatory factor analysis. First, a four-dimensional model for meritocratic and non-meritocratic perception and preferences is estimated, considering all indicators of the non-meritocratic perception dimension as a single latent variable. Then, we estimate a model that follows the proposed four latent variable measurement approach, however, the non-meritocratic perception dimension is assumed as a second-order factor for the first order latent variables parental attributes, racial and gender background and networks.
 
 
 ```{r sum-fit-issp}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr, kableExtra, knitr)
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
+} else if(knitr::is_latex_output()) {
+  "latex"#if latex set "latex" in format
+}
 
-cfa_perpref1 <- '
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
+} else if(knitr::is_latex_output()) {
+  12 # if latex set table fontsize to 12
+}
+# meassurement model: First order 
+cfa_perpref1 <- ' 
 	  # latent variables
 	  percmerit =~ hwork + ambition
 	  percnmerit=~ wealthy + pareduc +race + gender +people + polcone
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
-fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,ordered = T)
+# Model fit: First order 
+fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = data_s1,ordered = T)
 
+# meassurement model: Second order 
 cfa_perpref2 <- '
 	  # latent variables
 	  percmerit =~ hwork + ambition
@@ -453,7 +477,8 @@ cfa_perpref2 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
-fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = merit_per_pref,ordered = T)
+# Model fit: second order 
+fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = data_s1,ordered = T)
 
 # extract fit indices from models and add to table
 sum_fit_issp<- dplyr::bind_rows(
@@ -470,12 +495,12 @@ colnames <- c("Model","$N$","Estimator","$\\chi^2$","df","CFI","TLI","RMSEA")
 
 # Create table
 table_issp_fits <-
-  knitr::kable(sum_fit_issp, format="html", digits=3, booktabs=T,
-               col.names=colnames,
-               caption = "Summary fit indices according to model",
+  knitr::kable(sum_fit_issp, format=table_format, digits=3, booktabs=T, 
+               col.names=colnames,  
+               caption = "Summary fit indices according to model", 
                escape = FALSE) %>%
-  kableExtra::kable_styling(full_width = F,
-                            font_size = 15,
+  kableExtra::kable_styling(font_size = fsize,
+                            full_width = F,
                             bootstrap_options=c("striped", "bordered"))
 table_issp_fits
 ```
@@ -501,7 +526,7 @@ The data was obtained through an online questionnaire, which was part of a large
 
 ### Study design
 
-_Instrument_
+#### Instrument
 
 The proposed scale of perceptions and preferences relating to meritocracy consisted of eight indicators that were grouped into the four dimensions listed earlier: Perceptions (meritocratic/non-meritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which has been widely used for operationalizing meritocracy in previous studies [@mijs_paradox_2019; @duru-bellat_whos_2012; @reynolds_perceptions_2014]. The aforementioned eight items, ordered according to dimensions, are presented in Table \@ref(tab:table-indicadores). These eight likert-type items have five response alternatives, ranging from "Completely disagree"(1) to "Completely agree" (5).
 
@@ -531,7 +556,7 @@ kable(tabitems, table_format, booktabs = T, linesep = "",col.names = cnames, cap
 
 \pagebreak
 
-_Administration sets_
+#### Administration sets
 
 With the objective of evaluating the effect of indicator ordering in the responses, three different versions of items' order were designed and randomly assigned to the respondents, as depicted in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order that appears in Table \@ref(tab:table-indicadores) according to perceptions and preferences. For the second group (_n = 717_), the order was reorganized according to perceptions and preferences over the same topic, e.g. for the topic of hard work, the item about perception was followed by the item about preference, and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were presented as completely randomized.
 
@@ -539,7 +564,7 @@ With the objective of evaluating the effect of indicator ordering in the respons
 knitr::include_graphics('output/images/app_mod.png')
 ```
 
-_Methods_
+### Methods
 
 To test the scale's underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table \@ref(tab:table-indicadores). As in Study 1, CFA was conducted using the `lavaan` R package (version 0.6-3; Rosseel, 2020), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement (Kline, 2016; Rosseel, 2020). The fit indexes and cut-off criteria were the same as the ones used in Study 1.
 
@@ -547,11 +572,11 @@ A pre-registration was made in the OSF platform, available at the following link
 
 ### Results
 
-_Descriptive analyses_
+#### Descriptive analyses
 
 The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and comparable information of the different response categories for each item. As it can be observed, in general there is more agreement in the perception of non-meritocratic items than in meritocratic ones, while in the case of preferences the opposite occurs. As far as preferences are concerned, the preponderant role of effort over talent as a criterion of meritocratic preference is noteworthy.
 
-```{r produce-likert_s2}
+```{r produce-likert_s2, include=FALSE}
 pacman::p_load(dplyr)
 load(file = "input/data/proc/data_s2.RData")
 names(data_s2)
@@ -561,25 +586,99 @@ names(dat_likert_s2) # reverse coding for likert graph
 
 table(data_s2$perc_effort)
 table(dat_likert_s2$perc_effort_r) # check ok.
+# update.packages("sjPlot") # please install version 2.8.9 or above
+# plotlikert_s2<- sjPlot::plot_likert(dat_likert_s2,
+#                        c(1, 1, 1, 1, 2, 2, 2, 2),
+#                        groups.titles = c("Perceptions", "Preferences"),
+#                        geom.colors = "PuBu",
+#                        geom.size = 0.8,
+#                        axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
+#                        catcount = 4,
+#                        cat.neutral = 3,
+#                        grid.range  =  c (1.2 , 1.4),
+#                        values  =  "sum.outside",
+#                        reverse.colors = T,
+#                        reverse.scale = F,
+#                        show.n=FALSE)
+ggplot2::theme_set(ggplot2::theme(panel.background = ggplot2::element_rect(fill = "gray85",
+                                                                           colour = "gray85"),
+                                  panel.border = ggplot2::element_blank(),
+                                  axis.text.y = ggplot2::element_text(size = 13,
+                                                                      hjust = 1),
+                                  title = ggplot2::element_text(size = 13,
+                                                                face = "bold"),
+                                  legend.text = ggplot2::element_text(size = 12),
+                                  plot.caption = ggplot2::element_text(size = 10,
+                                                                       face = "plain",
+                                                                       hjust = 1)))
 
- # plotlikert_s2<- sjPlot::plot_likert(dat_likert_s2,
- #                        c(1, 1, 1, 1, 2, 2, 2, 2),
- #                        groups.titles = c("Perceptions", "Preferences"),
- #                        geom.colors = "PuBu",
- #                        geom.size = 0.8,
- #                        axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
- #                        catcount = 4,
- #                        cat.neutral = 3,
- #                        grid.range  =  c (1.2 , 1.4),
- #                        values  =  "sum.outside",
- #                        reverse.colors = T,
- #                        reverse.scale = F,
- #                        show.n=FALSE)
+#Plot 1: Perception 
+p1<- 
+  dplyr::select(dat_likert_s2,perc_effort_r:perc_netw_r) %>%
+  sjPlot::plot_likert(geom.colors = "PuBu",
+                      title = c("Perceptions"),                      
+                      geom.size = 0.8,
+                      axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
+                      catcount = 4,
+                      cat.neutral = 3,
+                      grid.range  =  c (1.2 , 1.4),
+                      values  =  "sum.outside",
+                      reverse.colors = T,
+                      reverse.scale = F,
+                      show.n = FALSE) + 
+  ggplot2::theme(legend.position = "none") 
+
+#Plot 2: Preferences 
+p2<-
+  dplyr::select(dat_likert_s2,pref_effort_r:pref_netw_r) %>%
+  sjPlot::plot_likert(geom.colors = "PuBu",
+                      title = c("Preferences"),                      
+                      geom.size = 0.8,
+                      axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
+                      catcount = 4,
+                      cat.neutral = 3,
+                      grid.range  =  c (1.2 , 1.4),
+                      values  =  "sum.outside",
+                      reverse.colors = T,
+                      reverse.scale = F,
+                      show.n = FALSE)  + 
+  ggplot2::theme(legend.position = "none")
+
+#Legend: Extract legend for the final plot using ggpubr
+leg<- ggpubr::as_ggplot(
+  ggpubr::get_legend(
+  dplyr::select(dat_likert_s2,pref_effort_r:pref_netw_r) %>%
+      sjPlot::plot_likert(geom.colors = "PuBu", 
+                          catcount = 4,
+                          cat.neutral = 3) +
+    ggplot2::theme(legend.position = "bottom") +
+    ggplot2::scale_fill_manual(
+      values = c("#b3b3b3ff", "#f1eef6ff", "#bdc9e1ff","#74a9cfff","#0570b0ff"),
+      breaks=c("neutral",4,3,2,1),
+      labels=c("Neither agree nor disagree","Strongly disagree","Disagree",
+               "Agree","Totally agree")
+      )
+    )
+  )
 ```
 
 
-```{r plotlikert, echo=FALSE, fig.cap = "Distribution of responses in the Merit Scale items", fig.align='center'}
-# plotlikert_s2
+```{r plotlikert, echo=FALSE, fig.align='center', fig.cap="Distribution of responses in the Merit Scale items", fig.height=8, fig.width=11}
+#Final plot
+cowplot::add_sub(
+  cowplot::plot_grid(p1,p2,leg, #plot 1,2 and legend (bottom)
+    align = "hv",
+    axis = "a",
+    nrow = 3, #2 plots
+    ncol = 1, #1 column
+    rel_heights = c(1,1,0.25) #fig size within plot
+    ),
+  label = paste0("n=",dim(dat_likert_s2)[1]
+    ),        # Caption: source and sample size 
+  size = 12,  # Caption font size
+  hjust = -8# Caption align 
+  ) %>% 
+  cowplot::ggdraw() 
 ```
 
 Attending now to the association among the scale items, Figure \@ref(fig:corpoly) shows items polychoric correlations. There are three main aspects to highlight from this correlation matrix.  Firstly, as expected the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, r=0.52). Secondly, among this correlations the highest are those between the non- meritocratic dimension buth in perceptions (r=0.73) and preferences (r=0.61). thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations. This is noteworthy because it indicates that even the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, we observe that there are no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining the assumptions of previous studies that suggested that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
@@ -618,7 +717,7 @@ corrplot::corrplot(cor_s2,
 
 ```
 
-_Confirmatory Factor Analysis_
+#### Confirmatory Factor Analysis
 
 The present sections shows the results of the confirmatory factor analysis estimation. The model estimates four latent factors: perception meritocratic, perception non-meritocratic, preferences meritocratic and preferences non-meritocratic. Each factor is estimated based on two items of the scale as detailed in Table \@ref(tab:table-indicadores).
 
@@ -645,7 +744,7 @@ fit_cfa3 <- cfa(model_cfa, data = data_s2[data_s2$group == 3,], ordered = TRUE, 
 
 ```
 
-```{r table_cfa_fits, echo=FALSE}
+```{r table-cfafits, echo=FALSE}
 pacman::p_load(dplyr, kableExtra, knitr)
 
 # extract fit indices from models and add to table
@@ -661,11 +760,11 @@ sum_fit <- dplyr::select(sum_fit,mod,nobs,est,everything())
 colnames <- c("Model","$N$","Estimator","$\\chi^2$","df","CFI","TLI","RMSEA")
 
 # Create table
-table_cfa_fits <-kable(sum_fit, format="html", digits=3, booktabs=T, col.names=colnames,  caption = "Summary fit indices according to order versions", escape = FALSE) %>% kable_styling(full_width = F, font_size = 10)
+table_cfa_fits <-kable(sum_fit, format="html", digits=3, booktabs=T, col.names=colnames,  caption = "Summary fit indices according to order versions", escape = FALSE) %>% kable_styling(full_width = F, font_size = 12,bootstrap_options=c("striped", "bordered"))
 table_cfa_fits
 ```
 
-Table \@ref(tab:table_cfa_fits) shows the fit indicators of the models estimated for each of the three versions of the items' order described in the methodology. Regardless of the version, all models obtained adequate fit indicators, with CFI's above 0.95 and RMSEA's below 0.08. However, none of the models achieved a non-significant chi-square, something expected in large samples as the one used here. The first version order (perceptions-preferences) was the one obtaining best fit (CFI=0.993, TLI=0.995, RMSEA=0.034, $\chi2$(df=14)=42.276), whereas version 2 with the fixed order according to merit/non-merit items shows the comparatively worst indicators. The CFA fit indices for the completely randomized items' order (Model 3) it keeps all the indicators within the acceptable cut-off criteria and besides it controls for possible order effects in the administration of the instrument. The model and parameter estimates for this version are depicted in Figure \@ref(fig:meas02):
+Table \@ref(tab:table-cfafits) shows the fit indicators of the models estimated for each of the three versions of the items' order described in the methodology. Regardless of the version, all models obtained adequate fit indicators, with CFI's above 0.95 and RMSEA's below 0.08. However, none of the models achieved a non-significant chi-square, something expected in large samples as the one used here. The first version order (perceptions-preferences) was the one obtaining best fit (CFI=0.993, TLI=0.995, RMSEA=0.034, $\chi2$(df=14)=42.276), whereas version 2 with the fixed order according to merit/non-merit items shows the comparatively worst indicators. The CFA fit indices for the completely randomized items' order (Model 3) it keeps all the indicators within the acceptable cut-off criteria and besides it controls for possible order effects in the administration of the instrument. The model and parameter estimates for this version are depicted in Figure \@ref(fig:meas02):
 
 ```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale", fig.align='center'}
 
@@ -681,11 +780,11 @@ We performed two further analyses in order to add evidence regarding the quality
 
 ### Convergent validity
 
-_Data_
+#### Data
 
 For this analysis we examined data from one wave of the same study described above, which was a three-wave panel survey. The last wave of the study included additional measures that allow testing the correlations of the merit scale with some related constructs as opportunity beliefs and personal wherewithal. After listwise deletion of missing cases in socio-demographics information, a total of 1422 individuals took part in the third wave: 668 (46.97%) women and 754 (53.03%) men. The ages of 50.57% of them are 45 years or older, and 36.28% held a tertiary degree.
 
-_Intruments_
+#### Variables
 
 The following scales were included for testing their correlations with the the 8-item meritocracy scale:
 
@@ -695,11 +794,11 @@ The following scales were included for testing their correlations with the the 8
 
 Both instruments cover mainly the perceptual side of the concept. Therefore, in general we expect larger correlation with meritocratic perceptions than with preferences. In the case of opportunity beliefs, the hard work item should correlate positively with meritocratic perception whereas the importance for coming from a wealthy family is expected to correlate positively with non-meritocratic perceptions. Regarding the second instrument of personal wherewithal, we also anticipate a positive correlation with meritocratic perception and low to null correlations with the other dimensions of the merit scale.
 
-_Results_
+#### Results
 
 We used polyserial correlations to evaluate relationships of meritocractic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal, we examined Pearson correlations.
 
-Table \@ref(tab:val-conv) shows the polyserial and pearson correlations between our meritocracy scale and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents---only 8.6 percent indicates _not very important_ or _not important at all_.
+Table \@ref(tab:val-conv) shows the polyserial and Pearson correlations between our meritocracy scale and common measures of meritocracy. The findings provide evidence for convergent validity for the scale. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (r=.354), and a negative and low correlation with meritocratic perception (-0.197). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (r=.187). One explanation for this result is that the support for hard work is very high among respondents---only 8.6 percent indicates _not very important_ or _not important at all_.
 
 
 ```{r val-conv}
@@ -738,7 +837,6 @@ kable(table01, col.names = c("Merit-Scale","Social Origin ", "Hard Work " , "Whe
     font_size = 14,
     bootstrap_options=c("striped", "bordered")) %>%
   column_spec(column = 1, width = "1.5cm", )
-
 ```
 
 
@@ -758,52 +856,37 @@ The invariance measurement procedure consists of a series of nested models to wh
 
 4. **Strict:** equality restrictions are added to the error variances of each indicator.
 
-*Data*
+#### Data
 
 For testing the invariance we compared the data described previously with a new data source coming from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample obtained contains 1,242 cases, where 605 (48.71%) are women and 637 (51.28%) are men. 48.84% of them are 45 years of age or older, and 33.97% have tertiary education or higher.
 
-_Instruments_
+#### Variables
 
-The items of the meritocracy scale were identical to the original. The items were administrated in a randomized order (which corresponds to the application modality of Group 3 present in Figure \@ref(fig: appmod)).
+The items of the meritocracy scale were identical to the original. The items were administrated in a randomized order (which corresponds to the application modality of Group 3 present in Figure \@ref(fig:appmod)).
 
-_Results_
+#### Results
 
-Tabla \@ref(tab:fcloads-inv) shows de results of the CFA estimation of the meritocracy scale in this new sample. As observed, the loadings and the fit indices show similar results as the ones presented for the original study above, which gives a first base with wich to start the invariance analysis.
+Table \@ref(tab:fcloads-inv) shows the results of the CFA estimation of the meritocracy scale in this new sample. As observed, the loadings and the fit indices show similar results as the ones presented for the original study above, which gives a first base with wich to start the invariance analysis.
 
 The first step for invariance testing is the estimation of the configural model, which serves as the baseline for further comparison and it is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit,since its sensitivity to sample size it is recommended to use three additional fit indices: Comparative Fit Index (CFI), which should have a value greater than 0.95; Root Mean Square Error Approximation (RMSEA), which must be in the range of values ​​of 0.05 and 0.08; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 [@vandeschoot_checklist_2012]. Besides, the literature on measurement invariance suggests some complementary approaches for the evaluation of the fit, from which we will consider the incremental adjustment of the fit indexes [@cheung_Evaluating_2002; @Milfont2010; @dimitrov_Testing_2010] and the ANOVA test for means comparison in nested models [@newsom_Longitudinal_2015].
 
-
-
-# Analysis
-
-```{r invargroup}
-
+```{r invargroup, echo=FALSE}
 #---Load packages and data -------------------------------------#
-
-pacman::p_load(sjPlot,dplyr,lavaan,semPlot,semTools,stargazer,corrplot,psych,knitr,kableExtra,stats)
-
-
+pacman::p_load(sjPlot,dplyr,lavaan,semPlot,semTools,stargazer,
+               corrplot,psych,knitr,kableExtra,stats)
 load(file = "input/data/proc/data_s3_inv.RData")
-
 pov01 <- data_s3_inv %>% filter(dataset=="pvw01")
 fs01  <- data_s3_inv %>% filter(dataset=="fsw02")
 
 #-----Meassurement model--------------------------------------#
-
-
-
 model01 <- '
 perc_merit  =~ perc_effort + perc_talent
 perc_nmerit =~ perc_wpart  + perc_netw
 pref_merit  =~ pref_effort + pref_talent
 pref_nmerit =~ pref_wpart  + pref_netw'
 
-
 #-----Invariance---------------------------------------------#
-
-
-
-inv01<- measurementInvariance(model=model01,data=data_s3_inv,group="dataset",estimator = "ML",strict=TRUE)
+inv01<- measurementInvariance(model=model01,data=data_s3_inv,group="dataset",estimator = "ML",strict=TRUE,quiet = T)
 
 conf  <- inv01$fit.configural
 weak  <- inv01$fit.loadings
@@ -863,7 +946,7 @@ footnote <- paste0("N = ","; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = 
 kable(tab.inv, col.names = col.nam, align = "l",
       booktabs=TRUE,format = table_format,escape = FALSE,
       caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>%
-  kable_styling(full_width = FALSE,latex_options = "HOLD_position") %>%
+  kable_styling(full_width = FALSE,latex_options = "HOLD_position",bootstrap_options=c("striped", "bordered")) %>%
   footnote(general = footnote, footnote_as_chunk = T)
 
 ```
@@ -896,51 +979,7 @@ The four-dimensional framework and structure of the Perceptions and Preferences 
 
 `r if (knitr::is_latex_output()){ '\\section{Appendix}'}`
 
-
-
-
-```{r tab-loads, echo=FALSE, eval=FALSE}
-pacman::p_load(dplyr)
-load(file = "output/tables/tb.fm.RData")
-cap <- "Factor loads and model fit."
-tb.col  <- c("Variables",1:4,1:4,1:4)
-tb.caption <- "Factor loadings and fit measures"
-tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
-
-
-tb.fm <- tb.fm %>%
-    mutate(vars = recode(vars,
-                         "A. Who the more they try they manage to get bigger rewards that those who strive less."= "Perception Effort",
-                         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent."= "Perception Talent",
-                         "C. Who they have rich parents manage to get out ahead."="Perception rich parents",
-                         "D. Who they have good contacts they manage to get out ahead."="Perception contacts",
-                         "E. Who the more they try they should get greater rewards than those who they try less." = "Preferences Effort",
-                         "F. Who possess more talent they should get greater rewards than those who possess less talent."= "Preferences Talent",
-                         "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
-                         "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
-
-
-tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = cap) %>%
-          kable_styling(full_width = table_format2,latex_options = c("hold_position","scale_down"), position = "center",font_size = 9) %>%
-#          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>%
-#          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>%
-          row_spec(row = 8,hline_after = TRUE) %>%
-          add_indent(c(9:12))  %>%
-          footnote(general = tb.foot,threeparttable = T);tb.fm01
-```
-
-```{r fcloads-inv, echo=FALSE, eval=FALSE}
-load(file = "output/tables/tb.fact-f02.RData")
-tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
-tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>%
-          kable_styling(full_width = table_format2,latex_options = c("hold_position"), position = "center",font_size = 9) %>%
-#          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
-          row_spec(row = 8,hline_after = TRUE) %>%
-          add_indent(c(9:12)) %>%
-          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm02
-```
-
-\pagebreak
+## Appendix study 1
 
 
 |                     | Sample  |   CEP  |
@@ -959,27 +998,25 @@ tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, captio
 | High school          | 43,23%  | 37,04% |
 | Non university      | 32,63%  | 28,93% |
 | university or more  | 21,21%  | 18,13% |
-Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the sample"))`.
-
-
-# Appendix sudy 1
+Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the study 1 sample"))`.
 
 ```{r tb-perpref1, echo=FALSE}
-load(file = "input/data/proc/merit_per_pref.rda")
+load(file = "input/data/proc/data_s1.RData")
 pacman::p_load(dplyr,knitr,kableExtra)
 options(knitr.kable.NA = '')
-table_format = if(knitr::is_html_output()) {
-  "html"
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
 } else if(knitr::is_latex_output()) {
-  "latex"
+  "latex"#if latex set "latex" in format
 }
 
-table_format2 = if(knitr::is_html_output()) {
-  T
+fsize = if(knitr::is_html_output()) { #conditional instructions for kable
+  20 # if html set table fontsize to 20
 } else if(knitr::is_latex_output()) {
-  F
+  12 # if latex set table fontsize to 12
 }
 
+# First order model for Appendix
 cfa_perpref1 <- '
 	  # latent variables
 	  percmerit =~ hwork + ambition
@@ -987,12 +1024,14 @@ cfa_perpref1 <- '
 	  prefmerit =~ welljob + hardjob
 	  prefnmerit=~ family + child
 	  '
-fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = merit_per_pref,
+# Fit First order model for Appendix
+fit_perpref1 <- lavaan::cfa(cfa_perpref1, data = data_s1,
                             ordered = c("wealthy","pareduc","ambition","hwork",
                                         "people","polcone","race","gender",
                                         "respons","yeduc",
                                         "family","child",
                                         "welljob","hardjob"))
+# Labels of First order model for Appendix
 labs <- c(
   "Importance: hard work",
   "Importance: having ambition",
@@ -1007,68 +1046,197 @@ labs <- c(
   "Reasons for pay: support family",
   "Reasons for pay: has children"
 )
-
+#Extract factor loadings
 tb.load<- data.frame(round(cbind(lavaan::inspect(fit_perpref1,
                                                         what="std")$lambda),
                            digits = 3))
-tb.load[tb.load==c(0.00)] <- NA
+tb.load[tb.load==c(0.00)] <- NA #set to NA factor loadings of 0
 
 for (i in names(tb.load)) {
-  tb.load[,i] <- sprintf(tb.load[,i], fmt = '%#.3f')
+  tb.load[,i] <- sprintf(tb.load[,i], fmt = '%#.3f') #set values as character
 }
-tb.load[tb.load=="NA"] <- ""
-#-------#
+tb.load[tb.load=="NA"] <- "" #set NA values to "" (empty space)
+#---extract fit measures-------#
 fm01<- data.frame(t(data.frame(lavaan::fitmeasures(fit_perpref1, output ="matrix")[c("chisq","df","cfi","tli","rmsea"),]))); row.names(fm01) ="percnmerit"
 
 #------chi2, df------#
-fm04<- round(rbind(fm01),3)
-fm04.1 <- fm04 %>% dplyr::select(chisq,df)
-fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1)
-fm04.1$df <- round(x = fm04.1$df,digits = 0)
-fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")")
-fm04.1 <- dplyr::select(fm04.1,"chi2df")
+fm04<- round(rbind(fm01),3) #select and round to 4 digits
+fm04.1 <- fm04 %>% dplyr::select(chisq,df) #select chi2 and degrees of freedom
+fm04.1$chisq <- round(x = fm04.1$chisq,digits = 1) # round Chi2 to 1 digit
+fm04.1$df <- round(x = fm04.1$df,digits = 0) #round Df to 0 digits
+fm04.1$chi2df <- paste0(fm04.1$chisq,"(",fm04.1$df,")") #Paste chi2(df)
+fm04.1 <- dplyr::select(fm04.1,"chi2df") #select final column
 for (i in names(fm04.1)) {
-  fm04.1[,i] <- as.character(fm04.1[,i])
+  fm04.1[,i] <- as.character(fm04.1[,i]) # transform all to character
 }
 
 #------CFI, RMSEA------#
-fm04.2 <- fm04 %>% dplyr::select(cfi,tli,rmsea)
-for (i in names(fm04.2)) {
+fm04.2 <- fm04 %>% dplyr::select(cfi,tli,rmsea) # select CFI, TLI and RMSEA
+for (i in names(fm04.2)) {                      # transform all to character
   fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
 }
 
-fm.df      <- dplyr::bind_cols(fm04.1,fm04.2)
-fm.df$nobs <- c(lavaan::nobs(fit_perpref1))
-fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("percnmerit")
+fm.df      <- dplyr::bind_cols(fm04.1,fm04.2) # factor loading and labels
+fm.df$nobs <- c(lavaan::nobs(fit_perpref1))   # add number of observations
+fm.df <- data.frame(t(fm.df)); colnames(fm.df) <- c("percnmerit") #transpose and set colnames
 
 
 #------ merge ------#
-tb.fm<- dplyr::bind_rows(tb.load,fm.df)
-tb.fm<- tb.fm %>%
+tb.fm<- dplyr::bind_rows(tb.load,fm.df) #merge factor loadings and fit indices
+tb.fm<- tb.fm %>% 
   dplyr::mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$",
                        "$\\text{TLI}$","$\\text{RMSEA}$","$N$")) %>%
-  dplyr::select(vars,everything())
-tb.perpref1 <- tb.fm
+  dplyr::select(vars,everything()) #Change names of Fit meassures to latex symbols
+tb.perpref1 <- tb.fm #final matrix for Table
 
 # Table --------------------------------------------------------------------.
 tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation")
 tb.col <- c("","Meritocratic","Non-meritocratic",
             "Meritocratic","Non-meritocratic")
-tb.caption <- c(" Factor loadings and fit measures for ISSP 2009")
+tb.caption <- c(" Factor loadings and fit measures of the four first-order factor model in study 1")
 tb.issp<- kable(tb.perpref1,escape = FALSE,digits = 3,
                 align = "lcccc",
-                col.names = tb.col,
-                caption = tb.caption,
+                col.names = tb.col, 
+                caption = tb.caption, 
                 booktabs = T,
                 linesep = "",
                 format = table_format) %>%
-          kable_styling(full_width = table_format2,
-                        latex_options = c("hold_position"),
+          kable_styling(latex_options = c("hold_position"),
+                        bootstrap_options = c("striped", "bordered"),
                         position = "center",
                         font_size = 12) %>%
-#          add_header_above(header = c(" "=1,"Perception"= 2,"Preference"= 2)) %>%
-#          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
+          add_header_above(header = c(" "=1,"Perception"= 2,"Preference"= 2)) %>%
+          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
           row_spec(row = 12,hline_after = TRUE) %>%
           add_indent(c(13:17)) %>%
-          footnote(general =tb.foot ,footnote_as_chunk = T);tb.issp
+          footnote(general =tb.foot ,footnote_as_chunk = T,threeparttable = T);tb.issp
 ```
+
+
+
+```{r tab-loads, echo=FALSE, eval=FALSE}
+pacman::p_load(dplyr)
+load(file = "output/tables/tb.fm.RData")
+cap <- "Factor loads and model fit."
+tb.col  <- c("Variables",1:4,1:4,1:4)
+tb.caption <- "Factor loadings and fit measures"
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
+tb.fm <- tb.fm %>%
+    mutate(vars = recode(vars,
+                         "A. Who the more they try they manage to get bigger rewards that those who strive less."= "Perception Effort",
+                         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent."= "Perception Talent",
+                         "C. Who they have rich parents manage to get out ahead."="Perception rich parents",
+                         "D. Who they have good contacts they manage to get out ahead."="Perception contacts",
+                         "E. Who the more they try they should get greater rewards than those who they try less." = "Preferences Effort",
+                         "F. Who possess more talent they should get greater rewards than those who possess less talent."= "Preferences Talent",
+                         "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
+                         "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
+tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = cap) %>%
+          kable_styling(full_width = table_format2,latex_options = c("hold_position","scale_down"), position = "center",font_size = 9) %>%
+#          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>%
+#          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>%
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12))  %>%
+          footnote(general = tb.foot,threeparttable = T);tb.fm01
+```
+
+
+## Appendix study 3
+
+```{r fcloads-inv, echo=FALSE}
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
+} else if(knitr::is_latex_output()) {
+  "latex"#if latex set "latex" in format
+}
+table_format2 = if(knitr::is_html_output()) {
+  T
+} else if(knitr::is_latex_output()) {
+  F
+}
+# Note: 
+# This CFA corresponds to the sample from the Factorial Survey Study 
+load(file = "input/data/proc/data_s3_inv.RData") #load data study 3
+fs01  <- data_s3_inv %>% dplyr::filter(dataset=="fsw02") #subset sample
+
+# Set model
+model01 <- '
+perc_merit  =~ perc_effort + perc_talent
+perc_nmerit =~ perc_wpart  + perc_netw
+pref_merit  =~ pref_effort + pref_talent
+pref_nmerit =~ pref_wpart  + pref_netw'
+
+# Model fit
+fs1_o <- lavaan::cfa(model = model01,
+             data = fs01,
+             ordered = c("perc_effort","perc_talent",
+                         "perc_wpart","perc_netw",
+                         "pref_effort","pref_talent",
+                         "pref_wpart","pref_netw"),std.lv=FALSE)
+
+# Extract information for table
+fm01<- data.frame(t(data.frame(lavaan::fitmeasures(fs1_o, output ="matrix")[c("chisq.scaled","df","cfi.scaled","rmsea.scaled"),]))); row.names(fm01) ="M1.1"
+
+#------chi2, df------#
+fm04.1 <- fm01 %>% dplyr::select(chisq.scaled,df) 
+fm04.1$chisq.scaled <- round(x = fm04.1$chisq.scaled,digits = 1)
+fm04.1$df <- round(x = fm04.1$df,digits = 0)
+fm04.1$chi2df <- paste0(fm04.1$chisq.scaled,"(",fm04.1$df,")")
+fm04.1 <- dplyr::select(fm04.1,"chi2df")
+
+#------CFI, RMSEA------#
+fm04.2 <- fm01 %>% dplyr::select(cfi.scaled,rmsea.scaled)
+for (i in names(fm04.2)) {
+  fm04.2[,i] <- sprintf(fm04.2[,i], fmt = '%#.3f')
+}
+
+#------ merge fit indices ------#
+fm.df      <- dplyr::bind_cols(fm04.1,fm04.2)
+fm.df$nobs <- c(lavaan::nobs(fs1_o)) 
+fm.df      <- data.frame(t(fm.df))
+
+#------ extract factor loadings ------#
+loads01<- data.frame(round(inspect(fs1_o,what="std")$lambda,digits = 3))
+loads01[loads01==c(0.00)] <- NA; names(loads01) <- c(paste0("M1.",1:4))
+
+for (i in names(loads01)) {
+  # tb.load[,i] <- sjlabelled::as_character(tb.load[,i])
+  loads01[,i] <- sprintf(loads01[,i], fmt = '%#.3f')
+}
+loads01[loads01=="NA"] <- ""
+
+#------ labels for table ------#
+labs <-c(
+    "A. Perception Effort",
+    "B. Perception Talent",
+    "C. Perception Rich parents",
+    "D. Perception Contacts",
+    "E. Preferences Effort",
+    "F. Preferences Talent",
+    "G. Preferences Rich parents",
+    "H. Preferences Contacts")
+
+#------ merge ------#
+tb.fm2<- bind_rows(loads01,fm.df)
+tb.fm2<- tb.fm2 %>% 
+  mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>%
+  select(vars,everything())
+# load(file = "output/tables/tb.fact-f02.RData")
+tb.col  <- c(" ",
+             "Meritocratic","Non-meritocratic",
+             "Meritocratic","Non-meritocratic")
+tb.caption <- "Factor loadings and fit measures for the second sample for study 3" 
+tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
+tb.fm02<- kable(tb.fm2,escape = FALSE,align = "lcccc",col.names = tb.col, caption = tb.caption, booktabs = T,linesep = "",format = table_format) %>%
+          kable_styling(full_width = table_format2,
+                        latex_options = c("hold_position"), 
+                        position = "center",
+                        font_size = 12,
+                        bootstrap_options = c("striped", "bordered")) %>%
+          add_header_above(header = c(" "=1,"Perception"= 2,"Preference"= 2)) %>%
+          add_header_above(header = c(" "=1,"Factor loadings"= 4)) %>%
+          row_spec(row = 8,hline_after = TRUE) %>%
+          add_indent(c(9:12)) %>%
+          footnote(general =tb.foot ,footnote_as_chunk = T);tb.fm02
+```
+
