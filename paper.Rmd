@@ -44,7 +44,14 @@ rmarkdown::render("paper.Rmd", output_format = "bookdown::html_document2")
 ```
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H")
+knitr::opts_chunk$set(
+	echo = FALSE,
+	fig.pos = "H",
+	message = FALSE,
+	warning = FALSE,
+	cache = FALSE,
+	out.width = "85%"
+)
 # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
 # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
 options(scipen=999)
@@ -1196,7 +1203,7 @@ fm.df$nobs <- c(lavaan::nobs(fs1_o))
 fm.df      <- data.frame(t(fm.df))
 
 #------ extract factor loadings ------#
-loads01<- data.frame(round(inspect(fs1_o,what="std")$lambda,digits = 3))
+loads01<- data.frame(round(lavaan::inspect(fs1_o,what="std")$lambda,digits = 3))
 loads01[loads01==c(0.00)] <- NA; names(loads01) <- c(paste0("M1.",1:4))
 
 for (i in names(loads01)) {
