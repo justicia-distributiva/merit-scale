@@ -544,7 +544,11 @@ The proposed scale of perceptions and preferences relating to meritocracy consis
 
 ```{r table-indicadores, echo=FALSE}
 pacman::p_load(knitr, kableExtra, dplyr)
-
+table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+  "html" #if html set "html" in format
+} else if(knitr::is_latex_output()) {
+  "latex"#if latex set "latex" in format
+}
 tabitems <- read.csv(file = "input/tables/table01.csv",header = 1,sep = ",",encoding = "UTF-8") # call file generated externally for the table
 cnames <- c("Component", "Dimensions","Item (english)" , "Item original (spanish)")
 cap <- "Items of the perceptions and preferences for meritocracy scale."
@@ -692,9 +696,9 @@ Attending now to the association among the scale items, Figure \@ref(fig:corpoly
 
 ```{r corpoly, echo=FALSE, fig.cap = "Perceptions & preferences for meritcoracy items' polychoric correlations", fig.align='center'}
 load(file = "input/data/proc/data_s2.RData")
-
+pacman::p_load(dplyr)
 # generate polychoric matrix
-cor_s2<- data_s2 %>% select(perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw) %>% lavaan::lavCor(., ordered=names(.))
+cor_s2<- data_s2 %>% dplyr::select(perc_effort,perc_talent,perc_wpart,perc_netw,pref_effort,pref_talent,pref_wpart,pref_netw) %>% lavaan::lavCor(., ordered=names(.))
 
 diag(cor_s2) = NA
 
@@ -1119,35 +1123,6 @@ tb.issp<- kable(tb.perpref1,escape = FALSE,digits = 3,
           footnote(general =tb.foot ,footnote_as_chunk = T,threeparttable = T);tb.issp
 ```
 
-
-
-```{r tab-loads, echo=FALSE, eval=FALSE}
-pacman::p_load(dplyr)
-load(file = "output/tables/tb.fm.RData")
-cap <- "Factor loads and model fit."
-tb.col  <- c("Variables",1:4,1:4,1:4)
-tb.caption <- "Factor loadings and fit measures"
-tb.foot <- paste0("Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index (scaled); RMSEA = Root mean square error of approximation (scaled)")
-tb.fm <- tb.fm %>%
-    mutate(vars = recode(vars,
-                         "A. Who the more they try they manage to get bigger rewards that those who strive less."= "Perception Effort",
-                         "B. Who possess more talent they manage to obtain greater rewards than those who possess less talent."= "Perception Talent",
-                         "C. Who they have rich parents manage to get out ahead."="Perception rich parents",
-                         "D. Who they have good contacts they manage to get out ahead."="Perception contacts",
-                         "E. Who the more they try they should get greater rewards than those who they try less." = "Preferences Effort",
-                         "F. Who possess more talent they should get greater rewards than those who possess less talent."= "Preferences Talent",
-                         "G. It's fine that those who have rich parents get ahead" ="Preferences rich parents",
-                         "H. Is well that those who have good contacts get ahead." = "Preferences contacts"))
-tb.fm01<- kable(tb.fm, format = table_format, booktabs = T,linesep = "", escape = FALSE,align = "lcccccccccccc",col.names = tb.col, caption = cap) %>%
-          kable_styling(full_width = table_format2,latex_options = c("hold_position","scale_down"), position = "center",font_size = 9) %>%
-#          add_header_above(header = c(" "=1,"Version 1"= 4,"Version 2"= 4,"Version 3"= 4)) %>%
-#          add_header_above(header = c(" "=1,"Factor loadings"= 12)) %>%
-          row_spec(row = 8,hline_after = TRUE) %>%
-          add_indent(c(9:12))  %>%
-          footnote(general = tb.foot,threeparttable = T);tb.fm01
-```
-
-
 ## Appendix study 3
 
 ```{r fcloads-inv, echo=FALSE}
@@ -1164,6 +1139,7 @@ table_format2 = if(knitr::is_html_output()) {
 # Note: 
 # This CFA corresponds to the sample from the Factorial Survey Study 
 load(file = "input/data/proc/data_s3_inv.RData") #load data study 3
+pacman::p_load(dplyr,knitr,kableExtra)
 fs01  <- data_s3_inv %>% dplyr::filter(dataset=="fsw02") #subset sample
 
 # Set model
@@ -1207,7 +1183,6 @@ loads01<- data.frame(round(lavaan::inspect(fs1_o,what="std")$lambda,digits = 3))
 loads01[loads01==c(0.00)] <- NA; names(loads01) <- c(paste0("M1.",1:4))
 
 for (i in names(loads01)) {
-  # tb.load[,i] <- sjlabelled::as_character(tb.load[,i])
   loads01[,i] <- sprintf(loads01[,i], fmt = '%#.3f')
 }
 loads01[loads01=="NA"] <- ""
@@ -1228,7 +1203,6 @@ tb.fm2<- bind_rows(loads01,fm.df)
 tb.fm2<- tb.fm2 %>% 
   mutate(vars=c(labs,"$\\chi^2\\text{(df)}$","$\\text{CFI}$","$\\text{RMSEA}$","$N$")) %>%
   select(vars,everything())
-# load(file = "output/tables/tb.fact-f02.RData")
 tb.col  <- c(" ",
              "Meritocratic","Non-meritocratic",
              "Meritocratic","Non-meritocratic")
