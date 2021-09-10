@@ -6,14 +6,14 @@ link-citations: yes
 author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
 abstract: "Economic and social inequalities have generated growing concerns and crises across contemporary societies. One of the mechanisms proposed by social sciences to explain the persistence of inequality is the belief in meritocracy, which would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualization and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data to operationalize meritocracy, with a wide variation in the use and interpretation of the same survey items. Taking into account the extant literature that uses measures of meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding conceptualization and operationalization. Based on this critical analysis, we propose a conceptual framework for studying perceptions and preferences for meritocracy and non-meritocracy, which is then tested through confirmatory analysis using ISSP (International Social Survey Programme) data as well as a novel survey designed specifically with this purpose (N=2,141). Our results support the conceptual framework and its operationalizarion, although with a better fit for the proposed scale than for the ISSP survey. Our discussion highlights the importance of considering different dimensions in order to advance in the study of meritocracy."
 output:
-  bookdown::word_document2:
-    number_sections: false
-  bookdown::html_document2:
-    number_sections: false
   bookdown::pdf_document2:
      template: null
      toc: false
      number_sections: false
+  bookdown::html_document2:
+    number_sections: false
+  bookdown::word_document2:
+    number_sections: false
 linkcolor: blue
 bibliography:
   - input/bib/meritocracy.bib
@@ -66,6 +66,16 @@ fontsize: 10pt
  options(knitr.graphics.error = FALSE)
  Sys.setlocale("LC_ALL", "ES_ES.UTF-8")
 ```
+
+
+\newpage
+
+# Acknowledgments 
+
+The authors recognize the support of ANID/FONDECYT grant 1160921 and of  the Center for Conflict and Social Cohesion Studies (COES)  grant ANID/FONDAP 1513009.
+
+\newpage
+
 
 # Introduction
 
@@ -145,15 +155,15 @@ The columns "Perceptions" and "Preferences" represent the distinction between th
   }
 ```
 
-The analysis is organized in three studies. Study 1 serves as a background to our instrument proposal by attempting to operationalize the meritocracy dimensions with available secondary data from the inequality module of the International Social Survey Programme (ISSP). Although we are aware that the available indicators in this dataset do not allow a precise operationalization of the conceptual model, we know that it is the most widely used data in comparative meritocracy studies (as well as overall subjective inequality) and therefore it is certainly useful to look at its potentials and limitations to this regard. Study 2 is the core of this paper and consists of the proposal of a new scale for measuring meritocratic perceptions and preferences. Finally, in Study 3 we perform additional validity analysis of the meritocracy scale.
+The analysis is organized in three studies. Study 1 serves as a background to our instrument proposal by attempting to operationalize the meritocracy dimensions with available secondary data from the inequality module of the ISSP. Although we are aware that the available indicators in this dataset do not allow a precise operationalization of the conceptual model, we know that it is the most widely used data in comparative meritocracy studies (as well as overall subjective inequality) and therefore it is certainly useful to look at its potentials and limitations to this regard. Study 2 is the core of this paper and consists of the proposal of a new scale for measuring meritocratic perceptions and preferences. Finally, in Study 3 we perform additional validity analysis of the meritocracy scale.
 
-## Study 1: Measuring meritocracy with international secondary data
+# Study 1: Measuring meritocracy with international secondary data
 
-### Data
+## Data
 
-The data cooresponds to the last available wave of the social inequality module from the International Social Survey Programme (ISSP), which is the most specialized international comparative survey in perceptions, attitudes and beliefs about inequality related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 41 countries and 56021 individuals. Although there is data available from this module for previous waves (1987, 1992 and 1999), unfortunately there are several variables that are important for this research that were not included, particularly in 1987 and 1999, reason why we only use the 2009 wave (during the development of this research the 2019 wave became available, but so far only with a restricted set of countries).
+The data cooresponds to the last available wave of the social inequality module from the ISSP, which is the most specialized international comparative survey in perceptions, attitudes and beliefs about inequality related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 41 countries and 56021 individuals. Although there is data available from this module for previous waves (1987, 1992 and 1999), unfortunately there are several variables that are important for this research that were not included, particularly in 1987 and 1999, reason why we only use the 2009 wave (during the development of this research the 2019 wave became available, but so far only with a restricted set of countries).
 
-### Variables
+## Variables
 
 There are a series of indicators in the ISSP survey that in the following we attempt to classify in our meritocracy measurement scheme. However, it is important to mention  that the items were not originally designed as a specific measure of meritocracy. The variables are presented below organized in perceptions and preferences:
 
@@ -190,13 +200,13 @@ The classification of the items is based on criteria of internal motivation (mer
 
 - Preferences for meritocracy-non meritocracy: for the operationalization of normative preferences we used a list of items related to reasons for pay battery. The ISSP question was: _In deciding how much people ought to earn, how important should each of these things be, in your opinion_, rated in the same _essential-non important at all_ scale (1 to 5) as the questions for meritocratic perceptions.
 
-### Methods
+## Methods
 
 The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012]. As recommended by @brown_confirmatory_2015, we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
 
-### Results
+## Results
 
-#### Descriptive analyses
+### Descriptive analyses
 
 ```{r desc-issp, eval=FALSE, include=FALSE, results='asis'}
   load(file = "input/data/proc/data_s1.RData")
@@ -422,7 +432,7 @@ In terms of the association between the indicators, Figure \@ref(fig:corr-issp) 
     na.label = "-")
 ```
 
-#### Confirmatory Factor Analysis
+### Confirmatory Factor Analysis
 
 
 First, a four-dimensional model for meritocratic and non-meritocratic perception and preferences is estimated, considering all indicators of the non-meritocratic perception dimension as a single latent variable. Then, we estimate a model that follows the proposed four latent variable measurement approach, however, the non-meritocratic perception dimension is assumed as a second-order factor for the first order latent variables parental attributes, racial and gender background and networks.
@@ -498,15 +508,15 @@ Table \@ref(tab:sum-fit-issp) shows the results of the estimation of two confirm
 
 Regarding the correlations between the factors in the Figure \@ref(fig:meas02-issp), we observe that perceptions are correlated with preferences, but more strongly for the meritocratic ($r=0.46$) than for the non-meritocratic ($r=0.27$) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation ($r=0.30$), suggesting that they are not the opposite poles of the same  continuum. Something similar occurs for the correlation between the two dimensions of preferences ($r=0.25$). From this information we can preliminary conclude that the wide use of reverse-coding for non-meritocratic items attempting to measure meritocracy is not an adequate operationalization of the construct. All in all, despite the good fit of the second order model there are still several limitations regarding the content of the items which we attempt to overcome next by developing a new instrument.
 
-## Study 2: The Perceptions and Preferences for Meritocracy Scale
+# Study 2: The Perceptions and Preferences for Meritocracy Scale
 
-### Data {-#data}
+## Data {-#data}
 
-The data was obtained through an online survey which was part of a larger study on meritocracy and preferences developed in Chile in 2019, funded by the national scientific agency ANID. The questionnaire was programmed in Qualtrics and the fieldwork was conducted by an external online survey agency ([netquest.com](www.netquest.com)) between December 2019 and January 2020. The sample was selected from a non-probabilistic quota design in three large cities in Chile (Santiago, Concepción & Antofagasta). The quotas for gender, age, and educational levels were generated based on a survey by the Public Studies Center [@cep_encuesta_2019], which is a well regarded counterpart agency of the ISSP (International Social Survey Programme) in Chile. A total sample of 2,141 people was collected, excluding those who did not signed the informed consent as well as those not answering the meritocracy response battery. There were no significant differences between our sample and the wider population for most socio-demographic characteristics, with the exception of educational level (see Table \@ref(tab:rep-samp) in Appendix). As it is often the case with online surveys, there were some limitations in achieving the quotas for lower educational levels [@zhang_quota_2018; @boas_recruiting_2020].
+The data was obtained through an online survey which was part of a larger study on meritocracy and preferences developed in Chile in 2019, funded by the national scientific agency ANID. The questionnaire was programmed in Qualtrics and the fieldwork was conducted by an external online survey agency ([netquest.com](www.netquest.com)) between December 2019 and January 2020. The sample was selected from a non-probabilistic quota design in three large cities in Chile (Santiago, Concepción & Antofagasta). The quotas for gender, age, and educational levels were generated based on a survey by the Public Studies Center [@cep_encuesta_2019], which is a well regarded counterpart agency of the ISSP in Chile. A total sample of 2,141 people was collected, excluding those who did not signed the informed consent as well as those not answering the meritocracy response battery. There were no significant differences between our sample and the wider population for most socio-demographic characteristics, with the exception of educational level (see Table \@ref(tab:rep-samp) in Appendix). As it is often the case with online surveys, there were some limitations in achieving the quotas for lower educational levels [@zhang_quota_2018; @boas_recruiting_2020].
 
-### Study design
+## Study design
 
-#### Instrument
+### Instrument
 
 
 The proposed scale of perceptions and preferences relating to meritocracy consisted of eight indicators that were grouped into the four dimensions listed earlier: Perceptions (meritocratic/non-meritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery "reasons to get ahead" (ISSP/GSS), which has been widely used for operationalizing meritocracy in previous studies [@mijs_paradox_2019; @duru-bellat_who_2012; @reynolds_perceptions_2014]. The aforementioned eight items, ordered according to dimensions, are presented in Table \@ref(tab:table-indicadores). These eight likert-type items have five response alternatives, ranging from "Completely disagree"(1) to "Completely agree" (5).
@@ -540,7 +550,7 @@ The proposed scale of perceptions and preferences relating to meritocracy consis
 
 \pagebreak
 
-#### Administration sets
+### Administration sets
 
 With the objective of evaluating the effect of indicator ordering in the responses, three different versions of items' order were designed and randomly assigned to the respondents, as depicted in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order that appears in Table \@ref(tab:table-indicadores) according to perceptions and preferences. For the second group (_n = 717_), the order was reorganized according to perceptions and preferences over the same topic, e.g. for the topic of hard work, the item about perception was followed by the item about preference, and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were presented as completely randomized.
 
@@ -548,15 +558,15 @@ With the objective of evaluating the effect of indicator ordering in the respons
  knitr::include_graphics('output/images/app_mod.png')
 ```
 
-### Methods
+## Methods
 
 To test the scale's underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table \@ref(tab:table-indicadores). As in Study 1, CFA was conducted using the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012]. The fit indexes and cut-off criteria were the same as the ones used in Study 1.
 
 A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2](https://osf.io/z45y2). Included in this pre-registration are the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
 
-### Results
+## Results
 
-#### Descriptive analyses
+### Descriptive analyses
 
 The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and comparable information of the different response categories for each item. As it can be observed, in general there is more agreement in the perception of non-meritocratic items than in meritocratic ones, while in the case of preferences the opposite occurs. As far as preferences are concerned, the preponderant role of effort over talent as a criterion of meritocratic preference is noteworthy. All in all the descriptive results tend to show a sort of critical view of meritocracy, perceiving the operation of non-meritocratic aspects over meritocratic ones, whereas in the preferences the  opposite occurs.
 
@@ -688,7 +698,7 @@ Attending now to the association among the scale items, Figure \@ref(fig:corpoly
     na.label = "-")
 ```
 
-#### Confirmatory Factor Analysis
+### Confirmatory Factor Analysis
 
 
 The present sections shows the results of the confirmatory factor analysis estimation. The model estimates four latent factors: perception meritocratic, perception non-meritocratic, preferences meritocratic and preferences non-meritocratic. Each factor is estimated based on two items of the scale as detailed in Table \@ref(tab:table-indicadores).
@@ -759,17 +769,17 @@ Table \@ref(tab:table-cfafits) shows the fit indicators of the models estimated 
 
 Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:meas02), meritocratic preferences are moderate to highly correlated with perceptions, both meritocratic ($r=0.457$) and non-meritocratic ($r=0.500$). The correlation between both types of perceptions ($r=-0.044$) and both types preferences ($r=0.185$) are low, as well as between non-meritocratic preferences and perceptions ($r=-0.059$). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects as assumed by previous studies.
 
-## Study 3: Additional validity analyses
+# Study 3: Additional validity analyses
 
 We performed two further analyses in order to add evidence regarding the quality of the scale. Firstly we analyzed the convergent validity by exploring the association of the merit scale with related concepts and its correspondent measurements. Secondly, we test the internal consistency of the measurement model behind the scale comparing with a different sample through measurement invariance procedures.
 
-### Convergent validity
+## Convergent validity
 
-#### Data
+### Data
 
 For this analysis we examined data from the last of the three waves of the online panel survey used in Study 2. This wave included additional measures that allow testing the correlations of the merit scale with some related constructs as opportunity beliefs and personal wherewithal. After listwise deletion of missing cases in socio-demographics information, a total of 1422 individuals took part in the third wave: 668 (46.97%) women and 754 (53.03%) men. The ages of 50.57% of them are 45 years or older, and 36.28% held a tertiary degree.
 
-#### Variables
+### Variables
 
 The following scales were included for testing their correlations with the the 8-item meritocracy scale:
 
@@ -779,7 +789,7 @@ The following scales were included for testing their correlations with the the 8
 
 Both instruments cover mainly the perceptual side of the concept. Therefore, in general we expect larger correlation with meritocratic perceptions than with preferences. In the case of opportunity beliefs, the hard work item should correlate positively with meritocratic perception whereas the importance for coming from a wealthy family is expected to correlate positively with non-meritocratic perceptions. Regarding the second instrument of personal wherewithal, we also anticipate a positive correlation with meritocratic perception and low to null correlations with the other dimensions of the merit scale.
 
-#### Results
+### Results
 
 We used polychoric correlations to evaluate relationships of meritocractic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal, we examined Pearson correlations.
 
@@ -835,7 +845,7 @@ Table \@ref(tab:val-conv) shows the polychoric and Pearson correlations between 
 
 The measure of NBI for _personal wherewithal_ also provides evidence for the convergent validity of the merit scale. Results indicate a positive correlation of this measure with meritocratic perception ($r=0.406$), suggesting that both variables capture similar concepts. The NBI's factor depicts a positive association with unmeritocratic preference ($r=0.225$). This finding is consistent with literature, inasmuch as the belief for meritocray is associated with the justification of inequality [@mccall_exposure_2017; @madeira_primes_2019]. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perceptions and unmeritocratic preferences show a positive and weak correlation.
 
-### Measurement invariance
+## Measurement invariance
 
 The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts [@davidov_measurement_2014]. In this section we will use an analysis of invariance between groups, where the proposed factorial structure is expected to be independent of belonging to the sample corresponding to the original study, comparing it with another more recent study available and where the meritocracy scale was also incorporated.
 
@@ -849,15 +859,15 @@ The invariance measurement procedure consists of a series of nested models to wh
 
 4. **Strict:** equality restrictions are added to the error variances of each indicator.
 
-#### Data
+### Data
 
 For testing the invariance we compared the data described previously with a new data source coming from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample obtained contains 1,242 cases, where 605 (48.71%) are women and 637 (51.28%) are men. 48.84% of them are 45 years of age or older, and 33.97% have tertiary education or higher.
 
-#### Variables
+### Variables
 
 The items of the meritocracy scale were identical to the original. The items were administrated in a randomized order (which corresponds to the application modality of Group 3 present in Figure \@ref(fig:appmod)).
 
-#### Results
+### Results
 
 Table \@ref(tab:fcloads-inv) shows the results of the CFA estimation of the meritocracy scale in this new sample. As observed, the loadings and the fit indices show similar results as the ones presented for the original study above, which gives a first base from which to start the invariance analysis.
 
