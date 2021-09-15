@@ -26,6 +26,7 @@ header-includes:
   - \usepackage{times}           # Times New Roman
   - \usepackage{caption}
   - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
+  - \usepackage[figurename=Fig.]{caption}
   - \usepackage{graphicx}
   - \usepackage{float}
   - \usepackage{booktabs}
@@ -132,7 +133,7 @@ Based on the previous assumptions and limitations identified in the empirical st
 The proposed conceptual and measurement framework is depicted in Figure \@ref(fig:merit-model):
 
 ```{r merit-model, echo=FALSE, fig.cap = "Model of perception and preferences for meritocracy and non-meritocracy", fig.align='center'}
- knitr::include_graphics("input/images/generalf.png")
+ knitr::include_graphics("input/images/Fig1.generalf.png")
 ```
 
 The columns "Perceptions" and "Preferences" represent the distinction between these two concepts, usually confused under the label "beliefs" [@castillo_meritocracia_2019]. Perceptions refer to the extent to which people observe that meritocracy functions or applies in their society, which relates to items such as "Hard work is important to get ahead in society". Preferences refer to normative expectations that are usually linked to a "should" expression (e.g. whether hard work should be related to payment). The rows in Figure \@ref(fig:merit-model) consider the distinction between meritocratic and non-meritocratic dimensions [@reynolds_perceptions_2014], usually treated as different ends of the same continuum in previous research. Non-meritocratic elements refer to the use of resources such as personal contacts or family advantages to get ahead in life.
@@ -209,6 +210,7 @@ The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was c
 ### Descriptive analyses
 
 ```{r desc-issp, eval=FALSE, include=FALSE, results='asis'}
+
   load(file = "input/data/proc/data_s1.RData")
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(dplyr, psych, knitr, kableExtra)
@@ -301,7 +303,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
     dplyr::select(hwork_r:ambition_r) %>%
     sjPlot::plot_likert(geom.colors = "PuBu",
                         grid.range  =  c (1.2 , 1.2),
-                        title = "Perception meritocratic",
+                        title = "a. Perception meritocratic",
                           geom.size = c(0.62),
                           catcount = 5,
                           expand.grid = T,
@@ -315,7 +317,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
     dplyr::select(wealthy_r:polcone_r) %>%
     sjPlot::plot_likert(geom.colors = "PuBu",
                         grid.range  =  c (1.2 , 1.2),
-                        title = "Perception Non-meritocratic",
+                        title = "b. Perception Non-meritocratic",
                           geom.size = c(0.9),
                           catcount = 5,
                           expand.grid = T,
@@ -329,7 +331,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
     dplyr::select(welljob_r:hardjob_r) %>%
     sjPlot::plot_likert(geom.colors = "PuBu",
                         grid.range  =  c (1.2 , 1.2),
-                        title = "Preference meritocratic",
+                        title = "c. Preference meritocratic",
                           geom.size = c(0.62),
                           catcount = 5,
                           expand.grid = T,
@@ -343,7 +345,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
     dplyr::select(family_r:child_r) %>%
     sjPlot::plot_likert(geom.colors = "PuBu",
                         grid.range  =  c (1.2 , 1.2),
-                        title = "Preference Non-meritocratic",
+                        title = "d. Preference Non-meritocratic",
                           geom.size = c(0.62),
                           catcount = 5,
                           expand.grid = T,
@@ -369,6 +371,9 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
 ```
 
 ```{r likert-issp,fig.height=11,fig.width=11,fig.cap="Distribution of responses in the ISSP meritocracy items", out.width='80%'}
+
+#dev.copy(png,'output/images/Fig2.plotlikert-study1.png') # save image
+
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(cowplot, dplyr)
   #Final plot
@@ -388,11 +393,16 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
     hjust = 0.25# Caption align
     ) %>%
     cowplot::ggdraw()
+#dev.off()
 ```
 
 In terms of the association between the indicators, Figure \@ref(fig:corr-issp) shows the polychoric correlation matrix. Firstly, we observe in general that the moderat to high associations are between the pairs of items representing each of the dimensions as described in \@ref(tab:table-issp). The exception here is the dimension of non-meritocratic perception, in which there are six items which appear mostly associated by pairs according to their specific topics (family background, personal background and connections). Still, between this same set of items there are moderate correlations (around 0.3), which could anticipate a single latent factor underlying non meritocratic perception and that is tested next through confirmatory factor analysis.
 
 ```{r corr-issp,fig.cap = "Perceptions and preferences for ISSP  meritocracy items' polychoric correlations", fig.align='center',fig.height=6,fig.width=8}
+
+#dev.copy(png,'output/images/Fig3.plotcor-sutdy1.png') # save image  
+
+
   load(file = "input/data/proc/data_s1.RData")
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(dplyr, corrplot, lavaan)
@@ -430,6 +440,9 @@ In terms of the association between the indicators, Figure \@ref(fig:corr-issp) 
     col=colorRampPalette(c("white","#0068DC"))(12),
     bg = "white",
     na.label = "-")
+
+#dev.off()
+  
 ```
 
 ### Confirmatory Factor Analysis
@@ -503,7 +516,7 @@ Table \@ref(tab:sum-fit-issp) shows the results of the estimation of two confirm
 
 
 ```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center',fig.cap="Confirmatory factor analysis of the ISSP indicators of Perceptions and Preferences for Meritocracy"}
- knitr::include_graphics('output/images/cfa_issp_study1.PNG')
+ knitr::include_graphics('output/images/Fig4.cfa_issp_study1.PNG')
 ```
 
 Regarding the correlations between the factors in the Figure \@ref(fig:meas02-issp), we observe that perceptions are correlated with preferences, but more strongly for the meritocratic ($r=0.46$) than for the non-meritocratic ($r=0.27$) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation ($r=0.30$), suggesting that they are not the opposite poles of the same  continuum. Something similar occurs for the correlation between the two dimensions of preferences ($r=0.25$). From this information we can preliminary conclude that the wide use of reverse-coding for non-meritocratic items attempting to measure meritocracy is not an adequate operationalization of the construct. All in all, despite the good fit of the second order model there are still several limitations regarding the content of the items which we attempt to overcome next by developing a new instrument.
@@ -555,7 +568,7 @@ The proposed scale of perceptions and preferences relating to meritocracy consis
 With the objective of evaluating the effect of indicator ordering in the responses, three different versions of items' order were designed and randomly assigned to the respondents, as depicted in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order that appears in Table \@ref(tab:table-indicadores) according to perceptions and preferences. For the second group (_n = 717_), the order was reorganized according to perceptions and preferences over the same topic, e.g. for the topic of hard work, the item about perception was followed by the item about preference, and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were presented as completely randomized.
 
 ```{r appmod, echo=FALSE, fig.cap = "Survey flow", fig.align='center'}
- knitr::include_graphics('output/images/app_mod.png')
+ knitr::include_graphics('output/images/Fig5.app_mod.png')
 ```
 
 ## Methods
@@ -598,7 +611,7 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
   p1<-
     dplyr::select(dat_likert_s2,perc_effort_r:perc_netw_r) %>%
     sjPlot::plot_likert(geom.colors = "PuBu",
-                        title = c("Perceptions"),
+                        title = c("a. Perceptions"),
                         geom.size = 0.8,
                         axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
                         catcount = 4,
@@ -614,7 +627,7 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
   p2<-
     dplyr::select(dat_likert_s2,pref_effort_r:pref_netw_r) %>%
     sjPlot::plot_likert(geom.colors = "PuBu",
-                        title = c("Preferences"),
+                        title = c("b. Preferences"),
                         geom.size = 0.8,
                         axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
                         catcount = 4,
@@ -645,6 +658,9 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
 ```
 
 ```{r plotlikert, echo=FALSE, fig.align='center', fig.cap="Distribution of responses in the Merit Scale items", fig.height=8, fig.width=11}
+
+#dev.copy(png,'output/images/Fig6.plotlikertmerit-scale.png') # save image    
+
   if (!require("pacman")) install.packages("pacman")
   pacman::p_load(cowplot)
   #Final plot
@@ -662,11 +678,15 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
     hjust = -0.15# Caption align
     ) %>%
     cowplot::ggdraw()
+  #dev.off()
+
 ```
 
 Attending now to the association among the scale items, Figure \@ref(fig:corpoly) shows items polychoric correlations. There are three main aspects to highlight from this correlation matrix.  Firstly, as expected the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, $r=0.52$). Secondly, among this correlations the highest are those between the non-meritocratic dimension but in perceptions ($r=0.73$) and preferences ($r=0.61$). Thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations. This is noteworthy because it indicates that the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, and similar to what was found in Study 1 with ISSP data, we observe that there are no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining the assumptions of previous studies that suggested that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
 
 ```{r corpoly, echo=FALSE, fig.cap = "Perceptions and preferences for meritcoracy items' polychoric correlations", fig.align='center'}
+
+#dev.copy(png,'output/images/Fig6.plotcor-sutdy2.png') # save image  
   if (!require("pacman")) install.packages("pacman")
   load(file = "input/data/proc/data_s2.RData")
   pacman::p_load(dplyr, corrplot, lavaan)
@@ -696,6 +716,7 @@ Attending now to the association among the scale items, Figure \@ref(fig:corpoly
     col=colorRampPalette(c("white","#0068DC"))(8),
     bg = "white",
     na.label = "-")
+#dev.off()
 ```
 
 ### Confirmatory Factor Analysis
@@ -764,7 +785,7 @@ Table \@ref(tab:table-cfafits) shows the fit indicators of the models estimated 
 
 ```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale", fig.align='center'}
  # estimation for diagram: summary(fit_cfa3, standardized = TRUE, fit.measures=TRUE)
- knitr::include_graphics('output/images/cfa_randomized_study2.png')
+ knitr::include_graphics('output/images/Fig8.cfa_randomized_study2.png')
 ```
 
 Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:meas02), meritocratic preferences are moderate to highly correlated with perceptions, both meritocratic ($r=0.457$) and non-meritocratic ($r=0.500$). The correlation between both types of perceptions ($r=-0.044$) and both types preferences ($r=0.185$) are low, as well as between non-meritocratic preferences and perceptions ($r=-0.059$). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects as assumed by previous studies.
