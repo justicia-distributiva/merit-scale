@@ -26,6 +26,7 @@ header-includes:
   - \usepackage{caption}
   - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
   - \usepackage[figurename=Fig.]{caption}
+  - \usepackage[labelfont=bf]{caption}
   - \usepackage{graphicx}
   - \usepackage{float}
   - \usepackage{booktabs}
@@ -45,8 +46,8 @@ fontsize: 10pt
 ```{r eval=FALSE, include=FALSE}
  # for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
  # clean #in the yml
- rmarkdown::render("paper.Rmd", output_format = "bookdown::pdf_document2")
- rmarkdown::render("paper.Rmd", output_format = "bookdown::html_document2")
+ rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::pdf_document2")
+ rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::html_document2")
  # rmarkdown::render("paper.Rmd", output_format = "bookdown::word_document2")
 ```
 
@@ -804,13 +805,13 @@ The modeling for invariance testing has been gaining more relevance in sociologi
 
 The invariance measurement procedure consists of a series of nested models to which restrictions are progressively incorporated on the parameters of the measurement model. The literature generally suggests that this modeling should be done through four levels or types of progressive restriction [@milfont_testing_2010; @millsap_statistical_2011; @vandeschoot_checklist_2012]:
 
-1. **Configural:** the model is estimated only indicating the factorial structure used in the CFA.
+1. *Configural:* the model is estimated only indicating the factorial structure used in the CFA.
 
-2. **Weak:** an equality restriction is applied to the factor loadings in the different groups, that is, the loadings are forced to be identical in both measurements.
+2. *Weak:* an equality restriction is applied to the factor loadings in the different groups, that is, the loadings are forced to be identical in both measurements.
 
-3. **Strong:** equality restrictions are added to the intercepts of each indicator.
+3. *Strong:* equality restrictions are added to the intercepts of each indicator.
 
-4. **Strict:** equality restrictions are added to the error variances of each indicator.
+4. *Strict:* equality restrictions are added to the error variances of each indicator.
 
 ### Data
 
