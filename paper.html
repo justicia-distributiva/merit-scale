@@ -1,0 +1,1920 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Measuring Perceptions and Preferences for Meritocracy</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+<style type="text/css">
+  p.abstract{
+    text-align: center;
+    font-weight: bold;
+  }
+  div.abstract{
+    margin: auto;
+    width: 90%;
+  }
+</style>
+
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Measuring perceptions and preferences for meritocracy</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="paper.html">Paper</a>
+</li>
+<li>
+  <a href="paper.pdf">
+    <span class="fa fa-file-pdf"></span>
+     
+    
+  </a>
+</li>
+<li>
+  <a href="https://github.com/juancarloscastillo/merit-scale">
+    <span class="fa fa-github fa-lg"></span>
+     
+    
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Measuring Perceptions and Preferences for Meritocracy</h1>
+<div class="abstract">
+<p class="abstract">Abstract</p>
+Economic and social inequalities have generated growing concerns and crises across contemporary societies. One of the mechanisms proposed by social sciences to explain the persistence of inequality is the belief in meritocracy, which would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualization and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data to operationalize meritocracy, with a wide variation in the use and interpretation of the same survey items. Taking into account the extant literature that uses measures of meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding conceptualization and operationalization. Based on this critical analysis, we propose a conceptual framework for studying perceptions and preferences for meritocracy and non-meritocracy, which is then tested through confirmatory analysis using ISSP (International Social Survey Programme) data as well as a novel survey designed specifically with this purpose (N=2,141). Our results support the conceptual framework and its operationalizarion, although with a better fit for the proposed scale than for the ISSP survey. Our discussion highlights the importance of considering different dimensions in order to advance in the study of meritocracy.
+</div>
+
+</div>
+
+
+<div style="page-break-after: always;"></div>
+<div id="acknowledgments" class="section level1">
+<h1>Acknowledgments</h1>
+<p>The authors recognize the support of ANID/FONDECYT grant 1160921 and of the Center for Conflict and Social Cohesion Studies (COES) grant ANID/FONDAP 1513009.</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Economic inequality and income concentration have become topics of growing concern over the last years, acquiring even more salience in times of pandemic and economic crises. This has led to a series of social movements in different societies as well as diverse critical analyses regarding the development of capitalism and its consequences <span class="citation">(<a href="#ref-streeck_politics_2014" role="doc-biblioref"><strong>streeck_politics_2014?</strong></a>; <a href="#ref-piketty_capital_2014" role="doc-biblioref"><strong>piketty_capital_2014?</strong></a>)</span>. In this context, the study of views, preferences, and perceptions of inequality has acquired relevance in the social sciences, in topics such as redistributive preferences <span class="citation">(<a href="#ref-alesina_fairness_2005" role="doc-biblioref">Alesina &amp; Angeletos, 2005</a>; <a href="#ref-dimick_models_2018" role="doc-biblioref">Dimick et al., 2018</a>)</span>, the legitimization of economic inequality <span class="citation">(<a href="#ref-schroder_income_2017" role="doc-biblioref">Schröder, 2017</a>)</span> and the functioning of meritocracy <span class="citation">(<a href="#ref-duru-bellat_who_2012" role="doc-biblioref">Duru-Bellat &amp; Tenret, 2012</a>; <a href="#ref-mijs_paradox_2019" role="doc-biblioref">Mijs, 2019</a>; <a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">Reynolds &amp; Xian, 2014</a>; <a href="#ref-atria_economic_2020" role="doc-biblioref"><strong>atria_economic_2020?</strong></a>)</span>. Within this context, the ideal of meritocracy has been strongly challenged as an unfulfilled promise of modern societies that allows the perpetuation of social inequalities <span class="citation">(<a href="#ref-goldthorpe_myth_2003" role="doc-biblioref">Goldthorpe, 2003</a>; <a href="#ref-sandel_tyranny_2020" role="doc-biblioref">Sandel, 2020</a>)</span>.</p>
+<p>In general, meritocracy is defined as a system of distribution of resources and rewards based on individual merit, which in its original conception is a combination of talent and effort <span class="citation">(<a href="#ref-young_rise_1962" role="doc-biblioref">Young, 1962</a>)</span>. This traditional conception of merit places in a secondary position the possible interference of structural or non-meritocratic factors, such as inheritance, personal contacts, and luck <span class="citation">(<a href="#ref-yair_meritocracy_2007" role="doc-biblioref">Yair, 2007</a>; <a href="#ref-young_rise_1962" role="doc-biblioref">Young, 1962</a>; <a href="#ref-breen_class_1999" role="doc-biblioref"><strong>breen_class_1999?</strong></a>; <a href="#ref-saunders_might_1995" role="doc-biblioref"><strong>saunders_might_1995?</strong></a>; <a href="#ref-land_we_2006" role="doc-biblioref"><strong>land_we_2006?</strong></a>)</span>. Social psychology and sociology have studied the characteristics and consequences of beliefs in meritocracy, under the general hypothesis that a greater belief in meritocracy emphasizes the role of the individual over structural factors in personal achievements, leading to greater legitimization of inequalities <span class="citation">(<a href="#ref-hadjar_meritokratie_2008" role="doc-biblioref">Hadjar, 2008</a>; <a href="#ref-madeira_primes_2019" role="doc-biblioref">Madeira et al., 2019</a>; <a href="#ref-preminger_meritocracy_2020" role="doc-biblioref"><strong>preminger_meritocracy_2020?</strong></a>; <a href="#ref-trump_when_2020" role="doc-biblioref"><strong>trump_when_2020?</strong></a>)</span>. Such research has raised criticism of meritocracy as a moral standard of distribution given the preponderant weight of non-meritocratic elements upon the individual status and social mobility <span class="citation">(<a href="#ref-arrow_meritocracy_2000" role="doc-biblioref">Arrow et al., 2000</a>; <a href="#ref-goldthorpe_myth_2003" role="doc-biblioref">Goldthorpe, 2003</a>; <a href="#ref-khan_privilege_2013" role="doc-biblioref">Khan, 2013</a>; <a href="#ref-markovits_meritocracy_2019" role="doc-biblioref">Markovits, 2019</a>; <a href="#ref-sandel_tyranny_2020" role="doc-biblioref">Sandel, 2020</a>; <a href="#ref-witteveen_reconsidering_2020" role="doc-biblioref"><strong>witteveen_reconsidering_2020?</strong></a>)</span>.</p>
+<p>Due to the role that meritocratic beliefs play in the justification of individual achievement (or failure) in contemporary societies <span class="citation">(<a href="#ref-hadjar_meritokratie_2008" role="doc-biblioref">Hadjar, 2008</a>; <a href="#ref-markovits_meritocracy_2019" role="doc-biblioref">Markovits, 2019</a>; <a href="#ref-sandel_tyranny_2020" role="doc-biblioref">Sandel, 2020</a>)</span>, multiple studies have evaluated the relationship between meritocratic beliefs and personal and/or contextual characteristics. For example, some studies have linked meritocracy to the reinforcement of socio-economic, gender, and ethnic stereotypes <span class="citation">(<a href="#ref-madeira_primes_2019" role="doc-biblioref">Madeira et al., 2019</a>; <a href="#ref-girerd_neoliberalism_2020" role="doc-biblioref"><strong>girerd_neoliberalism_2020?</strong></a>; <a href="#ref-girerd_neoliberalism_2020" role="doc-biblioref"><strong>girerd_neoliberalism_2020?</strong></a>)</span>, as well as the effects of meritocratic beliefs in educational <span class="citation">(<a href="#ref-generett_stories_2020" role="doc-biblioref"><strong>generett_stories_2020?</strong></a>; <a href="#ref-owens_engines_2020" role="doc-biblioref"><strong>owens_engines_2020?</strong></a>)</span> and organizational contexts <span class="citation">(<a href="#ref-perez_advancing_2020" role="doc-biblioref"><strong>perez_advancing_2020?</strong></a>; <a href="#ref-aiello_new_2019" role="doc-biblioref"><strong>aiello_new_2019?</strong></a>)</span>. Most of such studies so far have used indicators from existing standard social surveys, such as the International Social Survey Programme (ISSP), to measure meritocracy. However, as we will show later, the concepts used as well as the instruments for measuring meritocracy vary extensively among studies. In many cases, similar phenomena are associated with different indicators, and conversely, often different phenomena are measured with similar indicators. Such trends not only limit the comparability of studies, but also the ability to understanding the effects of meritocratic beliefs across different disciplines and lines of research.</p>
+<p>Based on a critical analysis of different approaches to the measurement of meritocracy to date, this article proposes an instrument to both measure and relate two main aspects in the study of meritocracy: perceptions and preferences. Furthermore, it distinguishes between meritocratic and non-meritocratic dimensions, as they are not necessarily two poles of the same continuum as previous studies seem to suggest. This conceptual framework is oriented to develop a measurement instrument as simple and brief as possible, being suitable to be used in public opinion surveys and allowing to integrate meritocratic beliefs in the study of different social phenomena.</p>
+<div id="blackbox" class="section level2 unnumbered">
+<h2>The black-box of meritocratic beliefs</h2>
+<p>In the following, we discuss four critical aspects in studies conceptualizing and measuring meritocracy, based upon which we develop a conceptual and measurement proposal.</p>
+<ol style="list-style-type: lower-alpha">
+<li><em>Conceptual components</em>: Is merit only effort?</li>
+</ol>
+<p>One recent definition of meritocracy by <span class="citation">Mijs (<a href="#ref-mijs_paradox_2019" role="doc-biblioref">2019</a>)</span> is the following: “When I discuss meritocracy beliefs, I am referring to citizens’ belief in the importance of hard work relative to structural factors.” <span class="citation">(<a href="#ref-mijs_paradox_2019" role="doc-biblioref">Mijs, 2019, p. pg.9</a>)</span>. In the subsequent operationalization, this is associated with the following question and indicator: “how important you think it is for getting ahead in life: (a) hard work”, scored from 1 to 5 on a likert scale. The assumptions behind such definition are worth discussing in light of the conceptual meaning of meritocracy and its possibilities of operationalization.</p>
+<p>The item used by <span class="citation">Mijs (<a href="#ref-mijs_paradox_2019" role="doc-biblioref">2019</a>)</span> is part of an items’ battery present in several international surveys, usually called “reasons to get ahead”. This battery displays a series of indicators related to what people consider important to get ahead in life: hard work, education, ambition, a wealthy family, the right connections, religion, race, and gender. Therefore, when considering only one of the items, it means that other aspects that could be associated with talent, such as education, would not be deemed as meritocratic. As he points out: “Hard work is arguably the most meritocratic part of Michael Young’s equation: ‘Merit = Intelligence + Effort’, for the simple fact that intelligence itself is influenced by a non-meritocratic factor: who your parents happen to be” (p.5).</p>
+<p>In this conceptual and measurement approach of meritocratic beliefs, we can observe a couple of strong conceptual assumptions: a) effort would not depend on parental influence, and b) talent (as innate ability) is not meritocratic (contrary to Michael Youngs’ original conceptualization). This conceptual and measurement-based assumption is found in other studies, which also assumes effort to be the main and only aspect of meritocracy <span class="citation">(<a href="#ref-girerd_neoliberalism_2020" role="doc-biblioref"><strong>girerd_neoliberalism_2020?</strong></a>; <a href="#ref-bubak_perceptions_2019" role="doc-biblioref"><strong>bubak_perceptions_2019?</strong></a>)</span>, raising the question: Is effort the only dimension behind the concept of meritocracy? The question of whether talent (as intelligence and ability) is or is not considered meritocratic is certainly an interesting topic to discuss from a philosophical point of view, but for those working on empirical studies, it should face empirical scrutiny. Besides, the consideration of talent as part of meritocracy certainly opens some interesting avenues of research, for instance in studies showing that for the elites meritocracy is more related to talent, whereas effort is something more characteristic of the meritocracy of the middle and low classes <span class="citation">(<a href="#ref-atria_economic_2020" role="doc-biblioref"><strong>atria_economic_2020?</strong></a>)</span>.</p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li><em>Beliefs?</em></li>
+</ol>
+<p>Several approaches to the empirical study of meritocracy based on public opinion surveys refer to the concept of <em>beliefs</em>, but with wide differences in meanings and operationalizations. To illustrate this point let us consider the most commonly used items for operationalizing meritocratic beliefs in survey research (as ISSP), which is the “reasons to get ahead” battery. It consists of a series of items asking “how important you think it is for getting ahead in life” and then lists several factors, such as effort, education, parental wealth, and contacts. Another version of this same battery used in other surveys - sometimes together with the previous one - asking about “how important you think it <em>should</em> be …”, and then listing the same concepts. Therefore, the question raised here is: Which one of both is a “belief”: what <em>is</em> or what it <em>should</em> be?</p>
+<p>The term belief has an ambiguous character in the literature, conceived as “idea-elements” by <span class="citation">(<a href="#ref-converse_nature_1964" role="doc-biblioref"><strong>converse_nature_1964?</strong></a>)</span> or “considerations” by <span class="citation">(<a href="#ref-zaller_nature_1992" role="doc-biblioref"><strong>zaller_nature_1992?</strong></a>)</span>. As <span class="citation">(<a href="#ref-kluegel_beliefs_1986" role="doc-biblioref"><strong>kluegel_beliefs_1986?</strong></a>)</span> pointed out about the scope of beliefs: “This usage encompasses such more specific social-psychological concepts as values, perceptions, and attitudes” (p.30). Therefore, beliefs cover almost anything related to subjective factors. To this regard, a relevant distinction in the field of inequality beliefs was made by <span class="citation">(<a href="#ref-janmaat_subjective_2013" role="doc-biblioref"><strong>janmaat_subjective_2013?</strong></a>)</span>: “Perceptions refer to subjective estimates of existing inequality (i.e. thoughts about what is). Beliefs are here defined as normative ideas about just inequality (i.e. thoughts about what should be)”(p.359). Several papers dealing with meritocracy use the term beliefs (i.e. what should be), while actually referring to perceptions (i.e. what is). This occurs for instance in <span class="citation">Reynolds &amp; Xian (<a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">2014</a>)</span>, in which the term belief is used to talk about what <span class="citation">(<a href="#ref-janmaat_subjective_2013" role="doc-biblioref"><strong>janmaat_subjective_2013?</strong></a>)</span> refers to as perceptions, whereas other authors use general terms such as attitudes <span class="citation">(<a href="#ref-kunovich_systems_2007" role="doc-biblioref">Kunovich &amp; Slomczynski, 2007</a>)</span>. The first attempt to shed light on this issue in meritocracy research was made by <span class="citation">Duru-Bellat &amp; Tenret (<a href="#ref-duru-bellat_who_2012" role="doc-biblioref">2012</a>)</span>, who used the question “how important should the number of years spent in education and training be in deciding how much money people ought to earn?” as a proxy for “desired” meritocracy (normative beliefs). They then determined “perceived” meritocracy, using the questions: “Would you say that in your country, people are rewarded for their efforts?” and “… people are rewarded for their skills?”.</p>
+<p>Is the belief in meritocracy a perception or a preference with normative meaning? In order to expand the analytical conceptual framework, we believe that both dimensions should be included as proposed by <span class="citation">Duru-Bellat &amp; Tenret (<a href="#ref-duru-bellat_who_2012" role="doc-biblioref">2012</a>)</span>. This opens up the possibility of analyzing whether perceptions and preferences are actually related (i.e. have a high correlation), or whether they are independent aspects of the same phenomenon. As <span class="citation">(<a href="#ref-sonhing_merit_2011" role="doc-biblioref"><strong>sonhing_merit_2011?</strong></a>)</span> has pointed out, “People can believe that outcomes ought to be distributed on the basis of merit and yet vary in their perceptions of whether this is how society currently operates” (p. 435). In other words, normative beliefs should be considered while taking perceptions into account: a strong normative belief in meritocracy may mean something totally different to someone perceiving high meritocracy than to someone perceiving low meritocracy. To avoid the confusion generated by the term “belief”, we propose the terms meritocratic preferences (“what should be”), and meritocratic perceptions (“what is”), as they better reflect the two facets of meritocracy under scrutiny <span class="citation">(<a href="#ref-castillo_meritocracia_2019" role="doc-biblioref">Castillo et al., 2019</a>)</span>.</p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li><em>Non-meritocratic aspects</em></li>
+</ol>
+<p>Some research in meritocracy considers aspects usually opposed to effort and talent for personal achievement, as for instance the use of personal advantages (as contacts or having a wealthy family) to get ahead in life. For instance, <span class="citation">Kunovich &amp; Slomczynski (<a href="#ref-kunovich_systems_2007" role="doc-biblioref">2007</a>)</span> used an items’ battery listing a number of factors in relation to “How important each should be in deciding pay…” (as <span class="citation">Duru-Bellat &amp; Tenret (<a href="#ref-duru-bellat_who_2012" role="doc-biblioref">2012</a>)</span> for desired meritocracy). They consider factors such as education and responsibility as meritocratic, giving them a value of 1 is considered “essential” in the scale response, whereas factors such as having a family or children are valued 1 when rated as “not important at all” (i.e. reverse coded). The assumption behind this approach is that rejecting a supposed non-meritocratic aspect (as having family and/or children) implies a stronger belief in meritocracy. A similar approach of reverse-coding non-meritocratic items was taken by <span class="citation">Newman et al. (<a href="#ref-newman_false_2015" role="doc-biblioref">2015</a>)</span>, using the same principles applied in the “Preference for the Merit Principle Scale” <span class="citation">(<a href="#ref-davey_preference_1999" role="doc-biblioref">Davey et al., 1999</a>)</span>.</p>
+<p>The assumption that meritocratic and non-meritocratic elements are poles of the same continuum was tested by <span class="citation">Reynolds &amp; Xian (<a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">2014</a>)</span> using the “get ahead” perceptions’ battery items mentioned above. They considered education, ambition, and hard work as meritocratic, and other factors such as family wealth and connections as non-meritocratic. Despite making and proving this distinction, however, the authors end up subtracting one dimension from the other, thus coming back to the assumption that they are two poles of the same continuum as <span class="citation">Kunovich &amp; Slomczynski (<a href="#ref-kunovich_systems_2007" role="doc-biblioref">2007</a>)</span> did. Similarly, <span class="citation">Roex et al. (<a href="#ref-roex_attitudes_2018" role="doc-biblioref">2018</a>)</span> used ISSP indicators for perceived meritocracy and non-meritocracy to build a single score by reverse coding the non-meritocratic items. Therefore, the treatment of non-meritocratic items has been rather inconsistent across studies and the assumption that they are the simple opposite of meritocracy certainly requires further empirical assessment.</p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li><em>Accounting for measurement error</em></li>
+</ol>
+<p>Finally, most studies in meritocracy so far have not properly considered the issue of latent structures and measurement error <span class="citation">(<a href="#ref-brown_confirmatory_2015" role="doc-biblioref"><strong>brown_confirmatory_2015?</strong></a>; <a href="#ref-bollen_structural_1989" role="doc-biblioref"><strong>bollen_structural_1989?</strong></a>; <a href="#ref-ansolabehere_strength_2008" role="doc-biblioref"><strong>ansolabehere_strength_2008?</strong></a>)</span>, as they mostly use single indicators and/or simple average indexes for measuring meritocracy. Such strategy assumes that the latent construct is measured perfectly (i.e. no error or residual variance) by the selected indicators, going as far as to propose that “… In choosing this strategy of index construction, we argue that support for meritocracy is not a latent variable” <span class="citation">(<a href="#ref-kunovich_systems_2007" role="doc-biblioref">Kunovich &amp; Slomczynski, 2007, pp. 653–654</a>)</span>. Although some advances were made by <span class="citation">Reynolds &amp; Xian (<a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">2014</a>)</span> through conducting a principal component analysis of meritocratic and non-meritocratic dimensions, somewhat surprisingly they finally chose to build a sum index despite proving a multidimensional latent structure.</p>
+</div>
+<div id="instrumentprop" class="section level2 unnumbered">
+<h2>Conceptual proposal for studying meritocracy</h2>
+<p>Based on the previous assumptions and limitations identified in the empirical study of meritocracy, we propose a conceptual and measurement framework with the following characteristics:</p>
+<ul>
+<li><p><em>Multidimensionality</em>, incorporating previous distinctions between preferences and perceptions, as well as between meritocratic and non-meritocratic aspects.</p></li>
+<li><p>Multiple indicators for each dimension, in order to <em>account for measurement error</em> in a confirmatory factor analysis context.</p></li>
+<li><p>Based on <em>previous indicators</em> as much as possible, for the sake of keeping comparability between studies.</p></li>
+<li><p><em>Brief</em>, as to be used in regular public opinion surveys. In this respect, it differs from the proposal of “Preference for the Merit Principle Scale” <span class="citation">(<a href="#ref-davey_preference_1999" role="doc-biblioref">Davey et al., 1999</a>)</span>, as they use 15 items for just one dimension (aside from the problem of reverse-coding non-meritocratic items).</p></li>
+</ul>
+<p>The proposed conceptual and measurement framework is depicted in Figure <a href="#fig:merit-model">1</a>:</p>
+<div class="figure" style="text-align: center"><span id="fig:merit-model"></span>
+<img src="input/images/Fig1.generalf.png" alt="Model of perception and preferences for meritocracy and non-meritocracy" width="85%" />
+<p class="caption">
+Figure 1: Model of perception and preferences for meritocracy and non-meritocracy
+</p>
+</div>
+<p>The columns “Perceptions” and “Preferences” represent the distinction between these two concepts, usually confused under the label “beliefs” <span class="citation">(<a href="#ref-castillo_meritocracia_2019" role="doc-biblioref">Castillo et al., 2019</a>)</span>. Perceptions refer to the extent to which people observe that meritocracy functions or apply in their society, which relates to items such as “Hard work is important to get ahead in society”. Preferences refer to normative expectations that are usually linked to a “should” expression (e.g. whether hard work should be related to payment). The rows in Figure <a href="#fig:merit-model">1</a> consider the distinction between meritocratic and non-meritocratic dimensions <span class="citation">(<a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">Reynolds &amp; Xian, 2014</a>)</span>, usually treated as different ends of the same continuum in previous research. Non-meritocratic elements refer to the use of resources such as personal contacts or family advantages to getting ahead in life.</p>
+</div>
+</div>
+<div id="methodology" class="section level1">
+<h1>Methodology</h1>
+<p>The analysis is organized into three studies. Study 1 serves as a background to our instrument proposal by attempting to operationalize the meritocracy dimensions with available secondary data from the inequality module of the International Social Survey Programme (ISSP). Although we are aware that the available indicators in this dataset do not allow a precise operationalization of the conceptual model, we know that it is the most widely used data in comparative meritocracy studies (as well as overall subjective inequality) and therefore it is certainly useful to look at its potentials and limitations to this regard. Study 2 is the core of this paper and consists of the proposal of a new scale for measuring meritocratic perceptions and preferences. Finally, in Study 3 we perform an additional validity analysis of the meritocracy scale.</p>
+</div>
+<div id="study-1-measuring-meritocracy-with-international-secondary-data" class="section level1">
+<h1>Study 1: Measuring meritocracy with international secondary data</h1>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The data corresponds to the last available wave of the social inequality module from the International Social Survey Programme (ISSP), which is the most specialized international comparative survey in perceptions, attitudes, and beliefs about inequality-related issues. This wave corresponds to the year 2009 and covers attitudes towards a series of topics dealing with social inequality across 41 countries and 56021 individuals. Although there is data available from this module for previous waves (1987, 1992, and 1999), unfortunately, there are several variables that are important for this research which were not included, particularly in 1987 and 1999, the reason why we only use the 2009 wave (during the development of this research the 2019 wave became available, but so far only with a restricted set of countries).</p>
+</div>
+<div id="variables" class="section level2">
+<h2>Variables</h2>
+<p>There are a series of indicators in the ISSP survey that in the following we attempt to classify in our meritocracy measurement scheme. However, it is important to mention that the items were not originally designed as a specific measure of meritocracy. The variables are presented below organized in perceptions and preferences:</p>
+<table class="table table-striped table-bordered" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:table-issp">Table 1: </span>Items of the ISSP meritocratic perceptions and preferences measures
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Component
+</th>
+<th style="text-align:left;">
+Dimensions
+</th>
+<th style="text-align:left;">
+Item
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 2cm; vertical-align: middle !important;" rowspan="8">
+Perception
+</td>
+<td style="text-align:left;width: 5cm; vertical-align: middle !important;" rowspan="2">
+Meritocratic
+</td>
+<td style="text-align:left;width: 8cm; ">
+How important is having ambition?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How important is hard work?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 5cm; vertical-align: middle !important;" rowspan="6">
+Non-meritocratic
+</td>
+<td style="text-align:left;width: 8cm; ">
+How important is coming from a wealthy family?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How important is having well-educated parents?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How important is a person’s race?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How important is being born a man or a woman?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How important is knowing the right people
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How important is having political connections
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2cm; vertical-align: middle !important;" rowspan="4">
+Preference
+</td>
+<td style="text-align:left;width: 5cm; vertical-align: middle !important;" rowspan="2">
+Meritocratic
+</td>
+<td style="text-align:left;width: 8cm; ">
+How well he or she does the job?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+How hard he or she works at the job?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 5cm; vertical-align: middle !important;" rowspan="2">
+Non-meritocratic
+</td>
+<td style="text-align:left;width: 8cm; ">
+What is needed to support a family?
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8cm; ">
+Whether the person has children to support?
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><em>Perception of meritocracy/non-meritocracy</em>: for operationalizing perceptions the closest set of ISSP’s indicators comes from the question asking about perceptions for opportunities to get ahead, which are usually considered as “meritocratic beliefs” in previous research. The general heading of the battery is: <em>“To begin we have some questions about opportunities for getting ahead. Please tick one box for each of these to show how important you think it is for getting ahead in life.”</em> This is followed by a list of statements to be rated from 1 to 5: essential, very important, fairly important, not very important, not important at all.</li>
+</ul>
+<p>The classification of the items is based on criteria of internal motivation (meritocratic) and structural constraints (non-meritocratic). There were two items from the battery that were excluded from the analysis as they would not fit into the classification. The first one was “having good education yourself”, since it was not clear whether this is could be due to individual motivation or system opportunities, and the second was “giving bribes”, as introduced elements of criminality that were beyond a non-meritocratic perception.</p>
+<ul>
+<li><em>Preferences for meritocracy-non meritocracy</em>: for the operationalization of normative preferences we used a list of items related to reasons for pay battery. The ISSP question was: <em>In deciding how much people ought to earn, how important should each of these things be, in your opinion</em>, rated in the same <em>essential-non important at all</em> scale (1 to 5) as the questions for meritocratic perceptions.</li>
+</ul>
+</div>
+<div id="methods" class="section level2">
+<h2>Methods</h2>
+<p>The estimation was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the <code>lavaan</code> R package (version 0.6-3; <span class="citation">(<a href="#ref-rosseel_lavaan_2012" role="doc-biblioref"><strong>rosseel_lavaan_2012?</strong></a>)</span>), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement <span class="citation">(<a href="#ref-kline_principles_2016" role="doc-biblioref"><strong>kline_principles_2016?</strong></a>; <a href="#ref-rosseel_lavaan_2012" role="doc-biblioref"><strong>rosseel_lavaan_2012?</strong></a>)</span>. As recommended by <span class="citation">(<a href="#ref-brown_confirmatory_2015" role="doc-biblioref"><strong>brown_confirmatory_2015?</strong></a>)</span>, we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit &gt; 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit &lt; 0.08), Chi-square: (p-value; acceptable fit &gt; 0.05, and Chi-square ratio &gt; 3).</p>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<div id="descriptive-analyses" class="section level3">
+<h3>Descriptive analyses</h3>
+<p>Figure <a href="#fig:likert-issp">2</a> shows the distribution of responses across the selected items in their corresponding dimensions. On the one side, we see that there is a high degree of importance attributed to factors such as hard work and ambition in the process of getting ahead, concentrating 94.9% and 92.8% in the fairly important to essential categories. By contrast, the perception of non-meritocratic aspects is rated lower than the meritocratic ones, particularly for gender, race, and political connections. Regarding normative preferences, we observe that the meritocratic ones are deemed as important (from fairly to essential) for nearly the whole sample, support that decreases slightly for the non-meritocratic ones. Still, we have to consider that the preferences for non-meritocratic aspects, in this case, refer to the distributive principle of need rather than personal background (as in the perceptions of non-meritocracy), which certainly is one of the limitations of this set of items for the operationalization of the proposed conceptual framework with this dataset.</p>
+<div class="figure" style="text-align: center"><span id="fig:likert-issp"></span>
+<img src="paper_files/figure-html/likert-issp-1.png" alt="Distribution of responses in the ISSP meritocracy items" width="80%" />
+<p class="caption">
+Figure 2: Distribution of responses in the ISSP meritocracy items
+</p>
+</div>
+<p>In terms of the association between the indicators, Figure <a href="#fig:corr-issp">3</a> shows the polychoric correlation matrix. Firstly, we observe in general that the moderate to high associations are between the pairs of items representing each of the dimensions as described in <a href="#tab:table-issp">1</a>. The exception here is the dimension of non-meritocratic perception, in which there are six items that appear mostly associated by pairs according to their specific topics (family background, personal background, and connections). Still, between this same set of items, there are moderate correlations (around 0.3) which could anticipate a single latent factor underlying non-meritocratic perception and that is tested next through confirmatory factor analysis.</p>
+<div class="figure" style="text-align: center"><span id="fig:corr-issp"></span>
+<img src="paper_files/figure-html/corr-issp-1.png" alt="Perceptions and preferences for ISSP  meritocracy items' polychoric correlations" width="85%" />
+<p class="caption">
+Figure 3: Perceptions and preferences for ISSP meritocracy items’ polychoric correlations
+</p>
+</div>
+</div>
+<div id="confirmatory-factor-analysis" class="section level3">
+<h3>Confirmatory Factor Analysis</h3>
+<p>First, a four-dimensional model for meritocratic and non-meritocratic perception and preferences is estimated, considering all indicators of the non-meritocratic perception dimension as a single latent variable. Then, we estimate a model that follows the proposed four latent variable measurement approach, however, the non-meritocratic perception dimension is assumed as a second-order factor for the first-order latent variables parental attributes, racial and gender background, and networks.</p>
+<table class="table table-striped table-bordered" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:sum-fit-issp">Table 2: </span>Summary fit indices according to model
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(N\)</span>
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI
+</th>
+<th style="text-align:right;">
+TLI
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+First order
+</td>
+<td style="text-align:right;">
+46594
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+21308.535
+</td>
+<td style="text-align:right;">
+48
+</td>
+<td style="text-align:right;">
+0.959
+</td>
+<td style="text-align:right;">
+0.944
+</td>
+<td style="text-align:right;">
+0.098
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Second order
+</td>
+<td style="text-align:right;">
+46594
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+4472.369
+</td>
+<td style="text-align:right;">
+45
+</td>
+<td style="text-align:right;">
+0.992
+</td>
+<td style="text-align:right;">
+0.988
+</td>
+<td style="text-align:right;">
+0.046
+</td>
+</tr>
+</tbody>
+</table>
+<p>Table <a href="#tab:sum-fit-issp">2</a> shows the results of the estimation of two confirmatory models. The first one (First Order) corresponds to a model that estimate four factors, each for one of the dimensions presented in <a href="#tab:table-issp">1</a>, showing only regular fit indicators (CFI=0.959, TLI=0.944, RMSEA=0.098, <span class="math inline">\(\chi^2\)</span>(df=48)= 21308.535; more detail in Table <a href="#tab:tb-perpref1">8</a>). Further analysis showed that the sources for poor fit were mostly related to the items of the non-meritocratic perceptions, which as mentioned above displayed correlations among them not taken into account in this model specification. Attending to these constraints, we specified a second model that keeps the basic four-factor structure but generates an additional model for the non-meritocratic perceptions as depicted in <a href="#fig:meas02-issp">4</a>. In this model, the pairs of items in this dimension form three latent factors which at the same time generates a second-order factor of non-meritocratic perceptions, improving the fit of the model.</p>
+<div class="figure" style="text-align: center"><span id="fig:meas02-issp"></span>
+<img src="output/images/Fig4.cfa_issp_study1.PNG" alt="Confirmatory factor analysis of the ISSP indicators of Perceptions and Preferences for Meritocracy" width="85%" />
+<p class="caption">
+Figure 4: Confirmatory factor analysis of the ISSP indicators of Perceptions and Preferences for Meritocracy
+</p>
+</div>
+<p>Regarding the correlations between the factors in the Figure <a href="#fig:meas02-issp">4</a>, we observe that perceptions are correlated with preferences, but more strongly for the meritocratic (<span class="math inline">\(r=0.46\)</span>) than for the non-meritocratic (<span class="math inline">\(r=0.27\)</span>) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation (<span class="math inline">\(r=0.30\)</span>), suggesting that they are not the opposite poles of the same continuum. Something similar occurs for the correlation between the two dimensions of preferences (<span class="math inline">\(r=0.25\)</span>). From this information, we can preliminary conclude that the wide use of reverse-coding for non-meritocratic items attempting to measure meritocracy is not an adequate operationalization of the construct. All in all, despite the good fit of the second-order model there are still several limitations regarding the content of the items which we attempt to overcome next by developing a new instrument.</p>
+</div>
+</div>
+</div>
+<div id="study-2-the-perceptions-and-preferences-for-meritocracy-scale" class="section level1">
+<h1>Study 2: The Perceptions and Preferences for Meritocracy Scale</h1>
+<div id="data-1" class="section level2">
+<h2>Data</h2>
+<p>The data was obtained through an online survey which was part of a larger study on meritocracy and preferences developed in Chile in 2019, funded by the national scientific agency ANID. The questionnaire was programmed in Qualtrics and the fieldwork was conducted by an external online survey agency (<a href="www.netquest.com">netquest.com</a>) between December 2019 and January 2020. The sample was selected from a non-probabilistic quota design in three large cities in Chile (Santiago, Concepción &amp; Antofagasta). The quotas for gender, age, and educational levels were generated based on a survey by the Public Studies Center <span class="citation">(<a href="#ref-cep_encuesta_2019" role="doc-biblioref"><strong>cep_encuesta_2019?</strong></a>)</span>, which is a well-regarded counterpart agency of the ISSP (International Social Survey Programme) in Chile. A total sample of 2,141 people was collected, excluding those who did not sign the informed consent as well as those not answering the meritocracy response battery. There were no significant differences between our sample and the wider population for most socio-demographic characteristics, with the exception of educational level (see Table <a href="#tab:rep-samp">7</a> in Appendix). As it is often the case with online surveys, there were some limitations in achieving the quotas for lower educational levels <span class="citation">(<a href="#ref-zhang_quota_2018" role="doc-biblioref"><strong>zhang_quota_2018?</strong></a>; <a href="#ref-boas_recruiting_2020" role="doc-biblioref"><strong>boas_recruiting_2020?</strong></a>)</span>.</p>
+</div>
+<div id="study-design" class="section level2">
+<h2>Study design</h2>
+<div id="instrument" class="section level3">
+<h3>Instrument</h3>
+<p>The proposed scale of perceptions and preferences relating to meritocracy consisted of eight indicators that were grouped into the four dimensions listed earlier: Perceptions (meritocratic/non-meritocratic) and preferences (meritocratic/non-meritocratic). In order to achieve at least some comparability with previous studies, the questions were adapted from the items battery “reasons to get ahead” (ISSP/GSS), which has been widely used for operationalizing meritocracy in previous studies <span class="citation">(<a href="#ref-duru-bellat_who_2012" role="doc-biblioref">Duru-Bellat &amp; Tenret, 2012</a>; <a href="#ref-mijs_paradox_2019" role="doc-biblioref">Mijs, 2019</a>; <a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">Reynolds &amp; Xian, 2014</a>)</span>. The aforementioned eight items ordered according to dimensions are presented in Table <a href="#tab:table-indicadores">3</a>. These eight likert-type items have five response alternatives, ranging from “Completely disagree”(1) to “Completely agree” (5).</p>
+<table class="table table-striped table-bordered" style="font-size: 10px; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:table-indicadores">Table 3: </span>Items of the perceptions and preferences for meritocracy scale.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Component
+</th>
+<th style="text-align:left;">
+Dimensions
+</th>
+<th style="text-align:left;">
+Item (English)
+</th>
+<th style="text-align:left;">
+Item original (Spanish)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 1.5cm; vertical-align: middle !important;" rowspan="4">
+Perception
+</td>
+<td style="text-align:left;width: 2 cm; vertical-align: middle !important;" rowspan="2">
+Meritocratic
+</td>
+<td style="text-align:left;">
+Those who make more effort get greater rewards than those who work less.
+</td>
+<td style="text-align:left;">
+Quienes más se esfuerzan logran obtener mayores recompensas que quienes se esfuerzan menos.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Those with more talent get greater rewards than those who have less talent.
+</td>
+<td style="text-align:left;">
+Quienes poseen más talento logran obtener mayores recompensas que quienes poseen menos talento.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2 cm; vertical-align: middle !important;" rowspan="2">
+Non meritocratic
+</td>
+<td style="text-align:left;">
+Those who have rich parents manage to get ahead.
+</td>
+<td style="text-align:left;">
+Quienes tienen padres ricos logran salir adelante.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Those who have good contacts manage to get ahead.
+</td>
+<td style="text-align:left;">
+Quienes tienen buenos contactos logran salir adelante.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 1.5cm; vertical-align: middle !important;" rowspan="4">
+Preference
+</td>
+<td style="text-align:left;width: 2 cm; vertical-align: middle !important;" rowspan="2">
+Meritocratic
+</td>
+<td style="text-align:left;">
+Those who make more effort should get greater rewards than those who make less effort.
+</td>
+<td style="text-align:left;">
+Quienes más se esfuerzan deberían obtener mayores recompensas que quienes se esfuerzan menos.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Those who have more talent should get greater rewards than those who have less talent.
+</td>
+<td style="text-align:left;">
+Quienes poseen más talento deberían obtener mayores recompensas que quienes poseen menos talento.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 2 cm; vertical-align: middle !important;" rowspan="2">
+Non meritocratic
+</td>
+<td style="text-align:left;">
+It is fine it those with rich parents get ahead.
+</td>
+<td style="text-align:left;">
+Está bien que quienes tienen padres ricos salgan adelante.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+It is fine if those with good contacts get ahead.
+</td>
+<td style="text-align:left;">
+Está bien que quienes tienen buenos contactos salgan adelante.
+</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="administration-sets" class="section level3">
+<h3>Administration sets</h3>
+<p>With the objective of evaluating the effect of indicator ordering in the responses, three different versions of items’ order were designed and randomly assigned to the respondents, as depicted in Figure <a href="#fig:appmod">5</a>. The scale was presented to the first group (<em>n = 712</em>) in the order that appears in Table <a href="#tab:table-indicadores">3</a> according to perceptions and preferences. For the second group (<em>n = 717</em>), the order was reorganized according to perceptions and preferences over the same topic, e.g. for the topic of hard work, the item about perception was followed by the item about preference and the same for the rest of the topics. Finally, for the third group (<em>n = 712</em>), the items were presented as completely randomized.</p>
+<div class="figure" style="text-align: center"><span id="fig:appmod"></span>
+<img src="output/images/Fig5.app_mod.png" alt="Survey flow" width="85%" />
+<p class="caption">
+Figure 5: Survey flow
+</p>
+</div>
+</div>
+</div>
+<div id="methods-1" class="section level2">
+<h2>Methods</h2>
+<p>To test the scale’s underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table <a href="#tab:table-indicadores">3</a>. As in Study 1, CFA was conducted using the <code>lavaan</code> R package (version 0.6-3; <span class="citation">(<a href="#ref-rosseel_lavaan_2012" role="doc-biblioref"><strong>rosseel_lavaan_2012?</strong></a>)</span>), with diagonally weighted least squares (DWLS) estimation due to the items’ ordinal level of measurement <span class="citation">(<a href="#ref-kline_principles_2016" role="doc-biblioref"><strong>kline_principles_2016?</strong></a>; <a href="#ref-rosseel_lavaan_2012" role="doc-biblioref"><strong>rosseel_lavaan_2012?</strong></a>)</span>. The fit indexes and cut-off criteria were the same as the ones used in Study 1.</p>
+<p>A pre-registration was made in the OSF platform, available at the following link: <a href="https://osf.io/z45y2">https://osf.io/z45y2</a>. Included in this pre-registration are the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.</p>
+</div>
+<div id="results-1" class="section level2">
+<h2>Results</h2>
+<div id="descriptive-analyses-1" class="section level3">
+<h3>Descriptive analyses</h3>
+<p>The graphs presented in Figure <a href="#fig:plotlikert">6</a> display disaggregated and comparable information of the different response categories for each item. As it can be observed, in general, there is more agreement in the perception of non-meritocratic items than in meritocratic ones, while in the case of preferences the opposite occurs. As far as preferences are concerned, the preponderant role of effort over talent as a criterion of meritocratic preference is noteworthy. All in all the descriptive results tend to show a sort of critical view of meritocracy, perceiving the operation of non-meritocratic aspects over meritocratic ones, whereas in the preferences the opposite occurs.</p>
+<div class="figure" style="text-align: center"><span id="fig:plotlikert"></span>
+<img src="paper_files/figure-html/plotlikert-1.png" alt="Distribution of responses in the Merit Scale items" width="85%" />
+<p class="caption">
+Figure 6: Distribution of responses in the Merit Scale items
+</p>
+</div>
+<p>Attending now to the association among the scale items, Figure <a href="#fig:corpoly">7</a> shows the items’ polychoric correlations. There are three main aspects to highlight from this correlation matrix. Firstly, as expected the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, <span class="math inline">\(r=0.52\)</span>). Secondly, among this correlations the highest are those between the non-meritocratic dimension but in perceptions (<span class="math inline">\(r=0.73\)</span>) and preferences (<span class="math inline">\(r=0.61\)</span>). Thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations. This is noteworthy because it indicates that the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, and similar to what was found in Study 1 with ISSP data, we observe that there are no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining the assumptions of previous studies that suggested that these dimensions would be the opposite poles of one same continuum <span class="citation">(<a href="#ref-reynolds_perceptions_2014" role="doc-biblioref">Reynolds &amp; Xian, 2014</a>)</span>.</p>
+<div class="figure" style="text-align: center"><span id="fig:corpoly"></span>
+<img src="paper_files/figure-html/corpoly-1.png" alt="Perceptions and preferences for meritcoracy items' polychoric correlations" width="85%" />
+<p class="caption">
+Figure 7: Perceptions and preferences for meritcoracy items’ polychoric correlations
+</p>
+</div>
+</div>
+<div id="confirmatory-factor-analysis-1" class="section level3">
+<h3>Confirmatory Factor Analysis</h3>
+<p>The present section describes the results of the confirmatory factor analysis estimation. The model estimates four latent factors: perception meritocratic, perception non-meritocratic, preferences meritocratic, and preferences non-meritocratic. Each factor is estimated based on two items of the scale as detailed in Table <a href="#tab:table-indicadores">3</a>.</p>
+<p>The first step in the analysis consists of comparing the model fit indicators for the three versions of the scale that were randomly assigned to the participants: order according to perceptions/preferences, order according to topics, and random order (see Figure <a href="#fig:appmod">5</a>).</p>
+<table class="table table-striped table-bordered" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:table-cfafits">Table 4: </span>Summary fit indices according to order versions
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(N\)</span>
+</th>
+<th style="text-align:left;">
+Estimator
+</th>
+<th style="text-align:right;">
+<span class="math inline">\(\chi^2\)</span>
+</th>
+<th style="text-align:right;">
+df
+</th>
+<th style="text-align:right;">
+CFI
+</th>
+<th style="text-align:right;">
+TLI
+</th>
+<th style="text-align:right;">
+RMSEA
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Version 1
+</td>
+<td style="text-align:right;">
+712
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+25.631
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.998
+</td>
+<td style="text-align:right;">
+0.996
+</td>
+<td style="text-align:right;">
+0.034
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Version 2
+</td>
+<td style="text-align:right;">
+717
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+67.652
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.984
+</td>
+<td style="text-align:right;">
+0.967
+</td>
+<td style="text-align:right;">
+0.073
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Version 3
+</td>
+<td style="text-align:right;">
+712
+</td>
+<td style="text-align:left;">
+DWLS
+</td>
+<td style="text-align:right;">
+41.633
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+0.991
+</td>
+<td style="text-align:right;">
+0.981
+</td>
+<td style="text-align:right;">
+0.053
+</td>
+</tr>
+</tbody>
+</table>
+<p>Table <a href="#tab:table-cfafits">4</a> shows the fit indicators of the models estimated for each of the three versions of the items’ order described in the methodology. Regardless of the version, all models obtained adequate fit indicators, with CFI’s above 0.95 and RMSEA’s below 0.08. However, none of the models achieved a non-significant chi-square, something expected in large samples as the one used here. The first version order (perceptions-preferences) was the one obtaining best fit (CFI=0.993, TLI=0.995, RMSEA=0.034, <span class="math inline">\(\chi2\)</span>(df=14)=42.276), whereas version 2 with the fixed order according to merit/non-merit items shows the comparatively worst indicators. The CFA fit indices for the completely randomized items’ order (Model 3) it keeps all the indicators within the acceptable cut-off criteria and besides it controls for possible order effects in the administration of the instrument. The model and parameter estimates for this version are depicted in Figure <a href="#fig:meas02">8</a>:</p>
+<div class="figure" style="text-align: center"><span id="fig:meas02"></span>
+<img src="output/images/Fig8.cfa_randomized_study2.png" alt="Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale" width="85%" />
+<p class="caption">
+Figure 8: Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale
+</p>
+</div>
+<p>Attending to the correlations between the latent variables as depicted in Figure <a href="#fig:meas02">8</a>, meritocratic preferences are moderate to highly correlated with perceptions, both meritocratic (<span class="math inline">\(r=0.457\)</span>) and non-meritocratic (<span class="math inline">\(r=0.500\)</span>). The correlation between both types of perceptions (<span class="math inline">\(r=-0.044\)</span>) and both types preferences (<span class="math inline">\(r=0.185\)</span>) are low, as well as between non-meritocratic preferences and perceptions (<span class="math inline">\(r=-0.059\)</span>). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects as assumed by previous studies.</p>
+</div>
+</div>
+</div>
+<div id="study-3-additional-validity-analyses" class="section level1">
+<h1>Study 3: Additional validity analyses</h1>
+<p>We performed two further analyses in order to add evidence regarding the quality of the scale. Firstly we analyzed the convergent validity by exploring the association of the merit scale with related concepts and its correspondent measurements. Secondly, we test the internal consistency of the measurement model behind the scale comparing it with a different sample through measurement invariance procedures.</p>
+<div id="convergent-validity" class="section level2">
+<h2>Convergent validity</h2>
+<div id="data-2" class="section level3">
+<h3>Data</h3>
+<p>For this analysis, we examined data from the last of the three waves of the online panel survey used in Study 2. This wave included additional measures that allow testing the correlations of the merit scale with some related constructs as opportunity beliefs and personal wherewithal. After a listwise deletion of missing cases in socio-demographic information, a total of 1422 individuals took part in the third wave: 668 (46.97%) women and 754 (53.03%) men. The ages of 50.57% of them are 45 years or older, and 36.28% held a tertiary degree.</p>
+</div>
+<div id="variables-1" class="section level3">
+<h3>Variables</h3>
+<p>The following scales were included for testing their correlations with the 8-item meritocracy scale:</p>
+<ul>
+<li><p>Opportunity beliefs: We used two items of the social inequality module of the International Social Survey Programme. Studies use generally both indicators to measure meritocratic and non-meritocratic beliefs <span class="citation">(<a href="#ref-mccall_exposure_2017" role="doc-biblioref">McCall et al., 2017</a>; <a href="#ref-mijs_paradox_2019" role="doc-biblioref">Mijs, 2019</a>)</span>. One item measures the importance of individual factors in determining life outcomes by asking for the importance of hard work for getting ahead in life (M=3.76, SD=0.93). The second item asks for the importance of coming from a wealthy family and captures the importance of structural factors in getting ahead (M=2.75, SD=1.27). Participants responded to each item using a 1 (not important at all) to 5 (essential) response scale. We call the first item <em>hard work</em> and the second one <em>social origin</em>.</p></li>
+<li><p>Personal wherewithal: the questionnaire included The Neoliberal Beliefs Inventory (NBI), which considers four factors: Government Interference preferences, Competition preferences, System Inequality perception, and Personal Wherewithal <span class="citation">(<a href="#ref-bay-cheng_tracking_2015" role="doc-biblioref"><strong>bay-cheng_tracking_2015?</strong></a>)</span>. We used the factor <em>personal wherewithal</em> that reflects meritocracy beliefs in terms of the importance of personal attributes as strength and skills to yield success. The construct consists of 8 items (e.g., “Any goal can be achieved with enough hard work and talent”, “I’ve benefited from working hard, so there’s no reason others can’t”, “Anyone who is willing to work hard can be successful in Chile”). Participants answered the items using a 1 (totally disagree) to 6 (totally agree) scale. We simply computed mean scores, with higher scores indicating stronger support for meritocracy (M=3.32, SD=0.88, <span class="math inline">\(\alpha\)</span> = 0.89).</p></li>
+</ul>
+<p>Both instruments cover mainly the perceptual side of the concept. Therefore, in general, we expect a larger correlation with meritocratic perceptions than with preferences. In the case of opportunity beliefs, the hard work item should correlate positively with meritocratic perception whereas the importance of coming from a wealthy family is expected to correlate positively with non-meritocratic perceptions. Regarding the second instrument of personal wherewithal, we also anticipate a positive correlation with meritocratic perception and low to null correlations with the other dimensions of the merit scale.</p>
+</div>
+<div id="results-2" class="section level3">
+<h3>Results</h3>
+<p>We used polychoric correlations to evaluate relationships of meritocratic and non-meritocratic preferences and perceptions with the items of the opportunity beliefs battery. For personal wherewithal, we examined Pearson correlations.</p>
+<p>Table <a href="#tab:val-conv">5</a> shows the polychoric and Pearson correlations between our meritocracy scale and common measures of meritocracy. As we expected, preferences show very weak correlations. Findings also indicate that correlations of perceptions with opportunity beliefs are consistent with our expectations. The item for social origin shows a positive and moderate association with unmeritocratic perception (<span class="math inline">\(r=0.361\)</span>), and a negative and low correlation with meritocratic perception (<span class="math inline">\(r=-0.186\)</span>). Regarding the item of hard work, the correlation with meritocratic perception is positive but weak (<span class="math inline">\(r=0.201\)</span>). One explanation for this result is that the support for hard work is very high among respondents and therefore with low variability, as only 8.6 percent indicates <em>not very important</em> or <em>not important at all</em>.</p>
+<table class="table table-striped table-bordered" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption style="font-size: initial !important;">
+<span id="tab:val-conv">Table 5: </span>Polyserial and Pearson correlation whit other merit scales
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Merit-Scale
+</th>
+<th style="text-align:left;">
+Social Origin
+</th>
+<th style="text-align:left;">
+Hard Work
+</th>
+<th style="text-align:left;">
+Wherewithal
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 4.5 cm; ">
+Meritocratic Perception
+</td>
+<td style="text-align:left;">
+-0.1865
+</td>
+<td style="text-align:left;">
+0.2011
+</td>
+<td style="text-align:left;">
+0.4064
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5 cm; ">
+Meritocratic Preferences
+</td>
+<td style="text-align:left;">
+0.1016
+</td>
+<td style="text-align:left;">
+0.0979
+</td>
+<td style="text-align:left;">
+0.1181
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5 cm; ">
+Non-meritocratic Perception
+</td>
+<td style="text-align:left;">
+0.3612
+</td>
+<td style="text-align:left;">
+-0.0694
+</td>
+<td style="text-align:left;">
+-0.188
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5 cm; ">
+Non-meritocratic Preferences
+</td>
+<td style="text-align:left;">
+-0.0257
+</td>
+<td style="text-align:left;">
+0.0803
+</td>
+<td style="text-align:left;">
+0.2246
+</td>
+</tr>
+</tbody>
+</table>
+<p>The measure of NBI for <em>personal wherewithal</em> also provides evidence for the convergent validity of the merit scale. Results indicate a positive correlation of this measure with meritocratic perception (<span class="math inline">\(r=0.406\)</span>), suggesting that both variables capture similar concepts. The NBI’s factor depicts a positive association with unmeritocratic preference (<span class="math inline">\(r=0.225\)</span>). This finding is consistent with the literature, in as much as the belief for meritocracy is associated with the justification of inequality <span class="citation">(<a href="#ref-madeira_primes_2019" role="doc-biblioref">Madeira et al., 2019</a>; <a href="#ref-mccall_exposure_2017" role="doc-biblioref">McCall et al., 2017</a>)</span>. Furthermore, results of our confirmatory factor analysis indicate that meritocratic perceptions and unmeritocratic preferences show a positive and weak correlation.</p>
+</div>
+</div>
+<div id="measurement-invariance" class="section level2">
+<h2>Measurement invariance</h2>
+<p>The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts <span class="citation">(<a href="#ref-davidov_measurement_2014" role="doc-biblioref"><strong>davidov_measurement_2014?</strong></a>)</span>. In this section we will use an analysis of invariance between groups, where the proposed factorial structure is expected to be independent of belonging to the sample corresponding to the original study, comparing it with another more recent study available and where the meritocracy scale was also incorporated.</p>
+<p>The invariance measurement procedure consists of a series of nested models to which restrictions are progressively incorporated on the parameters of the measurement model. The literature generally suggests that this modeling should be done through four levels or types of progressive restriction <span class="citation">(<a href="#ref-milfont_testing_2010" role="doc-biblioref"><strong>milfont_testing_2010?</strong></a>; <a href="#ref-millsap_statistical_2011" role="doc-biblioref"><strong>millsap_statistical_2011?</strong></a>; <a href="#ref-vandeschoot_checklist_2012" role="doc-biblioref"><strong>vandeschoot_checklist_2012?</strong></a>)</span>:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Configural:</strong> the model is estimated only indicating the factorial structure used in the CFA.</p></li>
+<li><p><strong>Weak:</strong> an equality restriction is applied to the factor loadings in the different groups, that is, the loadings are forced to be identical in both measurements.</p></li>
+<li><p><strong>Strong:</strong> equality restrictions are added to the intercepts of each indicator.</p></li>
+<li><p><strong>Strict:</strong> equality restrictions are added to the error variances of each indicator.</p></li>
+</ol>
+<div id="data-3" class="section level3">
+<h3>Data</h3>
+<p>For testing the invariance we compared the data described previously with a new data source coming from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample obtained contains 1,242 cases, where 605 (48.71%) are women and 637 (51.28%) are men. 48.84% of them are 45 years of age or older, and 33.97% have tertiary education or higher.</p>
+</div>
+<div id="variables-2" class="section level3">
+<h3>Variables</h3>
+<p>The items of the meritocracy scale were identical to the original. The items were administrated in a randomized order (which corresponds to the application modality of Group 3 present in Figure <a href="#fig:appmod">5</a>).</p>
+</div>
+<div id="results-3" class="section level3">
+<h3>Results</h3>
+<p>Table <a href="#tab:fcloads-inv">9</a> shows the results of the CFA estimation of the meritocracy scale in this new sample. As observed, the loadings and the fit indices show similar results as the ones presented for the original study above, which gives a first base from which to start the invariance analysis.</p>
+<p>The first step for invariance testing is the estimation of the configural model, which serves as the baseline for further comparison and is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit, since its sensitivity to sample size it is recommended to use three additional fit indices: Comparative Fit Index (CFI), which should have a value greater than 0.95; Root Mean Square Error Approximation (RMSEA), which must be lower than 0.06; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 <span class="citation">(<a href="#ref-vandeschoot_checklist_2012" role="doc-biblioref"><strong>vandeschoot_checklist_2012?</strong></a>)</span>. Besides, the literature on measurement invariance suggests some complementary approaches for the evaluation of the fit, from which we will consider the incremental adjustment of the fit indexes <span class="citation">(<a href="#ref-cheung_evaluating_2002" role="doc-biblioref"><strong>cheung_evaluating_2002?</strong></a>; <a href="#ref-milfont_testing_2010" role="doc-biblioref"><strong>milfont_testing_2010?</strong></a>; <a href="#ref-dimitrov_testing_2010" role="doc-biblioref"><strong>dimitrov_testing_2010?</strong></a>)</span> and the ANOVA test for means comparison in nested models <span class="citation">(<a href="#ref-newsom_longitudinal_2015" role="doc-biblioref"><strong>newsom_longitudinal_2015?</strong></a>)</span>.</p>
+<table class="table table-striped table-bordered" style="font-size: 10px; width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption style="font-size: initial !important;">
+<span id="tab:invargroup">Table 6: </span>Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Model
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\chi^2 (\text{df})\)</span>
+</th>
+<th style="text-align:left;">
+CFI
+</th>
+<th style="text-align:left;">
+RMSEA (90 CI)
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\Delta \chi^2 (\Delta \text{df}\)</span>)
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\Delta \text{CFI}\)</span>
+</th>
+<th style="text-align:left;">
+<span class="math inline">\(\Delta \text{RMSEA}\)</span>
+</th>
+<th style="text-align:left;">
+Decision
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Configural
+</td>
+<td style="text-align:left;">
+316.27 (28)
+</td>
+<td style="text-align:left;">
+0.944
+</td>
+<td style="text-align:left;">
+0.078
+(0.07-0.086)
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Weak
+</td>
+<td style="text-align:left;">
+323.62 (32)
+</td>
+<td style="text-align:left;">
+0.943
+</td>
+<td style="text-align:left;">
+0.073
+(0.066-0.081)
+</td>
+<td style="text-align:left;">
+7.347 (4)
+</td>
+<td style="text-align:left;">
+-0.001
+</td>
+<td style="text-align:left;">
+-0.005
+</td>
+<td style="text-align:left;">
+Accept
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strong
+</td>
+<td style="text-align:left;">
+330.66 (36)
+</td>
+<td style="text-align:left;">
+0.942
+</td>
+<td style="text-align:left;">
+0.07
+(0.063-0.077)
+</td>
+<td style="text-align:left;">
+7.045 (4)
+</td>
+<td style="text-align:left;">
+-0.001
+</td>
+<td style="text-align:left;">
+-0.004
+</td>
+<td style="text-align:left;">
+Accept
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Strict
+</td>
+<td style="text-align:left;">
+426.74 (44)
+</td>
+<td style="text-align:left;">
+0.925
+</td>
+<td style="text-align:left;">
+0.072
+(0.066-0.078)
+</td>
+<td style="text-align:left;">
+96.08 (8) ***
+</td>
+<td style="text-align:left;">
+-0.017
+</td>
+<td style="text-align:left;">
+0.002
+</td>
+<td style="text-align:left;">
+Reject
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> N = ; Group 1, n = 1242; Group 2, n = 2141, ***p &lt; 0.001
+</td>
+</tr>
+</tfoot>
+</table>
+<p>Table <a href="#tab:invargroup">6</a> shows the results of the measurement invariance estimation. When attending to the traditional invariance test of <span class="math inline">\(\Delta \chi^2 (\Delta \text{df})\)</span>, the results support the invariance at the strong level meaning that the fit of the factor model of the merit scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance <span class="citation">(<a href="#ref-fischer_are_2011" role="doc-biblioref"><strong>fischer_are_2011?</strong></a>)</span>, as strict forms of measurement invariance rarely hold <span class="citation">(<a href="#ref-vandeschoot_checklist_2012" role="doc-biblioref"><strong>vandeschoot_checklist_2012?</strong></a>)</span>. Still, the comparability of latent means requires strict invariance which in this case does not hold when considering <span class="math inline">\(\Delta \chi^2 (\Delta \text{df})\)</span>. Nevertheless, the criteria of <span class="math inline">\(\Delta \text{CFI}\)</span> used for comparing models is close to the rejection criteria of &gt;.01, whereas the <span class="math inline">\(\Delta \text{RMSEA}\)</span> fulfils the requirements of being below the cut-off criteria as suggested by <span class="citation">(<a href="#ref-chen_sensitivity_2007" role="doc-biblioref"><strong>chen_sensitivity_2007?</strong></a>)</span>. Therefore, using this last standard the level for strict invariance holds for the meritocracy scale.</p>
+</div>
+</div>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<p>Studies that attempt to characterize and compare societies by their support for meritocratic beliefs have used different approaches. As most studies use secondary survey data, they tend to assume that the available indicators represent an underlying meritocratic construct. A review of these studies reveals several non-tested assumptions, as well as the use of similar indicators to represent different constructs and dimensions of meritocracy. As the existence of heterogeneous approaches certainly has consequences for the advancement of the study of meritocracy, this paper presented a comprehensive conceptual framework for the empirical study of meritocracy, building upon previous research. This framework was then tested against available and new survey data.</p>
+<p>We identified four critical aspects regarding the measurement of meritocracy in previous studies: unidimensionality, the ambiguous use of the term “beliefs”, the use of non-meritocratic indicators as opposed to meritocratic indicators, and the consideration of measurement error. The proposed 8-item scale, “Perceptions and Preferences for Meritocracy”, was designed and tested in order to deal with these four issues. Our results indicate that perceptions and preferences seem to be two related but different dimensions, often confounded in previous research under the label of “beliefs”. Meritocratic and non-meritocratic dimensions do not appear to constitute poles of the same continuum, as some previous studies have assumed. Regarding the possible effects of the items’ order in the estimation of the latent variable, we tested three different order versions and found evidence that suggests the use of the randomized version of the scale. Furthermore, we found evidence of convergent validity as well as measurement invariance that approach well the requirement of comparability between samples.</p>
+<p>The four-dimensional conceptual framework and its operationalization in the Perceptions and Preferences for Meritocracy scale open several avenues for future research. For instance, distinguishing perceptions from preferences will allow us to evaluate the extent to which different societies are accustomed to, or satisfied with, the perceived level of meritocracy, in terms of differences between what is perceived and what is preferred. Additionally, given that non-meritocratic factors are not necessarily related to meritocratic ones, our framework makes it possible to assess the perceived legitimacy of practices such as the use of personal contacts and their interference (or not) with meritocratic ideals in different societies. The consideration of structural factors, both individual and societal, will allow us to advance future hypotheses relating to meritocratic legitimacy to a more comprehensive level than the current one, which is based solely on meritocratic perceptions. Furthermore, the impact of different configurations of the four-dimensional framework on practices and behaviors such as corruption, civic involvement, and political alignment, is an area that requires additional research. Such future agendas could be especially relevant in times of economic crisis and growing inequalities, that could entail changes in the legitimation of the current distributive structure based on meritocratic ideals.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-alesina_fairness_2005" class="csl-entry">
+Alesina, A., &amp; Angeletos, G. (2005). Fairness and redistribution. <em>American Economic Review</em>, 960–980.
+</div>
+<div id="ref-arrow_meritocracy_2000" class="csl-entry">
+Arrow, K. J., Bowles, S., &amp; Durlauf, S. N. (Eds.). (2000). <em>Meritocracy and economic inequality</em>. Princeton University Press.
+</div>
+<div id="ref-castillo_meritocracia_2019" class="csl-entry">
+Castillo, J. C., Torres, A., Atria, J., &amp; Maldonado, L. (2019). Meritocracia y desigualdad económica: Percepciones, preferencias e implicancias. <em>Revista Internacional de Sociología</em>, <em>77</em>(1), 117. <a href="https://doi.org/10.3989/ris.2019.77.1.17.114">https://doi.org/10.3989/ris.2019.77.1.17.114</a>
+</div>
+<div id="ref-davey_preference_1999" class="csl-entry">
+Davey, L., Bobocel, D., Son Hing, L., &amp; Zanna, M. (1999). Preference for the merit principle scale: An individual difference measure of distributive justice preferences. <em>Social Justice Research</em>, <em>12</em>(3), 223–240.
+</div>
+<div id="ref-dimick_models_2018" class="csl-entry">
+Dimick, M., Rueda, D., &amp; Stegmueller, D. (2018). Models of other-regarding preferences, inequality, and redistribution. <em>Annual Review of Political Science</em>, <em>21</em>(1), 441–460. <a href="https://doi.org/10.1146/annurev-polisci-091515-030034">https://doi.org/10.1146/annurev-polisci-091515-030034</a>
+</div>
+<div id="ref-duru-bellat_who_2012" class="csl-entry">
+Duru-Bellat, M., &amp; Tenret, E. (2012). Who’s for meritocracy? Individual and contextual variations in the faith. <em>Comparative Education Review</em>, <em>56</em>(2), 223–247. <a href="https://doi.org/10.1086/661290">https://doi.org/10.1086/661290</a>
+</div>
+<div id="ref-goldthorpe_myth_2003" class="csl-entry">
+Goldthorpe, J. (2003). The myth of education-based meritocracy. <em>New Economy</em>, <em>10</em>(4), 234–239. <a href="https://doi.org/10.1046/j.1468-0041.2003.00324.x">https://doi.org/10.1046/j.1468-0041.2003.00324.x</a>
+</div>
+<div id="ref-hadjar_meritokratie_2008" class="csl-entry">
+Hadjar, A. (2008). <em>Meritokratie als legitimationsprinzip</em>. VS Verlag.
+</div>
+<div id="ref-khan_privilege_2013" class="csl-entry">
+Khan, S. (2013). <em>Privilege: The making of an adolescent elite at st. Paul’s school</em> (first paperback printing). Princeton Univ. Press.
+</div>
+<div id="ref-kunovich_systems_2007" class="csl-entry">
+Kunovich, S., &amp; Slomczynski, K. M. (2007). Systems of distribution and a sense of equity: A multilevel analysis of meritocratic attitudes in post-industrial societies. <em>European Sociological Review</em>, <em>23</em>(5), 649–663. <a href="https://doi.org/10.1093/esr/jcm026">https://doi.org/10.1093/esr/jcm026</a>
+</div>
+<div id="ref-madeira_primes_2019" class="csl-entry">
+Madeira, A. F., Costa-Lopes, R., Dovidio, J. F., Freitas, G., &amp; Mascarenhas, M. F. (2019). Primes and consequences: A systematic review of meritocracy in intergroup relations. <em>Frontiers in Psychology</em>, <em>10</em>. <a href="https://doi.org/10.3389/fpsyg.2019.02007">https://doi.org/10.3389/fpsyg.2019.02007</a>
+</div>
+<div id="ref-markovits_meritocracy_2019" class="csl-entry">
+Markovits, D. (2019). <em>The meritocracy trap: How america’s foundational myth feeds inequality, dismantles the middle class, and devours the elite</em>. Penguin Press.
+</div>
+<div id="ref-mccall_exposure_2017" class="csl-entry">
+McCall, L., Burk, D., Laperrière, M., &amp; Richeson, J. A. (2017). Exposure to rising inequality shapes americans’ opportunity beliefs and policy support. <em>Proceedings of the National Academy of Sciences</em>, 201706253. <a href="https://doi.org/10.1073/pnas.1706253114">https://doi.org/10.1073/pnas.1706253114</a>
+</div>
+<div id="ref-mijs_paradox_2019" class="csl-entry">
+Mijs, J. J. B. (2019). The paradox of inequality: Income inequality and belief in meritocracy go hand in hand. <em>Socio-Economic Review</em>. <a href="https://doi.org/10.1093/ser/mwy051">https://doi.org/10.1093/ser/mwy051</a>
+</div>
+<div id="ref-newman_false_2015" class="csl-entry">
+Newman, B. J., Johnston, C. D., &amp; Lown, P. L. (2015). False consciousness or class awareness? Local income inequality, personal economic position, and belief in american meritocracy. <em>American Journal of Political Science</em>, <em>59</em>(2), 326–340. <a href="https://doi.org/10.1111/ajps.12153">https://doi.org/10.1111/ajps.12153</a>
+</div>
+<div id="ref-reynolds_perceptions_2014" class="csl-entry">
+Reynolds, J., &amp; Xian, H. (2014). Perceptions of meritocracy in the land of opportunity. <em>Research in Social Stratification and Mobility</em>, <em>36</em>, 121–137. <a href="https://doi.org/10.1016/j.rssm.2014.03.001">https://doi.org/10.1016/j.rssm.2014.03.001</a>
+</div>
+<div id="ref-roex_attitudes_2018" class="csl-entry">
+Roex, K. L., Huijts, T., &amp; Sieben, I. (2018). Attitudes towards income inequality: <span>“Winners”</span> versus <span>“losers”</span> of the perceived meritocracy. <em>Acta Sociologica</em>, 0001699317748340. <a href="https://doi.org/10.1177/0001699317748340">https://doi.org/10.1177/0001699317748340</a>
+</div>
+<div id="ref-sandel_tyranny_2020" class="csl-entry">
+Sandel, M. J. (2020). <em>The tyranny of merit: What’s become of the common good?</em> (First edition). Farrar, Straus; Giroux.
+</div>
+<div id="ref-schroder_income_2017" class="csl-entry">
+Schröder, M. (2017). Is income inequality related to tolerance for inequality? <em>Social Justice Research</em>, <em>30</em>(1), 23–47. <a href="https://doi.org/10.1007/s11211-016-0276-8">https://doi.org/10.1007/s11211-016-0276-8</a>
+</div>
+<div id="ref-yair_meritocracy_2007" class="csl-entry">
+Yair, G. (2007). Meritocracy. In G. Ritzer (Ed.), <em>The blackwell encyclopedia of sociology</em>. Blackwell Publishing Ltd.
+</div>
+<div id="ref-young_rise_1962" class="csl-entry">
+Young, M. (1962). <em>The rise of the meritocracy</em>. Penguin Books.
+</div>
+</div>
+<p><!-- Although <div> is an HTML tag, this method also works for other output formats such as PDF. --></p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="appendix-appendix" class="section level1 unnumbered">
+<h1>Appendix</h1>
+<div id="appendix-study-1" class="section level2">
+<h2>Appendix study 1</h2>
+<table>
+<caption><span id="tab:rep-samp">Table 7: </span> Representativeness of the study 1 sample.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">Sample</th>
+<th align="center">CEP</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Gender</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td>Men</td>
+<td align="center">49,82%</td>
+<td align="center">50,52%</td>
+</tr>
+<tr class="odd">
+<td>Women</td>
+<td align="center">50.18%</td>
+<td align="center">49,47%</td>
+</tr>
+<tr class="even">
+<td><strong>Age</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>18 - 24</td>
+<td align="center">18,55%</td>
+<td align="center">18,17%</td>
+</tr>
+<tr class="even">
+<td>25 - 34</td>
+<td align="center">18,86%</td>
+<td align="center">17,48%</td>
+</tr>
+<tr class="odd">
+<td>35 - 44</td>
+<td align="center">19.09%</td>
+<td align="center">19,98%</td>
+</tr>
+<tr class="even">
+<td>45 - 54</td>
+<td align="center">17,96%</td>
+<td align="center">19,23%</td>
+</tr>
+<tr class="odd">
+<td>55 - or more</td>
+<td align="center">25,54%</td>
+<td align="center">25.11%</td>
+</tr>
+<tr class="even">
+<td><strong>Education</strong></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr class="odd">
+<td>Primary or less</td>
+<td align="center">2,93%</td>
+<td align="center">15,88%</td>
+</tr>
+<tr class="even">
+<td>High school</td>
+<td align="center">43,23%</td>
+<td align="center">37,04%</td>
+</tr>
+<tr class="odd">
+<td>Non university</td>
+<td align="center">32,63%</td>
+<td align="center">28,93%</td>
+</tr>
+<tr class="even">
+<td>university or more</td>
+<td align="center">21,21%</td>
+<td align="center">18,13%</td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+<table class="table table-striped table-bordered" style="font-size: 10px; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption style="font-size: initial !important;">
+<span id="tab:tb-perpref1">Table 8: </span> Factor loadings and fit measures of the four first-order factor model in study 1
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Perception
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Preference
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Meritocratic
+</th>
+<th style="text-align:center;">
+Non-meritocratic
+</th>
+<th style="text-align:center;">
+Meritocratic
+</th>
+<th style="text-align:center;">
+Non-meritocratic
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Importance: hard work
+</td>
+<td style="text-align:center;">
+0.709
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: having ambition
+</td>
+<td style="text-align:center;">
+0.726
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: wealthy family
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.694
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: educated parents
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.609
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: race
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.624
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: gender
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.591
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: knowing people
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.612
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Importance: political connections
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.644
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: well job
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.760
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: hard job
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.910
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: support family
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.837
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reasons for pay: has children
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.918
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\chi^2\text{(df)}\)</span>
+</td>
+<td style="text-align:center;">
+21308.5(48)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{CFI}\)</span>
+</td>
+<td style="text-align:center;">
+0.959
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{TLI}\)</span>
+</td>
+<td style="text-align:center;">
+0.944
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{RMSEA}\)</span>
+</td>
+<td style="text-align:center;">
+0.098
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(N\)</span>
+</td>
+<td style="text-align:center;">
+46594
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+<div id="appendix-study-3" class="section level2">
+<h2>Appendix study 3</h2>
+<table class="table table-striped table-bordered" style="font-size: 10px; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<caption style="font-size: initial !important;">
+<span id="tab:fcloads-inv">Table 9: </span>Factor loadings and fit measures for the second sample for study 3
+</caption>
+<thead>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="4">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Factor loadings
+</div>
+</th>
+</tr>
+<tr>
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="1">
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Perception
+</div>
+</th>
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Preference
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:center;">
+Meritocratic
+</th>
+<th style="text-align:center;">
+Non-meritocratic
+</th>
+<th style="text-align:center;">
+Meritocratic
+</th>
+<th style="text-align:center;">
+Non-meritocratic
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+A. Perception Effort
+</td>
+<td style="text-align:center;">
+0.638
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+B. Perception Talent
+</td>
+<td style="text-align:center;">
+0.752
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+C. Perception Rich parents
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.692
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+D. Perception Contacts
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.801
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+E. Preferences Effort
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.752
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+F. Preferences Talent
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.605
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+G. Preferences Rich parents
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.652
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+H. Preferences Contacts
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+0.765
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\chi^2\text{(df)}\)</span>
+</td>
+<td style="text-align:center;">
+104.6(14)
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{CFI}\)</span>
+</td>
+<td style="text-align:center;">
+0.970
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{TLI}\)</span>
+</td>
+<td style="text-align:center;">
+0.941
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(\text{RMSEA}\)</span>
+</td>
+<td style="text-align:center;">
+0.072
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;padding-left: 2em;" indentlevel="1">
+<span class="math inline">\(N\)</span>
+</td>
+<td style="text-align:center;">
+1242
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; " colspan="100%">
+<span style="font-style: italic;">Note: </span> <sup></sup> Standardized factor loadings using DWLS estimator ; CFI = Comparative fit index ;TLI = Tucker-Lewis index; RMSEA = Root mean square error of approximation
+</td>
+</tr>
+</tfoot>
+</table>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

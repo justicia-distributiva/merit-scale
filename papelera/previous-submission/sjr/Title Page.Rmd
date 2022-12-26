@@ -1,0 +1,41 @@
+---
+title: "Measuring Perceptions and Preferences for Meritocracy"
+linestretch: '1.5'
+output:
+  bookdown::pdf_document2:
+     template: null
+     toc: false
+     number_sections: false
+geometry: margin=0.78in
+header-includes:
+  - \usepackage{times}           # Times New Roman
+  - \usepackage{caption}
+  - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
+  - \usepackage[figurename=Fig.]{caption}
+  - \usepackage{graphicx}
+  - \usepackage{float}
+  - \usepackage{booktabs}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{multirow}
+  - \usepackage{wrapfig}
+  - \usepackage{float}
+  - \usepackage{colortbl}
+  - \usepackage{pdflscape}
+  - \usepackage{tabu}
+  - \usepackage{threeparttable}
+fontsize: 10pt
+---
+
+
+Juan Carlos Castillo, Department of Sociology, Universidad de Chile (
+juancastillov@uchile.cl - [jc-castillo.com](https://juancarloscastillo.github.io/jc-castillo/) -  Ignacio Carrera Pinto 1045 Ñuñoa, Santiago de Chile )
+
+
+Luis Maldonado, Institute of Sociology, Pontificia Universidad Católica de Chile
+
+Jorge Atria, Department of Sociology, Universidad Diego Portales
+
+Julio Iturra, Center for Social Conflict and Cohesion Studies
+
+Francisco Meneses, Department of Sociology, Universidad de Chile

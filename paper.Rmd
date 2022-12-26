@@ -6,14 +6,14 @@ link-citations: yes
 # author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
 abstract: "Economic and social inequalities have generated growing concerns and crises across contemporary societies. One of the mechanisms proposed by social sciences to explain the persistence of inequality is the belief in meritocracy, which would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualization and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data to operationalize meritocracy, with a wide variation in the use and interpretation of the same survey items. Taking into account the extant literature that uses measures of meritocracy, this article identifies a series of drawbacks and inconsistencies within and between studies regarding conceptualization and operationalization. Based on this critical analysis, we propose a conceptual framework for studying perceptions and preferences for meritocracy and non-meritocracy, which is then tested through confirmatory analysis using ISSP (International Social Survey Programme) data as well as a novel survey designed specifically with this purpose (N=2,141). Our results support the conceptual framework and its operationalizarion, although with a better fit for the proposed scale than for the ISSP survey. Our discussion highlights the importance of considering different dimensions in order to advance in the study of meritocracy."
 output:
-  bookdown::word_document2:
-    number_sections: false
-  bookdown::html_document2:
-    number_sections: false
   bookdown::pdf_document2:
      template: null
      toc: false
      number_sections: false
+  bookdown::html_document2:
+    number_sections: false
+  bookdown::word_document2:
+    number_sections: false
 linkcolor: blue
 bibliography:
   - input/bib/meritocracy.bib
