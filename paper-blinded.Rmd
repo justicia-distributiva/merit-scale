@@ -5,7 +5,6 @@ linestretch: '1.5'
 link-citations: yes
 # author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
 abstract: "Economic and social inequalities have generated growing concerns and crises across contemporary societies. The belief in meritocracy has been suggested as one of the factors that explain the persistence of inequality, as it would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualizations and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data from different surveys to operationalize meritocracy, with a wide variation in the use and interpretation of the same measuring items. Based on a critical analysis of concepts and operationalizations of meritocracy in survey research, we propose a conceptual framework for measuring perceptions and preferences for meritocracy and non-meritocracy in a minimalistic version (few items as possible), in order to be considered in comparative survey research studies. The proposal is first tested through confirmatory factor analysis (CFA) using available ISSP (International Social Survey Programme) inequality module items. Based on these results, in a second stage we developed a improved scale that better suits the perceptions/preferences distinction, which was applied in a Chilean sample (N=2,141). The results of the CFA estimation give evidence of a better fit for the new scale. Our discussion highlights the importance of considering different dimensions in order to advance in the study of meritocracy."
-
 output:
   bookdown::word_document2:
     number_sections: false
@@ -46,8 +45,8 @@ fontsize: 10pt
 ```{r eval=FALSE, include=FALSE}
  # for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
  # clean #in the yml
- rmarkdown::render("paper.Rmd", output_format = "bookdown::pdf_document2")
- rmarkdown::render("paper.Rmd", output_format = "bookdown::html_document2")
+ rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::pdf_document2")
+ rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::html_document2")
  # rmarkdown::render("paper.Rmd", output_format = "bookdown::word_document2")
 ```
 
@@ -106,7 +105,7 @@ Is the belief in meritocracy a perception or a preference with normative meaning
 
 c. _Non-meritocratic aspects_
 
-Some research in meritocracy considers aspects usually opposed to effort and talent for personal achievement, as for instance family status and the use of personal advantages (as contacts or having a wealthy family) to get ahead in life. This distinction refers to the classical achieved and ascribed status dimension from @linton_study_1936.  For instance, @kunovich_systems_2007 used an items' battery listing a number of factors in relation to "How important each should be in deciding pay..." (as @duru-bellat_who_2012 for desired meritocracy). They consider factors such as education and responsibility as meritocratic, giving them a value of 1 is considered "essential" in the scale response, whereas factors such as having a family or children are valued 1 when rated as "not important at all" (i.e. reverse coded). The assumption behind this approach is that rejecting a supposed ascribed or non-meritocratic^[Although the use of the concept "non-meritocratic" is very broad, we prefer to use it instead of something like ascription, given that this last one leaves out aspects such as the use of personal relationships.@@] aspect (as having family and/or children) implies a stronger belief in meritocracy. A similar approach of reverse-coding non-meritocratic items was taken by @newman_false_2015, using the same principles applied in the "Preference for the Merit Principle Scale" [@davey_preference_1999].
+Some research in meritocracy considers aspects usually opposed to effort and talent for personal achievement, as for instance family status and the use of personal advantages (as contacts or having a wealthy family) to get ahead in life. This distinction refers to the classical achieved and ascribed status dimension from @linton_study_1936.  For instance, @kunovich_systems_2007 used an items' battery listing a number of factors in relation to "How important each should be in deciding pay..." (as @duru-bellat_who_2012 for desired meritocracy). They consider factors such as education and responsibility as meritocratic, giving them a value of 1 is considered "essential" in the scale response, whereas factors such as having a family or children are valued 1 when rated as "not important at all" (i.e. reverse coded). The assumption behind this approach is that rejecting a supposed ascribed or non-meritocratic^[Although the use of the concept "non-meritocratic" is very broad, we prefer to use it instead of something like ascription, given that this last one leaves out aspects such as the use of personal relationships.] aspect (as having family and/or children) implies a stronger belief in meritocracy. A similar approach of reverse-coding non-meritocratic items was taken by @newman_false_2015, using the same principles applied in the "Preference for the Merit Principle Scale" [@davey_preference_1999].
 
 The assumption that meritocratic and non-meritocratic elements are poles of the same continuum was tested by @reynolds_perceptions_2014 using the "get ahead" perceptions' battery items mentioned above. They considered education, ambition, and hard work as meritocratic, whereas factors such as family wealth and connections where classified as non-meritocratic. Despite making this distinction, the authors end up subtracting one dimension from the other, thus coming back to the assumption that they are two poles of the same continuum, as @kunovich_systems_2007 also did. Similarly, @roex_attitudes_2018 used ISSP indicators for perceived meritocracy and non-meritocracy to build a single score by reverse coding the non-meritocratic items. Therefore, the treatment of non-meritocratic items has been rather inconsistent across studies and the assumption that they are the simple opposite of meritocracy certainly requires further conceptual elaboration and empirical assessment. For instance, such distinction could open the door to study to what extent different and apparently contradictory views of meritocracy can coexist, to what extent individuals and societies differ to this regard, and of course the associated factors to such differences.
 
@@ -195,13 +194,15 @@ There are a series of indicators in the ISSP survey that in the following we att
 
 - _Perception of meritocracy/non-meritocracy_: for operationalizing perceptions the closest set of ISSP's indicators comes from the question asking about perceptions for opportunities to get ahead, which are usually considered as "meritocratic beliefs" in previous studies. The general heading of the battery is: _"To begin we have some questions about opportunities for getting ahead. Please tick one box for each of these to show how important you think it is for getting ahead in life."_ This is followed by a list of statements to be rated from 1 to 5: essential, very important, fairly important, not very important, not important at all.
 
+\break
+
 The classification of the items is based on criteria of internal motivation (meritocratic) and structural constraints (non-meritocratic). There were two items from the battery that were excluded from the analysis as they would not fit into the classification. The first one was "having good education yourself", since it was not clear whether this is could be due to individual motivation or system opportunities, and the second was "giving bribes", as introduced elements of criminality that were beyond a non-meritocratic perception.
 
 - _Preferences for meritocracy-non meritocracy_: for the operationalization of normative preferences we used a list of items related to reasons for pay battery. The ISSP question was: _In deciding how much people ought to earn, how important should each of these things be, in your opinion_, rated in the same _essential-non important at all_ scale (1 to 5) as the questions for meritocratic perceptions.
 
 ## Methods
 
-The estimation of the measurement model was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012), with diagonally weighted least squares (DWLS) estimation due to the items' ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012]. As recommended by @brown_confirmatory_2015, we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
+The estimation of the measurement model was performed using Confirmatory Factor Analysis (CFA). CFA was conducted using the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012a), with diagonally weighted least squares (DWLS) estimation due to the items' ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012a]. As recommended by @brown_confirmatory_2015, we assessed model fit by jointly considering the comparative fit index and Tucker-Lewis Index (CFI and TLI; acceptable fit > 0.95), Root of the average squared residual approximation (RMSEA; acceptable fit < 0.08),  Chi-square: (p-value; acceptable fit > 0.05, and Chi-square ratio > 3).
 
 ## Results
 
@@ -393,7 +394,7 @@ In terms of the association between the indicators, Figure \@ref(fig:corr-issp) 
 
 ### Confirmatory Factor Analysis
 
-Table \@ref(tab:sum-fit-issp) shows the results of the estimation of two confirmatory models. The first one (First Order) corresponds to a model that estimate four factors, each for one of the dimensions presented in \@ref(tab:table-issp), showing only regular fit indicators (CFI=0.959, TLI=0.944, RMSEA=0.098, $\chi^2$(df=48)= 21308.535; more detail in Table \@ref(tab:tb-perpref1)). Further analysis showed that the sources for poor fit were mostly related to the items of the non-meritocratic perceptions, which as mentioned above displayed correlations among them not taken into account in this model specification.
+Table \@ref(tab:sum-fit-issp) shows the results of the estimation of two confirmatory models. The first one (First Order) corresponds to a model that estimate four factors, each for one of the dimensions presented in \@ref(tab:table-issp), showing only regular fit indicators (CFI=0.959, TLI=0.944, RMSEA=0.098, $\chi^2$(df=48)= 21308.535). Further analysis showed that the sources for poor fit were mostly related to the items of the non-meritocratic perceptions, which as mentioned above displayed correlations among them not taken into account in this model specification.
 
 ```{r sum-fit-issp}
   load(file = "input/data/proc/data_s1.RData")
@@ -464,6 +465,88 @@ Attending to the sources of poor fit from the first estimated confirmatory model
 
 Regarding the correlations between the factors in the Figure \@ref(fig:meas02-issp), we observe that perceptions are correlated with preferences, but more strongly for the meritocratic ($r=0.46$) than for the non-meritocratic ($r=0.27$) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation ($r=0.30$), suggesting that they are not the opposite poles of the same continuum. Something similar occurs for the correlation between the two dimensions of preferences ($r=0.25$).
 
+Based on the measurement validation, we asses if the proposed measurement strategy can be used in cross-national comparisons. In this line, Figure \@ref(fig:scat1) depicts the correlation of factor scores for Meritocratic Perception and Meritocratic Preferences at the country level. For instance, Bulgaria (BGR) and the United States (USA) appropriately represent the positive association between perception and preferences. In other words, countries that describe merit in their society as an essential factor to get ahead in life also consider that effort and talent should be determinant factors in how much an individual earns. On the other hand, in countries with lower perceived meritocracy, preferences are also low, where Denmark (DNK) and Venezuela (VEN) are representative societies of this association.
+
+Another finding depicted by Figure \@ref(fig:scat1) is the positive association of Non-meritocratic perception with Meritocratic preferences, showing that countries like Bulgaria (BGR) and Philipines (PHL) represent cases with higher Non-meritocratic perceptions and higher preferences for meritocracy. In other words, in societies where people perceive higher importance of non-meritocratic aspects to get ahead in life, also preferer that merit should be a determinant factor in wages. On the other side, countries like Sweden (SWE) or Denmark (DNK), both Scandinavian societies with strong welfare systems, represent contexts in which non-meritocratic aspects are not described as important, and merit is not considered as a factor that should be determinant in wages.
+
+
+```{r scat1, fig.cap="Cross-national comparison of non-meritocratic and meritocratic perceptions with meritocratic preference",fig.height=6, fig.width=12}
+  load(file = "input/data/proc/data_s1.RData")
+  if (!require("pacman")) install.packages("pacman")
+  pacman::p_load(dplyr, kableExtra, knitr,lavaan,countrycode,ggplot2,haven,
+                 gridExtra)
+  table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+    "html" #if html set "html" in format
+  } else if(knitr::is_latex_output()) {
+    "latex"#if latex set "latex" in format
+  }
+
+  # meassurement model: Second order
+  cfa_perpref2 <- '
+  	  # latent variables
+  	  percmerit =~ hwork + ambition
+  	  parents =~ wealthy + pareduc
+  	  backgrd =~ race + gender
+  	  networks=~ people + polcone
+  	  percnmerit=~ parents + backgrd + networks
+  	  prefmerit =~ welljob + hardjob
+  	  prefnmerit=~ family + child
+  	  '
+  # Model fit: second order
+  
+  fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = data_s1,ordered = F)
+  
+  df_proc<- data_s1 %>% select(id,v5,wealthy:hardjob)  
+  df_proc$ccode <- as.numeric(data_s1$v5)   
+  
+  
+  predicted2 <- lavPredict(fit_perpref2,newdata = data_s1)  
+  
+  idx <- lavInspect(fit_perpref2, "case.idx")
+  fscores <- lavPredict(fit_perpref2)
+  ## loop over factors
+  for (fs in colnames(fscores)) {
+    df_proc[idx, fs] <- fscores[ , fs]
+  }
+
+  df_proc <-  df_proc %>%  select(id,ccode,percmerit,prefmerit,prefnmerit) %>% na.omit()  
+  
+  df_proc$clab <- countrycode(sourcevar = df_proc$ccode,
+                            origin = "iso3n",
+                            destination = "iso3c")
+
+avg_count <-  
+  df_proc %>% group_by(clab) %>% summarise(prefmerit=mean(prefmerit),
+                                            percmerit=mean(percmerit),
+                                            prefnmerit=mean(prefnmerit))
+
+
+
+# create figure 1: perception merit by preferences merit
+figure1 <- 
+ggplot(avg_count, aes(x=percmerit, y=prefmerit)) +
+  # geom_point() + 
+  geom_text(label=as.character(avg_count$clab)) +
+  geom_smooth(method = "lm") +
+  xlab("Meritocratic perception")+
+  ylab("Meritocratic preference")  
+# create figure 2: perception non-merit by preferences merit
+figure2 <- 
+ggplot(avg_count, aes(x=prefnmerit, y=prefmerit)) +
+  # geom_point() + 
+  geom_text(label=as.character(avg_count$clab)) +
+  geom_smooth(method = "lm") +
+  xlab("Non-meritocratic perception")+
+  ylab("Meritocratic preference") 
+
+  
+grid.arrange(figure1, figure2, ncol = 2,
+             bottom = grid::textGrob(label = paste0("Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009",
+      " (n=",dim(df_proc)[1],")"),
+                                     hjust = -0.07,
+                                     gp = grid::gpar(fontface = 1, fontsize = 9)))
+```
+
 ## Discussion study 1
 
 Although it was possible to get an adequate fit of the model to the pooled data from ISSP, there are several aspects to take into account when using these items for measuring meritocracy. First of all, the items were not designed based on this conceptual approach and a first estimation approach (first order factor model) reveals some problems of fit. Secondly, some of the items in similar dimensions refer to different concepts, as for instance meritocratic perceptions are related to ambition and hard work, whereas meritocratic preferences deal with how well a job is done. A better operationalization would require more alignment between the different sides of the same concept. And thirdly, the scale is rather unbalanced given he larger amount of non-meritocratic perception items, producing correlated errors. All these limitations are considered in the design of Study 2.
@@ -523,7 +606,7 @@ With the objective of evaluating the effect of indicator ordering in the respons
 
 ## Methods
 
-To test the scale's underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table \@ref(tab:table-indicadores). As in Study 1, CFA was conducted using the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012), with diagonally weighted least squares (DWLS) estimation due to the items' ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012]. The fit indexes and cut-off criteria were the same as the ones used in Study 1.
+To test the scale's underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table \@ref(tab:table-indicadores). As in Study 1, CFA was conducted using the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012a), with diagonally weighted least squares (DWLS) estimation due to the items' ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012a]. The fit indexes and cut-off criteria were the same as the ones used in Study 1.
 
 A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2](https://osf.io/z45y2). Included in this pre-registration are the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
 
@@ -877,7 +960,7 @@ This research follows a series of open science guidelines as the pre-registratio
 
 \pagebreak
 
-# Appendix {-}
+<!-- # Appendix {-} -->
 
 `r if (knitr::is_latex_output()){ '\\appendix'}`
 
@@ -905,7 +988,7 @@ Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the stu
 
 \pagebreak
 
-```{r tb-perpref1, echo=FALSE}
+```{r tb-perpref1, eval=FALSE, include=FALSE}
  if (!require("pacman")) install.packages("pacman")
  load(file = "input/data/proc/data_s1.RData")
  pacman::p_load(dplyr,knitr,kableExtra)
@@ -1012,9 +1095,9 @@ Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the stu
            footnote(general =tb.foot ,footnote_as_chunk = T,threeparttable = T);tb.issp
 ```
 
-**Study 3**
+<!-- **Study 3** -->
 
-```{r fcloads-inv, echo=FALSE}
+```{r fcloads-inv, eval=FALSE, include=FALSE}
  if (!require("pacman")) install.packages("pacman")
  pacman::p_load(dplyr, knitr, kableExtra,lavaan)
  options(knitr.kable.NA = '')
