@@ -543,7 +543,7 @@ ggplot(avg_count, aes(x=prefnmerit, y=prefmerit)) +
 grid.arrange(figure1, figure2, ncol = 2,
              bottom = grid::textGrob(label = paste0("Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009",
       " (n=",dim(df_proc)[1],")"),
-                                     hjust = -0.07,
+                                     hjust = 0.1,
                                      gp = grid::gpar(fontface = 1, fontsize = 9)))
 ```
 
