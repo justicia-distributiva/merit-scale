@@ -11,10 +11,10 @@ output:
      toc: false
      number_sections: false
      keep_text: true
-  # bookdown::word_document2:
-  #   number_sections: false
-  # bookdown::html_document2:
-  #   number_sections: false
+  bookdown::word_document2:
+    number_sections: false
+  bookdown::html_document2:
+    number_sections: false
 linkcolor: blue
 bibliography:
   - input/bib/meritocracy.bib
@@ -49,7 +49,7 @@ papersize: a4
  # clean #in the yml
  rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::pdf_document2")
  rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::html_document2")
- # rmarkdown::render("paper.Rmd", output_format = "bookdown::word_document2")
+ rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::word_document2")
 ```
 
 ```{r setup, include=FALSE}

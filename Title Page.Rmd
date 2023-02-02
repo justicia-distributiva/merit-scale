@@ -1,5 +1,5 @@
 ---
-title: "Measuring Perceptions and Preferences for Meritocracy"
+title: "Measuring Perceptions and Preferences for Meritocracy [^*]"
 linestretch: '1.5'
 output:
   bookdown::pdf_document2:
@@ -29,9 +29,7 @@ fontsize: 12pt
 ---
 
 
-Juan Carlos Castillo, Department of Sociology, Universidad de Chile (
-juancastillov@uchile.cl - [jc-castillo.com](https://juancarloscastillo.github.io/jc-castillo/) -  Ignacio Carrera Pinto 1045 Ñuñoa, Santiago de Chile )
-
+Juan Carlos Castillo, Department of Sociology, Universidad de Chile *
 
 Luis Maldonado, Institute of Sociology, Pontificia Universidad Católica de Chile
 
@@ -40,3 +38,8 @@ Jorge Atria, Department of Sociology, Universidad Diego Portales
 Julio Iturra, Bremen International Graduate School of Social Sciences
 
 Francisco Meneses, Department of Sociology, Universidad de Chile
+
+
+Word count: 8998
+
+[^*]: Corresponding author (juancastillov@uchile.cl - [jc-castillo.com](https://juancarloscastillo.github.io/jc-castillo/) -  Ignacio Carrera Pinto 1045 Ñuñoa, Santiago de Chile). The authors recognize the support of ANID/FONDECYT grant 1160921 and of  the Center for Conflict and Social Cohesion Studies (COES)  grant ANID/FONDAP 1513009.
