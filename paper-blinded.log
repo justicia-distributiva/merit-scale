@@ -1,14 +1,14 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.15)  29 JAN 2023 16:07
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.2.2)  2 FEB 2023 16:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **paper-blinded.tex
 (./paper-blinded.tex
 LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2022-12-17> (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+L3 programming layer <2023-02-01> (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
-(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+File: size12.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count185
 \c@section=\count186
@@ -284,11 +284,7 @@ Package caption Info: Standard document class detected.
 Package caption Info: longtable package is loaded.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
 Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
-))
-Package caption Info: Option `figurename' requires the `newfloat' package on input line 81.
-(c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/newfloat/newfloat.sty
-Package: newfloat 2019/09/02 v1.1l Defining new floating environments (AR)
-) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+)) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
@@ -476,7 +472,7 @@ LaTeX Font Info:    Trying to load font information for T1+ptm on input line 112
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 ) (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2023-01-16 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count311
 \l__pdf_internal_box=\box70
 ) (./paper-blinded.aux)
@@ -510,27 +506,27 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
 * driver: pdftex
-* paper: <default>
+* paper: a4paper
 * layout: <same size as paper>
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
-* h-part:(L,W,R)=(56.3705pt, 501.554pt, 56.3705pt)
-* v-part:(T,H,B)=(56.3705pt, 682.22899pt, 56.3705pt)
-* \paperwidth=614.295pt
-* \paperheight=794.96999pt
-* \textwidth=501.554pt
-* \textheight=682.22899pt
-* \oddsidemargin=-15.89949pt
-* \evensidemargin=-15.89949pt
-* \topmargin=-52.89949pt
+* h-part:(L,W,R)=(72.26999pt, 452.9679pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=452.9679pt
+* \textheight=700.50687pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
 * \headheight=12.0pt
 * \headsep=25.0pt
-* \topskip=10.0pt
+* \topskip=12.0pt
 * \footskip=30.0pt
-* \marginparwidth=65.0pt
-* \marginparsep=11.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
 * \columnsep=10.0pt
-* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
 * \hoffset=0.0pt
 * \voffset=0.0pt
 * \mag=1000
@@ -546,8 +542,6 @@ Package caption Info: hyperref package is loaded.
 Package caption Info: threeparttable package is loaded.
 Package caption Info: wrapfig package is loaded.
 Package caption Info: End \AtBeginDocument code.
-Package newfloat Info: `float' package detected.
-Package newfloat Info: `wrapfig' package detected.
 Package hyperref Info: Link coloring ON on input line 112.
 (./paper-blinded.out) (./paper-blinded.out)
 \@outlinefile=\write3
@@ -570,11 +564,11 @@ LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 1
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 114.
+(Font)              <14.4> on input line 114.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 114.
+(Font)              <10> on input line 114.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 114.
+(Font)              <7> on input line 114.
 LaTeX Font Info:    Trying to load font information for U+msa on input line 114.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
@@ -584,92 +578,127 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 114.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 171.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 171.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 171.
-[4]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 195.
+{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7]
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 192.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-)
-<input/images/Fig1.generalf.png, id=275, 976.64874pt x 332.24126pt>
+) [8]
+<input/images/Fig1.generalf.png, id=294, 976.64874pt x 332.24126pt>
 File: input/images/Fig1.generalf.png Graphic file (type png)
 <use input/images/Fig1.generalf.png>
-Package pdftex.def Info: input/images/Fig1.generalf.png  used on input line 208.
-(pdftex.def)             Requested size: 426.32396pt x 145.03073pt.
-[5 <./input/images/Fig1.generalf.png>]
+Package pdftex.def Info: input/images/Fig1.generalf.png  used on input line 205.
+(pdftex.def)             Requested size: 385.02547pt x 130.97783pt.
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Underfull \hbox (badness 1152) in paragraph at lines 209--209
+[]\T1/ptm/m/n/12 Figure 1: |Con-cep-tual Model of per-cep-tion and pref-er-ences for mer-i-toc-racy and non-
+ []
 
-[6]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 290.
+[9 <./input/images/Fig1.generalf.png>] [10]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 237.
+
+Overfull \hbox (9.82343pt too wide) in paragraph at lines 237--266
+ [][] 
+ []
+
+[11]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 287.
 (c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
-) [7]
-<paper-blinded_files/figure-latex/likert-issp-1.pdf, id=315, 794.97pt x 794.97pt>
+) [12]
+<paper-blinded_files/figure-latex/likert-issp-1.pdf, id=336, 794.97pt x 794.97pt>
 File: paper-blinded_files/figure-latex/likert-issp-1.pdf Graphic file (type pdf)
 <use paper-blinded_files/figure-latex/likert-issp-1.pdf>
-Package pdftex.def Info: paper-blinded_files/figure-latex/likert-issp-1.pdf  used on input line 302.
-(pdftex.def)             Requested size: 401.24472pt x 401.25653pt.
-<paper-blinded_files/figure-latex/corr-issp-1.pdf, id=318, 578.16pt x 433.62pt>
+Package pdftex.def Info: paper-blinded_files/figure-latex/likert-issp-1.pdf  used on input line 299.
+(pdftex.def)             Requested size: 362.37569pt x 362.37907pt.
+[13]
+<paper-blinded_files/figure-latex/corr-issp-1.pdf, id=346, 578.16pt x 433.62pt>
 File: paper-blinded_files/figure-latex/corr-issp-1.pdf Graphic file (type pdf)
 <use paper-blinded_files/figure-latex/corr-issp-1.pdf>
-Package pdftex.def Info: paper-blinded_files/figure-latex/corr-issp-1.pdf  used on input line 313.
-(pdftex.def)             Requested size: 426.32396pt x 319.74236pt.
-[8 <./paper-blinded_files/figure-latex/likert-issp-1.pdf>]
-<output/images/Fig4.cfa_issp_study1.png, id=334, 1149.5447pt x 597.73312pt>
-File: output/images/Fig4.cfa_issp_study1.png Graphic file (type png)
-<use output/images/Fig4.cfa_issp_study1.png>
-Package pdftex.def Info: output/images/Fig4.cfa_issp_study1.png  used on input line 344.
-(pdftex.def)             Requested size: 426.32396pt x 221.67766pt.
-[9 <./paper-blinded_files/figure-latex/corr-issp-1.pdf>]
-<paper-blinded_files/figure-latex/scat1-1.pdf, id=354, 867.24pt x 433.62pt>
+Package pdftex.def Info: paper-blinded_files/figure-latex/corr-issp-1.pdf  used on input line 310.
+(pdftex.def)             Requested size: 385.02547pt x 288.7639pt.
+[14 <./paper-blinded_files/figure-latex/likert-issp-1.pdf>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <12> on input line 320.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 320.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 320.
+[15 <./paper-blinded_files/figure-latex/corr-issp-1.pdf>]
+<output/images/figure4.png, id=377, 1149.5447pt x 597.73312pt>
+File: output/images/figure4.png Graphic file (type png)
+<use output/images/figure4.png>
+Package pdftex.def Info: output/images/figure4.png  used on input line 341.
+(pdftex.def)             Requested size: 385.02547pt x 200.1985pt.
+[16 <./output/images/figure4.png>]
+<paper-blinded_files/figure-latex/scat1-1.pdf, id=389, 867.24pt x 433.62pt>
 File: paper-blinded_files/figure-latex/scat1-1.pdf Graphic file (type pdf)
 <use paper-blinded_files/figure-latex/scat1-1.pdf>
-Package pdftex.def Info: paper-blinded_files/figure-latex/scat1-1.pdf  used on input line 359.
-(pdftex.def)             Requested size: 426.32396pt x 213.16377pt.
-[10 <./output/images/Fig4.cfa_issp_study1.png>] [11 <./paper-blinded_files/figure-latex/scat1-1.pdf>]
-Overfull \hbox (3.99052pt too wide) in paragraph at lines 416--416
+Package pdftex.def Info: paper-blinded_files/figure-latex/scat1-1.pdf  used on input line 356.
+(pdftex.def)             Requested size: 385.02547pt x 192.51367pt.
+[17 <./paper-blinded_files/figure-latex/scat1-1.pdf>] [18] [19]
+Overfull \hbox (3.99052pt too wide) in paragraph at lines 411--411
 []\T1/ptm/m/n/10 Component|  
  []
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[12]
-<output/images/Fig5.app_mod.png, id=403, 722.7pt x 455.45157pt>
-File: output/images/Fig5.app_mod.png Graphic file (type png)
-<use output/images/Fig5.app_mod.png>
-Package pdftex.def Info: output/images/Fig5.app_mod.png  used on input line 428.
-(pdftex.def)             Requested size: 426.32396pt x 268.6724pt.
-[13]
-<paper-blinded_files/figure-latex/plotlikert-1.pdf, id=417, 794.97pt x 578.16pt>
+[20]
+<output/images/figure6.png, id=440, 722.7pt x 455.45157pt>
+File: output/images/figure6.png Graphic file (type png)
+<use output/images/figure6.png>
+Package pdftex.def Info: output/images/figure6.png  used on input line 423.
+(pdftex.def)             Requested size: 385.02547pt x 242.64606pt.
+[21]
+Underfull \hbox (badness 2573) in paragraph at lines 435--436
+[]\T1/ptm/m/n/12 A pre-registration was made in the OSF plat-form, avail-able at the fol-low-ing link:
+ []
+
+
+Underfull \hbox (badness 1067) in paragraph at lines 435--436
+[][]\T1/ptm/m/n/12 https://osf.io/z45y2?[][]. This pre-registration in-cludes the hy-pothe-ses re-gard-ing the four-
+ []
+
+[22 <./output/images/figure6.png>]
+<paper-blinded_files/figure-latex/plotlikert-1.pdf, id=461, 794.97pt x 578.16pt>
 File: paper-blinded_files/figure-latex/plotlikert-1.pdf Graphic file (type pdf)
 <use paper-blinded_files/figure-latex/plotlikert-1.pdf>
-Package pdftex.def Info: paper-blinded_files/figure-latex/plotlikert-1.pdf  used on input line 452.
-(pdftex.def)             Requested size: 426.32396pt x 310.058pt.
-[14 <./output/images/Fig5.app_mod.png>]
-<paper-blinded_files/figure-latex/corpoly-1.pdf, id=429, 469.755pt x 325.215pt>
+Package pdftex.def Info: paper-blinded_files/figure-latex/plotlikert-1.pdf  used on input line 447.
+(pdftex.def)             Requested size: 385.02547pt x 280.02791pt.
+[23 <./paper-blinded_files/figure-latex/plotlikert-1.pdf>]
+<paper-blinded_files/figure-latex/corpoly-1.pdf, id=477, 469.755pt x 325.215pt>
 File: paper-blinded_files/figure-latex/corpoly-1.pdf Graphic file (type pdf)
 <use paper-blinded_files/figure-latex/corpoly-1.pdf>
-Package pdftex.def Info: paper-blinded_files/figure-latex/corpoly-1.pdf  used on input line 463.
-(pdftex.def)             Requested size: 426.32396pt x 295.14717pt.
-[15 <./paper-blinded_files/figure-latex/plotlikert-1.pdf>] [16 <./paper-blinded_files/figure-latex/corpoly-1.pdf>]
-<output/images/Fig8.cfa_randomized_study2.png, id=458, 1145.27875pt x 521.95pt>
-File: output/images/Fig8.cfa_randomized_study2.png Graphic file (type png)
-<use output/images/Fig8.cfa_randomized_study2.png>
-Package pdftex.def Info: output/images/Fig8.cfa_randomized_study2.png  used on input line 497.
-(pdftex.def)             Requested size: 426.32396pt x 194.29718pt.
-[17 <./output/images/Fig8.cfa_randomized_study2.png>]
+Package pdftex.def Info: paper-blinded_files/figure-latex/corpoly-1.pdf  used on input line 458.
+(pdftex.def)             Requested size: 385.02547pt x 266.55396pt.
+[24 <./paper-blinded_files/figure-latex/corpoly-1.pdf>]
+<output/images/figure9.png, id=493, 1145.27875pt x 521.95pt>
+File: output/images/figure9.png Graphic file (type png)
+<use output/images/figure9.png>
+Package pdftex.def Info: output/images/figure9.png  used on input line 492.
+(pdftex.def)             Requested size: 385.02547pt x 175.46957pt.
+[25] [26 <./output/images/figure9.png>] [27]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 533.
+(hyperref)                than one, level fixed on input line 528.
 
-[18] [19] [20] [21] [22] [23] [24]
+[28] [29] [30] [31] [32] [33] [34] [35] [36]
+Underfull \hbox (badness 1975) in paragraph at lines 715--717
+\T1/ptm/m/n/12 Sensemaking Nar-ra-tive in Hi-er-ar-chi-cal Or-ga-ni-za-tions.'' \T1/ptm/m/it/12 Cul-ture and Or-ga-ni-za-tion
+ []
+
+
+Underfull \hbox (badness 1603) in paragraph at lines 724--726
+[]\T1/ptm/m/n/12 Reynolds, Jeremy, and He Xian. 2014. ``Per-cep-tions of Mer-i-toc-racy in the Land
+ []
+
+
+Underfull \hbox (badness 1226) in paragraph at lines 724--726
+\T1/ptm/m/n/12 of Op-por-tu-nity.'' \T1/ptm/m/it/12 Re-search in So-cial Strat-i-fi-ca-tion and Mo-bil-ity \T1/ptm/m/n/12 36:121--37. doi:
+ []
+
+[37] [38] [39]
 
 Package caption Warning: Unused \captionsetup[figure] on input line \caption@opt@figure@lineno .
 See the caption package documentation for explanation.
@@ -678,23 +707,23 @@ See the caption package documentation for explanation.
 Package caption Warning: Unused \captionsetup[ table] on input line \caption@opt@ table@lineno .
 See the caption package documentation for explanation.
 
-[25] (./paper-blinded.aux)
+[40] (./paper-blinded.aux)
 Package rerunfilecheck Info: File `paper-blinded.out' has not changed.
-(rerunfilecheck)             Checksum: A7057CDA7D596CF1ABAD00A83A71B420;4649.
+(rerunfilecheck)             Checksum: 270564B060EC59AC30C52214A17B0C97;4652.
  ) 
 Here is how much of TeX's memory you used:
- 14876 strings out of 478035
- 245970 string characters out of 5838373
- 1868787 words of memory out of 5000000
- 34542 multiletter control sequences out of 15000+600000
- 575827 words of font info for 92 fonts, out of 8000000 for 9000
+ 14743 strings out of 478008
+ 242732 string characters out of 5837815
+ 1867340 words of memory out of 5000000
+ 34433 multiletter control sequences out of 15000+600000
+ 578040 words of font info for 96 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 63i,16n,67p,2053b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on paper-blinded.pdf (25 pages, 453979 bytes).
+ 66i,16n,67p,2030b,548s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/Julio/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on paper-blinded.pdf (40 pages, 487383 bytes).
 PDF statistics:
- 680 PDF objects out of 1000 (max. 8388607)
- 613 compressed objects within 7 object streams
- 173 named destinations out of 1000 (max. 500000)
+ 752 PDF objects out of 1000 (max. 8388607)
+ 664 compressed objects within 7 object streams
+ 187 named destinations out of 1000 (max. 500000)
  294 words of extra memory for PDF output out of 10000 (max. 10000000)
 

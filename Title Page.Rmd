@@ -3,9 +3,9 @@ title: "Measuring Perceptions and Preferences for Meritocracy"
 linestretch: '1.5'
 output:
   bookdown::pdf_document2:
-     template: null
-     toc: false
-     number_sections: false
+    template: null
+    toc: false
+    number_sections: false
 geometry: margin=0.78in
 header-includes:
   - \usepackage{times}           # Times New Roman
@@ -24,7 +24,8 @@ header-includes:
   - \usepackage{pdflscape}
   - \usepackage{tabu}
   - \usepackage{threeparttable}
-fontsize: 10pt
+fontsize: 12pt
+
 ---
 
 
@@ -36,6 +37,6 @@ Luis Maldonado, Institute of Sociology, Pontificia Universidad Católica de Chil
 
 Jorge Atria, Department of Sociology, Universidad Diego Portales
 
-Julio Iturra, Center for Social Conflict and Cohesion Studies
+Julio Iturra, Bremen International Graduate School of Social Sciences
 
 Francisco Meneses, Department of Sociology, Universidad de Chile

@@ -1,31 +1,32 @@
 ---
 title: "Measuring Perceptions and Preferences for Meritocracy"
 css: "custom.css"
-linestretch: '1.5'
+linestretch: '2.0'
 link-citations: yes
 # author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
-abstract: "Economic and social inequalities have generated growing concerns and crises across contemporary societies. The belief in meritocracy has been suggested as one of the factors that explain the persistence of inequality, as it would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualizations and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data from different surveys to operationalize meritocracy, with a wide variation in the use and interpretation of the same measuring items. Based on a critical analysis of concepts and operationalizations of meritocracy in survey research, we propose a conceptual and measurement framework for perceptions and preferences for meritocracy and non-meritocracy in a minimalistic version (few items as possible), in order to be considered in comparative survey research studies. The proposal is first tested through confirmatory factor analysis (CFA) using available ISSP (International Social Survey Programme) inequality module items. Based on these results, in a second study we propose an  improved scale that better suits the perceptions/preferences distinction and that is tested  in a Chilean sample (N=2,141). The results of the CFA estimation give evidence of a better fit for the new scale. Our discussion highlights the importance of considering different dimensions in the study of meritocracy, both conceptually and empirically."
+# abstract: "Economic and social inequalities have generated growing concerns and crises across contemporary societies. The belief in meritocracy has been suggested as one of the factors that explain the persistence of inequality, as it would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualizations and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data from different surveys to operationalize meritocracy, with a wide variation in the use and interpretation of the same measuring items. Based on a critical analysis of concepts and operationalizations of meritocracy in survey research, we propose a conceptual and measurement framework for perceptions and preferences for meritocracy and non-meritocracy in a minimalistic version (few items as possible), in order to be considered in comparative survey research studies. The proposal is first tested through confirmatory factor analysis (CFA) using available ISSP (International Social Survey Programme) inequality module items. Based on these results, in a second study we propose an  improved scale that better suits the perceptions/preferences distinction and that is tested  in a Chilean sample (N=2,141). The results of the CFA estimation give evidence of a better fit for the new scale. Our discussion highlights the importance of considering different dimensions in the study of meritocracy, both conceptually and empirically."
 output:
   bookdown::pdf_document2:
      template: null
      toc: false
      number_sections: false
-  bookdown::word_document2:
-    number_sections: false
-  bookdown::html_document2:
-    number_sections: false
+     keep_text: true
+  # bookdown::word_document2:
+  #   number_sections: false
+  # bookdown::html_document2:
+  #   number_sections: false
 linkcolor: blue
 bibliography:
   - input/bib/meritocracy.bib
-csl: input/bib/apa7-singlespace.csl
+csl: input/bib/asa6.csl
 editor_options:
   chunk_output_type: console
-geometry: margin=0.78in
+geometry: margin=1in
 header-includes:
   - \usepackage{times}           # Times New Roman
   - \usepackage{caption}
   - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
-  - \usepackage[figurename=Fig.]{caption}
+#  - \usepackage[figurename=Fig.]{caption}
   - \usepackage{graphicx}
   - \usepackage{float}
   - \usepackage{booktabs}
@@ -39,7 +40,8 @@ header-includes:
   - \usepackage{tabu}
   - \usepackage{threeparttable}
 always_allow_html: true # for word output
-fontsize: 10pt
+fontsize: 12pt
+papersize: a4
 ---
 
 ```{r eval=FALSE, include=FALSE}
@@ -51,7 +53,7 @@ fontsize: 10pt
 ```
 
 ```{r setup, include=FALSE}
- knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H", fig.align = 'center')
+ knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = TRUE,out.width = '85%',fig.pos= "H", fig.align = 'center')
  # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
  # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
  options(scipen=999)
@@ -460,7 +462,7 @@ Table \@ref(tab:sum-fit-issp) shows the results of the estimation of two confirm
 Attending to the sources of poor fit from the first estimated confirmatory model, we specified a second model that keeps the basic four-factor structure but generates an additional model for the non-meritocratic perceptions as depicted in Figure \@ref(fig:meas02-issp). In this model, the pairs of items in this dimension form three latent factors which at the same time generate a second-order factor of non-meritocratic perceptions, improving the fit of the model.
 
 ```{r meas02-issp, echo=FALSE, fig.cap = "Descriptive plot", fig.align='center',fig.cap="Second-order confirmatory factor analysis model using ISSP indicators of Perceptions and Preferences for Meritocracy"}
- knitr::include_graphics('output/images/Fig4.cfa_issp_study1.PNG')
+ knitr::include_graphics('output/images/figure4.PNG')
 ```
 
 Regarding the correlations between the factors in Figure ref(fig:meas02-issp), we observe that perceptions are correlated with preferences, but more strongly for the meritocratic ($r=0.46$) than for the non-meritocratic ($r=0.27$) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation ($r=0.30$), suggesting that they are not the opposite poles of the same continuum. Something similar occurs for the correlation between the two dimensions of preferences ($r=0.25$).
@@ -599,14 +601,14 @@ The proposed scale of meritocratic perceptions and preferences consisted of eigh
 To evaluate the effect of indicator ordering in the responses, three different versions of items' order were designed and randomly assigned to the respondents, as depicted in Figure \@ref(fig:appmod). The scale was presented to the first group (_n = 712_) in the order shown in Table \@ref(tab:table-indicadores) according to perceptions and preferences. For the second group (_n = 717_), the order was reorganized according to perceptions and preferences over the same topic, e.g., for the topic of hard work, the item about perception was followed by the item about preference and the same for the rest of the topics. Finally, for the third group (_n = 712_), the items were presented as completely randomized.
 
 ```{r appmod, echo=FALSE, fig.cap = "Survey flow", fig.align='center'}
- knitr::include_graphics('output/images/Fig5.app_mod.png')
+ knitr::include_graphics('output/images/figure6.png')
 ```
 
 ## Methods
 
 To test the scale's underlying constructs, we employed confirmatory factor analysis models (CFA). The models estimated one factor for each of the four proposed dimensions presented in Table \@ref(tab:table-indicadores). As in Study 1, CFA was performed with the `lavaan` R package (version 0.6-3; @rosseel_lavaan_2012a), with diagonally weighted least squares (DWLS) estimation due to the items' ordinal level of measurement [@kline_principles_2016; @rosseel_lavaan_2012a]. The fit indexes and cut-off criteria were the same as the ones used in Study 1.
 
-A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2](https://osf.io/z45y2). This pre-registration includes the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
+A pre-registration was made in the OSF platform, available at the following link: [https://osf.io/z45y2?](https://osf.io/z45y2/?view_only=adcd496887f2471597b1d6ffb46e492d). This pre-registration includes the hypotheses regarding the four-dimensional conceptual model underlying the scale, the variable measurement levels, the statistical tests to be performed with their respective evaluation parameters, and other important aspects of the research design.
 
 ## Results
 
@@ -712,7 +714,7 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
 
 Attending now to the association among the scale items, Figure \@ref(fig:corpoly) shows the items' polychoric correlations. There are three main aspects to highlight from this correlation matrix.  Firstly, and as expected, the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, $r=0.52$). Secondly, among these correlations, the highest are those between the non-meritocratic dimension but in perceptions ($r=0.73$) and preferences ($r=0.61$). Thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations and indicating that the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, similar to the results of Study 1 with ISSP data, we observe no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining previous studies' assumptions that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
 
-```{r corpoly, echo=FALSE, fig.cap = "Perceptions and preferences for meritcoracy items' polychoric correlations", fig.align='center'}
+```{r corpoly, echo=FALSE, fig.cap = "Perceptions and preferences for meritocracy items' polychoric correlations", fig.align='center'}
   # dev.copy(png,'output/images/Fig7.plotcor-study2.png',width = 800, height = 600) # save image
   if (!require("pacman")) install.packages("pacman")
   load(file = "input/data/proc/data_s2.RData")
@@ -811,7 +813,7 @@ Table \@ref(tab:table-cfafits) shows the fit indicators of the models estimated 
 
 ```{r meas02, echo=FALSE, fig.cap = "Confirmatory factor analysis of the Perceptions and Preferences for Meritocracy Scale", fig.align='center'}
  # estimation for diagram: summary(fit_cfa3, standardized = TRUE, fit.measures=TRUE)
- knitr::include_graphics('output/images/Fig8.cfa_randomized_study2.png')
+ knitr::include_graphics('output/images/figure9.png')
 ```
 
 Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:meas02), meritocratic preferences are moderate to highly correlated with perceptions, both meritocratic ($r=0.457$) and non-meritocratic ($r=0.500$). The correlation between both types of perceptions ($r=-0.044$) and both types of preferences ($r=0.185$) was low, as well as between non-meritocratic preferences and perceptions ($r=-0.059$). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects as assumed by previous studies.
