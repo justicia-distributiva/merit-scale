@@ -1,32 +1,37 @@
 ---
 title: "Measuring Perceptions and Preferences for Meritocracy"
 css: "custom.css"
-linestretch: '2.0'
+linestretch: '1.5'
 link-citations: yes
 # author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
 # abstract: "Economic and social inequalities have generated growing concerns and crises across contemporary societies. The belief in meritocracy has been suggested as one of the factors that explain the persistence of inequality, as it would legitimize economic disparities based on differences in effort and talent. Despite its wide use as a concept, empirical research on meritocracy is relatively novel and characterized by diverse conceptualizations and measures that make the findings and their interpretation rather inconsistent. Most of the studies in the area have relied upon secondary data from different surveys to operationalize meritocracy, with a wide variation in the use and interpretation of the same measuring items. Based on a critical analysis of concepts and operationalizations of meritocracy in survey research, we propose a conceptual and measurement framework for perceptions and preferences for meritocracy and non-meritocracy in a minimalistic version (few items as possible), in order to be considered in comparative survey research studies. The proposal is first tested through confirmatory factor analysis (CFA) using available ISSP (International Social Survey Programme) inequality module items. Based on these results, in a second study we propose an  improved scale that better suits the perceptions/preferences distinction and that is tested  in a Chilean sample (N=2,141). The results of the CFA estimation give evidence of a better fit for the new scale. Our discussion highlights the importance of considering different dimensions in the study of meritocracy, both conceptually and empirically."
+# keywords: meritocracy, survey methodology, factor analysis, social inequality
 output:
-  bookdown::pdf_document2:
-     template: null
-     toc: false
-     number_sections: false
-     keep_text: true
   bookdown::word_document2:
     number_sections: false
+    reference_docx: input/template.docx
+    toc: false
+  bookdown::pdf_document2:
+    template: null
+    number_sections: false    
+    toc: false
+    keep_tex: false
+    pandoc_args:
+      - --template=input/mytemplate.tex #custom template para usar autores con afiliacion    
   bookdown::html_document2:
     number_sections: false
 linkcolor: blue
 bibliography:
   - input/bib/meritocracy.bib
-csl: input/bib/asa6.csl
+csl: input/bib/apa7-singlespace.csl
 editor_options:
   chunk_output_type: console
 geometry: margin=1in
 header-includes:
   - \usepackage{times}           # Times New Roman
+  - \hypersetup {colorlinks = true, linkcolor = blue, urlcolor = blue}    
   - \usepackage{caption}
   - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
-#  - \usepackage[figurename=Fig.]{caption}
   - \usepackage{graphicx}
   - \usepackage{float}
   - \usepackage{booktabs}
@@ -40,7 +45,7 @@ header-includes:
   - \usepackage{tabu}
   - \usepackage{threeparttable}
 always_allow_html: true # for word output
-fontsize: 12pt
+fontsize: 10pt
 papersize: a4
 ---
 
@@ -195,8 +200,6 @@ There are a series of indicators in the ISSP survey that in the following we att
 ```
 
 - _Perception of meritocracy/non-meritocracy_: for operationalizing perceptions the closest set of ISSP's indicators comes from the question asking about perceptions for opportunities to get ahead, which are usually considered as "meritocratic beliefs" in previous studies. The general heading of the battery is: _"To begin we have some questions about opportunities for getting ahead. Please tick one box for each of these to show how important you think it is for getting ahead in life."_ This is followed by a list of statements to be rated from 1 to 5: essential, very important, fairly important, not very important, not important at all.
-
-\break
 
 The classification of the items is based on criteria of internal motivation (meritocratic) and structural constraints (non-meritocratic). There were two items from the battery that were excluded from the analysis as they would not fit into the classification. The first one was "having good education yourself" since it was not clear whether this is could be due to individual motivation or system opportunities, and the second was "giving bribes", as introduced elements of criminality that were beyond a non-meritocratic perception.
 
@@ -923,7 +926,7 @@ The first step for invariance testing is estimating the configural model, which 
 
   knitr::kable(tab.inv, col.names = col.nam, align = "l",
         booktabs=TRUE,format = table_format,escape = FALSE,
-        caption = "Multiple Group meassurement invariance for Perceptions and Preferences for Meritocracy") %>%
+        caption = "Multiple Group measurement invariance for Perceptions and Preferences for Meritocracy") %>%
     kableExtra::kable_styling(full_width = FALSE,
                               latex_options = "HOLD_position",
                               bootstrap_options=c("striped", "bordered"),
@@ -1061,7 +1064,7 @@ avg_count <- arrange(avg_count)
 | Primary  or less    | 2,93%   | 15,88% |
 | High school         | 43,23%  | 37,04% |
 | Non university      | 32,63%  | 28,93% |
-| university or more  | 21,21%  | 18,13% |
+| University or more  | 21,21%  | 18,13% |
 Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the study 2 sample"))`.
 
 ```{r tb-perpref1, eval=FALSE, include=FALSE}
