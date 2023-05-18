@@ -1,0 +1,232 @@
+---
+title: "Data preparation: Study 1_2019"
+date: "`r format(Sys.time(), '%A %d %B %Y %X')`"
+output:
+  bookdown::html_document2:
+    number_sections: true
+    toc: true
+    toc_float:
+        collapsed: false
+    toc_depth: 2
+    code_folding: "show"
+editor_options:
+  chunk_output_type: console
+---
+
+## Note: this is an update  of the original study_1 (which used 2009 data) Here we use the last available file from wave 2019.
+
+
+# Setup
+
+```{r setup}
+knitr::opts_chunk$set(warning = FALSE, 
+                      message = FALSE, 
+                      echo = TRUE 
+                      )
+knitr::opts_knit$set(root.dir = "../")
+options(scipen=9999) # desactivar notacion cientifica
+```
+
+```{css, echo=FALSE}
+# /* expandir el espacio del documento*/
+body .main-container {
+      max-width: 1600px !important;
+      width: 1600px !important;
+    }
+#/* expandir width de la TOC*/
+div.tocify {
+    width: 22% !important;
+    max-width: 331px !important;
+    max-height: 102% !important;
+}
+```
+This is the preparation code of the data for Study 1_2019: Measuring meritocracy with international secondary data. The prepared data is `data_s1_2019.RData`
+
+
+## Libraries
+```{r}
+if (!require("pacman")) install.packages("pacman") # install pacman
+pacman::p_load(dplyr,lavaan,sjPlot,sjmisc,sjlabelled,haven,stringr,summarytools)
+```
+
+# Data 
+
+```{r}
+issp2019 <- read_dta("input/data/original/ZA7600_v3-0-0.dta")
+```
+
+
+First, we check country identification variables and generate a specific individual-country variable.
+
+```{r }
+names(issp2019) <- tolower(names(issp2019))
+find_var(data = issp2019,"country") # country and c_sample
+find_var(data = issp2019,"id") #caseid
+dplyr::n_distinct(issp2019$caseid) # ok, id única por caso 
+
+# Check & generate IDs (caseid: respondent, country: country)
+tapply(issp2019$country, issp2019$caseid, mean, na.rm = TRUE)
+# Algunos paises (ej:826) tienen ids raros ...
+# Generar nueva id secuencial individuos por país para merges
+issp2019$id <- sequence(tabulate(issp2019$country))
+tapply(issp2019$id, issp2019$country, mean, na.rm = TRUE) # ok
+summary(issp2019$id)
+issp2019$idtem = issp2019$country * 10000
+issp2019$id = issp2019$idtem + issp2019$id
+```
+
+## Perceptions (getting-ahead)
+
+The following variables are those who are conceptualized as meritocratic and Non-meritocratic perception. 
+
+*  v1: wealthy family
+*  v2: educated parents
+*  XX: ambition 
+*  v4: hard work 
+*  v5: right people
+*  v6: political connections
+*  v8: race 
+* v10: gender 
+* IDs: v5 (country) & id (individual id)
+
+First, we rename the variables to a more substantial name. In second place, we check for missing values and declare them as NA. Then, we reverse code all the variables, because number 1 represents the "Essential" and 5 represents "Not important at all". Finally, whe adjust variable labels to a more intuitive one. 
+
+```{r}
+# names(issp2009)          #Check names
+get_label(issp2009[8:18])#Check variable labels
+
+# 1. Select and generate new variables
+getahead <- 
+  issp2009 %>%
+  select("id","v5","v6","v7","v9","v10","v11","v12","v14","v16") %>% 
+  mutate(wealthy = v6,
+         pareduc = v7,
+         ambition = v9,
+         hwork = v10,
+         people = v11,
+         polcone = v12,
+         race = v14,
+         gender = v16) %>% 
+  select(-c("v6","v7","v9","v10","v11","v12","v14","v16"))
+
+names(getahead)
+
+#2. Recode missing values
+# * 8 & 9 to NA
+frq(getahead$wealthy)
+getahead[3:10][getahead[3:10] > 5] <- NA
+frq(getahead$gender) # OK
+summary(getahead)    # OK
+
+#3. value labels
+get_labels(getahead$wealthy)
+getahead[, 3:10] <- 
+  set_na(x = getahead[, 3:10],
+         na = c(8,9))
+get_labels(getahead[3:10]) # OK
+frq(getahead[3:10])        # OK
+
+# 4. variable label
+
+getahed.label <-  str_remove_all(string = get_label(getahead[3:10]),
+                                 pattern = "Q1[abcdefghijk] ")
+getahed.label
+
+getahead[3:10] = 6 - getahead[3:10] # Reverse code for SEM models
+getahead[3:10] <- set_label(getahead[3:10],label = getahed.label) # variable label
+get_label(getahead[3:10]) # OK
+
+# 5. final ckeck   
+view_df(getahead,show.frq = T, show.prc = T)
+```
+
+## Preferences (detearn)
+
+* v47: responsibility job
+* v48: year on education
+* v49: support family
+* v50: has children to support
+* v51: well job
+* v52: hard job
+* IDs: v5 (country) & id (individual id)
+
+Same as the meritocratic perception. First, we rename the variables to a more substantial name. In second place, we check for missing values and declare them as NA. Then, we reversecode al the variables, because number 1 represents the "Esential" and 5 represents "Not important at all". Finally, whe adjust variable labels to a more intuitive one. 
+
+```{r}	    
+# names(issp2009)
+
+# 1. Select and generate new variables
+detearn <- 
+  issp2009 %>%
+  select("id","v5","v47", "v48", "v49", "v50", "v51","v52") %>% 
+  mutate(respons 	= v47,
+         yeduc  	= v48,
+         family   = v49,
+         child    = v50,
+         welljob  = v51,
+         hardjob  = v52) %>% 
+  select(-c("v47", "v48", "v49", "v50", "v51","v52"))
+
+
+#2. Recode missing values
+# * 8 & 9 to NA
+summary(detearn)
+frq(detearn$respons)
+detearn[3:8][detearn[3:8] > 5] <- NA
+frq(detearn$respons) 
+
+# Out Portugal (no answer in well job item)
+detearn[which(detearn$v5 == 620), ] = NA
+
+#3. value labels
+get_labels(detearn[3:8])
+detearn[, 3:8] <- 
+  set_na(detearn[, 3:8],
+         na =  c(8, 9)) 
+summary(detearn)      # Value 0 in Portugal Answers
+frq(detearn$welljob)  # Check 
+
+detearn$welljob[detearn$welljob == 0] = NA # recode to NA value 0 in welljob
+get_labels(detearn$welljob)
+frq(detearn$welljob)
+
+# value label correction in welljob
+detearn$welljob <- set_labels(x = detearn$welljob,
+                              labels = get_labels(detearn$hardjob))
+frq(detearn$welljob) # OK, solved
+frq(detearn[3:8])    # Check value labels
+
+
+# 4. Variable label
+get_label(detearn[3:8])
+detearn.label <-  str_remove_all(string = get_label(detearn[3:8]),
+                                 pattern = "Q12[abcdef] ")
+
+detearn[3:8] <-  6 - detearn[3:8] # Reverse code for SEM models
+detearn[3:8] <- set_label(detearn[3:8],label = detearn.label) # variable label
+
+frq(detearn[3:8])
+
+# 5. final ckeck   
+view_df(detearn,show.frq = T, show.prc = T)
+```
+
+# Merge
+
+We merge the meritocratic perceptions and preferences variables into a single dataset. 
+
+```{r}
+data_s1   <- left_join(getahead, detearn, by = c("id", "v5"))
+```
+
+# Final summary
+```{r,results='asis', echo=FALSE}
+st_css() # esto configura el css de dfsummary
+print(dfSummary(data_s1),
+      method = "render")
+```
+
+```{r}
+save(data_s1, file = "input/data/proc/data_s1.RData")
+```
+

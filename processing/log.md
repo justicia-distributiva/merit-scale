@@ -1,0 +1,2 @@
+- Study 1 2019: update to ISSP 2019 database
+  - does not work, several relevant variables missing (ej: ambition)

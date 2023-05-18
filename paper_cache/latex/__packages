@@ -1,0 +1,17 @@
+knitr
+kableExtra
+dplyr
+pacman
+sjPlot
+ggplot2
+sjlabelled
+sjmisc
+ggpubr
+cowplot
+corrplot
+lavaan
+countrycode
+haven
+gridExtra
+semTools
+gtools
