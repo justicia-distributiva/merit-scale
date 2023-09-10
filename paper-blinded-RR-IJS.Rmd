@@ -5,7 +5,7 @@ linestretch: '1.5'
 link-citations: yes
 # author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
 abstract: |
-  Economic and social inequalities are causing growing concerns and crises in contemporary societies. One factor suggested to explain the persistence of inequality is the belief in meritocracy, which justifies economic disparities based on differences in effort and talent. A great part of the international research on meritocratic beliefs has used the social inequality module of the ISSP (International Social Survey Programme), which for the first time has offered the possibility of comparing different societies in this regard. However, this research line is still a novel enterprise characterized by diverse conceptualizations and measures, often leading to inconsistent findings and interpretations. Based on a series of studies using ISSP data, the present paper proposes a multidimensional measurement framework for meritocratic beliefs that allows us to classify previous research contributions as well as to identify some vacuums and limitations. Firstly, we test the multidimensional framework for meritocratic beliefs using the ISSP 2009 inequality module through confirmatory factor analysis (CFA) techniques. After identifying the advantages and some limitations of ISSP for a multidiemsional operationalization of meritocratic belifs, in a second study we propose an expanded set of items that better taps the different dimensions of meritocratic beliefs. This measurement instrument was applied to a Chilean sample (N=2,141), offering new evidence regarding the multidimensional character of meritocratic beliefs.
+  Economic and social inequalities are causing growing concerns and crises in contemporary societies. One factor suggested to explain the persistence of inequality is the belief in meritocracy, which would justify economic disparities based on differences in effort and talent. A great part of the international research that has attempted to measure meritocratic beliefs has used the social inequality module of the ISSP (International Social Survey Programme), which offers an unprecedented opportunity to compare meritocratic views in different societies. However, this research agenda is still a novel enterprise characterized by diverse conceptualizations and measures of meritocracy, often leading to inconsistent findings and interpretations. Based on a series of studies using ISSP data, the present paper proposes a multidimensional measurement framework for meritocratic beliefs that allows us to classify previous research contributions as well as to identify some vacuums and limitations in the extant literature. Firstly, we test the multidimensional framework for meritocratic beliefs using the ISSP 2009 inequality module through confirmatory factor analysis (CFA) techniques. After identifying the advantages and some limitations of ISSP for a multidimensional operationalization of meritocratic beliefs, in a second study, we propose an expanded set of items that better taps the different dimensions of meritocracy and that is suitable for survey research. We examined the measuring properties of this new instrument using a sample of Chilean adults (N=2,141). While the instrument was tested in the limited context of a single country, the findings offer  new evidence  about the multidimensional character of meritocratic beliefs. Based on these results, we suggest improvements in measuring meritocratic beliefs in cross-national studies.
   \newline
   \newline
   
@@ -34,7 +34,7 @@ editor_options:
 geometry: margin=1in
 header-includes:
   - \usepackage{times}           # Times New Roman
-  - \hypersetup {colorlinks = true, linkcolor = blue, urlcolor = blue}    
+#  - \hypersetup {colorlinks = true, linkcolor = blue, urlcolor = blue}    
   - \usepackage{caption}
   - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
   - \usepackage{graphicx}
@@ -58,9 +58,9 @@ papersize: a4
 ```{r eval=FALSE, include=FALSE}
  # for render in pdf run rmarkdown::render_site("docs/paper.Rmd", output_format = "all")
  # clean #in the yml
- rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::pdf_document2")
- rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::html_document2")
- rmarkdown::render("paper-blinded.Rmd", output_format = "bookdown::word_document2")
+ rmarkdown::render("paper-blinded-RR-IJS.Rmd", output_format = "bookdown::pdf_document2")
+ rmarkdown::render("paper-blinded-RR-IJS.Rmd", output_format = "bookdown::html_document2")
+ rmarkdown::render("paper-blinded-RR-IJS.Rmd", output_format = "bookdown::word_document2")
 ```
 
 ```{r setup, include=FALSE}
@@ -364,7 +364,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
     # dev.off()
 ```
 
-In terms of the association between the indicators, Figure \@ref(fig:corr-issp) shows the polychoric correlation matrix. Firstly, we observe in general that the moderate to high associations are between the pairs of items representing each of the dimensions as described in Table \@ref(tab:table-issp). The exception here is the dimension of non-meritocratic perception, in which six items appear mostly associated by pairs according to their specific topics (family background, personal background, and connections). Still, between this same set of items, moderate correlations (around 0.3) could anticipate a single latent factor underlying non-meritocratic perception, which is tested next through confirmatory factor analysis.
+In terms of the association between the indicators, Figure \@ref(fig:corr-issp) shows the polychoric correlation matrix. Firstly, according to the criteria suggested by @cohen_statistical_1988 for effect size, we observe in general that the moderate to high associations are between the pairs of items representing each of the dimensions as described in Table \@ref(tab:table-issp). The exception here is the dimension of non-meritocratic perception, in which six items appear mostly associated by pairs according to their specific topics (family background, personal background, and connections). Still, between this same set of items, moderate correlations could anticipate a single latent factor underlying non-meritocratic perception, which is tested next through confirmatory factor analysis.
 
 ```{r corr-issp,fig.cap = "Perceptions and preferences for ISSP  meritocracy items' polychoric correlations", fig.align='center',fig.height=6,fig.width=8}
   # dev.copy(png,'output/images/Fig3.plotcor-study1.png', width = 800, height = 600) # save image
@@ -479,12 +479,11 @@ Attending to the sources of poor fit from the first estimated confirmatory model
  knitr::include_graphics('output/images/figure4.PNG')
 ```
 
-Regarding the correlations between the factors in Figure \@ref(fig:meas02-issp), we observe that perceptions are correlated with preferences, but more strongly for the meritocratic ($r=0.46$) than for the non-meritocratic ($r=0.27$) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation ($r=0.30$), suggesting that they are not the opposite poles of the same continuum. Something similar occurs for the correlation between the two dimensions of preferences ($r=0.25$).
+Regarding the correlations between the factors in Figure \@ref(fig:meas02-issp), we observe that perceptions are correlated with preferences, but more strongly for the meritocratic ($r=0.46, p<0.01$) than for the non-meritocratic ($r=0.27,p<0.01$) dimensions. Secondly, both perceptual dimensions (meritocratic and non-meritocratic) depict a moderate correlation ($r=0.30, p<0.01$), suggesting that they are not the opposite poles of the same continuum. Something similar occurs for the correlation between the two dimensions of preferences ($r=0.25,p<0.01$).
 
-Based on the measurement validation, we asses if the proposed measurement strategy can be used in cross-national comparisons. In this line, Figure \@ref(fig:scat1) depicts the correlation of factor scores for Meritocratic Perception and Meritocratic Preferences at the country level. For instance, Bulgaria (BGR) and the United States (USA) appropriately represent the positive association between perception and preferences. In other words, countries that describe merit in their society as an essential factor to get ahead in life also consider that effort and talent should be determinant factors in how much an individual earns. On the other hand, in countries with lower perceived meritocracy, preferences are also low, where Denmark (DNK) and Venezuela (VEN) are representative societies of this association.
+Based on the measurement validation, we asses if the proposed measurement strategy can be used in cross-national comparisons. In this line, Figure \@ref(fig:scat1) depicts the correlation of factor scores for Meritocratic Perception and Meritocratic Preferences at the country level ($r=0.65,p<0.01$). For instance, Bulgaria (BGR) and the United States (USA) appropriately represent the positive association between perception and preferences. In other words, countries that describe merit in their society as an essential factor to get ahead in life also consider that effort and talent should be determinant factors in how much an individual earns. On the other hand, in countries with lower perceived meritocracy, preferences are also low, where Denmark (DNK) and Venezuela (VEN) are representative societies of this association.
 
-Another finding depicted by Figure \@ref(fig:scat1) is the positive association of Non-meritocratic perception with Meritocratic preferences, showing that countries like Bulgaria (BGR) and Philipines (PHL) represent cases with higher Non-meritocratic perceptions and higher preferences for meritocracy. In other words, in societies where people perceive higher importance of non-meritocratic aspects to get ahead in life, people also prefer that merit should be a determinant factor in wages. On the other side, countries like Sweden (SWE) or Denmark (DNK), both Scandinavian societies with strong welfare systems, represent contexts in which non-meritocratic aspects are not described as important, and merit is not considered as a factor that should be determinant in wages.
-
+Another finding depicted by Figure \@ref(fig:scat1) is the positive association of Non-meritocratic perception with Meritocratic preferences ($r=0.55,p<0.01$), showing that countries like Bulgaria (BGR) and Philipines (PHL) represent cases with higher Non-meritocratic perceptions and higher preferences for meritocracy. In other words, in societies where people perceive higher importance of non-meritocratic aspects to get ahead in life, people also prefer that merit should be a determinant factor in wages. On the other side, countries like Sweden (SWE) or Denmark (DNK), both Scandinavian societies with strong welfare systems, represent contexts in which non-meritocratic aspects are not described as important, and merit is not considered as a factor that should be determinant in wages.
 
 ```{r scat1, fig.cap="Cross-national comparison of non-meritocratic and meritocratic perceptions with meritocratic preference",fig.height=6, fig.width=12}
   load(file = "input/data/proc/data_s1.RData")
@@ -525,32 +524,54 @@ Another finding depicted by Figure \@ref(fig:scat1) is the positive association 
     df_proc[idx, fs] <- fscores[ , fs]
   }
 
-  df_proc <-  df_proc %>%  select(id,ccode,percmerit,prefmerit,prefnmerit) %>% na.omit()  
+  df_proc <-  df_proc %>%  select(id,ccode,percmerit,prefmerit,prefnmerit,percnmerit) %>% na.omit()  
   
   df_proc$clab <- countrycode(sourcevar = df_proc$ccode,
                             origin = "iso3n",
                             destination = "iso3c")
 
+
 avg_count <-  
   df_proc %>% group_by(clab) %>% summarise(prefmerit=mean(prefmerit),
                                             percmerit=mean(percmerit),
-                                            prefnmerit=mean(prefnmerit))
+                                            prefnmerit=mean(prefnmerit),
+                                           percnmerit=mean(percnmerit),
+                                           pop=n()
+                                           )
 
+# idea: por continentes o regiones del mundo
+# avg_count %>% filter(clab %in% c("ARG","VEN","CHL"))
 
+avg_count$continent <- countrycode(sourcevar = avg_count$clab,
+                            origin = "iso3c",
+                            destination = "continent")
+
+avg_count$region <- countrycode(sourcevar = avg_count$clab,
+                            origin = "iso3c",
+                            destination = "region23")
+
+avg_count$country <- countrycode(sourcevar = avg_count$clab,
+                            origin = "iso3c",
+                            destination = "country.name")
 
 # create figure 1: perception merit by preferences merit
 figure1 <- 
 ggplot(avg_count, aes(x=percmerit, y=prefmerit)) +
   # geom_point() + 
   geom_text(label=as.character(avg_count$clab)) +
-  geom_smooth(method = "lm") +
+  scale_x_continuous(limits = c(-0.6,0.6))+
+  scale_y_continuous(limits = c(-0.6,0.6))+
+  geom_smooth(method = "lm",fullrange=TRUE) +
   xlab("Meritocratic perception")+
   ylab("Meritocratic preference")  
 # create figure 2: perception non-merit by preferences merit
 figure2 <- 
-ggplot(avg_count, aes(x=prefnmerit, y=prefmerit)) +
+ggplot(avg_count, aes(x=percnmerit, y=prefmerit)) +
   # geom_point() + 
   geom_text(label=as.character(avg_count$clab)) +
+  scale_x_continuous(limits = c(-0.6,0.6))+
+  scale_y_continuous(limits = c(-0.6,0.6))+ 
+  geom_smooth(method = "lm",fullrange=TRUE) +  
   geom_smooth(method = "lm") +
   xlab("Non-meritocratic perception")+
   ylab("Meritocratic preference") 
@@ -560,6 +581,156 @@ grid.arrange(figure1, figure2, ncol = 2,
              bottom = grid::textGrob(label = paste0("Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009",
       " (n=",dim(df_proc)[1],")"),
                                      hjust = 0.1,
+                                     gp = grid::gpar(fontface = 1, fontsize = 9)))
+```
+
+On one hand, when comparing societies based on their level of industrialization [@ishida_trends_2005], Figure \@ref(fig:scat2) illustrates the correlations within the sample. It shows that early-industrialized countries exhibit a similar association between Meritocratic Perception and Meritocratic Preference ($r=0.67, p<0.05$), a trend consistent within the group of late-industrialized nations ($r=0.68, p<0.01$). This suggests that citizens' perceptions regarding the significance of merit in both industrialized and late-industrialized nations tend to have a similar impact on their beliefs about the role of merit in determining wages. On the other hand, the association between Non-meritocratic Perception and Meritocratic Preference displays significant differences when compared to the complete sample. Industrialized nations exhibit a strong positive correlation ($r=0.75, p<0.01$). In contrast, late-industrialized countries show a weak and non-significant correlation ($r=0.29, p>0.05$). In other words, the non-meritocratic aspect holds greater salience in industrialized societies when it comes to citizens' opinions regarding the determinants of wages. However, in late-industrialized societies, the importance of non-meritocratic factors diminishes in influencing meritocratic preferences. This evidence suggests that in societies with a long history of transformations in their social structure, the perceived importance of both meritocratic and non-meritocratic dimensions in achieving success reinforces people's preferences for how status positions should be distributed. In contrast, in countries that experienced changes in their occupational structure during the early decades of the 20th century, meritocratic perception holds greater prominence than non-meritocratic factors such as personal contacts or family background in shaping citizens' opinions regarding the determinants of wages.
+
+```{r scat2, fig.cap="Cross-national comparison between industrialized and late-industrialized",fig.height=10, fig.width=10}
+  load(file = "input/data/proc/data_s1.RData")
+  if (!require("pacman")) install.packages("pacman")
+  pacman::p_load(dplyr, kableExtra, knitr,lavaan,countrycode,ggplot2,haven,
+                 gridExtra)
+  table_format = if(knitr::is_html_output()) { #conditional instructions for kable
+    "html" #if html set "html" in format
+  } else if(knitr::is_latex_output()) {
+    "latex"#if latex set "latex" in format
+  }
+
+  # meassurement model: Second order
+  cfa_perpref2 <- '
+  	  # latent variables
+  	  percmerit =~ hwork + ambition
+  	  parents =~ wealthy + pareduc
+  	  backgrd =~ race + gender
+  	  networks=~ people + polcone
+  	  percnmerit=~ parents + backgrd + networks
+  	  prefmerit =~ welljob + hardjob
+  	  prefnmerit=~ family + child
+  	  '
+  # Model fit: second order
+  
+  fit_perpref2 <- lavaan::cfa(cfa_perpref2, data = data_s1,ordered = F)
+  
+  df_proc<- data_s1 %>% select(id,v5,wealthy:hardjob)  
+  df_proc$ccode <- as.numeric(data_s1$v5)   
+  
+  
+  predicted2 <- lavPredict(fit_perpref2,newdata = data_s1)  
+  
+  idx <- lavInspect(fit_perpref2, "case.idx")
+  fscores <- lavPredict(fit_perpref2)
+  ## loop over factors
+  for (fs in colnames(fscores)) {
+    df_proc[idx, fs] <- fscores[ , fs]
+  }
+
+  df_proc <-  df_proc %>%  select(id,ccode,percmerit,prefmerit,prefnmerit,percnmerit) %>% na.omit()  
+  
+  df_proc$clab <- countrycode(sourcevar = df_proc$ccode,
+                            origin = "iso3n",
+                            destination = "iso3c")
+
+
+avg_count <-  
+  df_proc %>% group_by(clab) %>% summarise(prefmerit=mean(prefmerit),
+                                            percmerit=mean(percmerit),
+                                            prefnmerit=mean(prefnmerit),
+                                           percnmerit=mean(percnmerit),
+                                           pop=n()
+                                           )
+
+# idea: por continentes o regiones del mundo
+# avg_count %>% filter(clab %in% c("ARG","VEN","CHL"))
+
+avg_count$continent <- countrycode(sourcevar = avg_count$clab,
+                            origin = "iso3c",
+                            destination = "continent")
+
+avg_count$region <- countrycode(sourcevar = avg_count$clab,
+                            origin = "iso3c",
+                            destination = "region23")
+
+avg_count$country <- countrycode(sourcevar = avg_count$clab,
+                            origin = "iso3c",
+                            destination = "country.name")
+
+western <- 
+avg_count %>%
+  filter(continent=="Europe"| clab %in% c("USA","AUS","NZL")) 
+
+nonwestern <- 
+avg_count %>%
+  filter(continent=="Asia" | clab %in% c("VEN","CHL","ARG","ZAF"))
+
+indus <-  avg_count %>% 
+  filter(region %in% c("Northern America","Western Europe")) 
+
+lateindus <-  avg_count %>% 
+  filter(!region %in% c("Northern America","Western Europe")) 
+
+
+indus <-  avg_count %>% 
+  filter(country %in% c("Australia","Austria","Belgium","Switzerland","Germany","Denmark","Finland","France","United Kingdom","Iceland","Norway", "Sweden","United States")) 
+
+lateindus <-  avg_count %>% 
+  filter(!country %in% c("Australia","Austria","Belgium","Switzerland","Germany","Denmark","Finland","France","United Kingdom","Iceland","Norway", "Sweden","United States")) 
+
+
+
+
+# Western countries-------------------------------------------------------------
+wesmerit <- 
+indus %>%  
+ggplot(aes(x=percmerit, y=prefmerit)) +
+  # geom_point() + 
+  geom_text(label=as.character(indus$clab)) +
+  scale_x_continuous(limits = c(-0.6,0.6))+
+  scale_y_continuous(limits = c(-0.6,0.6))+
+  geom_smooth(method = "lm",fullrange=TRUE) +
+  xlab("Meritocratic perception")+
+  ylab("Meritocratic preference") +
+  ggtitle("Industrialized countries")
+wesnonmer <- 
+indus %>%  
+ggplot(aes(x=percnmerit, y=prefmerit)) +
+  # geom_point() + 
+  geom_text(label=as.character(indus$clab)) +
+  scale_x_continuous(limits = c(-0.6,0.6))+
+  scale_y_continuous(limits = c(-0.6,0.6))+ 
+  geom_smooth(method = "lm",fullrange=TRUE) +
+  xlab("Non-meritocratic perception")+
+  ylab("Meritocratic preference") +
+  ggtitle("Industrialized countries")
+
+# Non western countries --------------------------------------------------------
+nonwesmer <- 
+lateindus %>%  
+ggplot(aes(x=percmerit, y=prefmerit)) +
+  # geom_point() + 
+  geom_text(label=as.character(lateindus$clab)) +
+  scale_x_continuous(limits = c(-0.6,0.6))+
+  scale_y_continuous(limits = c(-0.6,0.6))+
+  geom_smooth(method = "lm",fullrange=TRUE) +
+  xlab("Meritocratic perception")+
+  ylab("Meritocratic preference") +
+  ggtitle("Late industralized countries")
+nonwesnonmer <- 
+lateindus %>%  
+ggplot(aes(x=percnmerit, y=prefmerit)) +
+  # geom_point() + 
+  geom_text(label=as.character(lateindus$clab)) +
+  scale_x_continuous(limits = c(-0.6,0.6))+
+  scale_y_continuous(limits = c(-0.6,0.6))+
+  geom_smooth(method = "lm",fullrange=TRUE) +
+  xlab("Non-meritocratic perception")+
+  ylab("Meritocratic preference") +
+  ggtitle("Late industralized countries")
+
+grid.arrange(wesmerit,wesnonmer,
+             nonwesmer,nonwesnonmer, ncol = 2,
+             bottom = grid::textGrob(label = paste0("Source: Authors calculation based on International Social Survey Programme - Social Inequality 2009"),
+                                     hjust = 0.2,
                                      gp = grid::gpar(fontface = 1, fontsize = 9)))
 ```
 
@@ -729,7 +900,7 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
   # dev.off()
 ```
 
-Attending now to the association among the scale items, Figure \@ref(fig:corpoly) shows the items' polychoric correlations. There are three main aspects to highlight from this correlation matrix.  Firstly, and as expected, the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, $r=0.52$). Secondly, among these correlations, the highest are those between the non-meritocratic dimension but in perceptions ($r=0.73$) and preferences ($r=0.61$). Thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations and indicating that the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, similar to the results of Study 1 with ISSP data, we observe no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining previous studies' assumptions that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
+Attending now to the association among the scale items, Figure \@ref(fig:corpoly) shows the items' polychoric correlations. There are three main aspects to highlight from this correlation matrix.  Firstly, and as expected, the largest correlations are between indicators that correspond to the same factors behind the conceptual model (e.g., perception of meritocracy by effort and by talent, $r=0.52,p<0.01$). Secondly, among these correlations, the highest are those between the non-meritocratic dimension but in perceptions ($r=0.73,p<0.01$) and preferences ($r=0.61,p<0.01$). Thirdly, both items for meritocratic preferences (E and F) are the ones that mostly correlate with the rest of the perceptual items, showing medium to high correlations and indicating that the perception of non-meritocracy would be related to larger meritocratic preferences. Finally, similar to the results of Study 1 with ISSP data, we observe no considerable negative correlations between meritocratic and non-meritocratic aspects, undermining previous studies' assumptions that these dimensions would be the opposite poles of one same continuum [@reynolds_perceptions_2014].
 
 ```{r corpoly, echo=FALSE, fig.cap = "Perceptions and preferences for meritocracy items' polychoric correlations", fig.align='center'}
   # dev.copy(png,'output/images/Fig7.plotcor-study2.png',width = 800, height = 600) # save image
@@ -833,126 +1004,13 @@ Table \@ref(tab:table-cfafits) shows the fit indicators of the models estimated 
  knitr::include_graphics('output/images/figure9.png')
 ```
 
-Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:meas02), meritocratic preferences are moderate to highly correlated with perceptions, both meritocratic ($r=0.457$) and non-meritocratic ($r=0.500$). The correlation between both types of perceptions ($r=-0.044$) and both types of preferences ($r=0.185$) was low, as well as between non-meritocratic preferences and perceptions ($r=-0.059$). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects as assumed by previous studies.
+Attending to the correlations between the latent variables as depicted in Figure \@ref(fig:meas02), meritocratic preferences are moderate to highly correlated with perceptions, both meritocratic ($r=0.457,p<0.01$) and non-meritocratic ($r=0.500,p<0.01$). The correlation between both types of perceptions ($r=-0.044,p>0.05$) and both types of preferences ($r=0.185,p<0.01$) was low, as well as between non-meritocratic preferences and perceptions ($r=-0.059p>0.05$). This last finding gives further evidence regarding the lack of unidimensionality of meritocratic and non-meritocratic aspects as assumed by previous studies.
 
 ## Discussion Study 2
 
 The estimation performed with different administration sets for the meritocracy scale gives evidence in line with the conceptual model. The four dimensions appear independent but related, with some differences when compared to the estimation with ISSP data in Study 1. The main general difference is that with ISSP data, the four latent dimensions were positively correlated, whereas now some correlations are statistically not different from zero. For instance, perceptions and preferences for meritocracy keep being related, which is not the case for the non-meritocratic pair. Theoretically, this makes more sense, as if someone perceives that meritocracy functions well, they probably will support it more. On the other side, if someone perceives non-meritocracy, this should lead to a more prominent preference for meritocracy as it would constitute a demand for a larger meritocracy when it is not perceived to work.
 
 Despite the good general working of the scale, there are some limitations in interpreting the results given the few items (two) per dimension. As mentioned before, the option of a minimalistic approach in terms of items has advantages and disadvantages: advantages in terms of usability in social surveys with limited space and disadvantages in terms of measurement validity in the estimation of the latent constructs. Aware of this trade-off, next we present additional evidence of validity to complement some of the weaknesses identified.
-
-# Study 3: Additional validity analyses
-
-The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts [@davidov_measurement_2014]. In this section, we present the results of an analysis of invariance between groups, testing whether the proposed factorial structure for the meritocracy scale is applicable in a different dataset.
-
-The invariance measurement procedure consists of a series of nested models in which restrictions are progressively incorporated into the parameters of the measurement model. The literature generally suggests that this modeling approach should consider four levels or types of progressive restriction [@milfont_testing_2010; @millsap_statistical_2011; @vandeschoot_checklist_2012]:
-
-1. **Configural:** the model is estimated only indicating the factorial structure used in the CFA.
-
-2. **Weak:** an equality restriction applied to the factor loadings in the different groups; that is, the loadings are forced to be identical in both measurements.
-
-3. **Strong:** equality restrictions added to the intercepts of each indicator.
-
-4. **Strict:** equality restrictions added to the error variances of each indicator.
-
-### Data
-
-For testing the invariance, we compared the data described previously in Study 2 to a different dataset from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample contains 1,242 cases, where 605 (48.71%) are women, and 637 (51.28%) are men. 48.84% are 45 or older, and 33.97% have tertiary education or higher.
-
-### Variables
-
-The items of the meritocracy scale were identical to the original scale of Study 2 administrated in a randomized order (which corresponds to the application modality of Group 3 in Study 2, as shown in Figure \@ref(fig:appmod)).
-
-### Results
-
-The first step for invariance testing is estimating the configural model, which serves as the baseline for further comparison and is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit, it is usually complemented with other indexes given its high sensitivity to sample size: the Comparative Fit Index (CFI), which should have a value greater than 0.95; the Root Mean Square Error Approximation (RMSEA), which must be lower than 0.06; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 [@vandeschoot_checklist_2012]. Besides, the literature on measurement invariance suggests some complementary approaches for evaluating the fit, from which we will consider the incremental adjustment of the fit indexes [@cheung_evaluating_2002; @milfont_testing_2010; @dimitrov_testing_2010] and the ANOVA test for means comparison in nested models [@newsom_longitudinal_2015].
-
-```{r invargroup, echo=FALSE}
-  if (!require("pacman")) install.packages("pacman")
-  #---Load packages and data -------------------------------------#
-  pacman::p_load(dplyr,lavaan,semTools,knitr,kableExtra,stats,gtools)
-  options(knitr.kable.NA = '')
-  load(file = "input/data/proc/data_s3_inv.RData")
-  pov01 <- data_s3_inv %>% dplyr::filter(dataset=="pvw01")
-  fs01  <- data_s3_inv %>% dplyr::filter(dataset=="fsw02")
-
-  #-----Meassurement model--------------------------------------#
-  model01 <- '
-  perc_merit  =~ perc_effort + perc_talent
-  perc_nmerit =~ perc_wpart  + perc_netw
-  pref_merit  =~ pref_effort + pref_talent
-  pref_nmerit =~ pref_wpart  + pref_netw'
-
-  #-----Invariance---------------------------------------------#
-  inv01<- semTools::measurementInvariance(model=model01,data=data_s3_inv,group="dataset",estimator = "ML",strict=TRUE,quiet = T)
-
-  conf  <- inv01$fit.configural
-  weak  <- inv01$fit.loadings
-  strong<- inv01$fit.intercepts
-  strict<- inv01$fit.residuals
-
-  tab01<- lavaan::anova(conf,weak,strong,strict,SB.classic=TRUE) %>%
-    dplyr::as_tibble() %>%
-    dplyr::select("Chisq","Df","chisq_diff"=`Chisq diff`,"df_diff"=`Df diff`,"pvalue"=`Pr(>Chisq)`) %>%
-    dplyr::mutate(stars=gtools::stars.pval(pvalue),
-           chisqt=paste0(round(Chisq,2)," (",Df,") "),
-           decision=ifelse(pvalue>0.05,yes = "Accept",no = "Reject"),
-           model=c("Configural","Weak","Strong","Strict"))
-
-  fit.meas<- dplyr::bind_rows(lavaan::fitmeasures(inv01$fit.configural,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
-                              lavaan::fitmeasures(inv01$fit.loadings,  output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
-                              lavaan::fitmeasures(inv01$fit.intercepts,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
-                              lavaan::fitmeasures(inv01$fit.residuals, output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),])
-
-  # compute differences in chisq, df, cfi and rmsea (90%, lower.ci - upper.ci )
-  fit.meas<- fit.meas %>%
-    dplyr::mutate(diff.chi2 = chisq    - lag(chisq,default = dplyr::first(chisq)),
-           diff.df   = df       - lag(df,   default = dplyr::first(df)),
-           diff.cfi  = cfi      - lag(cfi,  default = dplyr::first(cfi)),
-           diff.rmsea   = rmsea - lag(rmsea,default = dplyr::first(rmsea))) %>%
-    round(3) %>%
-    dplyr::mutate(rmsea.ci=paste0(rmsea," \n ", "(",rmsea.ci.lower,"-",rmsea.ci.upper,")"))
-
-  tab.inv<- dplyr::bind_cols(tab01,fit.meas) %>%
-    dplyr::select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.df,diff.cfi,diff.rmsea,stars,decision) %>%
-    dplyr::mutate(diff.chi2=paste0(diff.chi2," (",diff.df,") ",stars)) %>%
-    dplyr::select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.cfi,diff.rmsea,decision)
-
-  #clean values
-  tab.inv[tab.inv == c("0 (0) ")] <- NA
-  tab.inv[tab.inv == c(0)] <- NA
-
-  ### Check an alternative method
-  configural        <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset", estimator="ML")
-  weak.invariance   <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = "loadings", estimator="ML")
-  strong.invariance <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts"), estimator="ML")
-  strict.invariance <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts", "residuals"), estimator="ML")
-
-  table_format = if(is_html_output()) {
-    "html"
-  } else if(is_latex_output()) {
-    "latex"
-  }
-
-  col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
-               "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
-  footnote <- paste0("N = ","; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
-
-  knitr::kable(tab.inv, col.names = col.nam, align = "l",
-        booktabs=TRUE,format = table_format,escape = FALSE,
-        caption = "Multiple Group measurement invariance for Perceptions and Preferences for Meritocracy") %>%
-    kableExtra::kable_styling(full_width = FALSE,
-                              latex_options = "HOLD_position",
-                              bootstrap_options=c("striped", "bordered"),
-                              font_size = 10) %>%
-    kableExtra::footnote(general = footnote, footnote_as_chunk = T)
-```
-
-Table \@ref(tab:invargroup) shows the results of the measurement invariance estimation. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results support the invariance at the strong level meaning that the fit of the factor model of the merit scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [@fischer_are_2011], as strict forms of measurement invariance rarely hold [@vandeschoot_checklist_2012]. Still, the comparability of latent means requires strict invariance which in this case does not hold when considering just $\Delta \chi^2 (\Delta \text{df})$. Nevertheless, the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ fulfills the requirements of being below the cut-off criteria as suggested by [@chen_sensitivity_2007]. Therefore, using this last standard, the level of strict invariance would hold for the meritocracy scale.
-
-## Discusion Study 3
-
-Based on the measurement invariance analysis for two datasets, we found evidence supporting the equivalence of the scale when applied in different samples. This gives a more robust ground when using this measure for comparing groups, for instance in country comparisons. Although the results are promising, still the analysis was performed in two samples in a single country (Chile) and it requires further examination with social surveys in other societies.
 
 
 # Conclusions
@@ -1080,6 +1138,121 @@ avg_count <- arrange(avg_count)
 | Non university      | 32,63%  | 28,93% |
 | University or more  | 21,21%  | 18,13% |
 Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the study 2 sample"))`.
+
+
+**Study 3: Additional validity analyses**
+
+The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts [@davidov_measurement_2014]. In this section, we present the results of an analysis of invariance between groups, testing whether the proposed factorial structure for the meritocracy scale is applicable in a different dataset.
+
+The invariance measurement procedure consists of a series of nested models in which restrictions are progressively incorporated into the parameters of the measurement model. The literature generally suggests that this modeling approach should consider four levels or types of progressive restriction [@milfont_testing_2010; @millsap_statistical_2011; @vandeschoot_checklist_2012]:
+
+1. **Configural:** the model is estimated only indicating the factorial structure used in the CFA.
+
+2. **Weak:** an equality restriction applied to the factor loadings in the different groups; that is, the loadings are forced to be identical in both measurements.
+
+3. **Strong:** equality restrictions added to the intercepts of each indicator.
+
+4. **Strict:** equality restrictions added to the error variances of each indicator.
+
+**Data**
+
+For testing the invariance, we compared the data described previously in Study 2 to a different dataset from an online survey carried out during the first half of 2020. The characteristics of this sample in terms of application and coverage are equivalent to those of the previous study. The final sample contains 1,242 cases, where 605 (48.71%) are women, and 637 (51.28%) are men. 48.84% are 45 or older, and 33.97% have tertiary education or higher.
+
+**Variables**
+
+The items of the meritocracy scale were identical to the original scale of Study 2 administrated in a randomized order (which corresponds to the application modality of Group 3 in Study 2, as shown in Figure \@ref(fig:appmod)).
+
+**Results**
+
+The first step for invariance testing is estimating the configural model, which serves as the baseline for further comparison and is expected to adequately meet the global fit criteria of a measurement model. Although the chi-square statistic is used as a global measure of fit, it is usually complemented with other indexes given its high sensitivity to sample size: the Comparative Fit Index (CFI), which should have a value greater than 0.95; the Root Mean Square Error Approximation (RMSEA), which must be lower than 0.06; and the Standardized Root Mean Square Residuals (SRMR) which must be less than 0.08 [@vandeschoot_checklist_2012]. Besides, the literature on measurement invariance suggests some complementary approaches for evaluating the fit, from which we will consider the incremental adjustment of the fit indexes [@cheung_evaluating_2002; @milfont_testing_2010; @dimitrov_testing_2010] and the ANOVA test for means comparison in nested models [@newsom_longitudinal_2015].
+
+```{r invargroup, echo=FALSE}
+  if (!require("pacman")) install.packages("pacman")
+  #---Load packages and data -------------------------------------#
+  pacman::p_load(dplyr,lavaan,semTools,knitr,kableExtra,stats,gtools)
+  options(knitr.kable.NA = '')
+  load(file = "input/data/proc/data_s3_inv.RData")
+  pov01 <- data_s3_inv %>% dplyr::filter(dataset=="pvw01")
+  fs01  <- data_s3_inv %>% dplyr::filter(dataset=="fsw02")
+
+  #-----Meassurement model--------------------------------------#
+  model01 <- '
+  perc_merit  =~ perc_effort + perc_talent
+  perc_nmerit =~ perc_wpart  + perc_netw
+  pref_merit  =~ pref_effort + pref_talent
+  pref_nmerit =~ pref_wpart  + pref_netw'
+
+  #-----Invariance---------------------------------------------#
+  inv01<- semTools::measurementInvariance(model=model01,data=data_s3_inv,group="dataset",estimator = "ML",strict=TRUE,quiet = T)
+
+  conf  <- inv01$fit.configural
+  weak  <- inv01$fit.loadings
+  strong<- inv01$fit.intercepts
+  strict<- inv01$fit.residuals
+
+  tab01<- lavaan::anova(conf,weak,strong,strict,SB.classic=TRUE) %>%
+    dplyr::as_tibble() %>%
+    dplyr::select("Chisq","Df","chisq_diff"=`Chisq diff`,"df_diff"=`Df diff`,"pvalue"=`Pr(>Chisq)`) %>%
+    dplyr::mutate(stars=gtools::stars.pval(pvalue),
+           chisqt=paste0(round(Chisq,2)," (",Df,") "),
+           decision=ifelse(pvalue>0.05,yes = "Accept",no = "Reject"),
+           model=c("Configural","Weak","Strong","Strict"))
+
+  fit.meas<- dplyr::bind_rows(lavaan::fitmeasures(inv01$fit.configural,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                              lavaan::fitmeasures(inv01$fit.loadings,  output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                              lavaan::fitmeasures(inv01$fit.intercepts,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                              lavaan::fitmeasures(inv01$fit.residuals, output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),])
+
+  # compute differences in chisq, df, cfi and rmsea (90%, lower.ci - upper.ci )
+  fit.meas<- fit.meas %>%
+    dplyr::mutate(diff.chi2 = chisq    - lag(chisq,default = dplyr::first(chisq)),
+           diff.df   = df       - lag(df,   default = dplyr::first(df)),
+           diff.cfi  = cfi      - lag(cfi,  default = dplyr::first(cfi)),
+           diff.rmsea   = rmsea - lag(rmsea,default = dplyr::first(rmsea))) %>%
+    round(3) %>%
+    dplyr::mutate(rmsea.ci=paste0(rmsea," \n ", "(",rmsea.ci.lower,"-",rmsea.ci.upper,")"))
+
+  tab.inv<- dplyr::bind_cols(tab01,fit.meas) %>%
+    dplyr::select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.df,diff.cfi,diff.rmsea,stars,decision) %>%
+    dplyr::mutate(diff.chi2=paste0(diff.chi2," (",diff.df,") ",stars)) %>%
+    dplyr::select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.cfi,diff.rmsea,decision)
+
+  #clean values
+  tab.inv[tab.inv == c("0 (0) ")] <- NA
+  tab.inv[tab.inv == c(0)] <- NA
+
+  ### Check an alternative method
+  configural        <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset", estimator="ML")
+  weak.invariance   <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = "loadings", estimator="ML")
+  strong.invariance <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts"), estimator="ML")
+  strict.invariance <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts", "residuals"), estimator="ML")
+
+  table_format = if(is_html_output()) {
+    "html"
+  } else if(is_latex_output()) {
+    "latex"
+  }
+
+  col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
+               "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
+  footnote <- paste0("N = ","; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
+
+  knitr::kable(tab.inv, col.names = col.nam, align = "l",
+        booktabs=TRUE,format = table_format,escape = FALSE,
+        caption = "Multiple Group measurement invariance for Perceptions and Preferences for Meritocracy") %>%
+    kableExtra::kable_styling(full_width = FALSE,
+                              latex_options = "HOLD_position",
+                              bootstrap_options=c("striped", "bordered"),
+                              font_size = 10) %>%
+    kableExtra::footnote(general = footnote, footnote_as_chunk = T)
+```
+
+Table \@ref(tab:invargroup) shows the results of the measurement invariance estimation. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results support the invariance at the strong level meaning that the fit of the factor model of the merit scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [@fischer_are_2011], as strict forms of measurement invariance rarely hold [@vandeschoot_checklist_2012]. Still, the comparability of latent means requires strict invariance which in this case does not hold when considering just $\Delta \chi^2 (\Delta \text{df})$. Nevertheless, the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ fulfills the requirements of being below the cut-off criteria as suggested by [@chen_sensitivity_2007]. Therefore, using this last standard, the level of strict invariance would hold for the meritocracy scale.
+
+*Discusion* 
+
+Based on the measurement invariance analysis for two datasets, we found evidence supporting the equivalence of the scale when applied in different samples. This gives a more robust ground when using this measure for comparing groups, for instance in country comparisons. Although the results are promising, still the analysis was performed in two samples in a single country (Chile) and it requires further examination with social surveys in other societies.
+
 
 ```{r tb-perpref1, eval=FALSE, include=FALSE}
  if (!require("pacman")) install.packages("pacman")
