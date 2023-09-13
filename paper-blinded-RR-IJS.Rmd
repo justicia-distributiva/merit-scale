@@ -775,9 +775,13 @@ The items, organized according to their respective dimensions, are presented in 
    "latex"#if latex set "latex" in format
  }
  tabitems <- read.csv(file = "input/tables/table01.csv",header = 1,sep = ",",encoding = "UTF-8") # call file  generated externally for the table
- cnames <- c("Component", "Dimensions","Item (English)" , "Item original (Spanish)")
- cap <- "Items of the perceptions and preferences for meritocracy scale."
-
+ tabitems$itemsspa <- NULL
+ tabitems$issp <- c("How important is hard work?","-",
+                    "How important is coming from a wealthy family?", "How important is knowing the right people",
+                    "How hard he or she works at the job?*","How well he or she does the job?*",
+                    "-", "-")
+ cnames <- c("Component", "Dimensions","Items" , "Items ISSP (2009,2019)")
+ cap <- "Items' battery for the multidimensional measurement of meritocratic beliefs and their equivalents in ISSP"
  knitr::kable(tabitems, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
    kableExtra::kable_styling(
      full_width = T,
@@ -787,9 +791,9 @@ The items, organized according to their respective dimensions, are presented in 
      bootstrap_options=c("striped", "bordered")) %>%
    kableExtra::column_spec(column = 1, width = "1.5cm", ) %>%
    kableExtra::column_spec(column = 2,width = "2 cm") %>%
-   kableExtra::collapse_rows(columns = 1:2,valign = "middle")
+   kableExtra::collapse_rows(columns = 1:2,valign = "middle") %>%
+   kableExtra::footnote(general = "Those with an asterisk (*) are only present in 2009",footnote_as_chunk = T)
 ```
-
 \pagebreak
 
 ### Administration sets
