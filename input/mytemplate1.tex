@@ -214,9 +214,9 @@ $endif$
 $if(subject)$
   pdfsubject={$subject$},
 $endif$
-% $if(keywords)$
-%   pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
-% $endif$
+$if(keywords)$
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
 $if(colorlinks)$
   colorlinks=true,
   linkcolor={$if(linkcolor)$$linkcolor$$else$Maroon$endif$},
@@ -421,8 +421,8 @@ $if(author)$
     \setlength{\affilsep}{2em}
     \renewcommand*{\Affilfont}{\normalsize\normalfont}
     \renewcommand\Authsep{, }
-    \renewcommand\Authand{ y }
-    \renewcommand\Authands{, y }
+    \renewcommand\Authand{ and }
+    \renewcommand\Authands{, and }
     $for(author)$
         $if(author.name)$
             $if(author.number)$
@@ -454,15 +454,10 @@ $if(logo)$
 \logo{\includegraphics{$logo$}}
 $endif$
 $endif$
-
-\providecommand{\keywords}[1]
-{
-  \small	
-  \textbf{Keywords:} #1
-}
-
+\usepackage[british,UKenglish,USenglish,american]{babel}
 
 \begin{document}
+\selectlanguage{american} 
 $if(has-frontmatter)$
 \frontmatter
 $endif$
@@ -477,17 +472,7 @@ $if(abstract)$
 $abstract$
 \end{abstract}
 $endif$
-
-$if(keywords)$
-\keywords{$keywords$}
 $endif$
-
-
-$endif$
-
-
-
-
 
 $for(include-before)$
 $include-before$
