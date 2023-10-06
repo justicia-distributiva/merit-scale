@@ -121,7 +121,7 @@ a. _Conceptual components_: Is merit only effort?
 
 One recent definition of meritocracy by @mijs_paradox_2019 is the following: "When I discuss meritocracy beliefs, I am referring to citizens' belief in the importance of hard work relative to structural factors." [@mijs_paradox_2019, pg.9]. In the subsequent operationalization, this is associated with the following question and indicator: "how important you think it is for getting ahead in life: (a) hard work", scored on a likert scale. The assumptions behind such a definition are worth discussing in light of the conceptual meaning of meritocracy and its possibilities of operationalization.
 
-The item used by @mijs_paradox_2019 is part of an item's battery which is available in several international surveys (as ISSP), usually called “reasons to get ahead”. This battery displays a series of indicators related to what people consider important to get ahead: hard work, education, ambition, a wealthy family, the right connections, religion, race, and gender. Therefore, considering only one of the items means that other aspects associated with talent, such as education, would not be deemed meritocratic. As he points out: "Hard work is arguably the most meritocratic part of Michael Young's equation: 'Merit = Intelligence + Effort', for the simple fact that intelligence itself is influenced by a non-meritocratic factor: who your parents happen to be" (p.5). In such conceptual and measurement approach of meritocratic beliefs, we can observe a couple of strong conceptual assumptions: a) effort would not depend on parental influence (at least not as strongly as intelligence), and b) talent (as innate ability) is not meritocratic (contrary to Michael Young's' original conceptualization). This conceptual and measurement-based assumption is found in other studies, which also assume effort to be the main and only aspect of meritocracy [@girerd_neoliberalism_2020; @bubak_perceptions_2019], raising the question: Is effort the only (or main) dimension behind the concept of meritocracy?
+The item used by @mijs_paradox_2019 is part of an item's battery which is available in several international surveys (as ISSP), usually called “reasons to get ahead”. In the ISSP, this battery belongs to the social inequality module---see @roberts_issp_2023 for a recent overview of this module. This battery displays a series of indicators related to what people consider important to get ahead: hard work, education, ambition, a wealthy family, the right connections, religion, race, and gender. Therefore, considering only one of the items means that other aspects associated with talent, such as education, would not be deemed meritocratic. As he points out: "Hard work is arguably the most meritocratic part of Michael Young's equation: 'Merit = Intelligence + Effort', for the simple fact that intelligence itself is influenced by a non-meritocratic factor: who your parents happen to be" (p.5). In such conceptual and measurement approach of meritocratic beliefs, we can observe a couple of strong conceptual assumptions: a) effort would not depend on parental influence (at least not as strongly as intelligence), and b) talent (as innate ability) is not meritocratic (contrary to Michael Young's' original conceptualization). This conceptual and measurement-based assumption is found in other studies, which also assume effort to be the main and only aspect of meritocracy [@girerd_neoliberalism_2020; @bubak_perceptions_2019], raising the question: Is effort the only (or main) dimension behind the concept of meritocracy?
 
 We argue that whether talent (as intelligence and ability) is or is not considered meritocratic is an interesting topic to discuss from a philosophical point of view. However, when it comes to survey research on meritocratic beliefs, the weight of effort or talent in what it is deemed  meritocratic should be left to public scrutiny. Furthermore, considering talent as part of meritocracy certainly opens some appealing avenues of research. For instance, some studies suggest that, for the elites, meritocracy is related to talent, whereas effort is more characteristic of the meritocracy of the middle and lower classes [@atria_economic_2020]. Therefore, we suggest that a concept (and measure) of meritocracy benefits from including both talent and effort, as in Young's original conception.
 
@@ -504,7 +504,7 @@ Another finding depicted by Figure \@ref(fig:scat1) is the positive association 
 ```{r scat1, fig.cap="Cross-national comparison of non-meritocratic and meritocratic perceptions with meritocratic preference",fig.height=6, fig.width=12}
   load(file = "input/data/proc/data_s1.RData")
   if (!require("pacman")) install.packages("pacman")
-#  pacman::p_load(dplyr, kableExtra, knitr,lavaan,countrycode,ggplot2,haven,
+ pacman::p_load(dplyr, kableExtra, knitr,lavaan,countrycode,ggplot2,haven,gridExtra)
   table_format = if(knitr::is_html_output()) { #conditional instructions for kable
     "html" #if html set "html" in format
   } else if(knitr::is_latex_output()) {
@@ -1495,6 +1495,248 @@ Based on the measurement invariance analysis for two datasets, we found evidence
            kableExtra::row_spec(row = 8,hline_after = TRUE) %>%
            kableExtra::add_indent(c(9:13)) %>%
            kableExtra::footnote(general =tb.foot ,footnote_as_chunk = T,threeparttable = T);tb.fm02
+```
+
+```{r fit-country-s2, eval=FALSE, include=FALSE}
+if (!require("pacman")) install.packages("pacman")
+  #---Load packages and data -------------------------------------#
+  pacman::p_load(dplyr,lavaan,semTools,knitr,kableExtra,stats,gtools,haven)
+  options(knitr.kable.NA = '')
+  load(file = "input/data/proc/data_s1.RData")
+
+# meassurement model: Second order
+  cfa_perpref2 <- '
+  	  # latent variables
+  	  percmerit =~ hwork + ambition
+  	  parents =~ wealthy + pareduc
+  	  backgrd =~ race + gender
+  	  networks=~ people + polcone
+  	  percnmerit=~ parents + backgrd + networks
+  	  prefmerit =~ welljob + hardjob
+  	  prefnmerit=~ family + child
+  	  '
+
+  data_s1$country <- countrycode::countrycode(sourcevar = data_s1$v5,origin = "iso3n",destination = "country.name")
+# estimar modelo por paises
+df1<-data_s1 %>% select(country,wealthy:hardjob)
+ 
+# sjmisc::frq(df1$country)
+# 
+# Argentina      <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Argentina",],ordered = T)
+# Australia      <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Australia",],ordered = T)
+# Austria        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Austria",],ordered = T)
+# Belgium        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Belgium",],ordered = T)
+# # Bulgaria       <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Bulgaria",],ordered = T)
+# Chile          <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Chile",],ordered = T)
+# China          <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="China",],ordered = T)
+# Croatia        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Croatia",],ordered = T)
+# Cyprus         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Cyprus",],ordered = T)
+# Czechia        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Czechia",],ordered = T)
+# Denmark        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Denmark",],ordered = T)
+# Estonia        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Estonia",],ordered = T)
+# Finland        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Finland",],ordered = T)
+# France         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="France",],ordered = T)
+# Germany        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Germany",],ordered = T)
+# Hungary        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Hungary",],ordered = T)
+# # Iceland        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Iceland",],ordered = T)
+# Israel         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Israel",],ordered = T)
+# # Italy          <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Italy",],ordered = T)
+# # Japan          <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Japan",],ordered = T)
+# Latvia         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Latvia",],ordered = T)
+# # Lithuania      <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Lithuania",],ordered = T)
+# NewZealand    <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="New Zealand",],ordered = T)
+# Norway         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Norway",],ordered = T)
+# Philippines    <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Philippines",],ordered = T)
+# Poland         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Poland",],ordered = T)
+# # Portugal       <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Portugal",],ordered = T)
+# Russia         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Russia",],ordered = T)
+# Slovakia       <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Slovakia",],ordered = T)
+# Slovenia       <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Slovenia",],ordered = T)
+# SouthAfrica   <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="South Africa",],ordered = T)
+# SouthKorea    <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="South Korea",],ordered = T)
+# Spain          <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Spain",],ordered = T)
+# # Sweden         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Sweden",],ordered = T)
+# Switzerland    <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Switzerland",],ordered = T)
+# Taiwan         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Taiwan",],ordered = T)
+# Turkey         <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Turkey",],ordered = T)
+# Ukraine        <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Ukraine",],ordered = T)
+# UnitedKingdom <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="United Kingdom",],ordered = T)
+# # UnitedStates  <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="United States",],ordered = T)
+# # Venezuela      <- lavaan::cfa(cfa_perpref2,data = df1[df1$country=="Venezuela",],ordered = T)
+# # 
+# # 
+# # 
+# lavaan::fitmeasures(Argentina     )
+# lavaan::fitmeasures(Australia     )
+# lavaan::fitmeasures(Austria       )
+# lavaan::fitmeasures(Belgium       )
+# # lavaan::fitmeasures(# Bulgaria    )
+# lavaan::fitmeasures(Chile         )
+# lavaan::fitmeasures(China         )
+# lavaan::fitmeasures(Croatia       )
+# lavaan::fitmeasures(Cyprus        )
+# lavaan::fitmeasures(Czechia       )
+# lavaan::fitmeasures(Denmark       )
+# lavaan::fitmeasures(Estonia       )
+# lavaan::fitmeasures(Finland       )
+# lavaan::fitmeasures(France        )
+# lavaan::fitmeasures(Germany       )
+# lavaan::fitmeasures(Hungary       )
+# # lavaan::fitmeasures(# Iceland     )
+# # lavaan::fitmeasures(Israel        )
+# # lavaan::fitmeasures(Italy         )
+# # lavaan::fitmeasures(# Japan       )
+# lavaan::fitmeasures(Latvia        )
+# # lavaan::fitmeasures(# Lithuania   )
+# lavaan::fitmeasures(NewZealand    )
+# lavaan::fitmeasures(Norway        )
+# lavaan::fitmeasures(Philippines   )
+# lavaan::fitmeasures(Poland        )
+# # lavaan::fitmeasures(# Portugal    )
+# lavaan::fitmeasures(Russia        )
+# lavaan::fitmeasures(Slovakia      )
+# lavaan::fitmeasures(Slovenia      )
+# lavaan::fitmeasures(SouthAfrica   )
+# lavaan::fitmeasures(SouthKorea    )
+# lavaan::fitmeasures(Spain         )
+# # lavaan::fitmeasures(# Sweden      )
+# lavaan::fitmeasures(Switzerland   )
+# lavaan::fitmeasures(Taiwan        )
+# lavaan::fitmeasures(Turkey        )
+# lavaan::fitmeasures(Ukraine       )
+# lavaan::fitmeasures(UnitedKingdom )
+# # lavaan::fitmeasures(UnitedStates)
+# # lavaan::fitmeasures(Venezuela     )
+
+df2<-data_s1 %>% select(country,wealthy:hardjob) %>% 
+  filter(!country %in% c("Bulgaria","Iceland","Israel","Italy","Japan",
+                         "Lithuania","Portugal","Sweden","United States","Venezuela"))
+
+df_paises <- split(df2, df2$country)
+results = lapply(df_paises, function(df2) lavaan::cfa(cfa_perpref2,data = df2,ordered = T))
+
+#extraer fitmeasures por paises
+results_list<- lapply(results, function(results) data.frame(t(lavaan::fitmeasures(results)[c("chisq","df","cfi","tli","rmsea")])))
+#extraer nobs por paises
+nobs_list <- lapply(results, function(results) data.frame(obs=t(lavaan::nobs(results))))
+nobs_n <- data.table::rbindlist(nobs_list) %>% 
+  mutate(country=names(nobs_list)) %>%
+  select(country,everything())
+
+  # extract fit indices from models and add to table
+  sum_fit <- 
+  data.table::rbindlist(results_list) %>% 
+  mutate(country=names(results_list)) %>% 
+  select(country,everything())
+  # Customize object
+  sum_fit$nobs <- nobs_n$obs
+  sum_fit <- dplyr::select(sum_fit,country,"chisq","df", nobs,"cfi","tli","rmsea")
+  sum_fit <- sum_fit %>% dplyr::arrange(chisq)
+  colnames <- c("País","$\\chi^2$","gl","$N$","CFI","TLI","RMSEA")
+  # Create table
+  tab_cfa_count_1d <-
+    kable(
+      sum_fit,
+      # format=table_format,
+      digits = 3,
+      booktabs = T,
+      col.names = colnames,
+      caption = "Summary of country-specific fit for the ISSP",
+      escape = FALSE
+    ) %>% 
+    kable_styling(full_width = F,
+                  font_size = 10,
+                  latex_options = "HOLD_position",
+                  bootstrap_options=c("striped", "bordered"))
+  tab_cfa_count_1d
+```
+
+
+```{r invariance-s2, eval=FALSE, include=FALSE}
+df2<-data_s1 %>% select(country,wealthy:hardjob) %>% 
+  filter(!country %in% c("Bulgaria","Iceland","Israel","Italy","Japan",
+                         "Lithuania","Portugal","Sweden","United States","Venezuela","Finland"))
+
+  inv01 <- semTools::measurementInvariance(model=cfa_perpref2,
+                                           data=df2,
+                                           group="country",estimator = "ML",strict=TRUE,quiet = T)
+  
+  var_or <- c("hwork","ambition","wealthy", "pareduc","race",
+              "gender","people","polcone","welljob" ,"hardjob","family","child") 
+  
+  inv02 <- semTools::measurementInvarianceCat(model=cfa_perpref2,
+                                              data=df2,
+                                           group="country",estimator = "DWLS",
+                                           strict=TRUE,quiet = T,ordered=var_or)
+
+conf  <- inv01$fit.configural
+  weak  <- inv01$fit.loadings
+  strong<- inv01$fit.intercepts
+  strict<- inv01$fit.residuals
+
+  ### Check an alternative method
+  configural        <- lavaan::cfa(cfa_perpref2, data=df2, group = "country", estimator="ML")
+  weak.invariance   <- lavaan::cfa(cfa_perpref2, data=df2, group = "country",group.equal = "loadings", estimator="ML")
+  strong.invariance <- lavaan::cfa(cfa_perpref2, data=df2, group = "country",group.equal = c( "loadings", "intercepts"), estimator="ML")
+  strict.invariance <- lavaan::cfa(cfa_perpref2, data=df2, group = "country",group.equal = c( "loadings", "intercepts", "residuals"), estimator="ML")
+  
+  
+  
+  tab01<- lavaan::anova(conf,weak,strong,strict,SB.classic=TRUE) %>%
+    dplyr::as_tibble() %>%
+    dplyr::select("Chisq","Df","chisq_diff"=`Chisq diff`,"df_diff"=`Df diff`,"pvalue"=`Pr(>Chisq)`) %>%
+    dplyr::mutate(stars=gtools::stars.pval(pvalue),
+           chisqt=paste0(round(Chisq,2)," (",Df,") "),
+           decision=ifelse(pvalue>0.05,yes = "Accept",no = "Reject"),
+           model=c("Configural","Weak","Strong","Strict"))
+
+  fit.meas<- dplyr::bind_rows(lavaan::fitmeasures(inv01$fit.configural,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                              lavaan::fitmeasures(inv01$fit.loadings,  output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                              lavaan::fitmeasures(inv01$fit.intercepts,output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),],
+                              lavaan::fitmeasures(inv01$fit.residuals, output ="matrix")[c("chisq","df","cfi","rmsea","rmsea.ci.lower","rmsea.ci.upper"),])
+
+  # compute differences in chisq, df, cfi and rmsea (90%, lower.ci - upper.ci )
+  fit.meas<- fit.meas %>%
+    dplyr::mutate(diff.chi2 = chisq    - lag(chisq,default = dplyr::first(chisq)),
+           diff.df   = df       - lag(df,   default = dplyr::first(df)),
+           diff.cfi  = cfi      - lag(cfi,  default = dplyr::first(cfi)),
+           diff.rmsea   = rmsea - lag(rmsea,default = dplyr::first(rmsea))) %>%
+    round(3) %>%
+    dplyr::mutate(rmsea.ci=paste0(rmsea," \n ", "(",rmsea.ci.lower,"-",rmsea.ci.upper,")"))
+
+  tab.inv<- dplyr::bind_cols(tab01,fit.meas) %>%
+    dplyr::select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.df,diff.cfi,diff.rmsea,stars,decision) %>%
+    dplyr::mutate(diff.chi2=paste0(diff.chi2," (",diff.df,") ",stars)) %>%
+    dplyr::select(model,chisqt,cfi,rmsea.ci,diff.chi2,diff.cfi,diff.rmsea,decision)
+
+  #clean values
+  tab.inv[tab.inv == c("0 (0) ")] <- NA
+  tab.inv[tab.inv == c(0)] <- NA
+
+  ### Check an alternative method
+  configural        <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset", estimator="ML")
+  weak.invariance   <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = "loadings", estimator="ML")
+  strong.invariance <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts"), estimator="ML")
+  strict.invariance <- lavaan::cfa(model01, data=data_s3_inv, group = "dataset",group.equal = c( "loadings", "intercepts", "residuals"), estimator="ML")
+
+  table_format = if(is_html_output()) {
+    "html"
+  } else if(is_latex_output()) {
+    "latex"
+  }
+
+  col.nam <- c("Model","$\\chi^2 (\\text{df})$","CFI","RMSEA (90 CI)",
+               "$\\Delta \\chi^2 (\\Delta \\text{df}$)","$\\Delta \\text{CFI}$","$\\Delta \\text{RMSEA}$","Decision")
+  footnote <- paste0("N = ","; Group 1, n = ",conf@Data@nobs[[1]],"; Group 2, n = ",conf@Data@nobs[[2]], ", ***p < 0.001")
+
+  knitr::kable(tab.inv, col.names = col.nam, align = "l",
+        booktabs=TRUE,format = table_format,escape = FALSE,
+        caption = "Multiple Group measurement invariance for Perceptions and Preferences for Meritocracy") %>%
+    kableExtra::kable_styling(full_width = FALSE,
+                              latex_options = "HOLD_position",
+                              bootstrap_options=c("striped", "bordered"),
+                              font_size = 10) %>%
+    kableExtra::footnote(general = footnote, footnote_as_chunk = T)
 ```
 
 
