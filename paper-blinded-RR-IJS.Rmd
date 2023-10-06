@@ -79,7 +79,7 @@ papersize: a4
 ```
 
 ```{r setup, include=FALSE}
- knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = TRUE,out.width = '85%',fig.pos= "H", fig.align = 'center')
+ knitr::opts_chunk$set(echo=FALSE, warning = FALSE,message = FALSE, cache = FALSE,out.width = '85%',fig.pos= "H", fig.align = 'center')
  # knitr::opts_knit$set(base.url = "../") #relative path for .html output file
  # knitr::opts_knit$set(root.dir = "../") #relative path for chunks within .rmd files
  options(scipen=999)
