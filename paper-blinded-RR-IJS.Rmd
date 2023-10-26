@@ -3,7 +3,23 @@ title: "A multidimensional approach for measuring meritocratic beliefs: Advantag
 #css: "custom.css"
 linestretch: '1.5'
 link-citations: yes
-# author: "Juan Carlos Castillo, Julio Iturra, Luis Maldonado, Francisco Meneses & Jorge Atria <br><br>"
+# author: 
+# - name: Juan Carlos Castillo
+#   affiliation: Department of Sociology, Universidad de Chile
+#   email: juancastillov@uchile.cl
+#   number: 1
+# - name: Julio Iturra
+#   affiliation: Bremen International Graduate School of Social Sciences, Universität Bremen
+#   number: 2
+# - name: Luis Maldonado
+#   affiliation: Institute of Sociology, Universidad Católica de Chile
+#   number: 3
+# - name: Francisco Meneses
+#   affiliation: 
+#   number: 1
+# - name: Jorge Atria
+#   affiliation: Department of Sociology, Universidad Diego Portales, Chile
+#   number: 5  
 abstract: |
   A great part of the comparative international research that has attempted to measure meritocratic beliefs has used the social inequality module of the ISSP (International Social Survey Programme), which offers an unprecedented opportunity to compare meritocratic views in different societies.  Based on a series of studies using ISSP data, the present paper proposes a multidimensional measurement framework for meritocratic beliefs. This framework distinguishes, on the one side, between perceptions and preferences, and on the other side, between meritocratic and not meritocratic aspects. In a first study, we test the multidimensional framework for meritocratic beliefs using the ISSP 2009 inequality module through confirmatory factor analysis (CFA) techniques. After identifying the advantages and some limitations of ISSP items for a multidimensional operationalization of meritocratic beliefs, in a second study, we suggest an modified  set of items that better taps the different dimensions of meritocracy. We examined the measuring properties of this new instrument using a sample of Chilean adults (N=2,141). Based on these results, we recommend improvements in measuring meritocratic beliefs in cross-national studies.
   \newline
@@ -12,19 +28,19 @@ abstract: |
    **Keywords**: meritocracy, survey methodology, social inequality, construct measurement 
 # keywords: "meritocracy, survey methodology, social inequality, construct measurement"
 output:
-  bookdown::word_document2:
+  bookdown::html_document2:
     number_sections: false
-    reference_docx: input/template.docx
-    toc: false
   bookdown::pdf_document2:
     template: null
     number_sections: false    
     toc: false
     keep_tex: true
     pandoc_args:
-#      - --template=input/mytemplate.tex #custom template para usar autores con afiliacion    
-  bookdown::html_document2:
+     - --template=input/mytemplate.tex #custom template para usar autores con afiliacion
+  bookdown::word_document2:
     number_sections: false
+    reference_docx: input/template.docx
+    toc: false
 linkcolor: blue
 bibliography: input/bib/meritocracy.bib
 csl: input/bib/apa7-singlespace.csl
@@ -33,7 +49,6 @@ editor_options:
 geometry: margin=1in
 header-includes:
   - \usepackage{times}           # Times New Roman
-  - \hypersetup {colorlinks = true, linkcolor = blue, urlcolor = blue}    
   - \usepackage{caption}
   - \captionsetup[figure, table]{labelfont={bf},labelformat={default},labelsep=period}
   - \usepackage{graphicx}
@@ -270,7 +285,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
   #Plot 1: Perception meritocratic
   p1<- likert_issp %>%
     dplyr::select(hwork_r:ambition_r) %>%
-    sjPlot::plot_likert(geom.colors = "PuBu",
+    sjPlot::plot_likert(geom.colors = "Greys",
                         grid.range  =  c (1.2 , 1.2),
                         title = "a. Perception meritocratic",
                           geom.size = c(0.62),
@@ -284,7 +299,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
   #Plot 2: Perception Non-meritocratic
   p2<-likert_issp %>%
     dplyr::select(wealthy_r:polcone_r) %>%
-    sjPlot::plot_likert(geom.colors = "PuBu",
+    sjPlot::plot_likert(geom.colors = "Greys",
                         grid.range  =  c (1.2 , 1.2),
                         title = "b. Perception Non-meritocratic",
                           geom.size = c(0.9),
@@ -298,7 +313,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
   #Plot 3: Preference meritocratic
   p3<-likert_issp %>%
     dplyr::select(welljob_r:hardjob_r) %>%
-    sjPlot::plot_likert(geom.colors = "PuBu",
+    sjPlot::plot_likert(geom.colors = "Greys",
                         grid.range  =  c (1.2 , 1.2),
                         title = "c. Preference meritocratic",
                           geom.size = c(0.62),
@@ -312,7 +327,7 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
   #Plot 4: Preference Non-meritocratic
   p4<-likert_issp %>%
     dplyr::select(family_r:child_r) %>%
-    sjPlot::plot_likert(geom.colors = "PuBu",
+    sjPlot::plot_likert(geom.colors = "Greys",
                         grid.range  =  c (1.2 , 1.2),
                         title = "d. Preference Non-meritocratic",
                           geom.size = c(0.62),
@@ -328,12 +343,12 @@ Figure \@ref(fig:likert-issp) shows the distribution of responses across the sel
   leg<- ggpubr::as_ggplot(
     ggpubr::get_legend(
       dplyr::select(likert_issp, family_r:child_r) %>%
-        sjPlot::plot_likert(geom.colors = "PuBu", catcount = 5) +
+        sjPlot::plot_likert(geom.colors = "Greys", catcount = 5) +
         ggplot2::scale_fill_brewer(
           breaks = c(5:1),
           direction = -1,
           labels = c("Not important at all","Not very important","Fairly important",
-                     "Very important","Essential")) +
+                     "Very important","Essential"),palette = "Greys") +
         ggplot2::theme(legend.position = "bottom")
       )
     )
@@ -398,10 +413,12 @@ In terms of the association between the indicators, Figure \@ref(fig:corr-issp) 
   #Plot the matrix using corrplot
   corrplot::corrplot(cor_issp,
     method = "color",
-    addCoef.col = "#000390",
+    # addCoef.col = "#000390",
+    addCoef.col = "Gray",
     type = "upper",
     tl.col = "black",
-    col=colorRampPalette(c("white","#0068DC"))(12),
+    # col=colorRampPalette(c("white","#0068DC"))(12),
+    col=colorRampPalette(c("white","gray9"))(12),
     bg = "white",
     na.label = "-")
     # dev.off()
@@ -488,8 +505,7 @@ Another finding depicted by Figure \@ref(fig:scat1) is the positive association 
 ```{r scat1, fig.cap="Cross-national comparison of non-meritocratic and meritocratic perceptions with meritocratic preference",fig.height=6, fig.width=12}
   load(file = "input/data/proc/data_s1.RData")
   if (!require("pacman")) install.packages("pacman")
-#  pacman::p_load(dplyr, kableExtra, knitr,lavaan,countrycode,ggplot2,haven,
-                 gridExtra)
+ pacman::p_load(dplyr, kableExtra, knitr,lavaan,countrycode,ggplot2,haven,gridExtra)
   table_format = if(knitr::is_html_output()) { #conditional instructions for kable
     "html" #if html set "html" in format
   } else if(knitr::is_latex_output()) {
@@ -561,7 +577,7 @@ ggplot(avg_count, aes(x=percmerit, y=prefmerit)) +
   geom_text(label=as.character(avg_count$clab)) +
   scale_x_continuous(limits = c(-0.6,0.6))+
   scale_y_continuous(limits = c(-0.6,0.6))+
-  geom_smooth(method = "lm",fullrange=TRUE) +
+  geom_smooth(method = "lm",fullrange=TRUE,color="black") +
   xlab("Meritocratic perception")+
   ylab("Meritocratic preference")  
 # create figure 2: perception non-merit by preferences merit
@@ -571,10 +587,10 @@ ggplot(avg_count, aes(x=percnmerit, y=prefmerit)) +
   geom_text(label=as.character(avg_count$clab)) +
   scale_x_continuous(limits = c(-0.6,0.6))+
   scale_y_continuous(limits = c(-0.6,0.6))+ 
-  geom_smooth(method = "lm",fullrange=TRUE) +  
-  geom_smooth(method = "lm") +
+  geom_smooth(method = "lm",fullrange=TRUE,color="black") +  
   xlab("Non-meritocratic perception")+
   ylab("Meritocratic preference") 
+  
 
   
 grid.arrange(figure1, figure2, ncol = 2,
@@ -687,7 +703,8 @@ ggplot(aes(x=percmerit, y=prefmerit)) +
   geom_text(label=as.character(indus$clab)) +
   scale_x_continuous(limits = c(-0.6,0.6))+
   scale_y_continuous(limits = c(-0.6,0.6))+
-  geom_smooth(method = "lm",fullrange=TRUE) +
+  # geom_smooth(method = "lm",fullrange=TRUE) +
+geom_smooth(method = "lm",fullrange=TRUE,color="black") +  
   xlab("Meritocratic perception")+
   ylab("Meritocratic preference") +
   ggtitle("Industrialized countries")
@@ -698,7 +715,8 @@ ggplot(aes(x=percnmerit, y=prefmerit)) +
   geom_text(label=as.character(indus$clab)) +
   scale_x_continuous(limits = c(-0.6,0.6))+
   scale_y_continuous(limits = c(-0.6,0.6))+ 
-  geom_smooth(method = "lm",fullrange=TRUE) +
+  # geom_smooth(method = "lm",fullrange=TRUE) +
+geom_smooth(method = "lm",fullrange=TRUE,color="black") +    
   xlab("Non-meritocratic perception")+
   ylab("Meritocratic preference") +
   ggtitle("Industrialized countries")
@@ -711,7 +729,8 @@ ggplot(aes(x=percmerit, y=prefmerit)) +
   geom_text(label=as.character(lateindus$clab)) +
   scale_x_continuous(limits = c(-0.6,0.6))+
   scale_y_continuous(limits = c(-0.6,0.6))+
-  geom_smooth(method = "lm",fullrange=TRUE) +
+  # geom_smooth(method = "lm",fullrange=TRUE) +
+  geom_smooth(method = "lm",fullrange=TRUE,color="black") +  
   xlab("Meritocratic perception")+
   ylab("Meritocratic preference") +
   ggtitle("Late industralized countries")
@@ -723,6 +742,7 @@ ggplot(aes(x=percnmerit, y=prefmerit)) +
   scale_x_continuous(limits = c(-0.6,0.6))+
   scale_y_continuous(limits = c(-0.6,0.6))+
   geom_smooth(method = "lm",fullrange=TRUE) +
+  geom_smooth(method = "lm",fullrange=TRUE,color="black") +    
   xlab("Non-meritocratic perception")+
   ylab("Meritocratic preference") +
   ggtitle("Late industralized countries")
@@ -773,23 +793,33 @@ The items, organized according to their respective dimensions, are presented in 
  }
  tabitems <- read.csv(file = "input/tables/table01.csv",header = 1,sep = ",",encoding = "UTF-8") # call file  generated externally for the table
  tabitems$itemsspa <- NULL
+ tabitems[9,] <- tabitems[8,]
+ tabitems[9,3] <- "-"
+ tabitems[10,] <- tabitems[8,]
+ tabitems[10,3] <- "-"
  tabitems$issp <- c("How important is hard work?","-",
-                    "How important is coming from a wealthy family?", "How important is knowing the right people",
-                    "How hard he or she works at the job?*","How well he or she does the job?*",
-                    "-", "-")
+                    "How important is coming from a wealthy family?", 
+                    "How important is knowing the right people",
+                    "In deciding how much people ought to earn, how important each of these things be (...) How hard he or she works at the job?¹",
+                    " (...) How well he or she does the job?¹",
+                    "-", "-",
+                    "(...) What is needed to support a family?¹²","(...) Whether the person has children to support²")
+
  cnames <- c("Component", "Dimensions","Items" , "Items ISSP (2009,2019)")
  cap <- "Items' battery for the multidimensional measurement of meritocratic beliefs and their equivalents in ISSP"
- knitr::kable(tabitems, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap) %>%
+ knitr::kable(tabitems, table_format, booktabs = T, linesep = "",col.names = cnames, caption = cap,
+              longtable = F, escape = T) %>%
    kableExtra::kable_styling(
      full_width = T,
      latex_options = c("hold_position"),
      position = "center",
      font_size = 10,
      bootstrap_options=c("striped", "bordered")) %>%
-   kableExtra::column_spec(column = 1, width = "1.5cm", ) %>%
+   kableExtra::column_spec(column = 1, width = "1.5cm") %>%
    kableExtra::column_spec(column = 2,width = "2 cm") %>%
    kableExtra::collapse_rows(columns = 1:2,valign = "middle") %>%
-   kableExtra::footnote(general = "Those with an asterisk (*) are only present in 2009",footnote_as_chunk = T)
+   kableExtra::footnote(number =  c("Items present only in ISSP 2009",
+                                    "ISSP items that are not equivalent with the new measurement proposal"))
 ```
 \pagebreak
 
@@ -840,7 +870,7 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
   #Plot 1: Perception
   p1<-
     dplyr::select(dat_likert_s2,perc_effort_r:perc_netw_r) %>%
-    sjPlot::plot_likert(geom.colors = "PuBu",
+    sjPlot::plot_likert(geom.colors = "Greys",
                         title = c("a. Perceptions"),
                         geom.size = 0.8,
                         axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
@@ -856,7 +886,7 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
   #Plot 2: Preferences
   p2<-
     dplyr::select(dat_likert_s2,pref_effort_r:pref_netw_r) %>%
-    sjPlot::plot_likert(geom.colors = "PuBu",
+    sjPlot::plot_likert(geom.colors = "Greys",
                         title = c("b. Preferences"),
                         geom.size = 0.8,
                         axis.labels = c("Effort", "Talent", "Rich Parents", "Contacts"),
@@ -873,12 +903,13 @@ The graphs presented in Figure \@ref(fig:plotlikert) display disaggregated and c
   leg<- ggpubr::as_ggplot(
     ggpubr::get_legend(
     dplyr::select(dat_likert_s2,pref_effort_r:pref_netw_r) %>%
-        sjPlot::plot_likert(geom.colors = "PuBu",
+        sjPlot::plot_likert(geom.colors = "Greys",
                             catcount = 4,
                             cat.neutral = 3) +
       ggplot2::theme(legend.position = "bottom") +
       ggplot2::scale_fill_manual(
-        values = c("#b3b3b3ff", "#f1eef6ff", "#bdc9e1ff","#74a9cfff","#0570b0ff"),
+        values = c("#B3B3B3","#F7F7F7","#CCCCCC","#969696","#525252"),
+        # values = c("#b3b3b3ff", "#f1eef6ff", "#bdc9e1ff","#74a9cfff","#0570b0ff"),
         breaks=c("neutral",4,3,2,1),
         labels=c("Neither agree nor disagree","Strongly disagree","Disagree",
                  "Agree","Totally agree")
@@ -936,10 +967,12 @@ Attending now to the association among the scale items, Figure \@ref(fig:corpoly
 
   corrplot::corrplot(cor_s2,
     method = "color",
-    addCoef.col = "#000390",
+    # addCoef.col = "#000390",
+    addCoef.col = "Gray",
     type = "upper",
     tl.col = "black",
-    col=colorRampPalette(c("white","#0068DC"))(8),
+    # col=colorRampPalette(c("white","#0068DC"))(8),
+    col=colorRampPalette(c("white","gray9"))(12),
     bg = "white",
     na.label = "-")
   # dev.off()
@@ -1048,7 +1081,6 @@ This research follows a series of open science guidelines as the pre-registratio
 
 `r if (knitr::is_latex_output()){ '\\section{Appendix}'}`
 
-**Study 1**
 
 ```{r countries, echo=FALSE}
   load(file = "input/data/proc/data_s1.RData")
@@ -1126,7 +1158,6 @@ avg_count <- arrange(avg_count)
 
 \pagebreak
 
-**Study 2**
 
 |                     | Sample  |   CEP  |
 |---------------------|:-------:|:------:|
@@ -1147,7 +1178,7 @@ avg_count <- arrange(avg_count)
 Table: `r as.character(paste("(\\#tab:rep-samp)", "Representativeness of the study 2 sample"))`.
 
 
-**Study 3: Additional validity analyses**
+**Additional validity analyses of study 2**
 
 The modeling for invariance testing has been gaining more relevance in sociological survey studies, mainly due to the interest in the validity of measurement scales in comparative studies in various social and cultural contexts [@davidov_measurement_2014]. In this section, we present the results of an analysis of invariance between groups, testing whether the proposed factorial structure for the meritocracy scale is applicable in a different dataset.
 
@@ -1256,7 +1287,7 @@ The first step for invariance testing is estimating the configural model, which 
 
 Table \@ref(tab:invargroup) shows the results of the measurement invariance estimation. When attending to the traditional invariance test of $\Delta \chi^2 (\Delta \text{df})$, the results support the invariance at the strong level meaning that the fit of the factor model of the merit scale is equivalent across samples when constraining factor loadings and intercepts to being equal. Such result is considered in general as evidence of invariance [@fischer_are_2011], as strict forms of measurement invariance rarely hold [@vandeschoot_checklist_2012]. Still, the comparability of latent means requires strict invariance which in this case does not hold when considering just $\Delta \chi^2 (\Delta \text{df})$. Nevertheless, the criteria of $\Delta \text{CFI}$ used for comparing models is close to the rejection criteria of >.01, whereas the $\Delta \text{RMSEA}$ fulfills the requirements of being below the cut-off criteria as suggested by [@chen_sensitivity_2007]. Therefore, using this last standard, the level of strict invariance would hold for the meritocracy scale.
 
-*Discusion* 
+**Discusion** 
 
 Based on the measurement invariance analysis for two datasets, we found evidence supporting the equivalence of the scale when applied in different samples. This gives a more robust ground when using this measure for comparing groups, for instance in country comparisons. Although the results are promising, still the analysis was performed in two samples in a single country (Chile) and it requires further examination with social surveys in other societies.
 
